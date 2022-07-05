@@ -1,0 +1,31 @@
+.page-wrapper {
+  padding: 40px 200px;
+
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+  }
+}
+
+.React-logo {
+  height: 10vmin;
+  pointer-events: none;
+
+  @media screen and (max-width: 768px) {
+     height: 20vmin;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .React-logo {
+    animation: React-logo-spin infinite 10s linear;
+  }
+}
+
+@keyframes React-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
