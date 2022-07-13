@@ -1,6 +1,67 @@
-.page-wrapper {
-  padding: 40px 200px;
+$color-primary: #00c454;
+$color-darker: #101010;
+$white: #fff;
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px !important;
+  }
+  h2 {
+    font-size: 36px !important;
+  }
+  h3 {
+    font-size: 18px !important;
+  }
+  h4 {
+    font-size: 14px !important;
+  }
+  p {
+    font-size: 16px;
+  }
+
+  li {
+    font-size: 16px;
+  }
+}
+h1 {
+  font-size: 70px;
+}
+h2 {
+  font-size: 56px;
+}
+h3 {
+  font-size: 36px;
+}
+h4 {
+  font-size: 24px;
+}
+h5 {
+  font-size: 14px;
+}
+p {
+  font-size: 16px;
+}
+
+.title {
+  letter-spacing: 1px;
+  color: $color-primary;
+  text-transform: uppercase;
+}
+
+.bg-primary-color {
+  background: $color-primary !important;
+}
+.bg-darker {
+  background: $color-darker;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.page-wrapper {
+  padding: 60px 200px;
+  min-height: calc(100vh - 120px);
   @media screen and (max-width: 768px) {
     padding: 20px;
   }
@@ -28,4 +89,55 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav-tabs {
+  border-bottom: none !important;
+  &.underlined {
+    border-bottom: 1px solid $color-primary !important;
+  }
+
+  button {
+    text-transform: uppercase !important;
+    font-size: 18px !important;
+    padding: 12px !important;
+  }
+
+  .active {
+    background: black !important;
+    color: $color-primary !important;
+    border-color: $color-primary !important;
+  }
+}
+
+.btn-outline {
+  color: $color-primary !important;
+  background-color: transparent !important;
+  border-color: $color-primary !important;
+  font-weight: 700 !important;
+  border-radius: 24px !important;
+  &:hover {
+    color: $color-darker;
+    background-color: white;
+    opacity: 0.9;
+    transition: 300ms;
+  }
+}
+.btn-underline {
+  color: $color-primary !important;
+  background-color: transparent !important;
+  text-decoration: underline;
+  text-decoration-color: $color-primary;
+  border: none;
+  border-radius: 24px !important;
+  &:hover {
+    color: $color-darker;
+    background-color: white;
+    opacity: 0.9;
+    transition: 300ms;
+  }
+}
+
+.text-color-primary {
+  color: $color-primary !important;
 }
