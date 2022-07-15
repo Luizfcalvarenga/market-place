@@ -1,3 +1,4 @@
+$color-primary: #00c454;
 @media (max-width: 768px) {
   .w100 {
     width: 100% !important;
@@ -14,19 +15,22 @@ hr {
 
 footer {
   opacity: 0.8;
-  
+
 }
 
 .link-white {
   color: #fff;
+  &:hover {
+    color: $color-primary !important;
+  }
 }
 
 .fa-angle-right {
-  color: green;
+  color: $color-primary;
 }
 
 .fa-envelope, .fa-whatsapp, .fa-facebook-f, .fa-instagram {
   &:hover {
-    color: green !important;
+    color: $color-primary !important;
   }
 }

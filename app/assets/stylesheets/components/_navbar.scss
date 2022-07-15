@@ -1,3 +1,5 @@
+$color-primary: #00c454;
+
 .navbar {
   background: rgba(0, 0, 0, 0.7) !important;
   font-weight: bold !important;
@@ -16,6 +18,9 @@
 
 .nav-link {
   color: white;
+  &:hover {
+    color: $color-primary;
+  }
   @media screen and (max-width: 768px) {
     padding: 0.25rem;
     font-size: 20px;
