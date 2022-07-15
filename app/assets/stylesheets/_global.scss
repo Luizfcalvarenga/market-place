@@ -141,3 +141,18 @@ p {
 .text-color-primary {
   color: $color-primary !important;
 }
+
+form {
+  width: 100%;
+
+  label {
+    font-size: 20px;
+    color: $color-primary;
+    letter-spacing: 1px;
+  }
+
+  .form-group {
+    color: white;
+    width: 100%;
+  }
+}

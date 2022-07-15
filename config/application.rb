@@ -30,7 +30,5 @@ module ClubeDoEstudante
 
     config.time_zone = "America/Sao_Paulo"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.assets.compress = true
-    
   end
 end
