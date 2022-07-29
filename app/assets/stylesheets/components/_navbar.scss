@@ -27,6 +27,36 @@ $color-primary: #00c454;
   }
 }
 
-// .nav-login {
-//   color: rgb(0,196,84) !important;
-// }
+.fa-shopping-cart, .fa-search, .fa-times {
+  color: white;
+  &:hover {
+    color:#00c454;
+  }
+}
+
+.form-icon {
+  color:#00c454 !important;
+}
+
+.nav-search-button {
+  background: transparent;
+}
+
+.btn {
+  background: white;
+  color:#00c454 !important;
+  height: 40px;
+  border-radius: 0 20px 20px 0;
+}
+
+.btn:focus {
+  outline:none !important;
+  box-shadow: none !important;
+}
+
+.nav-form {
+  height: 40px;
+  width: 600px;
+  border-radius: 20px;
+  border: transparent;
+}

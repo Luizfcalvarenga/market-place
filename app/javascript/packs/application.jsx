@@ -21,15 +21,16 @@ ActiveStorage.start();
 import "bootstrap";
 
 // Internal imports
+import "./components/form_navbar";
 
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";
 
 document.addEventListener("turbolinks:load", () => {
   const reactContainer = document.querySelector("react");
-  
+
   if (!reactContainer || !reactContainer.dataset.component) return;
-  
+
   const components = {
     ReactPage: <ReactPage message={reactContainer.dataset.message} />,
   };
