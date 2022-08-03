@@ -1,7 +1,7 @@
 $color-primary: #00c454;
 
 .navbar {
-  background: rgba(0, 0, 0, 0.7) !important;
+  background: rgba(0, 0, 0, 0.1) !important;
   font-weight: bold !important;
   font-size: 24px;
   display: flex;
@@ -42,7 +42,7 @@ $color-primary: #00c454;
   background: transparent;
 }
 
-.btn {
+.search-btn {
   background: white;
   color:#00c454 !important;
   height: 40px;

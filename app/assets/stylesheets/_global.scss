@@ -112,13 +112,30 @@ p {
 
 .btn-outline {
   color: $color-primary !important;
-  background-color: transparent !important;
+  background-color: rgba(0,0,0,0.5) !important;
   border-color: $color-primary !important;
-  font-weight: 700 !important;
-  border-radius: 24px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  font-size: 30px !important;
+  padding: 1px 20px 1px 20px !important;
   &:hover {
-    color: $color-darker;
-    background-color: white;
+    color: $white !important;
+    background-color: rgba(0,196,84,0.8)  !important;
+    opacity: 0.9;
+    transition: 300ms;
+  }
+}
+.btn-primary {
+  color: white !important;
+  background-color: rgba(0,196,84,0.8) !important;
+  border-color: $color-primary !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  font-size: 30px !important;
+  padding: 1px 20px 1px 20px !important;
+  &:hover {
+    color: $color-primary !important;
+    background-color: rgba(0,0,0,0.5) !important;
     opacity: 0.9;
     transition: 300ms;
   }

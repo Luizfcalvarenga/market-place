@@ -1,2 +1,15 @@
 // Specific CSS for your home-page
+.first-section-home {
+  background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url("banner.png");
+  background-size: cover;
+  padding: -1px 320px;
+  height: 800px;
+  margin-top: -150px;
 
+  h1 {
+    font-size: 100px !important;
+  }
+  p {
+    font-size: 25px !important;
+  }
+}
