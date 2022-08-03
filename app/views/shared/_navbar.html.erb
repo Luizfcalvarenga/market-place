@@ -1,18 +1,18 @@
 <div class="navbar navbar-expand-md navbar-light-lg">
-  <div class="collapse navbar-collapse d-flex justify-content-center page-desktop">
-    <div class="f-40 px-2">
+  <div class="collapse navbar-collapse d-flex justify-content-between page-desktop">
+    <div class="f-40 px-2 w-100">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-end gap-24">
         <li class="nav-item active mt-2">
-          <%= link_to "#", id: "search-btn", class: "nav-link " do %>
+          <button id="search-btn" class="nav-link">
             <i class="fas fa-search" id="search-icon"></i>
-          <% end %>
+          </button>
         </li>
         <li class="nav-item mt-3">
-          <%= link_to "#", id: "close-btn", class: "nav-link d-none" do %>
+          <button id="close-btn" class="nav-link d-none mb-2">
             <i class="fas fa-times" id="close-icon"></i>
-          <% end %>
+          </button>
         </li>
-        <li id="navbar-form" class="nav-item active mt-2 form-inline d-none">
+        <li id="navbar-form" class="nav-item active mt-2 form-inline d-none mb-2">
           <div class="input-group">
             <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
             <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
@@ -20,16 +20,16 @@
         </li>
         <div id="navbar-links" class="nav-links d-flex">
           <li class="nav-item active">
-            <%= link_to "BIKES", "#", class: "nav-link" %>
+            <%= link_to "BIKES", "#", class: "nav-link me-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "PRODUTOS", "#", class: "nav-link me-1" %>
+            <%= link_to "PRODUTOS", "#", class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "VENDER", "#", class: "nav-link" %>
+            <%= link_to "VENDER", "#", class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "SERVIÇOS", "#", class: "nav-link me-1" %>
+            <%= link_to "SERVIÇOS", "#", class: "nav-link ms-3" %>
           </li>
         </div>
       </ul>

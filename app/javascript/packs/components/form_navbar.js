@@ -1,52 +1,45 @@
+function hideLinks() {
 
-function toggleFormAndLinks() {
-
+  const navLinks = document.getElementById('navbar-links');
+  const closeBTN = document.getElementById('close-btn');
+  const searchBTN = document.getElementById('search-btn');
   const form = document.getElementById('navbar-form');
-  form.classList.toggle('d-none')
-  const searchIcon = document.getElementById('search-icon');
-  searchForm.classList.toggle('d-none')
-  const closeIcon = document.getElementById('close-icon');
-  closeIcon.classList.toggle('d-none')
 
+  navLinks.classList.toggle('d-none');
+  closeBTN.classList.toggle('d-none');
+  searchBTN.classList.toggle('d-none');
+  form.classList.toggle('d-none');
 }
 
+// function hideForm() {
 
-// function toggleLinks() {
-
-//   const form = document.getElementById('navbar-form');
-//   if (form.style.display === "none") {
-//     form.style.display = "block";
-//   } else {
-//     form.style.display = "none";
-//   }
 //   const navLinks = document.getElementById('navbar-links');
-//   if (navLinks.style.display === "none") {
-//     navLinks.style.display = "block";
-//   } else {
-//     navLinks.style.display = "none";
-//   }
 //   const closeBTN = document.getElementById('close-btn');
-//   if (closeBTN.style.display === "none") {
-//     closeBTN.style.display = "block";
-//   } else {
-//     closeBTN.style.display = "none";
-//   }
 //   const searchBTN = document.getElementById('search-btn');
-//   if (searchBTN.style.display === "none") {
-//     searchBTN.style.display = "block";
-//   } else {
-//     searchBTN.style.display = "none";
+//   const form = document.getElementById('navbar-form');
+
+//   let width = parseInt(form.style.width);
+//   width -= 10; // reduce width 10 pixels at a time
+
+//   if (width < 0) width = 0;
+
+//   form.style.width = width + 'px';
+
+//   if (width > 0) {
+//       // keep doing this until width is zero:
+//       setTimeout(collapseForm,100);
 //   }
+//   navLinks.classList.toggle('d-none');
+//   closeBTN.classList.toggle('d-none');
+//   searchBTN.classList.toggle('d-none');
+//   form.classList.toggle('d-none');
 // }
-
-
-
 
 
 const searchBTN = document.getElementById('search-btn');
 
-if (searchBTN) searchBTN.addEventListener('click', toggleFormAndLinks);
+if (searchBTN) searchBTN.addEventListener('click', hideLinks);
 
 const closeBTN = document.getElementById('close-btn');
 
-if (closeBTN) closeBTN.addEventListener('click', toggleFormAndLinks);
+if (closeBTN) closeBTN.addEventListener('click', hideLinks);

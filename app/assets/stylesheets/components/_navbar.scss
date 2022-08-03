@@ -56,7 +56,21 @@ $color-primary: #00c454;
 
 .nav-form {
   height: 40px;
-  width: 600px;
+  width: 385px !important;
   border-radius: 20px;
   border: transparent;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+
 }
+
+#search-btn, #close-btn {
+  background: transparent;
+  border: none;
+}
+
+// .input-group > .form-control
