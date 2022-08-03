@@ -1,0 +1,12 @@
+.card {
+  border: 1px solid $color-primary;
+  border-radius: 8px;
+  height: 6.25rem;
+
+  &:hover {
+
+    .bikes {
+      content: "BIKES";
+    }
+  }
+}
