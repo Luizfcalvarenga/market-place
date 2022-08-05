@@ -3,7 +3,7 @@
   background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url("banner.png");
   background-size: cover;
   padding: -1px 320px;
-  height: 800px;
+  height: 105vh;
   margin-top: -150px;
 
   h1 {
@@ -12,4 +12,8 @@
   p {
     font-size: 25px !important;
   }
+}
+
+.second-section-home {
+  background-color: rgb(240,255,240)
 }

@@ -16,3 +16,6 @@ if (searchBTN) searchBTN.addEventListener('click', hideLinksShowForm);
 
 const closeBTN = document.getElementById('close-btn');
 if (closeBTN) closeBTN.addEventListener('click', hideLinksShowForm);
+
+
+

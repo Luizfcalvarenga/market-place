@@ -1,12 +1,29 @@
 .card {
-  border: 1px solid $color-primary;
-  border-radius: 8px;
-  height: 6.25rem;
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-background-card.png");
+  background-size: cover;
+  border: 1px solid rgb(153,153,153);
+  border-radius: 7px;
+  height: 10rem;
+  box-shadow: 0 0 11px rgba(16,16,16, .3);
 
-  &:hover {
+ &:hover {
+  transform: scale(1.05);
+ }
+}
 
-    .bikes {
-      content: "BIKES";
-    }
-  }
+.card-title {
+  color: rgb(153,153,153);
+}
+
+.category-cards {
+  justify-content: center;
+}
+
+.card:hover .card-icon {
+  opacity: 0;
+}
+
+.card:hover h3 {
+  transform: translateY(25px) !important;
+  color: $color-primary;
 }

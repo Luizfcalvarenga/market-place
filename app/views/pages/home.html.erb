@@ -4,8 +4,8 @@
       <div class="spacer-100 page-desktop"></div>
       <h1>COMPRE BICICLETAS USADAS<br><span class="text-success">COM MECÂNICA VERIFICADA.</span></h1>
       <p class="text-white">Bikes inspecionadas por oficinas qualificadas para você não ter nenhuma surpresa.</p>
-      <%= link_to "BIKES À VENDA", "#", class: "btn btn-primary mt-3 px-4" %>
-      <%= link_to "VENDER MINHA BIKE", "#", class: "btn btn-outline mt-3 px-4 ms-3" %>
+      <%= link_to "BIKES À VENDA", "#", class: "btn btn-primary mt-5 px-4" %>
+      <%= link_to "VENDER MINHA BIKE", "#", class: "btn btn-outline mt-5 px-4 ms-3" %>
       <% if false %>
         <div class="input-group my-4 text-center">
           <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Eventos, competições, pistas, bike parks, etc..." %>" aria-label="Eventos, competições, pistas, bike parks, etc..." aria-describedby="button-addon2">
@@ -15,31 +15,31 @@
     </div>
   </div>
 </div>
-<div class="second-section-home container">
-  <div class="d-flex justify-content-between mt-5 container mb-3">
-    <div class="align-self-center">
-      <h3 class="text-success">CATEGORIAS</h3>
+<div class="second-section-home mb-5">
+  <div class="d-flex justify-content-between mb-3">
+    <div class="ms-3">
+      <h3 class="mt-5 text-success ms-5">CATEGORIAS</h3>
     </div>
   </div>
-  <div class="row row-cols-1">
-    <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
-      <div class="card" style="background-image: url('bike-background-card.png');">
-        <h3 class="text-center mt-4 bikes"><i class="fas fa-bicycle"></i></h3>
+  <div class="row row-cols-1 category-cards mx-5">
+    <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link bike-link" do %>
+      <div class="card">
+        <h3 class="text-center mt-5 card-title">BIKES <br> <span class="card-icon"><i class="fas fa-bicycle"></i></span></h3>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
       <div class="card">
-        <h3 class="text-center mt-4">COMPONENTES</h3>
+        <h3 class="text-center mt-5 card-title">COMPONENTES <br> <span class="card-icon"><img src="bicycle.png" width="32" height="32"></span></h3>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
       <div class="card">
-        <h3 class="text-center mt-4">SERVIÇOS</h3>
+        <h3 class="text-center mt-5 card-title">SERVIÇOS</h3>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
       <div class="card">
-        <h3 class="text-center mt-4">PRODUTOS</h3>
+        <h3 class="text-center mt-5 card-title">PRODUTOS</h3>
       </div>
     <% end %>
   </div>
