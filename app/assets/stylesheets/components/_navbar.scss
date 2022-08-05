@@ -6,10 +6,33 @@ $color-primary: #00c454;
   font-size: 24px;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+
+.navbar-scroll {
+  background: rgba(0, 0, 0, 0.95) !important;
+  font-weight: bold !important;
+  font-size: 24px;
+  display: flex;
+  height: 100px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10000;
 }
 
 .navbar-brand {
   height: 100px;
+
+  @media screen and (max-width: 768px) {
+    height: 70px;
+  }
+}
+
+.navbar-brand-scroll {
+  height: 60px;
 
   @media screen and (max-width: 768px) {
     height: 70px;
