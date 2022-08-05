@@ -1,6 +1,5 @@
 .card {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-background-card.png");
-  background-size: cover;
+  background: transparent;
   border: 1px solid rgb(153,153,153);
   border-radius: 7px;
   height: 10rem;
@@ -24,6 +23,32 @@
 }
 
 .card:hover h3 {
-  transform: translateY(25px) !important;
+  transform: translateY(15px) !important;
   color: $color-primary;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  filter: invert(73%) sepia(0%) saturate(4%) hue-rotate(213deg) brightness(84%) contrast(89%);
+}
+
+.card-bikes:hover {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-card.png");
+  background-size: cover;
+}
+
+.card-components:hover {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-components.png");
+  background-size: cover;
+}
+
+.card-services:hover {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-maintenance.png");
+  background-size: cover;
+}
+
+.card-products:hover {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-products.png");
+  background-size: cover;
 }

@@ -23,23 +23,23 @@
   </div>
   <div class="row row-cols-1 category-cards mx-5">
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link bike-link" do %>
-      <div class="card">
-        <h3 class="text-center mt-5 card-title">BIKES <br> <span class="card-icon"><i class="fas fa-bicycle"></i></span></h3>
+      <div class="card card-bikes">
+        <h3 class="text-center mt-5 card-title">BIKES <br> <%= image_tag "bicycle.png", class: "card-icon" %></h3>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
-      <div class="card">
-        <h3 class="text-center mt-5 card-title">COMPONENTES <br> <span class="card-icon"><img src="bicycle.png" width="32" height="32"></span></h3>
+      <div class="card card-components">
+        <h3 class="text-center mt-5 card-title">COMPONENTES <br><%= image_tag "chain.png", class: "card-icon" %></h3>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
-      <div class="card">
-        <h3 class="text-center mt-5 card-title">SERVIÇOS</h3>
+      <div class="card card-services">
+        <h3 class="text-center mt-5 card-title">SERVIÇOS <br><%= image_tag "settings.png", class: "card-icon" %></h3>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-3 mb-2 btn-remove-link" do %>
-      <div class="card">
-        <h3 class="text-center mt-5 card-title">PRODUTOS</h3>
+      <div class="card card-products">
+        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
       </div>
     <% end %>
   </div>
