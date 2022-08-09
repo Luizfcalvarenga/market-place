@@ -52,3 +52,76 @@
   background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-products.png");
   background-size: cover;
 }
+
+.cards-social-media {
+  background: transparent;
+  border: 1px solid rgb(153,153,153);
+  border-radius: 7px;
+  height: 10rem;
+  width: 20rem;
+  box-shadow: 0 0 11px rgba(16,16,16, .3);
+}
+
+.youtube {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("youtube.png");
+  background-size: cover;
+}
+
+.youtube:hover  h3{
+  transform: translateY(-40px) !important;
+}
+.youtube:hover  p{
+  opacity: 0 !important;
+}
+
+.youtube:hover  .fa-youtube{
+  transform: translateY(-35px) !important;
+  opacity: 1 !important;
+  color: red !important;
+  font-size: 32px !important;
+}
+
+.instagram {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("instagram.png");
+  background-size: cover;
+}
+
+.instagram:hover  h3{
+  transform: translateY(-40px) !important;
+}
+.instagram:hover  p{
+  opacity: 0 !important;
+}
+
+
+.instagram:hover  .fa-instagram{
+  transform: translateY(-35px) !important;
+  opacity: 1 !important;
+  color: rgb(201,41,107);
+  font-size: 32px !important;
+}
+
+
+.facebook {
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("facebook.png");
+  background-size: cover;
+}
+
+.facebook:hover  h3{
+  transform: translateY(-40px) !important;
+}
+.facebook:hover  p{
+  opacity: 0 !important;
+}
+
+.facebook:hover  .fa-facebook{
+  transform: translateY(-35px) !important;
+  opacity: 1 !important;
+  color: rgb(72,103,170);
+  font-size: 32px !important;
+}
+
+
+.social-media {
+  text-decoration: none;
+}

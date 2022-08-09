@@ -146,3 +146,52 @@
     </div>
   </div>
 </div>
+
+<div class="fifth-section-home mx-5 py-5">
+  <div class="d-flex justify-content-between">
+    <%= image_tag "bike-blog.png", style: "width: 500px; heught: 500px;", class: "rounded" %>
+    <div class="blog-text ms-5">
+      <h2 class="text-success">BLOG</h2>
+      <h3 class="">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
+      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-3" %>
+    </div>
+  </div>
+</div>
+
+<div class="sixth-section-home py-3">
+  <h3 class="text-success ms-5">ENCONTRE A GENTE</h3>
+  <div class="d-flex justify-content-between mx-5">
+    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media", target: "_blank" do %>
+      <div class="cards-social-media youtube text-center">
+        <p class="mt-5 text-white">NOS ASSITA NO</p>
+        <h3>YOUTUBE</h3>
+        <i class="fab fa-youtube", style="opacity: 0;"></i>
+      </div>
+    <% end %>
+    <%= link_to "#", class: "social-media" do %>
+      <div class="cards-social-media instagram text-center">
+        <p class="mt-5 text-white">NOS SIGA NO</p>
+        <h3>INSTAGRAM</h3>
+        <i class="fab fa-instagram", style="opacity: 0;"></i>
+      </div>
+    <% end %>
+    <%= link_to "#", class: "social-media" do %>
+      <div class="cards-social-media facebook text-center">
+        <p class="mt-5 text-white">NOS ACOMPANE NO</p>
+        <h3>FACEBOOK</h3>
+        <i class="fab fa-facebook", style="opacity: 0;"></i>
+      </div>
+    <% end %>
+  </div>
+
+
+
+</div>
+
+
+
+<div class="wpp-btn">
+  <%= link_to "https://wa.me/553196225074", "data-toggle": "tooltip" , "data-placement": "top", "title": "Fala com um especialista", target: "_blank" do %>
+    <i class="fab fa-whatsapp-square"></i>
+  <% end %>
+</div>
