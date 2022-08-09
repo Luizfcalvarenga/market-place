@@ -17,6 +17,7 @@ if (searchBTN) searchBTN.addEventListener('click', hideLinksShowForm);
 const closeBTN = document.getElementById('close-btn');
 if (closeBTN) closeBTN.addEventListener('click', hideLinksShowForm);
 
+
 let myNav = document.getElementById('navbar');
 let logoNav = document.querySelector(".navbar-brand")
 

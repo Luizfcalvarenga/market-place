@@ -15,6 +15,27 @@
 }
 
 .second-section-home {
-  background-color: rgb(240,255,240);
-  background: #101010;
+  background-color: #F4F4F9;
+}
+
+.third-section-home {
+  background-color: #101010;
+}
+
+.fourth-section-home {
+  background-color: #F4F4F9;
+}
+
+.cards-differential {
+  background: transparent;
+  border: 1px solid rgb(153,153,153);
+  border-radius: 7px;
+  height: 13rem;
+  box-shadow: 0 0 11px rgba(16,16,16, .3);
+  margin: 5px;
+
+  .icon {
+    font-size: 32px;
+    align-items: center;
+  }
 }
