@@ -125,6 +125,23 @@ p {
     transition: 300ms;
   }
 }
+
+.btn-classic {
+  color: white !important;
+  background-color: rgb(0,196,84) !important;
+  border-color: $color-primary !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  font-size: 30px !important;
+  padding: 1px 17px 1px 17px !important;
+  &:hover {
+    color: $color-primary !important;
+    background-color: transparent !important;
+    opacity: 0.9;
+    transition: 300ms;
+  }
+}
+
 .btn-primary {
   color: white !important;
   background-color: rgba(0,196,84,0.8) !important;
@@ -140,6 +157,7 @@ p {
     transition: 300ms;
   }
 }
+
 .btn-underline {
   color: $color-primary !important;
   background-color: transparent !important;

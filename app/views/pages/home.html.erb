@@ -89,13 +89,8 @@
 
 <div class="fourth-section-home pb-5 my-3 pt-3">
   <h2 class="mt-3 text-success text-center">POR QUE A NUFLOW?</h2>
-  <div class="buyer-section mb-3 mx-5">
-    <div class="d-flex align-items-center justify-content-start">
-      <h2 class="text-success mt-3">COMPRE COM GARANTIA</h2>
-      <%= link_to "#", class: "btn btn-primary ms-5"  do %>
-        <i class="fas fa-bicycle"></i> BIKES
-      <% end %>
-    </div>
+  <div class="buyer-section mx-5">
+    <h2 class="text-success mt-3 ms-2">COMPRE COM GARANTIA</h2>
     <div class="d-flex justify-contet-between">
       <div class="cards-differential text-center mt-3 w-100">
         <i class="fas fa-headset text-success mt-4 icon"></i>
@@ -113,16 +108,19 @@
         <p class="">Com o Bike Check sua bike é verificada e <br> revisada por oficinas qualificadas.</p>
       </div>
     </div>
+    <div class="text-center">
+      <%= link_to "#", class: "btn btn-classic mt-3"  do %>
+        <i class="fas fa-bicycle"></i> BIKES
+      <% end %>
+    </div>
   </div>
 
   <hr>
 
   <div class="seller-section mx-5">
     <div class="d-flex align-items-center justify-content-end">
-      <%= link_to "#", class: "btn btn-primary me-5" do %>
-        <i class="fas fa-bullhorn"></i> ANUNCIE
-      <% end %>
-      <h2 class="text-success text-end">VENDA SEM SURPRESAS</h2>
+
+      <h2 class="text-success text-end me-2">VENDA SEM SURPRESAS</h2>
     </div>
     <div class="d-flex justify-contet-between">
       <div class="cards-differential text-center mt-3 w-100">
@@ -140,6 +138,11 @@
         <h3 class="text-success">ASSISTÊNCIA NA NEGOCIAÇÂO</h3>
         <p class="">Atendemos os interessados em sua bike, preocupe-se apenas com as propostas.</p>
       </div>
+    </div>
+    <div class="text-center">
+      <%= link_to "#", class: "btn btn-classic mt-3" do %>
+        <i class="fas fa-bullhorn"></i> ANUNCIE
+      <% end %>
     </div>
   </div>
 </div>
