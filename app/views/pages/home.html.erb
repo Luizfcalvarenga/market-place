@@ -8,8 +8,8 @@
       <%= link_to "VENDER MINHA BIKE", "#", class: "btn btn-outline mt-5 px-4 ms-3" %>
       <% if false %>
         <div class="input-group my-4 text-center">
-          <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Eventos, competições, pistas, bike parks, etc..." %>" aria-label="Eventos, competições, pistas, bike parks, etc..." aria-describedby="button-addon2">
-          <button class="btn btn-success px-2 px-md-3 text-white text-center" type="button" id="button-addon2">ENCONTRAR EXPERIÊNCIAS</button>
+          <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Bicicletas, assessórios, serviços, etc..." %>" aria-label="Bicicletas, assessórios, serviços, etc..." aria-describedby="button-addon2">
+          <button class="btn btn-success px-2 px-md-3 text-white text-center" type="button" id="button-addon2">ENCONTRAR BICICLETAS</button>
         </div>
       <% end %>
     </div>
@@ -56,56 +56,54 @@
   </div>
 </div>
 
-<div class="third-section-home mb-5 ms-3">
-  <div class="d-flex justify-content-between mt-3">
-    <%= image_tag "bike-certify.png", class: "bike-check-img ms-5 me-3" %>
-    <div class="check-text">
-      <h2 class="text-success ms-2">Compre sua bike com a segurança do Bike Check</h2>
-      <p class="ms-2 mb-5">Oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, <br> estético e de funcionamento da bicicleta.</p>
+<div class="d-flex justify-content-between mt-3 third-section-home mb-5 ms-3">
+  <%= image_tag "bike-certify.png", class: "bike-check-img ms-5 me-3" %>
+  <div class="check-text">
+    <h2 class="text-success ms-2">Compre sua bike com a segurança do Bike Check</h2>
+    <p class="ms-2 mb-5 check-text">Oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, <br> estético e de funcionamento da bicicleta.</p>
 
-      <h3 class="text-success"> <i class="fas fa-spray-can"></i> <span class="ms-2"> 1. Tudo começa pela lavagem</span></h3>
-      <p class="ms-5 mb-5">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
+    <h3 class="text-success"> <i class="fas fa-spray-can"></i> <span class="ms-2"> 1. Tudo começa pela lavagem</span></h3>
+    <p class="ms-5 mb-5 check-text">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
 
-      <h3 class="text-success"> <i class="fas fa-search text-success"></i> <span class="ms-2">2. É feita uma inspeção minuciosa</span></h3>
-      <p class="ms-5 mb-5">Buscamos identificar lascas maiores na pintura, trincas e fissuras visuais na estrutura.</p>
+    <h3 class="text-success"> <i class="fas fa-search text-success"></i> <span class="ms-2">2. É feita uma inspeção minuciosa</span></h3>
+    <p class="ms-5 mb-5 check-text">Buscamos identificar lascas maiores na pintura, trincas e fissuras visuais na estrutura.</p>
 
-      <h3 class="text-success"> <i class="fas fa-check-double"></i> <span class="ms-2">3. Verificamos a mecânica</span></h3>
-      <p class="ms-5 mb-5">São verificadas as características da bike e o funcionamento dos componentes: <br>
-        - Medida do quadro e dos aros <br>
-        - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
-        - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
-        - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
-        - Desgaste da corrente e dos pneus
-      </p>
+    <h3 class="text-success"> <i class="fas fa-check-double"></i> <span class="ms-2">3. Verificamos a mecânica</span></h3>
+    <p class="ms-5 mb-5 check-text">São verificadas as características da bike e o funcionamento dos componentes: <br>
+      - Medida do quadro e dos aros <br>
+      - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
+      - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
+      - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
+      - Desgaste da corrente e dos pneus
+    </p>
 
-      <h3 class="text-success"> <i class="fas fa-screwdriver"></i> <span class="ms-2">4. Ajustamos a bike para que a receba revisada</span></h3>
-      <p class="ms-5 mb-5">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
+    <h3 class="text-success"> <i class="fas fa-screwdriver"></i> <span class="ms-2">4. Ajustamos a bike para que a receba revisada</span></h3>
+    <p class="ms-5 mb-5 check-text">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
 
-      <h3 class="text-success"> <i class="fas fa-clipboard-list"></i> <span class="ms-2">5. Emitimos um laudo mecânico</span></h3>
-      <p class="ms-5 mb-5">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
-    </div>
+    <h3 class="text-success"> <i class="fas fa-clipboard-list"></i> <span class="ms-2">5. Emitimos um laudo mecânico</span></h3>
+    <p class="ms-5 mb-5 check-text">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
   </div>
 </div>
 
 <div class="fourth-section-home pb-5 my-3 pt-3">
   <h2 class="mt-3 text-success text-center">POR QUE A NUFLOW?</h2>
   <div class="buyer-section mx-5">
-    <h2 class="text-success mt-3 ms-2">COMPRE COM GARANTIA</h2>
-    <div class="d-flex justify-contet-between">
-      <div class="cards-differential text-center mt-3 w-100">
+    <h2 class="text-success mt-3">COMPRE COM SEGURANÇA</h2>
+    <div class="row row-cols-1">
+      <div class="cards-differential text-center mt-3 col-12 col-md-4 mb-2">
         <i class="fas fa-headset text-success mt-4 icon"></i>
         <h3 class="text-success">ASSESSORIA NA COMPRA</h3>
-        <p class="">Conte com a ajuda de especialistas <br> para encontrar a bike ideal para você.</p>
+        <p>Conte com a ajuda de especialistas <br> para encontrar a bike ideal para você.</p>
       </div>
-      <div class="cards-differential text-center mt-3 w-100">
+      <div class="cards-differential text-center mt-3 col-12 col-md-4 mb-2">
         <i class="fas fa-credit-card text-success mt-4 icon"></i>
         <h3 class="text-success">PAGAMENTO FLEXÍVEL E SEGURO</h3>
-        <p class="">Parcele sua compra em até 12x. <br> Nós retemos seu pagamento até a <br> confirmação de recebimento.</p>
+        <p>Parcele sua compra em até 12x. <br> Nós retemos seu pagamento até a <br> confirmação de recebimento.</p>
       </div>
-      <div class="cards-differential text-center mt-3 w-100">
+      <div class="cards-differential text-center mt-3 col-12 col-md-4 mb-2">
         <i class="fas fa-clipboard-check text-success mt-4 icon"></i>
         <h3 class="text-success">LAUDO MECÊNICO</h3>
-        <p class="">Com o Bike Check sua bike é verificada e <br> revisada por oficinas qualificadas.</p>
+        <p>Com o Bike Check sua bike é verificada e <br> revisada por oficinas qualificadas.</p>
       </div>
     </div>
     <div class="text-center">
@@ -118,25 +116,22 @@
   <hr>
 
   <div class="seller-section mx-5">
-    <div class="d-flex align-items-center justify-content-end">
-
-      <h2 class="text-success text-end me-2">VENDA SEM SURPRESAS</h2>
-    </div>
-    <div class="d-flex justify-contet-between">
-      <div class="cards-differential text-center mt-3 w-100">
+    <h2 class="text-success text-end me-2">VENDA COM GARANTIA</h2>
+    <div class="row row-cols-1">
+      <div class="cards-differential text-center mt-3 col-12 col-md-4 mb-2">
         <i class="fas fa-handshake text-success mt-4 icon"></i>
         <h3 class="text-success">VENDA MAIS RÁPIDO</h3>
-        <p class="">Atinja milhares de ciclistas e venda <br> para todo Brasil.</p>
+        <p>Atinja milhares de ciclistas e venda <br> para todo Brasil.</p>
       </div>
-      <div class="cards-differential text-center mt-3 w-100">
+      <div class="cards-differential text-center mt-3 col-12 col-md-4 mb-2">
         <i class="fas fa-hand-holding-usd text-success mt-4 icon"></i>
         <h3 class="text-success">PARCELE E RECEBA À VISTA</h3>
-        <p class="">Flexibilidade de pagamento para os  <br> interessados em sua bike.</p>
+        <p>Flexibilidade de pagamento para os  <br> interessados em sua bike.</p>
       </div>
-      <div class="cards-differential text-center mt-3 w-100">
+      <div class="cards-differential text-center mt-3 col-12 col-md-4 mb-2">
         <i class="fas fa-people-arrows text-success mt-4 icon"></i>
         <h3 class="text-success">ASSISTÊNCIA NA NEGOCIAÇÂO</h3>
-        <p class="">Atendemos os interessados em sua bike, preocupe-se apenas com as propostas.</p>
+        <p>Atendemos os interessados em sua bike, preocupe-se apenas com as propostas.</p>
       </div>
     </div>
     <div class="text-center">
@@ -148,9 +143,9 @@
 </div>
 
 <div class="fifth-section-home mx-5 py-5">
-  <div class="d-flex justify-content-between">
-    <%= image_tag "bike-blog.png", style: "width: 500px; heught: 500px;", class: "rounded" %>
-    <div class="blog-text ms-5">
+  <div class="row row-cols-1">
+    <%= image_tag "bike-blog.png", style: "width: 500px; heught: 500px;", class: "rounded col-12 col-md-6" %>
+    <div class="blog-text ms-5 col-12 col-md-6">
       <h2 class="text-success">BLOG</h2>
       <h3 class="">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
       <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-3" %>
@@ -160,22 +155,22 @@
 
 <div class="sixth-section-home py-5">
   <h3 class="text-success ms-5">ENCONTRE A GENTE</h3>
-  <div class="d-flex justify-content-between mx-5">
-    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media", target: "_blank" do %>
+  <div class="row row-cols-1 mx-5">
+    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media col-12 col-md-4", target: "_blank" do %>
       <div class="cards-social-media youtube text-center">
         <p class="mt-5 text-white">NOS ASSITA NO</p>
         <h3>YOUTUBE</h3>
         <i class="fab fa-youtube", style="opacity: 0;"></i>
       </div>
     <% end %>
-    <%= link_to "#", class: "social-media" do %>
+    <%= link_to "#", class: "social-media col-12 col-md-4" do %>
       <div class="cards-social-media instagram text-center">
         <p class="mt-5 text-white">NOS SIGA NO</p>
         <h3>INSTAGRAM</h3>
         <i class="fab fa-instagram", style="opacity: 0;"></i>
       </div>
     <% end %>
-    <%= link_to "#", class: "social-media" do %>
+    <%= link_to "#", class: "social-media col-12 col-md-4" do %>
       <div class="cards-social-media facebook text-center">
         <p class="mt-5 text-white">NOS ACOMPANE NO</p>
         <h3>FACEBOOK</h3>
@@ -184,8 +179,6 @@
     <% end %>
   </div>
 </div>
-
-
 
 <div class="wpp-btn">
   <%= link_to "https://wa.me/553196225074", "data-toggle": "tooltip" , "data-placement": "top", "title": "Fala com um especialista", target: "_blank" do %>

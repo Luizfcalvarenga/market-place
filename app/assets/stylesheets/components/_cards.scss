@@ -53,6 +53,22 @@
   background-size: cover;
 }
 
+
+.cards-differential {
+  background: transparent;
+  border: 1px solid rgb(153,153,153);
+  border-radius: 7px;
+  height: 13rem;
+  box-shadow: 0 0 11px rgba(16,16,16, .3);
+  
+
+  .icon {
+    font-size: 32px;
+    align-items: center;
+  }
+}
+
+
 .cards-social-media {
   background: transparent;
   border: 1px solid rgb(153,153,153);

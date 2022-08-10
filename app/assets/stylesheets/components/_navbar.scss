@@ -79,7 +79,7 @@ $color-primary: #00c454;
 
 .nav-form {
   height: 40px;
-  width: 420px !important;
+  // width: 420px !important;
   border-radius: 20px;
   border: transparent;
   outline: none !important;
@@ -90,4 +90,42 @@ $color-primary: #00c454;
 #search-btn, #close-btn {
   background: transparent;
   border: none;
+}
+
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: 150px !important;
+
+  }
+
+  .nav-form {
+    width: 82% !important;
+    margin-left: 5%;
+    margin-top: 10px;
+
+  }
+
+  .search-btn {
+    margin-top: 10px;
+  }
+
+
+  .navbar-scroll {
+
+    height: 150px;
+    display: block;
+
+    .nav-form {
+      width: 82% !important;
+      margin-left: 5%;
+      margin-top: 10px;
+    }
+
+    .search-btn {
+      margin-top: 10px;
+    }
+
+  }
 }
