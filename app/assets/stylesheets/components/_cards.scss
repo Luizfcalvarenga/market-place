@@ -84,18 +84,21 @@
   background-size: cover;
 }
 
-.youtube:hover  h3{
+.youtube:hover {
+  h3{
   transform: translateY(-40px) !important;
-}
-.youtube:hover  p{
-  opacity: 0 !important;
-}
+  }
 
-.youtube:hover  .fa-youtube{
-  transform: translateY(-35px) !important;
-  opacity: 1 !important;
-  color: red !important;
-  font-size: 32px !important;
+  p{
+    opacity: 0 !important;
+  }
+
+  .fa-youtube{
+    transform: translateY(-35px) !important;
+    opacity: 1 !important;
+    color: red !important;
+    font-size: 32px !important;
+  }
 }
 
 .instagram {
@@ -103,41 +106,46 @@
   background-size: cover;
 }
 
-.instagram:hover  h3{
-  transform: translateY(-40px) !important;
-}
-.instagram:hover  p{
-  opacity: 0 !important;
-}
+.instagram:hover {
 
+  h3{
+    transform: translateY(-40px) !important;
+  }
 
-.instagram:hover  .fa-instagram{
-  transform: translateY(-35px) !important;
-  opacity: 1 !important;
-  color: rgb(201,41,107);
-  font-size: 32px !important;
+  p{
+    opacity: 0 !important;
+  }
+
+  .fa-instagram{
+    transform: translateY(-35px) !important;
+    opacity: 1 !important;
+    color: rgb(201,41,107);
+    font-size: 32px !important;
+  }
 }
-
 
 .facebook {
   background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("facebook.png");
   background-size: cover;
 }
 
-.facebook:hover  h3{
-  transform: translateY(-40px) !important;
-}
-.facebook:hover  p{
-  opacity: 0 !important;
-}
+.facebook:hover {
 
-.facebook:hover  .fa-facebook{
-  transform: translateY(-35px) !important;
-  opacity: 1 !important;
-  color: rgb(72,103,170);
-  font-size: 32px !important;
-}
+  h3{
+    transform: translateY(-40px) !important;
+  }
 
+  p{
+    opacity: 0 !important;
+  }
+
+  .fa-facebook{
+    transform: translateY(-35px) !important;
+    opacity: 1 !important;
+    color: rgb(72,103,170);
+    font-size: 32px !important;
+  }
+}
 
 .social-media {
   text-decoration: none;
