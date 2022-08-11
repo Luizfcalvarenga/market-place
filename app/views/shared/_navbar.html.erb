@@ -80,15 +80,19 @@
           <% end %>
         </li>
         <% if user_signed_in? %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="dropdown">
+            <button class="btn" type="button" class="dropbtn">
               <i class="fas fa-bars"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Nuflow pass</a></li>
-              <li><a class="dropdown-item" href="#">Nuflow bike</a></li>
-              <li><%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline ms-5" %></li>
-            </ul>
+            </button>
+            <div class="dropdown-content dropdown-content-user">
+              <div class="drpdw-bike">
+                <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
+                <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
+                <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
+                <hr>
+                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link ms-2" %>
+              </div>
+            </div>
           </li>
           <li><%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline ms-5" %></li>
         <% else %>
