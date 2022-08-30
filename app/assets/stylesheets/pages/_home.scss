@@ -1,1 +1,292 @@
 // Specific CSS for your home-page
+.first-section-home {
+  background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url("banner.png");
+  background-size: cover;
+  padding: -1px 320px;
+  height: 105vh;
+  margin-top: -150px;
+
+  h1 {
+    font-size: 100px !important;
+  }
+  p {
+    font-size: 25px !important;
+  }
+}
+
+.second-section-home {
+  background-color: #F4F4F9;
+}
+
+.third-section-home {
+  background-color: #101010;
+
+  .bike-check-img {
+    height: 280.2px;
+    width: 435px;
+    position: sticky;
+    top: 70px;
+  }
+
+}
+
+.fourth-section-home {
+  background-color: #F4F4F9;
+}
+
+.sixth-section-home {
+  background-color: #F4F4F9;
+}
+
+
+
+@media (max-width: 725px) {
+
+  .first-section-home {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-mobile.png");
+    background-size: auto;
+    padding: -1px 320px;
+    height: 150vh;
+    margin-top: -150px;
+
+    h1 {
+      margin-top: 90px;
+      font-size: 90px !important;
+
+    }
+  }
+
+  .btn-outline {
+    margin-left: 0 !important;
+  }
+
+  .third-section-home {
+    display: block !important;
+    margin-top: 0 !important;
+
+    .bike-check-img {
+      position: relative;
+      width: 380px;
+      margin-left: 0 !important;
+    }
+
+    .check-text{
+      margin-left: 0px !important;
+      text-align: center;
+
+
+
+      .third-section-title {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  .fourth-section-home {
+    .text-success {
+      text-align: center !important;
+    }
+  }
+
+  .fifth-section-home {
+    .blog-text {
+      margin-top: 20px;
+      margin-left: 0px !important;
+    }
+  }
+
+  .wpp-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 425px) {
+
+  .first-section-home {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-mobile.png");
+    background-size: auto;
+    padding: -1px 320px;
+    height: 150vh;
+    margin-top: -150px;
+
+    h1 {
+      margin-top: 100px;
+      font-size: 90px !important;
+
+    }
+  }
+
+  .btn-outline {
+    margin-left: 0 !important;
+  }
+
+  .third-section-home {
+    display: block !important;
+    margin-top: 0 !important;
+
+    .bike-check-img {
+      position: relative;
+      width: 330px;
+      margin-left: 0 !important;
+    }
+
+    .check-text{
+      margin-left: 0px !important;
+      text-align: center;
+
+      .third-section-title {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  .fourth-section-home {
+    .text-success {
+      text-align: center !important;
+    }
+  }
+
+  .fifth-section-home {
+    .blog-text {
+      margin-top: 20px;
+      margin-left: 0px !important;
+    }
+  }
+
+  .sixth-section-home {
+    .cards-social-media {
+      width: 100%;
+    }
+  }
+
+  .wpp-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 415px) {
+
+  .first-section-home {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-mobile.png");
+    background-size: auto;
+    padding: -1px 320px;
+    height: 140vh;
+    margin-top: -150px;
+
+    h1 {
+      margin-top: 100px;
+      font-size: 90px !important;
+
+    }
+  }
+
+  .btn-outline {
+    margin-left: 0 !important;
+  }
+
+  .third-section-home {
+    display: block !important;
+    margin-top: 0 !important;
+
+    .bike-check-img {
+      position: relative;
+      width: 330px;
+      margin-left: 0 !important;
+    }
+
+    .check-text{
+      margin-left: 0px !important;
+      text-align: center;
+
+      .third-section-title {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  .fourth-section-home {
+    .text-success {
+      text-align: center !important;
+    }
+  }
+
+  .fifth-section-home {
+    .blog-text {
+      margin-top: 20px;
+      margin-left: 0px !important;
+    }
+  }
+
+  .sixth-section-home {
+    .cards-social-media {
+      width: 100%;
+    }
+  }
+
+  .wpp-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 389px) {
+
+  .first-section-home {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-mobile.png");
+    background-size: auto;
+    padding: -1px 320px;
+    height: 180vh;
+    margin-top: -150px;
+
+    h1 {
+      margin-top: 100px;
+      font-size: 90px !important;
+    }
+  }
+
+  .btn-outline {
+    margin-left: 100px;
+  }
+
+  .third-section-home {
+    display: block !important;
+    margin-top: 0 !important;
+
+    .bike-check-img {
+      position: relative;
+      width: 330px;
+      margin-left: 0 !important;
+    }
+
+    .check-text{
+      margin-left: 0px !important;
+      text-align: center;
+
+      .third-section-title {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  .fourth-section-home {
+    .text-success {
+      text-align: center !important;
+    }
+  }
+
+  .fifth-section-home {
+    .blog-text {
+      margin-top: 20px;
+      margin-left: 0px !important;
+    }
+  }
+
+  .sixth-section-home {
+    .cards-social-media {
+      width: 100%;
+    }
+  }
+
+  .wpp-btn {
+    display: none;
+  }
+}

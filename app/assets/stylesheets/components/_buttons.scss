@@ -1,0 +1,59 @@
+.wpp-btn {
+  position: sticky;
+  bottom: 30px;
+  margin-left: 95%;
+
+  .fa-whatsapp-square {
+    font-size: 50px;
+  }
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  border: none;
+  font-family: "Bebas Neue", "Helvetica", "sans-serif";
+  font-weight: bold !important;
+  font-size: 24px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.95);
+  width: 600px;
+  border: 1px solid $color-primary;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content-user {
+
+  width: 120px !important;
+
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 6px 8px;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: $color-primary !important;
+}
+
+.dropdown:hover .dropdown-content {display: flex;}
