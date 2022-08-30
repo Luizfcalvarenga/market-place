@@ -1,0 +1,39 @@
+$color-primary: #00c454;
+@media (max-width: 768px) {
+  .w100 {
+    width: 100% !important;
+  }
+  .footer-text {
+    display: none;
+  }
+}
+
+hr {
+  border: 1px dashed #000;
+  width: 50%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+footer {
+  opacity: 0.8;
+
+}
+
+.link-white {
+  color: #fff;
+  &:hover {
+    color: $color-primary !important;
+  }
+}
+
+.fa-angle-right {
+  color: $color-primary;
+}
+
+.fa-envelope, .fa-whatsapp, .fa-facebook-f, .fa-instagram {
+  &:hover {
+    color: $color-primary !important;
+  }
+}
