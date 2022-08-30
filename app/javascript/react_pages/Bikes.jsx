@@ -59,9 +59,13 @@ export function Bikes(props) {
       <div>
         {bikes.map((bike) => {
           return (
-            <p>
-              #{bike.id} - {bike.category} - Age: {bike.age} - Size: {bike.size}
-            </p>
+            <div className="cards-bikes">
+
+
+              <p>
+                #{bike.id} - {bike.category} - Age: {bike.age} - Size: {bike.size}
+              </p>
+            </div>
           );
         })}
       </div>
