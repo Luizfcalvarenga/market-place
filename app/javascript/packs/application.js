@@ -24,6 +24,7 @@ import "bootstrap";
 
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";
+import { Bikes } from "../react_pages/Bikes";
 
 document.addEventListener("turbolinks:load", () => {
   const reactContainer = document.querySelector("react");
@@ -32,6 +33,7 @@ document.addEventListener("turbolinks:load", () => {
   
   const components = {
     ReactPage: <ReactPage message={reactContainer.dataset.message} />,
+    Bikes: <Bikes galo="doido" batata={2} />,
   };
 
   ReactDOM.render(
