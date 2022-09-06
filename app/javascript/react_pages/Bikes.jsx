@@ -61,30 +61,39 @@ export function Bikes(props) {
           return (
             <div className="col-12 col-md-3">
               <div className="cards-bikes">
-              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="bike-card.png" class="d-block w-100 img-card-index" alt="" />
+                <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                  <div className="carousel-inner">
+                    <i className="fas fa-heart card-favorite"></i>
+                    <div className="carousel-item active">
+                      <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                    </div>
+                    <div className="carousel-item">
+                      <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                    </div>
+                    <div className="carousel-item">
+                      <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                    </div>
                   </div>
-                  <div class="carousel-item">
-                    <img src="bike-card.png" class="d-block w-100 img-card-index" alt="" />
-                  </div>
-                  <div class="carousel-item">
-                    <img src="bike-card.png" class="d-block w-100 img-card-index" alt="" />
+                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
+                </div>
+                <h4 className="card-title text-center mt-3">BIKE MODEL</h4>
+                <h4 className="text-center mt-1">R$ BIKE PRICE</h4>
+                <hr/>
+                <div className="card-content mt-2">
+                  <p className="text-center mt-1">Frame: {bike.id}</p>
+                  <div className="d-flex justify-content-around">
+                    <p>Ano: {bike.age}</p>
+                    <i class="fas fa-heart"></i>
+                    <p>Wheel: {bike.size}</p>
                   </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-                <p>
-                  #{bike.id} - {bike.category} - Age: {bike.age} - Size: {bike.size}
-                </p>
               </div>
             </div>
           );
