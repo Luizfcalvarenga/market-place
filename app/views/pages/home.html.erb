@@ -163,12 +163,12 @@
 
 <div class="fifth-section-home mx-5 py-5">
   <div class="row row-cols-1">
-    <div class="col-12 col-md-6 blog-text">
+    <div class="col-12 col-md-4 blog-text">
       <h2 class="text-success">BLOG</h2>
-      <h3 class="">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
-      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-3" %>
+      <h3 class="mb-5">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
+      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-5" %>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-8">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -213,27 +213,24 @@
 </div>
 
 <div class="sixth-section-home py-5">
-  <h3 class="text-success ms-5">ENCONTRE A GENTE</h3>
-  <div class="row row-cols-1 mx-5">
-    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media col-12 col-md-4", target: "_blank" do %>
+  <h3 class="text-success text-center mb-3">ENCONTRE A GENTE</h3>
+  <div class="d-flex justify-content-around mx-5">
+    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media ", target: "_blank" do %>
       <div class="cards-social-media youtube text-center">
-        <p class="mt-5 text-white">NOS ASSITA NO</p>
         <h3>YOUTUBE</h3>
-        <i class="fab fa-youtube", style="opacity: 0;"></i>
+        <i class="fab fa-youtube d-none"></i>
       </div>
     <% end %>
-    <%= link_to "#", class: "social-media col-12 col-md-4" do %>
+    <%= link_to "#", class: "social-media " do %>
       <div class="cards-social-media instagram text-center">
-        <p class="mt-5 text-white">NOS SIGA NO</p>
         <h3>INSTAGRAM</h3>
-        <i class="fab fa-instagram", style="opacity: 0;"></i>
+        <i class="fab fa-instagram d-none"></i>
       </div>
     <% end %>
-    <%= link_to "#", class: "social-media col-12 col-md-4" do %>
-      <div class="cards-social-media facebook text-center">
-        <p class="mt-5 text-white">NOS ACOMPANE NO</p>
-        <h3>FACEBOOK</h3>
-        <i class="fab fa-facebook", style="opacity: 0;"></i>
+    <%= link_to "https://nuflowpass.com.br/", class: "social-media " do %>
+      <div class="cards-social-media nuflow text-center">
+        <h3>NUFLOW PASS</h3>
+        <%= image_tag "white_logo.png", class: "social-logo d-none" %>
       </div>
     <% end %>
   </div>

@@ -72,77 +72,71 @@
 
 .cards-social-media {
   background: transparent;
-  border: 1px solid rgb(153,153,153);
-  border-radius: 7px;
+  border: 1px solid rgb(240, 234, 234);
+  border-radius: 50%;
   height: 10rem;
-  width: 20rem;
+  width: 10rem;
   box-shadow: 0 0 11px rgba(16,16,16, .3);
   margin: 5px;
+
+  h3 {
+    margin-top: 38%;
+    color: rgba(16,16,16, .5)
+  }
 }
 
-.youtube {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("youtube.png");
-  background-size: cover;
-}
 
 .youtube:hover {
+  box-shadow: 0 0 11px rgba(255,0,0, .7);
   h3{
-    transform: translateY(-40px) !important;
-  }
-
-  p{
-    opacity: 0 !important;
+    display: none
   }
 
   .fa-youtube{
-    transform: translateY(-35px) !important;
-    opacity: 1 !important;
+    display: block !important;
     color: red !important;
-    font-size: 32px !important;
+    font-size: 60px !important;
+    transform: translateY(50px) !important;
+
   }
 }
 
-.instagram {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("instagram.png");
-  background-size: cover;
-}
+
 
 .instagram:hover {
-  h3{
-    transform: translateY(-40px) !important;
-  }
 
-  p{
-    opacity: 0 !important;
+  box-shadow: 0 0 11px rgba(164,1,189, .3);
+
+  h3{
+    display: none
   }
 
   .fa-instagram{
-    transform: translateY(-35px) !important;
-    opacity: 1 !important;
-    color: rgb(201,41,107);
-    font-size: 32px !important;
+    color: rgb(201,41,107)  !important;
+    display: block !important;
+    font-size: 60px !important;
+    transform: translateY(50px) !important;
   }
 }
 
-.facebook {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("facebook.png");
-  background-size: cover;
-}
 
-.facebook:hover {
+
+.nuflow:hover {
+
+  box-shadow: 0 0 11px rgba(10,10,10, .9);
+
   h3{
-    transform: translateY(-40px) !important;
+    display: none
   }
 
-  p{
-    opacity: 0 !important;
-  }
+  .social-logo{
+    filter: grayscale(100%) brightness(0%);
+    display: block !important;
+    width: 60px !important;
+    height: 60px !important;
+    transform: translateY(50px) !important;
+    margin-left: 30%;
 
-  .fa-facebook{
-    transform: translateY(-35px) !important;
-    opacity: 1 !important;
-    color: rgb(72,103,170);
-    font-size: 32px !important;
   }
 }
 
@@ -151,15 +145,15 @@
 }
 
 .cards-blog {
-  height: 500px;
+  height: 450px;
   border: 1px solid rgb(21,21,21);
   border-radius: 5px;
-  width: 40%;
+  width: 50%;
   margin-left: 30%;
   background-color: rgb(21,21,21);
 
   .blog-img {
-    height: 200px;
+    height: 250px;
     width: 100%;
     border-radius: 5px 5px 0 0;
   }
