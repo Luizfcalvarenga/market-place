@@ -60,17 +60,20 @@
   <div class="check-text">
     <h2 class="text-success ms-2 third-section-title text-center">Compre sua bike com a segurança do Bike Check</h2>
     <p class="ms-2 mb-5 check-text text-center">Oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, <br> estético e de funcionamento da bicicleta.</p>
+    <div class="d-flex justify-content-between">
 
-    <div class="bike-check-step">
-      <h1 class="check-step">1</h1>
-      <div class="bike-check-card">
+
+      <div class="bike-check-card w-50">
         <h3 class="text-success"><i class="fas fa-spray-can text-success "></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
         <p class="check-text">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
       </div>
+
+      <div class="bike-check-card w-50">
+        <h3 class="text-success"> <i class="fas fa-search text-success"></i> <span class="ms-2">2. É feita uma inspeção minuciosa</span></h3>
+        <p class="check-text">Buscamos identificar lascas maiores na pintura, trincas e fissuras visuais na estrutura.</p>
+      </div>
     </div>
 
-    <h3 class="text-success"> <i class="fas fa-search text-success"></i> <span class="ms-2">2. É feita uma inspeção minuciosa</span></h3>
-    <p class="ms-5 mb-5 check-text">Buscamos identificar lascas maiores na pintura, trincas e fissuras visuais na estrutura.</p>
 
     <h3 class="text-success"> <i class="fas fa-check-double"></i> <span class="ms-2">3. Verificamos a mecânica</span></h3>
     <p class="ms-5 mb-5 check-text">São verificadas as características da bike e o funcionamento dos componentes: <br>
@@ -160,11 +163,51 @@
 
 <div class="fifth-section-home mx-5 py-5">
   <div class="row row-cols-1">
-    <%= image_tag "bike-blog.png", style: "width: 500px; heught: 500px;", class: "rounded col-12 col-md-6" %>
-    <div class="blog-text ms-5 col-12 col-md-6">
+    <div class="col-12 col-md-6 blog-text">
       <h2 class="text-success">BLOG</h2>
       <h3 class="">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
       <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-3" %>
+    </div>
+    <div class="col-12 col-md-6">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
+              <div class="cards-blog">
+                <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
+                <h4 class="text-white text-center mt-1">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
+                <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
+              </div>
+            <% end %>
+          </div>
+          <div class="carousel-item">
+            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+              <div class="cards-blog">
+                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
+                <h4 class="text-white text-center mt-1">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
+                <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
+              </div>
+            <% end %>
+          </div>
+          <div class="carousel-item">
+            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+              <div class="cards-blog">
+                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
+                <h4 class="text-white text-center mt-1">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
+                <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
