@@ -150,9 +150,22 @@
   background-color: rgb(21,21,21);
 
   .blog-img {
-    height: 250px;
+    height: 200px;
     width: 100%;
     border-radius: 5px 5px 0 0;
+  }
+}
+
+.review-card {
+  border-radius: 5px;
+  width: 550px;
+  height: 270px;
+  margin-left: 20%;
+  padding: 10px;
+  background-color: rgb(21,21,21);
+
+  .fa-star {
+    color: yellow;
   }
 }
 
@@ -161,5 +174,12 @@
   border-radius: 5px;
   height: 250px;
   padding: 20px;
-  width: 50%;
+  margin: 50px;
+  background-color: rgb(21,21,21);
+
+}
+
+
+.bigger-card {
+  height: 370px;
 }
