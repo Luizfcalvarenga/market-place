@@ -2,7 +2,7 @@
   <div class="flex center around h-100 w-100">
     <div class="<%= mobile_device? ? "w-90" : "w-80" %>">
       <div class="spacer-100 page-desktop"></div>
-      <h1>COMPRE BICICLETAS USADAS<br><span class="text-success">COM MECÂNICA VERIFICADA.</span></h1>
+      <h1>COMPRE BICICLETAS USADAS<br><span class="text-success mt-3">COM MECÂNICA VERIFICADA.</span></h1>
       <p class="text-white">Bikes inspecionadas por oficinas qualificadas para você não ter nenhuma surpresa.</p>
       <%= link_to "BIKES À VENDA", bikes_path, class: "btn btn-primary mt-5 px-4" %>
       <%= link_to "VENDER MINHA BIKE", "#", class: "btn btn-outline mt-5 px-4 ms-3" %>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="second-section-home mb-5 pb-5">
-  <div class="d-flex justify-content-between mb-3">
+  <div class="d-flex justify-content-between mb-1">
     <div class="ms-3">
       <h3 class="mt-5 text-success ms-5">CATEGORIAS</h3>
     </div>
@@ -56,32 +56,47 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-between mt-3 third-section-home mb-5 ms-3">
-  <%= image_tag "bike-certify.png", class: "bike-check-img ms-5 me-3" %>
-  <div class="check-text">
-    <h2 class="text-success ms-2 third-section-title">Compre sua bike com a segurança do Bike Check</h2>
-    <p class="ms-2 mb-5 check-text">Oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, <br> estético e de funcionamento da bicicleta.</p>
+<div class="mt-3 third-section-home mb-5 ms-3">
+  <h2 class="text-success ms-2 third-section-title text-center">Compre sua bike com a segurança do Bike Check</h2>
+  <p class="mx-5 mb-5 text-center">É normal que uma bicicleta usada apresente marcas de uso e desgaste dos componentes. Por isso, em uma revisão simples, oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, estético e de funcionamento da bicicleta.</p>
+  <div class="bike-check-path py-3 ms-1">
+    <div class="d-flex justify-content-center responsive-block">
+      <div class="bike-check-card wash">
+        <h3 class=""><i class="fas fa-spray-can"></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
+        <p class="mt-5 text-white">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
+      </div>
+      <div class="bike-check-card inspection">
+        <h3 class=""> <i class="fas fa-search"></i> <span class="ms-2">É feita uma inspeção minuciosa</span></h3>
+        <p class="mt-5 text-white">Inspeção visual da estética, estrutura da bike e<br>componentes: buscamos identificar lascas maiores  na pintura, trincas e fissuras visuais na estrutura.</p>
+      </div>
+    </div>
 
-    <h3 class="text-success"> <i class="fas fa-spray-can"></i> <span class="ms-2"> 1. Tudo começa pela lavagem</span></h3>
-    <p class="ms-5 mb-5 check-text">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
+    <div class="d-flex justify-content-center responsive-block">
+      <div class="bike-check-card adjustment">
+        <h3 class=""><i class="fas fa-screwdriver"></i> <span class="ms-2">Ajustamos a bike para que a receba <span class="ms-5">revisada</span></span></h3>
+        <p class="mt-5 text-white">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
+      </div>
+      <div class="bike-check-card bigger-card">
+        <h3 class=""><i class="fas fa-check-double"></i> <span class="ms-2">Verificamos a mecânica</span></h3>
+        <p class="mt-3 text-white">São verificadas as características da bike e o funcionamento dos componentes: <br>
+          - Medida do quadro e dos aros <br>
+          - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
+          - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
+          - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
+          - Desgaste da corrente e dos pneus
+        </p>
+      </div>
+    </div>
 
-    <h3 class="text-success"> <i class="fas fa-search text-success"></i> <span class="ms-2">2. É feita uma inspeção minuciosa</span></h3>
-    <p class="ms-5 mb-5 check-text">Buscamos identificar lascas maiores na pintura, trincas e fissuras visuais na estrutura.</p>
-
-    <h3 class="text-success"> <i class="fas fa-check-double"></i> <span class="ms-2">3. Verificamos a mecânica</span></h3>
-    <p class="ms-5 mb-5 check-text">São verificadas as características da bike e o funcionamento dos componentes: <br>
-      - Medida do quadro e dos aros <br>
-      - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
-      - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
-      - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
-      - Desgaste da corrente e dos pneus
-    </p>
-
-    <h3 class="text-success"> <i class="fas fa-screwdriver"></i> <span class="ms-2">4. Ajustamos a bike para que a receba revisada</span></h3>
-    <p class="ms-5 mb-5 check-text">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
-
-    <h3 class="text-success"> <i class="fas fa-clipboard-list"></i> <span class="ms-2">5. Emitimos um laudo mecânico</span></h3>
-    <p class="ms-5 mb-5 check-text">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
+    <div class="d-flex justify-content-start responsive-block">
+      <div class="bike-check-card w-40 report">
+        <h3 class=""> <i class="fas fa-clipboard-list"></i> <span class="ms-2">Emitimos um laudo mecânico</span></h3>
+        <p class="mt-5 text-white">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
+      </div>
+      <div class="">
+        <%= image_tag "cycling.png", class: "bike-png"%>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -155,38 +170,75 @@
 </div>
 
 <div class="fifth-section-home mx-5 py-5">
-  <div class="row row-cols-1">
-    <%= image_tag "bike-blog.png", style: "width: 500px; heught: 500px;", class: "rounded col-12 col-md-6" %>
-    <div class="blog-text ms-5 col-12 col-md-6">
-      <h2 class="text-success">BLOG</h2>
-      <h3 class="">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
-      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-3" %>
+  <div class="row row-cols-1 mx-3">
+    <div class="col-12 col-md-5 blog-text">
+      <h2 class="text-success mb-4">BLOG</h2>
+      <h3 class="mb-5">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
+      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-5" %>
+    </div>
+    <div class="col-12 col-md-7">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
+              <div class="cards-blog">
+                <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
+                <h4 class="text-white text-center mt-1">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
+                <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
+              </div>
+            <% end %>
+          </div>
+          <div class="carousel-item">
+            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+              <div class="cards-blog">
+                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
+                <h4 class="text-white text-center mt-1">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
+                <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
+              </div>
+            <% end %>
+          </div>
+          <div class="carousel-item">
+            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+              <div class="cards-blog">
+                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
+                <h4 class="text-white text-center mt-1">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
+                <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="sixth-section-home py-5">
-  <h3 class="text-success ms-5">ENCONTRE A GENTE</h3>
-  <div class="row row-cols-1 mx-5">
-    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media col-12 col-md-4", target: "_blank" do %>
+  <h3 class="text-success text-center mb-3">ENCONTRE A GENTE</h3>
+  <div class="d-flex justify-content-around mx-5 mb-3 social">
+    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media ", target: "_blank" do %>
       <div class="cards-social-media youtube text-center">
-        <p class="mt-5 text-white">NOS ASSITA NO</p>
         <h3>YOUTUBE</h3>
-        <i class="fab fa-youtube", style="opacity: 0;"></i>
+        <i class="fab fa-youtube d-none"></i>
       </div>
     <% end %>
-    <%= link_to "#", class: "social-media col-12 col-md-4" do %>
+    <%= link_to "#", class: "social-media " do %>
       <div class="cards-social-media instagram text-center">
-        <p class="mt-5 text-white">NOS SIGA NO</p>
         <h3>INSTAGRAM</h3>
-        <i class="fab fa-instagram", style="opacity: 0;"></i>
+        <i class="fab fa-instagram d-none"></i>
       </div>
     <% end %>
-    <%= link_to "#", class: "social-media col-12 col-md-4" do %>
-      <div class="cards-social-media facebook text-center">
-        <p class="mt-5 text-white">NOS ACOMPANE NO</p>
-        <h3>FACEBOOK</h3>
-        <i class="fab fa-facebook", style="opacity: 0;"></i>
+    <%= link_to "https://nuflowpass.com.br/", class: "social-media " do %>
+      <div class="cards-social-media nuflow text-center">
+        <h3>NUFLOW PASS</h3>
+        <%= image_tag "white_logo.png", class: "social-logo d-none" %>
       </div>
     <% end %>
   </div>
@@ -196,7 +248,6 @@
   <div class="row row-cols-1 mx-5">
     <div class="col-12 col-md-4">
       <h3 class="text-success text-center mt-5">O que nossos clientes pensam de nós?</h3>
-      <%= image_tag "google-review.png", class: "d-block w-100" %>
     </div>
     <div class="col-12 col-md-8 mt-5">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -209,19 +260,44 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <%= image_tag "review-1.png", class: "d-block w-100" %>
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Marcelo Person</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">A experiencia foi bem legal. O atendimento foi decisivo para a avaliação, ja que a primeira  bike que queria nao foi aprovada no bike check, que por sinal é algo que da bastante seguranca, já que por ser de outro estado nao deu para ver pessoalmente.</p>
+            </div>
           </div>
           <div class="carousel-item">
-            <%= image_tag "review-2.png", class: "d-block w-100" %>
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Gabriel Parisotto</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">Galera 100% responsável! Vendi minha bike em questão de dias com muita segurança, agilidade e sem incomodo algum.</p>
+            </div>
           </div>
           <div class="carousel-item">
-            <%= image_tag "review-3.png", class: "d-block w-100" %>
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Edwin van Eijk</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">O pessoal é sério e profissional. A bike fica em uma loja parceira e quando a venda é efetuada tem um contrato tudo certinho. Fizeram o depósito depois dos sete dias combinados da venda. Gostei muito da experiência.</p>
+            </div>
           </div>
           <div class="carousel-item">
-            <%= image_tag "review-4.png", class: "d-block w-100" %>
+           <div class="review-card">
+              <h4 class="text-center text-success mt-3">Arthur Guerra</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center"> Empresa de responsa!! já vendi duas bikes com eles, fazem o possível e impossível para dar certo, sucesso para vocês rapaziada! obrigado pela atenção 🤟🏼</p>
+            </div>
           </div>
           <div class="carousel-item">
-            <%= image_tag "review-5.png", class: "d-block w-100" %>
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Flávio Borges</h4>
+              <p class="text-center"><small>Comprador</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">O excelente atendimento foi um diferencial para fechar negócio. Agradeço ao time Nuflow, bem satisfeito com a aquisição e o serviço de confiança prestado.</p>
+            </div>
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

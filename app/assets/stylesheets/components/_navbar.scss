@@ -94,12 +94,18 @@ $color-primary: #00c454;
 
 .cart-counter {
   font-family: "Bebas Neue", "Helvetica", "sans-serif";
+  font-size: 18px;
 }
 
 .fa-bars {
   font-size: 32px;
 }
 
+.nav-sell-btn {
+  border: 1px solid $color-primary;
+  border-radius: 30px;
+  padding: 20px 30px;
+}
 
 @media (max-width: 768px) {
   .navbar {
