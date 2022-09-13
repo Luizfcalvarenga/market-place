@@ -26,7 +26,31 @@
   background-size: cover;
  }
 
+ .wash {
+   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("wash.png");
+   background-size: cover;
+   background-position: center;
+  }
 
+  .inspection {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("inspection.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .adjustment {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("adjustment.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .report {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("report.png");
+    background-size: cover;
+    background-position: center;
+
+    
+  }
 
 }
 
@@ -69,12 +93,16 @@
   .third-section-home {
     display: block !important;
     margin-top: 0 !important;
+
   }
+
 
   .fourth-section-home {
     .text-success {
       text-align: center !important;
     }
+
+
   }
 
   .fifth-section-home {

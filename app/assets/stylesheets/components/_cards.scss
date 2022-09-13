@@ -1,9 +1,9 @@
 .card {
   background: transparent;
-  border: 1px solid rgb(153,153,153);
+  border: 1px solid transparent;
   border-radius: 7px;
   height: 10rem;
-  box-shadow: 0 0 11px rgba(16,16,16, .3);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
  &:hover {
   transform: scale(1.05);
@@ -56,10 +56,10 @@
 
 .cards-differential {
   background: transparent;
-  border: 1px solid rgb(153,153,153);
+  border: 1px solid transparent;
   border-radius: 7px;
   height: 13rem;
-  box-shadow: 0 0 11px rgba(16,16,16, .3);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   margin: 5px;
 
   .icon {
@@ -75,7 +75,7 @@
   border-radius: 50%;
   height: 10rem;
   width: 10rem;
-  box-shadow: 0 0 11px rgba(16,16,16, .3);
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   margin: 5px;
 
   h3 {
@@ -170,16 +170,23 @@
 }
 
 .bike-check-card {
-  border: 1px solid $color-primary;
+  border: 1px solid rgb(16,16,16);
   border-radius: 5px;
   height: 250px;
   padding: 20px;
   margin: 50px;
-  background-color: rgb(21,21,21);
-
+  
+  h3, p {
+    text-shadow: 2px 2px rgb(16, 16, 16);
+  }
 }
 
 
+
+
 .bigger-card {
-  height: 370px;
+  height: 330px;
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("verification.png");
+  background-size: cover;
+  background-position: center;
 }
