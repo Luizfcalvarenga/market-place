@@ -21,11 +21,35 @@
 .third-section-home {
   background-color: #101010;
 
-  .bike-check-img {
-    height: 280.2px;
-    width: 435px;
-    position: sticky;
-    top: 70px;
+ .bike-check-path {
+  background-image: url("checkpath.png");
+  background-size: cover;
+ }
+
+ .wash {
+   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("wash.png");
+   background-size: cover;
+   background-position: center;
+  }
+
+  .inspection {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("inspection.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .adjustment {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("adjustment.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .report {
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("report.png");
+    background-size: cover;
+    background-position: center;
+
+    
   }
 
 }
@@ -39,6 +63,12 @@
 }
 
 
+.seventh-section-home {
+
+  .fa-quote-left, .fa-quote-right {
+    font-size: 10px;
+  }
+}
 
 @media (max-width: 725px) {
 
@@ -64,28 +94,15 @@
     display: block !important;
     margin-top: 0 !important;
 
-    .bike-check-img {
-      position: relative;
-      width: 380px;
-      margin-left: 0 !important;
-    }
-
-    .check-text{
-      margin-left: 0px !important;
-      text-align: center;
-
-
-
-      .third-section-title {
-        margin-top: 100px;
-      }
-    }
   }
+
 
   .fourth-section-home {
     .text-success {
       text-align: center !important;
     }
+
+
   }
 
   .fifth-section-home {
