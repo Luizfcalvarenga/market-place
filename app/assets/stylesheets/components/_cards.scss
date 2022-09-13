@@ -73,12 +73,12 @@
   background: transparent;
   border: 1px solid rgb(240, 234, 234);
   border-radius: 10px;
-  height: 10rem;
-  width: 10rem;
+  height: 8rem;
+  width: 8rem;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
   margin: 5px;
 
-  h3 {
+  h4 {
     margin-top: 38%;
     color: rgba(16,16,16, .5)
   }
@@ -87,7 +87,7 @@
 
 .youtube:hover {
   box-shadow: 0 0 11px rgba(255,0,0, .7);
-  h3{
+  h4{
     display: none
   }
 
@@ -95,7 +95,7 @@
     display: block !important;
     color: red !important;
     font-size: 60px !important;
-    transform: translateY(50px) !important;
+    transform: translateY(35px) !important;
 
   }
 }
@@ -105,7 +105,7 @@
 .instagram:hover {
   box-shadow: 0 0 11px rgba(164,1,189, .3);
 
-  h3{
+  h4{
     display: none
   }
 
@@ -113,7 +113,7 @@
     color: rgb(201,41,107)  !important;
     display: block !important;
     font-size: 60px !important;
-    transform: translateY(50px) !important;
+    transform: translateY(35px) !important;
   }
 }
 
@@ -122,7 +122,7 @@
 .nuflow:hover {
   box-shadow: 0 0 11px rgba(10,10,10, .9);
 
-  h3{
+  h4{
     display: none
   }
 
@@ -131,8 +131,8 @@
     display: block !important;
     width: 60px !important;
     height: 60px !important;
-    transform: translateY(50px) !important;
-    margin-left: 30%;
+    transform: translateY(35px) !important;
+    margin-left: 25%;
 
   }
 }
