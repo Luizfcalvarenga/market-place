@@ -57,9 +57,9 @@ export function Bikes(props) {
       </div>
 
       <div className="row row-cols-1 mt-5">
-        {bikes.map((bike) => {
+        {bikes.map((bike, idx) => {
           return (
-            <div className="col-12 col-md-3">
+            <div className="col-12 col-md-3" bike={bike} key={bike.id}>
               <div className="cards-bikes">
                 <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                   <div className="carousel-inner">
@@ -90,7 +90,7 @@ export function Bikes(props) {
                   <p className="text-center mt-1">Frame: {bike.id}</p>
                   <div className="d-flex justify-content-around">
                     <p>Ano: {bike.age}</p>
-                    <i class="fas fa-heart"></i>
+                    <i className="fas fa-heart"></i>
                     <p>Wheel: {bike.size}</p>
                   </div>
                 </div>
