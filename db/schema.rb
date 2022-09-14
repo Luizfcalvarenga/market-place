@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_23_001548) do
+ActiveRecord::Schema.define(version: 2022_09_14_174945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2022_08_23_001548) do
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.integer "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_08_23_001548) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -61,6 +61,22 @@ ActiveRecord::Schema.define(version: 2022_08_23_001548) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "invoice_id"
+    t.string "invoice_url"
+    t.string "invoice_pdf"
+    t.integer "net_value"
+    t.integer "value"
+    t.integer "price_in_cents"
+    t.datetime "invoice_paid_at"
+    t.string "status"
+    t.string "tracker_code"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,10 +89,16 @@ ActiveRecord::Schema.define(version: 2022_08_23_001548) do
     t.string "uid", default: "", null: false
     t.boolean "allow_password_change", default: false
     t.json "tokens"
+    t.string "full_name"
+    t.string "document_number"
+    t.string "address"
+    t.string "cep"
+    t.string "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders", "users"
 end
