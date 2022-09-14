@@ -170,11 +170,13 @@
 }
 
 .bike-check-card {
-  border: 1px solid rgb(16,16,16);
+  border: 1px solid transparent;
   border-radius: 5px;
-  height: 250px;
+  height: 350px;
+  width: 100%;
   padding: 20px;
   margin: 50px;
+  // box-shadow: 0px 0px 20px 0px #00c4545e;
 
   h3, p {
     text-shadow: 2px 2px rgb(16, 16, 16);
@@ -185,8 +187,8 @@
 
 
 .bigger-card {
-  height: 100%;
-  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("verification.png");
+  height: 350px;
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("check-3.png");
   background-size: cover;
   background-position: center;
 }

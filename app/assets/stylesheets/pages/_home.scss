@@ -21,37 +21,36 @@
 .third-section-home {
   background-color: #101010;
 
- .bike-check-path {
-  background-image: url("checkpath.png");
-  background-size: cover;
- }
+//  .bike-check-path {
+//   background-image: url("checkpath.png");
+//   background-size: cover;
+//  }
 
  .wash {
-   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("wash.png");
+   background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.2)), image-url("check-1.png");
    background-size: cover;
    background-position: center;
+
   }
 
   .inspection {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("inspection.png");
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.2)), image-url("check-2.png");
     background-size: cover;
     background-position: center;
   }
 
   .adjustment {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("adjustment.png");
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("check-4.png");
     background-size: cover;
     background-position: center;
   }
 
   .report {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("report.png");
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("check-5.png");
     background-size: cover;
     background-position: center;
-
-
+    width: 42.5%;
   }
-
 }
 
 .fourth-section-home {
