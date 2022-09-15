@@ -40,10 +40,10 @@ $color-primary: #00c454;
 }
 
 .nav-link {
-  font-size: 20px;
   color: white;
-  font-weight: light !important;
-  
+  font-weight: lighter !important;
+  font-size: 22px;
+
   &:hover {
     color: $color-primary;
   }
@@ -53,8 +53,28 @@ $color-primary: #00c454;
   }
 }
 
-.fa-shopping-cart, .fa-search, .fa-times {
+.btn-navbar {
+  text-decoration: none;
   color: white;
+  background-color: rgba(0,196,84,0.8);
+  border: 1px solid $color-primary;
+  font-weight: lighter;
+  font-size: 22px;
+  border-radius: 8px;
+  padding: 3px 15px 0 15px;
+  &:hover {
+    color: $color-primary;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0.9;
+    transition: 300ms;
+    border: 1px solid $color-primary;
+
+  }
+}
+
+.fa-shopping-cart, .fa-search, .fa-times, .fa-heart {
+  color: white;
+  font-size: 22px;
   &:hover {
     color:#00c454;
   }
@@ -100,15 +120,6 @@ $color-primary: #00c454;
   font-size: 18px;
 }
 
-.fa-bars {
-  font-size: 32px;
-}
-
-.nav-sell-btn {
-  border: 1px solid $color-primary;
-  border-radius: 30px;
-  padding: 20px 30px;
-}
 
 @media (max-width: 768px) {
   .navbar {
