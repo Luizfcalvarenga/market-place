@@ -87,7 +87,8 @@
 
 
 .youtube:hover {
-  box-shadow: 0 0 11px rgba(255,0,0, .7);
+  box-shadow: rgba(255,0,0, 0.5) 0px 1px 0px, rgba(255,0,0, 0.5) 0px 8px 24px, rgba(255,0,0, 0.5) 0px 16px 48px;
+
   h3{
     display: none
   }
@@ -104,7 +105,8 @@
 
 
 .instagram:hover {
-  box-shadow: 0 0 11px rgba(164,1,189, .3);
+  box-shadow: rgba(164,1,189, 0.5) 0px 1px 0px, rgba(164,1,189, 0.5) 0px 8px 24px, rgba(164,1,189, 0.5) 0px 16px 48px;
+
 
   h3{
     display: none
@@ -121,7 +123,9 @@
 
 
 .nuflow:hover {
-  box-shadow: 0 0 11px rgba(10,10,10, .9);
+  box-shadow: rgba(10,10,10, 0.5) 0px 1px 0px, rgba(10,10,10, 0.5) 0px 8px 24px, rgba(10,10,10, 0.5) 0px 16px 48px;
+
+
 
   h3{
     display: none
