@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_19_215316) do
+ActiveRecord::Schema.define(version: 2022_09_19_222302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,10 +54,14 @@ ActiveRecord::Schema.define(version: 2022_09_19_215316) do
   end
 
   create_table "bikes", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "service_id"
     t.string "modality"
-    t.string "price_in_cents"
-    t.string "quantity"
+    t.integer "price_in_cents"
+    t.integer "quantity"
     t.string "locality"
     t.string "frame_brand"
     t.string "model"
@@ -81,10 +85,6 @@ ActiveRecord::Schema.define(version: 2022_09_19_215316) do
     t.boolean "accessories"
     t.string "battery"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "category_id", null: false
-    t.bigint "service_id"
     t.index ["category_id"], name: "index_bikes_on_category_id"
     t.index ["service_id"], name: "index_bikes_on_service_id"
     t.index ["user_id"], name: "index_bikes_on_user_id"

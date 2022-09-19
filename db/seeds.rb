@@ -16,9 +16,9 @@ bike_user = User.create!(email: "bike@app.com", password: "123456" )
 
 ################################################################ BIKES_CTEGORIES ################################################################
 
-mtb = Category.create(name: "Mountain Bike", modalities: '["Downhill", "Enduro", "Gravel", "Speed", "Trail", "XC (Cross Country)"]')
-dirt = Category.create(name: "Dirt/Street", modalities: '["Street BMX", "Race BMX", "BIig Wheel BMX", "Dirt Jump", "Trail", "XC (Cross Country)"]')
-road = Category.create(name: "Road", modalities: '["Speed / Performance", "Triathlon", "Ciclocross", "Cicloviagem", "Gravel"]')
+mtb = Category.create!(name: "Mountain Bike", modalities: '["Downhill", "Enduro", "Gravel", "Speed", "Trail", "XC (Cross Country)"]')
+dirt = Category.create!(name: "Dirt/Street", modalities: '["Street BMX", "Race BMX", "BIig Wheel BMX", "Dirt Jump", "Trail", "XC (Cross Country)"]')
+road = Category.create!(name: "Road", modalities: '["Speed / Performance", "Triathlon", "Ciclocross", "Cicloviagem", "Gravel"]')
 
 categories = [mtb, dirt, road]
 
@@ -257,7 +257,7 @@ end
   category = [mtb, dirt, road].sample
 
   bike = Bike.create!(
-    category:  category,
+    category_id:  category.id,
     modality: JSON[category.modalities].sample,
     price_in_cents: rand(10000000..22000000),
     locality: "Belo Horizonte",
@@ -274,13 +274,13 @@ end
     suspension_type: "Full suspension",
     front_suspension_travel: "100 mm",
     rear_suspension_travel: "110 mm",
-    seat_post_type: "Retátil",
+    seat_post_type: "Retrátil",
     seat_post_travel: "100 mm",
     weight: [ 15.0, 16.3, 15.7, 17.4].sample,
     bike_conditions: "Usada",
     structural_visual_condition: "Apresenta pequenos riscos ou arranhões superficiais",
     opareting_condition: "Funcionamento perfeito, sem necessidade de ajustes ou substituição de peças",
-    documentation: "Nota fiscal",
+    documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
     description: "Bicicleta em perfeito estado apenas 1 dono.",
     accessories: false
   )
