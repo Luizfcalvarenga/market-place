@@ -5,6 +5,8 @@ class CreateComponentTypeAttributes < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :kind
       t.string :options
+      t.string :prompt
+
 
       t.timestamps
     end
