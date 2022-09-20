@@ -78,34 +78,35 @@
 .cards-social-media {
   background: transparent;
   border: 1px solid rgb(240, 234, 234);
-  border-radius: 10px;
-  height: 10rem;
-  width: 10rem;
+  border-radius: 3px;
+  height: 20rem;
+  width: 15rem;
   box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
   margin: 5px;
 
   h3 {
-    margin-top: 38%;
     color: rgba(16,16,16, .5)
   }
-}
 
-
-.youtube:hover {
-  box-shadow: rgba(255,0,0, 0.5) 0px 1px 0px, rgba(255,0,0, 0.5) 0px 8px 24px, rgba(255,0,0, 0.5) 0px 16px 48px;
-
-  h3{
-    display: none
+  .fa-youtube, .fa-instagram  {
+    margin-top: 25%;
+    color: rgba(16,16,16, .5);
+    // color: black;
+    font-size: 36px;
   }
 
-  .fa-youtube{
+  .social-logo{
+    filter: invert(61%) sepia(0%) saturate(655%) hue-rotate(293deg) brightness(84%) contrast(88%);
     display: block !important;
-    color: red !important;
-    font-size: 60px !important;
-    transform: translateY(50px) !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin-top: 24%;
+    margin-left: 41%;
 
   }
 }
+
+
 
 
 
@@ -113,16 +114,16 @@
   box-shadow: rgba(164,1,189, 0.5) 0px 1px 0px, rgba(164,1,189, 0.5) 0px 8px 24px, rgba(164,1,189, 0.5) 0px 16px 48px;
 
 
-  h3{
-    display: none
-  }
+  // h3{
+  //   display: none
+  // }
 
-  .fa-instagram{
-    color: rgb(201,41,107)  !important;
-    display: block !important;
-    font-size: 60px !important;
-    transform: translateY(50px) !important;
-  }
+  // .fa-instagram{
+  //   color: rgb(201,41,107)  !important;
+  //   display: block !important;
+  //   font-size: 60px !important;
+  //   transform: translateY(50px) !important;
+  // }
 }
 
 
@@ -147,9 +148,6 @@
   }
 }
 
-.social-media {
-  text-decoration: none;
-}
 
 .cards-blog {
   height: 450px;
@@ -179,26 +177,26 @@
   }
 }
 
-.bike-check-card {
-  border: 1px solid transparent;
-  border-radius: 5px;
-  height: 350px;
-  width: 100%;
-  padding: 20px;
-  margin: 50px;
-  // box-shadow: 0px 0px 20px 0px #00c4545e;
-
-  h3, p {
-    text-shadow: 2px 2px rgb(16, 16, 16);
-  }
-}
+// .bike-check-card {
+//   border: 1px solid transparent;
+//   border-radius: 5px;
+//   height: 350px;
+//   width: 100%;
+//   padding: 20px;
+//   margin: 50px;
 
 
+//   h3, p {
+//     text-shadow: 2px 2px rgb(16, 16, 16);
+//   }
+// }
 
 
-.bigger-card {
-  height: 350px;
-  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("check-3.png");
-  background-size: cover;
-  background-position: center;
-}
+
+
+// .bigger-card {
+//   height: 350px;
+//   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("check-3.png");
+//   background-size: cover;
+//   background-position: center;
+// }
