@@ -156,10 +156,11 @@ frame_questions = [ frame_question_1, frame_question_2, frame_question_3, frame_
 brake_types = [ "V-brake (frenagem no aro)", "À Disco - Hidráulico", "À Disco - Mecânico", "Contra pedal" ]
 
 brake_question_1 = ComponentTypeAttribute.create!(component_type: brake, name: "documentation_type", kind: "options", options: ["Yes", "No"], prompt: "Possui documentação?" )
-brake_question_2 = ComponentTypeAttribute.create!(component_type: brake, name: "number_of_pistons", kind: "options", options: [ 2, 4], prompt: "Quantos pistões?" )
-brake_question_3 = ComponentTypeAttribute.create!(component_type: brake, name: "number_of_disc", kind: "options", options: [ "Front and rear", "Isolated"], prompt: "Quantos discos?" )
-brake_question_4 = ComponentTypeAttribute.create!(component_type: brake, name: "disc-size", kind: "options", options: [ "120mm", "140mm", "160mm", "180mm", "200mm", "203mm" ], prompt: "Tamanho do disco?" )
-brake_question_5 = ComponentTypeAttribute.create!(component_type: brake, name: "inclusdes_assessories", kind: "options", options: ["Yes", "No"], prompt: "Inclui manetes e capipers?" )
+brake_question_2 = ComponentTypeAttribute.create!(component_type: brake, name: "brake_type", kind: "options", options: brake_types, prompt: "Tipo de freio?" )
+brake_question_3 = ComponentTypeAttribute.create!(component_type: brake, name: "number_of_pistons", kind: "options", options: [ 2, 4], prompt: "Quantos pistões?" )
+brake_question_4 = ComponentTypeAttribute.create!(component_type: brake, name: "number_of_disc", kind: "options", options: [ "Front and rear", "Isolated"], prompt: "Quantos discos?" )
+brake_question_5 = ComponentTypeAttribute.create!(component_type: brake, name: "disc-size", kind: "options", options: [ "120mm", "140mm", "160mm", "180mm", "200mm", "203mm" ], prompt: "Tamanho do disco?" )
+brake_question_6 = ComponentTypeAttribute.create!(component_type: brake, name: "inclusdes_assessories", kind: "options", options: ["Yes", "No"], prompt: "Inclui manetes e capipers?" )
 
 brake_questions = [ brake_question_1, brake_question_2, brake_question_3, brake_question_4, brake_question_5 ]
 
@@ -214,6 +215,7 @@ derailleur_questions = [ derailleur_question_1, derailleur_question_2, derailleu
 
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
 
 seat_post_types = ["Retractable", "Rigid"]
 seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm" ]
