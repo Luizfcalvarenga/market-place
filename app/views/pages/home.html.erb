@@ -25,32 +25,38 @@
   <div class="row row-cols-1 category-cards mx-5">
     <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
       <div class="card card-bikes">
-        <h3 class="text-center mt-5 card-title">BIKES <br> <%= image_tag "bicycle.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">BIKES </h3>
+        <%= image_tag "bicycle.png", class: "card-icon " %>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
       <div class="card card-components">
-        <h3 class="text-center mt-5 card-title">COMPONENTES <br><%= image_tag "chain.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">COMPONENTES </h3>
+        <%= image_tag "chain.png", class: "card-icon" %>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
       <div class="card card-services">
-        <h3 class="text-center mt-5 card-title">SERVIÇOS <br><%= image_tag "settings.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">SERVIÇOS</h3>
+        <%= image_tag "settings.png", class: "card-icon" %>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
       <div class="card card-products">
-        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">PRODUTOS</h3>
+        <%= image_tag "easy-maintenance.png", class: "card-icon" %>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
       <div class="card card-products">
-        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">PRODUTOS</h3>
+        <%= image_tag "easy-maintenance.png", class: "card-icon" %>
       </div>
     <% end %>
     <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
       <div class="card card-products">
-        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">PRODUTOS</h3>
+        <%= image_tag "easy-maintenance.png", class: "card-icon" %>
       </div>
     <% end %>
   </div>
@@ -59,43 +65,78 @@
 <div class="mt-3 third-section-home mb-5">
   <h2 class="text-success ms-2 third-section-title text-center">Compre sua bike com a segurança do Bike Check</h2>
   <p class="mx-5 mb-5 text-center">É normal que uma bicicleta usada apresente marcas de uso e desgaste dos componentes. Por isso, em uma revisão simples, oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, estético e de funcionamento da bicicleta.</p>
-  <div class="bike-check-path py-3">
-    <div class="d-flex justify-content-center responsive-block">
-      <div class="bike-check-card wash">
-        <h3 class=""><i class="fas fa-spray-can"></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
-        <p class="mt-5 text-white">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
-      </div>
-      <div class="bike-check-card inspection">
-        <h3 class=""> <i class="fas fa-search"></i> <span class="ms-2">É feita uma inspeção minuciosa</span></h3>
-        <p class="mt-5 text-white">Inspeção visual da estética, estrutura da bike e<br>componentes: buscamos identificar lascas maiores  na pintura, trincas e fissuras visuais na estrutura.</p>
-      </div>
-    </div>
 
-    <div class="d-flex justify-content-center responsive-block">
-      <div class="bike-check-card adjustment">
-        <h3 class=""><i class="fas fa-screwdriver"></i> <span class="ms-2">Ajustamos a bike para que a receba <span class="ms-5">revisada</span></span></h3>
-        <p class="mt-5 text-white">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
-      </div>
-      <div class="bike-check-card bigger-card">
-        <h3 class=""><i class="fas fa-check-double"></i> <span class="ms-2">Verificamos a mecânica</span></h3>
-        <p class="mt-3 text-white">São verificadas as características da bike e o funcionamento dos componentes: <br>
-          - Medida do quadro e dos aros <br>
-          - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
-          - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
-          - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
-          - Desgaste da corrente e dos pneus
-        </p>
-      </div>
-    </div>
+  <div class="v-check-line"></div>
 
-    <div class="d-flex justify-content-start responsive-block">
-      <div class="bike-check-card report">
-        <h3 class=""> <i class="fas fa-clipboard-list"></i> <span class="ms-2">Emitimos um laudo mecânico</span></h3>
-        <p class="mt-5 text-white">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
-      </div>
-      <div class="">
-        <%= image_tag "cycling.png", class: "bike-png"%>
-      </div>
+  <div class="d-flex justify-content-center responsive-block">
+    <div class="w-40 mt-5 me-5">
+      <h3 class="text-success mt-5"><i class="fas fa-spray-can"></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
+      <p class="mt-5 text-white">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
+    </div>
+    <%= image_tag "bike-check-1.png", class: "bike-check-img"%>
+  </div>
+
+  <div class="v-check-line-b"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-left"></div>
+
+
+  <div class="d-flex justify-content-center responsive-block">
+    <div class="check-img-card me-5">
+      <%= image_tag "bike-check-2.png", class: "bike-check-img me-5"%>
+    </div>
+    <div class="w-40 mt-5">
+      <h3 class="text-success mt-5"> <i class="fas fa-binoculars"></i><span class="ms-2">É feita uma inspeção minuciosa</span></h3>
+      <p class="mt-5 text-white">Inspeção visual da estética, estrutura da bike e<br>componentes: buscamos identificar lascas maiores  na pintura, trincas e fissuras visuais na estrutura.</p>
+    </div>
+  </div>
+
+  <div class="v-check-line-b-left"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-right"></div>
+
+  <div class="d-flex justify-content-center responsive-block">
+    <div class="w-40 me-5">
+      <h3 class="text-success mt-5"><i class="fas fa-check-double"></i> <span class="ms-2">Verificamos a mecânica</span></h3>
+      <p class="mt-3 text-white">São verificadas as características da bike e o funcionamento dos componentes: <br>
+        - Medida do quadro e dos aros <br>
+        - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
+        - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
+        - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
+        - Desgaste da corrente e dos pneus
+      </p>
+    </div>
+    <div class="check-img-card">
+      <%= image_tag "bike-check-3.png", class: "bike-check-img" %>
+    </div>
+  </div>
+
+  <div class="v-check-line-b3"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-left-4"></div>
+
+  <div class="d-flex justify-content-center responsive-block">
+    <div class="check-img-card me-5">
+      <%= image_tag "bike-check-4.png", class: "bike-check-img me-5"%>
+    </div>
+    <div class="w-40 mt-5">
+      <h3 class="text-success mt-5"> <i class="fas fa-tools"></i><span class="ms-2">Ajustamos a bike para que a receba revisada</span></h3>
+      <p class="mt-5 text-white">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
+    </div>
+  </div>
+
+  <div class="v-check-line-b-left"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-right-5"></div>
+
+
+ <div class="d-flex justify-content-center responsive-block">
+    <div class="w-40 mt-5 me-5">
+      <h3 class="text-success mt-5"> <i class="fas fa-clipboard-list"></i> <span class="ms-2">Emitimos um laudo mecânico</span></h3>
+      <p class="mt-5 text-white">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
+    </div>
+    <div class="check-img-card">
+      <%= image_tag "bike-check-5.png", class: "bike-check-img me-5"%>
     </div>
   </div>
 </div>

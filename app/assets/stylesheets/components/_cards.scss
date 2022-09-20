@@ -1,59 +1,64 @@
 .card {
-  background: transparent;
+  background: rgb(229,229,234);
   border: 1px solid transparent;
   border-radius: 7px;
   height: 10rem;
   box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  .card-icon {
+    display: none;
+  }
 
+  .card-title {
+    color: white;
+    margin: auto;
+    text-shadow: 2px 2px rgb(16, 16, 16);
+  }
 
- &:hover {
-  transform: scale(1.05);
- }
-}
+  &:hover {
+    transform: scale(1.05);
+    background-image: none;
+    h3 {
+      display: none;
+    }
 
-.card-title {
-  color: rgb(153,153,153);
+    .card-icon {
+      display: block;
+      width: 50px;
+      height: 50px;
+      margin: auto;
+      filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+    }
+
+    .card-bikes {
+      background-image: none;
+      background-size: cover;
+    }
+  }
 }
 
 .category-cards {
   justify-content: center;
 }
 
-.card:hover .card-icon {
-  opacity: 0;
-}
-
-.card:hover h3 {
-  transform: translateY(15px) !important;
-  color: $color-primary;
-}
-
-.card-icon {
-  width: 50px;
-  height: 50px;
-  filter: invert(73%) sepia(0%) saturate(4%) hue-rotate(213deg) brightness(84%) contrast(89%);
-}
-
-.card-bikes:hover {
+.card-bikes {
   background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-card.png");
   background-size: cover;
 }
 
-.card-components:hover {
+.card-components {
   background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-components.png");
   background-size: cover;
 }
 
-.card-services:hover {
+.card-services {
   background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-maintenance.png");
   background-size: cover;
 }
 
-.card-products:hover {
+.card-products {
   background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-products.png");
   background-size: cover;
 }
-
 
 .cards-differential {
   background: transparent;
