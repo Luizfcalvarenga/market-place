@@ -237,15 +237,16 @@ seat_post_questions = [ seat_post_question_1, seat_post_question_2 ]
     component_type: components_options.sample,
     name: "Peça em bom estado",
     description: "Único dono com funcinamento perfeito",
-    price_in_cents: rand(10000..50000)
+    price_in_cents: rand(10000..50000),
+    quantity: rand(1..10)
 
   )
 
-  # component_attribute_1 = ComponentAttribute.create!(component: component, component_type_attribute: component.component_type)
-  # component_attribute_2 = ComponentAttribute.create!(component: suspension, component_type_attribute: suspension_question_2, value: "Full Suspension (suspensão dianteira e traseira)")
-  # component_attribute_3 = ComponentAttribute.create!(component: suspension, component_type_attribute: suspension_question_3, value: "100 mm")
-  # component_attribute_4 = ComponentAttribute.create!(component: suspension, component_type_attribute: suspension_question_4, value: "120 mm")
-  # component_attribute_5 = ComponentAttribute.create!(component: suspension, component_type_attribute: suspension_question_5, value: "24''")
+
+  component_attributes =  ComponentTypeAttribute.where(component_type: component.component_type).each do | component_type_attribute |
+
+    ComponentAttribute.create!(component: component, component_type_attribute: component_type_attribute, value: JSON[component_type_attribute.options].sample)
+  end
 end
 
 
@@ -260,6 +261,7 @@ end
     category_id:  category.id,
     modality: JSON[category.modalities].sample,
     price_in_cents: rand(10000000..22000000),
+    quantity: 1,
     locality: "Belo Horizonte",
     user_id: (User.ids).sample,
     frame_brand: frame_brands.sample,

@@ -8,6 +8,8 @@ class CreateComponents < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :description
       t.integer :price_in_cents
+      t.integer :quantity
+
 
       t.timestamps
     end

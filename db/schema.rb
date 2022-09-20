@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.string "name"
     t.text "description"
     t.integer "price_in_cents"
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_components_on_category_id"
