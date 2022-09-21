@@ -103,6 +103,14 @@
   background-color: #F4F4F9;
 }
 
+///////////////////////////// 5ª SECTION
+
+.fifth-section-home {
+  .next {
+    color: $color-primary !important;
+  }
+}
+
 ///////////////////////////// 6ª SECTION
 
 .sixth-section-home {
@@ -113,8 +121,8 @@
 
 .seventh-section-home {
 
-  .fa-quote-left, .fa-quote-right {
-    font-size: 10px;
+  p {
+    font-weight: lighter !important;
   }
 }
 
