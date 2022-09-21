@@ -9,6 +9,7 @@
 }
 
 /* Dropdown Button */
+
 .dropbtn {
   background-color: transparent;
   color: white;
@@ -36,9 +37,7 @@
 }
 
 .dropdown-content-user {
-
   width: 120px !important;
-
 }
 
 
@@ -60,16 +59,23 @@
 
 
 .btn-social {
-  color: white;
-  text-shadow: 2px 2px rgb(16, 16, 16);
-  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5);;
   border: 1px solid white;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  font: inherit;
+  line-height: 1;
+  margin: 0.22em;
+  padding: 0.5em 1em;
   text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
 
   &:hover {
-    border-color: $color-primary;
-
+    background-color: #fff;
+    border-color: transparent;
+    color: #444;
   }
+
 }
+
+
