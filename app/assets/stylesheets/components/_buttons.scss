@@ -60,15 +60,16 @@
 
 
 .btn-social {
-  color: rgba(16,16,16, .5);
+  color: white;
+  text-shadow: 2px 2px rgb(16, 16, 16);
   padding: 10px 20px;
-  border: 1px solid rgba(16,16,16, .5);
+  border: 1px solid white;
   border-radius: 20px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.7);
   text-decoration: none;
 
   &:hover {
-    color: black;
-    border-color: black;
+    border-color: $color-primary;
+
   }
 }

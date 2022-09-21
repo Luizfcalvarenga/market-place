@@ -77,26 +77,25 @@
 
 .cards-social-media {
   background: transparent;
-  border: 1px solid rgb(240, 234, 234);
+  border: 1px solid rgb(16, 16, 16);
   border-radius: 3px;
   height: 20rem;
   width: 15rem;
   box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
   margin: 5px;
 
-  h3 {
-    color: rgba(16,16,16, .5)
+  h3, p{
+    color: white;
+    text-shadow: 2px 2px rgb(16, 16, 16);
   }
 
   .fa-youtube, .fa-instagram  {
     margin-top: 25%;
-    color: rgba(16,16,16, .5);
-    // color: black;
+    color: white;
     font-size: 36px;
   }
 
   .social-logo{
-    filter: invert(61%) sepia(0%) saturate(655%) hue-rotate(293deg) brightness(84%) contrast(88%);
     display: block !important;
     width: 36px !important;
     height: 36px !important;
@@ -106,46 +105,36 @@
   }
 }
 
+.youtube {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("youtube-background.jpg");
+  background-position: center;
+  background-size: cover;
 
-
-
-
-.instagram:hover {
-  box-shadow: rgba(164,1,189, 0.5) 0px 1px 0px, rgba(164,1,189, 0.5) 0px 8px 24px, rgba(164,1,189, 0.5) 0px 16px 48px;
-
-
-  // h3{
-  //   display: none
-  // }
-
-  // .fa-instagram{
-  //   color: rgb(201,41,107)  !important;
-  //   display: block !important;
-  //   font-size: 60px !important;
-  //   transform: translateY(50px) !important;
-  // }
+  .btn-youtube:hover {
+    border-color: red;
+    color: red;
+  }
 }
 
+.instagram {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("instagram-background.jpg");
+  background-position: center;
+  background-size: cover;
 
-
-.nuflow:hover {
-  box-shadow: rgba(10,10,10, 0.5) 0px 1px 0px, rgba(10,10,10, 0.5) 0px 8px 24px, rgba(10,10,10, 0.5) 0px 16px 48px;
-
-
-
-  h3{
-    display: none
+  .social-insta:hover {
+    color: white !important;
   }
 
-  .social-logo{
-    filter: grayscale(100%) brightness(0%);
-    display: block !important;
-    width: 60px !important;
-    height: 60px !important;
-    transform: translateY(50px) !important;
-    margin-left: 30%;
-
+  .btn-instagram:hover {
+    color: #e9ff0a;
+    border-color: #e9ff0a;
   }
+}
+
+.nuflow {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("nuflow-background.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 
@@ -176,27 +165,3 @@
     color: yellow;
   }
 }
-
-// .bike-check-card {
-//   border: 1px solid transparent;
-//   border-radius: 5px;
-//   height: 350px;
-//   width: 100%;
-//   padding: 20px;
-//   margin: 50px;
-
-
-//   h3, p {
-//     text-shadow: 2px 2px rgb(16, 16, 16);
-//   }
-// }
-
-
-
-
-// .bigger-card {
-//   height: 350px;
-//   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("check-3.png");
-//   background-size: cover;
-//   background-position: center;
-// }
