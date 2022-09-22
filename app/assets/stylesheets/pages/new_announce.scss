@@ -1,0 +1,29 @@
+.page-body {
+  background-color: #F4F4F9;
+}
+
+.new_announce_banner {
+  text-align: center;
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("new-announce-banner.jpg");
+  background-size: cover;
+  height: 70vh;
+  margin-top: -150px;
+}
+
+.fa-truck, .fa-thumbs-up, .fa-shield-alt, .fa-cogs {
+  font-size: 25px;
+}
+
+.frequent-questions {
+  border-top: 1px solid transparent;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  border-radius: 3px;
+  margin: 50px;
+  padding: 20px;
+
+}
+
+.accordion-body {
+  background-color: #F4F4F9;
+
+}

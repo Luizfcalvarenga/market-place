@@ -1,0 +1,87 @@
+<div class="h-100 w-100 page-body pb-5">
+  <div class="<%= mobile_device? ? "w-90" : "w-100" %> new_announce_banner">
+    <div class="spacer-100 page-desktop"></div>
+    <h1 class="pt-5 mt-5">ANUNCIE COM A <span class="text-success mt-3">NUFLOW</span></h1>
+    <p class="text-white">Anuncie bikes e componentes com facilidade e segurança sem sair de casa.</p>
+    <p class="text-white">O que gostaria de anunciar?</p>
+    <%= link_to "BIKE", "#", class: "btn btn-outline mt-3 px-4" %>
+    <%= link_to "COMPONENTE", "#", class: "btn btn-outline mt-3 px-4 ms-3" %>
+    <% if false %>
+      <div class="input-group my-4 text-center">
+        <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Bicicletas, assessórios, serviços, etc..." %>" aria-label="Bicicletas, assessórios, serviços, etc..." aria-describedby="button-addon2">
+        <button class="btn btn-success px-2 px-md-3 text-white text-center" type="button" id="button-addon2">ENCONTRAR BICICLETAS</button>
+      </div>
+    <% end %>
+  </div>
+
+  <h3 class="text-center text-success mt-3">Confira nossos serviços</h3>
+  <p class="text-center">Facilite seu anuncio com a nossa ajuda.</p>
+
+  <div class="row row-cols-1 mt-5  px-5">
+    <div class="col-12 col-md-3">
+      <p class="text-center"><i class="fas fa-cogs text-success"></i></p>
+      <h4 class="text-center text-success">Bike Check</h4>
+      <p class="text-center"><small>Verificação da sua bike para uma entrega sem sustos</small></p>
+    </div>
+
+    <div class="col-12 col-md-3">
+      <p class="text-center"><i class="far fa-thumbs-up text-success"></i></p>
+      <h4 class="text-center text-success">Certificado</h4>
+      <p class="text-center"><small>Facilidade e segurança na entrega com frete da Nuflow</small></p>
+    </div>
+
+    <div class="col-12 col-md-3">
+      <p class="text-center"><i class="fas fa-shield-alt text-success"></i></p>
+      <h4 class="text-center text-success">Compra segura</h4>
+      <p class="text-center"><small>Pagamento assegurado, garantia de entrega</small></p>
+    </div>
+
+    <div class="col-12 col-md-3">
+      <p class="text-center"><i class="fas fa-truck text-success"></i></p>
+      <h4 class="text-center text-success">Logística</h4>
+      <p class="text-center"><small>Facilidade e segurança na entrega com frete da Nuflow</small></p>
+    </div>
+  </div>
+
+  <div class="frequent-questions px-5 mt-3">
+    <h4 class="text-center text-success mb-4">Ainda com duvida?</h4>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            Accordion Item #1
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            Accordion Item #2
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+          <div class="accordion-body">
+            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            Accordion Item #3
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+          <div class="accordion-body">
+            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
