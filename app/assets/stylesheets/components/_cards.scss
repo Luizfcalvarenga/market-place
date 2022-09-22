@@ -15,9 +15,13 @@
     opacity: 1 !important;
   }
 
+  .flicker {
+    color: white;
+  }
+
   .card-title {
     margin: auto;
-    opacity: 0;
+    opacity: .6;
     position: relative;
     z-index: 2;
   }
@@ -40,11 +44,12 @@
         0 -0.5rem 2rem #009c2b, 0 0.5rem 3rem #009c2b;
       animation: shine 2s forwards, flicker 3s infinite;
     }
+    .flicker {
+      animation: shine 2s forwards, blink 3s 2s infinite;
+      color: #09ff4f;
+    }
   }
 
-  .flicker {
-    animation: shine 2s forwards, blink 3s 2s infinite;
-  }
 
   @keyframes blink {
     0%,
