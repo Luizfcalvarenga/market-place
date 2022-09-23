@@ -6,7 +6,7 @@
   text-align: center;
   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("new-announce-banner.jpg");
   background-size: cover;
-  height: 70vh;
+  height: 80vh;
   margin-top: -150px;
 }
 
@@ -23,7 +23,16 @@
 
 }
 
-.accordion-body {
-  background-color: #F4F4F9;
+.accordion {
+  border: 1px solid grey;
+  border-radius: 3px;
+  .accordion-body {
+    background-color: #F4F4F9;
 
+  }
+
+  .accordion-button {
+    background-color: #F4F4F9;
+    color: $color-primary;
+  }
 }
