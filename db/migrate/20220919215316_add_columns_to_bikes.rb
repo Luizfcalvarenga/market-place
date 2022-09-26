@@ -4,6 +4,7 @@ class AddColumnsToBikes < ActiveRecord::Migration[6.1]
     add_reference :bikes, :category, null: false, foreign_key: true
     add_reference :bikes, :service, foreign_key: true
     add_column :bikes, :modality, :string
+    add_column :bikes, :bike_type, :string
     add_column :bikes, :price_in_cents, :integer
     add_column :bikes, :quantity, :integer
     add_column :bikes, :locality, :string

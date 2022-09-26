@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.bigint "category_id", null: false
     t.bigint "service_id"
     t.string "modality"
+    t.string "bike_type"
     t.integer "price_in_cents"
     t.integer "quantity"
     t.string "locality"

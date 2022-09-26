@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'json'
+
+puts "Starting seed..."
+
 ################################################################ USERS ################################################################
 buyer = User.create!(email: "user@app.com", password: "123456" )
 seller = User.create!(email: "test@app.com", password: "123456" )
@@ -14,37 +17,57 @@ bike_user = User.create!(email: "bike@app.com", password: "123456" )
 
 
 
-################################################################ BIKES_CTEGORIES ################################################################
+################################################################ CTEGORIES ################################################################
+
+##### BIKES #####
 
 mtb = Category.create!(name: "Mountain Bike", modalities: '["Downhill", "Enduro", "Gravel", "Speed", "Trail", "XC (Cross Country)"]')
-dirt = Category.create!(name: "Dirt/Street", modalities: '["Street BMX", "Race BMX", "BIig Wheel BMX", "Dirt Jump", "Trail", "XC (Cross Country)"]')
+dirt = Category.create!(name: "Dirt/Street", modalities: '["Street BMX", "Race BMX", "Big Wheel BMX", "Dirt Jump"]')
 road = Category.create!(name: "Road", modalities: '["Speed / Performance", "Triathlon", "Ciclocross", "Cicloviagem", "Gravel"]')
+# infant = Category.create!(name: "Infant")
+# urban = Category.create!(name: "Urban")
+
+##### GENERAL #####
+# mixed = Category.create!(name: "Mixed")
 
 categories = [mtb, dirt, road]
 
 
-################################################################ BIKES_COMPONENTS ################################################################
-bike_oriantation = [ "Front", "Rear", "Both"]
+################################################################ BIKES_COMPONENTS #########################################################
+puts "Bike component types and theis attributtes..."
+
+bike_oriantations = [ "Front", "Rear", "Both"]
+bike_types = [ "No Engine", "Electric Engine"]
+
 
 brake = ComponentType.create(name: "Breake")
+bottle_cage = ComponentType.create(name: "Bottle Cage")
+cassette = ComponentType.create(name: "Cassete")
+chain = ComponentType.create(name: "Chain")
+chainring = ComponentType.create(name: "Chainring")
+crankset = ComponentType.create(name: "Crankset")
+derailleur = ComponentType.create(name: "Derailleur")
+fender = ComponentType.create(name: "Fender")
 frame = ComponentType.create(name: "Frame")
-suspension = ComponentType.create(name: "Suspension")
-seat_post = ComponentType.create(name: "Seat Post")
+grips = ComponentType.create(name: "Grips")
+handlebar = ComponentType.create(name: "Handlebar")
+headset = ComponentType.create(name: "Headset")
+hub = ComponentType.create(name: "Hub")
+pedals = ComponentType.create(name: "Pedals")
 rim = ComponentType.create(name: "Rim")
 saddle = ComponentType.create(name: "Saddle")
-shock = ComponentType.create(name: "Shock")
-handlebar = ComponentType.create(name: "Handlebar")
-crankset = ComponentType.create(name: "Crankset")
+seat_post = ComponentType.create(name: "Seat Post")
 shifters = ComponentType.create(name: "Shifters")
+shock = ComponentType.create(name: "Shock")
 stem = ComponentType.create(name: "Stem")
-pedals = ComponentType.create(name: "Pedals")
-derailleur = ComponentType.create(name: "Derailleur")
-grips = ComponentType.create(name: "Grips")
-headset = ComponentType.create(name: "Headset")
+suspension = ComponentType.create(name: "Suspension")
+tire = ComponentType.create(name: "Tire")
 
-components_options = [ brake, frame, suspension, seat_post, rim, saddle, shock, handlebar, crankset, shifters, stem, pedals, derailleur, grips, headset ]
+
+components_options = [ brake, bottle_cage, cassette, chain, chainring, crankset, derailleur, fender, frame, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, shifters, shock, stem, suspension, tire ]
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
 frame_brands = [ "Alfameq",
   "Astro",
   "Audax",
@@ -162,7 +185,7 @@ brake_question_4 = ComponentTypeAttribute.create!(component_type: brake, name: "
 brake_question_5 = ComponentTypeAttribute.create!(component_type: brake, name: "disc-size", kind: "options", options: [ "120mm", "140mm", "160mm", "180mm", "200mm", "203mm" ], prompt: "Tamanho do disco?" )
 brake_question_6 = ComponentTypeAttribute.create!(component_type: brake, name: "inclusdes_assessories", kind: "options", options: ["Yes", "No"], prompt: "Inclui manetes e capipers?" )
 
-brake_questions = [ brake_question_1, brake_question_2, brake_question_3, brake_question_4, brake_question_5 ]
+brake_questions = [ brake_question_1, brake_question_2, brake_question_3, brake_question_4, brake_question_5, brake_question_6 ]
 
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RIM >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -172,7 +195,7 @@ rim_materials = [ "Alumínio","Carbono", "Carbono / Alumínio (chainstay)", "Out
 
 
 rim_question_1 = ComponentTypeAttribute.create!(component_type: rim, name: "rim_size", kind: "options", options: rim_sizes, prompt: "Tamanho?" )
-rim_question_2 = ComponentTypeAttribute.create!(component_type: rim, name: "rim_holes", kind: "options", options: (1..5), prompt: "Quantos furos?" )
+rim_question_2 = ComponentTypeAttribute.create!(component_type: rim, name: "rim_holes", kind: "options", options: (1..5).to_a, prompt: "Quantos furos?" )
 rim_question_3 = ComponentTypeAttribute.create!(component_type: rim, name: "rim_material", kind: "options", options: rim_materials, prompt: "Qual material?" )
 
 rim_questions = [ rim_question_1, rim_question_2, rim_question_3 ]
@@ -207,9 +230,9 @@ shock_question_1 = ComponentTypeAttribute.create!(component_type: shock, name: "
 
 velocity_numbers_options= [ 1, 2, 3, 7, 8, 9, 10, 11, 12 ]
 
-derailleur_question_1 = ComponentTypeAttribute.create!(component_type: derailleur, name: "derailleur_number", kind: "options", options: bike_oriantation, prompt: "Tipo de câmbio?" )
+derailleur_question_1 = ComponentTypeAttribute.create!(component_type: derailleur, name: "derailleur_number", kind: "options", options: bike_oriantations, prompt: "Tipo de câmbio?" )
 derailleur_question_2 = ComponentTypeAttribute.create!(component_type: derailleur, name: "derailleur_velocities", kind: "options", options: velocity_numbers_options, prompt: "Quantas velocidades?" )
-derailleur_question_3 = ComponentTypeAttribute.create!(component_type: derailleur, name: "derailleur_teeth", kind: "options", options: (1..40), prompt: "Relação?" )
+derailleur_question_3 = ComponentTypeAttribute.create!(component_type: derailleur, name: "derailleur_teeth", kind: "options", options: (1..40).to_a, prompt: "Relação?" )
 
 derailleur_questions = [ derailleur_question_1, derailleur_question_2, derailleur_question_3 ]
 
@@ -227,9 +250,20 @@ seat_post_question_2 = ComponentTypeAttribute.create!(component_type: seat_post,
 seat_post_questions = [ seat_post_question_1, seat_post_question_2 ]
 
 
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BATTERY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+
+battery_capacity = ["320Wh", "500Wh", "625Wh", "700Wh" ]
+
+# Battery not sold separately **
+
+
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-5.times do
+
+puts "Creating 10 Components and their components attributes..."
+
+10.times do
   user = [buyer, seller, bike_user].sample
   category = categories.sample
 
@@ -244,7 +278,6 @@ seat_post_questions = [ seat_post_question_1, seat_post_question_2 ]
 
   )
 
-
   component_attributes =  ComponentTypeAttribute.where(component_type: component.component_type).each do | component_type_attribute |
 
     ComponentAttribute.create!(component: component, component_type_attribute: component_type_attribute, value: JSON[component_type_attribute.options].sample)
@@ -254,14 +287,22 @@ end
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BIKES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
+bike_conditions = ["Nova", "Usada" ]
 
-5.times do
-  # user = [buyer, seller, bike_user].sample
+structural_visual_condition = ["Perfect condition, no obsevations", "Minor scratches or surface scratches", "Spalls in the paint", "Spalls in the paint", "Frame painted", "Frame welded or repaired", "Frame has cracks or fissures that must be repaired", "Components welded or repaired", "Components has cracks or fissures that must be repaired" ]
+
+opareting_condition = ["Gears worn out (> 75%)", "Shifters not working properly", "Front suspension not working properly", "Rear suspension not working properly", "Suspensions lock not working properly", "Brake not working properly", "Retractable seat post not working properly", "Creaking noises when pedaling", "Wheels are bent", "Tyres worn out(> 50%)"]
+
+
+puts "Creating 10 Bikes..."
+
+10.times do
   category = [mtb, dirt, road].sample
 
   bike = Bike.create!(
     category_id:  category.id,
     modality: JSON[category.modalities].sample,
+    bike_type: "No Engine",
     price_in_cents: rand(10000000..22000000),
     quantity: 1,
     locality: "Belo Horizonte",
@@ -282,10 +323,12 @@ end
     seat_post_travel: "100 mm",
     weight: [ 15.0, 16.3, 15.7, 17.4].sample,
     bike_conditions: "Usada",
-    structural_visual_condition: "Apresenta pequenos riscos ou arranhões superficiais",
-    opareting_condition: "Funcionamento perfeito, sem necessidade de ajustes ou substituição de peças",
+    structural_visual_condition: structural_visual_condition.sample,
+    opareting_condition: opareting_condition.sample,
     documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
     description: "Bicicleta em perfeito estado apenas 1 dono.",
     accessories: false
   )
 end
+
+puts "Seed finished"
