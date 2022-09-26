@@ -37,6 +37,7 @@ categories = [mtb, dirt, road]
 puts "Bike component types and theis attributtes..."
 
 bike_oriantations = [ "Front", "Rear", "Both"]
+
 bike_types = [ "No Engine", "Electric Engine"]
 
 
@@ -279,7 +280,6 @@ puts "Creating 10 Components and their components attributes..."
   )
 
   component_attributes =  ComponentTypeAttribute.where(component_type: component.component_type).each do | component_type_attribute |
-
     ComponentAttribute.create!(component: component, component_type_attribute: component_type_attribute, value: JSON[component_type_attribute.options].sample)
   end
 end
