@@ -83,15 +83,14 @@ export function Bikes(props) {
                     <span className="visually-hidden">Next</span>
                   </button>
                 </div>
-                <h4 className="card-title text-center mt-3">BIKE MODEL</h4>
-                <h4 className="text-center mt-1">R$ BIKE PRICE</h4>
+                <h4 className="card-title text-center mt-3">{bike.model}</h4>
+                <h4 className="text-center mt-1">R$ {bike.price_in_cents}</h4>
                 <hr/>
                 <div className="card-content mt-2">
-                  <p className="text-center mt-1">Frame: {bike.id}</p>
+                  <p className="text-center mt-1">{bike.frame_brand} | {bike.frame_size}</p>
                   <div className="d-flex justify-content-around">
-                    <p>Ano: {bike.age}</p>
-                    <i className="fas fa-heart"></i>
-                    <p>Wheel: {bike.size}</p>
+                    <p>{bike.year}</p>
+                    <p>Aro: {bike.rim_size}</p>
                   </div>
                 </div>
               </div>
