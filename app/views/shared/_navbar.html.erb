@@ -5,9 +5,9 @@
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
     </div>
-    <div class="f-40 ps-2 w-100">
-      <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-end gap-10">
-        <li id="navbar-form" class="nav-item active my-2 form-inline d-none">
+    <div class="f-40  w-100">
+      <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-between gap-10">
+        <li id="navbar-form" class="nav-item active form-inline d-none">
           <div class="input-group input-group-navbar">
             <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
             <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
@@ -16,7 +16,7 @@
         <div id="navbar-links" class="nav-links d-flex">
           <li class="nav-item active">
             <div class="dropdown">
-              <%= link_to "CATEGORIAS", "#", class: "nav-link mx-3 dropbtn" %>
+              <%= link_to "CATEGORIAS", "#", class: "nav-link  drop-btn mx-3" %>
               <div class="dropdown-content">
                 <div class="drpdw-bike mx-5 margin-right">
                   <h4 class="text-center text-success mt-3">BIKES</h4>
@@ -46,7 +46,7 @@
             </div>
           </li>
           <li class="nav-item active">
-            <%= link_to "INSTITUCIONAL", "#", class: "nav-link" %>
+            <%= link_to "INSTITUCIONAL", "#", class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
             <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link mx-3" %>
@@ -56,29 +56,29 @@
           </li>
         </div>
         <li class="nav-item active mt-2">
-          <button id="search-btn" class="nav-link ms-2">
+          <button id="search-btn" class="nav-link ms-3">
             <i class="fas fa-search" id="search-icon"></i>
           </button>
         </li>
         <li class="nav-item mt-3">
-          <button id="close-btn" class="nav-link d-none mb-2 ms-2">
+          <button id="close-btn" class="nav-link d-none mb-2 ms-3">
             <i class="fas fa-times" id="close-icon"></i>
           </button>
         </li>
       </ul>
     </div>
 
-    <div class="f-40 px-2">
+    <div class="f-40 px-2 mt-2">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row d-flex justify-content-start gap-24">
-        <li class="nav-item active ms-5 me-1">
-          <%= link_to "VENDER", "#", class: "btn btn-primary" %>
+        <li class="nav-item active me-1 mt-2">
+          <%= link_to "VENDER", "#", class: "btn-navbar" %>
         </li>
-        <li class="nav-item active mt-2" style="color: white;">
+        <li class="nav-item active mt-2 ms-5" style="color: white;">
           <%= link_to "#" do %>
             <i class="fas fa-shopping-cart text-success ms-2"> <span  class="cart-counter ms-1 mb-3"><%= rand(1..5) %></span></i>
           <% end %>
         </li>
-        <li class="nav-item active mt-2" style="color: white;">
+        <li class="nav-item active mt-2 mx-3" style="color: white;">
           <%= link_to "#" do %>
             <i class="fa fa-heart text-success"></i>
           <% end %>
