@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
   resources :bikes, only: :index
 
+  get 'new_announce', to: 'pages#new_announce', as: "new_announce"
+
   resource :profiles
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
