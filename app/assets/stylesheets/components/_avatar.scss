@@ -1,5 +1,6 @@
 .avatar {
   width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .avatar-large {
@@ -19,9 +20,15 @@
   border: white 1px solid;
 }
 
+.avatar-profile{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
 .avatar-bike {
   width: 40px;
   height: 40px;
   filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  
+
 }
