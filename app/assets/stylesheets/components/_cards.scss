@@ -18,7 +18,7 @@
   }
 
   .flicker {
-    color: white;
+    color: #0ba94a;
   }
 
   .card-title {
@@ -259,20 +259,7 @@
   }
 }
 
-.instagram:hover {
-  box-shadow: 0 0 11px rgba(164,1,189, .3);
 
-  h4{
-    display: none
-  }
-
-  .fa-instagram{
-    color: rgb(201,41,107)  !important;
-    display: block !important;
-    font-size: 60px !important;
-    transform: translateY(35px) !important;
-  }
-}
 
 .youtube {
   background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("youtube-background.jpg");
