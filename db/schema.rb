@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.string "modalities"
+    t.string "modalities", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -102,56 +102,13 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.bigint "bike_id"
     t.bigint "seller_id_id", null: false
     t.bigint "buyer_id_id", null: false
-    t.bigint "component_id"
+    t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bike_id"], name: "index_chats_on_bike_id"
     t.index ["buyer_id_id"], name: "index_chats_on_buyer_id_id"
-    t.index ["component_id"], name: "index_chats_on_component_id"
+    t.index ["product_id"], name: "index_chats_on_product_id"
     t.index ["seller_id_id"], name: "index_chats_on_seller_id_id"
-  end
-
-  create_table "component_attributes", force: :cascade do |t|
-    t.bigint "component_id", null: false
-    t.bigint "component_type_attribute_id", null: false
-    t.string "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["component_id"], name: "index_component_attributes_on_component_id"
-    t.index ["component_type_attribute_id"], name: "index_component_attributes_on_component_type_attribute_id"
-  end
-
-  create_table "component_type_attributes", force: :cascade do |t|
-    t.bigint "component_type_id", null: false
-    t.string "name"
-    t.string "kind"
-    t.string "options"
-    t.string "prompt"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["component_type_id"], name: "index_component_type_attributes_on_component_type_id"
-  end
-
-  create_table "component_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "components", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "category_id"
-    t.bigint "component_type_id", null: false
-    t.string "modality"
-    t.string "name"
-    t.text "description"
-    t.integer "price_in_cents"
-    t.integer "quantity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_components_on_category_id"
-    t.index ["component_type_id"], name: "index_components_on_component_type_id"
-    t.index ["user_id"], name: "index_components_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -166,15 +123,58 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
 
   create_table "order_items", force: :cascade do |t|
     t.bigint "bike_id"
-    t.bigint "component_id"
+    t.bigint "product_id"
     t.bigint "service_id"
     t.integer "quantity"
     t.integer "price_in_cents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bike_id"], name: "index_order_items_on_bike_id"
-    t.index ["component_id"], name: "index_order_items_on_component_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
     t.index ["service_id"], name: "index_order_items_on_service_id"
+  end
+
+  create_table "product_attributes", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "product_type_attribute_id", null: false
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_attributes_on_product_id"
+    t.index ["product_type_attribute_id"], name: "index_product_attributes_on_product_type_attribute_id"
+  end
+
+  create_table "product_type_attributes", force: :cascade do |t|
+    t.bigint "product_type_id", null: false
+    t.string "name"
+    t.string "kind"
+    t.string "options", default: [], array: true
+    t.string "prompt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_type_id"], name: "index_product_type_attributes_on_product_type_id"
+  end
+
+  create_table "product_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "category_id"
+    t.bigint "product_type_id", null: false
+    t.string "modality"
+    t.string "name"
+    t.text "description"
+    t.integer "price_in_cents"
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["product_type_id"], name: "index_products_on_product_type_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -207,18 +207,18 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
   add_foreign_key "bikes", "services"
   add_foreign_key "bikes", "users"
   add_foreign_key "chats", "bikes"
-  add_foreign_key "chats", "components"
+  add_foreign_key "chats", "products"
   add_foreign_key "chats", "users", column: "buyer_id_id"
   add_foreign_key "chats", "users", column: "seller_id_id"
-  add_foreign_key "component_attributes", "component_type_attributes"
-  add_foreign_key "component_attributes", "components"
-  add_foreign_key "component_type_attributes", "component_types"
-  add_foreign_key "components", "categories"
-  add_foreign_key "components", "component_types"
-  add_foreign_key "components", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "order_items", "bikes"
-  add_foreign_key "order_items", "components"
+  add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "services"
+  add_foreign_key "product_attributes", "product_type_attributes"
+  add_foreign_key "product_attributes", "products"
+  add_foreign_key "product_type_attributes", "product_types"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "product_types"
+  add_foreign_key "products", "users"
 end

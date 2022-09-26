@@ -4,7 +4,7 @@ class CreateChats < ActiveRecord::Migration[6.1]
       t.references :bike, foreign_key: true
       t.references :seller_id, null: false, foreign_key: { to_table: :users }
       t.references :buyer_id, null: false, foreign_key: { to_table: :users }
-      t.references :component, foreign_key: true
+      t.references :product, foreign_key: true
 
       t.timestamps
     end

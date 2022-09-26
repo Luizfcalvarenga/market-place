@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ComponentTypeAttributeTest < ActiveSupport::TestCase
+class ProductAttributeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
