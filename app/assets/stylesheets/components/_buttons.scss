@@ -1,3 +1,5 @@
+///////////////////////  WPP BTN ON BOTTOM RIGHT
+
 .wpp-btn {
   position: sticky;
   bottom: 30px;
@@ -8,15 +10,16 @@
   }
 }
 
-/* Dropdown Button */
-.dropbtn {
+///////////////////////  CATEGORIES NAVBAR DROPDOWN BTN/
+
+.drop-btn {
   background-color: transparent;
   color: white;
   text-decoration: none;
   border: none;
   font-family: "Bebas Neue", "Helvetica", "sans-serif";
-  font-weight: bold !important;
-  font-size: 24px;
+  font-weight: lighter !important;
+  font-size: 22px;
 }
 
 .dropdown {
@@ -36,9 +39,7 @@
 }
 
 .dropdown-content-user {
-
   width: 120px !important;
-
 }
 
 
@@ -57,3 +58,26 @@
 }
 
 .dropdown:hover .dropdown-content {display: flex;}
+
+
+
+//////////////////////// BTN SOCIAL SECTION homepage
+
+.btn-social {
+  background-color: rgba(0, 0, 0, 0.5);;
+  border: 1px solid white;
+  font: inherit;
+  line-height: 1;
+  margin: 0.22em;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+
+  &:hover {
+    background-color: #fff;
+    border-color: transparent;
+    color: #444;
+  }
+}

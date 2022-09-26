@@ -19,83 +19,116 @@
 <div class="second-section-home mb-5 pb-5">
   <div class="d-flex justify-content-between mb-1">
     <div class="ms-3">
-      <h3 class="mt-5 text-success ms-5">CATEGORIAS</h3>
+      <h3 class="mt-5 text-success ms-5 mb-2">CATEGORIAS</h3>
     </div>
   </div>
   <div class="row row-cols-1 category-cards mx-5">
-    <%= link_to "#", class: "col-12 col-md-4 mb-2 btn-remove-link" do %>
+    <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
       <div class="card card-bikes">
-        <h3 class="text-center mt-5 card-title">BIKES <br> <%= image_tag "bicycle.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">B<span class="flicker">I</span>KES </h3>
+        <%= image_tag "bike-bg.jpg", class: "card-bg" %>
       </div>
     <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-2 btn-remove-link" do %>
+    <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
       <div class="card card-components">
-        <h3 class="text-center mt-5 card-title">COMPONENTES <br><%= image_tag "chain.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">COMPONE<span class="flicker">N</span>TES </h3>
+        <%= image_tag "bike-components.png", class: "card-bg" %>
       </div>
     <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-2 btn-remove-link" do %>
+    <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
       <div class="card card-services">
-        <h3 class="text-center mt-5 card-title">SERVIÇOS <br><%= image_tag "settings.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">SER<span class="flicker">V</span>IÇOS</h3>
+        <%= image_tag "bike-maintenance.png", class: "card-bg" %>
       </div>
     <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-2 btn-remove-link" do %>
+    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
       <div class="card card-products">
-        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">M<span class="flicker">T</span>B</h3>
+        <%= image_tag "mtb-bg.jpg", class: "card-bg" %>
       </div>
     <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-2 btn-remove-link" do %>
+    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
       <div class="card card-products">
-        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title"><span class="flicker">E</span>-BIKE</h3>
+        <%= image_tag "e-bike-bg.jpg", class: "card-bg" %>
       </div>
     <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-2 btn-remove-link" do %>
+    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
       <div class="card card-products">
-        <h3 class="text-center mt-5 card-title">PRODUTOS <br><%= image_tag "easy-maintenance.png", class: "card-icon" %></h3>
+        <h3 class="text-center card-title">ROA<span class="flicker">D</span></h3>
+        <%= image_tag "road-bg.jpg", class: "card-bg" %>
       </div>
     <% end %>
   </div>
 </div>
 
-<div class="mt-3 third-section-home mb-5 ms-3">
+<div class="third-section-home mt-3 mb-5">
   <h2 class="text-success ms-2 third-section-title text-center">Compre sua bike com a segurança do Bike Check</h2>
   <p class="mx-5 mb-5 text-center">É normal que uma bicicleta usada apresente marcas de uso e desgaste dos componentes. Por isso, em uma revisão simples, oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, estético e de funcionamento da bicicleta.</p>
-  <div class="bike-check-path py-3 ms-1">
-    <div class="d-flex justify-content-center responsive-block">
-      <div class="bike-check-card wash">
-        <h3 class=""><i class="fas fa-spray-can"></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
-        <p class="mt-5 text-white">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
-      </div>
-      <div class="bike-check-card inspection">
-        <h3 class=""> <i class="fas fa-search"></i> <span class="ms-2">É feita uma inspeção minuciosa</span></h3>
-        <p class="mt-5 text-white">Inspeção visual da estética, estrutura da bike e<br>componentes: buscamos identificar lascas maiores  na pintura, trincas e fissuras visuais na estrutura.</p>
-      </div>
-    </div>
 
-    <div class="d-flex justify-content-center responsive-block">
-      <div class="bike-check-card adjustment">
-        <h3 class=""><i class="fas fa-screwdriver"></i> <span class="ms-2">Ajustamos a bike para que a receba <span class="ms-5">revisada</span></span></h3>
-        <p class="mt-5 text-white">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
-      </div>
-      <div class="bike-check-card bigger-card">
-        <h3 class=""><i class="fas fa-check-double"></i> <span class="ms-2">Verificamos a mecânica</span></h3>
-        <p class="mt-3 text-white">São verificadas as características da bike e o funcionamento dos componentes: <br>
-          - Medida do quadro e dos aros <br>
-          - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
-          - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
-          - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
-          - Desgaste da corrente e dos pneus
-        </p>
-      </div>
-    </div>
+  <div class="v-check-line"></div>
 
-    <div class="d-flex justify-content-start responsive-block">
-      <div class="bike-check-card w-40 report">
-        <h3 class=""> <i class="fas fa-clipboard-list"></i> <span class="ms-2">Emitimos um laudo mecânico</span></h3>
-        <p class="mt-5 text-white">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
-      </div>
-      <div class="">
-        <%= image_tag "cycling.png", class: "bike-png"%>
-      </div>
+  <div class="d-flex justify-content-center responsive-block">
+    <%= image_tag "bike-check-1.png", class: "bike-check-img me-5"%>
+    <div class="w-40 mt-5 ms-4 check-text">
+      <h3 class="text-success mt-5"><i class="fas fa-spray-can"></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
+      <p class="mt-2 text-white">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
+    </div>
+  </div>
+
+  <div class="v-check-line-b"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-left"></div>
+
+
+  <div class="d-flex justify-content-center responsive-block">
+    <div class="w-40 mt-5 me-4 check-text">
+      <h3 class="text-success mt-5"> <i class="fas fa-binoculars"></i><span class="ms-2">É feita uma inspeção minuciosa</span></h3>
+      <p class="mt-2 text-white">Inspeção visual da estética, estrutura da bike e<br>componentes: buscamos identificar lascas maiores  na pintura, trincas e fissuras visuais na estrutura.</p>
+    </div>
+    <%= image_tag "bike-check-2.png", class: "bike-check-img"%>
+  </div>
+
+  <div class="v-check-line-b-left"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-right"></div>
+
+  <div class="d-flex justify-content-center responsive-block">
+    <%= image_tag "bike-check-3.png", class: "bike-check-img  me-5" %>
+    <div class="w-40 ms-4 check-text">
+      <h3 class="text-success mt-5"><i class="fas fa-check-double"></i> <span class="ms-2">Verificamos a mecânica</span></h3>
+      <p class="mt-2 text-white">São verificadas as características da bike e o funcionamento dos componentes: <br>
+        - Medida do quadro e dos aros <br>
+        - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
+        - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
+        - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
+        - Desgaste da corrente e dos pneus
+      </p>
+    </div>
+  </div>
+
+  <div class="v-check-line-b3"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-left-4"></div>
+
+  <div class="d-flex justify-content-center responsive-block">
+    <div class="w-40 mt-5 me-4 check-text">
+      <h3 class="text-success mt-5"> <i class="fas fa-tools"></i><span class="ms-2">Ajustamos a bike para que a receba revisada</span></h3>
+      <p class="mt-2 text-white">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
+    </div>
+    <%= image_tag "bike-check-4.png", class: "bike-check-img"%>
+  </div>
+
+  <div class="v-check-line-b-left"></div>
+  <div class="h-check-line"></div>
+  <div class="v-check-line-right-5"></div>
+
+
+ <div class="d-flex justify-content-center responsive-block">
+    <%= image_tag "bike-check-5.png", class: "bike-check-img me-5"%>
+    <div class="w-40 mt-5 ms-4 check-text">
+      <h3 class="text-success mt-5"> <i class="fas fa-clipboard-list"></i> <span class="ms-2">Emitimos um laudo mecânico</span></h3>
+      <p class="mt-2 text-white">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
     </div>
   </div>
 </div>
@@ -208,11 +241,11 @@
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
+        <button class="carousel-control-next next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
@@ -223,33 +256,40 @@
 <div class="sixth-section-home py-5">
   <h3 class="text-success text-center mb-3">ENCONTRE A GENTE</h3>
   <div class="d-flex justify-content-around mx-5 mb-3 social">
-    <%= link_to "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "social-media ", target: "_blank" do %>
-      <div class="cards-social-media youtube text-center">
-        <h4>YOUTUBE</h4>
-        <i class="fab fa-youtube d-none"></i>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "social-media " do %>
-      <div class="cards-social-media instagram text-center">
-        <h4>INSTAGRAM</h4>
-        <i class="fab fa-instagram d-none"></i>
-      </div>
-    <% end %>
-    <%= link_to "https://nuflowpass.com.br/", class: "social-media " do %>
-      <div class="cards-social-media nuflow text-center">
-        <h4>NUFLOW PASS</h4>
-        <%= image_tag "white_logo.png", class: "social-logo d-none" %>
-      </div>
-    <% end %>
+    <div class="cards-social-media youtube text-center">
+      <i class="fab fa-youtube"></i>
+      <p class="mt-1">Nos assista no</p>
+      <h3 class="mb-4">YOUTUBE</h3>
+      <%= link_to "Assista", "https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw", class: "btn-social btn-youtube", target: "_blank"  %>
+    </div>
+
+    <div class="cards-social-media instagram text-center">
+      <i class="fab fa-instagram social-instagram"></i>
+      <p class="mt-1">Nos siga no</p>
+      <h3 class="mb-4">INSTAGRAM</h3>
+      <%= link_to "Siga", "#", class: "btn-social btn-instagram", target: "_blank"  %>
+    </div>
+
+    <div class="cards-social-media nuflow text-center">
+      <%= image_tag "white_logo.png", class: "social-logo" %>
+      <p class="mt-1">Acompanhe eventos no</p>
+      <h3 class="mb-4">NUFLOWPASS</h3>
+      <%= link_to "Eventos", "https://nuflowpass.com.br/", class: "btn-social", target: "_blank"  %>
+    </div>
   </div>
 </div>
 
-<div class="seventh-section-home pb-5">
+<div class="seventh-section-home pb-2 mx-5">
   <div class="row row-cols-1 mx-5">
-    <div class="col-12 col-md-4">
-      <h3 class="text-success text-center mt-5">O que nossos clientes pensam de nós?</h3>
+    <div class="col-12 col-md-4 review-icons">
+      <h3 class="text-success text-start mt-5">A Nuflow te ajuda a vender e comprar com mais facilidade</h3>
+      <p class="text-start mt-4"><i class="fas fa-hands-helping me-1"></i> Ajuda na negociação</p>
+      <p class="text-start"><i class="fas fa-credit-card me-2"></i>Pagamento Flexível</p>
+      <p class="text-start"><i class="fas fa-check me-2"></i> Verificação da bike</p>
+      <p class="text-start"><i class="far fa-clock me-2"></i> Rapidez na venda</p>
+      <p class="text-start"><i class="fas fa-user-shield me-1"></i> Compra segura</p>
     </div>
-    <div class="col-12 col-md-8 mt-5">
+    <div class="col-12 col-md-8 mt-5 pt-4">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators d-none">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -262,7 +302,7 @@
           <div class="carousel-item active">
             <div class="review-card">
               <h4 class="text-center text-success mt-3">Marcelo Person</h4>
-              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><small>Comprador</small></p>
               <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
               <p class="text-center">A experiencia foi bem legal. O atendimento foi decisivo para a avaliação, ja que a primeira  bike que queria nao foi aprovada no bike check, que por sinal é algo que da bastante seguranca, já que por ser de outro estado nao deu para ver pessoalmente.</p>
             </div>

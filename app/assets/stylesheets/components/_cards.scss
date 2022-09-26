@@ -1,65 +1,224 @@
+////////////////////////// CARD CATEGORIES ON HOVER FLICKER AND BLINK
+
 .card {
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 7px;
+  background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.9)) !important;
   height: 10rem;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  transition: .5s ease;
+  position: relative;
+  overflow: hidden;
 
- &:hover {
-  transform: scale(1.05);
- }
+  .card-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 1 !important;
+  }
+
+  .flicker {
+    color: white;
+  }
+
+  .card-title {
+    margin: auto;
+    opacity: .6;
+    position: relative;
+    z-index: 2;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+
+    .card-bg {
+      opacity: .6 !important;
+    }
+
+    .card-title {
+      color: $color-primary;
+      opacity: 1;
+      z-index: 1000;
+      letter-spacing: 2;
+      color: #09ff4f;
+      text-shadow: 0 0 0.6rem #c7f1d3, 0 0 1.5rem #22e058,
+        -0.2rem 0.1rem 1rem #00c336, 0.2rem 0.1rem 1rem #00c336,
+        0 -0.5rem 2rem #009c2b, 0 0.5rem 3rem #009c2b;
+      animation: shine 2s forwards, flicker 3s infinite;
+    }
+    .flicker {
+      animation: shine 2s forwards, blink 3s 2s infinite;
+      color: #09ff4f;
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    22%,
+    36%,
+    75% {
+      color: #09ff4f;
+      text-shadow: 0 0 0.6rem #c7f1d3, 0 0 1.5rem #22e058,
+        -0.2rem 0.1rem 1rem #00c336, 0.2rem 0.1rem 1rem #00c336,
+        0 -0.5rem 2rem #009c2b, 0 0.5rem 3rem #009c2b;
+      animation: shine 2s forwards, flicker 3s infinite;
+    }
+    28%,
+    33% {
+      color: #22e058;
+      text-shadow: none;
+    }
+    82%,
+    97% {
+      color: #00c336;
+      text-shadow: none;
+    }
+  }
+
+  @keyframes flicker {
+    from {
+      opacity: 1;
+    }
+
+    4% {
+      opacity: 0.9;
+    }
+
+    6% {
+      opacity: 0.85;
+    }
+
+    8% {
+      opacity: 0.95;
+    }
+
+    10% {
+      opacity: 0.9;
+    }
+
+    11% {
+      opacity: 0.922;
+    }
+
+    12% {
+      opacity: 0.9;
+    }
+
+    14% {
+      opacity: 0.95;
+    }
+
+    16% {
+      opacity: 0.98;
+    }
+
+    17% {
+      opacity: 0.9;
+    }
+
+    19% {
+      opacity: 0.93;
+    }
+
+    20% {
+      opacity: 0.99;
+    }
+
+    24% {
+      opacity: 1;
+    }
+
+    26% {
+      opacity: 0.94;
+    }
+
+    28% {
+      opacity: 0.98;
+    }
+
+    37% {
+      opacity: 0.93;
+    }
+
+    38% {
+      opacity: 0.5;
+    }
+
+    39% {
+      opacity: 0.96;
+    }
+
+    42% {
+      opacity: 1;
+    }
+
+    44% {
+      opacity: 0.97;
+    }
+
+    46% {
+      opacity: 0.94;
+    }
+
+    56% {
+      opacity: 0.9;
+    }
+
+    58% {
+      opacity: 0.9;
+    }
+
+    60% {
+      opacity: 0.99;
+    }
+
+    68% {
+      opacity: 1;
+    }
+
+    70% {
+      opacity: 0.9;
+    }
+
+    72% {
+      opacity: 0.95;
+    }
+
+    93% {
+      opacity: 0.93;
+    }
+
+    95% {
+      opacity: 0.95;
+    }
+
+    97% {
+      opacity: 0.93;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+  .card-bg {
+    opacity: .5;
+  }
 }
 
-.card-title {
-  color: rgb(153,153,153);
-}
+///////////////////////////// CATEGORIES SECTION #HOME
 
 .category-cards {
   justify-content: center;
 }
 
-.card:hover .card-icon {
-  opacity: 0;
-}
-
-.card:hover h3 {
-  transform: translateY(15px) !important;
-  color: $color-primary;
-}
-
-.card-icon {
-  width: 50px;
-  height: 50px;
-  filter: invert(73%) sepia(0%) saturate(4%) hue-rotate(213deg) brightness(84%) contrast(89%);
-}
-
-.card-bikes:hover {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-card.png");
-  background-size: cover;
-}
-
-.card-components:hover {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-components.png");
-  background-size: cover;
-}
-
-.card-services:hover {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-maintenance.png");
-  background-size: cover;
-}
-
-.card-products:hover {
-  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), image-url("bike-products.png");
-  background-size: cover;
-}
-
+///////////////////////////// DIFFERENTIAL SECTION #HOME
 
 .cards-differential {
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 7px;
+  border-radius: 3px;
   height: 13rem;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
   margin: 5px;
 
   .icon {
@@ -68,38 +227,39 @@
   }
 }
 
+///////////////////////////// SOCIAL MEDIA SECTION #HOME
 
 .cards-social-media {
   background: transparent;
-  border: 1px solid rgb(240, 234, 234);
-  border-radius: 10px;
-  height: 8rem;
-  width: 8rem;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  border: 1px solid rgb(16, 16, 16);
+  border-radius: 3px;
+  height: 20rem;
+  width: 15rem;
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
   margin: 5px;
 
-  h4 {
-    margin-top: 38%;
-    color: rgba(16,16,16, .5)
-  }
-}
-
-
-.youtube:hover {
-  box-shadow: 0 0 11px rgba(255,0,0, .7);
-  h4{
-    display: none
+  h3, p{
+    color: white;
+    text-shadow: 2px 2px rgb(16, 16, 16);
   }
 
-  .fa-youtube{
+  .fa-youtube, .fa-instagram  {
+    margin-top: 25%;
+    color: white;
+    font-size: 36px;
+  }
+
+  .social-logo{
     display: block !important;
-    color: red !important;
-    font-size: 60px !important;
-    transform: translateY(35px) !important;
+    width: 36px !important;
+    height: 36px !important;
+    margin-top: 24%;
+    margin-left: 41%;
 
   }
 }
 
+<<<<<<< HEAD
 
 
 .instagram:hover {
@@ -115,9 +275,20 @@
     font-size: 60px !important;
     transform: translateY(35px) !important;
   }
+=======
+.youtube {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("youtube-background.jpg");
+  background-position: center;
+  background-size: cover;
+>>>>>>> main
 }
 
+.instagram {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("instagram-background.jpg");
+  background-position: center;
+  background-size: cover;
 
+<<<<<<< HEAD
 
 .nuflow:hover {
   box-shadow: 0 0 11px rgba(10,10,10, .9);
@@ -134,33 +305,43 @@
     transform: translateY(35px) !important;
     margin-left: 25%;
 
+=======
+  .social-instagram:hover {
+    color: white !important;
+>>>>>>> main
   }
 }
 
-.social-media {
-  text-decoration: none;
+.nuflow {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("nuflow-background.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
+///////////////////////////// BLOG SECTION #HOME
+
 .cards-blog {
-  height: 450px;
+  height: 430px;
   border: 1px solid rgb(21,21,21);
-  border-radius: 5px;
+  border-radius: 3px;
   width: 50%;
-  margin-left: 30%;
+  margin-left: 25%;
   background-color: rgb(21,21,21);
 
   .blog-img {
     height: 200px;
     width: 100%;
-    border-radius: 5px 5px 0 0;
+    border-radius: 3px 3px 0 0;
   }
 }
 
+///////////////////////////// REVIEW SECTION #HOME
+
 .review-card {
-  border-radius: 5px;
+  border-radius: 3px;
   width: 550px;
   height: 270px;
-  margin-left: 20%;
+  margin-left: 13.5%;
   padding: 10px;
   background-color: rgb(21,21,21);
 
@@ -180,9 +361,6 @@
     text-shadow: 2px 2px rgb(16, 16, 16);
   }
 }
-
-
-
 
 .bigger-card {
   height: 100%;
