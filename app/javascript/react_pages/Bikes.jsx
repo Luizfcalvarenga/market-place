@@ -56,12 +56,46 @@ export function Bikes(props) {
         )}
       </div>
 
-      <div>
-        {bikes.map((bike) => {
+      <div className="row row-cols-1 mt-5">
+        {bikes.map((bike, idx) => {
           return (
-            <p>
-              #{bike.id} - {bike.category} - Age: {bike.age} - Size: {bike.size}
-            </p>
+            <div className="col-12 col-md-3" bike={bike} key={bike.id}>
+              <div className="cards-bikes">
+                <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                  <div className="carousel-inner">
+                    <i className="fas fa-heart card-favorite"></i>
+                    <div className="carousel-item active">
+                      <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                    </div>
+                    <div className="carousel-item">
+                      <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                    </div>
+                    <div className="carousel-item">
+                      <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                    </div>
+                  </div>
+                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
+                </div>
+                <h4 className="card-title text-center mt-3">BIKE MODEL</h4>
+                <h4 className="text-center mt-1">R$ BIKE PRICE</h4>
+                <hr/>
+                <div className="card-content mt-2">
+                  <p className="text-center mt-1">Frame: {bike.id}</p>
+                  <div className="d-flex justify-content-around">
+                    <p>Ano: {bike.age}</p>
+                    <i className="fas fa-heart"></i>
+                    <p>Wheel: {bike.size}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
 
+  resource :profiles
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
