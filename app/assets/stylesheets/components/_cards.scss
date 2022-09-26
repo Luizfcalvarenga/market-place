@@ -312,3 +312,22 @@
     color: yellow;
   }
 }
+
+.bike-check-card {
+  border: 1px solid rgb(16,16,16);
+  border-radius: 5px;
+  height: 250px;
+  padding: 20px;
+  margin: 50px;
+
+  h3, p {
+    text-shadow: 2px 2px rgb(16, 16, 16);
+  }
+}
+
+.bigger-card {
+  height: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("verification.png");
+  background-size: cover;
+  background-position: center;
+}
