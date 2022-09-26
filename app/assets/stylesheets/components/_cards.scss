@@ -1,3 +1,5 @@
+////////////////////////// CARD CATEGORIES ON HOVER FLICKER AND BLINK
+
 .card {
   background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.9)) !important;
   height: 10rem;
@@ -49,7 +51,6 @@
       color: #09ff4f;
     }
   }
-
 
   @keyframes blink {
     0%,
@@ -205,12 +206,12 @@
 }
 
 ///////////////////////////// CATEGORIES SECTION #HOME
+
 .category-cards {
   justify-content: center;
 }
 
-
-///////////////////////////// DIFERENTIAL SECTION #HOME
+///////////////////////////// DIFFERENTIAL SECTION #HOME
 
 .cards-differential {
   background: transparent;
@@ -262,7 +263,6 @@
   background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("youtube-background.jpg");
   background-position: center;
   background-size: cover;
-
 }
 
 .instagram {
@@ -270,7 +270,7 @@
   background-position: center;
   background-size: cover;
 
-  .social-insta:hover {
+  .social-instagram:hover {
     color: white !important;
   }
 }

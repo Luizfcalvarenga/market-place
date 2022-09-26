@@ -183,7 +183,7 @@
     }
 
     .cards-differential {
-      margin: 10px;
+      margin-top: 20px;
       height: auto;
     }
   }
@@ -209,6 +209,11 @@
   }
 
   .sixth-section-home {
+
+    .cards-social-media {
+      width: 100%;
+      margin-top: 20px;
+    }
     .social {
       display: block !important;
     }
@@ -233,6 +238,10 @@
     display: none;
   }
 }
+
+
+///////////////////////////// RESPONSIVE 425px
+
 
 @media (max-width: 425px) {
 
@@ -280,7 +289,7 @@
     }
 
     .cards-differential {
-      margin: 10px;
+      margin-top: 20px;
       height: auto;
 
     }
@@ -309,6 +318,7 @@
   .sixth-section-home {
     .cards-social-media {
       width: 100%;
+      margin-top: 20px;
     }
   }
 
@@ -332,6 +342,9 @@
     display: none;
   }
 }
+
+///////////////////////////// RESPONSIVE 415px
+
 
 @media (max-width: 415px) {
   .first-section-home {
@@ -377,7 +390,7 @@
     }
 
     .cards-differential {
-      margin: 10px;
+      margin-top: 20px;
       height: auto;
     }
   }
@@ -405,6 +418,7 @@
   .sixth-section-home {
     .cards-social-media {
       width: 100%;
+      margin-top: 20px;
     }
   }
 
@@ -428,6 +442,8 @@
     display: none;
   }
 }
+
+///////////////////////////// RESPONSIVE 389px
 
 @media (max-width: 389px) {
 
@@ -474,7 +490,7 @@
     }
 
     .cards-differential {
-      margin: 10px;
+      margin-top: 20px;
       height: auto;
     }
   }
@@ -502,6 +518,7 @@
   .sixth-section-home {
     .cards-social-media {
       width: 100%;
+      margin-top: 20px;
     }
   }
 

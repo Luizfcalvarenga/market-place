@@ -1,3 +1,5 @@
+///////////////////////  WPP BTN ON BOTTOM RIGHT
+
 .wpp-btn {
   position: sticky;
   bottom: 30px;
@@ -8,9 +10,9 @@
   }
 }
 
-/* Dropdown Button */
+///////////////////////  CATEGORIES NAVBAR DROPDOWN BTN/
 
-.dropbtn {
+.drop-btn {
   background-color: transparent;
   color: white;
   text-decoration: none;
@@ -58,6 +60,9 @@
 .dropdown:hover .dropdown-content {display: flex;}
 
 
+
+//////////////////////// BTN SOCIAL SECTION homepage
+
 .btn-social {
   background-color: rgba(0, 0, 0, 0.5);;
   border: 1px solid white;
@@ -75,7 +80,4 @@
     border-color: transparent;
     color: #444;
   }
-
 }
-
-
