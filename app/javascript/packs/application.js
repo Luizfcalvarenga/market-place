@@ -22,6 +22,7 @@ import "bootstrap";
 
 // Internal imports
 import "./components/form_navbar";
+import "./mask";
 
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";

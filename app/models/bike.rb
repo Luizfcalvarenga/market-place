@@ -5,6 +5,7 @@ class Bike < ApplicationRecord
 
   has_many :order_items
   has_many :chats
+  has_many_attached :photos
 
   validates :price_in_cents, :quantity, :modality, :model, presence: true
 end
