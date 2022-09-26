@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.integer "record_id", null: false
+    t.bigint "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum"
+    t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -100,15 +100,15 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
 
   create_table "chats", force: :cascade do |t|
     t.bigint "bike_id"
-    t.bigint "seller_id_id", null: false
-    t.bigint "buyer_id_id", null: false
+    t.bigint "seller_id", null: false
+    t.bigint "buyer_id", null: false
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bike_id"], name: "index_chats_on_bike_id"
-    t.index ["buyer_id_id"], name: "index_chats_on_buyer_id_id"
+    t.index ["buyer_id"], name: "index_chats_on_buyer_id"
     t.index ["product_id"], name: "index_chats_on_product_id"
-    t.index ["seller_id_id"], name: "index_chats_on_seller_id_id"
+    t.index ["seller_id"], name: "index_chats_on_seller_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -125,13 +125,31 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.bigint "bike_id"
     t.bigint "product_id"
     t.bigint "service_id"
+    t.bigint "order_id"
     t.integer "quantity"
     t.integer "price_in_cents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bike_id"], name: "index_order_items_on_bike_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
     t.index ["service_id"], name: "index_order_items_on_service_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "invoice_id"
+    t.string "invoice_url"
+    t.string "invoice_pdf"
+    t.integer "net_value"
+    t.integer "value"
+    t.integer "price_in_cents"
+    t.datetime "invoice_paid_at"
+    t.string "status"
+    t.string "tracker_code"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_attributes", force: :cascade do |t|
@@ -185,22 +203,6 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.integer "invoice_id"
-    t.string "invoice_url"
-    t.string "invoice_pdf"
-    t.integer "net_value"
-    t.integer "value"
-    t.integer "price_in_cents"
-    t.datetime "invoice_paid_at"
-    t.string "status"
-    t.string "tracker_code"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -224,19 +226,20 @@ ActiveRecord::Schema.define(version: 2022_09_19_222302) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "orders", "users"
   add_foreign_key "bikes", "categories"
   add_foreign_key "bikes", "services"
   add_foreign_key "bikes", "users"
   add_foreign_key "chats", "bikes"
   add_foreign_key "chats", "products"
-  add_foreign_key "chats", "users", column: "buyer_id_id"
-  add_foreign_key "chats", "users", column: "seller_id_id"
+  add_foreign_key "chats", "users", column: "buyer_id"
+  add_foreign_key "chats", "users", column: "seller_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "order_items", "bikes"
+  add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "services"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_attributes", "product_type_attributes"
   add_foreign_key "product_attributes", "products"
   add_foreign_key "product_type_attributes", "product_types"
