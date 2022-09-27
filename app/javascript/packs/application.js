@@ -26,8 +26,10 @@ import "./mask";
 
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";
-import { Bikes } from "../react_pages/Bikes";
-import { Products } from "../react_pages/Products";
+import { Bikes } from "../react_pages/bikes/Bikes";
+import { Products } from "../react_pages/products/Products";
+import { Product } from "../react_pages/products/Product";
+
 
 
 document.addEventListener("turbolinks:load", () => {
@@ -39,6 +41,8 @@ document.addEventListener("turbolinks:load", () => {
     ReactPage: <ReactPage message={reactContainer.dataset.message} />,
     Bikes: <Bikes galo="doido" batata={2} />,
     Products: <Products />,
+    Product: <Product />,
+
   };
 
   ReactDOM.render(
