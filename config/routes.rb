@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  resources :bikes, only: :index
+  resources :bikes
+  resources :products
+
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
 
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
       get 'users/me', to: 'users#me'
 
       resources :bikes, only: :index
+      resources :products
     end
   end
 end
