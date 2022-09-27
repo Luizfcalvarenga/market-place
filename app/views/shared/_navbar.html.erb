@@ -73,12 +73,12 @@
         <li class="nav-item active ms-5 me-1">
           <%= link_to "VENDER", new_announce_path, class: "btn btn-primary" %>
         </li>
-        <li class="nav-item active mt-2 ms-5" style="color: white;">
+        <li class="nav-item active mt-1" style="color: white;">
           <%= link_to "#" do %>
-            <i class="fas fa-shopping-cart text-success ms-2"> <span  class="cart-counter ms-1 mb-3"><%= rand(1..5) %></span></i>
+            <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= rand(1..5) %></span></i>
           <% end %>
         </li>
-        <li class="nav-item active mt-2 mx-3" style="color: white;">
+        <li class="nav-item active mt-1" style="color: white;">
           <%= link_to "#" do %>
             <i class="fa fa-heart text-success"></i>
           <% end %>
@@ -101,13 +101,13 @@
                 <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
                 <%= link_to "Editar Infos", edit_profiles_path, class: "text-white ms-2" %>
                 <hr>
-                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link ms-2" %>
+                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link ms-2 mt-1" %>
               </div>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link text-decoration-underline nav-login ms-5" %>
+            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link text-decoration-underline nav-login" %>
           </li>
         <% end %>
       </ul>
