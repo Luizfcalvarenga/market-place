@@ -21,9 +21,9 @@ bike_user = User.create!(email: "bike@app.com", password: "123456" )
 
 ##### BIKES #####
 
-mtb = Category.create!(name: "Mountain Bike", modalities: ["Downhill", "Enduro", "Gravel", "Speed", "Trail", "XC (Cross Country)"])
-dirt = Category.create!(name: "Dirt/Street", modalities: ["Street BMX", "Race BMX", "Big Wheel BMX", "Dirt Jump"])
-road = Category.create!(name: "Road", modalities: ["Speed / Performance", "Triathlon", "Ciclocross", "Cicloviagem", "Gravel"])
+mtb = Category.create!(name: "mountain_bike", modalities: ["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
+dirt = Category.create!(name: "dirt_street", modalities: ["street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
+road = Category.create!(name: "road", modalities: ["speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
 # infant = Category.create!(name: "Infant")
 # urban = Category.create!(name: "Urban")
 
@@ -33,16 +33,20 @@ road = Category.create!(name: "Road", modalities: ["Speed / Performance", "Triat
 categories = [mtb, dirt, road]
 
 
-################################################################ BIKES_COMPONENTS #########################################################
-puts "Bike product types and theis attributtes..."
-
-bike_oriantations = [ "Front", "Rear", "Both"]
-
-bike_types = [ "No Engine", "Electric Engine"]
+################################################################ PRODUCTS #########################################################
+puts "Products types and theis attributtes..."
 
 
-brake = ProductType.create(name: "Breake")
-bottle_cage = ProductType.create(name: "Bottle Cage")
+################################## BIKE COMPONENTS
+
+bike_oriantations = [ "front", "rear", "both"]
+
+bike_types = [ "no_engine", "electric_engine"]
+
+
+
+brake = ProductType.create(name: "breake")
+bottle_cage = ProductType.create(name: "bottle_cage")
 cassette = ProductType.create(name: "Cassete")
 chain = ProductType.create(name: "Chain")
 chainring = ProductType.create(name: "Chainring")
@@ -64,8 +68,16 @@ stem = ProductType.create(name: "Stem")
 suspension = ProductType.create(name: "Suspension")
 tire = ProductType.create(name: "Tire")
 
+############################################################### OTHER PRODUCTS
 
-products_options = [ brake, bottle_cage, cassette, chain, chainring, crankset, derailleur, fender, frame, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, shifters, shock, stem, suspension, tire ]
+accessories = ProductType.create(name: "Accessories")
+clothing = ProductType.create(name: "Clothing")
+kids = ProductType.create(name: "Kids")
+equipament = ProductType.create(name: "Equipament")
+
+
+
+products_options = [ brake, bottle_cage, cassette, chain, chainring, crankset, derailleur, fender, frame, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, shifters, shock, stem, suspension, tire, accessories, clothing, kids, equipament ]
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
@@ -163,27 +175,27 @@ frame_brands = [ "Alfameq",
 road_frame_sizes = [ "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
 mtb_dirt_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
 
-frame_materials = [ "Alumínio","Carbono", "Carbono / Alumínio (chainstay)", "Outro"]
+frame_materials = [ "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
 frame_question_1 = ProductTypeAttribute.create!(product_type: frame, name: "documentation_type", kind: "options", options: ["Yes", "No"], prompt: "Possui documentação?" )
 frame_question_2 = ProductTypeAttribute.create!(product_type: frame, name: "frame_brand", kind: "options", options: frame_brands, prompt: "Marca do quadro?" )
 frame_question_3 = ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "options", options: frame_materials, prompt: "Material do quadro?" )
 frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "which_category", kind: "options", options: categories, prompt: "Qual categoria?" )
 frame_question_5 = ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "options", options: road_frame_sizes + mtb_dirt_frame_sizes, prompt: "Tamanho do quadro?")
-frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "types_of_rim", kind: "options", options: ["Sport Travel", "Sport Travel/Carbon", "Sport Highways/Carbon", "Mountain Bike", "Hybrid Bicycles"], prompt: "Tipos de aro?")
+frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "types_of_rim", kind: "options", options: ["Sport_travel", "Sport_travel_carbon", "Sport_highways_carbon", "Mountain_bike", "Hybrid_bicycles"], prompt: "Tipos de aro?")
 
 frame_questions = [ frame_question_1, frame_question_2, frame_question_3, frame_question_4, frame_question_5, frame_question_6 ]
 
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-brake_types = [ "V-brake (frenagem no aro)", "À Disco - Hidráulico", "À Disco - Mecânico", "Contra pedal" ]
+brake_types = [ "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
 
 brake_question_1 = ProductTypeAttribute.create!(product_type: brake, name: "documentation_type", kind: "options", options: ["Yes", "No"], prompt: "Possui documentação?" )
 brake_question_2 = ProductTypeAttribute.create!(product_type: brake, name: "brake_type", kind: "options", options: brake_types, prompt: "Tipo de freio?" )
 brake_question_3 = ProductTypeAttribute.create!(product_type: brake, name: "number_of_pistons", kind: "options", options: [ 2, 4], prompt: "Quantos pistões?" )
 brake_question_4 = ProductTypeAttribute.create!(product_type: brake, name: "number_of_disc", kind: "options", options: [ "Front and rear", "Isolated"], prompt: "Quantos discos?" )
-brake_question_5 = ProductTypeAttribute.create!(product_type: brake, name: "disc-size", kind: "options", options: [ "120mm", "140mm", "160mm", "180mm", "200mm", "203mm" ], prompt: "Tamanho do disco?" )
+brake_question_5 = ProductTypeAttribute.create!(product_type: brake, name: "disc_size", kind: "options", options: [ "120mm", "140mm", "160mm", "180mm", "200mm", "203mm" ], prompt: "Tamanho do disco?" )
 brake_question_6 = ProductTypeAttribute.create!(product_type: brake, name: "inclusdes_assessories", kind: "options", options: ["Yes", "No"], prompt: "Inclui manetes e capipers?" )
 
 brake_questions = [ brake_question_1, brake_question_2, brake_question_3, brake_question_4, brake_question_5, brake_question_6 ]
@@ -192,7 +204,7 @@ brake_questions = [ brake_question_1, brake_question_2, brake_question_3, brake_
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RIM >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 rim_sizes = [ "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "700C", "650B", "Fatbike"]
-rim_materials = [ "Alumínio","Carbono", "Carbono / Alumínio (chainstay)", "Outro"]
+rim_materials = [ "aluminum", "carbon", "carbono_alumínio_chainstay", "outro"]
 
 
 rim_question_1 = ProductTypeAttribute.create!(product_type: rim, name: "rim_size", kind: "options", options: rim_sizes, prompt: "Tamanho?" )
@@ -205,7 +217,7 @@ rim_questions = [ rim_question_1, rim_question_2, rim_question_3 ]
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-suspension_types = [ "Sem suspensão", "Hardtail (apenas suspensão dianteira)", "Full Suspension (suspensão dianteira e traseira)"]
+suspension_types = [ "no_suspension", "hardtail", "full_suspension"]
 front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "Outro"]
 rear_suspension_travels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "Outro"]
 
@@ -241,7 +253,7 @@ derailleur_questions = [ derailleur_question_1, derailleur_question_2, derailleu
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-seat_post_types = ["Retractable", "Rigid"]
+seat_post_types = ["retractable", "rigid"]
 seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm" ]
 
 
@@ -268,7 +280,8 @@ puts "Creating 10 Products and their products attributes..."
     category: category,
     modality: category.modalities.sample,
     product_type: products_options.sample,
-    name: "Peça em bom estado",
+    brand: ["Nuflow", "Damatta", "Nomad"].sample,
+    name: "òtimo produto",
     description: "Único dono com funcinamento perfeito",
     price_in_cents: rand(10000..50000),
     quantity: rand(1..10)
@@ -283,7 +296,7 @@ end
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BIKES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-bike_conditions = ["Nova", "Usada" ]
+bike_conditions = ["new", "used" ]
 
 structural_visual_condition = ["Perfect condition, no obsevations", "Minor scratches or surface scratches", "Spalls in the paint", "Spalls in the paint", "Frame painted", "Frame welded or repaired", "Frame has cracks or fissures that must be repaired", "Products welded or repaired", "Products has cracks or fissures that must be repaired" ]
 
@@ -304,9 +317,9 @@ puts "Creating 10 Bikes..."
     locality: "Belo Horizonte",
     user_id: (User.ids).sample,
     frame_brand: frame_brands.sample,
-    model: "GTX",
-    year: "2021",
-    frame_size: "55",
+    model: ["GTX", "Sense mt-4r", "Oggi predator", "Alfameq trilheiro", "Specialized GTR"].sample,
+    year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
+    frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
     frame_material: "Aluminium",
     rim_size: "19'",
     number_of_front_gears: 1,
