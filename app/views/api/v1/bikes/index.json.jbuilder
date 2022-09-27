@@ -7,8 +7,4 @@ json.bikes @bikes do |bike|
   json.rim_size bike.rim_size
   json.price_in_cents bike.price_in_cents
   json.model bike.model
-
-
-
-
 end
