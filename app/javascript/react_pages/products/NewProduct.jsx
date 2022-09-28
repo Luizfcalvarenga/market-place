@@ -8,8 +8,8 @@ export function NewProduct(props) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [modalities, setModalities] = useState([]);
   const [selectedModality, setSelectedModality] = useState("");
-  const [productTypeAttribute, setProductTypeAttribute] = useState([]);
-  const [productAttribute, setProductAttribute] = useState([]);
+  const [productTypeAttributes, setProductTypeAttributes] = useState([]);
+  const [productAttributes, setProductAttributes] = useState([]);
 
 
   fetch(
@@ -29,6 +29,18 @@ export function NewProduct(props) {
       setCategories(data);
 
     });
+
+
+  fetch(
+    "/get_product_type_attributes"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      setProductTypeAttributes(data);
+
+    });
+
 
 
 
@@ -54,6 +66,32 @@ export function NewProduct(props) {
 
 
 
+  const displayQuestions = (selectedProduct) => {
+
+    setProductAttributes(productTypes.find(element => element.name === selectedProduct))
+    return (
+      productAttributes.map((attribute) => {
+
+        <div>
+          <label htmlFor="attribute1">{attribute.prompt}?</label>
+          <select
+          value={selectedModality}
+          onChange={(e) => setSelectedModality(e.target.value)}
+          >
+            {attribute.options.map((option) => {
+              return (<option key={option}>{option}</option>)
+            })}
+          </select>
+        </div>
+
+      })
+
+
+    )
+
+  }
+
+
 
   // useEffect(async () => {
   //   let url = `/api/v1/products/${productId}`;
@@ -68,37 +106,35 @@ export function NewProduct(props) {
   return (
     <div className="">
       <h1>Cheguei</h1>
-        <form action="/products">
-          <label htmlFor="procuct">O que deseja anunciar?</label>
-          <select
-          value={selectedProduct}
-          onChange={(e) => setSelectedProduct(e.target.value)}
-          setModalities={(e) => setSelectedProduct(e.target.value)}
-          >
-            {productTypes.map((productType) => {
-              return (<option key={productType.name}>{productType.name}</option>)
-            })}
-          </select>
+      <form action="/products">
+        <label htmlFor="procuct">O que deseja anunciar?</label>
+        <select
+        value={selectedProduct}
+        onChange={(e) => setSelectedProduct(e.target.value)}
+        setModalities={(e) => setSelectedProduct(e.target.value)}
+        >
+          {productTypes.map((productType) => {
+            return (<option key={productType.name}>{productType.name}</option>)
+          })}
+        </select>
 
-          <br />
+        <br />
 
-          <label htmlFor="category">Qual a categoria do seu produto?</label>
-          <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          onChange={(e) => displayModalities(e.target.value)}
+        <label htmlFor="category">Qual a categoria do seu produto?</label>
+        <select
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map((category) => {
+            return (<option key={category.name}>{category.name}</option>)
+          })}
+        </select>
 
-          >
-            {categories.map((category) => {
-              return (<option key={category.name}>{category.name}</option>)
-            })}
-          </select>
-
-          <br />
+        <br />
 
 
 
-        </form>
+      </form>
     </div>
   );
 }
