@@ -36,7 +36,6 @@ export function NewProduct(props) {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
       setProductTypeAttributes(data);
 
     });
@@ -44,9 +43,11 @@ export function NewProduct(props) {
 
 
 
+
   const displayModalities = (selectedCategory) => {
 
     setModalities(categories.find(element => element.name === selectedCategory).modalities)
+    setSelectedCategory(e.target.value)
     return (
       <div>
         <label htmlFor="modality">Qual a modalidade do seu produto?</label>
@@ -66,31 +67,31 @@ export function NewProduct(props) {
 
 
 
-  const displayQuestions = (selectedProduct) => {
+  const displayQuestions = (e) => {
 
-    setProductAttributes(productTypes.find(element => element.name === selectedProduct))
-    return (
-      productAttributes.map((attribute) => {
+    setSelectedProduct(e.target)
+    console.log(selectedProduct)
+    // setProductAttributes(productTypes.find(element => element.name === selectedProduct))
+    // return (
+    //   productAttributes.map((attribute) => {
 
-        <div>
-          <label htmlFor="attribute1">{attribute.prompt}?</label>
-          <select
-          value={selectedModality}
-          onChange={(e) => setSelectedModality(e.target.value)}
-          >
-            {attribute.options.map((option) => {
-              return (<option key={option}>{option}</option>)
-            })}
-          </select>
-        </div>
+    //     <div>
+    //       <label htmlFor="attribute1">{attribute.prompt}?</label>
+    //       <select
 
-      })
+    //       >
+    //         {attribute.options.map((option) => {
+    //           return (<option key={option}>{option}</option>)
+    //         })}
+    //       </select>
+    //     </div>
+
+    //   })
 
 
-    )
+
 
   }
-
 
 
   // useEffect(async () => {
@@ -110,13 +111,13 @@ export function NewProduct(props) {
         <label htmlFor="procuct">O que deseja anunciar?</label>
         <select
         value={selectedProduct}
-        onChange={(e) => setSelectedProduct(e.target.value)}
-        setModalities={(e) => setSelectedProduct(e.target.value)}
+        onChange={(e) => displayQuestions(e)}
         >
           {productTypes.map((productType) => {
             return (<option key={productType.name}>{productType.name}</option>)
           })}
         </select>
+
 
         <br />
 
