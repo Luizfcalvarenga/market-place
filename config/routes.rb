@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   end
   resources :bikes
   resources :products
+  # resources :product_types
+  get 'get_types_of_product', to: 'product_types#get_types_of_product'
+
 
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"

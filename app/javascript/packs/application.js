@@ -29,6 +29,8 @@ import { ReactPage } from "../react_pages/ReactPage";
 import { Bikes } from "../react_pages/bikes/Bikes";
 import { Products } from "../react_pages/products/Products";
 import { Product } from "../react_pages/products/Product";
+import { NewProduct } from "../react_pages/products/NewProduct";
+
 
 
 
@@ -42,6 +44,7 @@ document.addEventListener("turbolinks:load", () => {
     Bikes: <Bikes galo="doido" batata={2} />,
     Products: <Products />,
     Product: <Product />,
+    NewProduct: <NewProduct/>,
 
   };
 

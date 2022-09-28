@@ -11,9 +11,6 @@ export function Product(props) {
     setProduct(response.data);
   },)
 
-  console.log(product)
-
-
   return (
     <div className="" product={product} key={product} >
       <div className="card-product">

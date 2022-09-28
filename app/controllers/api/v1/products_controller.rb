@@ -27,15 +27,30 @@ module Api
       end
 
       def new
-        @product = Product.new(product_params)
+        @product = Product.new
+        skip_authorization
+        @product_types = ProductType.all
+        @categories = Category.all
       end
 
+      def create
+        @product = Product.new(product_params)
+        skip_authorization
+        @product_types = ProductType.all
+        @categories = Category.all
+
+        if @product.save
+          render json: @product
+        else
+          render json: { error: @product.error.messages }, status: 422
+        end
+      end
 
 
 
       private
 
-      def produc_params
+      def product_params
         params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
       end
     end
