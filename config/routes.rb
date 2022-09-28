@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   # resources :product_types
   get 'get_types_of_product', to: 'product_types#get_types_of_product'
 
+  get 'get_categories', to: 'categories#get_categories'
+
+
 
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
