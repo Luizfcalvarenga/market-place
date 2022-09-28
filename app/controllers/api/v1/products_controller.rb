@@ -24,7 +24,19 @@ module Api
       def show
         @product = Product.find_by(id: params[:id])
         skip_authorization
+      end
 
+      def new
+        @product = Product.new(product_params)
+      end
+
+
+
+
+      private
+
+      def produc_params
+        params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
       end
     end
   end

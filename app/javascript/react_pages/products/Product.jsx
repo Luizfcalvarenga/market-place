@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 
 export function Product(props) {
-  const [product, setProduct] = useState()
+  const [product, setProduct] = useState([])
+
+  let productId = window.location.pathname.split("/").pop();
 
   useEffect(async () => {
-    let url = `/api/v1/products/${id}`;
+    let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
     setProduct(response.data);
   },)
 
+  console.log(product)
+
 
   return (
-    <div className="">
+    <div className="" product={product} key={product} >
       <div className="card-product">
         <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-inner">
@@ -35,13 +39,14 @@ export function Product(props) {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-        <h4 className="card-title text-center mt-3">{props.modality}</h4>
-        <h4 className="text-center mt-1">R$ {props.price_in_cents}</h4>
-        <hr/>
-        <div className="card-content mt-2">
-          <p className="text-center mt-1">{props.name} | {props.brand}</p>
-          <div className="d-flex justify-content-around">
-
+        <h4 className="card-title text-center mt-3">{product.modality}</h4>
+          <h4 className="text-center mt-1">R$ {product.price_in_cents}</h4>
+          <hr/>
+          <div className="card-content mt-2">
+            <p className="text-center mt-1"> {product.brand} | {product.name}</p>
+            <div className="d-flex justify-content-around">
+              <p>produto: </p>
+              <p>catega: </p>
           </div>
         </div>
       </div>
