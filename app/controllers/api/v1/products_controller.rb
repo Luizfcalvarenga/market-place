@@ -24,6 +24,7 @@ module Api
       def show
         @product = Product.find_by(id: params[:id])
         skip_authorization
+
       end
     end
   end

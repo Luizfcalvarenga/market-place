@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-export function Product() {
+export function Product(props) {
   const [product, setProduct] = useState()
 
-
   useEffect(async () => {
-    let url = `/api/v1/products/${productId}`;
+    let url = `/api/v1/products/${id}`;
     const response = await axios.get(url);
     setProduct(response.data);
   },)
+
 
   return (
     <div className="">
@@ -35,11 +35,11 @@ export function Product() {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-        <h4 className="card-title text-center mt-3">{product.modality}</h4>
-        <h4 className="text-center mt-1">R$ {product.price_in_cents}</h4>
+        <h4 className="card-title text-center mt-3">{props.modality}</h4>
+        <h4 className="text-center mt-1">R$ {props.price_in_cents}</h4>
         <hr/>
         <div className="card-content mt-2">
-          <p className="text-center mt-1">{product.name} | {product.brand}</p>
+          <p className="text-center mt-1">{props.name} | {props.brand}</p>
           <div className="d-flex justify-content-around">
 
           </div>
