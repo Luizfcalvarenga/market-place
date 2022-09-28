@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-export function Product(props) {
-  const [product, setProduct] = useState([])
+export function Product() {
+  const [product, setProduct] = useState()
 
 
   useEffect(async () => {
-    let url = "/api/v1/products?";
+    let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
-    setProduct(response.data.products);
+    setProduct(response.data);
   },)
 
   return (
@@ -41,8 +41,7 @@ export function Product(props) {
         <div className="card-content mt-2">
           <p className="text-center mt-1">{product.name} | {product.brand}</p>
           <div className="d-flex justify-content-around">
-            <p>{product.category.name}</p>
-            <p>{product.product_type.name}</p>
+
           </div>
         </div>
       </div>
