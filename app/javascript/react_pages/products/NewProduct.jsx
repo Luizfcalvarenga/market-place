@@ -20,30 +20,14 @@ export function NewProduct(props) {
   }
 
   useEffect(() => {
-    fetch(`/get_types_of_product`)
+    fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
      .then((data) => {
-      setProductTypes(data)
+      setProductTypes(data.types_of_product)
+      setCategories(data.categories)
+      setProductTypeAttributes(data.product_type_attributes)
      })
   }, []);
-
-  useEffect(() => {
-    fetch(`/get_categories`)
-     .then((response) => response.json())
-     .then((data) => {
-      setCategories(data)
-     })
-  }, []);
-
-  useEffect(() => {
-    fetch(`/get_product_type_attributes`)
-     .then((response) => response.json())
-     .then((data) => {
-      setProductTypeAttributes(data)
-      // console.log(productTypeAttributes)
-     })
-  }, []);
-
 
   useEffect(() => {
     if (selectedCategory) {
@@ -54,17 +38,26 @@ export function NewProduct(props) {
   });
 
 
+
+
+
   useEffect(() => {
+
     if (selectedProduct) {
-      // console.log(productTypeAttributes)
+
+
       const id = productTypes.find(element => element.name === selectedProduct).id
-      // console.log(id)
-      // setProductAttributes(productTypeAttributes.find(element => element.product_type_id === id))
       setProductAttributes(productTypeAttributes.filter(element => element.product_type_id === id))
-      // console.log(categories.find(element => element.name === selectedCategory).modalities)
-      
+      console.log(productAttributes)
     }
-  });
+
+
+
+  })
+
+
+
+
 
 
   // const displayQuestions = (e) => {
@@ -118,6 +111,7 @@ export function NewProduct(props) {
           })}
         </select>
 
+        <br />
 
         {selectedCategory === "other" && (
           <>
@@ -125,6 +119,8 @@ export function NewProduct(props) {
             <input type="text" />
           </>
         )}
+
+        <br />
 
         {selectedCategory && selectedCategory != "other" && (
           <><label htmlFor="modality">Qual a modalidade do seu produto?</label><select
@@ -151,15 +147,8 @@ export function NewProduct(props) {
         )}
 
         <br />
-        {selectedProduct && needQuestion && (
-          productAttributes.map((productAttribute) => {
-
-            <><label htmlFor="product attribute">`${productAttribute.prompt}`</label>
-            </>
 
 
-          })
-        )}
 
 
 

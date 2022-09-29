@@ -6,4 +6,6 @@ class PagesController < ApplicationController
 
   def new_announce
   end
+
+  
 end

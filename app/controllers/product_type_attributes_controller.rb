@@ -5,12 +5,12 @@ class ProductTypeAttributesController < ApplicationController
   skip_before_action :authenticate_user!
 
 
-  def get_product_type_attributes
-    @product_type_attributes = ProductTypeAttribute.all
-    skip_authorization
+  # def get_product_type_attributes
+  #   @product_type_attributes = ProductTypeAttribute.all
+  #   skip_authorization
 
-    respond_to do |format|
-      format.json { render json: @product_type_attributes }
-    end
-  end
+  #   respond_to do |format|
+  #     format.json { render json: @product_type_attributes }
+  #   end
+  # end
 end

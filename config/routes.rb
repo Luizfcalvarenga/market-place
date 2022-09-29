@@ -13,12 +13,15 @@ Rails.application.routes.draw do
   resources :bikes
   resources :products
   # resources :product_types
-  get 'get_types_of_product', to: 'product_types#get_types_of_product'
 
-  get 'get_product_type_attributes', to: 'product_type_attributes#get_product_type_attributes'
+  get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
+
+  # get 'get_types_of_product', to: 'product_types#get_types_of_product'
+
+  # get 'get_product_type_attributes', to: 'product_type_attributes#get_product_type_attributes'
 
 
-  get 'get_categories', to: 'categories#get_categories'
+  # get 'get_categories', to: 'categories#get_categories'
 
 
 

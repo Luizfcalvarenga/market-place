@@ -5,13 +5,13 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!
 
 
-  def get_categories
-    @categories = Category.all
+  # def get_categories
+  #   @categories = Category.all
 
-    skip_authorization
+  #   skip_authorization
 
-    respond_to do |format|
-      format.json { render json: @categories }
-    end
-  end
+  #   respond_to do |format|
+  #     format.json { render json: @categories }
+  #   end
+  # end
 end

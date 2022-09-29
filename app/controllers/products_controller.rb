@@ -32,6 +32,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_information_for_new_product
+    @product_types = ProductType.all
+    @categories = Category.all
+    @product_type_attributes = ProductTypeAttribute.all
+
+
+    skip_authorization
+
+    respond_to do |format|
+      format.json { render json: {
+        types_of_product: @product_types,
+        categories: @categories,
+        product_type_attributes: @product_type_attributes
+      } }
+    end
+  end
+
   private
 
   def product_params
