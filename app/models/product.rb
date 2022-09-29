@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :product_type
 
-  validates :price_in_cents, :modality, :quantity, :name, presence: true
+  validates :price_in_cents, :category, :quantity, :name, presence: true
 
-  
+
 end
