@@ -10,7 +10,7 @@ export function NewProduct(props) {
   const [modalities, setModalities] = useState([]);
   const [selectedModality, setSelectedModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
-  const [productAttributes, setProductAttributes] = useState([]);
+  const [productAttributes, setProductAttributes] = useState({});
 
 
   const needQuestion = (selectedProduct) => {
@@ -23,9 +23,9 @@ export function NewProduct(props) {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
      .then((data) => {
+      console.log(data.categories)
       setProductTypes(data.types_of_product)
       setCategories(data.categories)
-      setProductTypeAttributes(data.product_type_attributes)
      })
   }, []);
 
@@ -40,50 +40,53 @@ export function NewProduct(props) {
 
 
 
-
   useEffect(() => {
+
 
     if (selectedProduct) {
 
-
       const id = productTypes.find(element => element.name === selectedProduct).id
-      setProductAttributes(productTypeAttributes.filter(element => element.product_type_id === id))
-      console.log(productAttributes)
+
+      fetch(`/get_attributes_for_product?` +
+        new URLSearchParams({
+          product_type: id,
+        })
+      )
+        .then((response) => response.json())
+        .then((data) => {
+
+
+          setProductTypeAttributes(data)
+
+        })
+
     }
+  }, [])
 
+  function displayQuestions(e) {
 
-
-  })
-
-
-
-
-
-
-  // const displayQuestions = (e) => {
-
-  //   setSelectedProduct(e.target)
-  //   // const id = productTypes.find(element => element.name === selectedProduct)
-  //   console.log(setSelectedProduct)
-  //   // setProductAttributes(productTypesAttribute.find(element => element.name === selectedProduct))
-  //   // console.log(selectedProduct)
-
-  //   // return (
-  //   //   productAttributes.map((attribute) => {
-
-  //   //     <div>
-  //   //       <label htmlFor="attribute1">{attribute.prompt}?</label>
-  //   //       <select
-
-  //   //       >
-  //   //         {attribute.options.map((option) => {
-  //   //           return (<option key={option}>{option}</option>)
-  //   //         })}
-  //   //       </select>
-  //   //     </div>
-  //   //   })
-  //   // )
-  // }
+    console.log(e.target.value);
+    // const id = productTypes.find(element => element.name === selectedProduct)
+    // console.log(setSelectedProduct)
+    // const id = productTypes.find(element => element.name === selectedProduct).id
+    // setProductAttributes(productTypeAttributes.filter(element => element.product_type_id === id))
+    // console.log(productAttributes)
+    // setProductAttributes(productTypesAttribute.find(element => element.name === selectedProduct))
+    // console.log(selectedProduct)
+    // return (
+    //   productAttributes.map((attribute) => {
+    //     <div>
+    //       <label htmlFor="attribute1">{attribute.prompt}?</label>
+    //       <select
+    //       >
+    //         {attribute.options.map((option) => {
+    //           return (<option key={option}>{option}</option>)
+    //         })}
+    //       </select>
+    //     </div>
+    //   })
+    // )
+  }
 
 
   // useEffect(async () => {
@@ -147,6 +150,22 @@ export function NewProduct(props) {
         )}
 
         <br />
+
+        {selectedProduct && needQuestion (
+          productTypeAttributes.map((attribute) => {
+
+
+            <><label htmlFor="product">{attribute.prompt}</label>
+            <select
+            value={selectedProduct}
+            onChange={(e) => setSelectedProduct(e.target.value)}
+            >
+              {attribute.options.map((option) => {
+                return (<option key={option}>{option}</option>)
+              })}
+            </select></>
+          })
+        )}
 
 
 

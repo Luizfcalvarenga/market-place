@@ -5,5 +5,5 @@ class Product < ApplicationRecord
 
   validates :price_in_cents, :category, :quantity, :name, presence: true
 
-
+  
 end

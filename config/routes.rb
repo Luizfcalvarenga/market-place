@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
 
-  # get 'get_types_of_product', to: 'product_types#get_types_of_product'
+  get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
 
   # get 'get_product_type_attributes', to: 'product_type_attributes#get_product_type_attributes'
 
