@@ -23,7 +23,6 @@ export function NewProduct(props) {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
      .then((data) => {
-      console.log(data.categories)
       setProductTypes(data.types_of_product)
       setCategories(data.categories)
      })
@@ -60,10 +59,8 @@ export function NewProduct(props) {
           prompt: data.prompt,
           kind: data.kind,
           options: data.options,
-
         },
       ]);
-      console.log(productTypeAttributes)
     })
   });
 
@@ -74,7 +71,6 @@ export function NewProduct(props) {
 
     if (selectedProduct) {
       setProductId(productTypes.find(element => element.name === selectedProduct).id)
-      console.log(productId)
     }
   })
 
@@ -170,7 +166,34 @@ export function NewProduct(props) {
         )}
 
         <br />
+        {selectedProduct && productTypeAttributes && (
 
+          <div>
+            {productTypeAttributes.map((attribute) => {
+              return (
+                <><div attribute={attribute} key={attribute.id}>
+
+                  <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
+                  <select
+                  value={attribute.id}
+                  onChange={(e) => setSelectedProduct(e.target.value)}
+                  >
+                    {attribute.options?.map((option) => {
+                      return (<option key={option}>{option}</option>)
+                    })}
+                  </select>
+                </div></>
+              )
+            })}
+
+
+          </div>
+
+
+
+
+
+        )}
 
 
 
