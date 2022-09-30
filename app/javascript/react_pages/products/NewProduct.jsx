@@ -175,8 +175,8 @@ export function NewProduct(props) {
 
                   <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
                   <select
-                  value={attribute.id}
-                  onChange={(e) => setSelectedProduct(e.target.value)}
+                  value={productAttributes}
+                  onChange={(e) => setProductAttributes(e.target.value)}
                   >
                     {attribute.options?.map((option) => {
                       return (<option key={attribute.id}>{option}</option>)
