@@ -179,7 +179,7 @@ export function NewProduct(props) {
                   onChange={(e) => setSelectedProduct(e.target.value)}
                   >
                     {attribute.options?.map((option) => {
-                      return (<option key={option}>{option}</option>)
+                      return (<option key={attribute.id}>{option}</option>)
                     })}
                   </select>
                 </div></>
