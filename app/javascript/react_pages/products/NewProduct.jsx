@@ -10,7 +10,7 @@ export function NewProduct(props) {
   const [modalities, setModalities] = useState([]);
   const [selectedModality, setSelectedModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
-  const [productAttributes, setProductAttributes] = useState({});
+  const [productAttributes, setProductAttributes] = useState([]);
 
 
   const needQuestion = (selectedProduct) => {
@@ -40,32 +40,52 @@ export function NewProduct(props) {
 
 
 
+
   useEffect(() => {
 
+    fetch(`/get_attributes_for_product?` +
+    new URLSearchParams({
+      product_type: productId,
+    })
+    )
+    .then((response) => response.json())
+    .then((data) => {
+
+
+      setProductTypeAttributes([
+        ...data,
+        {
+          product_type_id: data.product_type_id,
+          name: data.name,
+          prompt: data.prompt,
+          kind: data.kind,
+          options: data.options,
+
+        },
+      ]);
+      console.log(productTypeAttributes)
+    })
+  });
+
+
+
+
+  useEffect(() => {
 
     if (selectedProduct) {
-
-      const id = productTypes.find(element => element.name === selectedProduct).id
-
-      fetch(`/get_attributes_for_product?` +
-        new URLSearchParams({
-          product_type: id,
-        })
-      )
-        .then((response) => response.json())
-        .then((data) => {
-
-
-          setProductTypeAttributes(data)
-
-        })
-
+      setProductId(productTypes.find(element => element.name === selectedProduct).id)
+      console.log(productId)
     }
-  }, [])
+  })
+
+
+
+
+
 
   function displayQuestions(e) {
 
-    console.log(e.target.value);
+    console.log(productTypeAttributes);
     // const id = productTypes.find(element => element.name === selectedProduct)
     // console.log(setSelectedProduct)
     // const id = productTypes.find(element => element.name === selectedProduct).id
@@ -151,21 +171,7 @@ export function NewProduct(props) {
 
         <br />
 
-        {selectedProduct && needQuestion (
-          productTypeAttributes.map((attribute) => {
 
-
-            <><label htmlFor="product">{attribute.prompt}</label>
-            <select
-            value={selectedProduct}
-            onChange={(e) => setSelectedProduct(e.target.value)}
-            >
-              {attribute.options.map((option) => {
-                return (<option key={option}>{option}</option>)
-              })}
-            </select></>
-          })
-        )}
 
 
 
