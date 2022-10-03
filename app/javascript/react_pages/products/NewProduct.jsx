@@ -126,7 +126,7 @@ export function NewProduct(props) {
         onChange={(e) => setSelectedCategory(e.target.value) }
         >
           {categories.map((category) => {
-            return (<option key={category.name}>{category.name}</option>)
+            return (<option key={category.id}>{category.name}</option>)
           })}
         </select>
 
@@ -146,8 +146,8 @@ export function NewProduct(props) {
               value={selectedModality}
               onChange={(e) => e.preventDefault && setSelectedModality(e.target.value)}
             >
-              {modalities.map((modality) => {
-                return (<option key={modality}>{modality}</option>);
+              {modalities.map((modality, index) => {
+                return (<option key={index}>{modality}</option>);
               })}
             </select></>
         )}
@@ -160,7 +160,7 @@ export function NewProduct(props) {
           onChange={(e) => setSelectedProduct(e.target.value)}
           >
             {productTypes.map((productType) => {
-              return (<option key={productType.name}>{productType.name}</option>)
+              return (<option key={productType.id}>{productType.name}</option>)
             })}
           </select></>
         )}
@@ -175,11 +175,11 @@ export function NewProduct(props) {
 
                   <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
                   <select
-                  value={productAttributes}
                   onChange={(e) => setProductAttributes(e.target.value)}
+                  value={productAttributes}
                   >
-                    {attribute.options?.map((option) => {
-                      return (<option key={attribute.id}>{option}</option>)
+                    {attribute.options?.map((option, index) => {
+                      return (<option key={index} value={option}>{option}</option>)
                     })}
                   </select>
                 </div></>
