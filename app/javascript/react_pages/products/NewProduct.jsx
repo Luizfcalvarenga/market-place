@@ -185,17 +185,32 @@ export function NewProduct(props) {
                 </div></>
               )
             })}
-
-
           </div>
-
-
-
-
-
         )}
 
+        <br />
 
+        {selectedProduct && productTypeAttributes && (
+
+          <div>
+            {productTypeAttributes.map((attribute) => {
+              return (
+                <><div attribute={attribute} key={attribute.id}>
+
+                  <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
+                  <select
+                  onChange={(e) => setProductAttributes(e.target.value)}
+                  value={productAttributes}
+                  >
+                    {attribute.options?.map((option, index) => {
+                      return (<option key={index} value={option}>{option}</option>)
+                    })}
+                  </select>
+                </div></>
+              )
+            })}
+          </div>
+        )}
 
 
 
