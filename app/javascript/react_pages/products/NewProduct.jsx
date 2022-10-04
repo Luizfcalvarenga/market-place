@@ -41,28 +41,35 @@ export function NewProduct(props) {
 
 
   useEffect(() => {
-
-    fetch(`/get_attributes_for_product?` +
-    new URLSearchParams({
-      product_type: productId,
-    })
-    )
-    .then((response) => response.json())
-    .then((data) => {
+    if(selectedProduct) {
 
 
-      setProductTypeAttributes([
-        ...data,
-        {
-          product_type_id: data.product_type_id,
-          name: data.name,
-          prompt: data.prompt,
-          kind: data.kind,
-          options: data.options,
-        },
-      ]);
-    })
+
+
+      fetch(`/get_attributes_for_product?` +
+      new URLSearchParams({
+        product_type: productId,
+      })
+      )
+      .then((response) => response.json())
+      .then((data) => {
+
+
+        setProductTypeAttributes([
+          ...data,
+          {
+            product_type_id: data.product_type_id,
+            name: data.name,
+            prompt: data.prompt,
+            kind: data.kind,
+            options: data.options,
+          },
+        ]);
+      })
+    }
   });
+
+
 
 
 
@@ -104,6 +111,14 @@ export function NewProduct(props) {
     // )
   }
 
+  const createProductAttributes = (e, attribute) => {
+
+    setProductAttributes({
+      product_type_id: productId,
+      product_type_attribute_id: attribute.id,
+      value: e.target.value,
+    })
+  }
 
   // useEffect(async () => {
   //   let url = `/api/v1/products/${productId}`;
@@ -175,11 +190,11 @@ export function NewProduct(props) {
 
                   <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
                   <select
-                  onChange={(e) => setProductAttributes(e.target.value)}
-                  value={productAttributes}
+
+                  onChange={(e) => createProductAttributes(e, attribute)}
                   >
-                    {attribute.options?.map((option, index) => {
-                      return (<option key={index} value={option}>{option}</option>)
+                    {attribute.options?.map((option) => {
+                      return (<option value={option}>{option}</option>)
                     })}
                   </select>
                 </div></>
@@ -189,28 +204,6 @@ export function NewProduct(props) {
         )}
 
         <br />
-
-        {selectedProduct && productTypeAttributes && (
-
-          <div>
-            {productTypeAttributes.map((attribute) => {
-              return (
-                <><div attribute={attribute} key={attribute.id}>
-
-                  <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
-                  <select
-                  onChange={(e) => setProductAttributes(e.target.value)}
-                  value={productAttributes}
-                  >
-                    {attribute.options?.map((option, index) => {
-                      return (<option key={index} value={option}>{option}</option>)
-                    })}
-                  </select>
-                </div></>
-              )
-            })}
-          </div>
-        )}
 
 
 

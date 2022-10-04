@@ -6,7 +6,6 @@ class ProductTypeAttributesController < ApplicationController
 
 
   def get_attributes_for_product
-    # @product_type_attributes = ProductTypeAttribute.all
     skip_authorization
 
     respond_to do |format|

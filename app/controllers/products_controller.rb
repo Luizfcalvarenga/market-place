@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new
+    @product = Product.new(product_params)
     skip_authorization
     @product_types = ProductType.all
     @categories= Category.all
