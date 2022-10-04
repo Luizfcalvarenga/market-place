@@ -31,6 +31,7 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
+
       end
 
       def create
@@ -39,10 +40,11 @@ module Api
         @product_types = ProductType.all
         @categories = Category.all
 
+
         if @product.save
           render json: @product
         else
-          render json: { error: @product.error.messages }, status: 422
+          render json: { error: @product.errors.messages }, status: 422
         end
       end
 
@@ -51,7 +53,7 @@ module Api
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
+        params.require(:product).permit(:product_type_id, :product_id, :value )
       end
     end
   end
