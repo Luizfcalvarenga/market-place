@@ -200,6 +200,41 @@ export function NewProduct(props) {
                 </div></>
               )
             })}
+
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Marca</span>
+              </div>
+              <input type="text" className="form-control" placeholder="Marca" aria-label="Username" aria-describedby="basic-addon1"/>
+            </div>
+
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Nome</span>
+              </div>
+              <input type="text" className="form-control" placeholder="Nome" aria-label="Username" aria-describedby="basic-addon1"/>
+            </div>
+
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Descrição</span>
+              </div>
+              <input type="text" className="form-control" placeholder="Descrição" aria-label="Username" aria-describedby="basic-addon1"/>
+            </div>
+
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">RS</span>
+              </div>
+              <input type="text" className="form-control" placeholder="Preço" aria-label="Username" aria-describedby="basic-addon1"/>
+            </div>
+
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Quantidade</span>
+              </div>
+              <input type="text" className="form-control" placeholder="Quantidade" aria-label="Username" aria-describedby="basic-addon1"/>
+            </div>
           </div>
         )}
 
