@@ -20,6 +20,6 @@ class ProductAttributesController < ApplicationController
   private
 
   def product_attribute_params
-    params.require(:product_attribute).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
+    params.require(:product_attribute).permit(:product_id, :product_type_attribute_id, :value)
   end
 end

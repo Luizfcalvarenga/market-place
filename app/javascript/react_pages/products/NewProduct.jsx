@@ -92,7 +92,7 @@ export function NewProduct(props) {
   const createProductAttributes = (e, attribute) => {
 
     axios.post('/api/v1/products', {
-      product_type_id: productId,
+      product_id: productId,
       product_type_attribute_id: attribute.id,
       value: e.target.value,
     })
