@@ -50,25 +50,28 @@ export function NewProduct(props) {
     }
   }, [selectedProductTypeId]);
 
-  // useEffect(() => {
-  //   if (selectedProductTypeId) {
-  //     setProductTypeId(productTypes.find(element => element.name === selectedProductTypeId).id);
-  //   }
-  // })
 
   const createProductAttributes = (e, attribute) => {
+    let answers = [];
+    let answer = { product_id: productTypeId,
+                    product_type_attribute_id: attribute.id,
+                    value: e.target.value
+    }
 
-    axios.post('', {
-      product_id: productTypeId,
-      product_type_attribute_id: attribute.id,
-      value: e.target.value,
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    answers.push(answer)
+
+    console.log(answers)
+    // axios.post('', {
+    //   product_id: productTypeId,
+    //   product_type_attribute_id: attribute.id,
+    //   value: e.target.value,
+    // })
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
 
   }
 
@@ -102,123 +105,118 @@ export function NewProduct(props) {
 
 
   return (
-    <div className="">
+    <div className="w-60 text-center mb-5 new-product-react">
       <h1>Cheguei</h1>
       <form>
-
-        <label htmlFor="category">Qual a categoria do seu produto?</label><br />
-        <select
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((category) => {
-            return (<option key={category.id} value={category.name}>{category.name}</option>)
-          })}
-        </select>
-
-
-        <br />
-
-        {selectedCategory === "other" && (
-          <>
-            <label htmlFor="category">Qual?</label>
-            <input type="text" />
-          </>
-        )}
-
-        <br />
+        <div className="card-questions mb-3">
+          <label htmlFor="category" className="mb-3">Qual a categoria do seu produto?</label>
+          <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="select-answer"
+          >
+            {categories.map((category) => {
+              return (<option key={category.id} value={category.name}>{category.name}</option>)
+            })}
+          </select>
+          {selectedCategory === "other" && (
+            <>
+              <label htmlFor="category" className="mx-3">Qual?</label>
+              <input type="text" />
+            </>
+          )}
+        </div>
 
         {selectedCategory && selectedCategory != "other" && (
-          <><label htmlFor="modality">Qual a modalidade do seu produto?</label><select
+          <div className="card-questions mb-3">
+            <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
+            <select
               value={selectedModality}
               onChange={(e) => e.preventDefault && setSelectedModality(e.target.value)}
+              className="select-answer"
             >
               {modalities.map((modality, index) => {
                 return (<option key={index}>{modality}</option>);
               })}
-            </select></>
+            </select>
+          </div>
         )}
 
-        <br />
         {selectedModality && (
-          <><label htmlFor="product">O que deseja anunciar?</label>
-          <select
-          value={selectedProductTypeId}
-          onChange={(e) => setSelectedProductTypeId(e.target.value)}
-          >
-            {productTypes.map((productType) => {
-              return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
-            })}
-          </select></>
+          <div className="card-questions mb-3">
+            <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
+            <select
+            value={selectedProductTypeId}
+            onChange={(e) => setSelectedProductTypeId(e.target.value)}
+            className="select-answer"
+            >
+              {productTypes.map((productType) => {
+                return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
+              })}
+            </select>
+          </div>
         )}
 
-        <br />
+
         {selectedProductTypeId && productTypeAttributes && (
 
           <div>
-            <p>{JSON.stringify(productTypeAttributes)}</p>
             {productTypeAttributes.map((attribute) => {
               return (
-                <><div attribute={attribute} key={attribute.id}>
+                <><div attribute={attribute} key={attribute.id} className="card-questions mb-3">
 
-                  <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
-                  {/* <select
-
+                  <label htmlFor="product attribute" className="mb-3" key={attribute.id}>{attribute.prompt}</label><br />
+                  <select
+                  className="select-answer"
                   onChange={(e) => createProductAttributes(e, attribute)}
                   >
                     {attribute.options?.map((option) => {
                       return (<option value={option}>{option}</option>)
                     })}
-                  </select> */}
+                  </select>
                 </div></>
               )
             })}
 
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Marca</span>
+            <div className="card-questions mb-5">
+              <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Marca</span>
+                </div>
+                <input type="text" className="form-control" placeholder="Marca" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
               </div>
-              <input type="text" className="form-control" placeholder="Marca" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
-            </div>
 
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Nome</span>
+              <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Nome</span>
+                </div>
+                <input type="text" className="form-control" placeholder="Nome" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
               </div>
-              <input type="text" className="form-control" placeholder="Nome" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
-            </div>
 
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Descrição</span>
+              <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Descrição</span>
+                </div>
+                <input type="text" className="form-control" placeholder="Descrição" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
               </div>
-              <input type="text" className="form-control" placeholder="Descrição" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
-            </div>
 
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">RS</span>
+              <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">RS</span>
+                </div>
+                <input type="number" className="form-control" placeholder="Preço" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
               </div>
-              <input type="number" className="form-control" placeholder="Preço" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
-            </div>
 
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Quantidade</span>
+              <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Quantidade</span>
+                </div>
+                <input type="number" className="form-control" placeholder="Quantidade" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
               </div>
-              <input type="number" className="form-control" placeholder="Quantidade" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
             </div>
           </div>
         )}
-
-        <br />
-
-        <input type="radio" name="" id="" onChange={(e) => console.log(newProduct)}/>
-        <button onClick={() => handleSubmit()}>Criar Produto</button>
-
-
-
-
+        <button onClick={() => handleSubmit()} className="btn btn-outline">Criar Produto</button>
       </form>
     </div>
   );
