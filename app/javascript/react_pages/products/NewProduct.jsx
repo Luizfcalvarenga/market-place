@@ -4,8 +4,8 @@ export function NewProduct(props) {
   const [newProduct, setNewProduct] = useState({});
   const [user, setUser] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  const [productId, setProductId] = useState();
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const [productTypeId, setProductTypeId] = useState();
+  const [selectedProductTypeId, setSelectedProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -32,51 +32,34 @@ export function NewProduct(props) {
     if (selectedCategory) {
       setModalities(categories.find(element => element.name === selectedCategory).modalities)
       setCategoryId(categories.find(element => element.name === selectedCategory).id);
-      newProduct.category_id = categoryId;
     }
   });
 
-  if (selectedModality) {
-    newProduct.modality = selectedModality;
-  }
 
   useEffect(() => {
-    if(selectedProduct) {
-      fetch(`/get_attributes_for_product?` +
-      new URLSearchParams({
-        product_type: productId,
-      })
-      )
+    if(selectedProductTypeId) {
+      fetch(`/get_attributes_for_product?product_type_id=${selectedProductTypeId}`)
       .then((response) => response.json())
       .then((data) => {
 
 
-        setProductTypeAttributes([
-          ...data,
-          {
-            product_type_id: data.product_type_id,
-            name: data.name,
-            prompt: data.prompt,
-            kind: data.kind,
-            options: data.options,
-          },
-        ]);
+        setProductTypeAttributes(
+          data
+        );
       })
     }
-  });
+  }, [selectedProductTypeId]);
 
-  useEffect(() => {
-
-    if (selectedProduct) {
-      setProductId(productTypes.find(element => element.name === selectedProduct).id);
-      newProduct.product_type = productId;
-    }
-  })
+  // useEffect(() => {
+  //   if (selectedProductTypeId) {
+  //     setProductTypeId(productTypes.find(element => element.name === selectedProductTypeId).id);
+  //   }
+  // })
 
   const createProductAttributes = (e, attribute) => {
 
-    axios.post('/api/v1/products', {
-      product_id: productId,
+    axios.post('', {
+      product_id: productTypeId,
       product_type_attribute_id: attribute.id,
       value: e.target.value,
     })
@@ -91,17 +74,23 @@ export function NewProduct(props) {
 
   const handleSubmit = () => {
 
-    axios.post('/api/v1/products', {
+    const product = {
       user_id: user,
       category_id: categoryId,
       modality: selectedModality,
-      product_type_id: productId,
+      product_type_id: selectedProductTypeId,
       brand: productBrand,
       name: productName,
       description: productDescription,
       price_in_cents: productPrice,
       quantity: productQuantity
 
+    }
+
+    console.log(newProduct)
+
+    axios.post('/api/v1/products', {
+      product
     })
     .then(function (response) {
       console.log(response);
@@ -115,7 +104,7 @@ export function NewProduct(props) {
   return (
     <div className="">
       <h1>Cheguei</h1>
-      <form action="/api/v1/products" method='post'>
+      <form>
 
         <label htmlFor="category">Qual a categoria do seu produto?</label><br />
         <select
@@ -123,7 +112,7 @@ export function NewProduct(props) {
         onChange={(e) => setSelectedCategory(e.target.value)}
         >
           {categories.map((category) => {
-            return (<option key={category.id}>{category.name}</option>)
+            return (<option key={category.id} value={category.name}>{category.name}</option>)
           })}
         </select>
 
@@ -154,32 +143,33 @@ export function NewProduct(props) {
         {selectedModality && (
           <><label htmlFor="product">O que deseja anunciar?</label>
           <select
-          value={selectedProduct}
-          onChange={(e) => setSelectedProduct(e.target.value)}
+          value={selectedProductTypeId}
+          onChange={(e) => setSelectedProductTypeId(e.target.value)}
           >
             {productTypes.map((productType) => {
-              return (<option key={productType.id} value={productType.name}>{productType.name}</option>)
+              return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
           </select></>
         )}
 
         <br />
-        {selectedProduct && productTypeAttributes && (
+        {selectedProductTypeId && productTypeAttributes && (
 
           <div>
+            <p>{JSON.stringify(productTypeAttributes)}</p>
             {productTypeAttributes.map((attribute) => {
               return (
                 <><div attribute={attribute} key={attribute.id}>
 
                   <label htmlFor="product attribute" key={attribute.id}>{attribute.prompt}</label><br />
-                  <select
+                  {/* <select
 
                   onChange={(e) => createProductAttributes(e, attribute)}
                   >
                     {attribute.options?.map((option) => {
                       return (<option value={option}>{option}</option>)
                     })}
-                  </select>
+                  </select> */}
                 </div></>
               )
             })}
@@ -222,9 +212,10 @@ export function NewProduct(props) {
         )}
 
         <br />
-        
+
         <input type="radio" name="" id="" onChange={(e) => console.log(newProduct)}/>
-        <input type="button" onClick={() => handleSubmit()}/>
+        <button onClick={() => handleSubmit()}>Criar Produto</button>
+
 
 
 

@@ -35,8 +35,9 @@ class ProductsController < ApplicationController
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all
-    @user = current_user
-
+    if current_user.present?
+      @user = current_user
+    end
 
 
     skip_authorization

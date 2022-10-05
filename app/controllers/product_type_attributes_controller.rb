@@ -9,7 +9,7 @@ class ProductTypeAttributesController < ApplicationController
     skip_authorization
 
     respond_to do |format|
-      format.json { render json: ProductTypeAttribute.return_questions_for_new_product_type(params[:product_type].to_i) }
+      format.json { render json: ProductType.find(params[:product_type_id]).product_type_attributes }
     end
   end
 end
