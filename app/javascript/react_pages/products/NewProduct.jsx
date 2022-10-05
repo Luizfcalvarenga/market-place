@@ -18,9 +18,6 @@ export function NewProduct(props) {
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
 
-
-
-
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
@@ -42,8 +39,6 @@ export function NewProduct(props) {
   if (selectedModality) {
     newProduct.modality = selectedModality;
   }
-
-
 
   useEffect(() => {
     if(selectedProduct) {
@@ -70,11 +65,6 @@ export function NewProduct(props) {
     }
   });
 
-
-
-
-
-
   useEffect(() => {
 
     if (selectedProduct) {
@@ -82,12 +72,6 @@ export function NewProduct(props) {
       newProduct.product_type = productId;
     }
   })
-
-
-
-
-
-
 
   const createProductAttributes = (e, attribute) => {
 
@@ -238,7 +222,8 @@ export function NewProduct(props) {
         )}
 
         <br />
-         <input type="radio" name="" id="" onChange={(e) => console.log(newProduct)}/>
+        
+        <input type="radio" name="" id="" onChange={(e) => console.log(newProduct)}/>
         <input type="button" onClick={() => handleSubmit()}/>
 
 
