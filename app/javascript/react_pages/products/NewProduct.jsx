@@ -127,7 +127,7 @@ export function NewProduct(props) {
           )}
         </div>
 
-        {selectedCategory && selectedCategory != "other" && (
+        {selectedCategory  && selectedCategory != "other" && (
           <div className="card-questions mb-3">
             <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
             <select
