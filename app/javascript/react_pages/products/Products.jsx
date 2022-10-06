@@ -19,46 +19,49 @@ export function Products(props) {
 
   return (
     <div className="p-5 br-8">
-      <h2>Produtos</h2>
-      <div className="d-flex gap-24">
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value=""></option>
-          <option value="price_ascending">Prc Asc</option>
-          <option value="price_descending">Prc Desc</option>
-        </select>
 
-        <select
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-        >
-          <option value=""></option>
-          <option value="mountain_bike">Mountain Bike</option>
-          <option value="dirt_street">Dirt</option>
-          <option value="road">Road</option>
-        </select>
-
-        <select
-          value={modalityFilter}
-          onChange={(e) => setModalityFilter(e.target.value)}
-        >
-          
-          <option value=""></option>
-          <option value="mountain_bike">Mountain Bike</option>
-          <option value="dirt_street">Dirt</option>
-          <option value="road">Road</option>
-        </select>
-
-        <input
-          type="number"
-          value={modalityFilter}
-          onChange={(e) => setModalityFilter(e.target.value)}
-        />
-      </div>
-
+      <h2 className="text-center">Produtos</h2>
       <div className="row row-cols-1 mt-5">
+        <div className="filters col-12 col-md-3">
+          <p className="text-success">Filtrar</p>
+          <div className="">
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value=""></option>
+              <option value="price_ascending">Prc Asc</option>
+              <option value="price_descending">Prc Desc</option>
+            </select>
+
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="mountain_bike">Mountain Bike</option>
+              <option value="dirt_street">Dirt</option>
+              <option value="road">Road</option>
+            </select>
+
+            <select
+              value={modalityFilter}
+              onChange={(e) => setModalityFilter(e.target.value)}
+            >
+
+              <option value=""></option>
+              <option value="mountain_bike">Mountain Bike</option>
+              <option value="dirt_street">Dirt</option>
+              <option value="road">Road</option>
+            </select>
+
+            <input
+              type="number"
+              value={modalityFilter}
+              onChange={(e) => setModalityFilter(e.target.value)}
+            />
+          </div>
+        </div>
         {products.map((product, idx) => {
           return (
-            <div className="col-12 col-md-3" product={product} key={product.id}>
+            <div className="col-12 col-md-3 flex-wrap" product={product} key={product.id}>
               <a href={"products/" + product.id}>
                 <div className="cards-bikes">
                   <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
@@ -96,6 +99,7 @@ export function Products(props) {
                 </div>
               </a>
             </div>
+
           );
         })}
       </div>

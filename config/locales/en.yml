@@ -33,6 +33,12 @@ en:
   activerecord:
     models:
       user: Usuário
+      category: Categoria
+      product: Produto
+      product_type: Tipo de Produto
+
+
+
     attributes:
       user:
         full_name: Nome Completo
@@ -40,6 +46,12 @@ en:
         document_number: Documento
         phone_number: Celular
         password: Senha
+      product_type_attribute:
+        option: Opções
+      category:
+        name: Nome
+          road: Road
+          mountain_bike: Mountain bike
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
