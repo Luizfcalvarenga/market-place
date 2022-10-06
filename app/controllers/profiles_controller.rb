@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     if @profile.update(profile_params)
       flash[:notice] = "Informações atualizadas com sucesso"
 
-      redirect_to root_path
+      redirect_to edit_profiles_path
     else
       flash[:alert] = "Ocorreu algum erro ao atualizar seus dados. Insira o nome completo, CPF, telefone e CEP válidos"
       redirect_to root_path and return

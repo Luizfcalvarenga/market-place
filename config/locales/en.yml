@@ -36,9 +36,6 @@ en:
       category: Categoria
       product: Produto
       product_type: Tipo de Produto
-
-
-
     attributes:
       user:
         full_name: Nome Completo
@@ -50,8 +47,6 @@ en:
         option: Opções
       category:
         name: Nome
-          road: Road
-          mountain_bike: Mountain bike
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
