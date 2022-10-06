@@ -13,11 +13,6 @@
 
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
 .select-answer {
   // A reset of styles, including removing the default dropdown arrow
@@ -35,10 +30,17 @@
   color: gray;
   text-align: center;
 }
-
-select-answer::-ms-expand {
-  display: none;
+.select-answer:focus {
+  outline:none !important;
+  box-shadow: none !important;
+  border-color: #ced4da !important;
 }
+
+option {
+
+  border: none !important;
+}
+
 
 .form-control:focus {
   outline:none !important;
@@ -53,4 +55,3 @@ select-answer::-ms-expand {
 #basic-addon1 {
   color: $color-primary;
 }
-

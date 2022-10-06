@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 export function NewProduct(props) {
-  const [newProduct, setNewProduct] = useState({});
+  // const [newProduct, setNewProduct] = useState({});
   const [user, setUser] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  const [productTypeId, setProductTypeId] = useState();
+  // const [productTypeId, setProductTypeId] = useState();
   const [selectedProductTypeId, setSelectedProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -12,6 +12,7 @@ export function NewProduct(props) {
   const [modalities, setModalities] = useState([]);
   const [selectedModality, setSelectedModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
+  const [productAttribute, setProductAttribute] = useState();
   const [productBrand, setProductBrand] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -52,15 +53,14 @@ export function NewProduct(props) {
 
 
   const createProductAttributes = (e, attribute) => {
-    let answers = [];
-    let answer = { product_id: productTypeId,
-                    product_type_attribute_id: attribute.id,
-                    value: e.target.value
-    }
 
-    answers.push(answer)
+    setProductAttribute({
+      product_type_attribute_id: attribute.id,
+      value: e.target.value
+    })
 
-    console.log(answers)
+
+    // console.log(answers)
     // axios.post('', {
     //   product_id: productTypeId,
     //   product_type_attribute_id: attribute.id,
@@ -90,7 +90,7 @@ export function NewProduct(props) {
 
     }
 
-    console.log(newProduct)
+    console.log(product)
 
     axios.post('/api/v1/products', {
       product
@@ -116,7 +116,7 @@ export function NewProduct(props) {
           className="select-answer"
           >
             {categories.map((category) => {
-              return (<option key={category.id} value={category.name}>{category.name}</option>)
+              return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
           </select>
           {selectedCategory === "other" && (
