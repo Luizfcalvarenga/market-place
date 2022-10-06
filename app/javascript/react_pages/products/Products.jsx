@@ -18,7 +18,7 @@ export function Products(props) {
   }, [categoryFilter, modalityFilter, sortBy])
 
   return (
-    <div className="vh-40 p-5 br-8">
+    <div className="p-5 br-8">
       <h2>Produtos</h2>
       <div className="d-flex gap-24">
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
@@ -32,11 +32,22 @@ export function Products(props) {
           onChange={(e) => setCategoryFilter(e.target.value)}
         >
           <option value=""></option>
-          <option value="MTB">MTB</option>
-          <option value="BMX">BMX</option>
-          <option value="Road">Road</option>
-          <option value="Urbano">Urbano</option>
+          <option value="mountain_bike">Mountain Bike</option>
+          <option value="dirt_street">Dirt</option>
+          <option value="road">Road</option>
         </select>
+
+        <select
+          value={modalityFilter}
+          onChange={(e) => setModalityFilter(e.target.value)}
+        >
+          
+          <option value=""></option>
+          <option value="mountain_bike">Mountain Bike</option>
+          <option value="dirt_street">Dirt</option>
+          <option value="road">Road</option>
+        </select>
+
         <input
           type="number"
           value={modalityFilter}

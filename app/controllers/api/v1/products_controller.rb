@@ -8,7 +8,7 @@ module Api
 
       def index
         @products = Product.all
-        @products = @products.where(category: params[:category]) if params[:category].present?
+        @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
 
 

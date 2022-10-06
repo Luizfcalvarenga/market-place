@@ -18,7 +18,7 @@ export function Bikes(props) {
   }, [categoryFilter, maxAgeFilter, sortBy])
 
   return (
-    <div className="vh-40 p-5 br-8">
+    <div className="p-5 br-8">
       <h2>Bikes</h2>
       <div className="d-flex gap-24">
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>

@@ -105,10 +105,10 @@ export function NewProduct(props) {
 
 
   return (
-    <div className="w-60 text-center mb-5 new-product-react">
+    <div className="w-60 text-center new-product-react">
       <h1>Cheguei</h1>
       <form>
-        <div className="card-questions mb-3">
+        <div className="card-questions mb-5">
           <label htmlFor="category" className="mb-3">Qual a categoria do seu produto?</label>
           <select
           value={selectedCategory}
@@ -128,7 +128,7 @@ export function NewProduct(props) {
         </div>
 
         {selectedCategory  && selectedCategory != "other" && (
-          <div className="card-questions mb-3">
+          <div className="card-questions mb-5">
             <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
             <select
               value={selectedModality}
@@ -143,7 +143,7 @@ export function NewProduct(props) {
         )}
 
         {selectedModality && (
-          <div className="card-questions mb-3">
+          <div className="card-questions mb-5">
             <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
             <select
             value={selectedProductTypeId}
@@ -163,7 +163,7 @@ export function NewProduct(props) {
           <div>
             {productTypeAttributes.map((attribute) => {
               return (
-                <><div attribute={attribute} key={attribute.id} className="card-questions mb-3">
+                <><div attribute={attribute} key={attribute.id} className="card-questions mb-5">
 
                   <label htmlFor="product attribute" className="mb-3" key={attribute.id}>{attribute.prompt}</label><br />
                   <select
@@ -179,44 +179,48 @@ export function NewProduct(props) {
             })}
 
             <div className="card-questions mb-5">
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Marca</span>
+              <div className="d-flex">
+                <div className="input-group input-group-sm mb-3 w-50">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Marca</span>
+                  </div>
+                  <input type="text" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
                 </div>
-                <input type="text" className="form-control" placeholder="Marca" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
-              </div>
 
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Nome</span>
+                <div className="input-group input-group-sm mb-3 w-50">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Nome</span>
+                  </div>
+                  <input type="text" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
                 </div>
-                <input type="text" className="form-control" placeholder="Nome" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
               </div>
 
               <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Descrição</span>
                 </div>
-                <input type="text" className="form-control" placeholder="Descrição" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
               </div>
 
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">RS</span>
+              <div className="d-flex">
+                <div className="input-group input-group-sm mb-3 w-50">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">RS</span>
+                  </div>
+                  <input type="number" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
                 </div>
-                <input type="number" className="form-control" placeholder="Preço" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
-              </div>
 
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Quantidade</span>
+                <div className="input-group input-group-sm mb-3 w-50">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Quantidade</span>
+                  </div>
+                  <input type="number" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
                 </div>
-                <input type="number" className="form-control" placeholder="Quantidade" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
               </div>
             </div>
           </div>
         )}
-        <button onClick={() => handleSubmit()} className="btn btn-outline">Criar Produto</button>
+        <button onClick={() => handleSubmit()} className="btn btn-outline mb-5">Anunciar</button>
       </form>
     </div>
   );
