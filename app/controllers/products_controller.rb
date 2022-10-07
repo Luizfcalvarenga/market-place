@@ -32,6 +32,24 @@ class ProductsController < ApplicationController
     end
   end
 
+  def my_products
+    @user = current_user
+    @products = Product.where(user: @user)
+    skip_authorization
+    
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    authorize @product
+    @product.touch(:removed_at)
+    if @product.removed_at != nil
+      flash[:alert] = "Seu Produto #{@product.name} foi removido"
+      redirect_to my_products_path
+    end
+  end
+
+
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all

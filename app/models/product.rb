@@ -5,5 +5,6 @@ class Product < ApplicationRecord
 
   validates :price_in_cents, :category, :quantity, :name, presence: true
 
-  
+  default_scope { where(removed_at: nil) }
+
 end

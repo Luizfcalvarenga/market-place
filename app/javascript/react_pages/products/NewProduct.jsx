@@ -207,7 +207,7 @@ export function NewProduct(props) {
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">RS</span>
                   </div>
-                  <input type="number" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
+                  <input type="number" min="0.00" max="10000.00" step="0.01" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
                 </div>
 
                 <div className="input-group input-group-sm mb-3 w-50">

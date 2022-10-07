@@ -52,7 +52,12 @@ export function Product(props) {
             </div>
             <h4 className="card-title mt-1">{product.description}</h4>
             <div className="card-content">
-              <h4 className="text-success mt-1">R$ {product.price_in_cents}</h4>
+              <h4 className="text-success mt-1">
+                {(product.price_in_cents / 100).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </h4>
               <p>Categoria: {product.category.name} </p>
               <p className="">Modalidade: {product.modality}</p>
               <p className="">Marca: {product.brand}</p>

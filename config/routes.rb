@@ -29,8 +29,12 @@ Rails.application.routes.draw do
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
 
   resource :profiles
-  get 'my_products', to: 'profiles#my_products', as: "my_products"
-  
+  # resource :products
+
+  get 'my_products', to: 'products#my_products', as: "my_products"
+  # delete 'my_products/product/:id', to: 'profiles#destroy'
+
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'

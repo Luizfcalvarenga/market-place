@@ -87,7 +87,12 @@ export function Products(props) {
                     </button>
                   </div>
                   <h4 className="card-title text-center mt-3">{product.modality}</h4>
-                  <h4 className="text-center mt-1">R$ {product.price_in_cents}</h4>
+                  <h4 className="text-center mt-1">
+                    {(product.price_in_cents / 100).toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
+                  </h4>
                   <hr/>
                   <div className="card-content mt-2">
                     <p className="text-center mt-1">{product.name} | {product.brand}</p>
