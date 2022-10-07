@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Meus produtos</h1>
+  <% @my_products.each do |product| %>
+    <p><%= product.name %></p>
+    <p><%= product.category.name %></p>
+    <p><%= product.description %></p>
+  <% end %>
+</div>

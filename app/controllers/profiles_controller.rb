@@ -17,6 +17,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def my_products
+    @user = current_user
+    @my_products = Product.where(user: @user)
+    skip_authorization
+  end
+
   private
 
   def profile_params
