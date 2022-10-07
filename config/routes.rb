@@ -10,8 +10,18 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  resources :bikes
-  resources :products
+  
+  resources :bikes do
+    resource :order_items, only: [:new, :create, :destroy]
+
+  end
+
+  resource :order_items
+
+
+  resources :products do
+    resource :order_items, only: [:new, :create, :destroy]
+  end
   # resources :product_types
 
   get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
@@ -29,6 +39,7 @@ Rails.application.routes.draw do
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
 
   resource :profiles
+
   # resource :products
 
   get 'my_products', to: 'products#my_products', as: "my_products"

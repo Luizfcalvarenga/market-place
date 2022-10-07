@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 export function Product(props) {
   const [product, setProduct] = useState()
+  const [quantity, setQuantity] = useState()
+
 
   let productId = window.location.pathname.split("/").pop();
 
@@ -10,6 +12,21 @@ export function Product(props) {
     const response = await axios.get(url);
     setProduct(response.data);
   }, [])
+
+  const handleSubmit = (product) => {
+
+    const orderItem = {
+
+      product_id: productId,
+      price_in_cents: product.price_in_cents,
+      quantity: productQuantity
+
+    }
+
+    console.log(orderItem)
+
+
+  }
 
   return (
 
@@ -61,9 +78,22 @@ export function Product(props) {
               <p>Categoria: {product.category.name} </p>
               <p className="">Modalidade: {product.modality}</p>
               <p className="">Marca: {product.brand}</p>
+              <p className="">Disponível: {product.quantity}</p>
+
             </div>
-            <button className="btn-chat w-100 mt-3"><i class="fas fa-comments me-2"></i>Conversar com anunciante</button>
-            <button className="btn-order w-100  mt-2"><i class="fas fa-cart-plus me-2"></i>Adicionar ao carrinho</button>
+
+            <button className="btn-chat w-100 mt-3"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+
+            <form action={product.id + "/order_items"} method="post">
+              <label htmlFor="">Quantidade</label>
+              <input type="number" onChange={(e) => setQuantity(e.target.value)} name="quantity"/>
+              <input type="hidden" value={product.id} />
+              <input type="hidden" value={product.price_in_cents} name="price_in_cents"/>
+
+
+              <button type="submit" className="btn-order mt-2"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
+            </form>
+            <button className="btn-order w-100  mt-2"><i className="fas fa-cart-plus me-2"></i>Adicionar ao carrinho</button>
 
           </div>
         </div>

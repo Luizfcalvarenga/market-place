@@ -17,6 +17,8 @@ export function Products(props) {
     setProducts(response.data.products);
   }, [categoryFilter, modalityFilter, sortBy])
 
+ 
+
   return (
     <div className="p-5 br-8">
 
