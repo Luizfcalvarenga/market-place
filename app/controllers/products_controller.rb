@@ -39,6 +39,25 @@ class ProductsController < ApplicationController
 
   end
 
+  def edit
+    @product = Product.find_by(id: params[:id])
+
+    @product_attributes = ProductAttribute.where(product: @product)
+    skip_authorization
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product_attributes = ProductAttribute.where(product: @product)
+    skip_authorization
+
+    if @product.update(product_params)
+      render  @product
+    else
+      redirect_to :edit
+    end
+  end
+
   def destroy
     @product = Product.find(params[:id])
     authorize @product

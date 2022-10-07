@@ -49,6 +49,26 @@ module Api
         end
       end
 
+      def edit
+        @product = Product.find_by(id: params[:id])
+
+        @product_attributes = ProductAttribute.where(product: @product)
+        skip_authorization
+
+      end
+
+
+      def update
+        @product = Product.find_by(id: params[:id])
+        @product_attributes = ProductAttribute.where(product: @product)
+        skip_authorization
+
+        if @product.update(product_params)
+          render json: @product
+        else
+          render json: { error: @product.error.messages }, status: 422
+        end
+      end
 
 
       private

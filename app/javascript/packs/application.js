@@ -30,6 +30,8 @@ import { Bikes } from "../react_pages/bikes/Bikes";
 import { Products } from "../react_pages/products/Products";
 import { Product } from "../react_pages/products/Product";
 import { NewProduct } from "../react_pages/products/NewProduct";
+import { EditProduct } from "../react_pages/products/EditProduct";
+
 
 
 
@@ -45,6 +47,7 @@ document.addEventListener("turbolinks:load", () => {
     Products: <Products />,
     Product: <Product />,
     NewProduct: <NewProduct/>,
+    EditProduct: <EditProduct/>,
 
   };
 
