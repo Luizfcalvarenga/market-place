@@ -7,7 +7,8 @@ module Api
       skip_before_action :authenticate_user!
 
       def index
-        @products = Product.all
+        @user = current_user
+        @products = Product.where.not(user: @user)
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
 

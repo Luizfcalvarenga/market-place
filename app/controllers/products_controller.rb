@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @products = Product.all
+    @products = Product.where.not(user: @user)
   end
 
   def show
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
     @user = current_user
     @products = Product.where(user: @user)
     skip_authorization
-    
+
   end
 
   def destroy

@@ -100,6 +100,7 @@ export function Products(props) {
                       <p>{product.category.name}</p>
                       <p>{product.product_type.name}</p>
                     </div>
+                    <p>{product.user.email}</p>
                   </div>
                 </div>
               </a>
