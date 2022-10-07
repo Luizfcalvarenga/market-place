@@ -17,7 +17,7 @@ export function Product(props) {
       {product && (
         <div className="row row-cols-1">
           <div className="other-infos  col-12 col-md-8">
-            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
                 <i className="fas fa-heart card-favorite"></i>
                 <div className="carousel-item active">
@@ -39,7 +39,7 @@ export function Product(props) {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <div className="technical-details mt-3">
+            <div className="technical-details mt-5">
               <h4 className="text-success">Características Técnicas</h4>
 
             </div>
