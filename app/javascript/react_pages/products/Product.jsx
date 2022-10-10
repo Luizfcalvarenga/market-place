@@ -11,6 +11,7 @@ export function Product(props) {
     let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
     setProduct(response.data);
+
   }, [])
 
   const handleSubmit = (product) => {
@@ -112,7 +113,7 @@ export function Product(props) {
 
 
             </div>
-            <button className="btn-order w-100  mt-2"><i className="fas fa-cart-plus me-2"></i>Adicionar ao carrinho</button>
+            <button className="btn-order w-100  mt-2" onChange={(e) => handleSubmit(product) }><i className="fas fa-cart-plus me-2"></i>Adicionar ao carrinho</button>
 
           </div>
         </div>
