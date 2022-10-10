@@ -3,16 +3,15 @@ class OrderItemsController < ApplicationController
   def new
     @order_item =  OrderItem.new
     authorize @order_item
-
     @order = current_order
   end
 
   def create
     @order_item = OrderItem.new(order_item_params)
     authorize @order_item
+    @order = current_order
     @order_item.order = current_order
     @order_item.product = @product
-    @order = current_order
 
     if @order_item.save
       flash[:notice] = "Produto adicionada ao carrinho."

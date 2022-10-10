@@ -1,5 +1,5 @@
 <div class="container my-5">
-  <h1>Meus produtos</h1>
+  <h1 class="mb-5">Meus produtos</h1>
   <% @products.each do |product| %>
     <div class="my-product-card mt-3">
       <div class="row row-cols-1">
@@ -31,7 +31,7 @@
           <p><strong>Preço:</strong> <%= number_to_currency(product.price_in_cents, unit: "R$", separator: ",", delimiter: ".")%></p>
           <p><strong>Descrição:</strong> <%= product.description %></p>
           <p><strong>Produto:</strong> <%= product.product_type.name %></p>
-
+          <p><strong>Quantidade:</strong> <%= product.quantity %></p>
         </div>
         <div class="col-12 col-md-2 mt-3">
           <%= link_to edit_product_path(product), class: " mt-3 links-profile"  do %>

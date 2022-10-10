@@ -59,6 +59,7 @@ export function Product(props) {
             <div className="technical-details mt-5">
               <h4 className="text-success">Características Técnicas</h4>
 
+
             </div>
           </div>
 
@@ -75,8 +76,8 @@ export function Product(props) {
                   currency: "BRL",
                 })}
               </h4>
+              <p>Produto: {product.product_type.name} </p>
               <p>Categoria: {product.category.name} </p>
-              <p className="">Modalidade: {product.modality}</p>
               <p className="">Marca: {product.brand}</p>
               <p className="">Disponível: {product.quantity}</p>
 

@@ -182,7 +182,7 @@ frame_question_1 = ProductTypeAttribute.create!(product_type: frame, name: "docu
 frame_question_2 = ProductTypeAttribute.create!(product_type: frame, name: "frame_brand", kind: "multiple_choices", options: frame_brands, prompt: "Marca do quadro?" )
 frame_question_3 = ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: frame_materials, prompt: "Material do quadro?" )
 # frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "which_category", kind: "multiple_choices", options: categories, prompt: "Qual categoria?" )
-frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes + mtb_dirt_frame_sizes, prompt: "Tamanho do quadro?")
+frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro?")
 frame_question_5 = ProductTypeAttribute.create!(product_type: frame, name: "types_of_rim", kind: "multiple_choices", options: [16, 20, 26, 27.5, 29, 650, 700], prompt: "Compatibilidade de aro?")
 frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição?")
 

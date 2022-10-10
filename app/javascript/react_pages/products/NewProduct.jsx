@@ -12,7 +12,8 @@ export function NewProduct(props) {
   const [modalities, setModalities] = useState([]);
   const [selectedModality, setSelectedModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
-  const [productAttribute, setProductAttribute] = useState();
+  const [productAttribute, setProductAttribute] = useState([]);
+  const [productAttributes, setProductAttributes] = useState([]);
   const [productBrand, setProductBrand] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -42,8 +43,6 @@ export function NewProduct(props) {
       fetch(`/get_attributes_for_product?product_type_id=${selectedProductTypeId}`)
       .then((response) => response.json())
       .then((data) => {
-
-
         setProductTypeAttributes(
           data
         );
@@ -54,12 +53,68 @@ export function NewProduct(props) {
 
   const createProductAttributes = (e, attribute) => {
 
+    // const nextAttribute = [
+    //   // Items before the insertion point:
+    //   // ...productAttributes.slice(0, insertAttr),
+    //   // New item:
+    //   {
+    //     product_id: null,
+    //     product_type_attribute_id: attribute.id,
+    //     value: e.target.value
+    //   }
+    //   // Items after the insertion point:
+    //   // ...productAttributes.slice(insertAttr)
+    // ];
+    // setProductAttribute(nextAttribute);
+
     setProductAttribute({
+      product_id: null,
       product_type_attribute_id: attribute.id,
       value: e.target.value
-    })
+
+    });
 
 
+    productAttributes.push(productAttribute)
+
+
+
+    
+    // setProductAttribute('');
+
+    // useEffect(() => {
+
+    //   setProductAttribute(e.target.value)
+
+    // }, [productAttributes]);
+    // const answers = []
+    // let answer = e.targets
+    // answers.push(answer)
+    // if (e.target.value.hasChanged) {
+    //   let answer = e.target.value
+
+    //   answers.push(answer)
+    // }
+
+    // productTypeAttributes.map((attr, index) => {
+
+
+
+    //   let answer =  {
+    //     product_id: null,
+    //     product_type_attribute_id: attr.id,
+    //     value: e.target.value
+    //   }
+
+    //   answers.push(answer)
+
+
+
+    // })
+
+
+
+    console.log(productAttributes)
     // console.log(answers)
     // axios.post('', {
     //   product_id: productTypeId,

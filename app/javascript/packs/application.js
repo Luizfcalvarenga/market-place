@@ -48,7 +48,6 @@ document.addEventListener("turbolinks:load", () => {
     Product: <Product />,
     NewProduct: <NewProduct/>,
     EditProduct: <EditProduct/>,
-
   };
 
   ReactDOM.render(
