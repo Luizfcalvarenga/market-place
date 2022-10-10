@@ -9,8 +9,9 @@ class OrderItemsController < ApplicationController
   def create
     @order_item = OrderItem.new(order_item_params)
     authorize @order_item
-    @order = current_order
+    # @order = current_order
     @order_item.order = current_order
+    @product = Product.find(params[:id])
     @order_item.product = @product
 
     if @order_item.save

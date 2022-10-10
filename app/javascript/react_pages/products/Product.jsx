@@ -94,6 +94,24 @@ export function Product(props) {
 
               <button type="submit" className="btn-order mt-2"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
             </form>
+            <div>
+
+
+              {quantity && (
+
+               <p>Subtotal: {((product.price_in_cents * quantity) /100 ).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                  })}
+                </p>
+
+
+              )}
+
+
+
+
+            </div>
             <button className="btn-order w-100  mt-2"><i className="fas fa-cart-plus me-2"></i>Adicionar ao carrinho</button>
 
           </div>
