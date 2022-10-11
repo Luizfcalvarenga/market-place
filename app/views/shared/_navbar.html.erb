@@ -74,8 +74,8 @@
           <%= link_to "VENDER", new_announce_path, class: "btn btn-primary" %>
         </li>
         <li class="nav-item active mt-1" style="color: white;">
-          <%= link_to "#" do %>
-            <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= rand(1..5) %></span></i>
+          <%= link_to order_path(current_user.orders.last.id) do %>
+            <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= current_user.orders.last.order_items.count %></span></i>
           <% end %>
         </li>
         <li class="nav-item active mt-1" style="color: white;">

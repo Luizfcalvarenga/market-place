@@ -10,19 +10,23 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  
+
   resources :bikes do
     resource :order_items, only: [:new, :create, :destroy]
 
   end
 
-  resource :order_items
-
+  resource :order_items, only: [ :destroy ], as: :destroy
+  resources :orders, only: [ :index, :show ]
 
   resources :products do
     resource :order_items, only: [:new, :create, :destroy]
   end
   # resources :product_types
+
+  resources :product_attributes
+  post 'create_attribute_for_product', to: 'product_attributes#create_attribute_for_product'
+
 
   get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
 

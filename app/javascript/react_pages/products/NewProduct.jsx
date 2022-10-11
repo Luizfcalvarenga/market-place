@@ -98,12 +98,12 @@ export function NewProduct(props) {
 
 
 
-    setProductAttribute({
-      product_id: null,
-      product_type_attribute_id: attribute.id,
-      value: e.target.value
+    // setProductAttribute({
+    //   product_id: null,
+    //   product_type_attribute_id: attribute.id,
+    //   value: e.target.value
 
-    });
+    // });
 
     // setProductAttributes(productAttribute)
 
@@ -137,10 +137,10 @@ export function NewProduct(props) {
 
     // console.log(productAttributes)
     // console.log(answers)
-    // axios.post('', {
-    //   product_id: productTypeId,
+    // axios.post('/product_attributes', {
+    //   // product_id: productTypeId,
     //   product_type_attribute_id: attribute.id,
-    //   value: e.target.value,
+    //   value: e.target.value
     // })
     // .then(function (response) {
     //   console.log(response);
@@ -172,7 +172,7 @@ export function NewProduct(props) {
       product
     })
     .then(function (response) {
-      console.log(response);
+      console.log(response.id);
     })
     .catch(function (error) {
       console.log(error);

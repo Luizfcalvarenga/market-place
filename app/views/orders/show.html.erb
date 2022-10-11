@@ -1,0 +1,63 @@
+<div class="container orders mb-5">
+  <h1 class="mt-5">Meu pedido</h1>
+  <p>TOTAL <%= @order.order_items.count %>
+    <% if @order.order_items.count > 1 %>
+      items
+    <% else %>
+      item
+    <% end %>
+    <span><%= number_to_currency(@order.price_in_cents, unit: "R$", separator: ",", delimiter: ".") %></span>
+  </p>
+  <% if @order_items.empty? %>
+    <h3 class="my-5">Seu carrinho está vazio!</h3>
+    <%= link_to "Adicionar item", products_path, class: "btn btn-primary"%>
+  <% else %>
+    <div class="row">
+      <div class="col">
+        <% @order_items.each do |order_item| %>
+          <div class="my-product-card d-flex my-3">
+            <div class="image-order-card">
+              <% if order_item.product.photos.attached? %>
+                <%= cl_image_tag order_item.product.photos.first.key, crop: :fill, class: "my-product-img" %>
+              <% else %>
+                <%= image_tag "e-bike-bg.jpg", class: "my-product-img" %>
+              <% end %>
+            </div>
+            <div class="card-body d-flex align-items-start flex-column">
+              <div class="mb-auto p-2">
+                <h4 class="card-text col"><strong><%= order_item.product.product_type.name %></strong></h4>
+                <p><strong>Quantidade:</strong> <%= order_item.quantity %></p>
+                <p><strong>Categoria:</strong> <%= order_item.product.category.name %></p>
+                <p><strong>Modalidade:</strong> <%= order_item.product.modality %></p>
+                <p><strong>Nome:</strong> <%= order_item.product.name %></p>
+                <p><strong>Descrição:</strong> <%= order_item.product.description %></p>
+
+              </div>
+              <div class="p-2">
+
+              </div>
+            </div>
+            <div class="price-delete m-2 d-flex flex-column align-items-end">
+              <div class="delete-item p-2">
+                <%= link_to destroy_path(order_item), method: :delete, data: { confirm: "Tem certeza que deseja remover #{order_item.product.product_type.name} do seu carrinho?"}  do %>
+                  <i class="fas fa-trash-alt"> <span style="font-family: Montserrat, sans-serif; font-size: 15px;">Remover</span> </i>
+                <% end %>
+              </div>
+              <div class="subtotal mt-auto p-2">
+                <p class="card-text mb-3">
+                  <strong><%= number_to_currency(order_item.price_in_cents, unit: "R$", separator: ",", delimiter: ".")%></strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      </div>
+      <div>
+        <%= link_to "Adicionar mais itens", products_path, class: "btn btn-outline mt-3 w-100"%>
+        <br>
+        <%= link_to "Finalizar compra", "#", class: "btn-orders btn btn-primary mt-3 w-100", data: { confirm: "Ao clicar em ok, eu confirmo que li e entendi os termos e condições desta compra."} %>
+      </div>
+    </div>
+  <% end %>
+</div>

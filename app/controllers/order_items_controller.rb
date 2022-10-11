@@ -8,11 +8,13 @@ class OrderItemsController < ApplicationController
 
   def create
     @order_item = OrderItem.new(order_item_params)
-    authorize @order_item
-    # @order = current_order
     @order_item.order = current_order
-    @product = Product.find(params[:id])
-    @order_item.product = @product
+    authorize @order_item
+    # @product = Product.find(params[:id])
+    # @order_item.product_id = params[:product_id]
+    # @order_item.quantity = params[:quantity]
+    # @order_item.price_in_cent = params[:price_in_cent]
+
 
     if @order_item.save
       flash[:notice] = "Produto adicionada ao carrinho."
@@ -24,7 +26,7 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    @order_item = OrderItem.find(params[:id])
+    @order_item = OrderItem.find_by(params[:id])
     authorize @order_item
     @order_item.bike = @bike
     @order_item.product = @product
@@ -36,6 +38,6 @@ class OrderItemsController < ApplicationController
   private
 
   def order_item_params
-    params.require(:order_item).permit(:product_id, :quantity, :price_in_cents)
+    params.permit(:product_id, :quantity, :price_in_cents)
   end
 end

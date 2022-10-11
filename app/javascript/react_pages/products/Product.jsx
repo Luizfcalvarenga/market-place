@@ -86,11 +86,14 @@ export function Product(props) {
 
             <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
 
-            <form action={product.id + "/order_items"} method="post">
-              <label htmlFor="" className="me-2">Quantidade</label>
-              <input type="number" onChange={(e) => setQuantity(e.target.value)} name="quantity"/>
+            <form action={product.id + "/order_items"} method="post" className="d-flex">
+              <div className="div">
+
+                <label htmlFor="" className="me-2">Quantidade</label>
+                <input type="number" onChange={(e) => setQuantity(e.target.value)} name="quantity" className="w-40 quantity-input"/>
+              </div>
               <input type="hidden" value={product.id} />
-              <input type="hidden" value={product.price_in_cents} name="price_in_cents"/>
+              <input type="hidden" value={product.price_in_cents * quantity } name="price_in_cents"/>
 
 
               <button type="submit" className="btn-order mt-2 w-100"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
@@ -100,7 +103,7 @@ export function Product(props) {
 
               {quantity && (
 
-               <p>Subtotal: {((product.price_in_cents * quantity) /100 ).toLocaleString("pt-BR", {
+               <p className="mt-3">Subtotal: {((product.price_in_cents * quantity) /100 ).toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}
