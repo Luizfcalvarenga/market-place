@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
   def my_products
     @user = current_user
     @products = Product.where(user: @user)
+    @bikes = Bike.where(user: @user)
     skip_authorization
 
   end

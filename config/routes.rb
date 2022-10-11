@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
 
   resource :order_items, only: [ :destroy ], as: :destroy
+  resource :bikes, only: [ :destroy ], as: :remove
+
   resources :orders, only: [ :index, :show ]
 
   resources :products do
