@@ -12,8 +12,6 @@ module Api
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
 
-
-
         if params[:sort_by] == "price_ascending"
           @products = @products.order(price_in_cents: :asc)
         elsif params[:sort_by] == "price_descending"
@@ -32,7 +30,6 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
       end
 
       def create
@@ -40,7 +37,6 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
 
         if @product.save
           render json: @product
@@ -51,10 +47,8 @@ module Api
 
       def edit
         @product = Product.find_by(id: params[:id])
-
         @product_attributes = ProductAttribute.where(product: @product)
         skip_authorization
-
       end
 
 
@@ -69,7 +63,6 @@ module Api
           render json: { error: @product.error.messages }, status: 422
         end
       end
-
 
       private
 
