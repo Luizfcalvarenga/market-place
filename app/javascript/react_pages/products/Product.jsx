@@ -84,16 +84,16 @@ export function Product(props) {
 
             </div>
 
-            <button className="btn-chat w-100 mt-3"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+            <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
 
             <form action={product.id + "/order_items"} method="post">
-              <label htmlFor="">Quantidade</label>
+              <label htmlFor="" className="me-2">Quantidade</label>
               <input type="number" onChange={(e) => setQuantity(e.target.value)} name="quantity"/>
               <input type="hidden" value={product.id} />
               <input type="hidden" value={product.price_in_cents} name="price_in_cents"/>
 
 
-              <button type="submit" className="btn-order mt-2"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
+              <button type="submit" className="btn-order mt-2 w-100"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
             </form>
             <div>
 
@@ -113,7 +113,6 @@ export function Product(props) {
 
 
             </div>
-            <button className="btn-order w-100  mt-2" onChange={(e) => handleSubmit(product) }><i className="fas fa-cart-plus me-2"></i>Adicionar ao carrinho</button>
 
           </div>
         </div>

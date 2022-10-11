@@ -20,6 +20,7 @@ export function NewProduct(props) {
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
 
+
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
@@ -66,6 +67,36 @@ export function NewProduct(props) {
     //   // ...productAttributes.slice(insertAttr)
     // ];
     // setProductAttribute(nextAttribute);
+    // const answer = {
+    //   product_id: null,
+    //   product_type_attribute_id: attribute.id,
+    //   value: e.target.value
+    // }
+
+
+    // productAttributes.push(productAttribute)
+
+
+
+    // answers.push(answer)
+    // setProductAttribute({
+    //   product_id: null,
+    //   product_type_attribute_id: attribute.id,
+    //   value: e.target.value
+
+    // });
+
+    // const answers = []
+
+    // answers.push(productAttribute)
+
+    // console.log(answers)
+
+
+
+    // setProductAttribute('');
+
+
 
     setProductAttribute({
       product_id: null,
@@ -74,19 +105,9 @@ export function NewProduct(props) {
 
     });
 
-
-    productAttributes.push(productAttribute)
-
+    // setProductAttributes(productAttribute)
 
 
-
-    // setProductAttribute('');
-
-    // useEffect(() => {
-
-    //   setProductAttribute(e.target.value)
-
-    // }, [productAttributes]);
     // const answers = []
     // let answer = e.targets
     // answers.push(answer)
@@ -114,7 +135,7 @@ export function NewProduct(props) {
 
 
 
-    console.log(productAttributes)
+    // console.log(productAttributes)
     // console.log(answers)
     // axios.post('', {
     //   product_id: productTypeId,
@@ -216,17 +237,17 @@ export function NewProduct(props) {
         {selectedProductTypeId && productTypeAttributes && (
 
           <div>
-            {productTypeAttributes.map((attribute) => {
+            {productTypeAttributes.map((attribute, index) => {
               return (
-                <><div attribute={attribute} key={attribute.id} className="card-questions mb-5">
+                <><div attribute={attribute} key={index} className="card-questions mb-5">
 
-                  <label htmlFor="product attribute" className="mb-3" key={attribute.id}>{attribute.prompt}</label><br />
+                  <label htmlFor="product attribute" className="mb-3" key={index}>{attribute.prompt}</label><br />
                   <select
                   className="select-answer"
                   onChange={(e) => createProductAttributes(e, attribute)}
                   >
-                    {attribute.options?.map((option) => {
-                      return (<option value={option}>{option}</option>)
+                    {attribute.options?.map((option, index) => {
+                      return (<option key={index} value={option}>{option}</option>)
                     })}
                   </select>
                 </div></>
