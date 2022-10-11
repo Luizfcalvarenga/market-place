@@ -79,7 +79,7 @@ export function NewProduct(props) {
 
 
 
-    
+
     // setProductAttribute('');
 
     // useEffect(() => {
@@ -160,8 +160,8 @@ export function NewProduct(props) {
 
 
   return (
-    <div className="w-60 text-center new-product-react">
-      <h1>Cheguei</h1>
+    <div className="w-60 text-center new-product-react py-5">
+      <h1 className="text-success">Anuncie aqui</h1>
       <form>
         <div className="card-questions mb-5">
           <label htmlFor="category" className="mb-3">Qual a categoria do seu produto?</label>
@@ -275,7 +275,12 @@ export function NewProduct(props) {
             </div>
           </div>
         )}
-        <button onClick={() => handleSubmit()} className="btn btn-outline mb-5">Anunciar</button>
+        {productQuantity && (<>
+
+          <button onClick={() => handleSubmit()} className="btn btn-outline mb-5">Anunciar</button>
+
+        </>)}
+
       </form>
     </div>
   );

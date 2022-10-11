@@ -101,8 +101,8 @@ export function Product(props) {
               {quantity && (
 
                <p>Subtotal: {((product.price_in_cents * quantity) /100 ).toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
+                    style: "currency",
+                    currency: "BRL",
                   })}
                 </p>
 
