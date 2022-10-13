@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between">
           <div>
             <h6>Pedido #<%= order.id %></h6>
-            <h6>Total: <%=number_to_currency(order.price_in_cents, unit: "R$", separator: ",", delimiter: ".")%> </h6>
+            <h6>Total: <%=number_to_currency((order.price_in_cents / 100), unit: "R$", separator: ",", delimiter: ".")%> </h6>
             <div class="d-flex">
               <% if order.invoice_paid_at.present? %>
                 <i class="fas fa-handshake ms-2 mt-1" style="color: green;"></i>
@@ -28,7 +28,7 @@
           </div>
           <p><span class="topic-cards-index-media">Item:</span> <%= order_item.product.product_type.name %> </p>
           <p><span class="topic-cards-index-media">Quantidade:</span> de <%= order_item.quantity %> </p>
-          <p><span class="topic-cards-index-media">Preço:</span> <%= number_to_currency(order_item.price_in_cents, unit: "R$", separator: ",", delimiter: ".")  %> </p>
+          <p><span class="topic-cards-index-media">Preço:</span> <%= number_to_currency((order_item.price_in_cents / 100), unit: "R$", separator: ",", delimiter: ".")  %> </p>
 
         <% end %>
       </div>

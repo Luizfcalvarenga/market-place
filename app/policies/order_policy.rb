@@ -1,7 +1,7 @@
 class OrderPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all.where(user: user)
+      scope.all.where(user: user).where(status: "paid")
     end
   end
 

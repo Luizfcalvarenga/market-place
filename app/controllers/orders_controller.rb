@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = policy_scope(Order).where(user_id: current_user).order(created_at: :desc)
+    @orders = policy_scope(Order).where(user_id: current_user).where(status: "paid").order(created_at: :desc)
 
   end
 
@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   def invoice
     @order = Order.find(params[:id])
     authorize @order
+    @order.price_in_cents = @order.order_items.map(&:price_in_cents).sum
     if @order.should_generate_new_invoice?
       ::NovaIugu::InvoiceGenerator.new(@order).call
     else
@@ -25,7 +26,7 @@ class OrdersController < ApplicationController
         begin
           ::NovaIugu::InvoiceGenerator.new(@order).call
         rescue
-          @order_error = true
+          raise
         end
       end
     end

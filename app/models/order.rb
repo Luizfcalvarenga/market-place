@@ -7,9 +7,11 @@ class Order < ApplicationRecord
 
   validates :invoice_id, uniqueness: true, allow_blank: true
 
+  scope :paid, -> { where(status: "paid")}
+
   def perform_after_payment_confirmation_actions
     self.update(status: "paid")
-
+    self.update(price_in_cents: order_items.map(&:price_in_cents).sum)
 
   end
 
@@ -41,16 +43,12 @@ class Order < ApplicationRecord
   end
 
   def payment_method
-    if price_in_cents > 4500
+    if (price_in_cents / 100) > 4500
       ["pix", "bank_slip"]
     else
       ["pix", "credit_card", "bank_slip"]
     end
   end
-
-  # def total_value_for_order_items
-  #   order_items.map { | order_item | order_item.price_in_cents }.sum
-  # end
 
   def price_in_cents
     order_items.map(&:price_in_cents).sum
@@ -61,6 +59,6 @@ class Order < ApplicationRecord
   end
 
   def check_payment_actions_performed
-    status == "paid" && products.count == order_items.count && order_items.count == bikes.count
+    status == "paid" 
   end
 end
