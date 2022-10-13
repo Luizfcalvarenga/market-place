@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/iugu/iugu-ruby
+  revision: ac2985783591e36863ae78a1d5294aa39f5ef014
+  specs:
+    iugu (1.0.10)
+      rest-client
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -287,6 +294,7 @@ DEPENDENCIES
   devise_token_auth
   dotenv-rails
   font-awesome-sass
+  iugu!
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)

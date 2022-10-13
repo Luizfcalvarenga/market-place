@@ -19,8 +19,6 @@ Rails.application.routes.draw do
   resource :order_items, only: [ :destroy ], as: :destroy
   resource :bikes, only: [ :destroy ], as: :remove
 
-  resources :orders, only: [ :index, :show ]
-
   resources :products do
     resource :order_items, only: [:new, :create, :destroy]
   end
@@ -34,12 +32,9 @@ Rails.application.routes.draw do
 
   get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
 
-  # get 'get_product_type_attributes', to: 'product_type_attributes#get_product_type_attributes'
-
-
-  # get 'get_categories', to: 'categories#get_categories'
-
-
+  resources :orders, only: [ :index, :show ]
+  get "orders/:id/invoice", to: "orders#invoice", as: "order_invoice"
+  get "orders/:id/status", to: "orders#status", as: "order_status", format: :json
 
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"

@@ -1,0 +1,37 @@
+<div class="container mt-5 orders">
+  <h1 class="my-5">Pedidos realizados</h1>
+  <% @orders.each do | order | %>
+    <div class="my-product-card my-5">
+      <div class="card-body p-5">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h6>Pedido #<%= order.id %></h6>
+            <h6>Total: <%=number_to_currency(order.price_in_cents, unit: "R$", separator: ",", delimiter: ".")%> </h6>
+            <div class="d-flex">
+              <% if order.invoice_paid_at.present? %>
+                <i class="fas fa-handshake ms-2 mt-1" style="color: green;"></i>
+                <p><span class="topic-cards-index-media ms-3">Pago em: </span> <%= order.invoice_paid_at.strftime("%d/%m/%Y") %> </p>
+              <% else %>
+                <i class="fas fa-clock ms-2 mt-1" style="color: red;"></i>
+                <p><span class="topic-cards-index-media ms-3">Aguardando pagamento</p>
+              <% end %>
+            </div>
+          </div>
+          <div>
+            <a href="<%= order.invoice_url %>" target="_blank" class="btn btn-primary">Ver invoice</a>
+          </div>
+        </div>
+        <% order.order_items.each_with_index do | order_item, i | %>
+          <div class="d-flex justify-content-around">
+            <p><span class="topic-cards-index-media display-type-item"> <%= order_item.product.name %> </span> </p>
+            <p><span class="topic-cards-index-media num-of-items">Item <%= i + 1 %></span></p>
+          </div>
+          <p><span class="topic-cards-index-media">Item:</span> <%= order_item.product.product_type.name %> </p>
+          <p><span class="topic-cards-index-media">Quantidade:</span> de <%= order_item.quantity %> </p>
+          <p><span class="topic-cards-index-media">Preço:</span> <%= number_to_currency(order_item.price_in_cents, unit: "R$", separator: ",", delimiter: ".")  %> </p>
+
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -23,6 +23,7 @@ import "bootstrap";
 // Internal imports
 import "./components/form_navbar";
 import "./mask";
+import "./payment_pooling";
 
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";
