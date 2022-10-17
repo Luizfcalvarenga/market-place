@@ -6,7 +6,7 @@ export function Product(props) {
 
 
   const [quantity, setQuantity] = useState()
-  const [productAttributes, setProductAttributes] = useState([])
+  // const [productAttributes, setProductAttributes] = useState([])
 
   // useEffect(() => {
   //   setProductId(window.location.pathname.split("/").pop())
@@ -20,9 +20,11 @@ export function Product(props) {
   useEffect(async () => {
     let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
-    console.log(response)
     setProduct(response.data);
-    setProductAttributes(response.data.product_attributes);
+
+    // setProductAttributes(response.data.product_attributes)
+    console.log(product)
+    // console.log(productAttributes)
 
   }, [])
 
@@ -78,11 +80,25 @@ export function Product(props) {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <div className="technical-details mt-5">
-              <h4 className="text-success">Características Técnicas</h4>
+            {product.product_attributes && (
 
 
-            </div>
+              <div className="technical-details mt-5">
+                <h4 className="text-success">Características Técnicas</h4>
+                {product.product_attributes.map(attribute => {
+                  return (
+                    <>
+                      <p key={attribute.product_type_attribute_id}>{attribute.product_type_attribute}</p>
+
+                      <p key={attribute.id}>{attribute.value}</p>
+                    </>
+                  )
+                })}
+
+
+              </div>
+            )}
+
           </div>
 
           <div className="col-12 col-md-4 card-product">
@@ -113,8 +129,8 @@ export function Product(props) {
                 <label htmlFor="" className="me-2">Quantidade</label>
                 <input type="number" onChange={(e) => setQuantity(e.target.value)} name="quantity" className="w-40 quantity-input"/>
               </div>
-              <input type="hidden" value={product.id} />
-              <input type="hidden" value={product.price_in_cents * quantity } name="price_in_cents"/>
+              <input type="hidden" value={Number(product.id)} />
+              <input type="hidden" value={Number(product.price_in_cents * quantity )} name="price_in_cents"/>
 
 
               <button type="submit" className="btn-order mt-2 w-100"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
