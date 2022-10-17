@@ -2,7 +2,17 @@ import React, { useEffect, useState } from "react";
 
 export function Product(props) {
   const [product, setProduct] = useState()
+  // const [productId, setProductId] = useState()
+
+
   const [quantity, setQuantity] = useState()
+  const [productAttributes, setProductAttributes] = useState([])
+
+  // useEffect(() => {
+  //   setProductId(window.location.pathname.split("/").pop())
+  // })
+
+
 
 
   let productId = window.location.pathname.split("/").pop();
@@ -10,9 +20,20 @@ export function Product(props) {
   useEffect(async () => {
     let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
+    console.log(response)
     setProduct(response.data);
+    setProductAttributes(response.data.product_attributes);
 
   }, [])
+
+  // useEffect(async () => {
+  //   let url = `/api/v1/products/${productId}`;
+  //   const response = await axios.get(url);
+  //   setProduct(response.data);
+
+  // }, [])
+
+
 
   const handleSubmit = (product) => {
 

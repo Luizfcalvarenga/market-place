@@ -45,7 +45,7 @@ module Api
           end
           render json: { success: true, product: @product, redirect_url: product_path(@product) }
         else
-          render json: { error: @product.errors.messages }, status: 422
+          render json: { success: false, error: @product.errors.messages }, status: 422
         end
       end
 
