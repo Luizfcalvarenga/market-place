@@ -12,8 +12,7 @@ export function NewProduct(props) {
   const [modalities, setModalities] = useState([]);
   const [selectedModality, setSelectedModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
-  const [productAttribute, setProductAttribute] = useState([]);
-  const [productAttributes, setProductAttributes] = useState([]);
+  const [productAttributes, setProductAttributes] = useState({});
   const [productBrand, setProductBrand] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -47,111 +46,52 @@ export function NewProduct(props) {
         setProductTypeAttributes(
           data
         );
+        setProductAttributes(
+          {}
+        );
       })
     }
   }, [selectedProductTypeId]);
 
 
   const createProductAttributes = (e, attribute) => {
-
-    // const nextAttribute = [
-    //   // Items before the insertion point:
-    //   // ...productAttributes.slice(0, insertAttr),
-    //   // New item:
-    //   {
-    //     product_id: null,
-    //     product_type_attribute_id: attribute.id,
-    //     value: e.target.value
-    //   }
-    //   // Items after the insertion point:
-    //   // ...productAttributes.slice(insertAttr)
-    // ];
-    // setProductAttribute(nextAttribute);
-    // const answer = {
-    //   product_id: null,
-    //   product_type_attribute_id: attribute.id,
-    //   value: e.target.value
-    // }
-
-
-    // productAttributes.push(productAttribute)
-
-
-
-    // answers.push(answer)
-    // setProductAttribute({
-    //   product_id: null,
-    //   product_type_attribute_id: attribute.id,
-    //   value: e.target.value
-
-    // });
-
-    // const answers = []
-
-    // answers.push(productAttribute)
-
-    // console.log(answers)
-
-
-
-    // setProductAttribute('');
-
-
-
-    // setProductAttribute({
-    //   product_id: null,
-    //   product_type_attribute_id: attribute.id,
-    //   value: e.target.value
-
-    // });
-
-    // setProductAttributes(productAttribute)
-
-
-    // const answers = []
-    // let answer = e.targets
-    // answers.push(answer)
-    // if (e.target.value.hasChanged) {
-    //   let answer = e.target.value
-
-    //   answers.push(answer)
-    // }
-
-    // productTypeAttributes.map((attr, index) => {
-
-
-
-    //   let answer =  {
-    //     product_id: null,
-    //     product_type_attribute_id: attr.id,
-    //     value: e.target.value
-    //   }
-
-    //   answers.push(answer)
-
-
-
-    // })
-
-
-
-    // console.log(productAttributes)
-    // console.log(answers)
-    // axios.post('/product_attributes', {
-    //   // product_id: productTypeId,
-    //   product_type_attribute_id: attribute.id,
-    //   value: e.target.value
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
-
+    const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
+    currentProductAttributes[attribute.name] = e.target.value
+    setProductAttributes(currentProductAttributes)
   }
 
-  const handleSubmit = () => {
+  const renderProductTypeAttributeSelect = (attribute, index) => {
+    let options = []
+    console.log(attribute.name, attribute.name === "front_suspension_travel", productAttributes["suspension_type"] )
+    if (["mountain_bike", "dirt_street"].includes(selectedCategory) && attribute.name === "frame_size") {
+      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+    } else if (selectedCategory === "road" && attribute.name === "frame_size") {
+      options = [ "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+    } else if (attribute.name === "front_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+      return
+    } else if (attribute.name === "rear_suspension_travel" && ["no_suspension"].includes(productAttributes["suspension_type"])) {
+      return
+    } else {
+      options = attribute.options
+    }
+
+    return (
+      <div attribute={attribute} key={attribute.id} className="card-questions mb-5">
+        <label htmlFor="product attribute" className="mb-3" key={index}>{attribute.prompt}</label><br />
+        <select
+        className="select-answer"
+        onChange={(e) => createProductAttributes(e, attribute)}
+        >
+          {options?.map((option, index) => {
+            return (<option key={index} value={option}>{option}</option>)
+          })}
+        </select>
+      </div>
+    )
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
     const product = {
       user_id: user,
@@ -162,21 +102,25 @@ export function NewProduct(props) {
       name: productName,
       description: productDescription,
       price_in_cents: productPrice,
-      quantity: productQuantity
+      quantity: productQuantity,
+      productAttributes
 
     }
-
-    console.log(product)
 
     axios.post('/api/v1/products', {
       product
     })
     .then(function (response) {
       console.log(response.id);
+      if (response.success) {
+        window.location = response.redirect_url
+      }
     })
     .catch(function (error) {
       console.log(error);
     });
+
+
   }
 
 
@@ -238,20 +182,7 @@ export function NewProduct(props) {
 
           <div>
             {productTypeAttributes.map((attribute, index) => {
-              return (
-                <><div attribute={attribute} key={index} className="card-questions mb-5">
-
-                  <label htmlFor="product attribute" className="mb-3" key={index}>{attribute.prompt}</label><br />
-                  <select
-                  className="select-answer"
-                  onChange={(e) => createProductAttributes(e, attribute)}
-                  >
-                    {attribute.options?.map((option, index) => {
-                      return (<option key={index} value={option}>{option}</option>)
-                    })}
-                  </select>
-                </div></>
-              )
+              return renderProductTypeAttributeSelect(attribute, index)
             })}
 
             <div className="card-questions mb-5">
@@ -298,7 +229,7 @@ export function NewProduct(props) {
         )}
         {productQuantity && (<>
 
-          <button onClick={() => handleSubmit()} className="btn btn-outline mb-5">Anunciar</button>
+          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5">Anunciar</button>
 
         </>)}
 

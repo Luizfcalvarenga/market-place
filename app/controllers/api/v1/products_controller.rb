@@ -38,8 +38,12 @@ module Api
         @product_types = ProductType.all
         @categories = Category.all
 
+
         if @product.save
-          render json: @product
+          params[:product][:productAttributes].each do |key, value|
+            ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
+          end
+          render json: { success: true, product: @product, redirect_url: product_path(@product) }
         else
           render json: { error: @product.errors.messages }, status: 422
         end

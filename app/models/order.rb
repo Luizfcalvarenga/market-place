@@ -12,7 +12,6 @@ class Order < ApplicationRecord
   def perform_after_payment_confirmation_actions
     self.update(status: "paid")
     self.update(price_in_cents: order_items.map(&:price_in_cents).sum)
-
   end
 
   def nova_iugu_charge_params_hash
@@ -21,7 +20,7 @@ class Order < ApplicationRecord
       months: 1,
       items: order_items.map do |order_item|
         {
-          description: "Item: #{order_item.product.product_type.name}",
+          description: "Item: #{order_item.product.name}",
           quantity: order_item.quantity,
           price_cents: order_item.price_in_cents,
         }
@@ -59,6 +58,6 @@ class Order < ApplicationRecord
   end
 
   def check_payment_actions_performed
-    status == "paid" 
+    status == "paid"
   end
 end

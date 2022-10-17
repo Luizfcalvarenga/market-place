@@ -17,6 +17,14 @@ class ProductAttributesController < ApplicationController
     end
   end
 
+  def get_product_attributes
+    skip_authorization
+
+    respond_to do |format|
+      format.json { render json: ProductAttribute.where(product_id: params[:product_id]) }
+    end
+  end
+
   private
 
   def product_attribute_params

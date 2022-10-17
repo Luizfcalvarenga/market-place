@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
     skip_authorization
     @product_types = ProductType.all
     @categories= Category.all
+    
     if @product.save
       redirect_to product_path(@product)
     else

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :products do
     resource :order_items, only: [:new, :create, :destroy]
   end
-  # resources :product_types
+
 
   resources :product_attributes
   post 'create_attribute_for_product', to: 'product_attributes#create_attribute_for_product'
@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
 
   get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
+
+  get 'get_product_attributes', to: 'product_attributes#get_product_attributes'
+
 
   resources :orders, only: [ :index, :show ]
   get "orders/:id/invoice", to: "orders#invoice", as: "order_invoice"
