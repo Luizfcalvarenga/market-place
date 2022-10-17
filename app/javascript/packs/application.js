@@ -23,10 +23,19 @@ import "bootstrap";
 // Internal imports
 import "./components/form_navbar";
 import "./mask";
+import "./payment_pooling";
 
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";
-import { Bikes } from "../react_pages/Bikes";
+import { Bikes } from "../react_pages/bikes/Bikes";
+import { Products } from "../react_pages/products/Products";
+import { Product } from "../react_pages/products/Product";
+import { NewProduct } from "../react_pages/products/NewProduct";
+import { EditProduct } from "../react_pages/products/EditProduct";
+
+
+
+
 
 document.addEventListener("turbolinks:load", () => {
   const reactContainer = document.querySelector("react");
@@ -36,6 +45,10 @@ document.addEventListener("turbolinks:load", () => {
   const components = {
     ReactPage: <ReactPage message={reactContainer.dataset.message} />,
     Bikes: <Bikes galo="doido" batata={2} />,
+    Products: <Products />,
+    Product: <Product />,
+    NewProduct: <NewProduct/>,
+    EditProduct: <EditProduct/>,
   };
 
   ReactDOM.render(

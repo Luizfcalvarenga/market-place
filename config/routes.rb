@@ -10,11 +10,46 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  resources :bikes, only: :index
+
+  resources :bikes do
+    resource :order_items, only: [:new, :create, :destroy]
+
+  end
+
+  resource :order_items, only: [ :destroy ], as: :destroy
+  resource :bikes, only: [ :destroy ], as: :remove
+
+  resources :products do
+    resource :order_items, only: [:new, :create, :destroy]
+  end
+
+
+  resources :product_attributes
+  post 'create_attribute_for_product', to: 'product_attributes#create_attribute_for_product'
+
+
+  get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
+
+  get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
+
+  get 'get_product_attributes', to: 'product_attributes#get_product_attributes'
+
+
+  resources :orders, only: [ :index, :show ]
+  get "orders/:id/invoice", to: "orders#invoice", as: "order_invoice"
+  get "orders/:id/status", to: "orders#status", as: "order_status", format: :json
+
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
 
   resource :profiles
+
+  # resource :products
+
+  get 'my_products', to: 'products#my_products', as: "my_products"
+  # delete 'my_products/product/:id', to: 'profiles#destroy'
+
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
@@ -22,6 +57,7 @@ Rails.application.routes.draw do
       get 'users/me', to: 'users#me'
 
       resources :bikes, only: :index
+      resources :products
     end
   end
 end

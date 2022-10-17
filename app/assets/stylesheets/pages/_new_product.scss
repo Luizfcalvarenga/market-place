@@ -1,0 +1,57 @@
+.card-questions {
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  transition: .5s ease;
+  border-radius: 3px;
+  padding: 20px;
+  align-items: center;
+}
+
+.new-product-react {
+  margin: auto;
+  background-color: #F4F4F9;
+
+
+}
+
+
+.select-answer {
+  // A reset of styles, including removing the default dropdown arrow
+  appearance: none;
+  // Additional resets for further consistency
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 50%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  color: gray;
+  text-align: center;
+}
+.select-answer:focus {
+  outline:none !important;
+  box-shadow: none !important;
+  border-color: #ced4da !important;
+}
+
+option {
+
+  border: none !important;
+}
+
+
+.form-control:focus {
+  outline:none !important;
+  box-shadow: none !important;
+  border-color: #ced4da !important;
+}
+
+.input-group-text {
+  margin: auto;
+}
+
+#basic-addon1 {
+  color: $color-primary;
+}

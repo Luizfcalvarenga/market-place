@@ -45,6 +45,8 @@ gem 'simple_form'
 gem 'bootstrap-sass'
 gem 'rexml'
 gem 'uglifier'
+gem 'iugu', git: "https://github.com/iugu/iugu-ruby"
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'

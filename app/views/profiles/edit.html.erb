@@ -20,16 +20,56 @@
 
 
   <div class="bg-dark br-12 p-5">
-    <h3 class="title">Editar usuário</h3>
-    <%= simple_form_for @profile, :url => profiles_path, :method => :patch do |f| %>
-      <%= f.input :full_name %>
-      <%= f.input :document_number, input_html: { class: "mask-cpf" } %>
-      <%= f.input :cep, input_html: { class: "mask-cep" } %>
-      <%= f.input :address %>
-      <%= f.input :phone_number, input_html: { class: "mask-phone" } %>
-      <%= f.input :photo, as: :file %>
-      <%= f.submit "Editar", class: "btn btn-success mt-5 w-100" %>
-    <% end %>
+    <div class="d-flex justify-content-between">
+      <button type="button" class="links-profile edit-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fas fa-edit me-2"></i>Editar usuário
+      </button>
+      <%= link_to orders_path, class: "links-profile" do %>
+        <i class="fas fa-shopping-bag me-2"></i>Pedidos
+      <% end %>
+      <%= link_to my_products_path, class: "links-profile" do %>
+        <i class="fab fa-product-hunt me-2"></i>Produtos
+      <% end %>
+      <%= link_to "#", class: "links-profile" do %>
+        <i class="fas fa-envelope-open-text me-2"></i>Chat
+      <% end %>
+    </div>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 text-success" id="exampleModalLabel">Editar informações</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for @profile, :url => profiles_path, :method => :patch do |f| %>
+              <%= f.input :full_name %>
+              <div class="d-flex justify-content-around">
+                <%= f.input :document_number, input_html: { class: "mask-cpf  me-2" } %>
+                <%= f.input :phone_number, input_html: { class: "mask-phone" } %>
+              </div>
+              <%= f.input :cep, input_html: { class: "mask-cep" } %>
+              <%= f.input :address %>
+              <%= f.input :photo, as: :file, input_html: { class: "mt-3" } %>
+              <%= f.submit "Editar", class: "btn btn-success mt-3 w-100" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="user-infos mt-5">
+      <h4><span class="text-success">Nome:</span> <%= @profile.full_name %></h4>
+      <h4><span class="text-success">Email:</span> <%= @profile.email %></h4>
+      <h4><span class="text-success">CPF:</span> <%= @profile.document_number %></h4>
+      <h4><span class="text-success">Contato:</span> <%= @profile.phone_number %></h4>
+      <h4><span class="text-success">Endereço:</span> <%= @profile.address %></h4>
+      <h4><span class="text-success">CEP:</span> <%= @profile.cep %></h4>
+    </div>
 
   </div>
 

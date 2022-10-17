@@ -73,11 +73,13 @@
         <li class="nav-item active ms-5 me-1">
           <%= link_to "VENDER", new_announce_path, class: "btn btn-primary" %>
         </li>
-        <li class="nav-item active mt-1" style="color: white;">
-          <%= link_to "#" do %>
-            <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= rand(1..5) %></span></i>
-          <% end %>
-        </li>
+        <% if current_user.present? %>
+          <li class="nav-item active mt-1" style="color: white;">
+            <%= link_to order_path(current_user.orders.last.id) do %>
+              <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= current_user.orders.last.order_items.count %></span></i>
+            <% end %>
+          </li>
+        <% end %>
         <li class="nav-item active mt-1" style="color: white;">
           <%= link_to "#" do %>
             <i class="fa fa-heart text-success"></i>
@@ -99,7 +101,7 @@
                 <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
                 <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
                 <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
-                <%= link_to "Editar Infos", edit_profiles_path, class: "text-white ms-2" %>
+                <%= link_to "Conta", edit_profiles_path, class: "text-white ms-2" %>
                 <hr>
                 <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link ms-2 mt-1" %>
               </div>
