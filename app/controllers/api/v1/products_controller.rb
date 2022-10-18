@@ -24,7 +24,7 @@ module Api
         @product = Product.find_by(id: params[:id])
         skip_authorization
         @product_attributes = ProductAttribute.where(product: @product)
-
+        @product_type_attributes = ProductTypeAttribute.where(product_type: @product.product_type)
       end
 
       def new

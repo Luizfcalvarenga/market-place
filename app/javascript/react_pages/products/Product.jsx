@@ -84,16 +84,29 @@ export function Product(props) {
 
 
               <div className="technical-details mt-5">
-                <h4 className="text-success">Características Técnicas</h4>
-                {product.product_attributes.map(attribute => {
+                <h3 className="text-success mb-2">Características Técnicas</h3>
+                {product.product_attributes.map((attribute) => {
                   return (
-                    <>
-                      <p key={attribute.product_type_attribute_id}>{attribute.product_type_attribute}</p>
+                    <div className="d-inline-flex justify-content-between">
 
-                      <p key={attribute.id}>{attribute.value}</p>
-                    </>
+
+                      <h4 key={attribute.product_type_attribute_id} className="me-2 mb-3 text-black"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></h4>
+                      <h4 key={attribute.id} className="text-success me-3">{attribute.value}</h4>
+
+
+                    </div>
+
                   )
                 })}
+                <div className="d-inline-flex justify-content-between">
+
+
+                  <h4 className="me-2 mb-3 text-black"><strong>Categoria:</strong></h4>
+                  <h4 className="text-success me-3">{product.category.name}</h4>
+
+
+
+                </div>
 
 
               </div>
@@ -115,7 +128,6 @@ export function Product(props) {
                 })}
               </h4>
               <p>Produto: {product.product_type.name} </p>
-              <p>Categoria: {product.category.name} </p>
               <p className="">Marca: {product.brand}</p>
               <p className="">Disponível: {product.quantity}</p>
 
