@@ -9,169 +9,162 @@
 
 require 'json'
 
-  puts "Starting seed..."
+puts "Starting seed..."
 
-  ################################################################ USERS ################################################################
-  buyer = User.create!(email: "user@app.com", password: "123456" )
-  seller = User.create!(email: "test@app.com", password: "123456" )
-  bike_user = User.create!(email: "bike@app.com", password: "123456" )
+################################################################ CTEGORIES ################################################################
 
+##### BIKES #####
 
+mtb = Category.create!(name: "mountain_bike", modalities: ["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
+dirt = Category.create!(name: "dirt_street", modalities: ["street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
+road = Category.create!(name: "road", modalities: ["speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
+other = Category.create!(name: "other")
+# infant = Category.create!(name: "Infant")
+# urban = Category.create!(name: "Urban")
 
-  ################################################################ CTEGORIES ################################################################
+##### GENERAL #####
+# mixed = Category.create!(name: "Mixed")
 
-  ##### BIKES #####
-
-  mtb = Category.create!(name: "mountain_bike", modalities: ["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
-  dirt = Category.create!(name: "dirt_street", modalities: ["street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
-  road = Category.create!(name: "road", modalities: ["speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
-  other = Category.create!(name: "other")
-  # infant = Category.create!(name: "Infant")
-  # urban = Category.create!(name: "Urban")
-
-  ##### GENERAL #####
-  # mixed = Category.create!(name: "Mixed")
-
-  categories = [mtb, dirt, road, other]
+categories = [mtb, dirt, road, other]
 
 
-  ################################################################ PRODUCTS #########################################################
-  puts "Products types and theis attributtes..."
+################################################################ PRODUCTS #########################################################
+puts "Products types and theis attributtes..."
 
 
-  ################################## BIKE COMPONENTS
+################################## BIKE COMPONENTS
 
-  bike_oriantations = [ "front", "rear", "both"]
+bike_oriantations = [ "front", "rear", "both"]
 
-  bike_types = [ "no_engine", "electric_engine"]
+bike_types = [ "no_engine", "electric_engine"]
 
 
 
-  brake = ProductType.create(name: "breake") #
-  bottle_cage = ProductType.create(name: "bottle_cage") #
-  cassette = ProductType.create(name: "cassete")
-  chain = ProductType.create(name: "chain")
-  chainring = ProductType.create(name: "chainring")
-  crankset = ProductType.create(name: "crankset")
-  derailleur = ProductType.create(name: "derailleur")
-  fender = ProductType.create(name: "fender")
-  frame = ProductType.create(name: "frame")
-  grips = ProductType.create(name: "grips")
-  handlebar = ProductType.create(name: "handlebar")
-  headset = ProductType.create(name: "headset")
-  hub = ProductType.create(name: "hub")
-  pedals = ProductType.create(name: "pedals")
-  rim = ProductType.create(name: "rim")
-  saddle = ProductType.create(name: "saddle")
-  seat_post = ProductType.create(name: "seat_post")
-  shifters = ProductType.create(name: "shifters")
-  shock = ProductType.create(name: "shock")
-  stem = ProductType.create(name: "stem")
-  suspension = ProductType.create(name: "suspension")
-  tire = ProductType.create(name: "tire")
+brake = ProductType.create(name: "breake") #
+bottle_cage = ProductType.create(name: "bottle_cage") #
+cassette = ProductType.create(name: "cassete")
+chain = ProductType.create(name: "chain")
+chainring = ProductType.create(name: "chainring")
+crankset = ProductType.create(name: "crankset")
+derailleur = ProductType.create(name: "derailleur")
+fender = ProductType.create(name: "fender")
+frame = ProductType.create(name: "frame")
+grips = ProductType.create(name: "grips")
+handlebar = ProductType.create(name: "handlebar")
+headset = ProductType.create(name: "headset")
+hub = ProductType.create(name: "hub")
+pedals = ProductType.create(name: "pedals")
+rim = ProductType.create(name: "rim")
+saddle = ProductType.create(name: "saddle")
+seat_post = ProductType.create(name: "seat_post")
+shifters = ProductType.create(name: "shifters")
+shock = ProductType.create(name: "shock")
+stem = ProductType.create(name: "stem")
+suspension = ProductType.create(name: "suspension")
+tire = ProductType.create(name: "tire")
 
-  ############################################################### OTHER PRODUCTS
+############################################################### OTHER PRODUCTS
 
-  accessories = ProductType.create(name: "accessories")
-  clothing = ProductType.create(name: "clothing")
-  kids = ProductType.create(name: "kids")
-  equipament = ProductType.create(name: "equipament")
+accessories = ProductType.create(name: "accessories")
+clothing = ProductType.create(name: "clothing")
+kids = ProductType.create(name: "kids")
+equipament = ProductType.create(name: "equipament")
 
 
 
-  products_options = [ brake, bottle_cage, cassette, chain, chainring, crankset, derailleur, fender, frame, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, shifters, shock, stem, suspension, tire, accessories, clothing, kids, equipament ]
+products_options = [ brake, bottle_cage, cassette, chain, chainring, crankset, derailleur, fender, frame, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, shifters, shock, stem, suspension, tire, accessories, clothing, kids, equipament ]
 
-  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  frame_brands = [ "alfameq",
-    "astro",
-    "audax",
-    "bH",
-    "bianchi",
-    "bMC",
-    "caloi",
-    "cannondale",
-    "canyon",
-    "carrera",
-    "cervelo",
-    "corratec",
-    "cube",
-    "dabomb",
-    "felt",
-    "first",
-    "focus",
-    "fuji",
-    "giant",
-    "groove",
-    "gT",
-    "gTS",
-    "ibis",
-    "jamis",
-    "kona",
-    "lapierre",
-    "marin",
-    "merida",
-    "mosso",
-    "oggi",
-    "orbea",
-    "pinarello",
-    "raleigh",
-    "rava",
-    "ridley",
-    "santa_cruz",
-    "schwinn",
-    "scott",
-    "sense",
-    "soul",
-    "specialized",
-    "swift Carbon",
-    "trek",
-    "tsw",
-    "wilier",
-    "yt",
-    "argon_21",
-    "bliv",
-    "blue",
-    "bottecchia",
-    "cipollini",
-    "cly",
-    "cumberland",
-    "de_rosa",
-    "e_moving",
-    "gary_fisher",
-    "gioia",
-    "kaiena",
-    "kestrel",
-    "kode",
-    "kuota",
-    "lazzaretti",
-    "lev_e_bike",
-    "litespeed",
-    "look",
-    "lotus",
-    "mercian",
-    "miyamura Gravel",
-    "open",
-    "quintana_roo",
-    "redland",
-    "riva",
-    "rose",
-    "sava",
-    "sundown",
-    "time",
-    "trinx",
-    "trust",
-    "velorbis",
-    "vicinitech",
-    "victory",
-    "eddy_merckx",
-    "salsa",
-    "surly",
-    "soma",
-    "diamondback",
-    "dahon",
-    "other"
-  ].sort_by { |frame_brands| frame_brands }
+frame_brands = [ "alfameq",
+  "astro",
+  "audax",
+  "bH",
+  "bianchi",
+  "bMC",
+  "caloi",
+  "cannondale",
+  "canyon",
+  "carrera",
+  "cervelo",
+  "corratec",
+  "cube",
+  "dabomb",
+  "felt",
+  "first",
+  "focus",
+  "fuji",
+  "giant",
+  "groove",
+  "gT",
+  "gTS",
+  "ibis",
+  "jamis",
+  "kona",
+  "lapierre",
+  "marin",
+  "merida",
+  "mosso",
+  "oggi",
+  "orbea",
+  "pinarello",
+  "raleigh",
+  "rava",
+  "ridley",
+  "santa_cruz",
+  "schwinn",
+  "scott",
+  "sense",
+  "soul",
+  "specialized",
+  "swift Carbon",
+  "trek",
+  "tsw",
+  "wilier",
+  "yt",
+  "argon_21",
+  "bliv",
+  "blue",
+  "bottecchia",
+  "cipollini",
+  "cly",
+  "cumberland",
+  "de_rosa",
+  "e_moving",
+  "gary_fisher",
+  "gioia",
+  "kaiena",
+  "kestrel",
+  "kode",
+  "kuota",
+  "lazzaretti",
+  "lev_e_bike",
+  "litespeed",
+  "look",
+  "lotus",
+  "mercian",
+  "miyamura Gravel",
+  "open",
+  "quintana_roo",
+  "redland",
+  "riva",
+  "rose",
+  "sava",
+  "sundown",
+  "time",
+  "trinx",
+  "trust",
+  "velorbis",
+  "vicinitech",
+  "victory",
+  "eddy_merckx",
+  "salsa",
+  "surly",
+  "soma",
+  "diamondback",
+  "dahon",
+  "other"
+].sort_by { |frame_brands| frame_brands }
 
 
   road_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
@@ -293,12 +286,24 @@ require 'json'
 
   crankset_questions = [ crankset_question_1, crankset_question_2, crankset_question_3 ]
 
+<<<<<<< HEAD
 
   # Battery not sold separately **
 
+=======
+# Battery not sold separately **
+if Rails.env.development?
+  ################################################################ USERS ################################################################
+  buyer = User.create!(email: "user@app.com", password: "123456" )
+  seller = User.create!(email: "test@app.com", password: "123456" )
+  bike_user = User.create!(email: "bike@app.com", password: "123456" )
+
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+>>>>>>> main
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
+<<<<<<< HEAD
 
   puts "Creating 10 Products and their products attributes..."
 
@@ -318,6 +323,26 @@ require 'json'
 
     )
 
+=======
+  puts "Creating 10 Products and their products attributes..."
+
+  10.times do
+    user = [buyer, seller, bike_user].sample
+    category = categories.sample
+
+    product = Product.create!(user: user,
+      category: category,
+      modality: category.modalities.sample,
+      product_type: products_options.sample,
+      brand: ["nuflow", "damatta", "nomad"].sample,
+      name: "òtimo produto",
+      description: "Único dono com funcinamento perfeito",
+      price_in_cents: rand(10000..50000),
+      quantity: rand(1..10)
+
+    )
+
+>>>>>>> main
     product_attributes =  ProductTypeAttribute.where(product_type: product.product_type).each do | product_type_attribute |
       ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample)
     end
@@ -368,6 +393,9 @@ require 'json'
       description: "Bicicleta em perfeito estado apenas 1 dono.",
       accessories: false
     )
+<<<<<<< HEAD
+=======
+  end
+  puts "Seed finished"
+>>>>>>> main
 end
-
-puts "Seed finished"
