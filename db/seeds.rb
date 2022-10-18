@@ -10,13 +10,6 @@ require 'json'
 
 puts "Starting seed..."
 
-################################################################ USERS ################################################################
-buyer = User.create!(email: "user@app.com", password: "123456" )
-seller = User.create!(email: "test@app.com", password: "123456" )
-bike_user = User.create!(email: "bike@app.com", password: "123456" )
-
-
-
 ################################################################ CTEGORIES ################################################################
 
 ##### BIKES #####
@@ -295,79 +288,83 @@ crankset_questions = [ crankset_question_1, crankset_question_2, crankset_questi
 
 
 # Battery not sold separately **
+if Rails.env.development?
+  ################################################################ USERS ################################################################
+  buyer = User.create!(email: "user@app.com", password: "123456" )
+  seller = User.create!(email: "test@app.com", password: "123456" )
+  bike_user = User.create!(email: "bike@app.com", password: "123456" )
+
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+  puts "Creating 10 Products and their products attributes..."
 
+  10.times do
+    user = [buyer, seller, bike_user].sample
+    category = categories.sample
 
-puts "Creating 10 Products and their products attributes..."
+    product = Product.create!(user: user,
+      category: category,
+      modality: category.modalities.sample,
+      product_type: products_options.sample,
+      brand: ["nuflow", "damatta", "nomad"].sample,
+      name: "òtimo produto",
+      description: "Único dono com funcinamento perfeito",
+      price_in_cents: rand(10000..50000),
+      quantity: rand(1..10)
 
-10.times do
-  user = [buyer, seller, bike_user].sample
-  category = categories.sample
+    )
 
-  product = Product.create!(user: user,
-    category: category,
-    modality: category.modalities.sample,
-    product_type: products_options.sample,
-    brand: ["nuflow", "damatta", "nomad"].sample,
-    name: "òtimo produto",
-    description: "Único dono com funcinamento perfeito",
-    price_in_cents: rand(10000..50000),
-    quantity: rand(1..10)
-
-  )
-
-  product_attributes =  ProductTypeAttribute.where(product_type: product.product_type).each do | product_type_attribute |
-    ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample)
+    product_attributes =  ProductTypeAttribute.where(product_type: product.product_type).each do | product_type_attribute |
+      ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample)
+    end
   end
+
+
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BIKES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+  bike_conditions = ["new", "used" ]
+
+  structural_visual_condition = ["perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired" ]
+
+  opareting_condition = ["rears_worn_out_higher_75", "hifters-not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
+
+
+  puts "Creating 10 Bikes..."
+
+  10.times do
+    category = [mtb, dirt, road].sample
+
+    bike = Bike.create!(
+      category_id:  category.id,
+      modality: category.modalities.sample,
+      bike_type: "No Engine",
+      price_in_cents: rand(10000000..22000000),
+      quantity: 1,
+      locality: "Belo Horizonte",
+      user_id: (User.ids).sample,
+      frame_brand: frame_brands.sample,
+      model: ["GTX", "Sense mt-4r", "Oggi predator", "Alfameq trilheiro", "Specialized GTR"].sample,
+      year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
+      frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
+      frame_material: "Aluminium",
+      rim_size: "19'",
+      number_of_front_gears: 1,
+      number_of_rear_gears: 16,
+      brake_type: "Freio a disco",
+      suspension_type: "Full suspension",
+      front_suspension_travel: "100 mm",
+      rear_suspension_travel: "110 mm",
+      seat_post_type: "Retrátil",
+      seat_post_travel: "100 mm",
+      weight: [ 15.0, 16.3, 15.7, 17.4].sample,
+      bike_conditions: "Usada",
+      structural_visual_condition: structural_visual_condition.sample,
+      opareting_condition: opareting_condition.sample,
+      documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
+      description: "Bicicleta em perfeito estado apenas 1 dono.",
+      accessories: false
+    )
+  end
+  puts "Seed finished"
 end
-
-
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BIKES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-
-bike_conditions = ["new", "used" ]
-
-structural_visual_condition = ["perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired" ]
-
-opareting_condition = ["rears_worn_out_higher_75", "hifters-not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
-
-
-puts "Creating 10 Bikes..."
-
-10.times do
-  category = [mtb, dirt, road].sample
-
-  bike = Bike.create!(
-    category_id:  category.id,
-    modality: category.modalities.sample,
-    bike_type: "No Engine",
-    price_in_cents: rand(10000000..22000000),
-    quantity: 1,
-    locality: "Belo Horizonte",
-    user_id: (User.ids).sample,
-    frame_brand: frame_brands.sample,
-    model: ["GTX", "Sense mt-4r", "Oggi predator", "Alfameq trilheiro", "Specialized GTR"].sample,
-    year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
-    frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
-    frame_material: "Aluminium",
-    rim_size: "19'",
-    number_of_front_gears: 1,
-    number_of_rear_gears: 16,
-    brake_type: "Freio a disco",
-    suspension_type: "Full suspension",
-    front_suspension_travel: "100 mm",
-    rear_suspension_travel: "110 mm",
-    seat_post_type: "Retrátil",
-    seat_post_travel: "100 mm",
-    weight: [ 15.0, 16.3, 15.7, 17.4].sample,
-    bike_conditions: "Usada",
-    structural_visual_condition: structural_visual_condition.sample,
-    opareting_condition: opareting_condition.sample,
-    documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
-    description: "Bicicleta em perfeito estado apenas 1 dono.",
-    accessories: false
-  )
-end
-
-puts "Seed finished"
