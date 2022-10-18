@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 export function NewProduct(props) {
-  // const [newProduct, setNewProduct] = useState({});
   const [user, setUser] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  // const [productTypeId, setProductTypeId] = useState();
   const [selectedProductTypeId, setSelectedProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -18,6 +16,8 @@ export function NewProduct(props) {
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
+  const [productPhotos, setProductPhotos ] = useState([]);
+
 
 
   useEffect(() => {
@@ -58,6 +58,21 @@ export function NewProduct(props) {
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
     currentProductAttributes[attribute.name] = e.target.value
     setProductAttributes(currentProductAttributes)
+  }
+
+  const createProductPhotos = (e) => {
+    // const currentProductPhotos = {...productPhotos} // criar um hash com valor atual do estado (copiar o valor)
+    // currentProductPhotos[name] = e.target.files.name
+    // currentProductPhotos[type] = e.target.files.type
+    const arrayOfObjects = Object.values(e.target.files)
+    console.log(arrayOfObjects)
+    const arrayOfArray = arrayOfObjects.map(object => Object.values(object))
+    // const arrayOfArray = Object.values(arrayOfObjects)
+    // setProductPhotos(Object.values(e.target.files))
+    console.log(arrayOfArray)
+    // setProductPhotos(Object.keys(e.target.files).map(key => e.target.files[key]))
+
+    console.log(productPhotos)
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -103,6 +118,7 @@ export function NewProduct(props) {
       description: productDescription,
       price_in_cents: productPrice,
       quantity: productQuantity,
+      photos: productPhotos,
       productAttributes
 
     }
@@ -227,7 +243,16 @@ export function NewProduct(props) {
             </div>
           </div>
         )}
+
         {productQuantity && (<>
+
+          <label htmlFor="photos">Adicione as fotos do seu produto:</label>
+
+          <input type="file" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
+
+        </>)}
+
+        {productPhotos &&  (<>
 
           <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5">Anunciar</button>
 

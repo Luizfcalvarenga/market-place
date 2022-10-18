@@ -88,24 +88,15 @@ export function Product(props) {
                 {product.product_attributes.map((attribute) => {
                   return (
                     <div className="d-inline-flex justify-content-between">
-
-
                       <h4 key={attribute.product_type_attribute_id} className="me-2 mb-3 text-black"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></h4>
                       <h4 key={attribute.id} className="text-success me-3">{attribute.value}</h4>
-
-
                     </div>
 
                   )
                 })}
                 <div className="d-inline-flex justify-content-between">
-
-
                   <h4 className="me-2 mb-3 text-black"><strong>Categoria:</strong></h4>
                   <h4 className="text-success me-3">{product.category.name}</h4>
-
-
-
                 </div>
 
 
@@ -127,9 +118,9 @@ export function Product(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p>Produto: {product.product_type.name} </p>
-              <p className="">Marca: {product.brand}</p>
-              <p className="">Disponível: {product.quantity}</p>
+              <p><strong>Produto:</strong> {product.product_type.name} </p>
+              <p className=""><strong>Marca:</strong> {product.brand}</p>
+              <p className=""><strong>Disponível:</strong> {product.quantity}</p>
 
             </div>
 

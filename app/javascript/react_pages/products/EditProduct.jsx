@@ -44,6 +44,7 @@ export function EditProduct(props) {
         <p>{JSON.stringify(product)}</p>
         <p>{JSON.stringify(productAttributes)}</p>
         <p>{product.name}</p>
+        <p>{product.photos}</p>
         <p>{product.modality}</p>
         <p>{product.brand}</p>
         <p>{product.description}</p>

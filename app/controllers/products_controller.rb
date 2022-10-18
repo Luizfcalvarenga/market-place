@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     skip_authorization
     @product_types = ProductType.all
     @categories= Category.all
-    
+
     if @product.save
       redirect_to product_path(@product)
     else
@@ -98,6 +98,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
+    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity, photos: [])
   end
 end

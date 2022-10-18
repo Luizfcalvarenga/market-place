@@ -5,8 +5,7 @@ class Product < ApplicationRecord
 
   has_many :product_attributes
   has_many :product_type_attributes, through: :product_attributes
-
-
+  
   has_many_attached :photos
 
   validates :price_in_cents, :category, :quantity, :name, presence: true

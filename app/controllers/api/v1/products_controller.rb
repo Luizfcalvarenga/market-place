@@ -41,10 +41,19 @@ module Api
         @categories = Category.all
 
 
+        if params[:product][:photos].present?
+          # params[:product][:photos].each do |photo|
+          @product.photos.attach(params[:product][:photos])
+          # end
+        end
+
         if @product.save
-          params[:product][:productAttributes].each do |key, value|
-            ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
+          if params[:product][:productAttributes].present?
+            params[:product][:productAttributes].each do |key, value|
+              ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
+            end
           end
+
           render json: { success: true, product: @product, redirect_url: product_path(@product) }
         else
           render json: { success: false, error: @product.errors.messages }, status: 422
