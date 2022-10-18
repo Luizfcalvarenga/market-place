@@ -173,15 +173,14 @@ frame_brands = [ "alfameq",
 ].sort_by { |frame_brands| frame_brands }
 
 
-road_frame_sizes = [ "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-mtb_dirt_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+road_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
+mtb_dirt_frame_sizes = [  "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
 
 frame_materials = [ "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
 frame_question_1 = ProductTypeAttribute.create!(product_type: frame, name: "documentation_type", kind: "multiple_choices", options: ["Yes", "No"], prompt: "Possui documentação?" )
 frame_question_2 = ProductTypeAttribute.create!(product_type: frame, name: "frame_brand", kind: "multiple_choices", options: frame_brands, prompt: "Marca do quadro?" )
 frame_question_3 = ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: frame_materials, prompt: "Material do quadro?" )
-# frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "which_category", kind: "multiple_choices", options: categories, prompt: "Qual categoria?" )
 frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro?")
 frame_question_5 = ProductTypeAttribute.create!(product_type: frame, name: "types_of_rim", kind: "multiple_choices", options: [16, 20, 26, 27.5, 29, 650, 700], prompt: "Compatibilidade de aro?")
 frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição?")
