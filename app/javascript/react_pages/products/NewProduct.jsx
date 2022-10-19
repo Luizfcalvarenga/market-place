@@ -16,7 +16,7 @@ export function NewProduct(props) {
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
-  const [productPhotos, setProductPhotos ] = useState([]);
+  const [productPhotos, setProductPhotos ] = useState(null);
 
 
 
@@ -64,15 +64,20 @@ export function NewProduct(props) {
     // const currentProductPhotos = {...productPhotos} // criar um hash com valor atual do estado (copiar o valor)
     // currentProductPhotos[name] = e.target.files.name
     // currentProductPhotos[type] = e.target.files.type
-    const arrayOfObjects = Object.values(e.target.files)
-    console.log(arrayOfObjects)
-    const arrayOfArray = arrayOfObjects.map(object => Object.values(object))
+    // const arrayOfObjects = Object.values(e.target.files)
+    // console.log(arrayOfObjects)
+    // const arrayOfArray = arrayOfObjects.map(object => Object.values(object))
     // const arrayOfArray = Object.values(arrayOfObjects)
-    // setProductPhotos(Object.values(e.target.files))
-    console.log(arrayOfArray)
-    // setProductPhotos(Object.keys(e.target.files).map(key => e.target.files[key]))
+    const photos = Object.values(e.target.files)
+    const formData = new FormData()
+    photos.map((photo) => {
+      formData.append("image", photo)
 
-    console.log(productPhotos)
+    })
+    // console.log(arrayOfArray)
+    // setProductPhotos(Object.keys(e.target.files).map(key => e.target.files[key]))
+    setProductPhotos(Object.values(formData))
+    console.log(formData)
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -107,6 +112,8 @@ export function NewProduct(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+
 
     const product = {
       user_id: user,

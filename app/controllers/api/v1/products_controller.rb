@@ -39,8 +39,7 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
-
+        raise
         if params[:product][:photos].present?
           # params[:product][:photos].each do |photo|
           @product.photos.attach(params[:product][:photos])
