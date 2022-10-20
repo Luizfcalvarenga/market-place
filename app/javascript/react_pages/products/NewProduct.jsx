@@ -18,7 +18,9 @@ export function NewProduct(props) {
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
 
-
+  const [errors, setErrors] = useState({
+    product: {},
+  });
 
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
@@ -110,7 +112,7 @@ export function NewProduct(props) {
     )
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
 
@@ -130,20 +132,35 @@ export function NewProduct(props) {
 
     }
 
-    axios.post('/api/v1/products', {
-      product
-    })
-    .then(function (response) {
-      console.log(response.id);
-      if (response.success) {
-        window.location = response.redirect_url
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    const response = await axios.post('/api/v1/products', product )
+    if (response.data.success) {
+      window.location = response.data.redirect_url;
+    } else {
+      console.log(response.data.errors)
 
+      setErrors(response.data.errors);
+      console.log(errors)
+      alert(
+        "Erro ao criar o produto: " + JSON.stringify(response.errors)
+      );
+    }
 
+    // .then(function (response) {
+    //   console.log(response.data);
+    //   if (response.data.success) {
+    //     window.location = response.data.redirect_url
+    //   } else {
+    //     setErrors(response.data.errors)
+    //     console.log(response.data.errors)
+    //     alert("Erro ao criar produto: " + JSON.stringify(response.errors) )
+    //   }
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    //   setErrors(error.response.data.errors)
+    //   console.log(error.response.data.errors)
+    //   alert("Erro ao criar produto: " + JSON.stringify(error.response.data.errors) )
+    // });
   }
 
 
@@ -222,6 +239,9 @@ export function NewProduct(props) {
                     <span className="input-group-text" id="basic-addon1">Nome</span>
                   </div>
                   <input type="text" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
+                  { errors && errors.product && errors.product.name && (
+                    <p className="text-danger">{errors.product.name}</p>
+                  )}
                 </div>
               </div>
 
@@ -255,13 +275,13 @@ export function NewProduct(props) {
 
           <label htmlFor="photos">Adicione as fotos do seu produto:</label>
 
-          <input type="file" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
+          <input type="file" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => setProductPhotos(e.target.files)}/>
 
         </>)}
 
         {productPhotos &&  (<>
 
-          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5">Anunciar</button>
+          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
 
         </>)}
 

@@ -39,12 +39,12 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-        raise
-        if params[:product][:photos].present?
-          # params[:product][:photos].each do |photo|
-          @product.photos.attach(params[:product][:photos])
-          # end
-        end
+
+        # if params[:product][:photos].present?
+        #   # params[:product][:photos].each do |photo|
+        #   @product.photos.attach(params[:product][:photos])
+        #   # end
+        # end
 
         if @product.save
           if params[:product][:productAttributes].present?
@@ -55,7 +55,7 @@ module Api
 
           render json: { success: true, product: @product, redirect_url: product_path(@product) }
         else
-          render json: { success: false, error: @product.errors.messages }, status: 422
+          render json: { success: false, errors: @product.errors }, status: 422
         end
       end
 
@@ -74,7 +74,7 @@ module Api
         if @product.update(product_params)
           render json: @product
         else
-          render json: { error: @product.error.messages }, status: 422
+          render json: { errors: @product.error.messages }, status: 422
         end
       end
 
