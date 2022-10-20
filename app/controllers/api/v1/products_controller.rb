@@ -53,7 +53,11 @@ module Api
             end
           end
 
-          render json: { success: true, product: @product, redirect_url: product_path(@product) }
+          if  ProductAttribute.where(product: @product).present?
+            render json: { success: true, product: @product, product_attributes: @product_attributes, redirect_url: product_path(@product) }
+          else
+            render json: { success: false, errors: { product_attributes: ProductAttribute.where(product: @product).errors  } }
+          end
         else
           render json: { success: false, errors: @product.errors }, status: 422
         end

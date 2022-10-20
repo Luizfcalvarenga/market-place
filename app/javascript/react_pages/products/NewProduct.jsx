@@ -20,6 +20,7 @@ export function NewProduct(props) {
 
   const [errors, setErrors] = useState({
     product: {},
+    product_attributes: {}
   });
 
   useEffect(() => {
@@ -84,7 +85,7 @@ export function NewProduct(props) {
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
     let options = []
-    console.log(attribute.name, attribute.name === "front_suspension_travel", productAttributes["suspension_type"] )
+    // console.log(attribute.name, attribute.name === "front_suspension_travel", productAttributes["suspension_type"] )
     if (["mountain_bike", "dirt_street"].includes(selectedCategory) && attribute.name === "frame_size") {
       options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
     } else if (selectedCategory === "road" && attribute.name === "frame_size") {
@@ -132,35 +133,35 @@ export function NewProduct(props) {
 
     }
 
-    const response = await axios.post('/api/v1/products', product )
-    if (response.data.success) {
-      window.location = response.data.redirect_url;
-    } else {
-      console.log(response.data.errors)
+    // if (response.data.success) {
+    //   window.location = response.data.redirect_url;
 
-      setErrors(response.data.errors);
-      console.log(errors)
-      alert(
-        "Erro ao criar o produto: " + JSON.stringify(response.errors)
-      );
-    }
+    // } else {
+    //   console.log(response.data.errors)
 
-    // .then(function (response) {
-    //   console.log(response.data);
-    //   if (response.data.success) {
-    //     window.location = response.data.redirect_url
-    //   } else {
-    //     setErrors(response.data.errors)
-    //     console.log(response.data.errors)
-    //     alert("Erro ao criar produto: " + JSON.stringify(response.errors) )
-    //   }
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    //   setErrors(error.response.data.errors)
-    //   console.log(error.response.data.errors)
-    //   alert("Erro ao criar produto: " + JSON.stringify(error.response.data.errors) )
-    // });
+    //   setErrors(response.data.errors);
+    //   console.log(errors)
+    //   alert(
+    //     "Erro ao criar o produto: " + JSON.stringify(response.errors)
+    //   );
+    // }
+    axios.post('/api/v1/products', product )
+    .then(function (response) {
+      console.log(response.data);
+      if (response.data.success) {
+        window.location = response.data.redirect_url
+      } else {
+        setErrors(response.data.errors)
+        console.log(response.data.errors)
+        alert("Erro ao criar produto: " + JSON.stringify(response.errors) )
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      setErrors(error.response.data.errors)
+      console.log(error.response.data.errors)
+      alert("Erro ao criar produto: " + JSON.stringify(error.response.data.errors) )
+    });
   }
 
 
