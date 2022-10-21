@@ -1,5 +1,10 @@
 <div class="">
-  <div class="container">
-    <%= render "form", product: @product %>
+  <div class="">
+    <react
+    data-component="ProductForm"
+    data-product="<%= @product.to_json %>"
+    data-product-attributes="<%= @product_attributes.to_json %>"
+    data-product-id="<%= @product.id.to_json %>"
+  /></react>
   </div>
 </div>

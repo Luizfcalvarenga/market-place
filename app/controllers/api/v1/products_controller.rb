@@ -40,23 +40,19 @@ module Api
         @product_types = ProductType.all
         @categories = Category.all
 
-        # if params[:product][:photos].present?
-        #   # params[:product][:photos].each do |photo|
-        #   @product.photos.attach(params[:product][:photos])
-        #   # end
-        # end
 
         if @product.save
-          if params[:product][:productAttributes].empty?
-
-            render json: { success: true, product: @product, redirect_url: product_path(@product) }
-
-          else
+          if params[:product][:photos].present?
+            # params[:product][:photos].each do |photo|
+            @product.photos.attach(params[:product][:photos])
+            # end
+          end
+          if params[:product][:productAttributes].present?
             @product_attributes = params[:product][:productAttributes].each do |key, value|
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
-            render json: { success: true, product: @product, product_attributes: @product_attributes, redirect_url: product_path(@product) }
           end
+          render json: { success: true, product: @product, product_attributes: @product_attributes, redirect_url: product_path(@product) }
         else
           render json: { success: false, errors: @product.errors }, status: 422
         end
