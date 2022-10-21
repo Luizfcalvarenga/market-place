@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-export function NewProduct(props) {
+export function ProductForm(props) {
   const [user, setUser] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  const [selectedProductTypeId, setSelectedProductTypeId] = useState("");
+  const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [modalities, setModalities] = useState([]);
-  const [selectedModality, setSelectedModality] = useState("");
+  const [productModality, setProductModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
   const [productBrand, setProductBrand] = useState("");
@@ -20,8 +20,14 @@ export function NewProduct(props) {
 
   const [errors, setErrors] = useState({
     product: {},
-    product_attributes: {}
+    product_attributes: {},
   });
+
+  async function fetchProduct() {
+    const data = await fetch(`http://localhost:3000/api/v1/products/${props.productId}/edit`)
+      .then((response) => response.json())
+      .then((data) => alert(JSON.stringify(data)));
+  }
 
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
@@ -31,6 +37,7 @@ export function NewProduct(props) {
       setCategories(data.categories)
       setUser(data.user.id)
      })
+    if (props.productId) fetchProduct();
   }, []);
 
   useEffect(() => {
@@ -42,8 +49,8 @@ export function NewProduct(props) {
 
 
   useEffect(() => {
-    if(selectedProductTypeId) {
-      fetch(`/get_attributes_for_product?product_type_id=${selectedProductTypeId}`)
+    if(productTypeId) {
+      fetch(`/get_attributes_for_product?product_type_id=${productTypeId}`)
       .then((response) => response.json())
       .then((data) => {
         setProductTypeAttributes(
@@ -54,7 +61,7 @@ export function NewProduct(props) {
         );
       })
     }
-  }, [selectedProductTypeId]);
+  }, [productTypeId]);
 
 
   const createProductAttributes = (e, attribute) => {
@@ -121,8 +128,8 @@ export function NewProduct(props) {
     const product = {
       user_id: user,
       category_id: categoryId,
-      modality: selectedModality,
-      product_type_id: selectedProductTypeId,
+      modality: productModality,
+      product_type_id: productTypeId,
       brand: productBrand,
       name: productName,
       description: productDescription,
@@ -132,6 +139,8 @@ export function NewProduct(props) {
       productAttributes
 
     }
+
+
 
     // if (response.data.success) {
     //   window.location = response.data.redirect_url;
@@ -192,8 +201,8 @@ export function NewProduct(props) {
           <div className="card-questions mb-5">
             <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
             <select
-              value={selectedModality}
-              onChange={(e) => e.preventDefault && setSelectedModality(e.target.value)}
+              value={productModality}
+              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
               className="select-answer"
             >
               {modalities.map((modality, index) => {
@@ -203,12 +212,12 @@ export function NewProduct(props) {
           </div>
         )}
 
-        {selectedModality && (
+        {productModality && (
           <div className="card-questions mb-5">
             <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
             <select
-            value={selectedProductTypeId}
-            onChange={(e) => setSelectedProductTypeId(e.target.value)}
+            value={productTypeId}
+            onChange={(e) => setProductTypeId(e.target.value)}
             className="select-answer"
             >
               {productTypes.map((productType) => {
@@ -219,7 +228,7 @@ export function NewProduct(props) {
         )}
 
 
-        {selectedProductTypeId && productTypeAttributes && (
+        {productTypeId && productTypeAttributes && (
 
           <div>
             {productTypeAttributes.map((attribute, index) => {
