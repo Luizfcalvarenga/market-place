@@ -47,7 +47,7 @@ bike_types = [ "no_engine", "electric_engine"]
 
 
 
-brake = ProductType.create(name: "breake") #
+brake = ProductType.create(name: "brake") #
 bottle_cage = ProductType.create(name: "bottle_cage") #
 cassette = ProductType.create(name: "cassete")
 chain = ProductType.create(name: "chain")

@@ -93,6 +93,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  def search
+    @products_brake = Product.where(product_type_id: (ProductType.find_by(name: "brake").id))
+  end
 
 
 
