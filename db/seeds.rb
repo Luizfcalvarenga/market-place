@@ -11,7 +11,14 @@ require 'json'
 
 puts "Starting seed..."
 
-################################################################ CTEGORIES ################################################################
+################################################################ SERVICES ################################################################
+
+standart_ad = Service.create!(name: "standart_ad", description: "standart_ad_with_no_views_privileges", price_in_cents: 2990)
+gold_ad = Service.create!(name: "gold_ad", description: "gold_ad_with_some_views_privileges", price_in_cents: 3990)
+platinum_ad = Service.create!(name: "platinum_ad", description: "platinum_ad_with_total_views_privileges", price_in_cents: 4990)
+
+
+################################################################ CATEGORIES ################################################################
 
 ##### BIKES #####
 

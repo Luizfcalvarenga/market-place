@@ -75,6 +75,7 @@ class ProductsController < ApplicationController
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all
+    @services = Service.all
     if current_user.present?
       @user = current_user
     end
@@ -86,7 +87,8 @@ class ProductsController < ApplicationController
       format.json { render json: {
         types_of_product: @product_types,
         categories: @categories,
-        user: @user
+        user: @user,
+        services: @services
       } }
     end
   end

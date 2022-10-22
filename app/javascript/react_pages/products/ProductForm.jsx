@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 export function ProductForm(props) {
+  const [productId, setProductId] = useState([]);
   const [user, setUser] = useState([]);
+  const [services, setServices] = useState([]);
+  const [productServicePrice, setProductServicePrice] = useState(null);
   const [productTypes, setProductTypes] = useState([]);
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
@@ -59,8 +62,14 @@ export function ProductForm(props) {
       setProductTypes(data.types_of_product)
       setCategories(data.categories)
       setUser(data.user.id)
+      setServices(data.services)
+
+
      })
-    if (props.productId) fetchProduct();
+    if (props.productId) {
+      fetchProduct();
+      setProductId(props.productId)
+    }
   }, []);
 
   useEffect(() => {
@@ -330,7 +339,49 @@ export function ProductForm(props) {
 
         </>)}
 
-        {productPhotos &&  (<>
+        {productPhotos && productId (<>
+
+          <div className="card-questions my-3">
+
+          {services.map((service) => {
+            return (
+              <>
+                <input type="radio"
+                value={productServicePrice}
+                onChange={(e) => setProductServicePrice(e.target.value)}
+                className="select-answer"
+                />
+
+                <label htmlFor="service">{service.name} | {(service.price_in_cents / 100).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                  })}
+                </label>
+              </>
+            )
+          })}
+
+
+
+
+            {/* <label htmlFor="product" className="mb-3">Qual tipo de anúncio quer usar para seu produto?</label>
+            <select
+            type="radio"
+            value={productServicePrice}
+            onChange={(e) => setProductServicePrice(e.target.value)}
+            className="select-answer"
+            >
+              {services.map((service) => {
+                return (<option key={service.id} value={service.price_in_cents}>{service.name} | {(service.price_in_cents / 100).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}</option>)
+              })}
+            </select> */}
+          </div>
+        </>)}
+
+        {productServicePrice &&  (<>
 
           <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
 
