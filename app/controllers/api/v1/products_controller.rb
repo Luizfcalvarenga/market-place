@@ -62,17 +62,32 @@ module Api
       def edit
         @product = Product.find(params[:id])
         authorize @product
-        render json: { product: @product, product_attributes: @product.product_attributes }
+
+        @product_attributes = {}
+        @product.product_attributes.each { |product_attribute|
+          @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
+        }
+        render json: { product: @product, product_attributes: @product_attributes }
       end
 
 
       def update
-        @product = Product.find_by(id: params[:id])
+        @product = Product.find(params[:id])
         @product_attributes = @product.product_attributes
+        if params[:product][:productAttributes].present?
+          params[:product][:productAttributes].each do |key, value|
+            ProductAttribute.update(value: value)
+          end
+        end
         authorize @product
+        # if params[:product][:productAttributes].present?
+        #   @product_attributes = params[:product][:productAttributes].each do |key, value|
+        #     ProductAttribute.update(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
+        #   end
+        # end
 
-        if @product.update(product_params) && @product_attributes.save
-          render json: { success: true, product: @product}
+        if @product.update(product_params) || @product_attributes.update(product_attributes_params)
+          render json: { success: true, product: @product, redirect_url: product_path(@product)}
         else
           render json: { success: false, errors: {product: @product.error, product_attributes: @product_attributes.errors }}, status: 422
         end

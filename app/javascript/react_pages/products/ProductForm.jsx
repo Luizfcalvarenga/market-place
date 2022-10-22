@@ -34,13 +34,21 @@ export function ProductForm(props) {
       setCategoryId(response.data.product.category_id);
       setSelectedCategory(categories.find(element => element.id === response.data.product.category_id))
       setProductModality(response.data.product.modality);
-      setProductAttributes(response.data.product_attributes);
       setProductBrand(response.data.product.brand);
       setProductName(response.data.product.name);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
-      console.log("mengudo")
+
+
+
+      setProductAttributes(
+        response.data.product_attributes
+      );
+
+
+
+      console.log(productAttributes)
     }
   }
 
@@ -71,9 +79,11 @@ export function ProductForm(props) {
         setProductTypeAttributes(
           data
         );
-        setProductAttributes(
-          {}
-        );
+        if (!props.productId) {
+          setProductAttributes(
+            {}
+          );
+        }
       })
     }
   }, [productTypeId]);
@@ -125,7 +135,6 @@ export function ProductForm(props) {
         <label htmlFor="product attribute" className="mb-3" key={index}>{attribute.prompt}</label><br />
         <select
         className="select-answer"
-        value={productAttributes}
         onChange={(e) => createProductAttributes(e, attribute)}
         >
           {options?.map((option, index) => {
@@ -156,7 +165,20 @@ export function ProductForm(props) {
 
     }
 
+    const url = props.productId
+    ? `/api/v1/products/${props.productId}`
+    : "/api/v1/products";
+    const method = props.productId ? 'patch' : 'post';
 
+    const response = await axios[method](url, product);
+    if (response.data.success) {
+      window.location = response.data.redirect_url;
+    } else {
+      setErrors(response.data.errors);
+      alert(
+        "Erro ao criar a proposta: " + JSON.stringify(response.data.errors)
+      );
+    }
 
     // if (response.data.success) {
     //   window.location = response.data.redirect_url;
@@ -170,23 +192,26 @@ export function ProductForm(props) {
     //     "Erro ao criar o produto: " + JSON.stringify(response.errors)
     //   );
     // }
-    axios.post('/api/v1/products', {product} )
-    .then(function (response) {
-      console.log(response.data);
-      if (response.data.success) {
-        window.location = response.data.redirect_url
-      } else {
-        setErrors(response.data.errors)
-        console.log(response.data.errors)
-        alert("Erro ao criar produto: " + JSON.stringify(response.errors) )
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-      setErrors(error.response.data.errors)
-      console.log(error.response.data.errors)
-      alert("Erro ao criar produto: " + JSON.stringify(error.response.data.errors) )
-    });
+
+
+
+    // axios.post('/api/v1/products', {product} )
+    // .then(function (response) {
+    //   console.log(response.data);
+    //   if (response.data.success) {
+    //     window.location = response.data.redirect_url
+    //   } else {
+    //     setErrors(response.data.errors)
+    //     console.log(response.data.errors)
+    //     alert("Erro ao criar produto: " + JSON.stringify(response.errors) )
+    //   }
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    //   setErrors(error.response.data.errors)
+    //   console.log(error.response.data.errors)
+    //   alert("Erro ao criar produto: " + JSON.stringify(error.response.data.errors) )
+    // });
   }
 
 

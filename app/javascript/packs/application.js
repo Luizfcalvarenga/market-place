@@ -65,7 +65,7 @@ document.addEventListener("turbolinks:load", () => {
       ProductForm: (
         <ProductForm
           productId={reactContainer.dataset.productId}
-          productAttributes={reactContainer.dataset.productAttributes}
+          // productAttributes={reactContainer.dataset.productAttributes}
         />
       ),
     };
