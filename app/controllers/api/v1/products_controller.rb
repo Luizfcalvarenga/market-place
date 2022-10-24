@@ -19,7 +19,6 @@ module Api
         end
       end
 
-
       def show
         @product = Product.find(params[:id])
         skip_authorization
@@ -50,12 +49,15 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-          render json: { success: true, product: @product, product_attributes: @product_attributes, redirect_url: product_path(@product) }
+          if @product.photos.attach && ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
+            render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: product_path(@product) }
+          else
+            render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors, photos: @product.photos.erros}}, status: 422
+          end
         else
           render json: { success: false, errors: @product.errors }, status: 422
         end
       end
-
 
       def edit
         @product = Product.find(params[:id])
@@ -67,22 +69,15 @@ module Api
         render json: { product: @product, product_attributes: @product_attributes }
       end
 
-
       def update
         @product = Product.find(params[:id])
         @product_attributes = @product.product_attributes
         if params[:product][:productAttributes].present?
           params[:product][:productAttributes].each do |key, value|
-            ProductAttribute.update(value: value)
+            @product_attributes.find_by(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type)).update(value: value)
           end
         end
         authorize @product
-        # if params[:product][:productAttributes].present?
-        #   @product_attributes = params[:product][:productAttributes].each do |key, value|
-        #     ProductAttribute.update(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
-        #   end
-        # end
-
         if @product.update(product_params) || @product_attributes.update(product_attributes_params)
           render json: { success: true, product: @product, redirect_url: product_path(@product)}
         else

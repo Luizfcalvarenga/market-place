@@ -24,6 +24,7 @@ export function ProductForm(props) {
   const [errors, setErrors] = useState({
     product: {},
     product_attributes: {},
+    photos: {},
   });
 
   async function fetchProduct() {
@@ -57,8 +58,6 @@ export function ProductForm(props) {
       setCategories(data.categories)
       setUser(data.user.id)
       setServices(data.services)
-
-      console.log(user)
      })
     if (props.productId) {
       fetchProduct();
@@ -102,7 +101,6 @@ export function ProductForm(props) {
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
     setProductPhotos(photos)
-    console.log(photos)
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -148,7 +146,7 @@ export function ProductForm(props) {
     dataObject.append( "product[price_in_cents]", productPrice );
     dataObject.append( "product[quantity]", productQuantity );
     productPhotos.map((photo) => {
-      dataObject.append( "product[photos]", photo );
+      dataObject.append( "product[photos][]", photo );
     })
     for (const [key, value] of Object.entries(productAttributes)) {
       console.log(`${key}: ${value}`);
@@ -182,7 +180,7 @@ export function ProductForm(props) {
     } else {
       setErrors(response.data.errors);
       alert(
-        "Erro ao criar a proposta: " + JSON.stringify(response.data.errors)
+        "Erro ao criar a produto: " + JSON.stringify(response.data.errors)
       );
     }
   }
@@ -306,29 +304,6 @@ export function ProductForm(props) {
         {productPhotos &&  (<>
 
           <div className="card-questions my-3">
-
-            {/* {services.map((service) => {
-              return (
-                <>
-                  <input type="radio"
-                  id="service"
-                  value={productServicePrice}
-                  onChange={(e) => setProductServicePrice(e.target.value)}
-                  className="select-answer"
-                  />
-
-                  <label htmlFor="service">{service.name} | {(service.price_in_cents / 100).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                    })}
-                  </label>
-                </>
-              )
-            })} */}
-
-
-
-
             <label htmlFor="product" className="mb-3">Qual tipo de anúncio quer usar para seu produto?</label>
             <select
             type="radio"

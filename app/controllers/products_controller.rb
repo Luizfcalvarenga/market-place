@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = policy_scope(Product).order(created_at: :desc)
-
   end
 
   def show
@@ -34,17 +33,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def my_products
-    @user = current_user
-    @products = Product.where(user: @user)
-    @bikes = Bike.where(user: @user)
-    skip_authorization
-
-  end
 
   def edit
     @product = Product.find_by(id: params[:id])
-
     @product_attributes = ProductAttribute.where(product: @product)
     skip_authorization
   end
@@ -71,6 +62,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def my_products
+    @user = current_user
+    @products = Product.where(user: @user)
+    @bikes = Bike.where(user: @user)
+    skip_authorization
+  end
 
   def get_information_for_new_product
     @product_types = ProductType.all
