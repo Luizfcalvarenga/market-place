@@ -3,31 +3,14 @@ import React, { useEffect, useState } from "react";
 export function Product(props) {
   const [product, setProduct] = useState()
   const [quantity, setQuantity] = useState()
-
-
   let productId = window.location.pathname.split("/").pop();
 
   useEffect(async () => {
     let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
     setProduct(response.data);
-
   }, [])
 
-  const handleSubmit = (product) => {
-
-    const orderItem = {
-
-      product_id: productId,
-      price_in_cents: product.price_in_cents,
-      quantity: productQuantity
-
-    }
-
-    console.log(orderItem)
-
-
-  }
 
   return (
 
@@ -57,11 +40,27 @@ export function Product(props) {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <div className="technical-details mt-5">
-              <h4 className="text-success">Características Técnicas</h4>
+            {product.product_attributes && (
 
 
-            </div>
+              <div className="technical-details mt-5">
+                <h3 className="text-success mb-2">Características Técnicas</h3>
+                {product.product_attributes.map((attribute) => {
+                  return (
+                    <div className="d-inline-flex justify-content-between">
+                      <h4 key={attribute.product_type_attribute_id} className="me-2 mb-3 text-black"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></h4>
+                      <h4 key={attribute.id} className="text-success me-3">{attribute.value}</h4>
+                    </div>
+
+                  )
+                })}
+                <div className="d-inline-flex justify-content-between">
+                  <h4 className="me-2 mb-3 text-black"><strong>Categoria:</strong></h4>
+                  <h4 className="text-success me-3">{product.category.name}</h4>
+                </div>
+              </div>
+            )}
+
           </div>
 
           <div className="col-12 col-md-4 card-product">
@@ -77,46 +76,13 @@ export function Product(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p>Produto: {product.product_type.name} </p>
-              <p>Categoria: {product.category.name} </p>
-              <p className="">Marca: {product.brand}</p>
-              <p className="">Disponível: {product.quantity}</p>
+              <p><strong>Produto:</strong> {product.product_type.name} </p>
+              <p className=""><strong>Marca:</strong> {product.brand}</p>
+              <p className=""><strong>Disponível:</strong> {product.quantity}</p>
 
             </div>
 
             <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
-
-            <form action={product.id + "/order_items"} method="post" className="d-flex">
-              <div className="div">
-
-                <label htmlFor="" className="me-2">Quantidade</label>
-                <input type="number" onChange={(e) => setQuantity(e.target.value)} name="quantity" className="w-40 quantity-input"/>
-              </div>
-              <input type="hidden" value={product.id} />
-              <input type="hidden" value={product.price_in_cents * quantity } name="price_in_cents"/>
-
-
-              <button type="submit" className="btn-order mt-2 w-100"><i className="fas fa-cart-plus me-2"></i>Adicionar</button>
-            </form>
-            <div>
-
-
-              {quantity && (
-
-               <p className="mt-3">Subtotal: {((product.price_in_cents * quantity) /100 ).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </p>
-
-
-              )}
-
-
-
-
-            </div>
-
           </div>
         </div>
       )

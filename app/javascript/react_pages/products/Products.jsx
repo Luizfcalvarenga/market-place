@@ -17,7 +17,7 @@ export function Products(props) {
     setProducts(response.data.products);
   }, [categoryFilter, modalityFilter, sortBy])
 
- 
+
 
   return (
     <div className="p-5 br-8">
@@ -64,8 +64,8 @@ export function Products(props) {
         {products.map((product, idx) => {
           return (
             <div className="col-12 col-md-3 flex-wrap" product={product} key={product.id}>
-              <a href={"products/" + product.id}>
-                <div className="cards-bikes">
+              <a href={"products/" + product.id} className="remove-link">
+                <div className="cards-products">
                   <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                       <i className="fas fa-heart card-favorite"></i>
@@ -88,7 +88,7 @@ export function Products(props) {
                       <span className="visually-hidden">Next</span>
                     </button>
                   </div>
-                  <h4 className="card-title text-center mt-3">{product.modality}</h4>
+                  <h4 className="card-title text-center mt-3">{product.product_type.name}</h4>
                   <h4 className="text-center mt-1">
                     {(product.price_in_cents / 100).toLocaleString("pt-BR", {
                       style: "currency",
@@ -97,12 +97,11 @@ export function Products(props) {
                   </h4>
                   <hr/>
                   <div className="card-content mt-2">
-                    <p className="text-center mt-1">{product.name} | {product.brand}</p>
+                    <p className="text-center mt-1">{product.category.name} | {product.modality}</p>
                     <div className="d-flex justify-content-around">
-                      <p>{product.category.name}</p>
-                      <p>{product.product_type.name}</p>
+                      <p> {product.brand}</p>
+                      <p>{product.name}</p>
                     </div>
-                    <p>{product.user.email}</p>
                   </div>
                 </div>
               </a>

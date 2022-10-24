@@ -30,29 +30,49 @@ import { ReactPage } from "../react_pages/ReactPage";
 import { Bikes } from "../react_pages/bikes/Bikes";
 import { Products } from "../react_pages/products/Products";
 import { Product } from "../react_pages/products/Product";
-import { NewProduct } from "../react_pages/products/NewProduct";
-import { EditProduct } from "../react_pages/products/EditProduct";
+import { ProductForm } from "../react_pages/products/ProductForm";
+
 
 
 
 
 
 document.addEventListener("turbolinks:load", () => {
-  const reactContainer = document.querySelector("react");
+  const reactContainers = document.querySelectorAll("react");
 
-  if (!reactContainer || !reactContainer.dataset.component) return;
+  if (!reactContainers) return;
+  reactContainers.forEach((reactContainer) => {
 
-  const components = {
-    ReactPage: <ReactPage message={reactContainer.dataset.message} />,
-    Bikes: <Bikes galo="doido" batata={2} />,
-    Products: <Products />,
-    Product: <Product />,
-    NewProduct: <NewProduct/>,
-    EditProduct: <EditProduct/>,
-  };
+    const components = {
+      ReactPage: <ReactPage message={reactContainer.dataset.message} />,
+      Bikes: (
+        <Bikes
+          bikes={reactContainer.dataset.bikes}
+          batata={2}
+        />
+      ),
+      Products: (
+        <Products
+          products={reactContainer.dataset.products}
+        />
+      ),
+      Product: (
+        <Product
+          productId={reactContainer.dataset.productId}
+          productAttributes={reactContainer.dataset.productAttributes}
+        />
+      ),
+      ProductForm: (
+        <ProductForm
+          productId={reactContainer.dataset.productId}
+          // productAttributes={reactContainer.dataset.productAttributes}
+        />
+      ),
+    };
 
-  ReactDOM.render(
-    components[reactContainer.dataset.component],
-    reactContainer
-  );
+    ReactDOM.render(
+      components[reactContainer.dataset.component],
+      reactContainer
+    );
+  })
 });

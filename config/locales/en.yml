@@ -36,6 +36,7 @@ en:
       category: Categoria
       product: Produto
       product_type: Tipo de Produto
+      product_type_attributes: Atributos para o tipo de produto
     attributes:
       user:
         full_name: Nome Completo

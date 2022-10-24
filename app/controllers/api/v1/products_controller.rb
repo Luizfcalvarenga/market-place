@@ -19,10 +19,11 @@ module Api
         end
       end
 
-
       def show
-        @product = Product.find_by(id: params[:id])
+        @product = Product.find(params[:id])
         skip_authorization
+        @product_attributes =  @product.product_attributes
+        @product_type_attributes = ProductTypeAttribute.where(product_type: @product.product_type)
       end
 
       def new
@@ -37,41 +38,61 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
-
         if @product.save
-          params[:product][:productAttributes].each do |key, value|
-            ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
+          if params[:product][:photos].present?
+            params[:product][:photos].each do | photo |
+              @product.photos.attach(photo)
+            end
           end
-          render json: { success: true, product: @product, redirect_url: product_path(@product) }
+          if params[:product][:productAttributes].present?
+            @product_attributes = params[:product][:productAttributes].each do |key, value|
+              ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
+            end
+          end
+          if @product.photos.attach && ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
+            render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: product_path(@product) }
+          else
+            render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors, photos: @product.photos.erros}}, status: 422
+          end
         else
-          render json: { error: @product.errors.messages }, status: 422
+          render json: { success: false, errors: @product.errors }, status: 422
         end
       end
 
       def edit
-        @product = Product.find_by(id: params[:id])
-        @product_attributes = ProductAttribute.where(product: @product)
-        skip_authorization
+        @product = Product.find(params[:id])
+        authorize @product
+        @product_attributes = {}
+        @product.product_attributes.each { |product_attribute|
+          @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
+        }
+        render json: { product: @product, product_attributes: @product_attributes }
       end
 
-
       def update
-        @product = Product.find_by(id: params[:id])
-        @product_attributes = ProductAttribute.where(product: @product)
-        skip_authorization
-
-        if @product.update(product_params)
-          render json: @product
+        @product = Product.find(params[:id])
+        @product_attributes = @product.product_attributes
+        if params[:product][:productAttributes].present?
+          params[:product][:productAttributes].each do |key, value|
+            @product_attributes.find_by(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type)).update(value: value)
+          end
+        end
+        authorize @product
+        if @product.update(product_params) || @product_attributes.update(product_attributes_params)
+          render json: { success: true, product: @product, redirect_url: product_path(@product)}
         else
-          render json: { error: @product.error.messages }, status: 422
+          render json: { success: false, errors: {product: @product.error, product_attributes: @product_attributes.errors }}, status: 422
         end
       end
 
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
+        params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity, photos: [])
+      end
+
+      def product_attributes_params
+        params.require(:product_attributes).permit(:value)
       end
     end
   end

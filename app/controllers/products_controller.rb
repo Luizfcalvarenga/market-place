@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = policy_scope(Product).order(created_at: :desc)
-
   end
 
   def show
@@ -26,7 +25,7 @@ class ProductsController < ApplicationController
     skip_authorization
     @product_types = ProductType.all
     @categories= Category.all
-    
+
     if @product.save
       redirect_to product_path(@product)
     else
@@ -34,17 +33,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def my_products
-    @user = current_user
-    @products = Product.where(user: @user)
-    @bikes = Bike.where(user: @user)
-    skip_authorization
-
-  end
 
   def edit
     @product = Product.find_by(id: params[:id])
-
     @product_attributes = ProductAttribute.where(product: @product)
     skip_authorization
   end
@@ -71,10 +62,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def my_products
+    @user = current_user
+    @products = Product.where(user: @user)
+    @bikes = Bike.where(user: @user)
+    skip_authorization
+  end
 
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all
+    @services = Service.all
     if current_user.present?
       @user = current_user
     end
@@ -86,11 +84,15 @@ class ProductsController < ApplicationController
       format.json { render json: {
         types_of_product: @product_types,
         categories: @categories,
-        user: @user
+        user: @user,
+        services: @services
       } }
     end
   end
 
+  def search
+    @products_brake = Product.where(product_type_id: (ProductType.find_by(name: "brake").id))
+  end
 
 
 
@@ -98,6 +100,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
+    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity, photos: [])
   end
 end

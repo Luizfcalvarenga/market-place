@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   belongs_to :product_type
 
   has_many :product_attributes
+  has_many :product_type_attributes, through: :product_attributes
   
   has_many_attached :photos
 

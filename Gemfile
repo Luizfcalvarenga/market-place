@@ -46,6 +46,7 @@ gem 'bootstrap-sass'
 gem 'rexml'
 gem 'uglifier'
 gem 'iugu', git: "https://github.com/iugu/iugu-ruby"
+gem 'active_model_serializers'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

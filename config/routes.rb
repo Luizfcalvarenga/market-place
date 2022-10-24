@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   # resource :products
 
   get 'my_products', to: 'products#my_products', as: "my_products"
+  get 'search/product_type', to: 'products#search', as: "search"
+
   # delete 'my_products/product/:id', to: 'profiles#destroy'
 
 

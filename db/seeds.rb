@@ -6,11 +6,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 require 'json'
 
 puts "Starting seed..."
 
-################################################################ CTEGORIES ################################################################
+################################################################ SERVICES ################################################################
+
+standart_ad = Service.create!(name: "standart_ad", description: "standart_ad_with_no_views_privileges", price_in_cents: 2990)
+gold_ad = Service.create!(name: "gold_ad", description: "gold_ad_with_some_views_privileges", price_in_cents: 3990)
+platinum_ad = Service.create!(name: "platinum_ad", description: "platinum_ad_with_total_views_privileges", price_in_cents: 4990)
+
+
+################################################################ CATEGORIES ################################################################
 
 ##### BIKES #####
 
@@ -24,7 +32,7 @@ other = Category.create!(name: "other")
 ##### GENERAL #####
 # mixed = Category.create!(name: "Mixed")
 
-categories = [mtb, dirt, road, other]
+categories = [mtb, dirt, road]
 
 
 ################################################################ PRODUCTS #########################################################
@@ -39,7 +47,7 @@ bike_types = [ "no_engine", "electric_engine"]
 
 
 
-brake = ProductType.create(name: "breake") #
+brake = ProductType.create(name: "brake") #
 bottle_cage = ProductType.create(name: "bottle_cage") #
 cassette = ProductType.create(name: "cassete")
 chain = ProductType.create(name: "chain")
@@ -166,15 +174,14 @@ frame_brands = [ "alfameq",
 ].sort_by { |frame_brands| frame_brands }
 
 
-road_frame_sizes = [ "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-mtb_dirt_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+road_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
+mtb_dirt_frame_sizes = [  "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
 
 frame_materials = [ "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
 frame_question_1 = ProductTypeAttribute.create!(product_type: frame, name: "documentation_type", kind: "multiple_choices", options: ["Yes", "No"], prompt: "Possui documentação?" )
 frame_question_2 = ProductTypeAttribute.create!(product_type: frame, name: "frame_brand", kind: "multiple_choices", options: frame_brands, prompt: "Marca do quadro?" )
 frame_question_3 = ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: frame_materials, prompt: "Material do quadro?" )
-# frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "which_category", kind: "multiple_choices", options: categories, prompt: "Qual categoria?" )
 frame_question_4 = ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro?")
 frame_question_5 = ProductTypeAttribute.create!(product_type: frame, name: "types_of_rim", kind: "multiple_choices", options: [16, 20, 26, 27.5, 29, 650, 700], prompt: "Compatibilidade de aro?")
 frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição?")
@@ -286,7 +293,6 @@ crankset_question_3 = ProductTypeAttribute.create!(product_type: crankset, name:
 
 crankset_questions = [ crankset_question_1, crankset_question_2, crankset_question_3 ]
 
-
 # Battery not sold separately **
 if Rails.env.development?
   ################################################################ USERS ################################################################
@@ -296,6 +302,7 @@ if Rails.env.development?
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   puts "Creating 10 Products and their products attributes..."
 
