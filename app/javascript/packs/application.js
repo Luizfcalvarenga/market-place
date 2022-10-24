@@ -58,7 +58,7 @@ document.addEventListener("turbolinks:load", () => {
       ),
       Product: (
         <Product
-          product={reactContainer.dataset.product}
+          productId={reactContainer.dataset.productId}
           productAttributes={reactContainer.dataset.productAttributes}
         />
       ),

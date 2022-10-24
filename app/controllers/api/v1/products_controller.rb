@@ -39,13 +39,11 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
-
         if @product.save
           if params[:product][:photos].present?
-            # params[:product][:photos].each do |photo|
-            @product.photos.attach(params[:product][:photos])
-            # end
+            params[:product][:photos].each do | photo |
+              @product.photos.attach(photo)
+            end
           end
           if params[:product][:productAttributes].present?
             @product_attributes = params[:product][:productAttributes].each do |key, value|
@@ -62,7 +60,6 @@ module Api
       def edit
         @product = Product.find(params[:id])
         authorize @product
-
         @product_attributes = {}
         @product.product_attributes.each { |product_attribute|
           @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
@@ -96,7 +93,7 @@ module Api
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity)
+        params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity, photos: [])
       end
 
       def product_attributes_params

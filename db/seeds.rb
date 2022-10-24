@@ -32,7 +32,7 @@ other = Category.create!(name: "other")
 ##### GENERAL #####
 # mixed = Category.create!(name: "Mixed")
 
-categories = [mtb, dirt, road, other]
+categories = [mtb, dirt, road]
 
 
 ################################################################ PRODUCTS #########################################################
