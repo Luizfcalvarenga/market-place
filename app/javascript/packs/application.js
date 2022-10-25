@@ -28,6 +28,8 @@ import "./payment_pooling";
 // Import components and pages
 import { ReactPage } from "../react_pages/ReactPage";
 import { Bikes } from "../react_pages/bikes/Bikes";
+import { Bike } from "../react_pages/bikes/Bike";
+import { BikeForm } from "../react_pages/bikes/BikeForm";
 import { Products } from "../react_pages/products/Products";
 import { Product } from "../react_pages/products/Product";
 import { ProductForm } from "../react_pages/products/ProductForm";
@@ -48,7 +50,16 @@ document.addEventListener("turbolinks:load", () => {
       Bikes: (
         <Bikes
           bikes={reactContainer.dataset.bikes}
-          batata={2}
+        />
+      ),
+      Bike: (
+        <Bike
+          bike={reactContainer.dataset.bike}
+        />
+      ),
+      BikeForm: (
+        <BikeForm
+          bikeId={reactContainer.dataset.bikeId}
         />
       ),
       Products: (

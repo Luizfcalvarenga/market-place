@@ -29,10 +29,10 @@ Rails.application.routes.draw do
 
 
   get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
-
   get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
-
   get 'get_product_attributes', to: 'product_attributes#get_product_attributes'
+
+  get 'get_information_for_new_bike', to: 'bikes#get_information_for_new_bike'
 
 
   resources :orders, only: [ :index, :show ]
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
       get 'users/me', to: 'users#me'
 
-      resources :bikes, only: :index
+      resources :bikes
       resources :products
     end
   end

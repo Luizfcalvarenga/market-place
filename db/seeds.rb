@@ -624,7 +624,7 @@ when "development"
 
   structural_visual_condition = ["perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired" ]
 
-  opareting_condition = ["rears_worn_out_higher_75", "hifters-not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
+  opareting_condition = ["rears_worn_out_higher_75", "hifters_not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
 
 
   puts "Creating 10 Bikes..."
@@ -638,26 +638,26 @@ when "development"
       bike_type: "No Engine",
       price_in_cents: rand(10000000..22000000),
       quantity: 1,
-      locality: "Belo Horizonte",
+      locality: ["Belo Horizonte", "Rio de Janeiro", "São Paulo"].sample,
       user_id: (User.ids).sample,
       frame_brand: frame_brands.sample,
       model: ["GTX", "Sense mt-4r", "Oggi predator", "Alfameq trilheiro", "Specialized GTR"].sample,
       year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
       frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
-      frame_material: "Aluminium",
+      frame_material: frame_materials.sample,
       rim_size: "19'",
       number_of_front_gears: 1,
       number_of_rear_gears: 16,
-      brake_type: "Freio a disco",
-      suspension_type: "Full suspension",
-      front_suspension_travel: "100 mm",
-      rear_suspension_travel: "110 mm",
-      seat_post_type: "Retrátil",
-      seat_post_travel: "100 mm",
+      brake_type: brake_types.sample,
+      suspension_type: suspension_types.sample,
+      front_suspension_travel: front_suspension_travels.sample,
+      rear_suspension_travel: rear_suspension_travels.sample,
+      seat_post_type: seat_post_types.sample,
+      seat_post_travel: seat_post_travels.sample,
       weight: [ 15.0, 16.3, 15.7, 17.4].sample,
-      bike_conditions: "Usada",
+      bike_conditions: ["Nova", "Usada"].sample,
       structural_visual_condition: structural_visual_condition.sample,
-      opareting_condition: opareting_condition.sample,
+      operating_condition: opareting_condition.sample,
       documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
       description: "Bicicleta em perfeito estado apenas 1 dono.",
       accessories: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_13_190258) do
+ActiveRecord::Schema.define(version: 2022_10_25_173111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2022_10_13_190258) do
     t.float "weight"
     t.string "bike_conditions"
     t.string "structural_visual_condition"
-    t.string "opareting_condition"
+    t.string "operating_condition"
     t.string "documentation_type"
     t.boolean "accessories"
     t.string "battery"

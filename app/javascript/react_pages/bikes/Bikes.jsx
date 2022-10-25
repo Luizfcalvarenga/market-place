@@ -59,8 +59,9 @@ export function Bikes(props) {
       <div className="row row-cols-1 mt-5">
         {bikes.map((bike, idx) => {
           return (
-            <div className="col-12 col-md-3" bike={bike} key={bike.id}>
-              <div className="cards-bikes">
+            <div className="col-12 col-md-3 flex-wrap" bike={bike} key={bike.id}>
+            <a href={"bikes/" + bike.id} className="remove-link">
+              <div className="cards-products">
                 <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                   <div className="carousel-inner">
                     <i className="fas fa-heart card-favorite"></i>
@@ -84,17 +85,23 @@ export function Bikes(props) {
                   </button>
                 </div>
                 <h4 className="card-title text-center mt-3">{bike.model}</h4>
-                <h4 className="text-center mt-1">R$ {bike.price_in_cents}</h4>
+                <h4 className="text-center mt-1">
+                  {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </h4>
                 <hr/>
                 <div className="card-content mt-2">
-                  <p className="text-center mt-1">{bike.frame_brand} | {bike.frame_size}</p>
+                  <p className="text-center mt-1">{bike.category.name} | {bike.modality}</p>
                   <div className="d-flex justify-content-around">
-                    <p>{bike.year}</p>
-                    <p>Aro: {bike.rim_size}</p>
+                    <p>{bike.suspension_type}</p>
+                    <p>{bike.brake_type}</p>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
+          </div>
           );
         })}
       </div>
