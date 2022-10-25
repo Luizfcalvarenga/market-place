@@ -408,7 +408,7 @@ export function BikeForm(props) {
             <label htmlFor="frontSuspensionTravel" className="mt-3">Suspensão dianteira?</label>
             <select
               class="select-answer"
-              value={frameSize}
+              value={frontSuspensionTravel}
               onChange={(e) => setFrontSuspensionTravel(e.target.value)}
 
             >
@@ -422,7 +422,7 @@ export function BikeForm(props) {
             <label htmlFor="rearSuspensionTravel" className="mt-3">Suspensão traseira?</label>
             <select
               class="select-answer"
-              value={frameSize}
+              value={rearSuspensionTravel}
               onChange={(e) => setRearSuspensionTravel(e.target.value)}
 
             >
@@ -436,7 +436,7 @@ export function BikeForm(props) {
             <label htmlFor="rearSuspensionTravel" className="mt-3">Suspensão traseira?</label>
             <select
               class="select-answer"
-              value={frameSize}
+              value={rearSuspensionTravel}
               onChange={(e) => setRearSuspensionTravel(e.target.value)}
 
             >
@@ -482,6 +482,8 @@ export function BikeForm(props) {
               })}
             </select>
           </>)}
+
+          <br />
 
           <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
           <select
@@ -624,9 +626,12 @@ export function BikeForm(props) {
           <div className="d-flex">
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">De uma descrição:</span>
+                <span className="input-group-text" id="basic-addon1">Peso da sua bicicleta?</span>
               </div>
-              <input type="text" className="form-control" placeholder=""  value={description} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setDescription(e.target.value)}/>
+              <input type="text" className="form-control" placeholder="" value={weight} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setWeight(e.target.value)}/>
+              { errors && errors.product && errors.product.name && (
+                <p className="text-danger">{errors.product.name}</p>
+              )}
             </div>
 
             <div className="input-group input-group-sm mb-3 w-50">
@@ -639,13 +644,11 @@ export function BikeForm(props) {
 
           <div className="input-group input-group-sm mb-3 w-50">
             <div className="input-group-prepend">
-              <span className="input-group-text" id="basic-addon1">Peso da sua bicicleta?</span>
+              <span className="input-group-text" id="basic-addon1">De uma descrição:</span>
             </div>
-            <input type="text" className="form-control" placeholder="" value={weight} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setWeight(e.target.value)}/>
-            { errors && errors.product && errors.product.name && (
-              <p className="text-danger">{errors.product.name}</p>
-            )}
+            <input type="text" className="form-control" placeholder=""  value={description} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setDescription(e.target.value)}/>
           </div>
+
 
 
 
