@@ -311,7 +311,7 @@ export function BikeForm(props) {
         {modality && (<>
           <label htmlFor="bikeType" className="mt-3">Qual o tipo da sua bicicleta?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={bikeType}
             onChange={(e) => setBikeType(e.target.value)}
 
@@ -327,7 +327,7 @@ export function BikeForm(props) {
           {bikeType === "electric" && (<>
             <label htmlFor="frameSize" className="mt-3">Qual a bateria da sua bike?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={battery}
               onChange={(e) => setBattery(e.target.value)}
             >
@@ -339,7 +339,7 @@ export function BikeForm(props) {
           </>)}
           <label htmlFor="frameBrand" className="mt-3">Qual a marca do quadro?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={frameBrand}
             onChange={(e) => setFrameBrand(e.target.value)}
 
@@ -352,7 +352,7 @@ export function BikeForm(props) {
           {category === "road" && (<>
             <label htmlFor="frameSize" className="mt-3">Qual o tamanho do quadro?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={frameSize}
               onChange={(e) => setFrameSize(e.target.value)}
 
@@ -367,7 +367,7 @@ export function BikeForm(props) {
           {["dirt_street", "mountain_bike"].includes(category) && (<>
             <label htmlFor="frameSize" className="mt-3">Qual o tamanho do quadro?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={frameSize}
               onChange={(e) => setFrameSize(e.target.value)}
 
@@ -381,7 +381,7 @@ export function BikeForm(props) {
 
           <label htmlFor="frameMaterial" className="mt-3">Qual o material do quadro?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={frameMaterial}
             onChange={(e) => setFrameMaterial(e.target.value)}
 
@@ -393,7 +393,7 @@ export function BikeForm(props) {
 
           <label htmlFor="suspensionType" className="mt-3">Qual o tipo de suspensão?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={suspensionType}
             onChange={(e) => setSuspensionType(e.target.value)}
 
@@ -407,7 +407,7 @@ export function BikeForm(props) {
           {suspensionType === "full_suspension" && (<>
             <label htmlFor="frontSuspensionTravel" className="mt-3">Suspensão dianteira?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={frontSuspensionTravel}
               onChange={(e) => setFrontSuspensionTravel(e.target.value)}
 
@@ -421,7 +421,7 @@ export function BikeForm(props) {
 
             <label htmlFor="rearSuspensionTravel" className="mt-3">Suspensão traseira?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={rearSuspensionTravel}
               onChange={(e) => setRearSuspensionTravel(e.target.value)}
 
@@ -435,7 +435,7 @@ export function BikeForm(props) {
           {suspensionType === "hard_tail" && (<>
             <label htmlFor="rearSuspensionTravel" className="mt-3">Suspensão traseira?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={rearSuspensionTravel}
               onChange={(e) => setRearSuspensionTravel(e.target.value)}
 
@@ -448,7 +448,7 @@ export function BikeForm(props) {
 
           <label htmlFor="brakeType" className="mt-3">Qual o tipo de freio?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={brakeType}
             onChange={(e) => setBrakeType(e.target.value)}
 
@@ -460,7 +460,7 @@ export function BikeForm(props) {
 
           <label htmlFor="seatPostType" className="mt-3">Qual o tipo de canote?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={seatPostType}
             onChange={(e) => setSeatPostType(e.target.value)}
 
@@ -472,7 +472,7 @@ export function BikeForm(props) {
           {seatPostType === "retractable" && (<>
             <label htmlFor="seatPostTravel" className="mt-3">Qual o curso do canote?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={seatPostTravel}
               onChange={(e) => setSeatPostTravel(e.target.value)}
 
@@ -487,7 +487,7 @@ export function BikeForm(props) {
 
           <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={numberOfFrontGears}
             onChange={(e) => setNumberOfFrontGears(e.target.value)}
 
@@ -499,7 +499,7 @@ export function BikeForm(props) {
 
           <label htmlFor="numberOfRearGears" className="mt-3">Marchas traseiras?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={numberOfRearGears}
             onChange={(e) => setNumberOfRearGears(e.target.value)}
 
@@ -513,7 +513,7 @@ export function BikeForm(props) {
 
           <label htmlFor="rimSize" className="mt-3">Tamanho do aro?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={rimSize}
             onChange={(e) => setRimSize(e.target.value)}
 
@@ -527,7 +527,7 @@ export function BikeForm(props) {
 
           <label htmlFor="rimSize" className="mt-3">Qual a condição da bike?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={bikeCondition}
             onChange={(e) => setBikeCondition(e.target.value)}
 
@@ -542,7 +542,7 @@ export function BikeForm(props) {
 
             <label htmlFor="structuralVisualCondition" className="mt-3">Qual a condição estrutural/visual?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={structuralVisualCondition}
               onChange={(e) => setStructuralVisualCondition(e.target.value)}
 
@@ -556,7 +556,7 @@ export function BikeForm(props) {
 
             <label htmlFor="operatingCondition" className="mt-3">Qual a condição estrutural/visual?</label>
             <select
-              class="select-answer"
+              className="select-answer"
               value={operatingCondition}
               onChange={(e) => setOperatingCondition(e.target.value)}
 
@@ -571,7 +571,7 @@ export function BikeForm(props) {
 
           <label htmlFor="documentationType" className="mt-3">Sua bike possui documentação?</label>
           <select
-            class="select-answer"
+            className="select-answer"
             value={documentationType}
             onChange={(e) => setDocumentationType(e.target.value)}
 
