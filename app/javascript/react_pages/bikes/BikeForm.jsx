@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export function BikeForm(props) {
+  const [bikeId, setBikeId] = useState([]);
   const [user, setUser] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -34,6 +35,7 @@ export function BikeForm(props) {
   const [documentationType, setDocumentationType] = useState("");
   const [description, setDescription] = useState("");
   const [accessories, setAccessories] = useState("");
+  const [accessoriesWithin, setAccessoriesWithin] = useState("");
   const [battery, setBattery] = useState("");
   const [photos, setPhotos ] = useState(null);
 
@@ -50,11 +52,11 @@ export function BikeForm(props) {
       setUser(data.user.id)
       setServices(data.services)
      })
-    // if (props.productId) {
-    //   fetchProduct();
-    //   setProductId(props.productId)
+    if (props.bikeId) {
+      fetchBike();
+      setBikeId(props.bikeId)
 
-    // }
+    }
   }, []);
 
   useEffect(() => {
@@ -64,81 +66,105 @@ export function BikeForm(props) {
     }
   });
 
-  // async function fetchBike() {
-  //   const response = await axios.get(
-  //     `http://localhost:3000/api/v1/products/${props.productId}/edit`
-  //   );
-  //   alert(JSON.stringify(response.data))
-  //   if (response.data) {
-  //     // const category = categories.find(element => element.id === response.data.product.category_id).name
-  //     setUser(response.data.product.user_id);
-  //     setProductTypeId(response.data.product.product_type_id);
-  //     setCategoryId(response.data.product.category_id);
-  //     // setProductCategory(category);
-  //     setProductModality(response.data.product.modality);
-  //     setProductBrand(response.data.product.brand);
-  //     setProductName(response.data.product.name);
-  //     setProductDescription(response.data.product.description);
-  //     setProductPrice(response.data.product.price_in_cents);
-  //     setProductQuantity(response.data.product.quantity);
-  //     setProductAttributes(
-  //       response.data.product_attributes
-  //     );
-  //   }
-  // }
+  const createBikePhotos = (e) => {
+    const photos = Object.values(e.target.files)
+    setPhotos(photos)
+  }
+
+  async function fetchBike() {
+    const response = await axios.get(
+      `http://localhost:3000/api/v1/bikes/${props.bikeId}/edit`
+    );
+    alert(JSON.stringify(response.data))
+    if (response.data) {
+      setUser(response.data.bike.user_id);
+      // setCategory(categories.find(element => element.id === response.data.bike.category_id).name);
+      setCategoryId(response.data.bike.category_id);
+      setModality(response.data.bike.modality);
+      setBikeType(response.data.bike.bike_type);
+      setPriceInCents(response.data.bike.price_in_cents);
+      setQuantity(response.data.bike.quantity);
+      setFrameBrand(response.data.bike.frame_brand);
+      setFrameSize(response.data.bike.frame_size);
+      setFrameMaterial(response.data.bike.frame_material);
+      setModel(response.data.bike.model);
+      setYear(response.data.bike.year);
+      setRimSize(response.data.bike.rim_size);
+      setNumberOfFrontGears(response.data.bike.number_of_front_gears);
+      setNumberOfRearGears(response.data.bike.number_of_rear_gears);
+      setBrakeType(response.data.bike.brake_type);
+      setSuspensionType(response.data.bike.suspension_type);
+      setFrontSuspensionTravel(response.data.bike.front_suspension_travel);
+      setRearSuspensionTravel(response.data.bike.rear_suspension_travel);
+      setSeatPostType(response.data.bike.seat_post_type);
+      setSeatPostTravel(response.data.bike.seat_post_travel);
+      setWeight(response.data.bike.weight);
+      setLocality(response.data.bike.locality);
+      setBikeCondition(response.data.bike.bike_conditions);
+      setStructuralVisualCondition(response.data.bike.structural_visual_condition);
+      setOperatingCondition(response.data.bike.operating_condition);
+      setDocumentationType(response.data.bike.documentation_type);
+      setDescription(response.data.bike.description);
+      setAccessories(response.data.bike.accessories);
+      // setAccessoriesWithin(response.data.bike);
+      setBattery(response.data.bike.battery);
+      setPhotos(response.data.bike.photos);
+
+    }
+  }
 
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   const dataObject = new FormData();
-  //   dataObject.append( "product[user_id]", user );
-  //   dataObject.append( "product[category_id]", categoryId );
-  //   dataObject.append( "product[modality]", productModality );
-  //   dataObject.append( "product[product_type_id]", productTypeId );
-  //   dataObject.append( "product[brand]", productBrand );
-  //   dataObject.append( "product[name]", productName );
-  //   dataObject.append( "product[description]", productDescription );
-  //   dataObject.append( "product[price_in_cents]", productPrice );
-  //   dataObject.append( "product[quantity]", productQuantity );
-  //   productPhotos.map((photo) => {
-  //     dataObject.append( "product[photos][]", photo );
-  //   })
-  //   for (const [key, value] of Object.entries(productAttributes)) {
-  //     console.log(`${key}: ${value}`);
-  //     dataObject.append( `product[productAttributes][${key}]`, value );
-  //   }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const dataObject = new FormData();
+    dataObject.append( "bike[user_id]", user );
+    dataObject.append( "bike[category_id]", categoryId );
+    dataObject.append( "bike[modality]", modality );
+    dataObject.append( "bike[bike_type]", bikeType );
+    dataObject.append( "bike[price_in_cents]", priceInCents );
+    dataObject.append( "bike[quantity]", quantity );
+    dataObject.append( "bike[frame_brand]", frameBrand );
+    dataObject.append( "bike[frame_size]", frameSize );
+    dataObject.append( "bike[frame_material]", frameMaterial );
+    dataObject.append( "bike[model]", model );
+    dataObject.append( "bike[year]", year );
+    dataObject.append( "bike[rim_size]", rimSize );
+    dataObject.append( "bike[number_of_front_gears]", numberOfFrontGears );
+    dataObject.append( "bike[number_of_rear_gears]", numberOfRearGears );
+    dataObject.append( "bike[brake_type]", brakeType );
+    dataObject.append( "bike[suspension_type]", suspensionType );
+    dataObject.append( "bike[front_suspension_travel]", frontSuspensionTravel );
+    dataObject.append( "bike[rear_suspension_travel]", rearSuspensionTravel );
+    dataObject.append( "bike[seat_post_type]", seatPostType );
+    dataObject.append( "bike[seat_post_travel]", seatPostTravel );
+    dataObject.append( "bike[weight]", weight );
+    dataObject.append( "bike[locality]", locality );
+    dataObject.append( "bike[bike_conditions]", bikeCondition );
+    dataObject.append( "bike[structural_visual_condition]", structuralVisualCondition );
+    dataObject.append( "bike[operating_condition]", operatingCondition );
+    dataObject.append( "bike[documentation_type]", documentationType );
+    dataObject.append( "bike[description]", description );
+    dataObject.append( "bike[accessories]", accessories );
+    dataObject.append( "bike[battery]", battery );
+    photos.map((photo) => {
+      dataObject.append( "bike[photos][]", photo );
+    })
 
-  //   const product = {
-  //     user_id: user,
-  //     category_id: categoryId,
-  //     modality: productModality,
-  //     product_type_id: productTypeId,
-  //     brand: productBrand,
-  //     name: productName,
-  //     description: productDescription,
-  //     price_in_cents: productPrice,
-  //     quantity: productQuantity,
-  //     photos: productPhotos,
-  //     productAttributes,
-  //     service: productServiceId
+    const url = props.bikeId
+    ? `/api/v1/bikes/${props.bikeId}`
+    : "/api/v1/bikes";
+    const method = props.bikeId ? 'patch' : 'post';
 
-  //   }
-
-  //   const url = props.productId
-  //   ? `/api/v1/products/${props.productId}`
-  //   : "/api/v1/products";
-  //   const method = props.productId ? 'patch' : 'post';
-
-  //   const response = await axios[method](url, dataObject);
-  //   if (response.data.success) {
-  //     window.location = response.data.redirect_url;
-  //   } else {
-  //     setErrors(response.data.errors);
-  //     alert(
-  //       "Erro ao criar a produto: " + JSON.stringify(response.data.errors)
-  //     );
-  //   }
-  // }
+    const response = await axios[method](url, dataObject);
+    if (response.data.success) {
+      window.location = response.data.redirect_url;
+    } else {
+      setErrors(response.data.errors);
+      alert(
+        "Erro ao criar a bike: " + JSON.stringify(response.data.errors)
+      );
+    }
+  }
 
 
   //////////////////////////////////////////////// frames
@@ -276,8 +302,9 @@ export function BikeForm(props) {
 
     <div className="w-60 text-center new-bike-react py-5">
       <h1 className="text-success">Anuncie aqui</h1>
+      <h4 className="text-success">sua bike</h4>
       <div className="card-bike-select mb-5">
-        <label htmlFor="category" className="">Qual a categoria da sua bicicleta?</label>
+        <label htmlFor="category" className="mb-2">Qual a categoria da sua bicicleta?</label><br />
         <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
@@ -290,9 +317,11 @@ export function BikeForm(props) {
         {category === "other" && (
           <>
             <label htmlFor="category" className="mx-3">Qual?</label>
-            <input type="text" />
+            <input type="text"/>
           </>
         )}
+
+
 
 
         {category  && category != "other" && (<>
@@ -581,18 +610,36 @@ export function BikeForm(props) {
             })}
           </select>
 
+          <label htmlFor="documentationType" className="mt-3">Sua bike acompanha algum acessório?</label>
+          <select
+            className="select-answer"
+            value={accessories}
+            onChange={(e) => setAccessories(e.target.value)}
+
+          >
+            <option>Sim</option>
+            <option>Não</option>
+          </select>
+
+          {accessories === "Sim" && (
+            <>
+              <label htmlFor="category" className="mx-3">Quais?</label>
+              <input type="text" onChange={(e) => setAccessoriesWithin(e.target.value)} />
+            </>
+          )}
+
 
           <div className="d-flex mt-3">
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Ano</span>
+                <span className="input-group-text" id="basic-addon1">Ano:</span>
               </div>
               <input type="text" className="form-control" placeholder=""  value={year} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setYear(e.target.value)}/>
             </div>
 
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Modelo</span>
+                <span className="input-group-text" id="basic-addon1">Modelo:</span>
               </div>
               <input type="text" className="form-control" placeholder="" value={model} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setModel(e.target.value)}/>
               { errors && errors.product && errors.product.name && (
@@ -604,9 +651,9 @@ export function BikeForm(props) {
           <div className="d-flex">
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Qual seu preço?</span>
+                <span className="input-group-text" id="basic-addon1">Preço:</span>
               </div>
-              <input type="text" className="form-control" placeholder="" value={priceInCents} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setPriceInCents(e.target.value)}/>
+              <input type="number" className="form-control" placeholder="" value={priceInCents} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setPriceInCents(e.target.value)}/>
               { errors && errors.product && errors.product.name && (
                 <p className="text-danger">{errors.product.name}</p>
               )}
@@ -614,9 +661,9 @@ export function BikeForm(props) {
 
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">quantity</span>
+                <span className="input-group-text" id="basic-addon1">Quantidade:</span>
               </div>
-              <input type="text" className="form-control" placeholder="" value={quantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setQuantity(e.target.value)}/>
+              <input type="number" className="form-control" placeholder="" value={quantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setQuantity(e.target.value)}/>
               { errors && errors.product && errors.product.name && (
                 <p className="text-danger">{errors.product.name}</p>
               )}
@@ -626,9 +673,9 @@ export function BikeForm(props) {
           <div className="d-flex">
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Peso da sua bicicleta?</span>
+                <span className="input-group-text" id="basic-addon1">Peso:</span>
               </div>
-              <input type="text" className="form-control" placeholder="" value={weight} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setWeight(e.target.value)}/>
+              <input type="number" className="form-control" placeholder="" value={weight} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setWeight(e.target.value)}/>
               { errors && errors.product && errors.product.name && (
                 <p className="text-danger">{errors.product.name}</p>
               )}
@@ -636,26 +683,53 @@ export function BikeForm(props) {
 
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Cidade</span>
+                <span className="input-group-text" id="basic-addon1">Cidade:</span>
               </div>
               <input type="text" className="form-control" placeholder=""  value={locality} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setLocality(e.target.value)}/>
             </div>
           </div>
 
-          <div className="input-group input-group-sm mb-3 w-50">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="basic-addon1">De uma descrição:</span>
-            </div>
-            <input type="text" className="form-control" placeholder=""  value={description} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setDescription(e.target.value)}/>
+
+          <div className="mb-3">
+            <label for="exampleFormControlTextarea1" className="form-label text-success">Descrição</label>
+            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
           </div>
 
-
-
-
-
-
-
         </div>
+
+        {description && (<>
+
+          <label htmlFor="photos">Adicione as fotos do seu produto:</label>
+
+          <input type="file" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createBikePhotos(e)}/>
+
+          </>)}
+
+          {photos &&  (<>
+
+          <div className="card-questions my-3">
+            <label htmlFor="product" className="mb-3">Qual tipo de anúncio quer usar para seu produto?</label>
+            <select
+            type="radio"
+            value={serviceId}
+            onChange={(e) => setServiceId(e.target.value)}
+            className="select-answer"
+            >
+              {services.map((service) => {
+                return (<option key={service.id} value={service.id}>{service.name} | {(service.price_in_cents / 100).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}</option>)
+              })}
+            </select>
+          </div>
+          </>)}
+
+          {serviceId && (<>
+
+          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
+
+          </>)}
 
       </>)}
 

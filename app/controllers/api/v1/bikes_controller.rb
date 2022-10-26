@@ -38,6 +38,12 @@ module Api
         @bike = Bike.new(bike_params)
         skip_authorization
         @categories = Category.all
+
+        if params[:bike][:accessories] === "Não"
+          @bike.accessories = false
+        else
+          @bike.accessories = true
+        end
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
@@ -51,6 +57,24 @@ module Api
           end
         else
           render json: { success: false, errors: @bike.errors }, status: 422
+        end
+      end
+
+      def edit
+        @bike = Bike.find(params[:id])
+        authorize @bike
+        @modalities = Category.where(id: @bike.category_id).first.modalities
+        render json: { bike: @bike, modalities: @modalities }
+      end
+
+      def update
+        @bike = Bike.find(params[:id])
+
+        authorize @bike
+        if @product.update(bike_params)
+          render json: { success: true, bike: @bike, redirect_url: bike_path(@bike)}
+        else
+          render json: { success: false, errors: {bike: @bike.error }}, status: 422
         end
       end
 
@@ -68,6 +92,7 @@ module Api
           :price_in_cents,
           :quantity,
           :year,
+          :frame_brand,
           :frame_size,
           :frame_material,
           :rim_size,
@@ -82,7 +107,7 @@ module Api
           :weight,
           :bike_conditions,
           :structural_visual_condition,
-          :opareting_condition,
+          :operating_condition,
           :documentation_type,
           :accessories,
           :battery,

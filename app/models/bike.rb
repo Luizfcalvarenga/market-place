@@ -10,8 +10,5 @@ class Bike < ApplicationRecord
   validates :price_in_cents, :quantity, :modality, :model, presence: true
   default_scope { where(removed_at: nil) }
 
-  enum accessories: {
-    true: "Sim",
-    false: "Não",
-  }
+ 
 end

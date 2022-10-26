@@ -35,13 +35,13 @@ class ProductsController < ApplicationController
 
 
   def edit
-    @product = Product.find_by(id: params[:id])
+    @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
     skip_authorization
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
+    @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
     skip_authorization
 

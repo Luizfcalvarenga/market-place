@@ -71,7 +71,7 @@ export function Bike(props) {
                 <h4 className="me-2 mb-3 text-black"><strong>Condições da bike:</strong> <span className="text-success me-3">{bike.bike_conditions}</span></h4>
                 <h4 className="me-2 mb-3 text-black"><strong>Tipo de documento:</strong> <span className="text-success me-3">{bike.documentation_type}</span></h4>
               </div>
-              <h4 className="me-2 mb-3 text-black"><strong>Acompanha acessórios:</strong> <span className="text-success me-3">{bike.accessories}</span></h4>
+              <h4 className="me-2 mb-3 text-black"><strong>Acompanha acessórios:</strong> <span className="text-success me-3">{bike.accessories  ? "Sim" : "Não"}</span></h4>
               <h4 className="me-2 mb-3 text-black"><strong>Condições operacionais:</strong> <span className="text-success me-3">{bike.operating_condition}</span></h4>
               <h4 className="me-2 mb-3 text-black"><strong>Condições estruturais:</strong> <span className="text-success me-3">{bike.structural_visual_condition}</span></h4>
               <h4 className="me-2 mb-3 text-black"><strong>Descrição:</strong> <span className="text-success me-3">{bike.description}</span></h4>

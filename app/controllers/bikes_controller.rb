@@ -30,6 +30,21 @@ class BikesController < ApplicationController
     end
   end
 
+  def edit
+    @bike = Bike.find(params[:id])
+    authorize @bike
+  end
+
+  def update
+    @bike = Bike.find(params[:id])
+    authorize @bike
+
+    if @bike.update(bike_params)
+      render  @bike
+    else
+      redirect_to :edit
+    end
+  end
 
   def destroy
     @bike = Bike.find_by(params[:id])
@@ -47,7 +62,6 @@ class BikesController < ApplicationController
     if current_user.present?
       @user = current_user
     end
-
 
     skip_authorization
 
@@ -74,6 +88,7 @@ class BikesController < ApplicationController
       :price_in_cents,
       :quantity,
       :year,
+      :frame_material,
       :frame_size,
       :frame_material,
       :rim_size,
@@ -88,7 +103,7 @@ class BikesController < ApplicationController
       :weight,
       :bike_conditions,
       :structural_visual_condition,
-      :opareting_condition,
+      :operating_condition,
       :documentation_type,
       :accessories,
       :battery,
