@@ -41,7 +41,6 @@ export function BikeForm(props) {
 
   const [errors, setErrors] = useState({
     bike: {},
-    photos: {},
   });
 
   useEffect(() => {
@@ -78,7 +77,7 @@ export function BikeForm(props) {
     alert(JSON.stringify(response.data))
     if (response.data) {
       setUser(response.data.bike.user_id);
-      // setCategory(categories.find(element => element.id === response.data.bike.category_id).name);
+      setCategory(response.data.category);
       setCategoryId(response.data.bike.category_id);
       setModality(response.data.bike.modality);
       setBikeType(response.data.bike.bike_type);
@@ -159,10 +158,10 @@ export function BikeForm(props) {
     if (response.data.success) {
       window.location = response.data.redirect_url;
     } else {
-      setErrors(response.data.errors);
       alert(
         "Erro ao criar a bike: " + JSON.stringify(response.data.errors)
       );
+      setErrors(response.data.errors);
     }
   }
 
@@ -634,28 +633,28 @@ export function BikeForm(props) {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Ano:</span>
               </div>
-              <input type="text" className="form-control" placeholder=""  value={year} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setYear(e.target.value)}/>
+              <input type="text" className="form-control" value={year} onChange={(e) => setYear(e.target.value)}/>
             </div>
 
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Modelo:</span>
               </div>
-              <input type="text" className="form-control" placeholder="" value={model} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setModel(e.target.value)}/>
-              { errors && errors.product && errors.product.name && (
-                <p className="text-danger">{errors.product.name}</p>
-              )}
+              <input type="text" className="form-control"  value={model}onChange={(e) => setModel(e.target.value)}/> <br />
+              { errors && errors.bike && errors.bike.model && (
+               <p className="text-danger">{errors.bike.model[0]}</p>
+               )}
             </div>
           </div>
 
-          <div className="d-flex">
+          <div className="d-flex mt-3">
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Preço:</span>
               </div>
-              <input type="number" className="form-control" placeholder="" value={priceInCents} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setPriceInCents(e.target.value)}/>
-              { errors && errors.product && errors.product.name && (
-                <p className="text-danger">{errors.product.name}</p>
+              <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={priceInCents}onChange={(e) => setPriceInCents(e.target.value)}/>
+              { errors && errors.bike && errors.bike.price_in_cents  && (
+                <p className="text-danger">{errors.bike.price_in_cents[0]}</p>
               )}
             </div>
 
@@ -663,29 +662,26 @@ export function BikeForm(props) {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Quantidade:</span>
               </div>
-              <input type="number" className="form-control" placeholder="" value={quantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setQuantity(e.target.value)}/>
-              { errors && errors.product && errors.product.name && (
-                <p className="text-danger">{errors.product.name}</p>
+              <input type="number" className="form-control" value={quantity}onChange={(e) => setQuantity(e.target.value)}/> <br />
+              { errors && errors.bike && errors.bike.quantity  && (
+                <p className="text-danger">{errors.bike.quantity[0]}</p>
               )}
             </div>
           </div>
 
-          <div className="d-flex">
+          <div className="d-flex mt-3">
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Peso:</span>
               </div>
-              <input type="number" className="form-control" placeholder="" value={weight} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setWeight(e.target.value)}/>
-              { errors && errors.product && errors.product.name && (
-                <p className="text-danger">{errors.product.name}</p>
-              )}
+              <input type="number" className="form-control" placeholder="Em Kg" value={weight}onChange={(e) => setWeight(e.target.value)}/>
             </div>
 
             <div className="input-group input-group-sm mb-3 w-50">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Cidade:</span>
               </div>
-              <input type="text" className="form-control" placeholder=""  value={locality} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setLocality(e.target.value)}/>
+              <input type="text" className="form-control"  value={locality}onChange={(e) => setLocality(e.target.value)}/>
             </div>
           </div>
 
@@ -701,7 +697,7 @@ export function BikeForm(props) {
 
           <label htmlFor="photos">Adicione as fotos do seu produto:</label>
 
-          <input type="file" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createBikePhotos(e)}/>
+          <input type="file" className="form-control" multiple onChange={(e) => createBikePhotos(e)}/>
 
           </>)}
 

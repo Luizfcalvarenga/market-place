@@ -53,25 +53,24 @@ module Api
           if @bike.photos.attach
             render json: { success: true, bike: @bike, photos: @photos, redirect_url: bike_path(@bike) }
           else
-            render json: { success: false, errors: {bike: @bike.errors, photos: @bike.photos.erros}}, status: 422
+            render json: { success: false, errors: {bike: @bike.errors}}
           end
         else
-          render json: { success: false, errors: @bike.errors }, status: 422
+          render json: { success: false, errors: {bike: @bike.errors}}
         end
       end
 
       def edit
         @bike = Bike.find(params[:id])
         authorize @bike
-        @modalities = Category.where(id: @bike.category_id).first.modalities
-        render json: { bike: @bike, modalities: @modalities }
+        @category = @bike.category.name
+        render json: { bike: @bike, category: @category }
       end
 
       def update
         @bike = Bike.find(params[:id])
-
         authorize @bike
-        if @product.update(bike_params)
+        if @bike.update(bike_params)
           render json: { success: true, bike: @bike, redirect_url: bike_path(@bike)}
         else
           render json: { success: false, errors: {bike: @bike.error }}, status: 422

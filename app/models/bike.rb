@@ -7,8 +7,10 @@ class Bike < ApplicationRecord
   has_many :chats
   has_many_attached :photos
 
+  validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
+  
   validates :price_in_cents, :quantity, :modality, :model, presence: true
+
   default_scope { where(removed_at: nil) }
 
- 
 end
