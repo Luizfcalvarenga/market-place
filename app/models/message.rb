@@ -8,8 +8,7 @@ class Message < ApplicationRecord
   def confirm_participant
     return unless chat.is_private
 
-    is_participant = Participant.where(user_id: self.user_id, chat_id: self.chat_id ).first
+    is_participant = Participant.where(user_id: self.user.id, chat_id: self.chat.id ).first
     throw :abort unless is_participant
-
   end
 end

@@ -7,6 +7,12 @@ class ChatsController < ApplicationController
 
     @users = User.all_except(current_user)
     render 'index'
+    @user = current_user
+
+    # @chats = Chat.where(is_private: true).where(id: Participant.where(user_id: @user.id).id).each do |chat|
+    #   chat.name
+    # end
+
   end
 
   def show

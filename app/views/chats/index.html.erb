@@ -4,17 +4,19 @@
     <h4> Users </h4>
     <%= turbo_stream_from "users" %>
     <div id="users">
-      <%= render @users %>
+      <%# <%= render @single_chats %> %>
+      <%= @single_chats%>
     </div>
     <h4> Chats </h4>
     <%= turbo_stream_from "chats" %>
     <%= render 'chats/new_chat_form' %>
     <div id="chats">
-      <%= render @chats%>
+      <%= render @chats %>
     </div>
+
   </div>
-  <div id="chat_container"
-  class="col-md-8 col-sm-8 bg-dark text-light">
+
+  <div id="chat_container" class="col-md-8 col-sm-8 bg-dark text-light">
     <% if @single_chat %>
       <div id="single_chat">
         <h4 class="text-center"> <%= @user&.email || @single_chat.name %> </h4>
@@ -26,4 +28,3 @@
       </div>
     <% end %>
   </div>
-</div>

@@ -81,7 +81,7 @@ export function Product(props) {
               <p className=""><strong>Disponível:</strong> {product.quantity}</p>
 
             </div>
-            <a href="/chats">
+            <a href={"http://localhost:3000/user/" + product.user.id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>
           </div>
