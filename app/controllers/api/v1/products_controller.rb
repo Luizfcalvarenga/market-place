@@ -11,6 +11,8 @@ module Api
         @products = Product.where.not(user: @user)
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
+        @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
+
 
         if params[:sort_by] == "price_ascending"
           @products = @products.order(price_in_cents: :asc)

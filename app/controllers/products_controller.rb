@@ -5,11 +5,11 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    if params[:product_type_id]
-      @products = Product.where(product_type_id:  params[:product_type_id] )
-    else
-      @products = policy_scope(Product).order(created_at: :desc)
-    end
+
+    @products = policy_scope(Product).order(created_at: :desc)
+    @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
+
+
   end
 
   def show

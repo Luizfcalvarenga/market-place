@@ -81,8 +81,9 @@ export function Product(props) {
               <p className=""><strong>Disponível:</strong> {product.quantity}</p>
 
             </div>
-
-            <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+            <a href="/chats">
+              <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+            </a>
           </div>
         </div>
       )

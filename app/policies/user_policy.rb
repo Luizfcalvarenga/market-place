@@ -4,7 +4,9 @@ class UserPolicy < ApplicationPolicy
       scope.all
     end
   end
-
+  def show?
+    true
+  end
 	def me?
 		user.present?
 	end
