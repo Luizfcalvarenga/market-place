@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_25_173111) do
+ActiveRecord::Schema.define(version: 2022_10_27_184045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,15 +101,13 @@ ActiveRecord::Schema.define(version: 2022_10_25_173111) do
 
   create_table "chats", force: :cascade do |t|
     t.bigint "bike_id"
-    t.bigint "seller_id", null: false
-    t.bigint "buyer_id", null: false
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.boolean "is_private", default: false
     t.index ["bike_id"], name: "index_chats_on_bike_id"
-    t.index ["buyer_id"], name: "index_chats_on_buyer_id"
     t.index ["product_id"], name: "index_chats_on_product_id"
-    t.index ["seller_id"], name: "index_chats_on_seller_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -153,6 +151,15 @@ ActiveRecord::Schema.define(version: 2022_10_25_173111) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "invoice_status"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "chat_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chat_id"], name: "index_participants_on_chat_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "product_attributes", force: :cascade do |t|
@@ -236,8 +243,6 @@ ActiveRecord::Schema.define(version: 2022_10_25_173111) do
   add_foreign_key "bikes", "users"
   add_foreign_key "chats", "bikes"
   add_foreign_key "chats", "products"
-  add_foreign_key "chats", "users", column: "buyer_id"
-  add_foreign_key "chats", "users", column: "seller_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "order_items", "bikes"
@@ -245,6 +250,8 @@ ActiveRecord::Schema.define(version: 2022_10_25_173111) do
   add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "services"
   add_foreign_key "orders", "users"
+  add_foreign_key "participants", "chats"
+  add_foreign_key "participants", "users"
   add_foreign_key "product_attributes", "product_type_attributes"
   add_foreign_key "product_attributes", "products"
   add_foreign_key "product_type_attributes", "product_types"

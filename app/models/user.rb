@@ -6,14 +6,16 @@ class User < ApplicationRecord
 
 	include DeviseTokenAuth::Concerns::User
 
-  has_many :orders
-
-  has_one_attached :photo
-  has_many :buyer_chats, :foreign_key => "buyer_id", :class_name => "chat"
-  has_many :seller_chats, :foreign_key => "seller_id", :class_name => "chat"
-
   scope :all_except, ->(user) {where.not(id: user)}
-  
+  after_create_commit { broadcast_append_to "users" }
+
+  has_many :orders
+  has_many :messages
+  has_one_attached :photo
+  # has_many :buyer_chats, :foreign_key => "buyer_id", :class_name => "chat"
+  # has_many :seller_chats, :foreign_key => "seller_id", :class_name => "chat"
+
+
 	def admin?
 		true
 	end

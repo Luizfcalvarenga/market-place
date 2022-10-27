@@ -10,6 +10,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "trix";
 import "@rails/actiontext";
+import "@hotwired/turbo-rails"
 
 import "../stylesheets/application";
 
