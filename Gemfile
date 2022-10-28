@@ -49,6 +49,9 @@ gem 'active_model_serializers'
 
 gem "turbo-rails"
 
+gem "image_processing", "~> 1.2"
+gem 'mini_magick'
+
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
