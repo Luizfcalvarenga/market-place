@@ -4,7 +4,7 @@
   <% isActive = '' %>
 <% end %>
 <li class="list-group-item d-flex align-items-center justify-content-between user_list_item <%= isActive %>">
-  <div class="icon-container">
+  <div class="icon-container ms-3">
     <%= link_to cl_image_tag(user.photo.key, class: 'chat_pfp'), user %>
     <%= turbo_stream_from "user_status" %>
      <div>

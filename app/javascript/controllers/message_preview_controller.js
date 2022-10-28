@@ -92,8 +92,8 @@ export default class extends Controller {
     element.appendChild(image);
     cancelUploadButton = document.createElement("i");
     cancelUploadButton.classList.add(
-      "bi",
-      "bi-x-circle-fill",
+      "fas",
+      "fa-times-circle",
       "cancel-upload-button"
     );
     cancelUploadButton.onclick = cancelFunction;

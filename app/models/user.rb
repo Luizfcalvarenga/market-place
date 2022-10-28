@@ -21,13 +21,15 @@ class User < ApplicationRecord
   after_commit :add_default_photo, on: %i[create update]
 
 
-  def photo_thumbnail
-    photo.variant(resize_to_limit: [150, 150]).processed
-  end
+  
 
-  def chat_photo
-    photo.variant(resize_to_limit: [50, 50]).processed
-  end
+  # def photo_thumbnail
+  #   photo.variant(resize_to_limit: [150, 150]).processed
+  # end
+
+  # def chat_photo
+  #   photo.variant(resize_to_limit: [50, 50]).processed
+  # end
 
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
