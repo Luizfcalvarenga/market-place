@@ -11,7 +11,6 @@ import ReactDOM from "react-dom";
 import "trix";
 import "@rails/actiontext";
 import "@hotwired/turbo-rails"
-
 import "../stylesheets/application";
 
 Rails.start();
@@ -22,6 +21,9 @@ ActiveStorage.start();
 import "bootstrap";
 
 // Internal imports
+import "controllers"
+import "channels"
+
 import "./components/form_navbar";
 import "./mask";
 import "./payment_pooling";
@@ -34,7 +36,6 @@ import { BikeForm } from "../react_pages/bikes/BikeForm";
 import { Products } from "../react_pages/products/Products";
 import { Product } from "../react_pages/products/Product";
 import { ProductForm } from "../react_pages/products/ProductForm";
-
 
 
 

@@ -1,10 +1,24 @@
+<%= turbo_frame_tag "appearance_channel" %>
+<div id="appearance_channel"></div>
+
 <div id="chatroom_container" class="row bg-dark text-light">
   <div id="side_panel" class="col-md-4 col-sm-4">
-    <h5> <%= current_user.email %> </h5>
+    <li class="list-group-item d-flex align-items-center justify-content-between user_list_item">
+      <div class="icon-container">
+        <%= link_to cl_image_tag(current_user.photo.key, class: 'chat_pfp'), current_user %>
+        <%= turbo_stream_from "user_status" %>
+        <div>
+          <%= render "users/status", user: current_user %>
+        </div>
+      </div>
+      <div class='ms-2 me-auto username'>
+        <%= current_user.email%>
+      </div>
+    </li>
     <h4> Users </h4>
     <%= turbo_stream_from "users" %>
     <div id="users">
-      <%# <%= render @single_chats %> %>
+      <%= render @users %>
       <%= @single_chats%>
     </div>
     <h4> Chats </h4>
@@ -21,10 +35,11 @@
       <div id="single_chat">
         <h4 class="text-center"> <%= @user&.email || @single_chat.name %> </h4>
         <%= turbo_stream_from @single_chat %>
-        <div id="messages">
+        <div id="messages" data-controller="scroll">
           <%= render @messages %>
         </div>
         <%= render 'layouts/new_message_form' %>
       </div>
     <% end %>
   </div>
+</div>

@@ -8,12 +8,44 @@ class User < ApplicationRecord
 
   scope :all_except, ->(user) {where.not(id: user)}
   after_create_commit { broadcast_append_to "users" }
+  after_update_commit { broadcast_update }
 
   has_many :orders
   has_many :messages
   has_one_attached :photo
   # has_many :buyer_chats, :foreign_key => "buyer_id", :class_name => "chat"
   # has_many :seller_chats, :foreign_key => "seller_id", :class_name => "chat"
+
+  enum status: %i[offline away online]
+
+  after_commit :add_default_photo, on: %i[create update]
+
+
+  def photo_thumbnail
+    photo.variant(resize_to_limit: [150, 150]).processed
+  end
+
+  def chat_photo
+    photo.variant(resize_to_limit: [50, 50]).processed
+  end
+
+  def broadcast_update
+    broadcast_replace_to 'user_status', partial: 'users/status', user: self
+  end
+
+  def status_to_css
+    case status
+    when 'online'
+      'bg-success'
+    when 'away'
+      'bg-warning'
+    when 'offline'
+      'bg-danger'
+    else
+      'bg-dark'
+    end
+  end
+
 
 
 	def admin?
@@ -53,4 +85,16 @@ class User < ApplicationRecord
     end
     return false
   end
+
+  def add_default_photo
+    return if photo.attached?
+
+    photo.attach(
+      io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-bike.png')),
+      filename: 'avatar-bike.png',
+      content_type: 'image/png'
+    )
+  end
+  private
+
 end

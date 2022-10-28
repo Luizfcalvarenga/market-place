@@ -33,10 +33,9 @@ gem 'pundit'
 
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
-
+gem 'stimulus-rails'
 gem 'devise_token_auth'
 gem 'rack-cors', require: 'rack/cors'
-
 gem 'cloudinary', '~> 1.16.0'
 
 gem 'autoprefixer-rails', '10.2.5'
