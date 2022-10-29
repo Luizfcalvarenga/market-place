@@ -16,13 +16,13 @@
 
 #chat_container {
   height: 80vh;
-  margin-right: 0px !important;
+  margin-right: -10px !important;
   border-radius: 10px;
 }
 
 #side_panel {
   height: 80vh;
-  margin-right: 0px !important;
+  margin-right: -10px !important;
   overflow-x: hidden;
   overflow-y: scroll;
   margin-bottom: 55px;
@@ -30,7 +30,7 @@
 }
 #chatroom_container {
   height: 80vh;
-  margin-right: 0px !important;
+  margin-right: -10px !important;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -76,6 +76,7 @@
 
 .username {
   overflow: hidden;
+  text-decoration: none;
 }
 
 .chat_pfp {
@@ -88,6 +89,7 @@
 .user_list_item {
   height: 55px;
   background-color: #101010 !important;
+  border-bottom: 1px solid grey;
 }
 .room_list_item {
   height: 55px;
@@ -253,4 +255,8 @@
   font-size: 12px;
   color: #aaa;
   margin-top: 5px;
+}
+
+.me-li {
+  background-color: grey !important;
 }

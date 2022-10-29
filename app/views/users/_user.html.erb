@@ -3,7 +3,7 @@
 <% else %>
   <% isActive = '' %>
 <% end %>
-<li class="list-group-item d-flex align-items-center justify-content-between user_list_item <%= isActive %>">
+<li class="list-group-item d-flex align-items-center justify-content-between mb-3 user_list_item <%= isActive %>">
   <div class="icon-container ms-3">
     <%= link_to cl_image_tag(user.photo.key, class: 'chat_pfp'), user %>
     <%= turbo_stream_from "user_status" %>
@@ -11,5 +11,5 @@
       <%= render "users/status", user: user %>
     </div>
   </div>
-  <%= link_to user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+  <%= link_to user.email, user, class:'ms-1 me-auto username mb-3 text-white', data: {turbo: "false"}%>
 </li>
