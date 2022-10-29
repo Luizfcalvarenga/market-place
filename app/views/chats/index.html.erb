@@ -2,7 +2,7 @@
 <div id="appearance_channel"></div>
 
 <div id="chatroom_container" class="row bg-dark text-light">
-  <div id="side_panel" class="col-md-3 col-sm-4">
+  <div id="side_panel" class="col-md-4 col-sm-4">
     <li class="list-group-item d-flex align-items-center justify-content-around user_list_item mt-3">
       <div class="icon-container ms-3">
         <%= link_to cl_image_tag(current_user.photo.key, class: 'chat_pfp'), current_user %>
@@ -19,19 +19,21 @@
     <%= turbo_stream_from "users" %>
     <div id="users">
       <%= render @users %>
-      <%= @single_chats %>
+      <%# <%= @users %> %>
+
+      <%= @conversations %>
     </div>
-    <h4> Chats </h4>
+    <%# <h4> Chats </h4>
     <%= turbo_stream_from "chats" %>
-    <%= render 'chats/new_chat_form' %>
-    <div id="chats">
-      <%= render @chats %>
-      <%= @single_chats %>
-    </div>
+    <%# <%= render 'chats/new_chat_form' %>
+    <%# <div id="chats"> %>
+      <%# <%= render @chats %>
+      <%# <%= @single_chats %>
+    <%# </div> %>
 
   </div>
 
-  <div id="chat_container" class="col-md-5 col-sm-8 bg-dark text-light">
+  <div id="chat_container" class="col-md-8 col-sm-8 bg-dark text-light">
     <% if @single_chat %>
       <div id="single_chat">
         <h4 class="text-center mt-3"> <%= @user&.email || @single_chat.name %> </h4>

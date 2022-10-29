@@ -8,6 +8,7 @@ class Chat < ApplicationRecord
   has_many :messages
   has_many :participants, dependent: :destroy
 
+
   scope :public_chats, -> { where(is_private: false) }
   after_create_commit { broadcast_if_public }
 
@@ -23,8 +24,40 @@ class Chat < ApplicationRecord
     single_chat
   end
 
-  def participant?(chat, user)
+  def self.participant?(chat, user)
     chat.participants.where(user: user).exists?
     Participant.where(user_id: user.id, chat_id: chat.id).exists?
+  end
+
+  def latest_message
+    messages.includes(:user).order(created_at: :desc).first
+  end
+
+  def broadcast_latest_message
+    last_message = latest_message
+
+    return unless last_message
+
+    chat_target = "chat_#{id} last_message"
+    user_target = "chat_#{id} user_last_message"
+    sender = Current.user.eql?(last_message.user) ? Current.user : last_message.user
+
+    broadcast_update_to('chats',
+                        target: chat_target,
+                        partial: 'chats/last_message',
+                        locals: {
+                          chat: self,
+                          user: last_message.user,
+                          last_message: last_message
+                        })
+    broadcast_update_to('chats',
+                        target: user_target,
+                        partial: 'users/last_message',
+                        locals: {
+                          chat: self,
+                          user: last_message.user,
+                          last_message: last_message,
+                          sender: sender
+                        })
   end
 end

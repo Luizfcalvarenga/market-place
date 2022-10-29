@@ -4,7 +4,12 @@ class Message < ApplicationRecord
 
   has_many_attached :attachments, dependent: :destroy
 
-  after_create_commit { broadcast_append_to chat }
+
+  after_create_commit do
+    update_parent_chat
+    broadcast_append_to chat
+  end
+
   before_create :confirm_participant
 
   def chat_attachment(index)
@@ -24,4 +29,9 @@ class Message < ApplicationRecord
     is_participant = Participant.where(user_id: self.user.id, chat_id: self.chat.id ).first
     throw :abort unless is_participant
   end
+
+  def update_parent_chat
+    chat.update(last_message_at: Time.now)
+  end
+
 end

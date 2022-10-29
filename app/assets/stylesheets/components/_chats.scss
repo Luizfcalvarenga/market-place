@@ -5,23 +5,23 @@
 }
 
 #single_chat {
-  height: calc(78vh - 160px);
+  height: calc(80vh - 160px);
 }
 
 #messages {
-  height: calc(78vh - 160px);
+  height: calc(80vh - 160px);
   overflow-x: hidden;
   overflow-y: scroll;
 }
 
 #chat_container {
-  height: 78vh;
+  height: 80vh;
   margin-right: 0px !important;
   border-radius: 10px;
 }
 
 #side_panel {
-  height: 78vh;
+  height: 80vh;
   margin-right: 0px !important;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -29,7 +29,7 @@
   background-color: #101010;
 }
 #chatroom_container {
-  height: 78vh;
+  height: 80vh;
   margin-right: 0px !important;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -83,6 +83,7 @@
   height: 35px;
   border-radius: 50%;
   margin-right: 10px;
+  border: 1px solid grey;
 }
 .user_list_item {
   height: 55px;
@@ -242,4 +243,14 @@
   width: 150px;
   height: 150px;
   border-radius: 5px;
+}
+
+
+// LAST MESSAGE
+
+.last-message,
+.last-message-time {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 5px;
 }

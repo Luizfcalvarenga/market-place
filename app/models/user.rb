@@ -12,6 +12,9 @@ class User < ApplicationRecord
 
   has_many :orders
   has_many :messages
+  has_many :participants
+  has_many :chats, through: :participants
+
   has_one_attached :photo
   # has_many :buyer_chats, :foreign_key => "buyer_id", :class_name => "chat"
   # has_many :seller_chats, :foreign_key => "seller_id", :class_name => "chat"
@@ -21,7 +24,7 @@ class User < ApplicationRecord
   after_commit :add_default_photo, on: %i[create update]
 
 
-  
+
 
   # def photo_thumbnail
   #   photo.variant(resize_to_limit: [150, 150]).processed
@@ -87,6 +90,22 @@ class User < ApplicationRecord
     end
     return false
   end
+
+  # def user_conversations
+
+  #   # Participant.where(user_id: 3).each do | participant |
+  #   #   users = Chat.where(is_private: true).each do | chat |
+  #   #     chat.participants.where.not(user_id: 3).first
+  #   #   end
+  #   # end
+  #   private_chats = Chat.where(is_private: true).each do | chat |
+  #     chat.name.include?("_#{current_user.id}")
+  #   end
+  #   users = private_chats.each do | chat |
+  #     chat.participants.where.not(user: current_user)
+  #   end
+  #   users
+  # end
 
   def add_default_photo
     return if photo.attached?
