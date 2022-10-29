@@ -17,12 +17,11 @@
 #chat_container {
   height: 80vh;
   margin-right: -10px !important;
-  border-radius: 10px;
 }
 
 #side_panel {
   height: 80vh;
-  margin-right: -10px !important;
+  margin-right: -22px !important;
   overflow-x: hidden;
   overflow-y: scroll;
   margin-bottom: 55px;
@@ -72,11 +71,15 @@
   height: 50px;
   padding: 10px;
   border-bottom: 1px solid #555555;
+
 }
 
 .username {
   overflow: hidden;
   text-decoration: none;
+  &:hover {
+    color: $color-primary !important;
+  }
 }
 
 .chat_pfp {
@@ -258,5 +261,5 @@
 }
 
 .me-li {
-  background-color: grey !important;
+  background-color: #222320 !important;
 }
