@@ -51,7 +51,7 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-          if @product.photos.attach && ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
+          if @product.photos.attach || ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
             render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: product_path(@product) }
           else
             render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}
