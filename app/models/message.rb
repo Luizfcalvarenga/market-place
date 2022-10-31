@@ -6,7 +6,7 @@ class Message < ApplicationRecord
 
 
   after_create_commit do
-    notify_recipients[index]
+    # notify_recipients[index]
     update_parent_chat
     broadcast_append_to chat
   end
@@ -37,14 +37,14 @@ class Message < ApplicationRecord
 
   private #
 
-  def notify_recipients
-    users_in_room = room.joined_users
-    users_in_room.each do |user|
-      next if user.eql?(self.user)
+  # def notify_recipients
+  #   users_in_room = room.joined_users
+  #   users_in_room.each do |user|
+  #     next if user.eql?(self.user)
 
-      notification = MessageNotification.with(message: self, chat:)
-      notification.deliver_later(user)
-    end
-  end
+  #     notification = MessageNotification.with(message: self, chat:)
+  #     notification.deliver_later(user)
+  #   end
+  # end
 
 end
