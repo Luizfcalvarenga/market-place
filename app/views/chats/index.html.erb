@@ -3,8 +3,8 @@
 
 <div id="chatroom_container" class="row bg-dark text-light">
   <div id="side_panel" class="col-md-4 col-sm-4">
-    <li class="list-group-item d-flex align-items-center justify-content-around user_list_item mb-3 me-li">
-      <div class="icon-container ms-3 mt-3">
+    <li class="list-group-item d-flex align-items-center justify-content-between user_list_item  me-li">
+      <div class="icon-container ms-3 mt-2">
         <%= link_to cl_image_tag(current_user.photo.key, class: 'chat_pfp'), current_user %>
         <%= turbo_stream_from "user_status" %>
         <div>
@@ -16,11 +16,11 @@
       </div>
     </li>
     <%= turbo_stream_from "users" %>
-    <div id="users">
-      <%= render @users %>
+    <div id="users" data-controller="user-list">
+      <%= render"users/users", users: @users %>
       <%# <%= @users %>
 
-      <%= @conversations %>
+      <%# <%= @conversations %> %>
     </div>
     <%# <h4> Chats </h4>
     <%= turbo_stream_from "chats" %>

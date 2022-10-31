@@ -5,11 +5,12 @@ class ChatsController < ApplicationController
   def index
     @chat = Chat.new
     @chats = policy_scope(Chat)
-    
+
 
     @users = User.all_except(current_user)
     render 'index'
     @user = current_user
+    current_user.update(current_chat: nil)
     # @single_chats = Participant.where(user_id: @user).each do | participant |
     #   @chats.where(id: participant.chat_id).where(is_private: true)
     # end
@@ -18,6 +19,7 @@ class ChatsController < ApplicationController
 
   def show
     @single_chat = Chat.find(params[:id])
+    current_user.update(current_chat: @single_chat)
 
     @chat = Chat.new
     @chats = Chat.public_chats

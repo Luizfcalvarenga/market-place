@@ -83,22 +83,6 @@ class User < ApplicationRecord
     return false
   end
 
-  # def user_conversations
-
-  #   # Participant.where(user_id: 3).each do | participant |
-  #   #   users = Chat.where(is_private: true).each do | chat |
-  #   #     chat.participants.where.not(user_id: 3).first
-  #   #   end
-  #   # end
-  #   private_chats = Chat.where(is_private: true).each do | chat |
-  #     chat.name.include?("_#{current_user.id}")
-  #   end
-  #   users = private_chats.each do | chat |
-  #     chat.participants.where.not(user: current_user)
-  #   end
-  #   users
-  # end
-
   def add_default_photo
     return if photo.attached?
 

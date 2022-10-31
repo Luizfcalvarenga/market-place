@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ChatsHelper
   def show
     @user = User.find(params[:id])
     @users = User.all_except(current_user)
@@ -14,22 +15,19 @@ class UsersController < ApplicationController
 
     end
 
-   
+
     authorize @user
     @chat = Chat.new
     @chats = Chat.public_chats
     @chat_name = get_name(@user, current_user)
     @single_chat = Chat.where(name: @chat_name).first || Chat.create_private_chat([@user, current_user], @chat_name)
+    current_user.update(current_chat: @single_chat)
 
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
+    # pagy_messages = @single_room.messages.includes(:user).order(created_at: :desc)
+    # @pagy, messages = pagy(pagy_messages, items: 10)
     render 'chats/index'
   end
 
-  private
-
-  def get_name(user1, user2)
-    user = [user1, user2].sort
-    "private_#{user[0].id}_#{user[1].id}"
-  end
 end

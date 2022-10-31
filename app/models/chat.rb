@@ -1,18 +1,19 @@
 class Chat < ApplicationRecord
   # validates_uniqueness_of :name
   belongs_to :bike, optional: true
-  # belongs_to :buyer_id, class_name: "user"
-  # belongs_to :seller_id, class_name: "user"
+  scope :public_chats, -> { where(is_private: false) }
+  after_create_commit { broadcast_if_public }
+
   belongs_to :product, optional: true
 
   has_many :messages
   has_many :participants, dependent: :destroy
 
-  scope :public_chats, -> { where(is_private: false) }
-  after_create_commit { broadcast_if_public }
+  has_noticed_notifications model_name: 'Notification'
+
 
   def broadcast_if_public
-    broadcast_append_to 'chats' unless self.is_private
+    broadcast_latest_message
   end
 
   def self.create_private_chat(users, chat_name)
