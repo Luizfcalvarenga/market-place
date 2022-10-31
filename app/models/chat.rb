@@ -8,7 +8,6 @@ class Chat < ApplicationRecord
   has_many :messages
   has_many :participants, dependent: :destroy
 
-
   scope :public_chats, -> { where(is_private: false) }
   after_create_commit { broadcast_if_public }
 

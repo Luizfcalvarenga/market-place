@@ -14,10 +14,10 @@ class User < ApplicationRecord
   has_many :messages
   has_many :participants
   has_many :chats, through: :participants
+  has_many :notifications, dependent: :destroy, as: :recipient
 
   has_one_attached :photo
-  # has_many :buyer_chats, :foreign_key => "buyer_id", :class_name => "chat"
-  # has_many :seller_chats, :foreign_key => "seller_id", :class_name => "chat"
+
 
   enum status: %i[offline away online]
 
@@ -25,14 +25,6 @@ class User < ApplicationRecord
 
 
 
-
-  # def photo_thumbnail
-  #   photo.variant(resize_to_limit: [150, 150]).processed
-  # end
-
-  # def chat_photo
-  #   photo.variant(resize_to_limit: [50, 50]).processed
-  # end
 
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
