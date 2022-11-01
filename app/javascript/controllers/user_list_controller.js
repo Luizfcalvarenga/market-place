@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {
     console.log("cole")
   }
-  
+
   initialize() {
     const users = document.getElementById("users");
     this.initialModifyUsers(users);

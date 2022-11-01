@@ -2,7 +2,7 @@ class Chat < ApplicationRecord
   # validates_uniqueness_of :name
   belongs_to :bike, optional: true
   scope :public_chats, -> { where(is_private: false) }
-  after_create_commit { broadcast_if_public }
+  after_update_commit { broadcast_if_public }
 
   belongs_to :product, optional: true
 
@@ -24,7 +24,7 @@ class Chat < ApplicationRecord
     single_chat
   end
 
-  def self.participant?(chat, user)
+  def participant?(chat, user)
     chat.participants.where(user: user).exists?
     Participant.where(user_id: user.id, chat_id: chat.id).exists?
   end

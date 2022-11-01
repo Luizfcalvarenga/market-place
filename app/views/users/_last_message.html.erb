@@ -5,7 +5,7 @@
         <% if sender.id.eql?(Current.user.id) %>
           <%= "You: #{last_message.content}".truncate(40) %>
         <% else %>
-          <%= "#{sender.email}: #{last_message.content}".truncate(40) %>
+          <%= "#{sender.full_name.present? ? sender.full_name : sender.email}: #{last_message.content}".truncate(40) %>
         <% end %>
       </em>
       <%= content_tag(:em, class:"last-message-time me-2",

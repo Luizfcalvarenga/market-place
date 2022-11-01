@@ -16,7 +16,7 @@
 
 #chat_container {
   height: 80vh;
-  margin-right: -10px !important;
+  margin-right: 0 !important;
 }
 
 #side_panel {
@@ -29,7 +29,7 @@
 }
 #chatroom_container {
   height: 80vh;
-  margin-right: -10px !important;
+  margin-right: 0 !important;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -77,6 +77,7 @@
 .username {
   overflow: hidden;
   text-decoration: none;
+
   &:hover {
     color: $color-primary !important;
   }
@@ -94,6 +95,12 @@
   background-color: #101010 !important;
   border-bottom: 1px solid grey;
 }
+
+// .user_list_item:active {
+
+//   background-color: #222320 !important;
+// }
+
 .room_list_item {
   height: 90px;
   background-color: #343a40 !important;

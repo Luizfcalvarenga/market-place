@@ -14,7 +14,7 @@
             <%= render "users/status", user: user %>
           </div>
         </div>
-        <%= link_to user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+        <%= link_to user.full_name || user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
       </div>
     </div>
     <%= turbo_frame_tag [dom_id(chat), "user_last_message"] do %>
@@ -24,3 +24,4 @@
     <% end %>
   </li>
 </div>
+

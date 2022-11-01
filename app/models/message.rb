@@ -1,7 +1,8 @@
 class Message < ApplicationRecord
   belongs_to :chat
   belongs_to :user
-
+  before_create :confirm_participant
+  
   has_many_attached :attachments, dependent: :destroy
 
 
