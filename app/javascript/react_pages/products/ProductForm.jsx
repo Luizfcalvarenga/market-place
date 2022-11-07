@@ -24,7 +24,6 @@ export function ProductForm(props) {
   const [errors, setErrors] = useState({
     product: {},
     product_attributes: {},
-    photos: {},
   });
 
   async function fetchProduct() {
@@ -33,11 +32,10 @@ export function ProductForm(props) {
     );
     alert(JSON.stringify(response.data))
     if (response.data) {
-      // const category = categories.find(element => element.id === response.data.product.category_id).name
+      setProductCategory(response.data.category);
       setUser(response.data.product.user_id);
       setProductTypeId(response.data.product.product_type_id);
       setCategoryId(response.data.product.category_id);
-      // setProductCategory(category);
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
       setProductName(response.data.product.name);
@@ -253,14 +251,14 @@ export function ProductForm(props) {
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">Marca</span>
                   </div>
-                  <input type="text" className="form-control" placeholder=""  value={productBrand} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
+                  <input type="text" className="form-control"  value={productBrand} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
                 </div>
 
                 <div className="input-group input-group-sm mb-3 w-50">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">Nome</span>
                   </div>
-                  <input type="text" className="form-control" placeholder="" value={productName} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
+                  <input type="text" className="form-control" value={productName} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
                   { errors && errors.product && errors.product.name && (
                     <p className="text-danger">{errors.product.name}</p>
                   )}
@@ -271,22 +269,30 @@ export function ProductForm(props) {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Descrição</span>
                 </div>
-                <input type="text" className="form-control" placeholder="" value={productDescription} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
+                <input type="text" className="form-control" value={productDescription} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
               </div>
 
               <div className="d-flex">
+
+
                 <div className="input-group input-group-sm mb-3 w-50">
                   <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">RS</span>
+                    <span className="input-group-text" id="basic-addon1">R$</span>
                   </div>
-                  <input type="number" min="0.00" max="10000.00" step="0.01" className="form-control" placeholder="" value={productPrice} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
+                  <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={productPrice} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
+                  { errors && errors.product && errors.product.price_in_cents && (
+                    <p className="text-danger">{errors.product.price_in_cents}</p>
+                  )}
                 </div>
 
                 <div className="input-group input-group-sm mb-3 w-50">
                   <div className="input-group-prepend">
                     <span className="input-group-text" id="basic-addon1">Quantidade</span>
                   </div>
-                  <input type="number" className="form-control" placeholder="" value={productQuantity}aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
+                  <input type="number" className="form-control" value={productQuantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
+                  { errors && errors.product && errors.product.quantity && (
+                    <p className="text-danger">{errors.product.quantity}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -297,7 +303,7 @@ export function ProductForm(props) {
 
           <label htmlFor="photos">Adicione as fotos do seu produto:</label>
 
-          <input type="file" className="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
+          <input type="file" className="form-control" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
 
         </>)}
 

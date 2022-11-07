@@ -5,7 +5,11 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @products = policy_scope(Product).order(created_at: :desc)
+    if params[:product_type_id]
+      @products = Product.where(product_type_id:  params[:product_type_id] )
+    else
+      @products = policy_scope(Product).order(created_at: :desc)
+    end
   end
 
   def show
@@ -35,13 +39,13 @@ class ProductsController < ApplicationController
 
 
   def edit
-    @product = Product.find_by(id: params[:id])
+    @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
     skip_authorization
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
+    @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
     skip_authorization
 
@@ -91,7 +95,12 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products_brake = Product.where(product_type_id: (ProductType.find_by(name: "brake").id))
+    @current_filters = params[:filters]
+    @products = Product.all
+    @products = @products.where(:product_type_id => @current_filters[:product_type_id]) if @current_filters[:product_type_id]
+
+
+
   end
 
 
