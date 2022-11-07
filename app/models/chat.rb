@@ -2,7 +2,7 @@ class Chat < ApplicationRecord
   # validates_uniqueness_of :name
   belongs_to :bike, optional: true
   scope :public_chats, -> { where(is_private: false) }
-  after_update_commit { broadcast_if_public }
+  after_update_commit { broadcast_latest_message }
 
   belongs_to :product, optional: true
 
@@ -12,9 +12,7 @@ class Chat < ApplicationRecord
   has_noticed_notifications model_name: 'Notification'
 
 
-  def broadcast_if_public
-    broadcast_latest_message
-  end
+ 
 
   def self.create_private_chat(users, chat_name)
     single_chat = Chat.create(name: chat_name, is_private: true)

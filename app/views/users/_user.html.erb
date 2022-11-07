@@ -15,8 +15,10 @@
           </div>
         </div>
         <%= link_to user.full_name || user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+        <%= render 'users/notifications', chat: chat %>
       </div>
     </div>
+    <%= turbo_stream_from @single_chat %>
     <%= turbo_frame_tag [dom_id(chat), "user_last_message"] do %>
       <%= render "users/last_message",
         last_message: last_message,
@@ -24,4 +26,3 @@
     <% end %>
   </li>
 </div>
-

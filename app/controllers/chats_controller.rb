@@ -21,6 +21,7 @@ class ChatsController < ApplicationController
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
     @users = User.all_except(current_user)
+    set_notifications_to_read
     render 'index'
   end
 
@@ -33,6 +34,11 @@ class ChatsController < ApplicationController
 
   def set_status
     current_user.update!(status: User.statuses[:online]) if current_user
+  end
+
+  def set_notifications_to_read
+    notifications = @single_chat.notifications_as_chat.where(recipient: current_user).unread
+    notifications.update_all(read_at: Time.zone.now)
   end
 
 end

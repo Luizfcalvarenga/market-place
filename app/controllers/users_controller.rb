@@ -12,8 +12,17 @@ class UsersController < ApplicationController
     @single_chat = Chat.where(name: @chat_name).first || Chat.create_private_chat([@user, current_user], @chat_name)
     current_user.update(current_chat: @single_chat)
     @message = Message.new
-    @messages = @single_chat.messages.includes(:user).order(created_at: :asc)
+    @messages = @single_chat.messages.order(created_at: :asc)
+    set_notifications_to_read
+
     render 'chats/index'
+  end
+
+  private
+
+  def set_notifications_to_read
+    notifications = @single_chat.notifications_as_chat.where(recipient: current_user).unread
+    notifications.update_all(read_at: Time.zone.now)
   end
 
 end
