@@ -1,9 +1,10 @@
 <div class="input-group msg-form mt-3" >
   <%= form_with(model: [@single_chat, @message], remote: true, clas: "d-flex", data: { controller: "reset-form", action: 'turbo:submit-end->reset-form#reset' }) do |f| %>
-     <div id="attachment-previews"
-      data-controller="message-preview"
-      data-action="message-preview#preview"
-      >
+    <div id="attachment-previews"
+    
+    data-controller="message-preview"
+    data-action="message-preview#preview"
+    >
     </div>
     <div class="d-flex">
       <div class="image-upload">
