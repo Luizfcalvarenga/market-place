@@ -72,7 +72,7 @@ export function BikeForm(props) {
 
   async function fetchBike() {
     const response = await axios.get(
-      `http://localhost:3000/api/v1/bikes/${props.bikeId}/edit`
+      `/api/v1/bikes/${props.bikeId}/edit`
     );
     alert(JSON.stringify(response.data))
     if (response.data) {

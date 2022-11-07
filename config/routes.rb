@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :users, controllers: {
     passwords: 'users/passwords',
     registrations: 'users/registrations',
@@ -10,7 +11,12 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+  resources :chats do
+    resources :messages
+  end
 
+  get 'user/:id', to: 'users#show', as: 'user'
+  
   resources :bikes do
     resource :order_items, only: [:new, :create, :destroy]
 

@@ -8,9 +8,18 @@ class ApplicationController < ActionController::Base
 	skip_before_action :verify_authenticity_token
 
   before_action :current_order
+  before_action :set_current_user
 
 	private
 
+  def turbo_frame_request_variant
+    request.variant = :turbo_frame if turbo_frame_request?
+  end
+
+  def set_current_user
+    Current.user = current_user
+  end
+  
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
     devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :document_number, :phone_number, :cep, :address])

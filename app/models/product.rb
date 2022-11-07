@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :product_type
 
+
+  has_many :chats
   has_many :product_attributes
   has_many :product_type_attributes, through: :product_attributes
 

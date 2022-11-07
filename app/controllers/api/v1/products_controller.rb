@@ -11,6 +11,8 @@ module Api
         @products = Product.where.not(user: @user)
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
+        @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
+
 
         if params[:sort_by] == "price_ascending"
           @products = @products.order(price_in_cents: :asc)
@@ -49,7 +51,7 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-          if @product.photos.attach && ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
+          if @product.photos.attach || ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
             render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: product_path(@product) }
           else
             render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}

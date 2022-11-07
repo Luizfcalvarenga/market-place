@@ -33,10 +33,9 @@ gem 'pundit'
 
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
-
+gem 'stimulus-rails'
 gem 'devise_token_auth'
 gem 'rack-cors', require: 'rack/cors'
-
 gem 'cloudinary', '~> 1.16.0'
 
 gem 'autoprefixer-rails', '10.2.5'
@@ -47,6 +46,11 @@ gem 'rexml'
 gem 'uglifier'
 gem 'iugu', git: "https://github.com/iugu/iugu-ruby"
 gem 'active_model_serializers'
+
+gem "turbo-rails"
+
+gem "image_processing", "~> 1.2"
+gem 'mini_magick'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -77,3 +81,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "noticed", "~> 1.6"

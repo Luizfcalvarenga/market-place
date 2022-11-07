@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module ClubeDoEstudante
+module NuflowShop
   class Application < Rails::Application
     config.generators do |generate|
       generate.assets false
@@ -25,6 +25,11 @@ module ClubeDoEstudante
           methods: [:get, :post, :options, :delete, :put]
       end
     end
+
+    config.after_initialize do |_config|
+      User.update_all(status: User.statuses[:offline])
+    end
+
 
 		config.active_job.queue_adapter = :sidekiq
     # config.i18n.default_locale = 'pt-BR'

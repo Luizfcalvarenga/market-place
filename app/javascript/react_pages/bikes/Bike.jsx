@@ -97,8 +97,9 @@ export function Bike(props) {
               <p className=""><strong>Quadro:</strong> {bike.frame_brand}</p>
               <p className=""><strong>Tipo da bike:</strong> {bike.bike_type}</p>
             </div>
-
-            <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+            <a href={"/user/" + bike.user_id}>
+              <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+            </a>
           </div>
         </div>
       )

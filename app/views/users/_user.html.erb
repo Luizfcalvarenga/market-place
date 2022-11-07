@@ -1,0 +1,28 @@
+<% if @single_chat && @single_chat.participant?(@single_chat, user) %>
+  <% isActive = 'active' %>
+<% else %>
+  <% isActive = '' %>
+<% end %>
+<div class="user">
+  <li class="list-group-item user_list_item <% isActive %>">
+    <div class="row">
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <div class="icon-container ms-3 mt-3">
+          <%= link_to cl_image_tag(user.photo.key, class: 'chat_pfp'), user %>
+          <%= turbo_stream_from "user_status" %>
+          <div>
+            <%= render "users/status", user: user %>
+          </div>
+        </div>
+        <%= link_to user.full_name || user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+        <%= render 'users/notifications', chat: chat %>
+      </div>
+    </div>
+    <%= turbo_stream_from @single_chat %>
+    <%= turbo_frame_tag [dom_id(chat), "user_last_message"] do %>
+      <%= render "users/last_message",
+        last_message: last_message,
+        sender: sender %>
+    <% end %>
+  </li>
+</div>

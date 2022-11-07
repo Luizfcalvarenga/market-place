@@ -28,7 +28,7 @@ export function ProductForm(props) {
 
   async function fetchProduct() {
     const response = await axios.get(
-      `http://localhost:3000/api/v1/products/${props.productId}/edit`
+      `/api/v1/products/${props.productId}/edit`
     );
     alert(JSON.stringify(response.data))
     if (response.data) {
