@@ -151,6 +151,40 @@
   position: absolute;
 }
 
+.user-info {
+  background-color:#555555!important;
+
+}
+
+.user-conversation-info {
+  background-color: #555555!important;
+
+}
+
+.search-user-chat {
+  height: 27px !important;
+  margin-top: 10px !important;
+  margin-left: 5px !important;
+  background-color: #555555 !important;
+  border-color: #555555 !important;
+  border-radius: 5px;
+}
+
+.search-user-chat:focus {
+  // border-color: #555555 !important;
+  outline:none !important;
+  box-shadow: none !important;
+}
+
+.seach-user-btn {
+  background-color: transparent !important;
+  border: 0 !important;
+
+}
+
+.user-search-icon {
+  font-size: 22px !important;
+}
 
 // ATTACHEMENTS
 
