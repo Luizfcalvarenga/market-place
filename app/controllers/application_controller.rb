@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	include Pundit
-  
-  include Pagy::Backend
+
+
 
   before_action :turbo_frame_request_variant
 

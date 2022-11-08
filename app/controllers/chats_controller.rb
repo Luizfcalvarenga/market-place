@@ -27,10 +27,9 @@ class ChatsController < ApplicationController
     authorize @chats
 
     @message = Message.new
-    pagy_messages = @single_chat.messages.order(created_at: :asc)
-    @pagy, messages = pagy(pagy_messages, items: 10)
-    @messages = messages.reverse
-    
+    @messages = @single_chat.messages.order(created_at: :asc)
+
+
     @users = User.all_except(current_user)
     set_notifications_to_read
     render 'index'
