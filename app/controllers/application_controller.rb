@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
 	include Pundit
+  
+  include Pagy::Backend
+
+  before_action :turbo_frame_request_variant
 
 	before_action :authenticate_user!, unless: :auth_request?
 
@@ -19,7 +23,7 @@ class ApplicationController < ActionController::Base
   def set_current_user
     Current.user = current_user
   end
-  
+
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
     devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :document_number, :phone_number, :cep, :address])

@@ -41,6 +41,8 @@ class Message < ApplicationRecord
   def notify_recipients
     conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{Current.user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: Current.user.id).first}
     users_in_chat = conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
+    # raise
+    # user = chat.participants.where.not(user_id: current_user).first
     users_in_chat.each do |user|
       next if user.eql?(self.user)
 

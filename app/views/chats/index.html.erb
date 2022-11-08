@@ -31,10 +31,9 @@
     <div id="users" data-controller="user-list">
       <%= render "users/users", users: @users %>
     </div>
-
-
   </div>
-  <div id="room_container"
+
+  <div id="chat_container"
   class="col-md-8 col-sm-8 bg-dark text-light">
     <% if @single_chat %>
       <div id="single_chat">
@@ -45,6 +44,7 @@
         <%= turbo_stream_from @single_chat %>
         <div id="messages" data-controller="scroll">
           <%= turbo_frame_tag "page_handler" %>
+          <%= render "messages/pager", pagy: @pagy %>
           <div id="messages-container">
             <%= render @messages %>
           </div>

@@ -12,7 +12,7 @@ class Chat < ApplicationRecord
   has_noticed_notifications model_name: 'Notification'
 
 
- 
+
 
   def self.create_private_chat(users, chat_name)
     single_chat = Chat.create(name: chat_name, is_private: true)

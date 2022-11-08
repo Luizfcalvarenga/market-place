@@ -11,8 +11,12 @@ class UsersController < ApplicationController
     @chat_name = get_name(@user, current_user)
     @single_chat = Chat.where(name: @chat_name).first || Chat.create_private_chat([@user, current_user], @chat_name)
     current_user.update(current_chat: @single_chat)
+    
     @message = Message.new
-    @messages = @single_chat.messages.order(created_at: :asc)
+    pagy_messages = @single_chat.messages.order(created_at: :asc)
+    @pagy, messages = pagy(pagy_messages, items: 10)
+    @messages = messages.reverse
+
     set_notifications_to_read
 
     render 'chats/index'

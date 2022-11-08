@@ -83,3 +83,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "noticed", "~> 1.6"
+
+gem "pagy", "~> 5.10"

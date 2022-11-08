@@ -2,7 +2,10 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "controllers/application"
+import { application } from "./application"
+
+import AutoclickController from "./autoclick_controller"
+application.register("autoclick", AutoclickController)
 
 import MessagePreviewController from "./message_preview_controller"
 application.register("message-preview", MessagePreviewController)
