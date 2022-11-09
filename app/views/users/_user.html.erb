@@ -18,6 +18,7 @@
         <%= render 'users/notifications', chat: chat %>
       </div>
     </div>
+
     <%= turbo_frame_tag [dom_id(chat), "user_last_message"] do %>
       <%= render "users/last_message",
         last_message: last_message,

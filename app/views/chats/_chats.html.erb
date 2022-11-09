@@ -1,0 +1,6 @@
+<% chats.each do |chat| %>
+  <%= render 'chats/chat',
+        chat: chat,
+        last_message: chat.latest_message,
+        user: user %>
+<% end %>

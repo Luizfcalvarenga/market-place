@@ -38,18 +38,28 @@ class Chat < ApplicationRecord
 
     return unless last_message
 
-    # chat_target = "chat_#{id} last_message"
+    chat_target = "chat_#{id}_last_message"
     user_target = "chat_#{id}_user_last_message"
     sender = Current.user.eql?(last_message.user) ? Current.user : last_message.user
 
-    broadcast_replace_to('chats',
-                      target: user_target,
-                      partial: 'users/last_message',
-                      locals: {
-                        chat: self,
-                        user: last_message.user,
-                        last_message: last_message,
-                        sender: sender
+    broadcast_update_to('chats',
+                        target: chat_target,
+                        partial: 'chats/last_message',
+                        locals: {
+                          chat: self,
+                          user: last_message.user,
+                          last_message: last_message
                         })
+
+
+    broadcast_update_to 'chats',
+                        target: user_target,
+                        partial: 'users/last_message',
+                        locals: {
+                          chat: self,
+                          user: last_message.user,
+                          last_message: last_message,
+                          sender: sender
+                        }
   end
 end
