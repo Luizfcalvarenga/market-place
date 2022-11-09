@@ -31,7 +31,10 @@
     <div id="users" data-controller="user-list">
       <%= render "users/users", users: @users %>
     </div>
+
+
     <%= turbo_stream_from "chats" %>
+
   </div>
 
   <div id="chat_container"

@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     current_user.update(current_chat: @single_chat)
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
-
     set_notifications_to_read
 
     render 'chats/index'
