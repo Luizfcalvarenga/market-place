@@ -7,9 +7,9 @@ class Message < ApplicationRecord
 
 
   after_create_commit do
+    notify_recipients
     update_parent_chat
     broadcast_append_to chat
-    notify_recipients
   end
 
   before_create :confirm_participant
@@ -36,6 +36,10 @@ class Message < ApplicationRecord
     chat.update(last_message_at: Time.now)
   end
 
+  def broadcast_to_user
+    broadcast_update_to 'user_notifications', partial: 'users/notifications', user: self.recipient, chat: self.params[:chat]
+  end
+
   private
 
   def notify_recipients
@@ -47,7 +51,9 @@ class Message < ApplicationRecord
 
       notification = MessageNotification.with(message: self, chat: self.chat)
       notification.deliver_later(user)
+      # broadcast_update_to 'notifications', partial: 'users/notifications', user: user, chat: self.chat
     end
+
   end
 
 end

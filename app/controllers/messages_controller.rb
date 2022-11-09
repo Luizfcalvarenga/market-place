@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
       attachments: msg_params[:attachments]
     )
     skip_authorization
+
   end
 
   private

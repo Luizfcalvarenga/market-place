@@ -1,7 +1,11 @@
-<% unread = chat.notifications_as_chat.where(type: MessageNotification.name,
-                                            recipient: current_user).unread %>
-<% if unread.count > 0 %>
-  <div class="me-3">
-    <%= "+#{unread.count}" %>
+<div  data-controller="notification">
+  <div data-notification-target="counter">
+    <% unread = chat.notifications_as_chat.where(type: MessageNotification.name,
+                                                recipient: current_user).unread %>
   </div>
-<% end %>
+  <% if unread.count > 0 %>
+    <div class="me-3">
+      <%= "+#{unread.count}" %>
+    </div>
+  <% end %>
+</div>
