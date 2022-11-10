@@ -5,6 +5,7 @@ export function ProductForm(props) {
   const [user, setUser] = useState([]);
   const [services, setServices] = useState([]);
   const [productServiceId, setProductServiceId] = useState("");
+  const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
@@ -32,7 +33,7 @@ export function ProductForm(props) {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
      .then((data) => {
-      setProductTypes(data.types_of_product)
+      setAllProducts(data.types_of_product)
       setCategories(data.categories)
       setUser(data.user.id)
       setServices(data.services)
@@ -188,10 +189,58 @@ export function ProductForm(props) {
     }
   }
 
+  const handleProductType = (e) => {
+    console.log(e.target.innerHTML);
+    let filterProducts = e.target.innerHTML;
+    if (filterProducts === "Acessórios") {
+      setProductTypes(allProducts.filter(product => product.name === "car_accessories" || product.name === "bike_accessories" || product.name === "training_accessories" || product.name === "pre_after_pedal_accessories"));
+    } else if (filterProducts == "Componentes") {
+      setProductTypes(allProducts.filter(product => product.name === "battery" || product.name === "brake" || product.name === "brake_levers" || product.name === "cassete"
+        || product.name === "chain" || product.name === "chainring" || product.name === "crankset" || product.name === "fender"
+        || product.name === "frame" || product.name === "front_derailleur" || product.name === "front_shifter" || product.name === "front_suspension"
+        || product.name === "full_wheel" || product.name === "grips" || product.name === "handlebar" || product.name === "headset"
+        || product.name === "hub" || product.name === "pedals" || product.name === "rim" || product.name === "saddle"
+        || product.name === "seat_post" || product.name === "spoke" || product.name === "rear_derailleur" || product.name === "rear_shifter"
+        || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre"
+      ));
+
+    } else if (filterProducts == "Equipamentos") {
+      setProductTypes(allProducts.filter(product => product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
+        || product.name === "bottle_cage" || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker"
+      ));
+    } else if (filterProducts == "Casual") {
+      setProductTypes(allProducts.filter(product => product.name === "cap" || product.name === "shirt" || product.name === "shorts" || product.name === "glasses"
+      ));
+    } else if (filterProducts == "Manutenção") {
+      setProductTypes(allProducts.filter(product => product.name === "air_bomb" || product.name === "lubricant" || product.name === "sealant"
+      ));
+    }  else if (filterProducts == "Vestuário") {
+      setProductTypes(allProducts.filter(product => product.name === "bretelle" || product.name === "shorts" || product.name === "inner_shorts" || product.name === "shirt"
+        || product.name === "vest" || product.name === "windbreaker" || product.name === "gloves" || product.name === "socks"
+        || product.name === "glasses" || product.name === "thermal_clothing"
+      ));
+    }
+  }
+
 
   return (
     <div className="w-60 text-center new-product-react py-5">
       <h1 className="text-success">Anuncie aqui</h1>
+      <h4 className="">O que deseja anunciar?</h4>
+
+      <div className="d-flex justify-content-between gap-3">
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios</button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes</button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos</button>
+      </div>
+      <div className="d-flex justify-content-between py-3 gap-3">
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual</button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção</button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário</button>
+      </div>
+
+
+
       <form>
         <div className="card-questions mb-5">
           <label htmlFor="category" className="mb-3">Qual a categoria do seu produto?</label>
