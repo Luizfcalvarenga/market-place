@@ -1,7 +1,7 @@
 class ChatPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(is_private: true)
+      scope.where(is_private: false)
     end
   end
 

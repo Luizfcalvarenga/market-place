@@ -7,9 +7,9 @@ class Message < ApplicationRecord
 
 
   after_create_commit do
+    notify_recipients
     update_parent_chat
     broadcast_append_to chat
-    notify_recipients
   end
 
   before_create :confirm_participant
@@ -36,17 +36,24 @@ class Message < ApplicationRecord
     chat.update(last_message_at: Time.now)
   end
 
+  def broadcast_to_user
+    broadcast_update_to 'user_notifications', partial: 'users/notifications', user: self.recipient, chat: self.params[:chat]
+  end
+
   private
 
   def notify_recipients
     conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{Current.user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: Current.user.id).first}
     users_in_chat = conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
+
     users_in_chat.each do |user|
       next if user.eql?(self.user)
 
       notification = MessageNotification.with(message: self, chat: self.chat)
       notification.deliver_later(user)
+      # broadcast_update_to 'notifications', partial: 'users/notifications', user: user, chat: self.chat
     end
+
   end
 
 end

@@ -1,0 +1,14 @@
+<li class="list-group-item chat_list_item">
+  <div class="row">
+    <div class="col-12 d-flex align-items-center justify-content-between">
+      <%= link_to chat.name, chat_path(chat, name_search: params[:name_search]), data: {turbo: "false"}, class: "ms-2 me-auto" %>
+      <%= render 'chats/joinable_link', chat: chat %>
+    </div>
+  </div>
+  <%= turbo_frame_tag [dom_id(chat), "last_message"] do %>
+    <%= render "chats/last_message",
+        chat: chat,
+        user: user,
+        last_message: last_message %>
+  <% end %>
+</li>
