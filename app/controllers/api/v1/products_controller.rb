@@ -40,6 +40,7 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
+
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
@@ -51,7 +52,8 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-          if @product.photos.attach || ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count
+
+          if @product.photos.attach ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
             render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: product_path(@product) }
           else
             render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}
@@ -66,9 +68,11 @@ module Api
         authorize @product
         @product_attributes = {}
         @category = @product.category.name
-        @product.product_attributes.each { |product_attribute|
-          @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
-        }
+        if @product.product_attributes.present?
+          @product.product_attributes.each { |product_attribute|
+            @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
+          }
+        end
         render json: { product: @product, product_attributes: @product_attributes, category: @category }
       end
 

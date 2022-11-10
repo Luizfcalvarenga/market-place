@@ -26,27 +26,7 @@ export function ProductForm(props) {
     product_attributes: {},
   });
 
-  async function fetchProduct() {
-    const response = await axios.get(
-      `/api/v1/products/${props.productId}/edit`
-    );
-    alert(JSON.stringify(response.data))
-    if (response.data) {
-      setProductCategory(response.data.category);
-      setUser(response.data.product.user_id);
-      setProductTypeId(response.data.product.product_type_id);
-      setCategoryId(response.data.product.category_id);
-      setProductModality(response.data.product.modality);
-      setProductBrand(response.data.product.brand);
-      setProductName(response.data.product.name);
-      setProductDescription(response.data.product.description);
-      setProductPrice(response.data.product.price_in_cents);
-      setProductQuantity(response.data.product.quantity);
-      setProductAttributes(
-        response.data.product_attributes
-      );
-    }
-  }
+
 
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
@@ -56,6 +36,7 @@ export function ProductForm(props) {
       setCategories(data.categories)
       setUser(data.user.id)
       setServices(data.services)
+      console.log(categories)
      })
     if (props.productId) {
       fetchProduct();
@@ -89,6 +70,30 @@ export function ProductForm(props) {
     }
   }, [productTypeId]);
 
+  async function fetchProduct() {
+    const response = await axios.get(
+      `/api/v1/products/${props.productId}/edit`
+    );
+    alert(JSON.stringify(response.data))
+    if (response.data) {
+      setProductCategory(response.data.category);
+      setUser(response.data.product.user_id);
+      setProductTypeId(response.data.product.product_type_id);
+      setCategoryId(response.data.product.category_id);
+      setProductModality(response.data.product.modality);
+      setProductBrand(response.data.product.brand);
+      setProductName(response.data.product.name);
+      setProductDescription(response.data.product.description);
+      setProductPrice(response.data.product.price_in_cents);
+      setProductQuantity(response.data.product.quantity);
+      if (response.data.product_attributes) {
+        setProductAttributes(
+          response.data.product_attributes
+        );
+
+      }
+    }
+  }
 
   const createProductAttributes = (e, attribute) => {
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)

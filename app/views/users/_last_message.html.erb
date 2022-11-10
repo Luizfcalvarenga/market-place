@@ -8,7 +8,7 @@
           <%= "#{sender.full_name.present? ? sender.full_name : sender.email}: #{last_message.content}".truncate(40) %>
         <% end %>
       </em>
-      <%= content_tag(:em, class:"last-message-time me-2",
+      <%= content_tag(:em, class:"last-message-time me-3",
                 data: {
                 time: last_message.created_at.to_i
                 }) do %>

@@ -12,13 +12,21 @@ export default class extends Controller {
    * Creates the preview panel displayed above the message input.
    * This panel is used to display the file(s) that is/are being uploaded.
    */
-  preview() {
+   preview() {
     this.clearPreviews();
     for (let i = 0; i < this.targets.element.files.length; i++) {
       let file = this.targets.element.files[i];
       const reader = new FileReader();
       this.createAndDisplayFilePreviewElements(file, reader);
     }
+    this.toggleVisiblity();
+  }
+  /**
+   * Toggle the visibility of the preview div.
+   */
+  toggleVisiblity() {
+    let preview = document.getElementById("attachment-previews");
+    preview.classList.toggle("d-none");
   }
   /**
    * Creates and displays the preview elements for the file.
@@ -194,11 +202,17 @@ export default class extends Controller {
     target.parentNode.removeChild(target);
     filesArray.forEach((file) => dataTransfer.items.add(file));
     fileInput.files = dataTransfer.files;
+    if (filesArray.length === 0) {
+      this.toggleVisiblity();
+    }
   }
   /**
    * Clear all the preview elements after submit
    */
-  clearPreviews() {
+   clearPreviews() {
     document.getElementById("attachment-previews").innerHTML = "";
+
+    let preview = document.getElementById("attachment-previews");
+    preview.classList.add("d-none");
   }
 }
