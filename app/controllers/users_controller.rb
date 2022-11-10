@@ -4,7 +4,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # @users = User.all_except(current_user)
     @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
-    @users = @conversations.map {| conversation | User.find_by(["id = ?", conversation.user_id])}
+    if params[:query].present?
+      sql_query = "email ILIKE :query OR full_name ILIKE :query"
+      @users = User.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
+    end
+    # @users = @conversations.map {| conversation | User.find_by(["id = ?", conversation.user_id])}
     authorize @user
     @chat = Chat.new
     @chats = Chat.public_chats

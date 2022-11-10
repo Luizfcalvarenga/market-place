@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_180601) do
+ActiveRecord::Schema.define(version: 2022_11_10_205440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_180601) do
     t.string "year"
     t.string "frame_size"
     t.string "frame_material"
-    t.string "rim_size"
+    t.string "front_rim_size"
     t.integer "number_of_front_gears"
     t.integer "number_of_rear_gears"
     t.string "brake_type"
@@ -87,6 +87,23 @@ ActiveRecord::Schema.define(version: 2022_10_31_180601) do
     t.string "battery"
     t.text "description"
     t.datetime "removed_at"
+    t.string "front_suspension_model"
+    t.string "rear_suspension_model"
+    t.string "front_derailleur_model"
+    t.string "rear_derailleur_model"
+    t.string "crankset"
+    t.string "chain"
+    t.string "brake_model"
+    t.string "rear_rim_size"
+    t.string "front_hub"
+    t.string "rear_hub"
+    t.string "front_tyre"
+    t.string "rear_tyre"
+    t.string "handlebar"
+    t.string "stem"
+    t.string "motor"
+    t.integer "battery_cyles"
+    t.integer "mileage"
     t.index ["category_id"], name: "index_bikes_on_category_id"
     t.index ["service_id"], name: "index_bikes_on_service_id"
     t.index ["user_id"], name: "index_bikes_on_user_id"
@@ -246,6 +263,7 @@ ActiveRecord::Schema.define(version: 2022_10_31_180601) do
     t.string "cep"
     t.string "phone_number"
     t.integer "status", default: 0
+    t.integer "current_chat"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

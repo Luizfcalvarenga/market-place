@@ -11,7 +11,8 @@ json.frame_size @bike.frame_size
 json.frame_material @bike.frame_material
 json.model @bike.model
 json.year @bike.year
-json.rim_size @bike.rim_size
+json.front_rim_size @bike.front_rim_size
+json.rear_rim_size @bike.rear_rim_size
 json.number_of_front_gears @bike.number_of_front_gears
 json.number_of_rear_gears @bike.number_of_rear_gears
 json.brake_type @bike.brake_type
