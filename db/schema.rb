@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_213253) do
+ActiveRecord::Schema.define(version: 2022_10_31_180601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,7 +246,6 @@ ActiveRecord::Schema.define(version: 2022_10_31_213253) do
     t.string "cep"
     t.string "phone_number"
     t.integer "status", default: 0
-    t.integer "current_chat"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
