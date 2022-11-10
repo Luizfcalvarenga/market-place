@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   include ChatsHelper
   def show
     @user = User.find(params[:id])
-    # @users = User.all_except(current_user)
     @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
     if params[:query].present?
       sql_query = "email ILIKE :query OR full_name ILIKE :query"
