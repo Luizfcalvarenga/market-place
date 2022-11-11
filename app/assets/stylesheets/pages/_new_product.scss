@@ -80,14 +80,14 @@ option {
 
 .progress-bar {
   margin: auto;
-  border-radius: 50%;
+  // border-radius: 50%;
   list-style-type: none;
 
 }
 
 .progress-1 {
   // margin-right: 30px;
-  padding: 11px 17px;
+  padding: 7px 10px;
   height: 40px;
   width: 40px;
   border-radius: 50% 50% 50% 50% !important;
@@ -96,7 +96,7 @@ option {
 
 .progress-2 {
   // margin-right: 30px;
-  padding: 11px 14px;
+  padding: 7.5px 8.5px;
   height: 40px;
   width: 40px;
   border-radius: 50% 50% 50% 50% !important;
@@ -105,7 +105,7 @@ option {
 
 .progress-3 {
   // margin-right: 30px;
-  padding: 11px 14px;
+  padding: 7.5px 8.5px;
   height: 40px;
   width: 40px;
   border-radius: 50% 50% 50% 50% !important;
@@ -113,7 +113,23 @@ option {
 }
 
 .progress-4 {
-  padding: 11px 14px;
+  padding: 7.5px 8.5px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% 50% 50% 50% !important;
+  border: 2px solid $color-primary;
+}
+
+.progress-5 {
+  padding: 7.5px 8.5px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% 50% 50% 50% !important;
+  border: 2px solid $color-primary;
+}
+
+.progress-6 {
+  padding: 7.5px 8.5px;
   height: 40px;
   width: 40px;
   border-radius: 50% 50% 50% 50% !important;
@@ -131,4 +147,10 @@ option {
 .section-done {
   background-color: $color-primary;
   color: white
+}
+
+
+.btn-progress {
+  border: none !important;
+  background-color: transparent !important;
 }

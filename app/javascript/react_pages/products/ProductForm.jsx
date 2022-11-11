@@ -123,7 +123,7 @@ export function ProductForm(props) {
     }
 
     return (
-      <div attribute={attribute} key={attribute.id} className="card-questions mb-5">
+      <div attribute={attribute} key={attribute.id} className="">
         <label htmlFor="product attribute" className="mb-3" key={index}>{attribute.prompt}</label><br />
         <select
         className="select-answer"
@@ -221,26 +221,96 @@ export function ProductForm(props) {
       ));
     }
 
-    const form = document.getElementById("product-form")
-    form.classList.remove("d-none")
+    const firstSection = document.getElementById("first-section")
+    const secondSection = document.getElementById("second-section")
+    firstSection.classList.add("d-none")
+    secondSection.classList.remove("d-none")
 
-    handleFirstProgress()
+    handleFirstStep()
   }
 
-  const handleFirstProgress = () => {
+
+  const handleFirstSection = () => {
+    const firstSection = document.getElementById("first-section")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
+
+    firstSection.classList.remove("d-none")
+    secondSection.classList.add("d-none")
+    thirdSection.classList.add("d-none")
+
+  }
+  const handleFirstStep = () => {
     const progressOne = document.querySelector(".progress-1")
     if (productTypes) {
       progressOne.classList.add("section-done")
     }
   }
 
-  const handleSecondProgress = (e) => {
+
+
+  const handleSecondSection = () => {
+    const firstSection = document.getElementById("first-section")
+    const secondSection = document.getElementById("second-section")
+    const progressTwo = document.querySelector(".progress-2")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
+
+    firstSection.classList.add("d-none")
+    secondSection.classList.remove("d-none")
+    progressTwo.classList.remove("section-done")
+    thirdSection.classList.add("d-none")
+  }
+  const handleSecondStep = (e) => {
     setProductTypeId(e.target.value)
     const progressTwo = document.querySelector(".progress-2")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
     console.log(progressTwo)
     if (productTypes) {
       progressTwo.classList.add("section-done")
+      secondSection.classList.add("d-none")
+
+      thirdSection.classList.remove("d-none")
     }
+  }
+
+
+
+  const handleThirdSection = (e) => {
+    const firstSection = document.getElementById("first-section")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
+
+    firstSection.classList.add("d-none")
+    secondSection.classList.add("d-none")
+    thirdSection.classList.remove("d-none")
+    fourthSection.classList.add("d-none")
+
+    const progressThree = document.querySelector(".progress-3")
+
+    progressThree.classList.remove("section-done")
+  }
+  const handleThirdStep = () => {
+    console.log("chega?")
+    const progressThird = document.querySelector(".progress-3")
+
+    const firstSection = document.getElementById("first-section")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
+
+
+    progressThird.classList.add("section-done")
+
+    firstSection.classList.add("d-none")
+    secondSection.classList.add("d-none")
+    thirdSection.classList.add("d-none")
+    fourthSection.classList.remove("d-none")
+
+
   }
 
 
@@ -249,32 +319,38 @@ export function ProductForm(props) {
     <div className="w-60 text-center new-product-react py-5">
       <h1 className="text-success">Anuncie aqui</h1>
       <ul className="list-group list-group-horizontal-sm progress-bar pb-3">
-        <li className="progress progress-1">1</li>
+        <li className="progress progress-1"><button className="btn-progress" onClick={(e) => handleFirstSection()}>1</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-2">2</li>
+        <li className="progress progress-2"><button className="btn-progress" onClick={(e) => handleSecondSection()}>2</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-3">3</li>
+        <li className="progress progress-3"><button className="btn-progress" onClick={(e) => handleThirdSection()}>3</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-4">4</li>
+        <li className="progress progress-4"><button className="btn-progress" onClick={(e) => handleFourthSection()}>4</button></li>
+        <hr className="progress-path"/>
+        <li className="progress progress-5"><button className="btn-progress" onClick={(e) => handleFifthSection()}>5</button></li>
+        <hr className="progress-path"/>
+        <li className="progress progress-6"><button className="btn-progress" onClick={(e) => handleSixthSection()}>6</button></li>
       </ul>
-      <h4 className="">O que deseja anunciar?</h4>
 
-      <div className="d-flex justify-content-between gap-3">
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <spam><br/><i class="fas fa-charging-station"></i></spam> </button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i class="fas fa-cog"></i></button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/> <i class="fas fa-hard-hat"></i></button>
+      <div id="first-section">
+        <h4 className="">O que deseja anunciar?</h4>
+        <div className="d-flex justify-content-between gap-3">
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i className="fas fa-charging-station"></i> </button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i className="fas fa-cog"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/> <i className="fas fa-hard-hat"></i></button>
+        </div>
+        <div className="d-flex justify-content-between py-3 gap-3">
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/> <i className="fas fa-glasses"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/> <i className="fas fa-wrench"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/> <i className="fas fa-tshirt"></i></button>
+        </div>
       </div>
-      <div className="d-flex justify-content-between py-3 gap-3">
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/> <i class="fas fa-glasses"></i></button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/> <i class="fas fa-wrench"></i></button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/> <i class="fas fa-tshirt"></i></button>
-      </div>
 
 
 
-      <form id="product-form" className="d-none">
+      <form id="product-form" className="">
 
-        <div className="card-questions mb-5">
+        <div id="second-section" className="card-questions d-none mb-5">
           <label htmlFor="category" className="mb-3">Categoria:</label>
           <select
           value={productCategory}
@@ -300,7 +376,7 @@ export function ProductForm(props) {
           <label htmlFor="product" className="mb-3">Produto:</label>
           <select
           value={productTypeId}
-          onChange={(e) => handleSecondProgress(e)}
+          onChange={(e) => handleSecondStep(e)}
 
           className="select-answer"
           >
@@ -320,66 +396,84 @@ export function ProductForm(props) {
 
 
 
-        {productTypeId && productTypeAttributes && (
 
-          <div>
-            {productTypeAttributes.map((attribute, index) => {
-              return renderProductTypeAttributeSelect(attribute, index)
-            })}
 
-            <div className="card-questions mb-5">
-              <div className="d-flex">
-                <div className="input-group input-group-sm mb-3 w-50">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">Marca</span>
-                  </div>
-                  <input type="text" className="form-control"  value={productBrand} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
-                </div>
+        <div>
+          { productTypeAttributes.length > 0 && (
+            <div id="third-section" className="card-questions d-none mb-5">
 
-                <div className="input-group input-group-sm mb-3 w-50">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">Nome</span>
-                  </div>
-                  <input type="text" className="form-control" value={productName} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
-                  { errors && errors.product && errors.product.name && (
-                    <p className="text-danger">{errors.product.name}</p>
-                  )}
-                </div>
-              </div>
+              {productTypeAttributes.map((attribute, index) => {
+                return renderProductTypeAttributeSelect(attribute, index)
+              })}
 
-              <div className="input-group input-group-sm mb-3">
+
+              <button className="btn-announce-type" onClick={() => handleThirdStep()}>Seguir </button>
+
+            </div>
+          )}
+
+          { productTypeAttributes.length === 0 && (
+            <div id="third-section" className="card-questions d-none mb-5">
+
+              <h3>TEM NADA NÂO</h3>
+              <button className="btn-announce-type" onClick={() => handleThirdStep()}>Seguir </button>
+
+            </div>
+          )}
+
+          <div id="fourth-section" className="card-questions mb-5 d-none">
+            <div className="d-flex">
+              <div className="input-group input-group-sm mb-3 w-50">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Descrição</span>
+                  <span className="input-group-text" id="basic-addon1">Marca</span>
                 </div>
-                <input type="text" className="form-control" value={productDescription} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
+                <input type="text" className="form-control"  value={productBrand} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
               </div>
 
-              <div className="d-flex">
-
-
-                <div className="input-group input-group-sm mb-3 w-50">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">R$</span>
-                  </div>
-                  <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={productPrice} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
-                  { errors && errors.product && errors.product.price_in_cents && (
-                    <p className="text-danger">{errors.product.price_in_cents}</p>
-                  )}
+              <div className="input-group input-group-sm mb-3 w-50">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Nome</span>
                 </div>
+                <input type="text" className="form-control" value={productName} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
+                { errors && errors.product && errors.product.name && (
+                  <p className="text-danger">{errors.product.name}</p>
+                )}
+              </div>
+            </div>
 
-                <div className="input-group input-group-sm mb-3 w-50">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">Quantidade</span>
-                  </div>
-                  <input type="number" className="form-control" value={productQuantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
-                  { errors && errors.product && errors.product.quantity && (
-                    <p className="text-danger">{errors.product.quantity}</p>
-                  )}
+            <div className="input-group input-group-sm mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1">Descrição</span>
+              </div>
+              <input type="text" className="form-control" value={productDescription} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
+            </div>
+
+            <div className="d-flex">
+
+
+              <div className="input-group input-group-sm mb-3 w-50">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">R$</span>
                 </div>
+                <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={productPrice} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
+                { errors && errors.product && errors.product.price_in_cents && (
+                  <p className="text-danger">{errors.product.price_in_cents}</p>
+                )}
+              </div>
+
+              <div className="input-group input-group-sm mb-3 w-50">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="basic-addon1">Quantidade</span>
+                </div>
+                <input type="number" className="form-control" value={productQuantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
+                { errors && errors.product && errors.product.quantity && (
+                  <p className="text-danger">{errors.product.quantity}</p>
+                )}
               </div>
             </div>
           </div>
-        )}
+        </div>
+
 
         {productQuantity && (<>
 
