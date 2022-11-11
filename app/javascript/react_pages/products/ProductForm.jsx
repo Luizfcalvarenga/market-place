@@ -235,10 +235,27 @@ export function ProductForm(props) {
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
-
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
     firstSection.classList.remove("d-none")
     secondSection.classList.add("d-none")
     thirdSection.classList.add("d-none")
+    fourthSection.classList.add("d-none")
+    fifthSection.classList.add("d-none")
+    sixthSection.classList.add("d-none")
+
+    const progressOne = document.querySelector(".progress-1")
+    const progressTwo = document.querySelector(".progress-2")
+    const progressThree = document.querySelector(".progress-3")
+    const progressFour = document.querySelector(".progress-4")
+    const progressFive = document.querySelector(".progress-5")
+    const progressSix = document.querySelector(".progress-6")
+    progressOne.classList.add("section-done")
+    progressTwo.classList.remove("section-done")
+    progressThree.classList.remove("section-done")
+    progressFour.classList.remove("section-done")
+    progressFive.classList.remove("section-done")
+    progressSix.classList.remove("section-done")
 
   }
   const handleFirstStep = () => {
@@ -253,14 +270,31 @@ export function ProductForm(props) {
   const handleSecondSection = () => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
-    const progressTwo = document.querySelector(".progress-2")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
-
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
     firstSection.classList.add("d-none")
     secondSection.classList.remove("d-none")
-    progressTwo.classList.remove("section-done")
     thirdSection.classList.add("d-none")
+    fourthSection.classList.add("d-none")
+    fifthSection.classList.add("d-none")
+    sixthSection.classList.add("d-none")
+
+    const progressOne = document.querySelector(".progress-1")
+    const progressTwo = document.querySelector(".progress-2")
+    const progressThree = document.querySelector(".progress-3")
+    const progressFour = document.querySelector(".progress-4")
+    const progressFive = document.querySelector(".progress-5")
+    const progressSix = document.querySelector(".progress-6")
+    progressOne.classList.add("section-done")
+    progressTwo.classList.remove("section-done")
+    progressThree.classList.remove("section-done")
+    progressFour.classList.remove("section-done")
+    progressFive.classList.remove("section-done")
+    progressSix.classList.remove("section-done")
+
+
   }
   const handleSecondStep = (e) => {
     setProductTypeId(e.target.value)
@@ -283,15 +317,27 @@ export function ProductForm(props) {
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
-
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
     firstSection.classList.add("d-none")
     secondSection.classList.add("d-none")
     thirdSection.classList.remove("d-none")
     fourthSection.classList.add("d-none")
+    fifthSection.classList.add("d-none")
+    sixthSection.classList.add("d-none")
 
+    const progressOne = document.querySelector(".progress-1")
+    const progressTwo = document.querySelector(".progress-2")
     const progressThree = document.querySelector(".progress-3")
-
+    const progressFour = document.querySelector(".progress-4")
+    const progressFive = document.querySelector(".progress-5")
+    const progressSix = document.querySelector(".progress-6")
+    progressOne.classList.add("section-done")
+    progressTwo.classList.add("section-done")
     progressThree.classList.remove("section-done")
+    progressFour.classList.add("section-done")
+    progressFive.classList.add("section-done")
+    progressSix.classList.add("section-done")
   }
   const handleThirdStep = () => {
     console.log("chega?")
