@@ -77,3 +77,58 @@ option {
   height: 30px;
   filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
 }
+
+.progress-bar {
+  margin: auto;
+  border-radius: 50%;
+  list-style-type: none;
+
+}
+
+.progress-1 {
+  // margin-right: 30px;
+  padding: 11px 17px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% 50% 50% 50% !important;
+  border: 2px solid $color-primary;
+}
+
+.progress-2 {
+  // margin-right: 30px;
+  padding: 11px 14px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% 50% 50% 50% !important;
+  border: 2px solid $color-primary;
+}
+
+.progress-3 {
+  // margin-right: 30px;
+  padding: 11px 14px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% 50% 50% 50% !important;
+  border: 2px solid $color-primary;
+}
+
+.progress-4 {
+  padding: 11px 14px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50% 50% 50% 50% !important;
+  border: 2px solid $color-primary;
+}
+
+.progress-path {
+  border: 2px solid $color-primary !important;
+  width: 5% !important;
+  margin: 0 !important;
+  margin-top: 18px !important;
+  opacity: 1 !important;
+}
+
+.section-done {
+  background-color: $color-primary;
+  color: white
+}

@@ -192,9 +192,9 @@ export function ProductForm(props) {
   const handleProductType = (e) => {
     console.log(e.target.innerHTML);
     let filterProducts = e.target.innerHTML;
-    if (filterProducts === "Acessórios") {
+    if (filterProducts.includes("Acessórios")) {
       setProductTypes(allProducts.filter(product => product.name === "car_accessories" || product.name === "bike_accessories" || product.name === "training_accessories" || product.name === "pre_after_pedal_accessories"));
-    } else if (filterProducts == "Componentes") {
+    } else if (filterProducts.includes("Componentes")) {
       setProductTypes(allProducts.filter(product => product.name === "battery" || product.name === "brake" || product.name === "brake_levers" || product.name === "cassete"
         || product.name === "chain" || product.name === "chainring" || product.name === "crankset" || product.name === "fender"
         || product.name === "frame" || product.name === "front_derailleur" || product.name === "front_shifter" || product.name === "front_suspension"
@@ -204,17 +204,17 @@ export function ProductForm(props) {
         || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre"
       ));
 
-    } else if (filterProducts == "Equipamentos") {
+    } else if (filterProducts.includes("Equipamentos")) {
       setProductTypes(allProducts.filter(product => product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
         || product.name === "bottle_cage" || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker"
       ));
-    } else if (filterProducts == "Casual") {
+    } else if (filterProducts.includes("Casual")) {
       setProductTypes(allProducts.filter(product => product.name === "cap" || product.name === "shirt" || product.name === "shorts" || product.name === "glasses"
       ));
-    } else if (filterProducts == "Manutenção") {
+    } else if (filterProducts.includes("Manutenção")) {
       setProductTypes(allProducts.filter(product => product.name === "air_bomb" || product.name === "lubricant" || product.name === "sealant"
       ));
-    }  else if (filterProducts == "Vestuário") {
+    }  else if (filterProducts.includes("Vestuário")) {
       setProductTypes(allProducts.filter(product => product.name === "bretelle" || product.name === "shorts" || product.name === "inner_shorts" || product.name === "shirt"
         || product.name === "vest" || product.name === "windbreaker" || product.name === "gloves" || product.name === "socks"
         || product.name === "glasses" || product.name === "thermal_clothing"
@@ -223,16 +223,44 @@ export function ProductForm(props) {
 
     const form = document.getElementById("product-form")
     form.classList.remove("d-none")
+
+    handleProgress()
+  }
+
+  const handleProgress = () => {
+    const progressOne = document.querySelector(".progress-1")
+    const progressTwo = document.querySelector(".progress-2")
+    const progressThree = document.querySelector(".progress-3")
+    const progressFour = document.querySelector(".progress-4")
+
+    if (productTypes) {
+      progressOne.classList.add("section-done")
+    }
+
+
+    if (productTypeId) {
+      progressTwo.classList.add("section-done")
+    }
+
   }
 
 
   return (
     <div className="w-60 text-center new-product-react py-5">
       <h1 className="text-success">Anuncie aqui</h1>
+      <ul className="list-group list-group-horizontal-sm progress-bar pb-3">
+        <li className="progress progress-1">1</li>
+        <hr className="progress-path"/>
+        <li className="progress progress-2">2</li>
+        <hr className="progress-path"/>
+        <li className="progress progress-3">3</li>
+        <hr className="progress-path"/>
+        <li className="progress progress-4">4</li>
+      </ul>
       <h4 className="">O que deseja anunciar?</h4>
 
       <div className="d-flex justify-content-between gap-3">
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i class="fas fa-charging-station"></i></button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <spam><br/><i class="fas fa-charging-station"></i></spam> </button>
         <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i class="fas fa-cog"></i></button>
         <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/> <i class="fas fa-hard-hat"></i></button>
       </div>
@@ -272,7 +300,8 @@ export function ProductForm(props) {
           <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
           <select
           value={productTypeId}
-          onChange={(e) => setProductTypeId(e.target.value)}
+          onChange={(e) => setProductTypeId(e.target.value) && handleProgress()}
+
           className="select-answer"
           >
             {productTypes.map((productType) => {
