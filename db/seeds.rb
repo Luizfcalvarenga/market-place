@@ -147,7 +147,6 @@
     shirt_sizes = ProductTypeAttribute.create!(product_type: shirt, name: "shirt_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
     windbreaker_sizes = ProductTypeAttribute.create!(product_type: windbreaker, name: "windbreaker_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
     gloves_sizes = ProductTypeAttribute.create!(product_type: gloves, name: "gloves_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
-    socks_sizes = ProductTypeAttribute.create!(product_type: socks, name: "socks_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
     thermal_clothing_sizes = ProductTypeAttribute.create!(product_type: thermal_clothing, name: "thermal_clothing_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
     cap_sizes = ProductTypeAttribute.create!(product_type: cap, name: "cap_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
 
@@ -155,7 +154,8 @@
 
     shoes_sizes = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, "other"]
 
-    sneaker_sizes = ProductTypeAttribute.create!(product_type: sneaker, name: "sneaker_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
+    socks_sizes = ProductTypeAttribute.create!(product_type: socks, name: "socks_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho?")
+    sneaker_sizes = ProductTypeAttribute.create!(product_type: sneaker, name: "sneaker_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho?")
 
 
 

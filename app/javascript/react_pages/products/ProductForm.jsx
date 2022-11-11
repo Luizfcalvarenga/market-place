@@ -224,25 +224,25 @@ export function ProductForm(props) {
     const form = document.getElementById("product-form")
     form.classList.remove("d-none")
 
-    handleProgress()
+    handleFirstProgress()
   }
 
-  const handleProgress = () => {
+  const handleFirstProgress = () => {
     const progressOne = document.querySelector(".progress-1")
-    const progressTwo = document.querySelector(".progress-2")
-    const progressThree = document.querySelector(".progress-3")
-    const progressFour = document.querySelector(".progress-4")
-
     if (productTypes) {
       progressOne.classList.add("section-done")
     }
+  }
 
-
-    if (productTypeId) {
+  const handleSecondProgress = (e) => {
+    setProductTypeId(e.target.value)
+    const progressTwo = document.querySelector(".progress-2")
+    console.log(progressTwo)
+    if (productTypes) {
       progressTwo.classList.add("section-done")
     }
-
   }
+
 
 
   return (
@@ -275,7 +275,7 @@ export function ProductForm(props) {
       <form id="product-form" className="d-none">
 
         <div className="card-questions mb-5">
-          <label htmlFor="category" className="mb-3">Qual a categoria do seu produto?</label>
+          <label htmlFor="category" className="mb-3">Categoria:</label>
           <select
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
@@ -286,7 +286,7 @@ export function ProductForm(props) {
             })}
           </select>
 
-          <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
+          <label htmlFor="modality" className="mb-3">Modalidade:</label>
           <select
             value={productModality}
             onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
@@ -297,10 +297,10 @@ export function ProductForm(props) {
             })}
           </select>
 
-          <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
+          <label htmlFor="product" className="mb-3">Produto:</label>
           <select
           value={productTypeId}
-          onChange={(e) => setProductTypeId(e.target.value) && handleProgress()}
+          onChange={(e) => handleSecondProgress(e)}
 
           className="select-answer"
           >
