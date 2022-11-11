@@ -220,6 +220,9 @@ export function ProductForm(props) {
         || product.name === "glasses" || product.name === "thermal_clothing"
       ));
     }
+
+    const form = document.getElementById("product-form")
+    form.classList.remove("d-none")
   }
 
 
@@ -229,19 +232,20 @@ export function ProductForm(props) {
       <h4 className="">O que deseja anunciar?</h4>
 
       <div className="d-flex justify-content-between gap-3">
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios</button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes</button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos</button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i class="fas fa-charging-station"></i></button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i class="fas fa-cog"></i></button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/> <i class="fas fa-hard-hat"></i></button>
       </div>
       <div className="d-flex justify-content-between py-3 gap-3">
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual</button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção</button>
-        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário</button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/> <i class="fas fa-glasses"></i></button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/> <i class="fas fa-wrench"></i></button>
+        <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/> <i class="fas fa-tshirt"></i></button>
       </div>
 
 
 
-      <form>
+      <form id="product-form" className="d-none">
+
         <div className="card-questions mb-5">
           <label htmlFor="category" className="mb-3">Qual a categoria do seu produto?</label>
           <select
@@ -253,43 +257,38 @@ export function ProductForm(props) {
               return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
           </select>
-          {productCategory === "other" && (
+
+          <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
+          <select
+            value={productModality}
+            onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
+            className="select-answer"
+          >
+            {modalities.map((modality, index) => {
+              return (<option key={index}>{modality}</option>);
+            })}
+          </select>
+
+          <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
+          <select
+          value={productTypeId}
+          onChange={(e) => setProductTypeId(e.target.value)}
+          className="select-answer"
+          >
+            {productTypes.map((productType) => {
+              return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
+            })}
+          </select>
+
+          {/* {productCategory === "other" && (
             <>
               <label htmlFor="category" className="mx-3">Qual?</label>
               <input type="text" />
             </>
-          )}
+          )} */}
         </div>
 
-        {productCategory  && productCategory != "other" && (
-          <div className="card-questions mb-5">
-            <label htmlFor="modality" className="mb-3">Qual a modalidade do seu produto?</label>
-            <select
-              value={productModality}
-              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
-              className="select-answer"
-            >
-              {modalities.map((modality, index) => {
-                return (<option key={index}>{modality}</option>);
-              })}
-            </select>
-          </div>
-        )}
 
-        {productModality && (
-          <div className="card-questions mb-5">
-            <label htmlFor="product" className="mb-3">Qual produto deseja anunciar?</label>
-            <select
-            value={productTypeId}
-            onChange={(e) => setProductTypeId(e.target.value)}
-            className="select-answer"
-            >
-              {productTypes.map((productType) => {
-                return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
-              })}
-            </select>
-          </div>
-        )}
 
 
         {productTypeId && productTypeAttributes && (
