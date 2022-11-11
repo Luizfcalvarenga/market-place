@@ -229,35 +229,6 @@ export function ProductForm(props) {
     handleFirstStep()
   }
 
-
-  const handleFirstSection = () => {
-    const firstSection = document.getElementById("first-section")
-    const secondSection = document.getElementById("second-section")
-    const thirdSection = document.getElementById("third-section")
-    const fourthSection = document.getElementById("fourth-section")
-    const fifthSection = document.getElementById("fifth-section")
-    const sixthSection = document.getElementById("sixth-section")
-    firstSection.classList.remove("d-none")
-    secondSection.classList.add("d-none")
-    thirdSection.classList.add("d-none")
-    fourthSection.classList.add("d-none")
-    fifthSection.classList.add("d-none")
-    sixthSection.classList.add("d-none")
-
-    const progressOne = document.querySelector(".progress-1")
-    const progressTwo = document.querySelector(".progress-2")
-    const progressThree = document.querySelector(".progress-3")
-    const progressFour = document.querySelector(".progress-4")
-    const progressFive = document.querySelector(".progress-5")
-    const progressSix = document.querySelector(".progress-6")
-    progressOne.classList.add("section-done")
-    progressTwo.classList.remove("section-done")
-    progressThree.classList.remove("section-done")
-    progressFour.classList.remove("section-done")
-    progressFive.classList.remove("section-done")
-    progressSix.classList.remove("section-done")
-
-  }
   const handleFirstStep = () => {
     const progressOne = document.querySelector(".progress-1")
     if (productTypes) {
@@ -267,35 +238,113 @@ export function ProductForm(props) {
 
 
 
-  const handleSecondSection = () => {
+  const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
     const fifthSection = document.getElementById("fifth-section")
     const sixthSection = document.getElementById("sixth-section")
-    firstSection.classList.add("d-none")
-    secondSection.classList.remove("d-none")
-    thirdSection.classList.add("d-none")
-    fourthSection.classList.add("d-none")
-    fifthSection.classList.add("d-none")
-    sixthSection.classList.add("d-none")
 
-    const progressOne = document.querySelector(".progress-1")
-    const progressTwo = document.querySelector(".progress-2")
-    const progressThree = document.querySelector(".progress-3")
-    const progressFour = document.querySelector(".progress-4")
-    const progressFive = document.querySelector(".progress-5")
-    const progressSix = document.querySelector(".progress-6")
-    progressOne.classList.add("section-done")
-    progressTwo.classList.remove("section-done")
-    progressThree.classList.remove("section-done")
-    progressFour.classList.remove("section-done")
-    progressFive.classList.remove("section-done")
-    progressSix.classList.remove("section-done")
+    const progressOne = document.getElementById("progress-1")
+    const progressTwo = document.getElementById("progress-2")
+    const progressThree = document.getElementById("progress-3")
+    const progressFour = document.getElementById("progress-4")
+    const progressFive = document.getElementById("progress-5")
+    const progressSix = document.getElementById("progress-6")
+
+    console.log(e)
+    if (e.target.innerHTML === "1") {
+      firstSection.classList.remove("d-none")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
+
+      progressOne.classList.remove("section-done")
+      progressTwo.classList.remove("section-done")
+      progressThree.classList.remove("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+    } else if (e.target.innerHTML === "2") {
+      firstSection.classList.add("d-none")
+      secondSection.classList.remove("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
+
+      progressOne.classList.add("section-done")
+      progressTwo.classList.remove("section-done")
+      progressThree.classList.remove("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+    } else if (e.target.innerHTML === "3") {
+      firstSection.classList.add("d-none")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.remove("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
+
+      progressOne.classList.add("section-done")
+      progressTwo.classList.add("section-done")
+      progressThree.classList.remove("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+    } else if (e.target.innerHTML === "4") {
+      firstSection.classList.add("d-none")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.remove("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
+
+      progressOne.classList.add("section-done")
+      progressTwo.classList.add("section-done")
+      progressThree.classList.add("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+    } else if (e.target.innerHTML === "5") {
+      firstSection.classList.add("d-none")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.remove("d-none")
+      sixthSection.classList.add("d-none")
+
+      progressOne.classList.add("section-done")
+      progressTwo.classList.add("section-done")
+      progressThree.classList.add("section-done")
+      progressFour.classList.add("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+    } else if (e.target.innerHTML === "6") {
+      firstSection.classList.add("d-none")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.remove("d-none")
+
+      progressOne.classList.add("section-done")
+      progressTwo.classList.add("section-done")
+      progressThree.classList.add("section-done")
+      progressFour.classList.add("section-done")
+      progressFive.classList.add("section-done")
+      progressSix.classList.remove("section-done")
+    }
 
 
   }
+
+
+
   const handleSecondStep = (e) => {
     setProductTypeId(e.target.value)
     const progressTwo = document.querySelector(".progress-2")
@@ -312,33 +361,6 @@ export function ProductForm(props) {
 
 
 
-  const handleThirdSection = (e) => {
-    const firstSection = document.getElementById("first-section")
-    const secondSection = document.getElementById("second-section")
-    const thirdSection = document.getElementById("third-section")
-    const fourthSection = document.getElementById("fourth-section")
-    const fifthSection = document.getElementById("fifth-section")
-    const sixthSection = document.getElementById("sixth-section")
-    firstSection.classList.add("d-none")
-    secondSection.classList.add("d-none")
-    thirdSection.classList.remove("d-none")
-    fourthSection.classList.add("d-none")
-    fifthSection.classList.add("d-none")
-    sixthSection.classList.add("d-none")
-
-    const progressOne = document.querySelector(".progress-1")
-    const progressTwo = document.querySelector(".progress-2")
-    const progressThree = document.querySelector(".progress-3")
-    const progressFour = document.querySelector(".progress-4")
-    const progressFive = document.querySelector(".progress-5")
-    const progressSix = document.querySelector(".progress-6")
-    progressOne.classList.add("section-done")
-    progressTwo.classList.add("section-done")
-    progressThree.classList.remove("section-done")
-    progressFour.classList.add("section-done")
-    progressFive.classList.add("section-done")
-    progressSix.classList.add("section-done")
-  }
   const handleThirdStep = () => {
     console.log("chega?")
     const progressThird = document.querySelector(".progress-3")
@@ -356,30 +378,29 @@ export function ProductForm(props) {
     thirdSection.classList.add("d-none")
     fourthSection.classList.remove("d-none")
 
-
   }
 
 
 
   return (
     <div className="w-60 text-center new-product-react py-5">
-      <h1 className="text-success">Anuncie aqui</h1>
+      <h1 className="text-success">Vamos lá...</h1>
       <ul className="list-group list-group-horizontal-sm progress-bar pb-3">
-        <li className="progress progress-1"><button className="btn-progress" onClick={(e) => handleFirstSection()}>1</button></li>
+        <li id="progress-1" className="progress progress-1"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>1</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-2"><button className="btn-progress" onClick={(e) => handleSecondSection()}>2</button></li>
+        <li id="progress-2" className="progress progress-2"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>2</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-3"><button className="btn-progress" onClick={(e) => handleThirdSection()}>3</button></li>
+        <li id="progress-3" className="progress progress-3"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>3</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-4"><button className="btn-progress" onClick={(e) => handleFourthSection()}>4</button></li>
+        <li id="progress-4" className="progress progress-4"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>4</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-5"><button className="btn-progress" onClick={(e) => handleFifthSection()}>5</button></li>
+        <li id="progress-5" className="progress progress-5"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>5</button></li>
         <hr className="progress-path"/>
-        <li className="progress progress-6"><button className="btn-progress" onClick={(e) => handleSixthSection()}>6</button></li>
+        <li id="progress-6" className="progress progress-6"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>6</button></li>
       </ul>
 
       <div id="first-section">
-        <h4 className="">O que deseja anunciar?</h4>
+        <h4 className="text-success mt-3">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3">
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i className="fas fa-charging-station"></i> </button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i className="fas fa-cog"></i></button>
@@ -396,7 +417,8 @@ export function ProductForm(props) {
 
       <form id="product-form" className="">
 
-        <div id="second-section" className="card-questions d-none mb-5">
+        <div id="second-section" className="card-questions d-none mb-5 mt-3">
+          <h4 className="text-center text-success">Informações gerais</h4>
           <label htmlFor="category" className="mb-3">Categoria:</label>
           <select
           value={productCategory}
@@ -407,6 +429,7 @@ export function ProductForm(props) {
               return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
           </select>
+          <br />
 
           <label htmlFor="modality" className="mb-3">Modalidade:</label>
           <select
@@ -418,6 +441,7 @@ export function ProductForm(props) {
               return (<option key={index}>{modality}</option>);
             })}
           </select>
+          <br />
 
           <label htmlFor="product" className="mb-3">Produto:</label>
           <select
