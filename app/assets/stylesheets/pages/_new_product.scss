@@ -154,3 +154,14 @@ option {
   border: none !important;
   background-color: transparent !important;
 }
+
+.btn-next-step {
+  border: none !important;
+  background-color: transparent;
+  color: $color-primary;
+
+
+  &:hover {
+    color: #22e058;
+  }
+}

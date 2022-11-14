@@ -7,7 +7,6 @@ consumer.subscriptions.create("AppearanceChannel", {
   initialized() {},
   connected() {
     // Called when the subscription is ready for use on the server
-    console.log("Connected");
     resetFunc = () => this.resetTimer(this.uninstall);
     this.install();
     window.addEventListener("turbo:load", () => this.resetTimer());
@@ -45,7 +44,7 @@ consumer.subscriptions.create("AppearanceChannel", {
     }
   },
   install() {
-    console.log("Install");
+    // console.log("Install");
     window.removeEventListener("load", resetFunc);
     window.removeEventListener("DOMContentLoaded", resetFunc);
     window.removeEventListener("click", resetFunc);

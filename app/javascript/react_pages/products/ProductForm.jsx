@@ -37,7 +37,6 @@ export function ProductForm(props) {
       setCategories(data.categories)
       setUser(data.user.id)
       setServices(data.services)
-      console.log(categories)
      })
     if (props.productId) {
       fetchProduct();
@@ -91,7 +90,6 @@ export function ProductForm(props) {
         setProductAttributes(
           response.data.product_attributes
         );
-
       }
     }
   }
@@ -109,7 +107,6 @@ export function ProductForm(props) {
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
     let options = []
-    // console.log(attribute.name, attribute.name === "front_suspension_travel", productAttributes["suspension_type"] )
     if (["mountain_bike", "dirt_street"].includes(productCategory) && attribute.name === "frame_size") {
       options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
     } else if (productCategory === "road" && attribute.name === "frame_size") {
@@ -253,14 +250,13 @@ export function ProductForm(props) {
     const progressFive = document.getElementById("progress-5")
     const progressSix = document.getElementById("progress-6")
 
-    console.log(e)
     if (e.target.innerHTML === "1") {
       firstSection.classList.remove("d-none")
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      fifthSection.classList.add("d-none")
-      sixthSection.classList.add("d-none")
+      // fifthSection.classList.add("d-none")
+      // sixthSection.classList.add("d-none")
 
       progressOne.classList.remove("section-done")
       progressTwo.classList.remove("section-done")
@@ -273,8 +269,8 @@ export function ProductForm(props) {
       secondSection.classList.remove("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      fifthSection.classList.add("d-none")
-      sixthSection.classList.add("d-none")
+      // fifthSection.classList.add("d-none")
+      // sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.remove("section-done")
@@ -287,8 +283,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.remove("d-none")
       fourthSection.classList.add("d-none")
-      fifthSection.classList.add("d-none")
-      sixthSection.classList.add("d-none")
+      // fifthSection.classList.add("d-none")
+      // sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -301,8 +297,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.remove("d-none")
       fourthSection.classList.add("d-none")
-      fifthSection.classList.add("d-none")
-      sixthSection.classList.add("d-none")
+      // fifthSection.classList.add("d-none")
+      // sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -315,8 +311,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      fifthSection.classList.remove("d-none")
-      sixthSection.classList.add("d-none")
+      // fifthSection.classList.remove("d-none")
+      // sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -329,8 +325,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      fifthSection.classList.add("d-none")
-      sixthSection.classList.remove("d-none")
+      // fifthSection.classList.add("d-none")
+      // sixthSection.classList.remove("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -347,10 +343,9 @@ export function ProductForm(props) {
 
   const handleSecondStep = (e) => {
     setProductTypeId(e.target.value)
-    const progressTwo = document.querySelector(".progress-2")
+    const progressTwo = document.getElementById("progress-2")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-    console.log(progressTwo)
     if (productTypes) {
       progressTwo.classList.add("section-done")
       secondSection.classList.add("d-none")
@@ -362,21 +357,26 @@ export function ProductForm(props) {
 
 
   const handleThirdStep = () => {
-    console.log("chega?")
-    const progressThird = document.querySelector(".progress-3")
+    const progressThird = document.getElementById("progress-3")
 
-    const firstSection = document.getElementById("first-section")
-    const secondSection = document.getElementById("second-section")
-    const thirdSection = document.getElementById("third-section")
-    const fourthSection = document.getElementById("fourth-section")
+    // const firstSection = document.getElementById("first-section")
+    // const secondSection = document.getElementById("second-section")
+    // const thirdSection = document.getElementById("third-section")
+    // const fourthSection = document.getElementById("fourth-section")
+    // console.log(firstSection)
+    // console.log(secondSection)
+    console.log(progressThird)
+    // console.log(thirdSection)
+    // console.log(fourthSection)
 
 
-    progressThird.classList.add("section-done")
 
-    firstSection.classList.add("d-none")
-    secondSection.classList.add("d-none")
-    thirdSection.classList.add("d-none")
-    fourthSection.classList.remove("d-none")
+    // progressThird.classList.add("section-done")
+
+    // firstSection.classList.add("d-none")
+    // secondSection.classList.add("d-none")
+    // thirdSection.classList.add("d-none")
+    // fourthSection.classList.remove("d-none")
 
   }
 
@@ -412,7 +412,6 @@ export function ProductForm(props) {
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/> <i className="fas fa-tshirt"></i></button>
         </div>
       </div>
-
 
 
       <form id="product-form" className="">
@@ -471,25 +470,30 @@ export function ProductForm(props) {
         <div>
           { productTypeAttributes.length > 0 && (
             <div id="third-section" className="card-questions d-none mb-5">
+              <h4 className="text-center text-success">Informações técnicas</h4>
+
 
               {productTypeAttributes.map((attribute, index) => {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
 
 
-              <button className="btn-announce-type" onClick={() => handleThirdStep()}>Seguir </button>
+              <button className="btn-next-step me-3 mt-3" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
 
             </div>
           )}
 
           { productTypeAttributes.length === 0 && (
             <div id="third-section" className="card-questions d-none mb-5">
+               <h4 className="text-center text-success">Informações técnicas</h4>
 
-              <h3>TEM NADA NÂO</h3>
-              <button className="btn-announce-type" onClick={() => handleThirdStep()}>Seguir </button>
+              <h6 className="text-black">não há nada para esse produto, vamos em frente!!!</h6>
+              <button className="btn-next-step me-3 mt-3" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
 
             </div>
           )}
+
+
 
           <div id="fourth-section" className="card-questions mb-5 d-none">
             <div className="d-flex">
@@ -497,14 +501,14 @@ export function ProductForm(props) {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Marca</span>
                 </div>
-                <input type="text" className="form-control"  value={productBrand} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
+                <input type="text" className="form-control"  value={productBrand ? productBrand : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
               </div>
 
               <div className="input-group input-group-sm mb-3 w-50">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Nome</span>
                 </div>
-                <input type="text" className="form-control" value={productName} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
+                <input type="text" className="form-control" value={productName ? productName : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
                 { errors && errors.product && errors.product.name && (
                   <p className="text-danger">{errors.product.name}</p>
                 )}
@@ -515,17 +519,15 @@ export function ProductForm(props) {
               <div className="input-group-prepend">
                 <span className="input-group-text" id="basic-addon1">Descrição</span>
               </div>
-              <input type="text" className="form-control" value={productDescription} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
+              <input type="text" className="form-control" value={productDescription ? productDescription : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
             </div>
 
             <div className="d-flex">
-
-
               <div className="input-group input-group-sm mb-3 w-50">
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">R$</span>
                 </div>
-                <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={productPrice} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
+                <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
                 { errors && errors.product && errors.product.price_in_cents && (
                   <p className="text-danger">{errors.product.price_in_cents}</p>
                 )}
@@ -535,7 +537,7 @@ export function ProductForm(props) {
                 <div className="input-group-prepend">
                   <span className="input-group-text" id="basic-addon1">Quantidade</span>
                 </div>
-                <input type="number" className="form-control" value={productQuantity} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
+                <input type="number" className="form-control" value={productQuantity ? productQuantity : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
                 { errors && errors.product && errors.product.quantity && (
                   <p className="text-danger">{errors.product.quantity}</p>
                 )}
