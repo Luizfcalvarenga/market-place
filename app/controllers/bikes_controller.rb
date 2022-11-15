@@ -94,6 +94,7 @@ class BikesController < ApplicationController
       :number_of_front_gears,
       :number_of_rear_gears,
       :brake_type,
+      :brake_disc_size,
       :suspension_type,
       :front_suspension_travel,
       :rear_suspension_travel,

@@ -138,6 +138,13 @@ export function ProductForm(props) {
             return (<option key={index} value={option}>{option}</option>)
           })}
         </select>
+
+        {/* { === "other" && (
+            <>
+              <label htmlFor="category" className="mx-3">Qual?</label>
+              <input type="text" />
+            </>
+          )} PARA RESPOSTA QUE FOR OTHER PEGAR O QUE FOR ESCRITO NO INPUT NO LUGAR DO SELECT*/}
       </div>
     )
   }
@@ -233,15 +240,6 @@ export function ProductForm(props) {
 
     handleFirstStep()
   }
-
-  const handleFirstStep = () => {
-    const progressOne = document.querySelector(".progress-1")
-    if (productTypes) {
-      progressOne.classList.add("section-done")
-    }
-  }
-
-
 
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
@@ -347,7 +345,12 @@ export function ProductForm(props) {
 
   }
 
-
+  const handleFirstStep = () => {
+    const progressOne = document.querySelector(".progress-1")
+    if (productTypes) {
+      progressOne.classList.add("section-done")
+    }
+  }
 
   const handleSecondStep = (e) => {
     setProductTypeId(e.target.value)
@@ -430,6 +433,7 @@ export function ProductForm(props) {
 
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
+
           <label htmlFor="category" className="mb-3">Categoria:</label>
           <select
           value={productCategory}

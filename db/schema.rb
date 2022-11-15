@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_205440) do
+ActiveRecord::Schema.define(version: 2022_11_15_225519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_205440) do
     t.string "motor"
     t.integer "battery_cyles"
     t.integer "mileage"
+    t.string "brake_disc_size"
     t.index ["category_id"], name: "index_bikes_on_category_id"
     t.index ["service_id"], name: "index_bikes_on_service_id"
     t.index ["user_id"], name: "index_bikes_on_user_id"

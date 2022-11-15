@@ -743,7 +743,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< HANDLEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    handlebar_sizes = ["680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm" "Outro"]
+    handlebar_sizes = ["680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "Outro"]
 
     handlebar_question_1 = ProductTypeAttribute.create!(product_type: handlebar, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     handlebar_question_2 = ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho?" )
