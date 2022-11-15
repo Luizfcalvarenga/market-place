@@ -111,9 +111,17 @@ export function ProductForm(props) {
       options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
     } else if (productCategory === "road" && attribute.name === "frame_size") {
       options = [ "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    } else if (attribute.name === "front_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+    } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
-    } else if (attribute.name === "rear_suspension_travel" && ["no_suspension"].includes(productAttributes["suspension_type"])) {
+    } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+      return
+    } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+      return
+    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper"].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "seat_post_travel" && ["rigid"].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant"].includes(productCategory)) {
       return
     } else {
       options = attribute.options
@@ -255,8 +263,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.remove("section-done")
       progressTwo.classList.remove("section-done")
@@ -269,8 +277,8 @@ export function ProductForm(props) {
       secondSection.classList.remove("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.remove("section-done")
@@ -283,8 +291,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.remove("d-none")
       fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -295,10 +303,10 @@ export function ProductForm(props) {
     } else if (e.target.innerHTML === "4") {
       firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
-      thirdSection.classList.remove("d-none")
-      fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.remove("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -311,8 +319,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      // fifthSection.classList.remove("d-none")
-      // sixthSection.classList.add("d-none")
+      fifthSection.classList.remove("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -325,8 +333,8 @@ export function ProductForm(props) {
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.remove("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.remove("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
@@ -354,32 +362,36 @@ export function ProductForm(props) {
     }
   }
 
-
-
   const handleThirdStep = () => {
     const progressThird = document.getElementById("progress-3")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
 
-    // const firstSection = document.getElementById("first-section")
-    // const secondSection = document.getElementById("second-section")
-    // const thirdSection = document.getElementById("third-section")
-    // const fourthSection = document.getElementById("fourth-section")
-    // console.log(firstSection)
-    // console.log(secondSection)
-    console.log(progressThird)
-    // console.log(thirdSection)
-    // console.log(fourthSection)
-
-
-
-    // progressThird.classList.add("section-done")
-
-    // firstSection.classList.add("d-none")
-    // secondSection.classList.add("d-none")
-    // thirdSection.classList.add("d-none")
-    // fourthSection.classList.remove("d-none")
-
+    progressThird.classList.add("section-done")
+    thirdSection.classList.add("d-none")
+    fourthSection.classList.remove("d-none")
   }
 
+  const handleFourthStep = () => {
+    const progressFourth = document.getElementById("progress-4")
+    const fourthSection = document.getElementById("fourth-section")
+    const fifthSection = document.getElementById("fifth-section")
+
+    progressFourth.classList.add("section-done")
+    fourthSection.classList.add("d-none")
+    fifthSection.classList.remove("d-none")
+  }
+
+
+  const handleFifthStep = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
+
+    progressFifth.classList.add("section-done")
+    fifthSection.classList.add("d-none")
+    sixthSection.classList.remove("d-none")
+  }
 
 
   return (
@@ -478,7 +490,7 @@ export function ProductForm(props) {
               })}
 
 
-              <button className="btn-next-step me-3 mt-3" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
+              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
 
             </div>
           )}
@@ -488,7 +500,7 @@ export function ProductForm(props) {
                <h4 className="text-center text-success">Informações técnicas</h4>
 
               <h6 className="text-black">não há nada para esse produto, vamos em frente!!!</h6>
-              <button className="btn-next-step me-3 mt-3" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
+              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
 
             </div>
           )}
@@ -496,6 +508,7 @@ export function ProductForm(props) {
 
 
           <div id="fourth-section" className="card-questions mb-5 d-none">
+            <h4 className="text-center text-success">Informações adicionais</h4>
             <div className="d-flex">
               <div className="input-group input-group-sm mb-3 w-50">
                 <div className="input-group-prepend">
@@ -543,18 +556,50 @@ export function ProductForm(props) {
                 )}
               </div>
             </div>
+            <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}><i className="fas fa-angle-double-right"></i></button>
           </div>
         </div>
 
 
         {productQuantity && (<>
 
-          <label htmlFor="photos">Adicione as fotos do seu produto:</label>
+          <div id="fifth-section" className="card-questions mb-5 mt-3 d-none">
 
-          <input type="file" className="form-control" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
+            <h4 className="text-center text-success mb-3">Imagens do produto</h4>
+            {/* <label htmlFor="photos">Adicione as fotos do seu produto:</label> */}
 
+            <input type="file" className="form-control" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
+
+            <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
+
+          </div>
         </>)}
 
+
+        <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
+
+          <h4 className="text-center text-success mb-3">Revise seu produto</h4>
+              <p>Categoria: {productCategory}</p>
+              <p>Modalidade: {productModality}</p>
+              <p>Produto: {productId}</p>
+              { productAttributes && (<>
+
+              </>
+              )}
+              <p>Marca: {productBrand}</p>
+              <p>Nome: {productName}</p>
+              <p>Descrição: {productDescription}</p>
+              <p>Preço: {productPrice}</p>
+              <p>Quantidade: {productQuantity}</p>
+
+
+
+
+
+
+          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
+
+        </div>
         {productPhotos &&  (<>
 
           <div className="card-questions my-3">
