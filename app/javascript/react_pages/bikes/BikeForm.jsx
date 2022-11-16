@@ -1210,7 +1210,7 @@ export function BikeForm(props) {
                 <input type="text" onChange={(e) => setOtherAccessory(e.target.value)}/>
               </>)}
 
-              <label htmlFor="batteryCyle" className="mt-2">Descrição:</label>
+              <label htmlFor="accessories-description" className="mt-2">Descrição:</label>
               <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
             </>
           )}
@@ -1221,11 +1221,13 @@ export function BikeForm(props) {
         <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}><i className="fas fa-angle-double-right"></i></button>
       </div>
 
+                        {/* ////////////////////////////////////////////////////////////////////// 3ª SECTION //////////////////////////////////////////////////////////*/}
+
       <div id="third-section" className="card-bike-select mb-5 d-none">
         <div className="mb-3">
           <h4 className="text-center text-success">Informações adicionais</h4>
           <label for="description" className="">Descrição:</label>
-          <textarea className="text-input" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+          <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
           {bikeCondition === "used" && (<>
             <label htmlFor="structuralVisualCondition" className="mt-3">Condição estrutural/visual?</label>
