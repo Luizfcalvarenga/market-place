@@ -31,15 +31,15 @@
 
     ##### BIKES #####
 
-    mtb = Category.create!(name: "mountain_bike", modalities: ["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
-    dirt = Category.create!(name: "dirt_street", modalities: ["street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
-    road = Category.create!(name: "road", modalities: ["speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
+    mtb = Category.create!(name: "mountain_bike", modalities: ["", "downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
+    dirt = Category.create!(name: "dirt_street", modalities: ["", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
+    road = Category.create!(name: "road", modalities: ["", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
     urban = Category.create!(name: "urban")
     infant = Category.create!(name: "infant")
     # urban = Category.create!(name: "Urban")
 
     ##### GENERAL #####
-    documentation_type = ["nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
+    documentation_type = ["", "nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
 
     categories = [mtb, dirt, road, infant, urban ]
 
@@ -52,7 +52,7 @@
 
     bike_oriantations = [ "front", "rear", "both"]
 
-    bike_types = [ "no_engine", "electric_engine"]
+    bike_types = ["", "no_engine", "electric_engine"]
 
 
     battery = ProductType.create(name: "battery")
@@ -139,7 +139,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CLOTHES SIZES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    clothes_sizes = ["PP", "P", "M", "G", "GG", "XGG"]
+    clothes_sizes = ["", "PP", "P", "M", "G", "GG", "XGG"]
 
     bretelle_sizes = ProductTypeAttribute.create!(product_type: bretelle, name: "bretelle_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
     shorts_sizes = ProductTypeAttribute.create!(product_type: shorts, name: "shorts_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
@@ -152,7 +152,7 @@
 
 
 
-    shoes_sizes = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, "other"]
+    shoes_sizes = [0, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, "other"]
 
     socks_sizes = ProductTypeAttribute.create!(product_type: socks, name: "socks_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho?")
     sneaker_sizes = ProductTypeAttribute.create!(product_type: sneaker, name: "sneaker_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho?")
@@ -162,7 +162,8 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    frame_brands = [ "alfameq",
+    frame_brands = ["",
+      "alfameq",
       "astro",
       "audax",
       "bH",
@@ -255,11 +256,11 @@
 
     road_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
     mtb_dirt_frame_sizes = [  "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    frame_materials = [ "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
+    frame_materials = ["", "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
     # front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
-    rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
-    shock_sizes = [ "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+    rear_suspension_travels = ["", "80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+    shock_sizes = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
 
 
     frame_question_1 = ProductTypeAttribute.create!(product_type: frame, name: "documentation_type", kind: "multiple_choices", options: documentation_type, prompt: "Documentação?" )
@@ -278,10 +279,10 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    brake_types = [ "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
-    road_brake_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
-    mtb_dirt_urban_brake_models = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
-    front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
+    brake_types = ["", "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+    road_brake_models = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+    mtb_dirt_urban_brake_models = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
+    front_suspension_travels = ["", "80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
 
 
     brake_question_1 = ProductTypeAttribute.create!(product_type: brake, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -298,8 +299,8 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RIM >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    wheel_sizes = [ "16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
-    rim_materials = [ "aluminum", "carbon", "carbono_alumínio_chainstay", "other"]
+    wheel_sizes = ["", "16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
+    rim_materials = ["", "aluminum", "carbon", "carbono_alumínio_chainstay", "other"]
 
     rim_question_1 = ProductTypeAttribute.create!(product_type: rim, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     rim_question_2 = ProductTypeAttribute.create!(product_type: rim, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda?" )
@@ -312,7 +313,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< HANDLEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    handlebar_sizes = ["680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm" "Outro"]
+    handlebar_sizes = ["", "680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm" "Outro"]
 
     handlebar_question_1 = ProductTypeAttribute.create!(product_type: handlebar, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     handlebar_question_2 = ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho?" )
@@ -322,8 +323,8 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
-    mtb_dirt_urban_front_suspension_models = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
+    front_suspension_travels = ["", "80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
+    mtb_dirt_urban_front_suspension_models = ["", "FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
 
 
     front_suspension_question_1 = ProductTypeAttribute.create!(product_type: front_suspension, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -338,10 +339,10 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    shock_sizes = [ "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-    rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+    shock_sizes = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+    rear_suspension_travels = ["", "80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
 
-    mtb_dirt_urban_rear_suspension_models = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
+    mtb_dirt_urban_rear_suspension_models = ["", "FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
 
 
     rear_suspension_question_1 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Possui documentação?" )
@@ -374,9 +375,9 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    front_gears_options= [ 1, 2, 3 ]
-    road_front_derailleur_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
-    mtb_dirt_urban_front_derailleur_models = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
+    front_gears_options= [0, 1, 2, 3 ]
+    road_front_derailleur_models = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
+    mtb_dirt_urban_front_derailleur_models = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
 
 
 
@@ -395,9 +396,9 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    road_rear_derailleur_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
-    mtb_dirt_urban_rear_derailleur_models = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
-    rear_gears_options= [ 1, 7, 8, 9, 10, 11, 12 ]
+    road_rear_derailleur_models = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+    mtb_dirt_urban_rear_derailleur_models = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
+    rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
     rear_derailleur_question_1 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     rear_derailleur_question_2 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: velocity_numbers_options, prompt: "Quantas velocidades?" )
@@ -412,8 +413,8 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    seat_post_types = ["retractable", "rigid"]
-    seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
+    seat_post_types = ["", "retractable", "rigid"]
+    seat_post_travels = ["", "50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
 
     seat_post_question_1 = ProductTypeAttribute.create!(product_type: seat_post, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     seat_post_question_2 = ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_type", kind: "multiple_choice", options: seat_post_types, prompt: "Tipo do canote?" )
@@ -426,8 +427,8 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CRANKSET >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    lengths = ["170mm", "172,5mm", "175mm"]
-    crowns = ["30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28" ]
+    lengths = ["", "170mm", "172,5mm", "175mm"]
+    crowns = ["", "30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28" ]
 
 
     crankset_question_1 = ProductTypeAttribute.create!(product_type: crankset, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -440,7 +441,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BATTERY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
+    capacities = ["", "320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
 
 
     battery_question_1 = ProductTypeAttribute.create!(product_type: battery, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -463,14 +464,14 @@
 
     ##### BIKES #####
 
-    mtb = Category.create!(name: "mountain_bike", modalities: ["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
-    dirt = Category.create!(name: "dirt_street", modalities: ["street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
-    road = Category.create!(name: "road", modalities: ["speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
+    mtb = Category.create!(name: "mountain_bike", modalities: ["", "downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
+    dirt = Category.create!(name: "dirt_street", modalities: ["", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
+    road = Category.create!(name: "road", modalities: ["", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
     urban = Category.create!(name: "urban")
     infant = Category.create!(name: "infant")
 
     ##### GENERAL #####
-    documentation_type = ["nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
+    documentation_type = ["", "nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
 
     categories = [mtb, dirt, road, infant, urban ]
 
@@ -483,7 +484,7 @@
 
     bike_oriantations = [ "front", "rear", "both"]
 
-    bike_types = [ "no_engine", "electric_engine"]
+    bike_types = [ "", "no_engine", "electric_engine"]
 
 
     battery = ProductType.create(name: "battery")
@@ -570,7 +571,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CLOTHES SIZES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    clothes_sizes = ["PP", "P", "M", "G", "GG", "XGG"]
+    clothes_sizes = ["", "PP", "P", "M", "G", "GG", "XGG"]
 
     bretelle_sizes = ProductTypeAttribute.create!(product_type: bretelle, name: "bretelle_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
     shorts_sizes = ProductTypeAttribute.create!(product_type: shorts, name: "shorts_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho?")
@@ -585,7 +586,7 @@
 
 
 
-    shoes_sizes = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, "other"]
+    shoes_sizes = [0, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, "other"]
 
     socks_sizes = ProductTypeAttribute.create!(product_type: socks, name: "socks_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho?")
     sneaker_sizes = ProductTypeAttribute.create!(product_type: sneaker, name: "sneaker_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho?")
@@ -595,7 +596,8 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    frame_brands = [ "alfameq",
+    frame_brands = ["",
+      "alfameq",
       "astro",
       "audax",
       "bH",
@@ -688,11 +690,11 @@
 
     road_frame_sizes = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
     mtb_dirt_frame_sizes = [  "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    frame_materials = [ "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
+    frame_materials = ["", "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
     # front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
-    rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
-    shock_sizes = [ "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+    rear_suspension_travels = ["", "80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+    shock_sizes = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
 
 
     frame_question_1 = ProductTypeAttribute.create!(product_type: frame, name: "documentation_type", kind: "multiple_choices", options: documentation_type, prompt: "Documentação?" )
@@ -711,9 +713,9 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    brake_types = [ "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
-    road_brake_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
-    mtb_dirt_urban_brake_models = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
+    brake_types = ["", "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+    road_brake_models = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+    mtb_dirt_urban_brake_models = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
 
 
     brake_question_1 = ProductTypeAttribute.create!(product_type: brake, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -729,8 +731,8 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RIM >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    wheel_sizes = [ "16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
-    rim_materials = [ "aluminum", "carbon", "carbono_alumínio_chainstay", "other"]
+    wheel_sizes = ["", "16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
+    rim_materials = ["", "aluminum", "carbon", "carbono_alumínio_chainstay", "other"]
 
     rim_question_1 = ProductTypeAttribute.create!(product_type: rim, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     rim_question_2 = ProductTypeAttribute.create!(product_type: rim, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda?" )
@@ -743,7 +745,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< HANDLEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    handlebar_sizes = ["680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "Outro"]
+    handlebar_sizes = ["", "680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "Outro"]
 
     handlebar_question_1 = ProductTypeAttribute.create!(product_type: handlebar, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     handlebar_question_2 = ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho?" )
@@ -753,8 +755,8 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
-    mtb_dirt_urban_front_suspension_models = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
+    front_suspension_travels = ["", "80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
+    mtb_dirt_urban_front_suspension_models = ["", "FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
 
 
     front_suspension_question_1 = ProductTypeAttribute.create!(product_type: front_suspension, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -769,10 +771,10 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    shock_sizes = [ "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-    rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+    shock_sizes = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+    rear_suspension_travels = ["", "80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
 
-    mtb_dirt_urban_rear_suspension_models = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
+    mtb_dirt_urban_rear_suspension_models = ["", "FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
 
 
     rear_suspension_question_1 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Possui documentação?" )
@@ -808,9 +810,9 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    front_gears_options= [ 1, 2, 3 ]
-    road_front_derailleur_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
-    mtb_dirt_urban_front_derailleur_models = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
+    front_gears_options= [0, 1, 2, 3 ]
+    road_front_derailleur_models = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
+    mtb_dirt_urban_front_derailleur_models = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
 
 
 
@@ -828,9 +830,9 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    road_rear_derailleur_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
-    mtb_dirt_urban_rear_derailleur_models = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
-    rear_gears_options= [ 1, 7, 8, 9, 10, 11, 12 ]
+    road_rear_derailleur_models = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+    mtb_dirt_urban_rear_derailleur_models = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
+    rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
     rear_derailleur_question_1 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     rear_derailleur_question_2 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas velocidades?" )
@@ -845,8 +847,8 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    seat_post_types = ["retractable", "rigid"]
-    seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
+    seat_post_types = ["", "retractable", "rigid"]
+    seat_post_travels = ["", "50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
 
     seat_post_question_1 = ProductTypeAttribute.create!(product_type: seat_post, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
     seat_post_question_2 = ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_type", kind: "multiple_choice", options: seat_post_types, prompt: "Tipo do canote?" )
@@ -859,8 +861,8 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CRANKSET >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    lengths = ["170mm", "172,5mm", "175mm"]
-    crowns = ["30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28" ]
+    lengths = ["", "170mm", "172,5mm", "175mm"]
+    crowns = ["", "30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28" ]
 
 
     crankset_question_1 = ProductTypeAttribute.create!(product_type: crankset, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
@@ -873,7 +875,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BATTERY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
-    capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
+    capacities = ["", "320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
 
 
     battery_question_1 = ProductTypeAttribute.create!(product_type: battery, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação?" )
