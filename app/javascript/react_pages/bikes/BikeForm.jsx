@@ -43,6 +43,8 @@ export function BikeForm(props) {
   const [otherRearSuspensionModel, setOtherRearSuspensionModel] = useState("");
   const [seatPostType, setSeatPostType] = useState("");
   const [seatPostTravel, setSeatPostTravel] = useState("");
+  const [otherSeatPostTravel, setOtherSeatPostTravel] = useState("");
+
   const [weight, setWeight] = useState("");
   const [locality, setLocality] = useState("");
   const [bikeCondition, setBikeCondition] = useState("");
@@ -54,11 +56,19 @@ export function BikeForm(props) {
   const [rearDerailleurModel, setRearDerailleurModel] = useState("");
   const [otherFrontDerailleurModel, setOtherFrontDerailleurModel] = useState("");
   const [otherRearDerailleurModel, setOtherRearDerailleurModel] = useState("");
+  const [handlebar, setHandlebar] = useState("");
+  const [stem, setStem] = useState("");
   const [crankset, setCrankset] = useState("");
   const [chain, setChain] = useState("");
   const [accessories, setAccessories] = useState("");
-  const [accessoriesWithin, setAccessoriesWithin] = useState("");
+  const [accessoriesWithin, setAccessoriesWithin] = useState([]);
+  const [accessoryDescription, setAccessoryDescription] = useState([]);
+  const [otherAccessory, setotherAccessory] = useState([]);
+  const [pedal, setPedal] = useState([]);
+
   const [battery, setBattery] = useState("");
+  const [otherBattery, setOtherBattery] = useState("");
+
   const [photos, setPhotos ] = useState(null);
 
   const [errors, setErrors] = useState({
@@ -70,13 +80,14 @@ export function BikeForm(props) {
      .then((response) => response.json())
      .then((data) => {
       setCategories(data.categories)
-      setUser(data.user.id)
       setServices(data.services)
+      if (data.user) {
+        setUser(data.user.id)
+      }
      })
     if (props.bikeId) {
       fetchBike();
       setBikeId(props.bikeId)
-
     }
   }, []);
 
@@ -312,18 +323,17 @@ export function BikeForm(props) {
 
   }
 
-  // const handleSecondStep = (e) => {
-  //   setProductTypeId(e.target.value)
-  //   const progressTwo = document.getElementById("progress-2")
-  //   const secondSection = document.getElementById("second-section")
-  //   const thirdSection = document.getElementById("third-section")
-  //   if (productTypes) {
-  //     progressTwo.classList.add("section-done")
-  //     secondSection.classList.add("d-none")
+  const handleSecondStep = (e) => {
+    const progressTwo = document.getElementById("progress-2")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
 
-  //     thirdSection.classList.remove("d-none")
-  //   }
-  // }
+    progressTwo.classList.add("section-done")
+    secondSection.classList.add("d-none")
+
+    thirdSection.classList.remove("d-none")
+
+  }
 
   // const handleThirdStep = () => {
   //   const progressThird = document.getElementById("progress-3")
@@ -524,12 +534,16 @@ export function BikeForm(props) {
 
   const withinAccessories = ["", "no", "yes"]
 
+  //////////////////////////////////////////////ACCESSORIES
+
+
+  const accessoryOptions = ["", "Pedal", "Ciclocomputador", "Lanterna traseira", "Farol", "Bolsa de acessórios", "Suporte de garrafinha", "Outro"]
 
   return (
 
     <div className="w-60 text-center new-bike-react py-5">
-      <h1 className="text-success">Vamos lá...</h1>
-      <ul className="list-group list-group-horizontal-sm progress-bar pb-3">
+      <h1 className="text-success pb-3">Vamos lá...</h1>
+      <ul className="list-group list-group-horizontal-sm progress-bar pb-5">
         <li id="progress-1" className="progress progress-1"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>1</button></li>
         <hr className="progress-path"/>
         <li id="progress-2" className="progress progress-2"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>2</button></li>
@@ -634,7 +648,7 @@ export function BikeForm(props) {
         <br />
 
 
-        {["dirt_street", "mountain_bike"].includes(category) && (<>
+        {["dirt_street", "mountain_bike", "infant", "urban"].includes(category) && (<>
           <label htmlFor="frameSize" className="mt-3">Qual o tamanho do quadro?</label>
           <select
             className="select-answer"
@@ -700,7 +714,7 @@ export function BikeForm(props) {
         </>)}
 
         <br />
-
+                                                                              {/* PASSAR PERGUNTA PARA TRANSMISSAO????? */}
         <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
         <select
           className="select-answer"
@@ -728,7 +742,7 @@ export function BikeForm(props) {
           })}
         </select>
 
-        
+
 
         <br />
 
@@ -791,24 +805,7 @@ export function BikeForm(props) {
 
         <br />
 
-        <label htmlFor="" className="mt-3">Sua bike acompanha algum acessório?</label>
-        <select
-          className="select-answer"
-          value={accessories}
-          onChange={(e) => setAccessories(e.target.value)}
 
-        >
-          {withinAccessories.map((withinAccessory, index)=> {
-            return (<option key={index}>{withinAccessory}</option>);
-          })}
-        </select>
-
-        {accessories === "Sim" && (
-          <>
-            <label htmlFor="category" className="mx-3">Quais?</label>
-            <input type="text" onChange={(e) => setAccessoriesWithin(e.target.value)} />
-          </>
-        )}
 
         <br />
 
@@ -889,13 +886,19 @@ export function BikeForm(props) {
 
       </div>
 
+                                  {/*/////////////////////////////////////////////////////////2ª SECTION////////////////////////////////////////////////////////////////*/}
+
+
 
       <div id="second-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Informações técnicas</h4>
-        {category === "road" && (
-          <div className="transmission">
-            <h5 className="text-success">Transmissão</h5>
 
+                                                                        {/*//////////////////TRANSMISSÂO///////////////////////*/}
+
+        {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
+        {category === "road" && (<>
+          <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão</button>
+          <div id="transmission" className="transmission d-none">
             <label htmlFor="front_gear" className="">Câmbio dianteiro:</label>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example"  value={frontDerailleurModel}
             onChange={(e) => setFrontDerailleurModel(e.target.value)}>
@@ -934,11 +937,12 @@ export function BikeForm(props) {
             <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setChain(e.target.value)}/>
 
           </div>
-        )}
+        </>)}
 
-        {(category === "mountain_bike" || category === "dirt_street" || category === "urban")&& (
-          <div className="transmission">
-            <h5 className="text-success">Transmissão</h5>
+
+        {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && (<>
+          <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão</button>
+          <div id="transmission" className="transmission d-none">
 
             <label htmlFor="front_gear" className="">Câmbio dianteiro:</label>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example"  value={frontDerailleurModel}
@@ -977,12 +981,15 @@ export function BikeForm(props) {
             <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setChain(e.target.value)}/>
           </div>
 
-        )}
+        </>)}
+
+
+                                                                        {/*//////////////////FREIOS///////////////////////*/}
 
 
 
-        <div className="brake">
-          <h5 className="text-success my-3">Freios</h5>
+        <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("brakes").classList.toggle("d-none")}>Freios</button>
+        <div id="brakes"className="brake d-none">
 
           <label htmlFor="brakeType" className="mt-3">Qual o tipo de freio?</label>
           <select
@@ -1061,8 +1068,12 @@ export function BikeForm(props) {
           </>)}
         </div>
 
-        <div className="suspension">
-          <h5 className="text-success my-3">Suspensões</h5>
+                                                                        {/*//////////////////SUSPENSÂO///////////////////////*/}
+
+
+        <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("suspensions").classList.toggle("d-none")}>Suspensões</button>
+
+        <div id="suspensions" className="suspension d-none">
           <label htmlFor="suspensionType" className="mt-3">Qual o tipo de suspensão?</label>
           <select
             className="form-select form-select-sm" aria-label=".form-select-sm example"
@@ -1128,7 +1139,7 @@ export function BikeForm(props) {
           {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && (
             <>
 
-              <label htmlFor="front_gear" className="">modelo Suspensão dianteira:</label>
+              <label htmlFor="frontSuspensionModel" className="">modelo Suspensão dianteira:</label>
               <select class="form-select form-select-sm" aria-label=".form-select-sm example"  value={frontSuspensionModel}
               onChange={(e) => setFrontSuspensionModel(e.target.value)}>
                 {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
@@ -1138,12 +1149,12 @@ export function BikeForm(props) {
               <br />
               { frontSuspensionModel === "other"  && (
                 <>
-                  <label htmlFor="front_gear" className="mx-3">Qual?</label>
+                  <label htmlFor="otherFrontSuspensionModel" className="mx-3">Qual?</label>
                   <input type="text" onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
                 </>
               )}
 
-              <label htmlFor="rear_gear" className="mt-3">Modelo Suspensão traseira:</label>
+              <label htmlFor="RearSuspensionModel" className="mt-3">Modelo Suspensão traseira:</label>
               <select class="form-select form-select-sm" aria-label=".form-select-sm example"  value={rearSuspensionModel}
               onChange={(e) => setRearSuspensionModel(e.target.value)}>
                 {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModels, index)=> {
@@ -1153,37 +1164,185 @@ export function BikeForm(props) {
               <br />
               { rearSuspensionModel === "other"  && (
                 <>
-                  <label htmlFor="front_gear" className="mx-3">Qual?</label>
+                  <label htmlFor="otherRearSuspensionModel" className="mx-3">Qual?</label>
                   <input type="text" onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
                 </>
               )}
-
-
             </>
-
           )}
         </div>
 
-        <div className="rim">
-          <h5 className="text-success my-3">Rodas</h5>
+                                                                        {/*//////////////////RODAS///////////////////////*/}
 
-          <label htmlFor="front_gear" className="mx-3">Aro dianteiro:</label>
+
+        <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("rims").classList.toggle("d-none") }>Rodas</button>
+        <div id="rims" className="rims d-none">
+          <label htmlFor="frontRimSize" className="">Aro dianteiro:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setFrontRimSize(e.target.value)}/>
-          <label htmlFor="front_gear" className="mx-3">Aro traseiro:</label>
+
+          <label htmlFor="rearRimSize" className="">Aro traseiro:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setRearRimSize(e.target.value)}/>
 
-          <label htmlFor="front_gear" className="mx-3">Cubo dianteiro:</label>
+          <label htmlFor="frontHub" className="">Cubo dianteiro:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setFrontHub(e.target.value)}/>
-          <label htmlFor="front_gear" className="mx-3">Cubo traseiro:</label>
+
+          <label htmlFor="rearHub" className="">Cubo traseiro:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setRearHub(e.target.value)}/>
 
-          <label htmlFor="front_gear" className="mx-3">Pneu dianteiro:</label>
+          <label htmlFor="frontTyre" className="">Pneu dianteiro:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setFrontTyre(e.target.value)}/>
-          <label htmlFor="front_gear" className="mx-3">Pneu traseiro:</label>
+
+          <label htmlFor="rearTyre" className="">Pneu traseiro:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setRearTyre(e.target.value)}/>
+        </div>
+
+
+
+                                                                        {/*//////////////////COCKPIT///////////////////////*/}
+
+
+
+        <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("cockpit").classList.toggle("d-none") }>Cockpit</button>
+        <div id="cockpit" className="cockpit d-none">
+          <label htmlFor="frontRimSize" className="">Guidao:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setHandlebar(e.target.value)}/>
+
+          <label htmlFor="rearRimSize" className="">Mesa:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setStem(e.target.value)}/>
+        </div>
+
+
+                                                                        {/*//////////////////CANOTE///////////////////////*/}
+
+
+
+        <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("seat-post").classList.toggle("d-none") }>Canote</button>
+        <div id="seat-post" className="seat-post d-none">
+
+          <label htmlFor="seatPostType" className="mt-3">Tipo de canote?</label>
+          <select
+            className="form-select form-select-sm" aria-label=".form-select-sm example"
+            value={seatPostType}
+            onChange={(e) => setSeatPostType(e.target.value)}
+
+          >
+            {seatPostTypes.map((seatPostType, index)=> {
+                return (<option key={index}>{seatPostType}</option>);
+              })}
+          </select>
+
+          <br />
+
+          {seatPostType === "retractable" && (<>
+            <label htmlFor="seatPostTravel" className="mt-3">Curso do canote?</label>
+            <select
+              className="form-select form-select-sm" aria-label=".form-select-sm example"
+              value={seatPostTravel}
+              onChange={(e) => setSeatPostTravel(e.target.value)}
+
+            >
+              {seatPostTravels.map((seatPostTravel, index)=> {
+                return (<option key={index}>{seatPostTravel}</option>);
+              })}
+            </select>
+
+            { seatPostTravel === "other" && (
+              <>
+              <label htmlFor="otherSeatPostTravel" className="mx-3">Qual?</label>
+              <input type="text" onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
+            </>
+            )}
+          </>)}
+        </div>
+
+                                                                        {/*//////////////////BATERIA///////////////////////*/}
+
+
+
+        { bikeType === "electric" && (<>
+          <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("battery").classList.toggle("d-none") }>Bateria</button>
+          <div id="battery" className="rims d-none">
+            <label htmlFor="frameSize" className="mt-3">Capacidade?</label>
+            <select
+              className="form-select form-select-sm" aria-label=".form-select-sm example"
+              value={battery}
+              onChange={(e) => setBattery(e.target.value)}
+            >
+              {batteries.map((battery, index)=> {
+                return (<option key={index}>{battery}</option>);
+              })}
+            </select>
+
+            { battery === "other" && (<>
+              <label htmlFor="otherBattery" className="mx-3">Qual?</label>
+              <input type="text" onChange={(e) => setOtherBattery(e.target.value)}/>
+            </>)}
+
+
+
+            <label htmlFor="motor" className="">Motor:</label>
+            <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setMotor(e.target.value)}/>
+
+            <label htmlFor="mileage" className="">KM:</label>
+            <input class="form-control form-control-sm" type="number" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setMileage(e.target.value)}/>
+
+            <label htmlFor="batteryCyle" className="">Ciclos da bateria:</label>
+            <input class="form-control form-control-sm" type="number" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setBatteryCycles(e.target.value)}/>
+          </div>
+        </>)}
+
+
+                                                                        {/*//////////////////Accessories///////////////////////*/}
+        <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("accessories").classList.toggle("d-none") }>Acessórios</button>
+        <div id="accessories" className="accessories d-none">
+          <label htmlFor="" className="mt-3">Sua bike acompanha algum acessório?</label>
+          <select
+            className="form-select form-select-sm" aria-label=".form-select-sm example"
+            value={accessories}
+            onChange={(e) => setAccessories(e.target.value)}
+
+          >
+            {withinAccessories.map((withinAccessory, index)=> {
+              return (<option key={index}>{withinAccessory}</option>);
+            })}
+          </select>
+
+          <label htmlFor="batteryCyle" className="">Pedal:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setPedal(e.target.value)}/>
+
+          {accessories === "yes" && (
+
+            <>
+              <label htmlFor="accessories" className="mx-3">Qual?</label>
+              <select
+                className="form-select form-select-sm" aria-label=".form-select-sm example"
+                value={accessories}
+                onChange={(e) => setAccessoriesWithin(e.target.value)}
+                multiple
+              >
+                {accessoryOptions.map((accessorieOption, index)=> {
+                  return (<option key={index}>{accessorieOption}</option>);
+                })}
+              </select>
+
+
+              { accessoriesWithin === "other" && (<>
+                <label htmlFor="otherAccessory" className="mx-3">Qual?</label>
+                <input type="text" onChange={(e) => setOtherAccessory(e.target.value)}/>
+              </>)}
+
+              <label htmlFor="batteryCyle" className="">Descrição:</label>
+              <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
+            </>
+          )}
+
 
 
         </div>
+
+        <br />
+        <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep()}><i className="fas fa-angle-double-right"></i></button>
+
       </div>
 
 
