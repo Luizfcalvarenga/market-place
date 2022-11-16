@@ -18,7 +18,15 @@ export function BikeForm(props) {
   const [frameMaterial, setFrameMaterial] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
-  const [rimSize, setRimSize] = useState("");
+  const [frontRimSize, setFrontRimSize] = useState("");
+  const [rearRimSize, setRearRimSize] = useState("");
+
+  const [frontHub, setFrontHub] = useState("");
+  const [rearHub, setRearHub] = useState("");
+
+  const [frontTyre, setFrontTyre] = useState("");
+  const [rearTyre, setRearTyre] = useState("");
+
   const [numberOfFrontGears, setNumberOfFrontGears] = useState("");
   const [numberOfRearGears, setNumberOfRearGears] = useState("");
   const [brakeType, setBrakeType] = useState("");
@@ -720,23 +728,11 @@ export function BikeForm(props) {
           })}
         </select>
 
-        <br />
-
-        <label htmlFor="rimSize" className="mt-3">Tamanho do aro?</label>
-        <select
-          className="select-answer"
-          value={rimSize}
-          onChange={(e) => setRimSize(e.target.value)}
-
-        >
-          {rimSizes.map((rimSize, index)=> {
-            return (<option key={index}>{rimSize}</option>);
-          })}
-        </select>
+        
 
         <br />
 
-        <label htmlFor="rimSize" className="mt-3">Condição da bike?</label>
+        <label htmlFor="bikeCondition" className="mt-3">Condição da bike?</label>
         <select
           className="select-answer"
           value={bikeCondition}
@@ -1021,7 +1017,7 @@ export function BikeForm(props) {
 
           {brakeDiscSize === "other" && (<>
 
-            <label htmlFor="front_gear" className="mx-3">Qual:</label>
+            <label htmlFor="other_disc_size" className="mx-3">Qual:</label>
             <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
 
           </>)}
@@ -1166,6 +1162,27 @@ export function BikeForm(props) {
             </>
 
           )}
+        </div>
+
+        <div className="rim">
+          <h5 className="text-success my-3">Rodas</h5>
+
+          <label htmlFor="front_gear" className="mx-3">Aro dianteiro:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setFrontRimSize(e.target.value)}/>
+          <label htmlFor="front_gear" className="mx-3">Aro traseiro:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setRearRimSize(e.target.value)}/>
+
+          <label htmlFor="front_gear" className="mx-3">Cubo dianteiro:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setFrontHub(e.target.value)}/>
+          <label htmlFor="front_gear" className="mx-3">Cubo traseiro:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setRearHub(e.target.value)}/>
+
+          <label htmlFor="front_gear" className="mx-3">Pneu dianteiro:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setFrontTyre(e.target.value)}/>
+          <label htmlFor="front_gear" className="mx-3">Pneu traseiro:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setRearTyre(e.target.value)}/>
+
+
         </div>
       </div>
 
