@@ -705,7 +705,7 @@
     # frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "front_suspension_travel", kind: "multiple_choice", options: front_suspension_travels, prompt: "Curso suspensão dianteira")
     frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira")
     frame_question_7 = ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock?" )
-    frame_question_8 = ProductTypeAttribute.create!(product_type: frame, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição?")
+    frame_question_8 = ProductTypeAttribute.create!(product_type: frame, name: "condition", kind: "multiple_choices", options: ["", "new", "used"], prompt: "Condição?")
 
 
     frame_questions = [ frame_question_1, frame_question_2, frame_question_3, frame_question_4, frame_question_5, frame_question_6, frame_question_7 ]

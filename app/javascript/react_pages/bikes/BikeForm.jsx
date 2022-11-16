@@ -1260,9 +1260,9 @@ export function BikeForm(props) {
 
 
         { bikeType === "electric" && (<>
-          <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("battery").classList.toggle("d-none") }>Bateria</button>
+          <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("battery").classList.toggle("d-none") }>Parte elétrica</button>
           <div id="battery" className="rims d-none">
-            <label htmlFor="frameSize" className="mt-3">Capacidade?</label>
+            <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
             <select
               className="form-select form-select-sm" aria-label=".form-select-sm example"
               value={battery}
@@ -1307,9 +1307,6 @@ export function BikeForm(props) {
             })}
           </select>
 
-          <label htmlFor="batteryCyle" className="">Pedal:</label>
-          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setPedal(e.target.value)}/>
-
           {accessories === "yes" && (
 
             <>
@@ -1318,7 +1315,7 @@ export function BikeForm(props) {
                 className="form-select form-select-sm" aria-label=".form-select-sm example"
                 value={accessories}
                 onChange={(e) => setAccessoriesWithin(e.target.value)}
-                multiple
+
               >
                 {accessoryOptions.map((accessorieOption, index)=> {
                   return (<option key={index}>{accessorieOption}</option>);
@@ -1326,7 +1323,7 @@ export function BikeForm(props) {
               </select>
 
 
-              { accessoriesWithin === "other" && (<>
+              { accessoriesWithin === "Outro" && (<>
                 <label htmlFor="otherAccessory" className="mx-3">Qual?</label>
                 <input type="text" onChange={(e) => setOtherAccessory(e.target.value)}/>
               </>)}
@@ -1335,6 +1332,10 @@ export function BikeForm(props) {
               <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
             </>
           )}
+
+          <label htmlFor="batteryCyle" className="">Pedal:</label>
+          <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setPedal(e.target.value)}/>
+
 
 
 

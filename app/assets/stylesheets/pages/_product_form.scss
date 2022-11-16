@@ -16,10 +16,11 @@
 
 .select-answer {
   // A reset of styles, including removing the default dropdown arrow
-  appearance: none;
+  
   // Additional resets for further consistency
   background-color: transparent;
-  border: none;
+  border: 1px solid $color-primary;
+  border-radius: 4px;
   padding: 0 1em 0 0;
   margin: 0;
   width: 50%;
@@ -33,7 +34,8 @@
 .select-answer:focus {
   outline:none !important;
   box-shadow: none !important;
-  border-color: #ced4da !important;
+  border-color: $color-primary !important;
+  border-radius: 4px;
 }
 
 option {
