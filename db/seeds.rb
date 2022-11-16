@@ -34,8 +34,8 @@
     mtb = Category.create!(name: "mountain_bike", modalities: ["", "downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
     dirt = Category.create!(name: "dirt_street", modalities: ["", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
     road = Category.create!(name: "road", modalities: ["", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
-    urban = Category.create!(name: "urban")
-    infant = Category.create!(name: "infant")
+    urban = Category.create!(name: "urban", modalities: ["urban"])
+    infant = Category.create!(name: "infant", modalities: ["infant"])
     # urban = Category.create!(name: "Urban")
 
     ##### GENERAL #####
@@ -467,8 +467,8 @@
     mtb = Category.create!(name: "mountain_bike", modalities: ["", "downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
     dirt = Category.create!(name: "dirt_street", modalities: ["", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"])
     road = Category.create!(name: "road", modalities: ["", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "gravel"])
-    urban = Category.create!(name: "urban")
-    infant = Category.create!(name: "infant")
+    urban = Category.create!(name: "urban", modalities: ["urban"])
+    infant = Category.create!(name: "infant", modalities: ["infant"])
 
     ##### GENERAL #####
     documentation_type = ["", "nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
@@ -943,7 +943,7 @@
         model: ["GTX", "Sense mt-4r", "Oggi predator", "Alfameq trilheiro", "Specialized GTR"].sample,
         year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
         frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
-        frame_material: frame_materials.sample,
+        frame_material:  ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"].sample,
         front_rim_size: "19''",
         rear_rim_size: "20''",
         number_of_front_gears: 1,
@@ -955,7 +955,7 @@
         seat_post_type: seat_post_types.sample,
         seat_post_travel: seat_post_travels.sample,
         weight: [ 15.0, 16.3, 15.7, 17.4].sample,
-        bike_conditions: ["Nova", "Usada"].sample,
+        bike_conditions: bike_conditions.sample,
         structural_visual_condition: structural_visual_condition.sample,
         operating_condition: opareting_condition.sample,
         documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,

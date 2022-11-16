@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+
 export function BikeForm(props) {
   const [bikeId, setBikeId] = useState([]);
   const [user, setUser] = useState([]);
@@ -95,6 +96,14 @@ export function BikeForm(props) {
     if (category) {
       setModalities(categories.find(element => element.name === category).modalities)
       setCategoryId(categories.find(element => element.name === category).id);
+    }
+  });
+
+  useEffect(() => {
+    if (category === "urban") {
+      setModality(modalities[0])
+    } else if (category === "infant") {
+      setModality(modalities[0])
     }
   });
 
@@ -199,6 +208,9 @@ export function BikeForm(props) {
   }
 
 
+
+
+
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
@@ -217,87 +229,87 @@ export function BikeForm(props) {
     if (e.target.innerHTML === "1") {
       firstSection.classList.remove("d-none")
       secondSection.classList.add("d-none")
-      // thirdSection.classList.add("d-none")
-      // fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
-
-      progressOne.classList.remove("section-done")
-      progressTwo.classList.remove("section-done")
-      // progressThree.classList.remove("section-done")
-      // progressFour.classList.remove("section-done")
-      // progressFive.classList.remove("section-done")
-      // progressSix.classList.remove("section-done")
-    } else if (e.target.innerHTML === "2") {
-      firstSection.classList.add("d-none")
-      secondSection.classList.remove("d-none")
-      // thirdSection.classList.add("d-none")
-      // fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.remove("section-done")
-      // progressThree.classList.remove("section-done")
-      // progressFour.classList.remove("section-done")
-      // progressFive.classList.remove("section-done")
-      // progressSix.classList.remove("section-done")
+      progressThree.classList.remove("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+    } else if (e.target.innerHTML === "2") {
+      firstSection.classList.add("d-none")
+      secondSection.classList.remove("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
+
+      progressOne.classList.add("section-done")
+      progressTwo.classList.remove("section-done")
+      progressThree.classList.remove("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
     } else if (e.target.innerHTML === "3") {
       firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
       thirdSection.classList.remove("d-none")
-      // fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
-      // progressThree.classList.remove("section-done")
-      // progressFour.classList.remove("section-done")
-      // progressFive.classList.remove("section-done")
-      // progressSix.classList.remove("section-done")
+      progressThree.classList.remove("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
     } else if (e.target.innerHTML === "4") {
       firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
-      // thirdSection.classList.add("d-none")
-      // fourthSection.classList.remove("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.remove("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
-      // progressThree.classList.add("section-done")
-      // progressFour.classList.remove("section-done")
-      // progressFive.classList.remove("section-done")
-      // progressSix.classList.remove("section-done")
+      progressThree.classList.add("section-done")
+      progressFour.classList.remove("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
     } else if (e.target.innerHTML === "5") {
       firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
-      // thirdSection.classList.add("d-none")
-      // fourthSection.classList.add("d-none")
-      // fifthSection.classList.remove("d-none")
-      // sixthSection.classList.add("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.remove("d-none")
+      sixthSection.classList.add("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
-      // progressThree.classList.add("section-done")
-      // progressFour.classList.add("section-done")
-      // progressFive.classList.remove("section-done")
-      // progressSix.classList.remove("section-done")
+      progressThree.classList.add("section-done")
+      progressFour.classList.add("section-done")
+      progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
     } else if (e.target.innerHTML === "6") {
       firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
-      // thirdSection.classList.add("d-none")
-      // fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
-      // sixthSection.classList.remove("d-none")
+      thirdSection.classList.add("d-none")
+      fourthSection.classList.add("d-none")
+      fifthSection.classList.add("d-none")
+      sixthSection.classList.remove("d-none")
 
       progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
-      // progressThree.classList.add("section-done")
-      // progressFour.classList.add("section-done")
-      // progressFive.classList.add("section-done")
-      // progressSix.classList.remove("section-done")
+      progressThree.classList.add("section-done")
+      progressFour.classList.add("section-done")
+      progressFive.classList.add("section-done")
+      progressSix.classList.remove("section-done")
     }
 
 
@@ -309,18 +321,10 @@ export function BikeForm(props) {
     const progressOne = document.getElementById("progress-1")
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
-    console.log(progressOne)
-    console.log(firstSection)
-    console.log(secondSection)
-
-
 
     progressOne.classList.add("section-done")
     firstSection.classList.add("d-none")
     secondSection.classList.remove("d-none")
-
-
-
   }
 
   const handleSecondStep = (e) => {
@@ -330,41 +334,41 @@ export function BikeForm(props) {
 
     progressTwo.classList.add("section-done")
     secondSection.classList.add("d-none")
-
     thirdSection.classList.remove("d-none")
 
   }
 
-  // const handleThirdStep = () => {
-  //   const progressThird = document.getElementById("progress-3")
-  //   const thirdSection = document.getElementById("third-section")
-  //   const fourthSection = document.getElementById("fourth-section")
+  const handleThirdStep = () => {
+    const progressThird = document.getElementById("progress-3")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
 
-  //   progressThird.classList.add("section-done")
-  //   thirdSection.classList.add("d-none")
-  //   fourthSection.classList.remove("d-none")
-  // }
+    progressThird.classList.add("section-done")
+    thirdSection.classList.add("d-none")
+    fourthSection.classList.remove("d-none")
+  }
 
-  // const handleFourthStep = () => {
-  //   const progressFourth = document.getElementById("progress-4")
-  //   const fourthSection = document.getElementById("fourth-section")
-  //   const fifthSection = document.getElementById("fifth-section")
+  const handleFourthStep = () => {
+    const progressFourth = document.getElementById("progress-4")
+    const fourthSection = document.getElementById("fourth-section")
+    const fifthSection = document.getElementById("fifth-section")
 
-  //   progressFourth.classList.add("section-done")
-  //   fourthSection.classList.add("d-none")
-  //   fifthSection.classList.remove("d-none")
-  // }
+    progressFourth.classList.add("section-done")
+    fourthSection.classList.add("d-none")
+    fifthSection.classList.remove("d-none")
+  }
 
 
-  // const handleFifthStep = () => {
-  //   const progressFifth = document.getElementById("progress-5")
-  //   const fifthSection = document.getElementById("fifth-section")
-  //   const sixthSection = document.getElementById("sixth-section")
+  const handleFifthStep = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
 
-  //   progressFifth.classList.add("section-done")
-  //   fifthSection.classList.add("d-none")
-  //   sixthSection.classList.remove("d-none")
-  // }
+    progressFifth.classList.add("section-done")
+    fifthSection.classList.add("d-none")
+    sixthSection.classList.remove("d-none")
+  }
+
 
 
 
@@ -558,33 +562,7 @@ export function BikeForm(props) {
       </ul>
 
       <div id="first-section" className="card-bike-select mb-5">
-        <h4 className="text-center text-success">Informações gerais</h4>
-
-        <label htmlFor="category" className="mb-2">Categoria da bike?</label><br />
-        <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="select-answer"
-        >
-          {categories.map((category) => {
-            return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
-          })}
-        </select>
-
-        <br />
-
-        <label htmlFor="modality" className="mt-3">Modalidade da bike?</label>
-        <select
-          value={modality}
-          onChange={(e) => e.preventDefault && setModality(e.target.value)}
-          className="select-answer"
-        >
-          {modalities.map((modality, index) => {
-            return (<option key={index}>{modality}</option>);
-          })}
-        </select>
-
-        <br />
+        <h4 className="text-center text-success mt-2">Informações gerais</h4>
 
         <label htmlFor="bikeType" className="mt-3">Tipo da bike?</label>
         <select
@@ -599,6 +577,50 @@ export function BikeForm(props) {
         </select>
 
         <br />
+        <label htmlFor="category" className="mb-2">Categoria da bike?</label><br />
+        <select
+        value={category}
+        onChange={(e) =>  setCategory(e.target.value) }
+        className="select-answer"
+        >
+          {categories.map((category) => {
+            return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
+          })}
+        </select>
+
+        <br />
+
+        { (category === "mountain_bike" || category === "dirt_street" || category === "road") && (<>
+
+          <label htmlFor="modality" className="mt-3">Modalidade da bike?</label>
+          <select
+            value={modality}
+            onChange={(e) => e.preventDefault && setModality(e.target.value)}
+            className="select-answer"
+          >
+            {modalities.map((modality, index) => {
+              return (<option key={index}>{modality}</option>);
+            })}
+          </select>
+
+          <br />
+        </>)}
+
+        {/* { (category === "urban" || category === "infant" ) && (<>
+
+          <select
+            value={modality}
+            onInput={(e) => e.preventDefault && setModality(e.target.value)}
+            className="d-none"
+          >
+            <option selected>{modalities[0]}</option>
+          </select>
+
+          <input type="hidden" onLoad={(e) => console.log(e.target.value)} value={modalities[0]}/>
+          <br />
+        </>)} */}
+
+
 
         {bikeType === "electric" && (<>
           <label htmlFor="frameSize" className="mt-3">Qual a bateria da sua bike?</label>
@@ -679,115 +701,8 @@ export function BikeForm(props) {
 
         <br />
 
-
-
-
-        <br />
-
-
-        <label htmlFor="seatPostType" className="mt-3">Tipo de canote?</label>
-        <select
-          className="select-answer"
-          value={seatPostType}
-          onChange={(e) => setSeatPostType(e.target.value)}
-
-        >
-          {seatPostTypes.map((seatPostType, index)=> {
-              return (<option key={index}>{seatPostType}</option>);
-            })}
-        </select>
-
-        <br />
-
-        {seatPostType === "retractable" && (<>
-          <label htmlFor="seatPostTravel" className="mt-3">Curso do canote?</label>
-          <select
-            className="select-answer"
-            value={seatPostTravel}
-            onChange={(e) => setSeatPostTravel(e.target.value)}
-
-          >
-            {seatPostTravels.map((seatPostTravel, index)=> {
-              return (<option key={index}>{seatPostTravel}</option>);
-            })}
-          </select>
-        </>)}
-
-        <br />
                                                                               {/* PASSAR PERGUNTA PARA TRANSMISSAO????? */}
-        <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
-        <select
-          className="select-answer"
-          value={numberOfFrontGears}
-          onChange={(e) => setNumberOfFrontGears(e.target.value)}
 
-        >
-          {frontGears.map((frontGear, index)=> {
-            return (<option key={index}>{frontGear}</option>);
-          })}
-        </select>
-
-        <br />
-
-
-        <label htmlFor="numberOfRearGears" className="mt-3">Marchas traseiras?</label>
-        <select
-          className="select-answer"
-          value={numberOfRearGears}
-          onChange={(e) => setNumberOfRearGears(e.target.value)}
-
-        >
-          {rearGears.map((rearGear, index)=> {
-            return (<option key={index}>{rearGear}</option>);
-          })}
-        </select>
-
-
-
-        <br />
-
-        <label htmlFor="bikeCondition" className="mt-3">Condição da bike?</label>
-        <select
-          className="select-answer"
-          value={bikeCondition}
-          onChange={(e) => setBikeCondition(e.target.value)}
-
-        >
-          {bikeConditions.map((bikeCondition, index)=> {
-              return (<option key={index}>{bikeCondition}</option>);
-            })}
-        </select>
-
-        <br />
-
-        {bikeCondition === "used" && (<>
-
-          <label htmlFor="structuralVisualCondition" className="mt-3">Condição estrutural/visual?</label>
-          <select
-            className="select-answer"
-            value={structuralVisualCondition}
-            onChange={(e) => setStructuralVisualCondition(e.target.value)}
-
-          >
-            {structuralVisualConditions.map((structuralVisualCondition, index)=> {
-              return (<option key={index}>{structuralVisualCondition}</option>);
-            })}
-          </select>
-
-          <br />
-
-          <label htmlFor="operatingCondition" className="mt-3">Condição estrutural/visual?</label>
-          <select
-            className="select-answer"
-            value={operatingCondition}
-            onChange={(e) => setOperatingCondition(e.target.value)}
-
-          >
-            {operatingConditions.map((operatingCondition, index)=> {
-              return (<option key={index}>{operatingCondition}</option>);
-            })}
-          </select>
-        </>)}
 
         <br />
 
@@ -805,7 +720,19 @@ export function BikeForm(props) {
 
         <br />
 
+        <br />
 
+        <label htmlFor="bikeCondition" className="mt-3">Condição da bike?</label>
+        <select
+          className="select-answer"
+          value={bikeCondition}
+          onChange={(e) => setBikeCondition(e.target.value)}
+
+        >
+          {bikeConditions.map((bikeCondition, index)=> {
+              return (<option key={index}>{bikeCondition}</option>);
+            })}
+        </select>
 
         <br />
 
@@ -899,6 +826,19 @@ export function BikeForm(props) {
         {category === "road" && (<>
           <button type="button" className="btn-technicality my-3 mx-3 p-2" onClick={() => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão</button>
           <div id="transmission" className="transmission d-none">
+            <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
+            <select
+              className="select-answer"
+              value={numberOfFrontGears}
+              onChange={(e) => setNumberOfFrontGears(e.target.value)}
+            >
+              {frontGears.map((frontGear, index)=> {
+                return (<option key={index}>{frontGear}</option>);
+              })}
+            </select>
+
+            <br />
+
             <label htmlFor="front_gear" className="">Câmbio dianteiro:</label>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example"  value={frontDerailleurModel}
             onChange={(e) => setFrontDerailleurModel(e.target.value)}>
@@ -914,6 +854,19 @@ export function BikeForm(props) {
               </>
             )}
 
+
+
+            <label htmlFor="numberOfRearGears" className="mt-3">Marchas traseiras?</label>
+            <select
+              className="select-answer"
+              value={numberOfRearGears}
+              onChange={(e) => setNumberOfRearGears(e.target.value)}
+
+            >
+              {rearGears.map((rearGear, index)=> {
+                return (<option key={index}>{rearGear}</option>);
+              })}
+            </select>
 
             <label htmlFor="rear_gear" className="mt-3">Câmbio traseiro:</label>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example"  value={rearDerailleurModel}
@@ -1336,9 +1289,6 @@ export function BikeForm(props) {
           <label htmlFor="batteryCyle" className="">Pedal:</label>
           <input class="form-control form-control-sm" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setPedal(e.target.value)}/>
 
-
-
-
         </div>
 
         <br />
@@ -1352,20 +1302,68 @@ export function BikeForm(props) {
         <div className="mb-3">
           <label for="exampleFormControlTextarea1" className="form-label text-success">Descrição</label>
           <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+
+
+
+          <br />
+
+          {bikeCondition === "used" && (<>
+
+            <label htmlFor="structuralVisualCondition" className="mt-3">Condição estrutural/visual?</label>
+            <select
+              className="select-answer"
+              value={structuralVisualCondition}
+              onChange={(e) => setStructuralVisualCondition(e.target.value)}
+
+            >
+              {structuralVisualConditions.map((structuralVisualCondition, index)=> {
+                return (<option key={index}>{structuralVisualCondition}</option>);
+              })}
+            </select>
+
+            <br />
+
+            <label htmlFor="operatingCondition" className="mt-3">Condição estrutural/visual?</label>
+            <select
+              className="select-answer"
+              value={operatingCondition}
+              onChange={(e) => setOperatingCondition(e.target.value)}
+            >
+              {operatingConditions.map((operatingCondition, index)=> {
+                return (<option key={index}>{operatingCondition}</option>);
+              })}
+            </select>
+          </>)}
         </div>
+
+        <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
+
       </div>
 
-      {description && (<>
+
+      <div id="fourth-section" className="card-bike-select mb-5 d-none">
 
         <label htmlFor="photos">Adicione as fotos do seu produto:</label>
 
         <input type="file" className="form-control" multiple onChange={(e) => createBikePhotos(e)}/>
 
-        </>)}
+        <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}><i className="fas fa-angle-double-right"></i></button>
 
-        {photos &&  (<>
+      </div>
 
-        <div className="card-questions my-3">
+
+
+
+
+        <div id="fifth-section" className="card-bike-select mb-5 d-none">
+
+          <h3>Revisao da bike</h3>
+
+          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
+
+        </div>
+
+        {/* <div className="card-questions my-3">
           <label htmlFor="product" className="mb-3">Qual tipo de anúncio quer usar para seu produto?</label>
           <select
           type="radio"
@@ -1380,14 +1378,16 @@ export function BikeForm(props) {
               })}</option>)
             })}
           </select>
+        </div> */}
+
+
+        <div id="sixth-section" className="card-bike-select mb-5 d-none">
+          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
+
         </div>
-        </>)}
 
-        {serviceId && (<>
 
-        <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
 
-        </>)}
     </div>
   );
 }

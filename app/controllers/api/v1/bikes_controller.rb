@@ -127,6 +127,7 @@ module Api
           :stem,
           :motor,
           :mileage,
+          :rim_size,
           :battery_cycle,
           photos: []
         )

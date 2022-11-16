@@ -45,6 +45,8 @@ json.bikes @bikes do |bike|
   json.stem bike.stem
   json.motor bike.motor
   json.mileage bike.mileage
+  json.rim_size bike.rim_size
+
   json.battery_cycle bike.battery_cycle
   json.photos bike.photos
 end

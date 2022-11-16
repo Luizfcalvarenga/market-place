@@ -125,6 +125,7 @@ class BikesController < ApplicationController
       :motor,
       :battery_cyles,
       :mileage,
+      :rim_size,
       photos: []
     )
   end
