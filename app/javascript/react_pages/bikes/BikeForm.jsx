@@ -510,7 +510,7 @@ export function BikeForm(props) {
   //////////////////////////////////////////////// seat post
 
   const seatPostTypes = ["", "retractable", "rigid" ]
-  const seatPostTravels = ["", "50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm" ]
+  const seatPostTravels = ["", "50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
 
   /////////////////////////////////////////////// gears
 
@@ -557,7 +557,7 @@ export function BikeForm(props) {
   //////////////////////////////////////////////ACCESSORIES
 
 
-  const accessoryOptions = ["", "Pedal", "Ciclocomputador", "Lanterna traseira", "Farol", "Bolsa de acessórios", "Suporte de garrafinha", "Outro"]
+  const accessoryOptions = ["", "Não", "Pedal", "Ciclocomputador", "Lanterna traseira", "Farol", "Bolsa de acessórios", "Suporte de garrafinha", "Outro"]
 
   return (
 
@@ -1139,10 +1139,13 @@ export function BikeForm(props) {
             { seatPostTravel === "other" && (
               <>
               <label htmlFor="otherSeatPostTravel" className="mt-2">Qual?</label>
-              <input type="text" onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
+              <input className="text-input" type="text" onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
             </>
             )}
           </>)}
+
+          <label htmlFor="rearRimSize" className="mt-2">Modelo:</label>
+          <input className="text-input"className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setSeatPostModel(e.target.value)}/>
         </div>
 
                                                                         {/*//////////////////BATERIA///////////////////////*/}
@@ -1185,23 +1188,25 @@ export function BikeForm(props) {
         <div id="accessories" className="accessories d-none mb-3">
           <label htmlFor="" className="mt-3">Sua bike acompanha algum acessório?</label>
           <select
-                className="select-answer" aria-label=".form-select-sm example"
-                value={accessories}
-                onChange={(e) => setAccessoriesWithin(e.target.value)}
+            className="select-answer" aria-label=".form-select-sm example"
+            value={accessories}
+            onChange={(e) => setAccessories(e.target.value)}
 
-              >
-                {accessoryOptions.map((accessorieOption, index)=> {
-                  return (<option key={index}>{accessorieOption}</option>);
-                })}
-              </select>
+          >
+            {accessoryOptions.map((accessorieOption, index)=> {
+              return (<option key={index}>{accessorieOption}</option>);
+            })}
+          </select>
 
-            { accessoriesWithin === "Outro" && (<>
-              <label htmlFor="otherAccessory" className="mt-2">Qual?</label>
-              <input type="text" onChange={(e) => setOtherAccessory(e.target.value)}/>
-            </>)}
+          { accessories === "Outro" && (<>
+            <label htmlFor="otherAccessory" className="mt-2">Qual?</label>
+            <input type="text"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
+          </>)}
 
+          { accessories !== "Não" && (<>
             <label htmlFor="accessories-description" className="mt-2">Descrição:</label>
             <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
+          </>)}
 
           <label htmlFor="batteryCyle" className="mt-2">Pedal:</label>
           <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setPedal(e.target.value)}/>
