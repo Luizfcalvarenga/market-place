@@ -52,6 +52,13 @@ export function ProductForm(props) {
     }
   });
 
+  useEffect(() => {
+    if (productCategory === "urban") {
+      setProductModality(modalities[0])
+    } else if (productCategory === "infant") {
+      setProductModality(modalities[0])
+    }
+  });
 
   useEffect(() => {
     if(productTypeId) {
@@ -353,16 +360,16 @@ export function ProductForm(props) {
   }
 
   const handleSecondStep = (e) => {
-    setProductTypeId(e.target.value)
+    // setProductTypeId(e.target.value)
     const progressTwo = document.getElementById("progress-2")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-    if (productTypes) {
-      progressTwo.classList.add("section-done")
-      secondSection.classList.add("d-none")
 
-      thirdSection.classList.remove("d-none")
-    }
+    progressTwo.classList.add("section-done")
+    secondSection.classList.add("d-none")
+
+    thirdSection.classList.remove("d-none")
+
   }
 
   const handleThirdStep = () => {
@@ -398,8 +405,8 @@ export function ProductForm(props) {
 
 
   return (
-    <div className="w-60 text-center new-product-react py-5">
-      <h1 className="text-success">Vamos lá...</h1>
+    <div className="w-60 new-product-react py-5">
+      <h1 className="text-success  text-center">Vamos lá...</h1>
       <ul className="list-group list-group-horizontal-sm progress-bar pb-3">
         <li id="progress-1" className="progress progress-1"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>1</button></li>
         <hr className="progress-path"/>
@@ -415,7 +422,7 @@ export function ProductForm(props) {
       </ul>
 
       <div id="first-section">
-        <h4 className="text-success mt-3">O que deseja anunciar?</h4>
+        <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3">
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i className="fas fa-charging-station"></i> </button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i className="fas fa-cog"></i></button>
@@ -434,7 +441,7 @@ export function ProductForm(props) {
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
 
-          <label htmlFor="category" className="mb-3">Categoria:</label>
+          <label htmlFor="category" className="mt-3">Categoria:</label>
           <select
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
@@ -444,24 +451,25 @@ export function ProductForm(props) {
               return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
           </select>
-          <br />
 
-          <label htmlFor="modality" className="mb-3">Modalidade:</label>
-          <select
-            value={productModality}
-            onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
-            className="select-answer"
-          >
-            {modalities.map((modality, index) => {
-              return (<option key={index}>{modality}</option>);
-            })}
-          </select>
-          <br />
+          { (productCategory === "mountain_bike" || productCategory === "dirt_street" || productCategory === "road") && (<>
 
-          <label htmlFor="product" className="mb-3">Produto:</label>
+            <label htmlFor="modality" className="mt-2 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+            <select
+              value={productModality}
+              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
+              className="select-answer"
+            >
+              {modalities.map((modality, index) => {
+                return (<option key={index}>{modality}</option>);
+              })}
+            </select>
+          </>)}
+
+          <label htmlFor="product" className="mt-2">Produto:</label>
           <select
           value={productTypeId}
-          onChange={(e) => handleSecondStep(e)}
+          onChange={(e) => setProductTypeId(e.target.value)}
 
           className="select-answer"
           >
@@ -469,13 +477,7 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
           </select>
-
-          {/* {productCategory === "other" && (
-            <>
-              <label htmlFor="category" className="mx-3">Qual?</label>
-              <input type="text" />
-            </>
-          )} */}
+          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}><i className="fas fa-angle-double-right"></i></button>
         </div>
 
 

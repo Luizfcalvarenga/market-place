@@ -1145,7 +1145,7 @@ export function BikeForm(props) {
           </>)}
 
           <label htmlFor="rearRimSize" className="mt-2">Modelo:</label>
-          <input className="text-input"className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setSeatPostModel(e.target.value)}/>
+          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setSeatPostModel(e.target.value)}/>
         </div>
 
                                                                         {/*//////////////////BATERIA///////////////////////*/}
