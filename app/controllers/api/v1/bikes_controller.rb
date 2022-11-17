@@ -45,6 +45,7 @@ module Api
           @bike.accessories = true
         end
         if @bike.save
+         
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
               @bike.photos.attach(photo)
@@ -103,22 +104,25 @@ module Api
           :rear_suspension_travel,
           :seat_post_type,
           :seat_post_travel,
+          :seat_post_model,
           :weight,
-          :bike_conditions,
+          :brake_model,
+          :bike_condition,
           :structural_visual_condition,
           :operating_condition,
           :documentation_type,
           :accessories,
+          :accessories_description,
           :battery,
-          :front_rim_size,
-          :reaar_rim_size,
+          :rim_size,
+          :front_rim_model,
+          :reaar_rim_model,
           :front_suspension_model,
           :rear_suspension_model,
           :front_derailleur_model,
           :rear_derailleur_model,
           :crankset,
           :chain,
-          :brake_model,
           :front_hub,
           :rear_hub,
           :front_tyre,
@@ -127,7 +131,6 @@ module Api
           :stem,
           :motor,
           :mileage,
-          :rim_size,
           :battery_cycle,
           photos: []
         )

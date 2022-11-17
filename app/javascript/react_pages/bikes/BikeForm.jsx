@@ -19,6 +19,8 @@ export function BikeForm(props) {
   const [frameMaterial, setFrameMaterial] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
+  const [otherYear, setOtherYear] = useState("");
+
   const [rimSize, setRimSize] = useState("");
   const [frontRimSize, setFrontRimSize] = useState("");
   const [rearRimSize, setRearRimSize] = useState("");
@@ -169,7 +171,11 @@ export function BikeForm(props) {
     dataObject.append( "bike[frame_size]", frameSize );
     dataObject.append( "bike[frame_material]", frameMaterial );
     dataObject.append( "bike[model]", model );
-    dataObject.append( "bike[year]", year );
+    if (year === "other") {
+      dataObject.append( "bike[year]", otherYear );
+    } else {
+      dataObject.append( "bike[year]", year );
+    }
     dataObject.append( "bike[rim_size]", rimSize );
     dataObject.append( "bike[number_of_front_gears]", numberOfFrontGears );
     dataObject.append( "bike[number_of_rear_gears]", numberOfRearGears );
@@ -181,7 +187,7 @@ export function BikeForm(props) {
     dataObject.append( "bike[seat_post_travel]", seatPostTravel );
     dataObject.append( "bike[weight]", weight );
     dataObject.append( "bike[locality]", locality );
-    dataObject.append( "bike[bike_conditions]", bikeCondition );
+    dataObject.append( "bike[bike_condition]", bikeCondition );
     dataObject.append( "bike[structural_visual_condition]", structuralVisualCondition );
     dataObject.append( "bike[operating_condition]", operatingCondition );
     dataObject.append( "bike[documentation_type]", documentationType );
@@ -735,12 +741,12 @@ export function BikeForm(props) {
         { year === "other"  && (
           <>
             <label htmlFor="year" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input"/>
+            <input type="text" className="text-input" onChange={(e) => setOtherYear(e.target.value)}/>
           </>
         )}
 
         <label htmlFor="model" className="mt-4">modelo:<span className="requested-information ms-1">*</span></label>
-        <input type="text" className="text-input"  value={model}onChange={(e) => setModel(e.target.value)}/>
+        <input type="text" className="text-input"  value={model} onChange={(e) => setModel(e.target.value)}/>
         { errors && errors.bike && errors.bike.model && (
           <p className="text-danger">{errors.bike.model[0]}</p>
         )}
@@ -1179,21 +1185,6 @@ export function BikeForm(props) {
         <div id="accessories" className="accessories d-none mb-3">
           <label htmlFor="" className="mt-3">Sua bike acompanha algum acessório?</label>
           <select
-            className="select-answer" aria-label=".form-select-sm example"
-            value={accessories}
-            onChange={(e) => setAccessories(e.target.value)}
-
-          >
-            {withinAccessories.map((withinAccessory, index)=> {
-              return (<option key={index}>{withinAccessory}</option>);
-            })}
-          </select>
-
-          {accessories === "yes" && (
-
-            <>
-              <label htmlFor="accessories" className="mt-2">Qual?</label>
-              <select
                 className="select-answer" aria-label=".form-select-sm example"
                 value={accessories}
                 onChange={(e) => setAccessoriesWithin(e.target.value)}
@@ -1204,16 +1195,13 @@ export function BikeForm(props) {
                 })}
               </select>
 
+            { accessoriesWithin === "Outro" && (<>
+              <label htmlFor="otherAccessory" className="mt-2">Qual?</label>
+              <input type="text" onChange={(e) => setOtherAccessory(e.target.value)}/>
+            </>)}
 
-              { accessoriesWithin === "Outro" && (<>
-                <label htmlFor="otherAccessory" className="mt-2">Qual?</label>
-                <input type="text" onChange={(e) => setOtherAccessory(e.target.value)}/>
-              </>)}
-
-              <label htmlFor="accessories-description" className="mt-2">Descrição:</label>
-              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
-            </>
-          )}
+            <label htmlFor="accessories-description" className="mt-2">Descrição:</label>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
 
           <label htmlFor="batteryCyle" className="mt-2">Pedal:</label>
           <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setPedal(e.target.value)}/>

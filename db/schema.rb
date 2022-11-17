@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_16_181210) do
+ActiveRecord::Schema.define(version: 2022_11_17_000925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_181210) do
     t.string "year"
     t.string "frame_size"
     t.string "frame_material"
-    t.string "front_rim_size"
+    t.string "front_rim_model"
     t.integer "number_of_front_gears"
     t.integer "number_of_rear_gears"
     t.string "brake_type"
@@ -79,11 +79,11 @@ ActiveRecord::Schema.define(version: 2022_11_16_181210) do
     t.string "seat_post_type"
     t.string "seat_post_travel"
     t.float "weight"
-    t.string "bike_conditions"
+    t.string "bike_condition"
     t.string "structural_visual_condition"
     t.string "operating_condition"
     t.string "documentation_type"
-    t.boolean "accessories"
+    t.string "accessories"
     t.string "battery"
     t.text "description"
     t.datetime "removed_at"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2022_11_16_181210) do
     t.string "crankset"
     t.string "chain"
     t.string "brake_model"
-    t.string "rear_rim_size"
+    t.string "rear_rim_model"
     t.string "front_hub"
     t.string "rear_hub"
     t.string "front_tyre"
@@ -102,10 +102,13 @@ ActiveRecord::Schema.define(version: 2022_11_16_181210) do
     t.string "handlebar"
     t.string "stem"
     t.string "motor"
-    t.integer "battery_cyles"
+    t.integer "battery_cycles"
     t.integer "mileage"
     t.string "brake_disc_size"
     t.string "rim_size"
+    t.text "accessories_description"
+    t.string "pedals"
+    t.string "seat_post_model"
     t.index ["category_id"], name: "index_bikes_on_category_id"
     t.index ["service_id"], name: "index_bikes_on_service_id"
     t.index ["user_id"], name: "index_bikes_on_user_id"

@@ -918,7 +918,7 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BIKES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    bike_conditions = ["new", "used" ]
+    # bike_conditions = ["new", "used" ]
 
     structural_visual_condition = ["perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired" ]
 
@@ -944,8 +944,7 @@
         year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
         frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
         frame_material:  ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"].sample,
-        front_rim_size: "19''",
-        rear_rim_size: "20''",
+        rim_size: "19''",
         number_of_front_gears: 1,
         number_of_rear_gears: 16,
         brake_type: brake_types.sample,
@@ -955,12 +954,12 @@
         seat_post_type: seat_post_types.sample,
         seat_post_travel: seat_post_travels.sample,
         weight: [ 15.0, 16.3, 15.7, 17.4].sample,
-        bike_conditions: bike_conditions.sample,
+        bike_condition: ["new", "used" ].sample,
         structural_visual_condition: structural_visual_condition.sample,
         operating_condition: opareting_condition.sample,
         documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
         description: "Bicicleta em perfeito estado apenas 1 dono.",
-        accessories: false
+        accessories: "Não"
       )
     end
     puts "Seed finished"
