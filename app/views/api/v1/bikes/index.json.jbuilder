@@ -1,4 +1,4 @@
-json.bikes bikes do |bike|
+json.bikes @bikes do |bike|
   json.id bike.id
   json.user_id bike.user_id
   json.category bike.category
