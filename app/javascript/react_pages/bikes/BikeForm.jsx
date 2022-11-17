@@ -20,19 +20,19 @@ export function BikeForm(props) {
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
   const [otherYear, setOtherYear] = useState("");
-
   const [rimSize, setRimSize] = useState("");
   const [frontRimSize, setFrontRimSize] = useState("");
   const [rearRimSize, setRearRimSize] = useState("");
-
   const [frontHub, setFrontHub] = useState("");
   const [rearHub, setRearHub] = useState("");
-
   const [frontTyre, setFrontTyre] = useState("");
   const [rearTyre, setRearTyre] = useState("");
-
   const [numberOfFrontGears, setNumberOfFrontGears] = useState("");
   const [numberOfRearGears, setNumberOfRearGears] = useState("");
+  const [frontDerailleurModel, setFrontDerailleurModel] = useState("");
+  const [rearDerailleurModel, setRearDerailleurModel] = useState("");
+  const [otherFrontDerailleurModel, setOtherFrontDerailleurModel] = useState("");
+  const [otherRearDerailleurModel, setOtherRearDerailleurModel] = useState("");
   const [brakeType, setBrakeType] = useState("");
   const [brakeDiscSize, setBrakeDiscSize] = useState("");
   const [otherBrakeDiscSize, setOtherBrakeDiscSize] = useState("");
@@ -48,7 +48,6 @@ export function BikeForm(props) {
   const [seatPostType, setSeatPostType] = useState("");
   const [seatPostTravel, setSeatPostTravel] = useState("");
   const [otherSeatPostTravel, setOtherSeatPostTravel] = useState("");
-
   const [weight, setWeight] = useState("");
   const [locality, setLocality] = useState("");
   const [bikeCondition, setBikeCondition] = useState("");
@@ -56,25 +55,25 @@ export function BikeForm(props) {
   const [operatingCondition, setOperatingCondition] = useState("");
   const [documentationType, setDocumentationType] = useState("");
   const [description, setDescription] = useState("");
-  const [frontDerailleurModel, setFrontDerailleurModel] = useState("");
-  const [rearDerailleurModel, setRearDerailleurModel] = useState("");
-  const [otherFrontDerailleurModel, setOtherFrontDerailleurModel] = useState("");
-  const [otherRearDerailleurModel, setOtherRearDerailleurModel] = useState("");
   const [handlebar, setHandlebar] = useState("");
   const [stem, setStem] = useState("");
   const [crankset, setCrankset] = useState("");
   const [chain, setChain] = useState("");
   const [accessories, setAccessories] = useState("");
-  const [accessoriesWithin, setAccessoriesWithin] = useState([]);
-  const [accessoryDescription, setAccessoryDescription] = useState([]);
-  const [otherAccessory, setotherAccessory] = useState([]);
-  const [pedal, setPedal] = useState([]);
+  const [accessoriesDescription, setAccessoriesDescription] = useState([]);
+  const [otherAccessory, setOtherAccessory] = useState([]);
+  const [pedals, setPedals] = useState([]);
+  const [mileage, setMileage] = useState([]);
+  const [motor, setMedals] = useState([]);
+  const [batteryCycles, setBatteryCycles] = useState([]);
+
 
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
 
   const [photos, setPhotos ] = useState(null);
 
+  // const [accessoriesWithin, setAccessoriesWithin] = useState([]);
   const [errors, setErrors] = useState({
     bike: {},
   });
@@ -150,9 +149,30 @@ export function BikeForm(props) {
       setDocumentationType(response.data.bike.documentation_type);
       setDescription(response.data.bike.description);
       setAccessories(response.data.bike.accessories);
-      // setAccessoriesWithin(response.data.bike);
+      setAccessoriesDescription(response.data.bike.accessories_description);
       setBattery(response.data.bike.battery);
-      setPhotos(response.data.bike.photos);
+      setFrontDerailleurModel(response.data.bike.front_derailleur_model);
+      setRearDerailleurModel(response.data.bike.rear_derailleur_model);
+      setFrontSuspensionModel(response.data.bike.front_suspension_model);
+      setRearSuspensionModel(response.data.bike.rear_suspension_model);
+      setBrakeModel(response.data.bike.brake_model);
+      setBrakeDiscSize(response.data.bike.brake_disc_size);
+      setFrontRimSize(response.data.bike.front_rim_size);
+      setRearRimSize(response.data.bike.rear_rim_size);
+      setFrontHub(response.data.bike.front_hub);
+      setRearHub(response.data.bike.rear_hub);
+      setFrontTyre(response.data.bike.front_tyre);
+      setRearTyre(response.data.bike.rear_tyre);
+      setSeatPostModel(response.data.bike.seat_post_model);
+      setHandlebar(response.data.bike.handlebar);
+      setStem(response.data.bike.stem);
+      setMotor(response.data.bike.motor);
+      setMileage(response.data.bike.mileage);
+      setBatteryCycles(response.data.bike.battery_cycles);
+      setPedals(response.data.bike.pedals);
+
+
+      // setAccessoriesWithin(response.data.bike);
 
     }
   }
@@ -171,11 +191,6 @@ export function BikeForm(props) {
     dataObject.append( "bike[frame_size]", frameSize );
     dataObject.append( "bike[frame_material]", frameMaterial );
     dataObject.append( "bike[model]", model );
-    if (year === "other") {
-      dataObject.append( "bike[year]", otherYear );
-    } else {
-      dataObject.append( "bike[year]", year );
-    }
     dataObject.append( "bike[rim_size]", rimSize );
     dataObject.append( "bike[number_of_front_gears]", numberOfFrontGears );
     dataObject.append( "bike[number_of_rear_gears]", numberOfRearGears );
@@ -193,12 +208,86 @@ export function BikeForm(props) {
     dataObject.append( "bike[documentation_type]", documentationType );
     dataObject.append( "bike[description]", description );
     dataObject.append( "bike[accessories]", accessories );
-    dataObject.append( "bike[battery]", battery );
+    dataObject.append( "bike[accessories_description]", accessoriesDescription );
+    dataObject.append( "bike[front_hub]", frontHub );
+    dataObject.append( "bike[rear_hub]", rearHub );
+    dataObject.append( "bike[front_tyre]", frontTyre );
+    dataObject.append( "bike[rear_tyre]", rearTyre );
+    dataObject.append( "bike[front_rim_size]", frontRimSize );
+    dataObject.append( "bike[rear_rim_size]", rearRimSize );
+    dataObject.append( "bike[motor]", motor );
+    dataObject.append( "bike[pedals]", pedals );
+    dataObject.append( "bike[mileage]", mileage );
+    dataObject.append( "bike[chain]", chain );
+    dataObject.append( "bike[crankset]", crankset );
+    dataObject.append( "bike[handlebar]", handlebar );
+
+
     if (photos) {
       photos.map((photo) => {
         dataObject.append( "bike[photos][]", photo );
       })
     }
+    if (year === "other") {
+      dataObject.append( "bike[year]", otherYear );
+    } else {
+      dataObject.append( "bike[year]", year );
+    }
+
+    if (frontDerailleurModel === "other") {
+      dataObject.append( "bike[front_derailleur_model]", otherFrontDerailleurModel );
+    } else {
+      dataObject.append( "bike[year]", frontDerailleurModel );
+    }
+
+    if (rearDerailleurModel === "other") {
+      dataObject.append( "bike[rear_derailleur_model]", otherRearDerailleurModel );
+    } else {
+      dataObject.append( "bike[year]", rearDerailleurModel );
+    }
+
+    if (frontSuspensionModel === "other") {
+      dataObject.append( "bike[front_suspension_model]", otherFrontSuspensionModel );
+    } else {
+      dataObject.append( "bike[year]", frontSuspensionModel );
+    }
+
+    if (rearSuspensionModel === "other") {
+      dataObject.append( "bike[rear_suspension_model]", otherRearSuspensionModel );
+    } else {
+      dataObject.append( "bike[year]", rearSuspensionModel );
+    }
+
+    if (brakeModel === "other") {
+      dataObject.append( "bike[brake_model]", otherBrakeModel );
+    } else {
+      dataObject.append( "bike[brake_model]", brakeModel );
+    }
+
+    if (brakeDiscSize === "other") {
+      dataObject.append( "bike[brake_disc_size]", otherBrakeDiscSize );
+    } else {
+      dataObject.append( "bike[brake_disc_size]", brakeDiscSize );
+    }
+
+    if (seatPostTravel === "other") {
+      dataObject.append( "bike[seat_post_travel]", otherSeatPostTravel );
+    } else {
+      dataObject.append( "bike[seat_post_travel]", seatPostTravel );
+    }
+
+    if (battery === "other") {
+      dataObject.append( "bike[battery]", otherBattery );
+    } else {
+      dataObject.append( "bike[battery]", battery );
+    }
+
+    if (accessories === "other") {
+      dataObject.append( "bike[accessories]", otherAccessory );
+    } else {
+      dataObject.append( "bike[accessories]", accessories );
+    }
+
 
     const url = props.bikeId
     ? `/api/v1/bikes/${props.bikeId}`
@@ -318,13 +407,10 @@ export function BikeForm(props) {
       progressFive.classList.add("section-done")
       progressSix.classList.remove("section-done")
     }
-
-
   }
 
 
   const handleFirstStep = (e) => {
-
     const progressOne = document.getElementById("progress-1")
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
@@ -339,37 +425,30 @@ export function BikeForm(props) {
     const progressTwo = document.getElementById("progress-2")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-
     progressTwo.classList.add("section-done")
     secondSection.classList.add("d-none")
     thirdSection.classList.remove("d-none")
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-
   }
 
   const handleThirdStep = () => {
     const progressThird = document.getElementById("progress-3")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
-
     progressThird.classList.add("section-done")
     thirdSection.classList.add("d-none")
     fourthSection.classList.remove("d-none")
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
   }
 
   const handleFourthStep = () => {
     const progressFourth = document.getElementById("progress-4")
     const fourthSection = document.getElementById("fourth-section")
     const fifthSection = document.getElementById("fifth-section")
-
     progressFourth.classList.add("section-done")
     fourthSection.classList.add("d-none")
     fifthSection.classList.remove("d-none")
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
   }
 
 
@@ -377,15 +456,11 @@ export function BikeForm(props) {
     const progressFifth = document.getElementById("progress-5")
     const fifthSection = document.getElementById("fifth-section")
     const sixthSection = document.getElementById("sixth-section")
-
     progressFifth.classList.add("section-done")
     fifthSection.classList.add("d-none")
     sixthSection.classList.remove("d-none")
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
   }
-
-
 
 
   //////////////////////////////////////////////// frames
