@@ -75,6 +75,10 @@ export function BikeForm(props) {
 
   const [photos, setPhotos ] = useState(null);
 
+  const [photoFile, setPhotoFile] = useState({
+    index: null,
+  });
+
   const [errors, setErrors] = useState({
     bike: {},
   });
@@ -118,15 +122,18 @@ export function BikeForm(props) {
         return
     }
 
+    const photoFile = []
     const objectUrls = []
     for (let i = 0; i < photos.length; i++) {
       const file = photos[i];
-
+      photoFile.push(i)
       objectUrls.push(URL.createObjectURL(file));
 
     }
 
     setPhotosPreview(objectUrls)
+    setPhotoFile(photoFile)
+
 
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
@@ -141,7 +148,14 @@ export function BikeForm(props) {
   }
 
   const removePhoto = (e) => {
-    console.log(e.target)
+    console.log(photoFile)
+    console.log(e)
+    console.log(e.target.currentSrc)
+    const photo = photos.find(element => URL.createObjectURL(element) === e.target.currentSrc)
+    photos.map((photo) => {
+      console.log(photo)
+    })
+    console.log(photo)
   }
 
 
