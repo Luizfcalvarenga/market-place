@@ -45,7 +45,7 @@ module Api
           @bike.accessories = true
         end
         if @bike.save
-         
+
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
               @bike.photos.attach(photo)
@@ -65,7 +65,9 @@ module Api
         @bike = Bike.find(params[:id])
         authorize @bike
         @category = @bike.category.name
-        render json: { bike: @bike, category: @category }
+        @modalities = @bike.category.modalities
+
+        render json: { bike: @bike, category: @category, modalities: @modalities }
       end
 
       def update
@@ -116,7 +118,7 @@ module Api
           :battery,
           :rim_size,
           :front_rim_model,
-          :reaar_rim_model,
+          :rear_rim_model,
           :front_suspension_model,
           :rear_suspension_model,
           :front_derailleur_model,
@@ -131,7 +133,8 @@ module Api
           :stem,
           :motor,
           :mileage,
-          :battery_cycle,
+          :battery_cycles,
+          :pedals,
           photos: []
         )
       end

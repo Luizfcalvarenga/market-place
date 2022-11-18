@@ -68,10 +68,10 @@ export function Bike(props) {
               <h3 className="text-success mb-4">Condições e descrição</h3>
 
               <div className="d-flex justify-content-between">
-                <h4 className="me-2 mb-3 text-success"><strong>Condições da bike:</strong> <span className="me-3 bike-info">{bike.bike_conditions}</span></h4>
+                <h4 className="me-2 mb-3 text-success"><strong>Condições da bike:</strong> <span className="me-3 bike-info">{bike.bike_condition}</span></h4>
                 <h4 className="me-2 mb-3 text-success"><strong>Tipo de documento:</strong> <span className="me-3 bike-info">{bike.documentation_type}</span></h4>
               </div>
-              <h4 className="me-2 mb-3 text-success"><strong>Acompanha acessórios:</strong> <span className="me-3 bike-info">{bike.accessories  ? "Sim" : "Não"}</span></h4>
+              <h4 className="me-2 mb-3 text-success"><strong>Acompanha acessórios:</strong> <span className="me-3 bike-info">{bike.accessories}</span></h4>
               <h4 className="me-2 mb-3 text-success"><strong>Condições operacionais:</strong> <span className="me-3 bike-info">{bike.operating_condition}</span></h4>
               <h4 className="me-2 mb-3 text-success"><strong>Condições estruturais:</strong> <span className="me-3 bike-info">{bike.structural_visual_condition}</span></h4>
               <h4 className="me-2 mb-3 text-success"><strong>Descrição:</strong> <span className="me-3 bike-info">{bike.description}</span></h4>

@@ -93,17 +93,61 @@
     border-radius: 4px;
   }
 
+  input#file-upload-button {
+    background-color: transparent !important;
+  }
+
 }
 
-  .btn-technicality {
-    border: 1px solid $color-primary !important;
-    background-color: rgb(10,10,10) !important;
-    color: $color-primary;
-    border-radius: 3px;
+.btn-technicality {
+  border: 1px solid $color-primary !important;
+  background-color: rgb(10,10,10) !important;
+  color: $color-primary;
+  border-radius: 3px;
 
 
-    &:hover {
-      color: #22e058;
-      border-color: #22e058;
-    }
+  &:hover {
+    color: #22e058;
+    border-color: #22e058;
   }
+}
+
+.image-preview-form {
+  width: 285px;
+  height: 190px;
+  border-radius: 3px;
+}
+
+.file-upload {
+  display: none
+
+}
+
+.label-upload {
+  margin-left: 15% !important;
+  font-size: 20px;
+}
+
+.fa-file-import{
+  color: $color-primary;
+  font-size: 30px;
+  cursor: pointer;
+
+  &:hover {
+    color: #22e058;
+  }
+
+}
+
+.remove-photo {
+
+  border: none !important;
+  background-color: transparent;
+
+  .fa-times {
+    color: red;
+    position: relative;
+    top: -41%;
+    right: 8%;
+  }
+}
