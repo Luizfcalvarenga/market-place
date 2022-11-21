@@ -226,8 +226,6 @@ export function BikeForm(props) {
       setMotor(response.data.bike.motor);
       setCrankset(response.data.bike.crankset);
       setChain(response.data.bike.chain);
-
-
       setMileage(response.data.bike.mileage);
       setBatteryCycles(response.data.bike.battery_cycles);
       setPedals(response.data.bike.pedals);
