@@ -125,9 +125,16 @@ export function BikeForm(props) {
     const photoFile = []
     const objectUrls = []
     for (let i = 0; i < photos.length; i++) {
+      const photoName = photos[i].name
       const file = photos[i];
-      photoFile.push(i)
-      objectUrls.push(URL.createObjectURL(file));
+      const fileURL = URL.createObjectURL(file)
+      let nameURL = {
+        name: photoName,
+        url: fileURL
+      }
+
+      photoFile.push(nameURL)
+      objectUrls.push(fileURL);
 
     }
 
@@ -142,20 +149,23 @@ export function BikeForm(props) {
 
   const createBikePhotos = (e) => {
     const photos = Object.values(e.target.files)
-    console.log(e.target.files)
+    // console.log(e.target.files)
     setPhotos(photos)
+    console.log(photos)
 
+  }
+  function removeObjectWithId(arr, name) {
+    const objWithNameIndex = arr.findIndex((obj) => obj.name === name);
+    arr.splice(objWithNameIndex, 1);
+    return arr;
   }
 
   const removePhoto = (e) => {
-    console.log(photoFile)
     console.log(e)
-    console.log(e.target.currentSrc)
-    const photo = photos.find(element => URL.createObjectURL(element) === e.target.currentSrc)
-    photos.map((photo) => {
-      console.log(photo)
-    })
-    console.log(photo)
+    const newPhotosPreview = photosPreview.filter(element => element !== e.target.currentSrc)
+    setPhotosPreview(newPhotosPreview);
+    const photoToRemove = photoFile.find(element => element.url === e.target.currentSrc).name
+    setPhotos(removeObjectWithId(photos, photoToRemove))
   }
 
 
@@ -719,8 +729,6 @@ export function BikeForm(props) {
         { errors && errors.bike && errors.bike.bike_type && (
           <p className="text-danger">{errors.bike.bike_type[0]}</p>
         )}
-
-
 
         <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
         <select
@@ -1385,7 +1393,7 @@ export function BikeForm(props) {
           <div  className="d-flex gap-1 justify-content-center flex-wrap mt-3">
             {
               photosPreview.map((photoPreview, idx) => {
-                return <button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}> <img src={photoPreview} alt="" className="image-preview-form" /> <i class="fas fa-times"></i></button>
+                return  (<><button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}><img src={photoPreview} alt="" className="image-preview-form" /></button></>)
               })
             }
           </div> : null
