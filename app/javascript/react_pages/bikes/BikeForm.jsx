@@ -883,7 +883,7 @@ export function BikeForm(props) {
         { year === "other"  && (
           <>
             <label htmlFor="year" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" value={year} onChange={(e) => setOtherYear(e.target.value)}/>
+            <input type="text" className="text-input" onChange={(e) => setOtherYear(e.target.value)}/>
           </>
         )}
 
@@ -950,7 +950,7 @@ export function BikeForm(props) {
             { frontDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mx-3">Qual?</label>
-                <input type="text-input" className="text-input"  value={frontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <input type="text-input" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -977,7 +977,7 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mx-3">Qual?</label>
-                <input type="text-input" className="text-input" value={rearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text-input" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1005,7 +1005,7 @@ export function BikeForm(props) {
             { frontDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-2">Qual?</label>
-                <input type="text-input" value={frontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <input type="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1020,7 +1020,7 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-2">Qual?</label>
-                <input type="text-input" value={rearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1065,7 +1065,7 @@ export function BikeForm(props) {
 
           {brakeDiscSize === "other" && (<>
             <label htmlFor="other_disc_size" className="mt-2">Qual:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={brakeDiscSize} onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
           </>)}
 
           {category === "road" && (<>
@@ -1100,7 +1100,7 @@ export function BikeForm(props) {
           {brakeModel === "other" && (<>
 
             <label htmlFor="front_gear" className="mt-2">Qual:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={brakeModel} onChange={(e) => setOtherBrakeModel(e.target.value)}/>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeModel(e.target.value)}/>
 
           </>)}
         </div>
@@ -1180,7 +1180,7 @@ export function BikeForm(props) {
               { frontSuspensionModel === "other"  && (
                 <>
                   <label htmlFor="otherFrontSuspensionModel" className="mt-2">Qual?</label>
-                  <input type="text-input" className="text-input" value={frontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                  <input type="text-input" className="text-input" onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
                 </>
               )}
 
@@ -1195,7 +1195,7 @@ export function BikeForm(props) {
               { rearSuspensionModel === "other"  && (
                 <>
                   <label htmlFor="otherRearSuspensionModel" className="mt-2">Qual?</label>
-                  <input type="text" className="text-input" value={rearSuspensionModel} onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
+                  <input type="text" className="text-input" onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
                 </>
               )}
             </>
@@ -1281,7 +1281,7 @@ export function BikeForm(props) {
             { seatPostTravel === "other" && (
               <>
               <label htmlFor="otherSeatPostTravel" className="mt-2">Qual?</label>
-              <input className="text-input" type="text" value={seatPostModel} onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
+              <input className="text-input" type="text" onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
             </>
             )}
           </>)}
@@ -1342,7 +1342,7 @@ export function BikeForm(props) {
 
           { accessories === "Outro" && (<>
             <label htmlFor="otherAccessory" className="mt-2">Qual?</label>
-            <input type="text-input"  className="text-input" value={accessories} onChange={(e) => setOtherAccessory(e.target.value)}/>
+            <input type="text-input"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
           </>)}
 
           { accessories !== "Não" && (<>
@@ -1417,44 +1417,62 @@ export function BikeForm(props) {
 
       <div id="fifth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
-        <p>Tipo: {bikeType}</p>
-        <p>Categoria: {category}</p>
-        <p>Modaliade: {modality}</p>
-        <p>Documentação: {documentation}</p>
-        <p>Condição: {bikeCondition}</p>
-        <p>Ano: {year === "other" ? otherYear : year}</p>
-        <p>Modelo: {model}</p>
-        <p>Preço: {priceInCents}</p>
-        <p>Quantidade: {quantity}</p>
-        <p>Cidade: {locality}</p>
-        <p>Peso: {weight}</p>
-        <p>Tipo: {bikeType}</p>
+        <h5 className="text-success mt-3 text-center">Gerais:</h5>
+        <div className="d-flex justify-content-between">
+          <p><span className="text-success">Tipo:</span> {bikeType}</p>
+          <p><span className="text-success">Categoria:</span> {category}</p>
+          <p><span className="text-success">Modalidade:</span> {modality}</p>
+        </div>
 
-        <p>Quadro</p>
+        <div className="d-flex justify-content-between">
+          <p><span className="text-success">Ano:</span> {year === "other" ? otherYear : year}</p>
+          <p><span className="text-success">Quantidade:</span> {quantity}</p>
+          <p><span className="text-success">Peso:</span> {weight}Kg</p>
+        </div>
+
+
+        <div className="d-flex justify-content-between">
+          <p><span className="text-success">Modelo:</span> {model}</p>
+          <p><span className="text-success">Preço:</span>  {(priceInCents / 100).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}</p>
+          <p><span className="text-success">Cidade:</span> {locality}</p>
+        </div>
+
+        <p><span className="text-success">Documentação:</span> {documentationType}</p>
+        <p><span className="text-success">Condição:</span> {bikeCondition}</p>
+        <p><span className="text-success">Condição operacional:</span> {operatingCondition}</p>
+        <p><span className="text-success">Condição estrutural/visual:</span> {structuralVisualCondition}</p>
+        <p><span className="text-success">Descrição:</span> {description}</p>
+
+
+        <h5 className="text-success mt-3">Quadro:</h5>
         <p>Marca: {frameBrand}</p>
         <p>Material: {frameMaterial}</p>
         <p>Tamanho: {frameSize}</p>
 
-        <p>Freios</p>
-        <p>Tipo: {brakeType}</p>
-        <p>Tamanho disco: {brakeDiscSize === "other" ? otherDiscSize : brakeDiscSize }</p>
+        <h5 className="text-success mt-3">Transmissão:</h5>
+        <p>Marchas dianteiras: {numberOfFrontGears}</p>
+        <p>Modelo: {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
+        <p>Marchas traseiras: {numberOfRearGears}</p>
+        <p>Modelo: {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
+        <p>Pedivela: {crankset}</p>
+        <p>Corrent: {chain}</p>
 
-        <p>Suspensões</p>
+
+        <h5 className="text-success mt-3">Freios:</h5>
+        <p>Tipo: {brakeType}</p>
+        <p>Tamanho disco: {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
+        <p>MOdelo: {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
+
+
+        <h5 className="text-success mt-3">Suspensões:</h5>
         <p>Tipo: {suspensionType}</p>
         <p>Curso dianteira: {frontSuspensionTravel}</p>
         <p>Curso traseira: {rearSuspensionTravel }</p>
 
-        <p>Rodas</p>
-        <p>Tamanho: {rimSize}</p>
-        <p>Aro dianteiro: {frontRimModel}</p>
-        <p>Aro traseiro: {rearRimModel }</p>
-        <p>Cubo dianteiro: {frontHub}</p>
-        <p>Cubo traseiro: {rearHub }</p>
-        <p>Pneu dianteiro: {frontTyre}</p>
-        <p>Pneu traseiro: {reartyre }</p>
-
-
-        <p>Rodas</p>
+        <h5 className="text-success mt-3">Rodas:</h5>
         <p>Tamanho: {rimSize}</p>
         <p>Aro dianteiro: {frontRimModel}</p>
         <p>Aro traseiro: {rearRimModel }</p>
@@ -1463,21 +1481,42 @@ export function BikeForm(props) {
         <p>Pneu dianteiro: {frontTyre}</p>
         <p>Pneu traseiro: {rearTyre }</p>
 
-        <p>Cockpit</p>
+
+        <h5 className="text-success mt-3">Cockpit:</h5>
         <p>Guidão: {handlebar}</p>
         <p>mesa: {stem}</p>
 
 
-        <p>Canote</p>
+        <h5 className="text-success mt-3">Canote:</h5>
         <p>Tipo: {seatPostType}</p>
         <p>Curso: {seatPostTravel}</p>
         <p>Modelo: {seatPostModel }</p>
 
-        <p>Acessórios</p>
-        <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : brakeDiscSize }</p>
-        <p>Curso: {seatPostTravel}</p>
-        <p>Modelo: {seatPostModel }</p>
+        <h5 className="text-success mt-3">Acessórios:</h5>
+        <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : accessories }</p>
+        <p>Descrição: {accessoriesDescription}</p>
+        <p>pedais: {pedals }</p>
 
+        { bikeType === "eletric" && (<>
+          <h5 className="text-success mt-3">Parte elétrica:</h5>
+          <p>Capacidade bateria: {battery === "other" ? otherBattery : battery }</p>
+          <p>Motor: {motor}</p>
+          <p>Km: {mileage}</p>
+          <p>Ciclos bateria: {batteryCycles}</p>
+        </>)}
+
+        <h5 className="text-success mt-3">Imagens:</h5>
+        {
+          photosPreview?.length > 0 ?
+          <div  className="d-flex gap-1 justify-content-center flex-wrap mt-3">
+            {
+              photosPreview.map((photoPreview, idx) => {
+                return <img src={photoPreview} alt="" className="image-review" />
+              })
+            }
+          </div> : null
+
+        }
 
         <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
       </div>
