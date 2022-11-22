@@ -7,7 +7,7 @@ class Chat < ApplicationRecord
   belongs_to :product, optional: true
 
   has_many :messages
-  has_many :participants, dependent: :destroy
+  # has_many :participants, dependent: :destroy
 
   has_noticed_notifications model_name: 'Notification'
 
