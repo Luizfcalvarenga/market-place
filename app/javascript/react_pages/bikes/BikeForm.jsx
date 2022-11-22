@@ -154,7 +154,7 @@ export function BikeForm(props) {
     console.log(photos)
 
   }
-  
+
   function removeObjectWithId(arr, name) {
     const objWithNameIndex = arr.findIndex((obj) => obj.name === name);
     arr.splice(objWithNameIndex, 1);
@@ -1417,6 +1417,68 @@ export function BikeForm(props) {
 
       <div id="fifth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
+        <p>Tipo: {bikeType}</p>
+        <p>Categoria: {category}</p>
+        <p>Modaliade: {modality}</p>
+        <p>Documentação: {documentation}</p>
+        <p>Condição: {bikeCondition}</p>
+        <p>Ano: {year === "other" ? otherYear : year}</p>
+        <p>Modelo: {model}</p>
+        <p>Preço: {priceInCents}</p>
+        <p>Quantidade: {quantity}</p>
+        <p>Cidade: {locality}</p>
+        <p>Peso: {weight}</p>
+        <p>Tipo: {bikeType}</p>
+
+        <p>Quadro</p>
+        <p>Marca: {frameBrand}</p>
+        <p>Material: {frameMaterial}</p>
+        <p>Tamanho: {frameSize}</p>
+
+        <p>Freios</p>
+        <p>Tipo: {brakeType}</p>
+        <p>Tamanho disco: {brakeDiscSize === "other" ? otherDiscSize : brakeDiscSize }</p>
+
+        <p>Suspensões</p>
+        <p>Tipo: {suspensionType}</p>
+        <p>Curso dianteira: {frontSuspensionTravel}</p>
+        <p>Curso traseira: {rearSuspensionTravel }</p>
+
+        <p>Rodas</p>
+        <p>Tamanho: {rimSize}</p>
+        <p>Aro dianteiro: {frontRimModel}</p>
+        <p>Aro traseiro: {rearRimModel }</p>
+        <p>Cubo dianteiro: {frontHub}</p>
+        <p>Cubo traseiro: {rearHub }</p>
+        <p>Pneu dianteiro: {frontTyre}</p>
+        <p>Pneu traseiro: {reartyre }</p>
+
+
+        <p>Rodas</p>
+        <p>Tamanho: {rimSize}</p>
+        <p>Aro dianteiro: {frontRimModel}</p>
+        <p>Aro traseiro: {rearRimModel }</p>
+        <p>Cubo dianteiro: {frontHub}</p>
+        <p>Cubo traseiro: {rearHub }</p>
+        <p>Pneu dianteiro: {frontTyre}</p>
+        <p>Pneu traseiro: {rearTyre }</p>
+
+        <p>Cockpit</p>
+        <p>Guidão: {handlebar}</p>
+        <p>mesa: {stem}</p>
+
+
+        <p>Canote</p>
+        <p>Tipo: {seatPostType}</p>
+        <p>Curso: {seatPostTravel}</p>
+        <p>Modelo: {seatPostModel }</p>
+
+        <p>Acessórios</p>
+        <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : brakeDiscSize }</p>
+        <p>Curso: {seatPostTravel}</p>
+        <p>Modelo: {seatPostModel }</p>
+
+
         <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
       </div>
 
