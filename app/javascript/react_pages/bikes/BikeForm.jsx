@@ -179,6 +179,12 @@ export function BikeForm(props) {
 
   }
 
+  const handleReviewSection = (e) => {
+    console.log(e.target.innerText)
+    const section = document.getElementById(e.target.innerText)
+    console.log(section)
+    section.classList.toggle("d-none")
+  }
 
 
   async function fetchBike() {
@@ -1417,92 +1423,114 @@ export function BikeForm(props) {
 
       <div id="fifth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
-        <h5 className="text-success mt-3 text-center">Gerais:</h5>
-        <div className="d-flex justify-content-between">
-          <p><span className="text-success">Tipo:</span> {bikeType}</p>
-          <p><span className="text-success">Categoria:</span> {category}</p>
-          <p><span className="text-success">Modalidade:</span> {modality}</p>
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
+        {/* <h5 className="text-success mt-3 text-center">Gerais:</h5> */}
+        <div id="Gerais" className=" d-none">
+          <div className="d-flex justify-content-between">
+            <p><span className="text-success">Tipo:</span> {bikeType}</p>
+            <p><span className="text-success">Categoria:</span> {category}</p>
+            <p><span className="text-success">Modalidade:</span> {modality}</p>
+          </div>
+
+          <div className="d-flex justify-content-between">
+            <p><span className="text-success">Ano:</span> {year === "other" ? otherYear : year}</p>
+            <p><span className="text-success">Quantidade:</span> {quantity}</p>
+            <p><span className="text-success">Peso:</span> {weight}Kg</p>
+          </div>
+
+
+          <div className="d-flex justify-content-between">
+            <p><span className="text-success">Modelo:</span> {model}</p>
+            <p><span className="text-success">Preço:</span>  {(priceInCents / 100).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}</p>
+            <p><span className="text-success">Cidade:</span> {locality}</p>
+          </div>
+
+          <p><span className="text-success">Documentação:</span> {documentationType}</p>
+          <p><span className="text-success">Condição:</span> {bikeCondition}</p>
+          <p><span className="text-success">Condição operacional:</span> {operatingCondition}</p>
+          <p><span className="text-success">Condição estrutural/visual:</span> {structuralVisualCondition}</p>
+          <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
 
-        <div className="d-flex justify-content-between">
-          <p><span className="text-success">Ano:</span> {year === "other" ? otherYear : year}</p>
-          <p><span className="text-success">Quantidade:</span> {quantity}</p>
-          <p><span className="text-success">Peso:</span> {weight}Kg</p>
+
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Quadro</button>
+        <div id="Quadro" className="d-none">
+          <p>Marca: {frameBrand}</p>
+          <p>Material: {frameMaterial}</p>
+          <p>Tamanho: {frameSize}</p>
+        </div>
+
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Transmissão</button>
+        <div id="Transmissão" className="d-none">
+          <p>Marchas dianteiras: {numberOfFrontGears}</p>
+          <p>Modelo: {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
+          <p>Marchas traseiras: {numberOfRearGears}</p>
+          <p>Modelo: {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
+          <p>Pedivela: {crankset}</p>
+          <p>Corrent: {chain}</p>
         </div>
 
 
-        <div className="d-flex justify-content-between">
-          <p><span className="text-success">Modelo:</span> {model}</p>
-          <p><span className="text-success">Preço:</span>  {(priceInCents / 100).toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}</p>
-          <p><span className="text-success">Cidade:</span> {locality}</p>
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Freios</button>
+        <div id="Freios" className="d-none">
+          <p>Tipo: {brakeType}</p>
+          <p>Tamanho disco: {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
+          <p>Modelo: {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
-        <p><span className="text-success">Documentação:</span> {documentationType}</p>
-        <p><span className="text-success">Condição:</span> {bikeCondition}</p>
-        <p><span className="text-success">Condição operacional:</span> {operatingCondition}</p>
-        <p><span className="text-success">Condição estrutural/visual:</span> {structuralVisualCondition}</p>
-        <p><span className="text-success">Descrição:</span> {description}</p>
+
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Suspensões</button>
+        <div id="Suspensões" className="d-none">
+          <p>Tipo: {suspensionType}</p>
+          <p>Curso dianteira: {frontSuspensionTravel}</p>
+          <p>Curso traseira: {rearSuspensionTravel }</p>
+        </div>
 
 
-        <h5 className="text-success mt-3">Quadro:</h5>
-        <p>Marca: {frameBrand}</p>
-        <p>Material: {frameMaterial}</p>
-        <p>Tamanho: {frameSize}</p>
-
-        <h5 className="text-success mt-3">Transmissão:</h5>
-        <p>Marchas dianteiras: {numberOfFrontGears}</p>
-        <p>Modelo: {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
-        <p>Marchas traseiras: {numberOfRearGears}</p>
-        <p>Modelo: {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
-        <p>Pedivela: {crankset}</p>
-        <p>Corrent: {chain}</p>
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Rodas</button>
+        <div id="Rodas" className="d-none">
+          <p>Tamanho: {rimSize}</p>
+          <p>Aro dianteiro: {frontRimModel}</p>
+          <p>Aro traseiro: {rearRimModel }</p>
+          <p>Cubo dianteiro: {frontHub}</p>
+          <p>Cubo traseiro: {rearHub }</p>
+          <p>Pneu dianteiro: {frontTyre}</p>
+          <p>Pneu traseiro: {rearTyre }</p>
+        </div>
 
 
-        <h5 className="text-success mt-3">Freios:</h5>
-        <p>Tipo: {brakeType}</p>
-        <p>Tamanho disco: {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
-        <p>MOdelo: {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Cockpit</button>
+        <div id="Cockpit" className="d-none">
+          <p>Guidão: {handlebar}</p>
+          <p>mesa: {stem}</p>
+        </div>
 
 
-        <h5 className="text-success mt-3">Suspensões:</h5>
-        <p>Tipo: {suspensionType}</p>
-        <p>Curso dianteira: {frontSuspensionTravel}</p>
-        <p>Curso traseira: {rearSuspensionTravel }</p>
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Canote</button>
+        <div id="Canote" className="d-none">
+          <p>Tipo: {seatPostType}</p>
+          <p>Curso: {seatPostTravel}</p>
+          <p>Modelo: {seatPostModel }</p>
+        </div>
 
-        <h5 className="text-success mt-3">Rodas:</h5>
-        <p>Tamanho: {rimSize}</p>
-        <p>Aro dianteiro: {frontRimModel}</p>
-        <p>Aro traseiro: {rearRimModel }</p>
-        <p>Cubo dianteiro: {frontHub}</p>
-        <p>Cubo traseiro: {rearHub }</p>
-        <p>Pneu dianteiro: {frontTyre}</p>
-        <p>Pneu traseiro: {rearTyre }</p>
+        <button type="button" onClick={(e) => handleReviewSection(e)}>Acessórios</button>
+        <div id="Acessórios" className="d-none">
+          <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : accessories }</p>
+          <p>Descrição: {accessoriesDescription}</p>
+          <p>pedais: {pedals }</p>
+        </div>
 
-
-        <h5 className="text-success mt-3">Cockpit:</h5>
-        <p>Guidão: {handlebar}</p>
-        <p>mesa: {stem}</p>
-
-
-        <h5 className="text-success mt-3">Canote:</h5>
-        <p>Tipo: {seatPostType}</p>
-        <p>Curso: {seatPostTravel}</p>
-        <p>Modelo: {seatPostModel }</p>
-
-        <h5 className="text-success mt-3">Acessórios:</h5>
-        <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : accessories }</p>
-        <p>Descrição: {accessoriesDescription}</p>
-        <p>pedais: {pedals }</p>
-
-        { bikeType === "eletric" && (<>
-          <h5 className="text-success mt-3">Parte elétrica:</h5>
-          <p>Capacidade bateria: {battery === "other" ? otherBattery : battery }</p>
-          <p>Motor: {motor}</p>
-          <p>Km: {mileage}</p>
-          <p>Ciclos bateria: {batteryCycles}</p>
+        { bikeType === "electric" && (<>
+          <button type="button" onClick={(e) => handleReviewSection(e)}>Parte elétrica</button>
+          <div id="Parte elétrica" className="d-none">
+            <p>Capacidade bateria: {battery === "other" ? otherBattery : battery }</p>
+            <p>Motor: {motor}</p>
+            <p>Km: {mileage}</p>
+            <p>Ciclos bateria: {batteryCycles}</p>
+          </div>
         </>)}
 
         <h5 className="text-success mt-3">Imagens:</h5>
