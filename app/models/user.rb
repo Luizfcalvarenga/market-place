@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
 	include DeviseTokenAuth::Concerns::User
 
-  scope :all_except, ->(user) {where.not(id: user)}
-  after_create_commit { broadcast_append_to "users" }
-  after_update_commit { broadcast_update }
+  # scope :all_except, ->(user) {where.not(id: user)}
+  # after_create_commit { broadcast_append_to "users" }
+  # after_update_commit { broadcast_update }
 
   has_many :orders
   has_many :messages
