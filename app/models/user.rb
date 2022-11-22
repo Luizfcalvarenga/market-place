@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   has_many :orders
   has_many :messages
-  has_many :participants
+  # has_many :participants
   has_many :chats, through: :participants
   has_many :notifications, dependent: :destroy, as: :recipient
 
