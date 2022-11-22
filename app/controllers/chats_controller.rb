@@ -1,7 +1,7 @@
 class ChatsController < ApplicationController
   include ChatsHelper
   before_action :authenticate_user!
-  # before_action :set_status
+  before_action :set_status
 
   def index
     @chat = Chat.new
@@ -40,9 +40,9 @@ class ChatsController < ApplicationController
 
   private
 
-  # def set_status
-  #   current_user.update!(status: User.statuses[:online]) if current_user
-  # end
+  def set_status
+    current_user.update!(status: User.statuses[:online]) if current_user
+  end
 
   def set_notifications_to_read
     notifications = @single_chat.notifications_as_chat.where(recipient: current_user).unread
