@@ -21,6 +21,10 @@ export function ProductForm(props) {
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
+  const [photosPreview, setPhotosPreview] = useState([]);
+  const [photoFile, setPhotoFile] = useState({
+    index: null,
+  });
 
   const [errors, setErrors] = useState({
     product: {},
@@ -77,6 +81,67 @@ export function ProductForm(props) {
     }
   }, [productTypeId]);
 
+
+
+  useEffect(() => {
+    if (!productPhotos) {
+        setPhotosPreview(undefined)
+        return
+    }
+
+    const photoFile = []
+    const objectUrls = []
+    for (let i = 0; i < productPhotos.length; i++) {
+      const photoName = productPhotos[i].name
+      const file = productPhotos[i];
+      const fileURL = URL.createObjectURL(file)
+      let nameURL = {
+        name: photoName,
+        url: fileURL
+      }
+
+      photoFile.push(nameURL)
+      objectUrls.push(fileURL);
+
+    }
+
+    setPhotosPreview(objectUrls)
+    setPhotoFile(photoFile)
+
+
+    // free memory when ever this component is unmounted
+    return () => URL.revokeObjectURL(objectUrls)
+  }, [productPhotos])
+
+  const createProductPhotos = (e) => {
+    const photos = Object.values(e.target.files)
+    setProductPhotos(photos)
+  }
+
+  function removeObjectWithId(arr, name) {
+    const objWithNameIndex = arr.findIndex((obj) => obj.name === name);
+    arr.splice(objWithNameIndex, 1);
+    return arr;
+  }
+
+  const removePhoto = (e) => {
+    console.log(e)
+    console.log(e.nativeEvent.path[1].childNodes[0].src)
+    if (e.nativeEvent.path[1].childNodes[0].src) {
+
+      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+      setPhotosPreview(newPhotosPreview);
+      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+      setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    } else if (e.nativeEvent.path[2].childNodes[0].src) {
+      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+      setPhotosPreview(newPhotosPreview);
+      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+      setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    }
+
+  }
+
   async function fetchProduct() {
     const response = await axios.get(
       `/api/v1/products/${props.productId}/edit`
@@ -107,10 +172,7 @@ export function ProductForm(props) {
     setProductAttributes(currentProductAttributes)
   }
 
-  const createProductPhotos = (e) => {
-    const photos = Object.values(e.target.files)
-    setProductPhotos(photos)
-  }
+
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
     let options = []
@@ -566,20 +628,28 @@ export function ProductForm(props) {
           </div>
         </div>
 
+        <div id="fifth-section" className="card-questions mb-5 mt-3 d-none">
+          <h4 className="text-center text-success">Imagens</h4>
+          <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createProductPhotos(e)}/>
+          <label htmlFor="photo-upload" className="label-upload my-4">Escolha suas imagens para o anúncio. <i class="fas fa-file-import mt-2"></i></label>
+          {
+            photosPreview?.length > 0 ?
+            <div  className="d-flex gap-1 justify-content-center flex-wrap mt-3">
+              {
+                photosPreview.map((photoPreview, idx) => {
+                  return  (<><button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
+                      <img src={photoPreview} alt="" className="image-preview-form" />
+                      <div className="middle">
+                        <div className="text">Remover</div>
+                      </div>
+                    </button></>)
+                })
+              }
+            </div> : null
+          }
+          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
+        </div>
 
-        {productQuantity && (<>
-
-          <div id="fifth-section" className="card-questions mb-5 mt-3 d-none">
-
-            <h4 className="text-center text-success mb-3">Imagens do produto</h4>
-            {/* <label htmlFor="photos">Adicione as fotos do seu produto:</label> */}
-
-            <input type="file" className="form-control" aria-label="Username" aria-describedby="basic-addon1" multiple onChange={(e) => createProductPhotos(e)}/>
-
-            <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
-
-          </div>
-        </>)}
 
 
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
@@ -598,15 +668,9 @@ export function ProductForm(props) {
               <p>Preço: {productPrice}</p>
               <p>Quantidade: {productQuantity}</p>
 
-
-
-
-
-
           <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
-
         </div>
-        {productPhotos &&  (<>
+        {/* {productPhotos &&  (<>
 
           <div className="card-questions my-3">
             <label htmlFor="product" className="mb-3">Qual tipo de anúncio quer usar para seu produto?</label>
@@ -630,7 +694,7 @@ export function ProductForm(props) {
 
           <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
 
-        </>)}
+        </>)} */}
 
       </form>
     </div>

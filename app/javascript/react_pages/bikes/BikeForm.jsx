@@ -154,6 +154,7 @@ export function BikeForm(props) {
     console.log(photos)
 
   }
+  
   function removeObjectWithId(arr, name) {
     const objWithNameIndex = arr.findIndex((obj) => obj.name === name);
     arr.splice(objWithNameIndex, 1);
@@ -162,10 +163,20 @@ export function BikeForm(props) {
 
   const removePhoto = (e) => {
     console.log(e)
-    const newPhotosPreview = photosPreview.filter(element => element !== e.target.currentSrc)
-    setPhotosPreview(newPhotosPreview);
-    const photoToRemove = photoFile.find(element => element.url === e.target.currentSrc).name
-    setPhotos(removeObjectWithId(photos, photoToRemove))
+    console.log(e.nativeEvent.path[1].childNodes[0].src)
+    if (e.nativeEvent.path[1].childNodes[0].src) {
+
+      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+      setPhotosPreview(newPhotosPreview);
+      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+      setPhotos(removeObjectWithId(photos, photoToRemove))
+    } else if (e.nativeEvent.path[2].childNodes[0].src) {
+      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+      setPhotosPreview(newPhotosPreview);
+      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+      setPhotos(removeObjectWithId(photos, photoToRemove))
+    }
+
   }
 
 
@@ -1391,7 +1402,12 @@ export function BikeForm(props) {
           <div  className="d-flex gap-1 justify-content-center flex-wrap mt-3">
             {
               photosPreview.map((photoPreview, idx) => {
-                return  (<><button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}><img src={photoPreview} alt="" className="image-preview-form" /></button></>)
+                return  (<><button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
+                    <img src={photoPreview} alt="" className="image-preview-form" />
+                    <div className="middle">
+                      <div className="text">Remover</div>
+                    </div>
+                  </button></>)
               })
             }
           </div> : null

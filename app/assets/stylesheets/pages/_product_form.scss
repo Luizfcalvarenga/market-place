@@ -177,3 +177,64 @@ option {
     color: #22e058;
   }
 }
+
+
+.image-preview-form {
+  width: 285px;
+  height: 190px;
+  border-radius: 3px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  width: 285px;
+  height: 190px;
+  background-image: image-url("bin.png");
+  background-size: 30%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.file-upload {
+  display: none
+}
+
+.label-upload {
+  margin-left: 15% !important;
+  font-size: 20px;
+}
+
+.fa-file-import{
+  color: $color-primary;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.remove-photo {
+  position: relative;
+  border: none !important;
+  background-color: transparent;
+}
+
+.remove-photo:hover .image-preview-form {
+  opacity: 0.3;
+}
+
+.remove-photo:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: transparent;
+  color: red;
+  font-size: 13px;
+  margin-top: 30%;
+}
