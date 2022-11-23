@@ -141,15 +141,19 @@
 }
 
 .label-upload {
-  margin-left: 15% !important;
   font-size: 20px;
 }
 
-.fa-file-import{
+.fa-file-upload {
   color: $color-primary;
   font-size: 30px;
   cursor: pointer;
+  &:hover {
+    color: #22e058;
+
+  }
 }
+
 
 .remove-photo {
   position: relative;
@@ -174,6 +178,6 @@
 
 .image-review {
   width: 150px;
-  height: 80px;
+  height: 95px;
   border-radius: 3px
 }

@@ -139,8 +139,15 @@ export function ProductForm(props) {
       const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
       setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
     }
-
   }
+
+  const handleReviewSection = (e) => {
+    console.log(e.target.innerText)
+    const section = document.getElementById(e.target.innerText)
+    console.log(section)
+    section.classList.toggle("d-none")
+  }
+
 
   async function fetchProduct() {
     const response = await axios.get(
@@ -198,7 +205,7 @@ export function ProductForm(props) {
 
     return (
       <div attribute={attribute} key={attribute.id} className="">
-        <label htmlFor="product attribute" className="mb-3" key={index}>{attribute.prompt}</label><br />
+        <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
         <select
         className="select-answer"
         onChange={(e) => createProductAttributes(e, attribute)}
@@ -207,13 +214,6 @@ export function ProductForm(props) {
             return (<option key={index} value={option}>{option}</option>)
           })}
         </select>
-
-        {/* { === "other" && (
-            <>
-              <label htmlFor="category" className="mx-3">Qual?</label>
-              <input type="text" />
-            </>
-          )} PARA RESPOSTA QUE FOR OTHER PEGAR O QUE FOR ESCRITO NO INPUT NO LUGAR DO SELECT*/}
       </div>
     )
   }
@@ -516,7 +516,7 @@ export function ProductForm(props) {
 
           { (productCategory === "mountain_bike" || productCategory === "dirt_street" || productCategory === "road") && (<>
 
-            <label htmlFor="modality" className="mt-2 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+            <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
             <select
               value={productModality}
               onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
@@ -528,7 +528,7 @@ export function ProductForm(props) {
             </select>
           </>)}
 
-          <label htmlFor="product" className="mt-2">Produto:</label>
+          <label htmlFor="product" className="mt-4">Produto:</label>
           <select
           value={productTypeId}
           onChange={(e) => setProductTypeId(e.target.value)}
@@ -539,36 +539,33 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
           </select>
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}><i className="fas fa-angle-double-right"></i></button>
+          <div className="text-center">
+            <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          </div>
         </div>
-
-
-
-
-
 
         <div>
           { productTypeAttributes.length > 0 && (
             <div id="third-section" className="card-questions d-none mb-5">
               <h4 className="text-center text-success">Informações técnicas</h4>
-
-
               {productTypeAttributes.map((attribute, index) => {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
-
-
-              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
-
+              <div className="text-center">
+                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
+              </div>
             </div>
           )}
 
           { productTypeAttributes.length === 0 && (
-            <div id="third-section" className="card-questions d-none mb-5">
-               <h4 className="text-center text-success">Informações técnicas</h4>
+            <div id="third-section" className="card-questions d-none mb-5 text-center">
+              <h4 className="text-center text-success">Informações técnicas</h4>
 
-              <h6 className="text-black">não há nada para esse produto, vamos em frente!!!</h6>
-              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
+              <p className="mt-5">não há nada para esse produto, vamos em frente!!!</p>
+
+
+
+              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
 
             </div>
           )}
@@ -577,68 +574,54 @@ export function ProductForm(props) {
 
           <div id="fourth-section" className="card-questions mb-5 d-none">
             <h4 className="text-center text-success">Informações adicionais</h4>
-            <div className="d-flex">
-              <div className="input-group input-group-sm mb-3 w-50">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Marca</span>
-                </div>
-                <input type="text" className="form-control"  value={productBrand ? productBrand : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductBrand(e.target.value)}/>
-              </div>
 
-              <div className="input-group input-group-sm mb-3 w-50">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Nome</span>
-                </div>
-                <input type="text" className="form-control" value={productName ? productName : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductName(e.target.value)}/>
-                { errors && errors.product && errors.product.name && (
-                  <p className="text-danger">{errors.product.name}</p>
-                )}
-              </div>
+            <label htmlFor="productbrand" className="mt-3">Marca:</label>
+            <input type="text" className="text-input"  value={productBrand ? productBrand : ""} onChange={(e) => setProductBrand(e.target.value)}/>
+
+            <label htmlFor="productName" className="mt-4">Nome:</label>
+            <input type="text" className="text-input" value={productName ? productName : ""} onChange={(e) => setProductName(e.target.value)}/>
+            { errors && errors.product && errors.product.name && (
+              <p className="text-danger">{errors.product.name}</p>
+            )}
+
+
+            <label htmlFor="productDescription" className="mt-4">Descrição:</label>
+            <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
+
+
+            <label htmlFor="productPrice" className="mt-4">Preço:</label>
+            <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
+            { errors && errors.product && errors.product.price_in_cents && (
+              <p className="text-danger">{errors.product.price_in_cents}</p>
+            )}
+
+
+            <label htmlFor="productQuantity" className="mt-4">Quantidade:</label>
+            <input type="number" className="text-input" value={productQuantity ? productQuantity : ""} onChange={(e) => setProductQuantity(e.target.value)}/>
+            { errors && errors.product && errors.product.quantity && (
+              <p className="text-danger">{errors.product.quantity}</p>
+            )}
+
+            <div className="text-center">
+              <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
-
-            <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1">Descrição</span>
-              </div>
-              <input type="text" className="form-control" value={productDescription ? productDescription : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductDescription(e.target.value)}/>
-            </div>
-
-            <div className="d-flex">
-              <div className="input-group input-group-sm mb-3 w-50">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">R$</span>
-                </div>
-                <input type="number" className="form-control" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductPrice(e.target.value)}/>
-                { errors && errors.product && errors.product.price_in_cents && (
-                  <p className="text-danger">{errors.product.price_in_cents}</p>
-                )}
-              </div>
-
-              <div className="input-group input-group-sm mb-3 w-50">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">Quantidade</span>
-                </div>
-                <input type="number" className="form-control" value={productQuantity ? productQuantity : ""} aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setProductQuantity(e.target.value)}/>
-                { errors && errors.product && errors.product.quantity && (
-                  <p className="text-danger">{errors.product.quantity}</p>
-                )}
-              </div>
-            </div>
-            <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}><i className="fas fa-angle-double-right"></i></button>
           </div>
         </div>
 
         <div id="fifth-section" className="card-questions mb-5 mt-3 d-none">
           <h4 className="text-center text-success">Imagens</h4>
           <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createProductPhotos(e)}/>
-          <label htmlFor="photo-upload" className="label-upload my-4">Escolha suas imagens para o anúncio. <i class="fas fa-file-import mt-2"></i></label>
+          <p className="text-center my-3">ESCOLHA AS IMAGENS DO SEU PRODUTO</p>
+          <div className="text-center">
+            <label htmlFor="photo-upload" className="label-upload my-2"><i class="fas fa-file-upload"></i></label>
+          </div>
           {
             photosPreview?.length > 0 ?
-            <div  className="d-flex gap-1 justify-content-center flex-wrap mt-3">
+            <div  className="d-flex justify-content-center flex-wrap mt-3">
               {
                 photosPreview.map((photoPreview, idx) => {
-                  return  (<><button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
-                      <img src={photoPreview} alt="" className="image-preview-form" />
+                  return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
+                      <img src={photoPreview} alt="" className="image-preview-form mt-1" />
                       <div className="middle">
                         <div className="text">Remover</div>
                       </div>
@@ -647,55 +630,57 @@ export function ProductForm(props) {
               }
             </div> : null
           }
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}><i className="fas fa-angle-double-right"></i></button>
+          <div className="text-center">
+            <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          </div>
         </div>
 
 
 
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
 
-          <h4 className="text-center text-success mb-3">Revise seu produto</h4>
-              <p>Categoria: {productCategory}</p>
-              <p>Modalidade: {productModality}</p>
-              <p>Produto: {productId}</p>
-              { productAttributes && (<>
+          <h4 className="text-center text-success">Revise as informações</h4>
+          {/* <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Gerais</button> */}
+          <h4 className="text-success mt-3 text-center">Gerais</h4>
+          <div id="Gerais" className="">
 
-              </>
-              )}
-              <p>Marca: {productBrand}</p>
-              <p>Nome: {productName}</p>
-              <p>Descrição: {productDescription}</p>
-              <p>Preço: {productPrice}</p>
-              <p>Quantidade: {productQuantity}</p>
-
-          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
-        </div>
-        {/* {productPhotos &&  (<>
-
-          <div className="card-questions my-3">
-            <label htmlFor="product" className="mb-3">Qual tipo de anúncio quer usar para seu produto?</label>
-            <select
-            type="radio"
-            value={productServiceId}
-            onChange={(e) => setProductServiceId(e.target.value)}
-            className="select-answer"
-            >
-              {services.map((service) => {
-                return (<option key={service.id} value={service.id}>{service.name} | {(service.price_in_cents / 100).toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}</option>)
-              })}
-            </select>
+            <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p>
+            <p><span className="text-success">Categoria:</span> {productCategory}</p>
+            <p><span className="text-success">Modalidade:</span> {productModality}</p>
+            <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
+            <p><span className="text-success">Preço:</span>  {(productPrice / 100).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}</p>
+            <p><span className="text-success">Marca:</span> {productBrand}</p>
+            <p><span className="text-success">Nome:</span> {productName}</p>
           </div>
-        </>)}
 
-        {productServiceId && (<>
 
-          <button onClick={(e) => handleSubmit(e)} className="btn btn-outline mb-5 mt-3">Anunciar</button>
+          {Object.keys(productAttributes).length != 0 && (
+            <>
+              <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Atributos</button>
+              <div id="Atributos" className="d-none">
+                <p><span className="text-success">em breve...</span></p>
+              </div>
+            </>
+          )}
 
-        </>)} */}
-
+        <h4 className="text-success mt-3 text-center">Imagens</h4>
+        {
+          photosPreview?.length > 0 ?
+          <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
+            {
+              photosPreview.map((photoPreview, idx) => {
+                return <img src={photoPreview} alt="" className="image-review" />
+              })
+            }
+          </div> : <p className="text-center">Nenhuma imagem adicionada</p>
+        }
+          <div className="text-center">
+            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-5">Anunciar</button>
+          </div>
+        </div>
       </form>
     </div>
   );
