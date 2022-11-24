@@ -104,10 +104,12 @@ export function BikeForm(props) {
   }, []);
 
   useEffect(() => {
-    if (category) {
+    if (category && !props.bikeId) {
       console.log(categories)
       setModalities(categories.find(element => element.name === category).modalities)
       setCategoryId(categories.find(element => element.name === category).id);
+    } else if (props.bikeId) {
+      //NO EDIT O COMPORTAMENTO ERA ESTRANHO, NÃO ACHAVA AS MODALIDADES, FIND EM CATEGORIAS RETORNAVA NULL, VERIFICAR CERTINHO DEPOIS
     }
   });
 
@@ -199,7 +201,6 @@ export function BikeForm(props) {
       setUser(response.data.bike.user_id);
       setCategory(response.data.category);
       setCategoryId(response.data.bike.category_id);
-      // setModalities(response.data.modalities); no edit não consegue achar a categoria para setar as modalidades, tentei trazer do back mas assim nao mudam caso categoria mude
       setModality(response.data.bike.modality);
       setBikeType(response.data.bike.bike_type);
       setPriceInCents(response.data.bike.price_in_cents);
@@ -730,7 +731,6 @@ export function BikeForm(props) {
           className="select-answer"
           value={bikeType}
           onChange={(e) => setBikeType(e.target.value)}
-
         >
           {bikeTypes.map((bikeType, index) => {
             return (<option key={index}>{bikeType}</option>);
@@ -1577,7 +1577,12 @@ export function BikeForm(props) {
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
         <div className="text-center  mb-3">
-          <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+          {!props.bikeId && (
+            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+          )}
+          {props.bikeId && (
+            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
+          )}
         </div>
       </div>
     </div>

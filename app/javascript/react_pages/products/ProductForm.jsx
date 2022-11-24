@@ -46,13 +46,16 @@ export function ProductForm(props) {
       fetchProduct();
       setProductId(props.productId)
 
+
     }
   }, []);
 
   useEffect(() => {
-    if (productCategory) {
+    if (productCategory && !props.productId) {
       setModalities(categories.find(element => element.name === productCategory).modalities)
       setCategoryId(categories.find(element => element.name === productCategory).id);
+    } else if (props.productId) {
+      //NO EDIT O COMPORTAMENTO ERA ESTRANHO, NÃO ACHAVA AS MODALIDADES, FIND EM CATEGORIAS RETORNAVA NULL, VERIFICAR CERTINHO DEPOIS
     }
   });
 
@@ -190,7 +193,6 @@ export function ProductForm(props) {
   const changeAttribute = (e, attribute) => {
     productAttributes[attribute.name] = e.target.value
     setProductAttributes(productAttributes)
-
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -656,7 +658,7 @@ export function ProductForm(props) {
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
 
-            <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p>
+            {/* <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p> */}
             <p><span className="text-success">Categoria:</span> {productCategory}</p>
             <p><span className="text-success">Modalidade:</span> {productModality}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
@@ -703,7 +705,12 @@ export function ProductForm(props) {
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
           <div className="text-center">
-            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-5">Anunciar</button>
+            {props.productId && (
+              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
+            )}
+            {!props.productId && (
+              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-5">Anunciar</button>
+            )}
           </div>
         </div>
       </form>
