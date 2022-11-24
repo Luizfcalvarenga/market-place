@@ -11,3 +11,4 @@ json.products @products do |product|
   json.quantity product.quantity
 end
 json.product_types @product_types
+json.product_type_attributes @product_type_attributes

@@ -9,6 +9,7 @@ module Api
       def index
         @user = current_user
         @product_types = ProductType.all
+        @product_type_attributes = ProductTypeAttribute.all
         @products = Product.where.not(user: @user)
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         # if params[:category].present?
@@ -16,8 +17,9 @@ module Api
         # end
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
-        # @products = @products.where(product_type: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
+        @products = @products.where(product_type_: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
 
+        @products=  Product.joins(:product_attributes).where(:product_attributes => {:value => params[:product_attribute_value]}) if params[:product_attribute_value].present?
 
 
         if params[:sort_by] == "price_ascending"

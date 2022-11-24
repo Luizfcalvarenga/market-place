@@ -4,11 +4,18 @@ import React, { useEffect, useState } from "react";
 export function Products(props) {
   const [products, setProducts] = useState([])
   const [productTypes, setProductTypes] = useState([])
+  const [productTypeAttributes, setProductTypeAttributes] = useState([])
+  const [attributesForProduct, setAttributesForProduct] = useState([]);
+
+
 
   const [categoryFilter, setCategoryFilter] = useState("");
   const [productTypeFilter, setProductTypeFilter] = useState("");
 
   const [modalityFilter, setModalityFilter] = useState("");
+
+  const [productTypeAttributesFilter, setProductTypeAttributesFilter] = useState("");
+
   const [sortBy, setSortBy] = useState("");
 
   useEffect(async () => {
@@ -16,15 +23,25 @@ export function Products(props) {
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
+    if (productTypeAttributesFilter) url = url + `&product_type_id=${productTypeAttributesFilter}`
+
 
     if (sortBy) url = url + `&sort_by=${sortBy}`
 
     const response = await axios.get(url);
+    console.log(response)
     setProducts(response.data.products);
     setProductTypes(response.data.product_types)
+    setProductTypeAttributes(response.data.product_type_attributes)
+
   }, [categoryFilter, modalityFilter, sortBy, productTypeFilter])
 
-
+  const handleProductAtributes = (e) => {
+    console.log(e)
+    setProductTypeFilter(e.target.value)
+    setAttributesForProduct(productTypeAttributes.filter(productType => productType.product_type_id === productTypeFilter))
+    console.log(attributesForProduct)
+  }
 
   return (
     <div className="p-5 br-8">
@@ -37,7 +54,7 @@ export function Products(props) {
             <h5 className="text-success">Produto</h5>
             <select
               value={productTypeFilter}
-              onChange={(e) => setProductTypeFilter(e.target.value)}
+              onChange={(e) => handleProductAtributes(e)}
               className="select-answer"
             >
               <option value=""></option>
@@ -116,6 +133,27 @@ export function Products(props) {
                 <option value="gravel">Gravel</option>
 
               </select>
+            </>)}
+
+            {productTypeFilter && (<>
+              <h5 className="text-success mt-3">Atributos</h5>
+                {attributesForProduct.map((attribute) => {
+
+                  <>
+                    <h5 className="text-success mt-3">{productTypeAttribute.prompt}</h5>
+                    <select
+                      value={productTypeAttributesFilter}
+                      onChange={(e) => setProductTypeAttributesFilter(e.target.value)}
+                      className="select-answer"
+                    >
+                      <option value=""></option>
+
+                      {attribute.options.map((option, index) => {
+                        return (<option key={index} value={option}>{option}</option>)
+                      })}
+                    </select>
+                  </>
+                })}
             </>)}
 
             {/* <input
