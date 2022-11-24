@@ -23,9 +23,6 @@ class User < ApplicationRecord
 
   after_commit :add_default_photo, on: %i[create]
 
-
-
-
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
   end
@@ -42,7 +39,6 @@ class User < ApplicationRecord
       'bg-dark'
     end
   end
-
 
 
 	def admin?

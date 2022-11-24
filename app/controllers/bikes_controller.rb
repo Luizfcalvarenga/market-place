@@ -76,6 +76,7 @@ class BikesController < ApplicationController
 
   private
 
+
   def bike_params
     params.require(:bike).permit(
       :user_id,
@@ -88,25 +89,46 @@ class BikesController < ApplicationController
       :price_in_cents,
       :quantity,
       :year,
-      :frame_material,
+      :frame_brand,
       :frame_size,
       :frame_material,
-      :rim_size,
       :number_of_front_gears,
       :number_of_rear_gears,
       :brake_type,
+      :brake_disc_size,
       :suspension_type,
       :front_suspension_travel,
       :rear_suspension_travel,
       :seat_post_type,
       :seat_post_travel,
+      :seat_post_model,
       :weight,
-      :bike_conditions,
+      :brake_model,
+      :bike_condition,
       :structural_visual_condition,
       :operating_condition,
       :documentation_type,
       :accessories,
+      :accessories_description,
       :battery,
+      :rim_size,
+      :front_rim_model,
+      :reaar_rim_model,
+      :front_suspension_model,
+      :rear_suspension_model,
+      :front_derailleur_model,
+      :rear_derailleur_model,
+      :crankset,
+      :chain,
+      :front_hub,
+      :rear_hub,
+      :front_tyre,
+      :rear_tyre,
+      :handlebar,
+      :stem,
+      :motor,
+      :mileage,
+      :battery_cycle,
       photos: []
     )
   end

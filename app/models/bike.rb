@@ -8,8 +8,8 @@ class Bike < ApplicationRecord
   has_many_attached :photos
 
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
-  
-  validates :price_in_cents, :quantity, :modality, :model, presence: true
+
+  validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type, :locality,  presence: true
 
   default_scope { where(removed_at: nil) }
 

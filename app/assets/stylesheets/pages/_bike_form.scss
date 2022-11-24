@@ -10,5 +10,174 @@
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
-  background-color: rgb(21,21,21);
+  background-color: transparent;
+  box-shadow: 0px 0px 20px 0px #00c4545e;
+
+
+  label {
+    text-align: start !important;
+    text-transform: uppercase !important;
+    color: #828f8a !important;
+  }
+
+  .text-input {
+    width: 100% !important;
+    height: 37px !important;
+    border: 1px solid $color-primary !important;
+    border-radius: 4px !important;
+    background-color: transparent !important;
+    color: $color-primary !important;
+  }
+
+
+
+  .text-input:focus {
+    outline:none !important;
+    box-shadow: none !important;
+    border-color: $color-primary !important;
+    border-radius: 4px;
+  }
+
+  .text-input-description {
+    width: 100% !important;
+    height: 37px !important;
+    border: 1px solid $color-primary !important;
+    border-radius: 4px !important;
+    background-color: transparent !important;
+    color: $color-primary !important;
+    height: 120px !important;
+  }
+
+  .text-input-description:focus {
+    outline:none !important;
+    box-shadow: none !important;
+    border-color: $color-primary !important;
+    border-radius: 4px;
+  }
+
+
+  .requested-information {
+    color: $color-primary;
+    font-weight: 15px;
+  }
+
+  .select-answer {
+    // A reset of styles, including removing the default dropdown arrow
+
+    // Additional resets for further consistency
+    background-color: transparent;
+    border: 1px solid $color-primary;
+    border-radius: 4px;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    color: gray;
+    text-align: start;
+    height: 37px;
+
+    option {
+      background-color: rgb(16,16,16);
+      color: #00c454;
+      // border-color: $color-primary;
+      // border-radius: 3px;
+    }
+  }
+  .select-answer:focus {
+    outline:none !important;
+    box-shadow: none !important;
+    border-color: $color-primary !important;
+    border-radius: 4px;
+  }
+
+  input#file-upload-button {
+    background-color: transparent !important;
+  }
+
+}
+
+.btn-technicality {
+  border: 1px solid $color-primary !important;
+  background-color: rgb(10,10,10) !important;
+  color: $color-primary;
+  border-radius: 3px;
+
+
+  &:hover {
+    color: #22e058;
+    border-color: #22e058;
+  }
+}
+
+.image-preview-form {
+  width: 285px;
+  height: 190px;
+  border-radius: 3px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  width: 285px;
+  height: 190px;
+  background-image: image-url("bin.png");
+  background-size: 30%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.file-upload {
+  display: none
+}
+
+.label-upload {
+  font-size: 20px;
+}
+
+.fa-file-upload {
+  color: $color-primary;
+  font-size: 30px;
+  cursor: pointer;
+  &:hover {
+    color: #22e058;
+
+  }
+}
+
+
+.remove-photo {
+  position: relative;
+  border: none !important;
+  background-color: transparent;
+}
+
+.remove-photo:hover .image-preview-form {
+  opacity: 0.3;
+}
+
+.remove-photo:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: transparent;
+  color: red;
+  font-size: 13px;
+  margin-top: 30%;
+}
+
+.image-review {
+  width: 150px;
+  height: 95px;
+  border-radius: 3px
 }

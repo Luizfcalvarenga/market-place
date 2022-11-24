@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+
+
 export function Bikes(props) {
   const [bikes, setBikes] = useState([])
   const [categoryFilter, setCategoryFilter] = useState("");
