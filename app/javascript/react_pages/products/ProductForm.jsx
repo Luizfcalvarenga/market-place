@@ -180,7 +180,7 @@ export function ProductForm(props) {
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
     if (e.target.value ===  "other") {
       div?.classList.toggle('d-none')
-      // parece pegar as outras respostas, conferir novamente
+      // parece pegar as outras respostas, conferir novamente se escolher outra coisa antes do other não troca depois!!!!!
     } else {
       currentProductAttributes[attribute.name] = e.target.value
       setProductAttributes(currentProductAttributes)
