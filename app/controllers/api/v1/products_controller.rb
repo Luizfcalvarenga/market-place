@@ -8,10 +8,13 @@ module Api
 
       def index
         @user = current_user
+        @product_types = ProductType.all
         @products = Product.where.not(user: @user)
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
+        # @products = @products.where(product_type: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
+
 
 
         if params[:sort_by] == "price_ascending"

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 
 export function Products(props) {
   const [products, setProducts] = useState([])
+  const [productTypes, setProductTypes] = useState([])
+
   const [categoryFilter, setCategoryFilter] = useState("");
+  const [productTypeFilter, setProductTypeFilter] = useState("");
+
   const [modalityFilter, setModalityFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
 
@@ -11,10 +15,13 @@ export function Products(props) {
     let url = "/api/v1/products?";
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
+    if (productTypeFilter) url = url + `&product_type=${productTypeFilter}`
+
     if (sortBy) url = url + `&sort_by=${sortBy}`
 
     const response = await axios.get(url);
     setProducts(response.data.products);
+    setProductTypes(response.data.product_types)
   }, [categoryFilter, modalityFilter, sortBy])
 
 
@@ -27,6 +34,17 @@ export function Products(props) {
         <div className="filters col-12 col-md-3">
           <p className="text-success">Filtrar</p>
           <div className="">
+            <select
+              value={productTypeFilter}
+              onChange={(e) => setProductTypeFilter(e.target.value)}
+            >
+              <option value=""></option>
+              {productTypes.map((productType) => {
+                return (<option value={productType.id}>{productType.name}</option>)
+              })}
+            </select>
+
+
             <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
               <option value=""></option>
               <option value="price_ascending">Prc Asc</option>
@@ -47,7 +65,6 @@ export function Products(props) {
               value={modalityFilter}
               onChange={(e) => setModalityFilter(e.target.value)}
             >
-
               <option value=""></option>
               <option value="mountain_bike">Mountain Bike</option>
               <option value="dirt_street">Dirt</option>

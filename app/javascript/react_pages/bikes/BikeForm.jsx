@@ -746,6 +746,7 @@ export function BikeForm(props) {
         onChange={(e) =>  setCategory(e.target.value) }
         className="select-answer"
         >
+          <option value=""></option>
           {categories.map((category) => {
             return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
           })}

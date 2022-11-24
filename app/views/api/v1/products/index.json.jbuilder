@@ -10,3 +10,4 @@ json.products @products do |product|
   json.price_in_cents product.price_in_cents
   json.quantity product.quantity
 end
+json.product_types @product_types

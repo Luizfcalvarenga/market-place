@@ -529,6 +529,7 @@ export function ProductForm(props) {
           onChange={(e) => setProductCategory(e.target.value)}
           className="select-answer"
           >
+            <option value=""></option>
             {categories.map((category) => {
               return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
@@ -554,6 +555,7 @@ export function ProductForm(props) {
           onChange={(e) => setProductTypeId(e.target.value)}
           className="select-answer"
           >
+            <option value=""></option>
             {productTypes.map((productType) => {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
