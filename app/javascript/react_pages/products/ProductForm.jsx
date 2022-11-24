@@ -175,32 +175,22 @@ export function ProductForm(props) {
 
   const createProductAttributes = (e, attribute) => {
     const div = document.getElementById(attribute.name);
-    // const otherAnswer = document.getElementById("other-answer");
+    const otherAnswer = document.getElementById("other-answer");
 
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
     if (e.target.value ===  "other") {
-      console.log('outro')
-      console.log(div)
-      div.insertAdjacentHTML('beforeend',
-      `<div> <label class="mt-4">Qual?</label><input  id="other-answer" type="text" class="text-input"/></div>`
-      )
-
-      document.getElementById("other-answer").on('change', changeAttribute(e, attribute))
-
+      div?.classList.toggle('d-none')
+      // parece pegar as outras respostas, conferir novamente
     } else {
-
       currentProductAttributes[attribute.name] = e.target.value
       setProductAttributes(currentProductAttributes)
     }
-
-    // DARUM JEITO DE PEGAR A RESPOSTA CASO SEJA OUTRA
   }
 
   const changeAttribute = (e, attribute) => {
-    console.log(e)
-    console.log(attribute)
-    console.log(productAttributes)
     productAttributes[attribute.name] = e.target.value
+    setProductAttributes(productAttributes)
+
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -228,7 +218,7 @@ export function ProductForm(props) {
 
     return (
       <div attribute={attribute} key={attribute.id} className="">
-        <div id={attribute.name}>
+        <div id="">
           <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
           <select
           className="select-answer"
@@ -238,6 +228,10 @@ export function ProductForm(props) {
               return (<option key={index} value={option}>{option}</option>)
             })}
           </select>
+          <div id={attribute.name} class="d-none">
+            <label htmlFor="productbrand" className="mt-3">Qual:</label>
+            <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
+          </div>
         </div>
       </div>
     )
@@ -583,13 +577,8 @@ export function ProductForm(props) {
           { productTypeAttributes.length === 0 && (
             <div id="third-section" className="card-questions d-none mb-5 text-center">
               <h4 className="text-center text-success">Informações técnicas</h4>
-
               <p className="mt-5">não há nada para esse produto, vamos em frente!!!</p>
-
-
-
               <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-
             </div>
           )}
 
