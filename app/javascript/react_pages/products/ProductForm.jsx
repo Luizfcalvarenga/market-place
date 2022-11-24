@@ -174,14 +174,44 @@ export function ProductForm(props) {
   }
 
   const createProductAttributes = (e, attribute) => {
+    const div = document.getElementById(attribute.name);
+    // const otherAnswer = document.getElementById("other-answer");
+
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
-    currentProductAttributes[attribute.name] = e.target.value
-    setProductAttributes(currentProductAttributes)
+    if (e.target.value ===  "other") {
+      console.log('outro')
+      console.log(div)
+      div.insertAdjacentHTML('beforeend',
+      `<div> <label class="mt-4">Qual?</label><input  id="other-answer" type="text" class="text-input"/></div>`
+      )
+
+      document.getElementById("other-answer").on('change', changeAttribute(e, attribute))
+
+    } else {
+
+      currentProductAttributes[attribute.name] = e.target.value
+      setProductAttributes(currentProductAttributes)
+    }
+
+    // DARUM JEITO DE PEGAR A RESPOSTA CASO SEJA OUTRA
   }
 
+    // <label htmlFor="year" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+    // <input type="text" className="text-input" onChange={(e) => setOtherYear(e.target.value)}/>
 
+
+  const changeAttribute = (e, attribute) => {
+    console.log(e)
+    console.log(attribute)
+    console.log(productAttributes)
+
+
+
+    productAttributes[attribute.name] = e.target.value
+  }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
+    // VERIFICAR RETORNO DO ESCOLHA DE TIPO DE SUSPENSÃO PARA COMPONENTO QUADROAPARENTEMENTE PRA QUADRO E HARDTAIL NÃO PERGUNTA CURSO DE NENHUMA SUSPANSÃO(CONFERIR)
     let options = []
     if (["mountain_bike", "dirt_street"].includes(productCategory) && attribute.name === "frame_size") {
       options = [ "", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
@@ -189,7 +219,7 @@ export function ProductForm(props) {
       options = [ "", "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
-    } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+     } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
       return
     } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
       return
@@ -205,15 +235,17 @@ export function ProductForm(props) {
 
     return (
       <div attribute={attribute} key={attribute.id} className="">
-        <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
-        <select
-        className="select-answer"
-        onChange={(e) => createProductAttributes(e, attribute)}
-        >
-          {options?.map((option, index) => {
-            return (<option key={index} value={option}>{option}</option>)
-          })}
-        </select>
+        <div id={attribute.name}>
+          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
+          <select
+          className="select-answer"
+          onChange={(e) => createProductAttributes(e, attribute)}
+          >
+            {options?.map((option, index) => {
+              return (<option key={index} value={option}>{option}</option>)
+            })}
+          </select>
+        </div>
       </div>
     )
   }
@@ -422,7 +454,6 @@ export function ProductForm(props) {
   }
 
   const handleSecondStep = (e) => {
-    // setProductTypeId(e.target.value)
     const progressTwo = document.getElementById("progress-2")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
@@ -532,7 +563,6 @@ export function ProductForm(props) {
           <select
           value={productTypeId}
           onChange={(e) => setProductTypeId(e.target.value)}
-
           className="select-answer"
           >
             {productTypes.map((productType) => {
@@ -552,7 +582,7 @@ export function ProductForm(props) {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
               <div className="text-center">
-                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><i className="fas fa-angle-double-right"></i></button>
+                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span></button>
               </div>
             </div>
           )}
@@ -661,7 +691,21 @@ export function ProductForm(props) {
             <>
               <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Atributos</button>
               <div id="Atributos" className="d-none">
-                <p><span className="text-success">em breve...</span></p>
+
+                {Object.keys(productAttributes).map((key, index) => {
+                  return (
+                    <div key={index}>
+                      <p >
+                        <span className="text-success">
+                          {key}:
+                        </span>
+                        {productAttributes[key]}
+                      </p>
+
+                    </div>
+                  );
+                })}
+
               </div>
             </>
           )}
