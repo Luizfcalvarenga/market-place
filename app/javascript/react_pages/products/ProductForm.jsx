@@ -196,17 +196,10 @@ export function ProductForm(props) {
     // DARUM JEITO DE PEGAR A RESPOSTA CASO SEJA OUTRA
   }
 
-    // <label htmlFor="year" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-    // <input type="text" className="text-input" onChange={(e) => setOtherYear(e.target.value)}/>
-
-
   const changeAttribute = (e, attribute) => {
     console.log(e)
     console.log(attribute)
     console.log(productAttributes)
-
-
-
     productAttributes[attribute.name] = e.target.value
   }
 
@@ -696,7 +689,7 @@ export function ProductForm(props) {
                   return (
                     <div key={index}>
                       <p >
-                        <span className="text-success">
+                        <span className="text-success me-1">
                           {key}:
                         </span>
                         {productAttributes[key]}
@@ -705,7 +698,6 @@ export function ProductForm(props) {
                     </div>
                   );
                 })}
-
               </div>
             </>
           )}
