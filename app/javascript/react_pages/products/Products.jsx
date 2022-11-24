@@ -15,14 +15,14 @@ export function Products(props) {
     let url = "/api/v1/products?";
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
-    if (productTypeFilter) url = url + `&product_type=${productTypeFilter}`
+    if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
 
     if (sortBy) url = url + `&sort_by=${sortBy}`
 
     const response = await axios.get(url);
     setProducts(response.data.products);
     setProductTypes(response.data.product_types)
-  }, [categoryFilter, modalityFilter, sortBy])
+  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter])
 
 
 
@@ -44,13 +44,6 @@ export function Products(props) {
               })}
             </select>
 
-
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <option value=""></option>
-              <option value="price_ascending">Prc Asc</option>
-              <option value="price_descending">Prc Desc</option>
-            </select>
-
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
@@ -59,23 +52,67 @@ export function Products(props) {
               <option value="mountain_bike">Mountain Bike</option>
               <option value="dirt_street">Dirt</option>
               <option value="road">Road</option>
+              <option value="infant">Infantil</option>
+              <option value="urban">Urbano</option>
             </select>
+
+            {/* <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <option value=""></option>
+              <option value="price_ascending">Prc Asc</option>
+              <option value="price_descending">Prc Desc</option>
+            </select> */}
+
+            {categoryFilter === "mountain_bike" && (
+
+              <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="downhill">Downhill</option>
+                <option value="enduro">Enduro</option>
+                <option value="gravel">Gravel</option>
+                <option value="speed">Speed</option>
+                <option value="trail">Trail</option>
+                <option value="xc_cross_country">XC Cross Country</option>
+              </select>
+            )}
+
+            {categoryFilter === "dit_street" && (
 
             <select
               value={modalityFilter}
               onChange={(e) => setModalityFilter(e.target.value)}
             >
               <option value=""></option>
-              <option value="mountain_bike">Mountain Bike</option>
-              <option value="dirt_street">Dirt</option>
-              <option value="road">Road</option>
+              <option value="street_bmx">Street BMX</option>
+              <option value="race_bmx">Race BMX</option>
+              <option value="big_wheel_bmx">Big Wheel BMX</option>
+              <option value="dirt_jump">Dirt Jump</option>
             </select>
+            )}
 
-            <input
+            {categoryFilter === "road" && (
+
+              <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="speed_performance">Speed Performance</option>
+                <option value="triathlon">triathon</option>
+                <option value="ciclocross">Ciclocross</option>
+                <option value="cicloviagem">Cicloviagme</option>
+                <option value="gravel">Gravel</option>
+
+              </select>
+            )}
+
+            {/* <input
               type="number"
               value={modalityFilter}
               onChange={(e) => setModalityFilter(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
         {products.map((product, idx) => {
