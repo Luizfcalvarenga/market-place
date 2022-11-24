@@ -34,9 +34,11 @@ export function Products(props) {
         <div className="filters col-12 col-md-3">
           <p className="text-success">Filtrar</p>
           <div className="">
+            <h5 className="text-success">Produto</h5>
             <select
               value={productTypeFilter}
               onChange={(e) => setProductTypeFilter(e.target.value)}
+              className="select-answer"
             >
               <option value=""></option>
               {productTypes.map((productType) => {
@@ -44,9 +46,11 @@ export function Products(props) {
               })}
             </select>
 
+            <h5 className="text-success mt-3">categoria</h5>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
+              className="select-answer"
             >
               <option value=""></option>
               <option value="mountain_bike">Mountain Bike</option>
@@ -62,11 +66,13 @@ export function Products(props) {
               <option value="price_descending">Prc Desc</option>
             </select> */}
 
-            {categoryFilter === "mountain_bike" && (
-
+            {categoryFilter === "mountain_bike" && (<>
+              <h5 className="text-success mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+
               >
                 <option value=""></option>
                 <option value="downhill">Downhill</option>
@@ -76,27 +82,31 @@ export function Products(props) {
                 <option value="trail">Trail</option>
                 <option value="xc_cross_country">XC Cross Country</option>
               </select>
-            )}
+            </>)}
 
-            {categoryFilter === "dit_street" && (
-
-            <select
-              value={modalityFilter}
-              onChange={(e) => setModalityFilter(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="street_bmx">Street BMX</option>
-              <option value="race_bmx">Race BMX</option>
-              <option value="big_wheel_bmx">Big Wheel BMX</option>
-              <option value="dirt_jump">Dirt Jump</option>
-            </select>
-            )}
-
-            {categoryFilter === "road" && (
-
+            {categoryFilter === "dit_street" && (<>
+              <h5 className="text-success mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+
+              >
+                <option value=""></option>
+                <option value="street_bmx">Street BMX</option>
+                <option value="race_bmx">Race BMX</option>
+                <option value="big_wheel_bmx">Big Wheel BMX</option>
+                <option value="dirt_jump">Dirt Jump</option>
+              </select>
+            </>)}
+
+            {categoryFilter === "road" && (<>
+              <h5 className="text-success mt-3">Modalidade</h5>
+              <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+
               >
                 <option value=""></option>
                 <option value="speed_performance">Speed Performance</option>
@@ -106,7 +116,7 @@ export function Products(props) {
                 <option value="gravel">Gravel</option>
 
               </select>
-            )}
+            </>)}
 
             {/* <input
               type="number"
