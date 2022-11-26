@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   enum status: %i[offline away online]
 
-  after_commit :add_default_photo, on: %i[create]
+  after_commit :add_default_photo, on: %i[create update]
 
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
