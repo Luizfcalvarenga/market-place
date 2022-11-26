@@ -17,6 +17,24 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+
+   # If a default host is specifically defined then it's used otherwise the app is
+  # assumed to be a Heroku review app. Note that `Hash#fetch` is used defensively
+  # so the app will blow up at boot-time if both `DEFAULT_URL_HOST` and
+  # `HEROKU_APP_NAME` aren't defined.
+
+  host = ENV['DEFAULT_URL_HOST'] || "#{ENV['HEROKU_APP_NAME']}.herokuapp.com"
+  protocol = config.force_ssl ? 'https' : 'http'
+
+  config.action_controller.default_url_options = {
+    host: host,
+    protocol: protocol
+  }
+
+
+
+
+
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
