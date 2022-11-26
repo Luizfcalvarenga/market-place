@@ -11,6 +11,11 @@ export function Products(props) {
 
   const [categoryFilter, setCategoryFilter] = useState("");
   const [productTypeFilter, setProductTypeFilter] = useState("");
+  const [conditionFilter, setConditionFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState("");
+
+
+
 
   const [modalityFilter, setModalityFilter] = useState("");
 
@@ -23,7 +28,11 @@ export function Products(props) {
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
-    if (productTypeAttributesFilter) url = url + `&product_type_id=${productTypeAttributesFilter}`
+    if (conditionFilter) url = url + `&condition=${conditionFilter}`
+    if (priceFilter) url = url + `&price=${priceFilter}`
+
+
+    if (productTypeAttributesFilter) url = url + `&product_attribute_value=${productTypeAttributesFilter}`
 
 
     if (sortBy) url = url + `&sort_by=${sortBy}`
@@ -34,13 +43,24 @@ export function Products(props) {
     setProductTypes(response.data.product_types)
     setProductTypeAttributes(response.data.product_type_attributes)
 
-  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter])
+  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, priceFilter])
 
   const handleProductAtributes = (e) => {
     console.log(e)
     setProductTypeFilter(e.target.value)
-    setAttributesForProduct(productTypeAttributes.filter(productType => productType.product_type_id === productTypeFilter))
-    console.log(attributesForProduct)
+    const attrs = productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value))
+    setAttributesForProduct(attrs)
+
+    if (attrs.length > 1 ) {
+      attrs.pop()
+      console.log(attrs)
+      attrs.shift()
+      console.log(attrs)
+
+    }
+    // console.log(attributesForProduct)
+    // console.log(attrs)
+
   }
 
   return (
@@ -135,27 +155,79 @@ export function Products(props) {
               </select>
             </>)}
 
-            {productTypeFilter && (<>
+            <div className="condition-filter">
+              <h5 className="text-success mt-3">condição</h5>
+              <label htmlFor="new" className="me-2">
+                <input
+                  type="radio"
+                  value="new"
+                  // checked={this.state.selectedOption === "Female"}
+                  onChange={(e) => setConditionFilter(e.target.value)}
+                />Novo
+              </label>
+
+              <label htmlFor="used" className="me-2">
+                <input
+                  type="radio"
+                  value="used"
+                  // checked={this.state.selectedOption === "Female"}
+                  onChange={(e) => setConditionFilter(e.target.value)}
+                />Usado
+              </label>
+            </div>
+
+            <div className="price-filter">
+              <div className="d-flex justify-content-between">
+                <h5 className="text-success mt-3">preço</h5>
+                {priceFilter && (<>
+                  <h5 className="text-success mt-3">
+                  {(priceFilter / 100).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </h5>
+                </>)}
+              </div>
+              <input type="range" class="form-range" min="0" max="50000" id="customRange1" step="100" onChange={(e) => setPriceFilter(e.target.value)} />
+              <div className="d-flex justify-content-between">
+                <h6 className="text-success price-filter-text"><small>R$0,00</small></h6>
+                <h6 className="text-success price-filter-text"><small>R$50.000,00</small></h6>
+              </div>
+            </div>
+
+            {productTypeFilter.length > 1 && (<>
               <h5 className="text-success mt-3">Atributos</h5>
-                {attributesForProduct.map((attribute) => {
-
-                  <>
-                    <h5 className="text-success mt-3">{productTypeAttribute.prompt}</h5>
+                {attributesForProduct.map((attribute, index) => {
+                  return (<>
+                    <h5>{attribute.prompt}</h5>
                     <select
-                      value={productTypeAttributesFilter}
-                      onChange={(e) => setProductTypeAttributesFilter(e.target.value)}
                       className="select-answer"
-                    >
-                      <option value=""></option>
-
-                      {attribute.options.map((option, index) => {
-                        return (<option key={index} value={option}>{option}</option>)
-                      })}
+                      onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
+                      >
+                        {attribute.options.map((option, index) => {
+                          return (<option key={index} value={option}>{option}</option>)
+                        })}
                     </select>
-                  </>
+                  </>)
                 })}
             </>)}
 
+            {productTypeFilter.length === 1 && (<>
+              <h5 className="text-success mt-3">Atributos</h5>
+                {attributesForProduct.map((attribute, index) => {
+                  return (<>
+                    <h5>{attribute.prompt}</h5>
+                    <select
+                      className="select-answer"
+                      onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
+                      >
+                        {attribute.options.map((option, index) => {
+                          return (<option key={index} value={option}>{option}</option>)
+                        })}
+                    </select>
+                  </>)
+                })}
+            </>)}
             {/* <input
               type="number"
               value={modalityFilter}
