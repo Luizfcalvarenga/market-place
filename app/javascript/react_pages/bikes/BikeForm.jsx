@@ -961,7 +961,7 @@ export function BikeForm(props) {
             { frontDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text-input" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -988,7 +988,7 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text-input" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1491,78 +1491,78 @@ export function BikeForm(props) {
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
         <div id="Quadro" className="d-none">
-          <p>Marca: {frameBrand}</p>
-          <p>Material: {frameMaterial}</p>
-          <p>Tamanho: {frameSize}</p>
+          <p><span className="text-success">Marca:</span>{frameBrand}</p>
+          <p><span className="text-success">Material:</span>{frameMaterial}</p>
+          <p><span className="text-success">Tamanho:</span>{frameSize}</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão</button>
         <div id="Transmissão" className="d-none">
-          <p>Marchas dianteiras: {numberOfFrontGears}</p>
-          <p>Modelo: {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
-          <p>Marchas traseiras: {numberOfRearGears}</p>
-          <p>Modelo: {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
-          <p>Pedivela: {crankset}</p>
-          <p>Corrent: {chain}</p>
+          <p><span className="text-success">Marchas dianteiras:</span> {numberOfFrontGears}</p>
+          <p><span className="text-success">Modelo:</span> {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
+          <p><span className="text-success">Marchas traseiras:</span> {numberOfRearGears}</p>
+          <p><span className="text-success">Modelo:</span> {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
+          <p><span className="text-success">Pedivela:</span> {crankset}</p>
+          <p><span className="text-success">Corrente:</span> {chain}</p>
         </div>
 
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Freios</button>
         <div id="Freios" className="d-none">
-          <p>Tipo: {brakeType}</p>
-          <p>Tamanho disco: {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
-          <p>Modelo: {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
+          <p><span className="text-success">Tipo:</span> {brakeType}</p>
+          <p><span className="text-success">Tamanho do disco:</span> {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
+          <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
         <div id="Suspensões" className="d-none">
-          <p>Tipo: {suspensionType}</p>
-          <p>Curso dianteira: {frontSuspensionTravel}</p>
-          <p>Curso traseira: {rearSuspensionTravel }</p>
+          <p><span className="text-success">Tipo:</span> {suspensionType}</p>
+          <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
+          <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
         </div>
 
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas</button>
         <div id="Rodas" className="d-none">
-          <p>Tamanho: {rimSize}</p>
-          <p>Aro dianteiro: {frontRimModel}</p>
-          <p>Aro traseiro: {rearRimModel }</p>
-          <p>Cubo dianteiro: {frontHub}</p>
-          <p>Cubo traseiro: {rearHub }</p>
-          <p>Pneu dianteiro: {frontTyre}</p>
-          <p>Pneu traseiro: {rearTyre }</p>
+          <p><span className="text-success">Tamanho:</span> {rimSize}</p>
+          <p><span className="text-success">Aro dianteiro:</span> {frontRimModel}</p>
+          <p><span className="text-success">Aro traseiro:</span> {rearRimModel }</p>
+          <p><span className="text-success">Cudo dianteiro:</span> {frontHub}</p>
+          <p><span className="text-success">Cubo traseiro:</span> {rearHub }</p>
+          <p><span className="text-success">Pneu dianteiro:</span> {frontTyre}</p>
+          <p><span className="text-success">Pneu traseiro:</span> {rearTyre }</p>
         </div>
 
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Cockpit</button>
         <div id="Cockpit" className="d-none">
-          <p>Guidão: {handlebar}</p>
-          <p>mesa: {stem}</p>
+          <p><span className="text-success">Guidão:</span> {handlebar}</p>
+          <p><span className="text-success">Mesa:</span> {stem}</p>
         </div>
 
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Canote</button>
         <div id="Canote" className="d-none">
-          <p>Tipo: {seatPostType}</p>
-          <p>Curso: {seatPostTravel}</p>
-          <p>Modelo: {seatPostModel }</p>
+          <p><span className="text-success">Tipo:</span> {seatPostType}</p>
+          <p><span className="text-success">Curso:</span> {seatPostTravel}</p>
+          <p><span className="text-success">Modelo:</span> {seatPostModel }</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Acessórios</button>
         <div id="Acessórios" className="d-none">
-          <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : accessories }</p>
-          <p>Descrição: {accessoriesDescription}</p>
-          <p>pedais: {pedals }</p>
+          <p><span className="text-success">Acompanha(qual?):</span> {accessories === "other" ? otherAccessory : accessories }</p>
+          <p><span className="text-success">Descrição:</span> {accessoriesDescription}</p>
+          <p><span className="text-success">Pedais:</span> {pedals }</p>
         </div>
 
         { bikeType === "electric" && (<>
           <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Parte elétrica</button>
           <div id="Parte elétrica" className="d-none">
-            <p>Capacidade bateria: {battery === "other" ? otherBattery : battery }</p>
-            <p>Motor: {motor}</p>
-            <p>Km: {mileage}</p>
-            <p>Ciclos bateria: {batteryCycles}</p>
+            <p><span className="text-success">Capacidade da baterias:</span> {battery === "other" ? otherBattery : battery }</p>
+            <p><span className="text-success">Motor:</span> {motor}</p>
+            <p><span className="text-success">Km:</span> {mileage} Km</p>
+            <p><span className="text-success">Ciclos da bateria:</span> {batteryCycles}</p>
           </div>
         </>)}
 
