@@ -373,10 +373,10 @@ export function Bikes(props) {
                 </h5>
                 </>)}
               </div>
-              <input type="range" class="form-range" min="0" max="50000" id="customRange1" step="100" onChange={(e) => setPriceFilter(e.target.value)} />
+              <input type="range" class="form-range" min="0" max="2200000" id="customRange1" step="10000" onChange={(e) => setPriceFilter(e.target.value)} />
               <div className="d-flex justify-content-between">
                 <h6 className="text-success price-filter-text"><small>R$0,00</small></h6>
-                <h6 className="text-success price-filter-text"><small>R$50.000,00</small></h6>
+                <h6 className="text-success price-filter-text"><small>R$22.000,00</small></h6>
               </div>
             </div>
 

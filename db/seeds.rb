@@ -936,7 +936,7 @@
         category_id:  category.id,
         modality: category.modalities.sample,
         bike_type: types.sample,
-        price_in_cents: rand(10000000..22000000),
+        price_in_cents: rand(1000000..2200000),
         quantity: 1,
         locality: ["Belo Horizonte", "Rio de Janeiro", "São Paulo"].sample,
         user_id: (User.ids).sample,
