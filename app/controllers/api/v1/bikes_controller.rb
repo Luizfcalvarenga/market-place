@@ -26,8 +26,16 @@ module Api
         @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears]) if params[:number_of_rear_gears].present?
         @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_model]) if params[:font_derailleur_model].present?
         @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_model]) if params[:rear_derailleur_model].present?
-
-
+        @bikes = @bikes.where(brake_type: params[:brake_type]) if params[:brake_type].present?
+        @bikes = @bikes.where(brake_disc_size: params[:brake_disc_size]) if params[:brake_disc_size].present?
+        @bikes = @bikes.where(brake_model: params[:brake_model]) if params[:brake_model].present?
+        @bikes = @bikes.where(rim_size: params[:rim_size]) if params[:rim_size].present?
+        @bikes = @bikes.where(seat_post_type: params[:seat_post_type]) if params[:seat_post_type].present?
+        @bikes = @bikes.where(seat_post_travel: params[:seat_post_travel]) if params[:seat_post_travel].present?
+        @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
+        @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
+        @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
+        @bikes = @bikes.where('locality ILIKE ?', params[:locality]) if params[:locality].present?
 
 
         # @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?

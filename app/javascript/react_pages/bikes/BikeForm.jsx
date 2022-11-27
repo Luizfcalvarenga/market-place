@@ -937,7 +937,7 @@ export function BikeForm(props) {
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
         {category === "road" && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão<i class="fas fa-chevron-down ms-2"></i></button>
+          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão<i class="fas fa-chevron-down ms-2"></i></button>
           <div id="transmission" className="transmission d-none mb-3">
             <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
             <select
@@ -1372,7 +1372,7 @@ export function BikeForm(props) {
 
           { accessories === "Outro" && (<>
             <label htmlFor="otherAccessory" className="mt-4">Qual?</label>
-            <input type="text-input"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
+            <input type="text"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
           </>)}
 
           { accessories !== "Não" && (<>

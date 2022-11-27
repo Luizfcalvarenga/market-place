@@ -199,7 +199,7 @@ export function Products(props) {
               <h5 className="text-success mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {
                   return (<>
-                    <h5>{attribute.prompt}</h5>
+                    <h5 className="text-success mt-3">{attribute.prompt}</h5>
                     <select
                       className="select-answer"
                       onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
@@ -216,7 +216,7 @@ export function Products(props) {
               <h5 className="text-success mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {
                   return (<>
-                    <h5>{attribute.prompt}</h5>
+                    <h5 className="text-success mt-3">{attribute.prompt}</h5>
                     <select
                       className="select-answer"
                       onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
