@@ -930,11 +930,12 @@
 
     10.times do
       category = [mtb, dirt, road].sample
+      types = ["e-bike", "normal"]
 
       bike = Bike.create!(
         category_id:  category.id,
         modality: category.modalities.sample,
-        bike_type: "No Engine",
+        bike_type: types.sample,
         price_in_cents: rand(10000000..22000000),
         quantity: 1,
         locality: ["Belo Horizonte", "Rio de Janeiro", "São Paulo"].sample,

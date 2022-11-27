@@ -8,18 +8,39 @@ module Api
 
       def index
         @bikes = Bike.all
-        @bikes = @bikes.where(category: params[:category]) if params[:category].present?
-        @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?
+        @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
+        @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+        @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', 0, params[:price]) if params[:price].present?
+        @bikes = @bikes.where(bike_condition: params[:condition]) if params[:condition].present?
+        @bikes = @bikes.where(year: params[:year]) if params[:year].present?
+        @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
+        @bikes = @bikes.where(frame_size: params[:frame_size]) if params[:frame_size].present?
+        @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
+        @bikes = @bikes.where(frame_material: params[:frame_material]) if params[:frame_material].present?
+        @bikes = @bikes.where(suspension_type: params[:suspension_type]) if params[:suspension_type].present?
+        @bikes = @bikes.where(font_suspension_travel: params[:font_suspension_travel]) if params[:font_suspension_travel].present?
+        @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travel]) if params[:rear_suspension_travel].present?
+        @bikes = @bikes.where(font_suspension_model: params[:font_suspension_model]) if params[:font_suspension_model].present?
+        @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_model]) if params[:rear_suspension_model].present?
+        @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears]) if params[:number_of_front_gears].present?
+        @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears]) if params[:number_of_rear_gears].present?
+        @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_model]) if params[:font_derailleur_model].present?
+        @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_model]) if params[:rear_derailleur_model].present?
 
-        if params[:sort_by] == "age_ascending"
-          @bikes = @bikes.order(age: :asc)
-        elsif params[:sort_by] == "age_descending"
-          @bikes = @bikes.order(age: :desc)
-        elsif params[:sort_by] == "size_ascending"
-          @bikes = @bikes.order(size: :asc)
-        elsif params[:sort_by] == "size_descending"
-          @bikes = @bikes.order(size: :desc)
-        end
+
+
+
+        # @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?
+
+        # if params[:sort_by] == "age_ascending"
+        #   @bikes = @bikes.order(age: :asc)
+        # elsif params[:sort_by] == "age_descending"
+        #   @bikes = @bikes.order(age: :desc)
+        # elsif params[:sort_by] == "size_ascending"
+        #   @bikes = @bikes.order(size: :asc)
+        # elsif params[:sort_by] == "size_descending"
+        #   @bikes = @bikes.order(size: :desc)
+        # end
       end
 
       def show

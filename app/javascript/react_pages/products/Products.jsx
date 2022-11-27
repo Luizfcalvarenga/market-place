@@ -66,9 +66,9 @@ export function Products(props) {
   return (
     <div className="p-5 br-8">
 
-      <h2 className="text-center">Produtos</h2>
+      <h2 className="text-center text-success">Produtos</h2>
       <div className="row row-cols-1 mt-5">
-        <div className="filters col-12 col-md-3">
+        <div className="filters col-12 col-md-3 my-1">
           <p className="text-success">Filtrar</p>
           <div className="">
             <h5 className="text-success">Produto</h5>
@@ -235,54 +235,55 @@ export function Products(props) {
             /> */}
           </div>
         </div>
-        {products.map((product, idx) => {
-          return (
-            <div className="col-12 col-md-3 flex-wrap" product={product} key={product.id}>
-              <a href={"products/" + product.id} className="remove-link">
-                <div className="cards-products">
-                  <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-inner">
-                      <i className="fas fa-heart card-favorite"></i>
-                      <div className="carousel-item active">
-                        <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+        <div className="col-12 col-md-9 d-flex flex-wrap">
+          {products.map((product, idx) => {
+            return (
+              <div className="cards-index" product={product} key={product.id}>
+                <a href={"products/" + product.id} className="remove-link">
+                  <div className="cards-products">
+                    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                      <div className="carousel-inner">
+                        <i className="fas fa-heart card-favorite"></i>
+                        <div className="carousel-item active">
+                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                        </div>
+                        <div className="carousel-item">
+                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                        </div>
+                        <div className="carousel-item">
+                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                        </div>
                       </div>
-                      <div className="carousel-item">
-                        <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                      </div>
-                      <div className="carousel-item">
-                        <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                      </button>
+                      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                    <h4 className="card-title text-center mt-3">{product.product_type.name}</h4>
+                    <h4 className="text-center mt-1 product-price">
+                      {(product.price_in_cents / 100).toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </h4>
+                    <hr/>
+                    <div className="card-content mt-2">
+                      <p className="text-center mt-1">{product.category.name} | {product.modality}</p>
+                      <div className="d-flex justify-content-around">
+                        <p> {product.brand}</p>
+                        <p>{product.name}</p>
                       </div>
                     </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Next</span>
-                    </button>
                   </div>
-                  <h4 className="card-title text-center mt-3">{product.product_type.name}</h4>
-                  <h4 className="text-center mt-1">
-                    {(product.price_in_cents / 100).toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </h4>
-                  <hr/>
-                  <div className="card-content mt-2">
-                    <p className="text-center mt-1">{product.category.name} | {product.modality}</p>
-                    <div className="d-flex justify-content-around">
-                      <p> {product.brand}</p>
-                      <p>{product.name}</p>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
-          );
-        })}
+                </a>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

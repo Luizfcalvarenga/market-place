@@ -2,7 +2,7 @@
   border: 1px solid $color-primary;
   border-radius: 5px;
   padding: 20px;
-  height: 85vh;
+  height: 200vh;
   position: sticky;
   top: 7rem;
 
@@ -13,14 +13,20 @@
 }
 
 .cards-products {
-  border: 1px solid $color-primary;
+  border: 1px solid transparent;
   border-radius: 5px;
   height: 400px;
   margin: 5px;
-  background-color: rgb(21,21,21);
+  background-color: transparent;
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+
+  .product-price {
+    color: #0ba94a;
+
+  }
 
   &:hover {
-    box-shadow: 0px 0px 20px 0px #00c4545e;
+    // box-shadow: 0px 0px 20px 0px #00c4545e;
 
     h4 {
       color: inherit;
@@ -30,4 +36,8 @@
 
 .price-filter-text {
   font-size: 1rem;
+}
+
+.products-index {
+  background-color: #F4F4F9;
 }
