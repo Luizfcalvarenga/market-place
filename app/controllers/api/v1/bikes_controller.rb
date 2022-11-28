@@ -39,13 +39,8 @@ module Api
         skip_authorization
         @categories = Category.all
 
-        if params[:bike][:accessories] === "Não"
-          @bike.accessories = false
-        else
-          @bike.accessories = true
-        end
-        if @bike.save
 
+        if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
               @bike.photos.attach(photo)
@@ -56,6 +51,7 @@ module Api
           else
             render json: { success: false, errors: {bike: @bike.errors}}
           end
+          AdvertisementGenerator.new(@bike).call
         else
           render json: { success: false, errors: {bike: @bike.errors}}
         end

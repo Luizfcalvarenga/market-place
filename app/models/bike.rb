@@ -3,6 +3,7 @@ class Bike < ApplicationRecord
   belongs_to :category
   belongs_to :service, optional: true
 
+  has_many :advertisements
   has_many :order_items
   has_many :chats
   has_many_attached :photos

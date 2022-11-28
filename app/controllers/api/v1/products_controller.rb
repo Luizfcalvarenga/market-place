@@ -58,6 +58,9 @@ module Api
           else
             render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}
           end
+          if @product.price_in_cents > 50000
+            AdvertisementGenerator.new(@product).call
+          end
         else
           render json: { success: false, errors: {product: @product.errors} }
         end
