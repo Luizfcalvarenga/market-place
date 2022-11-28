@@ -10,7 +10,7 @@ module Api
         @bikes = Bike.all
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
         @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
-        @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', 0, params[:price]) if params[:price].present?
+        @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', 0, params[:price]).order(price_in_cents: :asc) if params[:price].present?
         @bikes = @bikes.where(bike_condition: params[:condition]) if params[:condition].present?
         @bikes = @bikes.where(year: params[:year]) if params[:year].present?
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
