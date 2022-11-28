@@ -123,6 +123,23 @@ export function Bikes(props) {
     }
   }
 
+  const handlePriceFilter = (e) => {
+    const maxValue = "2200000"
+    setPriceFilter(e.target.value)
+    if (e.target.value === "0") {
+      setPriceFilter(maxValue)
+    }
+  }
+
+  const handleYearFilter = (e) => {
+    // const maxValue = "2022"
+
+    setYearFilter(e.target.value)
+    if (e.target.value === "2002") {
+      setYearFilter("")
+    }
+  }
+
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   const frameBrands = [
     "alfameq",
@@ -401,7 +418,7 @@ export function Bikes(props) {
                 </h5>
                 </>)}
               </div>
-              <input type="range" class="form-range" min="0" max="2200000" id="customRange1" step="10000" onChange={(e) => setPriceFilter(e.target.value)} />
+              <input type="range" class="form-range" min="0" max="2200000" id="customRange1" step="10000" onChange={(e) => handlePriceFilter(e)} />
               <div className="d-flex justify-content-between">
                 <h6 className="text-success price-filter-text"><small>R$0,00</small></h6>
                 <h6 className="text-success price-filter-text"><small>R$22.000,00</small></h6>
@@ -417,7 +434,7 @@ export function Bikes(props) {
                 </h5>
                 </>)}
               </div>
-              <input type="range" class="form-range" min="2002" max="2022" id="customRange1" step="1" onChange={(e) => setYearFilter(e.target.value)} />
+              <input type="range" class="form-range" min="2002" max="2022" id="customRange1" step="1" onChange={(e) => handleYearFilter(e)} />
               <div className="d-flex justify-content-between">
                 <h6 className="text-success price-filter-text"><small>2002</small></h6>
                 <h6 className="text-success price-filter-text"><small>2022</small></h6>
