@@ -216,6 +216,7 @@ export function Products(props) {
                       className="select-answer"
                       onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
                       >
+                        <option value=""></option>
                         {attribute.options.map((option, index) => {
                           return (<option key={index} value={option}>{option}</option>)
                         })}

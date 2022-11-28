@@ -124,7 +124,7 @@ export function Bikes(props) {
   }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
-  const frameBrands = ["",
+  const frameBrands = [
     "alfameq",
     "astro",
     "audax",
@@ -215,26 +215,24 @@ export function Bikes(props) {
     "other"
   ].sort()
 
-  const roadFrameSizes =  ["", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["", "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const allFrameSizes = ["", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL", "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''"
-  , "M/L"]
-  const frameMaterials = ["", "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
-
+  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+  const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
   /////////////////////////////////////////////////////////////////////////////////////SUSPENSÃO////////////////////////////////////////////////////////////////////////////
 
 
-  const suspensionTypes = ["", "no_suspension", "full_suspension", "hardtail"]
-  const frontSuspensionTravels = ["", "80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
-  const rearSuspensionTravels = ["", "80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
+  const suspensionTypes = ["no_suspension", "full_suspension", "hardtail"]
+  const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
+  const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
 
-  const shockSizes = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-  const allRearSuspensionTravel = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
-  const mtbDirtUrbanFrontSuspensionModels = ["", "FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
+  const shockSizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+  const allRearSuspensionTravel = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
+  const mtbDirtUrbanFrontSuspensionModels = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
 
 
-  const mtbDirtUrbanRearSuspensionModels = ["", "FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
+  const mtbDirtUrbanRearSuspensionModels = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////TRANSMISSÂO//////////////////////////////////////////////////////////////////////
@@ -248,26 +246,23 @@ export function Bikes(props) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////FREIOS////////////////////////////////////////////////////////////////
 
-  const brakeTypes = ["", "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
-  const discSizes = ["", "140mm", "160mm", "180mm", "200mm", "203mm", "205mm", "210mm", "215mm", "220mm", "225mm" ]
- const brakeModels = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level"]
+  const brakeTypes = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+  const discSizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "205mm", "210mm", "215mm", "220mm", "225mm" ]
+ const brakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level"]
 
  //////////////////////////////////////////////////////////////////////////////////////////////RODAS//////////////////////////////////////////////////////////////////
 
- const rimSizes = ["", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "700C", "650B", "Fatbike"]
+ const rimSizes = ["20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "700C", "650B", "Fatbike"]
 
 
  /////////////////////////////////////////////////////////////////////////////////////////////CANOTE//////////////////////////////////////////////////////////////////////
 
- const seatPostTypes = ["", "retractable", "rigid" ]
- const seatPostTravels = ["", "50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "210mm", "215mm", "220mm" ]
+ const seatPostTypes = ["retractable", "rigid" ]
+ const seatPostTravels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "210mm", "215mm", "220mm" ]
 
  ////////////////////////////////////////////////////////////////////////////////////////BATERIA/////////////////////////////
 
- const batteries = ["", "320wH", "500Wh", "625Wh", "700Wh"]
-
-
-
+ const batteries = ["320wH", "500Wh", "625Wh", "700Wh"]
 
   return (
     <div className="p-5 br-8">
@@ -318,7 +313,6 @@ export function Bikes(props) {
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
-
               >
                 <option value=""></option>
                 <option value="downhill">Downhill</option>
@@ -336,7 +330,6 @@ export function Bikes(props) {
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
-
               >
                 <option value=""></option>
                 <option value="street_bmx">Street BMX</option>
@@ -371,7 +364,6 @@ export function Bikes(props) {
               <h5 className="text-success mt-3">Local</h5>
               <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
             </div>
-
 
             <div className="condition-filter">
               <h5 className="text-success mt-3">condição</h5>
@@ -432,19 +424,16 @@ export function Bikes(props) {
               </div>
             </div>
 
-
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
-
               {!categoryFilter && (<>
                 <h5 className="text-success mt-3">tamanho</h5>
-
                 <select
                   className="select-answer"
                   value={frameSizeFilter}
                   onChange={(e) => setFrameSizeFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {allFrameSizes.map((frameSize, index)=> {
                     return (<option key={index}>{frameSize}</option>);
                   })}
@@ -458,8 +447,8 @@ export function Bikes(props) {
                   className="select-answer"
                   value={frameSizeFilter}
                   onChange={(e) => setFrameSizeFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {roadFrameSizes.map((frameSize, index)=> {
                     return (<option key={index}>{frameSize}</option>);
                   })}
@@ -472,8 +461,8 @@ export function Bikes(props) {
                   className="select-answer"
                   value={frameSizeFilter}
                   onChange={(e) => setFrameSizeFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {dirtMtbFrameSizes.map((frameSize, index)=> {
                     return (<option key={index}>{frameSize}</option>);
                   })}
@@ -485,8 +474,8 @@ export function Bikes(props) {
                 className="select-answer"
                 value={frameBrandFilter}
                 onChange={(e) => setFrameBrandFilter(e.target.value)}
-
               >
+                <option value=""></option>
                 {frameBrands.map((frameBrand, index) => {
                   return (<option key={index}>{frameBrand}</option>);
                 })}
@@ -497,8 +486,8 @@ export function Bikes(props) {
                 className="select-answer"
                 value={frameMaterialFilter}
                 onChange={(e) => setFrameMaterialFilter(e.target.value)}
-
               >
+                <option value=""></option>
                 {frameMaterials.map((frameMaterial, index)=> {
                   return (<option key={index}>{frameMaterial}</option>);
                 })}
@@ -507,29 +496,26 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
             <div id="Suspensão" className="suspension-filter d-none">
-              <>
-                <h5 className="text-success mt-3">tipo</h5>
-                <select
-                  className="select-answer"
-                  value={suspensionTypeFilter}
-                  onChange={(e) => setSuspensionTypeFilter(e.target.value)}
-
-                >
-                  {suspensionTypes.map((suspensionType, index)=> {
-                    return (<option key={index}>{suspensionType}</option>);
-                  })}
-                </select>
-              </>
+              <h5 className="text-success mt-3">tipo</h5>
+              <select
+                className="select-answer"
+                value={suspensionTypeFilter}
+                onChange={(e) => setSuspensionTypeFilter(e.target.value)}
+              >
+                <option value=""></option>
+                {suspensionTypes.map((suspensionType, index)=> {
+                  return (<option key={index}>{suspensionType}</option>);
+                })}
+              </select>
 
               {["full_suspension", "hardtail"].includes(suspensionTypeFilter) && (<>
                 <h5 className="text-success mt-3">curso dianteira</h5>
-
                 <select
                   className="select-answer"
                   value={frontSuspensionTravelFilter}
                   onChange={(e) => setFrontSuspensionTravelFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
                     return (<option key={index}>{frontSuspensionTravel}</option>);
                   })}
@@ -540,8 +526,8 @@ export function Bikes(props) {
                   className="select-answer"
                   value={frontSuspensionModelFilter}
                   onChange={(e) => setFrontSuspensionModelFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModel, index)=> {
                     return (<option key={index}>{frontSuspensionModel}</option>);
                   })}
@@ -554,8 +540,8 @@ export function Bikes(props) {
                   className="select-answer"
                   value={rearSuspensionTravelFilter}
                   onChange={(e) => setRearSuspensionTravelFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {allRearSuspensionTravel.map((frameSize, index)=> {
                     return (<option key={index}>{frameSize}</option>);
                   })}
@@ -566,54 +552,49 @@ export function Bikes(props) {
                   className="select-answer"
                   value={rearSuspensionModelFilter}
                   onChange={(e) => setRearSuspensionModelFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModel, index)=> {
                     return (<option key={index}>{rearSuspensionModel}</option>);
                   })}
                 </select>
-
-
               </>)}
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Transmissão</button>
             <div id="Transmissão" className="suspension-filter d-none">
-              <>
-                <h5 className="text-success mt-3">marchas dianteiras</h5>
-                <select
-                  className="select-answer"
-                  value={frontGearsFilter}
-                  onChange={(e) => setFrontGearsFilter(e.target.value)}
+              <h5 className="text-success mt-3">marchas dianteiras</h5>
+              <select
+                className="select-answer"
+                value={frontGearsFilter}
+                onChange={(e) => setFrontGearsFilter(e.target.value)}
 
-                >
-                  {frontGears.map((frontGear, index)=> {
-                    return (<option key={index}>{frontGear}</option>);
-                  })}
-                </select>
-              </>
-
+              >
+                <option value=""></option>
+                {frontGears.map((frontGear, index)=> {
+                  return (<option key={index}>{frontGear}</option>);
+                })}
+              </select>
 
               <h5 className="text-success mt-3">modelo dianteira</h5>
               <select
                 className="select-answer"
                 value={frontDerailleurModelFilter}
                 onChange={(e) => setFrontDerailleurModelFilter(e.target.value)}
-
               >
+                <option value=""></option>
                 {frontDerailleurModels.map((frontDerailleurModel, index)=> {
                   return (<option key={index}>{frontDerailleurModel}</option>);
                 })}
               </select>
 
               <h5 className="text-success mt-3">marchas traseiras</h5>
-
               <select
                 className="select-answer"
                 value={rearGearsFilter}
                 onChange={(e) => setRearGearsFilter(e.target.value)}
-
               >
+                <option value=""></option>
                 {rearGears.map((rearGear, index)=> {
                   return (<option key={index}>{rearGear}</option>);
                 })}
@@ -624,8 +605,8 @@ export function Bikes(props) {
                 className="select-answer"
                 value={rearDerailleurModelFilter}
                 onChange={(e) => setRearDerailleurModelFilter(e.target.value)}
-
               >
+                <option value=""></option>
                 {rearDerailleurModels.map((frameSize, index)=> {
                   return (<option key={index}>{frameSize}</option>);
                 })}
@@ -644,29 +625,27 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Freios</button>
             <div id="Freios" className="suspension-filter d-none">
-              <>
-                <h5 className="text-success mt-3">tipo</h5>
-                <select
-                  className="select-answer"
-                  value={brakeTypeFilter}
-                  onChange={(e) => setBrakeTypeFilter(e.target.value)}
+              <h5 className="text-success mt-3">tipo</h5>
+              <select
+                className="select-answer"
+                value={brakeTypeFilter}
+                onChange={(e) => setBrakeTypeFilter(e.target.value)}
 
-                >
-                  {brakeTypes.map((brakeType, index)=> {
-                    return (<option key={index}>{brakeType}</option>);
-                  })}
-                </select>
-              </>
+              >
+                <option value=""></option>
+                {brakeTypes.map((brakeType, index)=> {
+                  return (<option key={index}>{brakeType}</option>);
+                })}
+              </select>
 
               {(brakeTypeFilter === "hydraulic_disc" || brakeTypeFilter === "mechanical_disc") && (<>
-
                 <h5 className="text-success mt-3">disco</h5>
                 <select
                   className="select-answer"
                   value={brakeDiscSizeFilter}
                   onChange={(e) => setBrakeDiscSizeFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {discSizes.map((discSize, index)=> {
                     return (<option key={index}>{discSize}</option>);
                   })}
@@ -674,13 +653,12 @@ export function Bikes(props) {
                 </>)}
 
               <h5 className="text-success mt-3">modelo</h5>
-
               <select
                 className="select-answer"
                 value={brakeModelFilter}
                 onChange={(e) => setBrakeModelFilter(e.target.value)}
-
               >
+                <option value=""></option>
                 {brakeModels.map((brakeModel, index)=> {
                   return (<option key={index}>{brakeModel}</option>);
                 })}
@@ -689,19 +667,19 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Rodas</button>
             <div id="Rodas" className="suspension-filter d-none">
-              <>
-                <h5 className="text-success mt-3">tamanho aro</h5>
-                <select
-                  className="select-answer"
-                  value={rimSizeFilter}
-                  onChange={(e) => setRimSizeFilter(e.target.value)}
+              <h5 className="text-success mt-3">tamanho aro</h5>
+              <select
+                className="select-answer"
+                value={rimSizeFilter}
+                onChange={(e) => setRimSizeFilter(e.target.value)}
 
-                >
-                  {rimSizes.map((rimSize, index)=> {
-                    return (<option key={index}>{rimSize}</option>);
-                  })}
-                </select>
-              </>
+              >
+                <option value=""></option>
+                {rimSizes.map((rimSize, index)=> {
+                  return (<option key={index}>{rimSize}</option>);
+                })}
+              </select>
+
 
               <div className="rim-filter">
                 <h5 className="text-success mt-3">Aro</h5>
@@ -713,7 +691,6 @@ export function Bikes(props) {
                 <input type="text" className="text-input" onChange={(e) => setHubFilter(e.target.value)}/>
               </div>
 
-
               <div className="tyre-filter">
                 <h5 className="text-success mt-3">Pneu</h5>
                 <input type="text" className="text-input" onChange={(e) => setTyreFilter(e.target.value)}/>
@@ -722,20 +699,17 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Canote</button>
             <div id="Canote" className="suspension-filter d-none">
-              <>
-                <h5 className="text-success mt-3">tipo</h5>
-                <select
-                  className="select-answer"
-                  value={seatPostTypeFilter}
-                  onChange={(e) => setSeatPostTypeFilter(e.target.value)}
-
-                >
-                  {seatPostTypes.map((seatPostType, index)=> {
-                    return (<option key={index}>{seatPostType}</option>);
-                  })}
-                </select>
-              </>
-
+              <h5 className="text-success mt-3">tipo</h5>
+              <select
+                className="select-answer"
+                value={seatPostTypeFilter}
+                onChange={(e) => setSeatPostTypeFilter(e.target.value)}
+              >
+                <option value=""></option>
+                {seatPostTypes.map((seatPostType, index)=> {
+                  return (<option key={index}>{seatPostType}</option>);
+                })}
+              </select>
 
               {seatPostTypeFilter === 'retractable' &&(
                 <>
@@ -744,27 +718,24 @@ export function Bikes(props) {
                   className="select-answer"
                   value={seatPostTravelFilter}
                   onChange={(e) => setSeatPostTravelFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {seatPostTravels.map((seatPostTravel, index)=> {
                     return (<option key={index}>{seatPostTravel}</option>);
                   })}
                 </select>
               </>
               )}
-
               <h5 className="text-success mt-3">Modelo</h5>
               <input type="text" className="text-input" onChange={(e) => setSeatPostModelFilter(e.target.value)}/>
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Cockpit</button>
             <div id="Cockpit" className="cockpit-filter d-none">
-
               <div className="hub-filter">
                 <h5 className="text-success mt-3">Mesa</h5>
                 <input type="text" className="text-input" onChange={(e) => setStemFilter(e.target.value)}/>
               </div>
-
 
               <div className="handlebar-filter">
                 <h5 className="text-success mt-3">Guidão</h5>
@@ -780,8 +751,8 @@ export function Bikes(props) {
                   className="select-answer"
                   value={batteryFilter}
                   onChange={(e) => setBatteryFilter(e.target.value)}
-
                 >
+                  <option value=""></option>
                   {batteries.map((battery, index)=> {
                     return (<option key={index}>{battery}</option>);
                   })}
