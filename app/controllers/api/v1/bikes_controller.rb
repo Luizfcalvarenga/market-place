@@ -32,23 +32,19 @@ module Api
         @bikes = @bikes.where(rim_size: params[:rim_size]) if params[:rim_size].present?
         @bikes = @bikes.where(seat_post_type: params[:seat_post_type]) if params[:seat_post_type].present?
         @bikes = @bikes.where(seat_post_travel: params[:seat_post_travel]) if params[:seat_post_travel].present?
+        @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?
         @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
         @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
         @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
-        @bikes = @bikes.where('locality ILIKE ?', params[:locality]) if params[:locality].present?
-
-
-        # @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?
-
-        # if params[:sort_by] == "age_ascending"
-        #   @bikes = @bikes.order(age: :asc)
-        # elsif params[:sort_by] == "age_descending"
-        #   @bikes = @bikes.order(age: :desc)
-        # elsif params[:sort_by] == "size_ascending"
-        #   @bikes = @bikes.order(size: :asc)
-        # elsif params[:sort_by] == "size_descending"
-        #   @bikes = @bikes.order(size: :desc)
-        # end
+        @bikes = @bikes.where('locality @@ ?', params[:locality]) if params[:locality].present?
+        @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
+        @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
+        @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
+        @bikes = (@bikes.where('front_hub_model @@ ?', params[:hub])  || @bikes.where('rear_hub_model @@ ?', params[:hub]) )if params[:hub].present?
+        @bikes = (@bikes.where('front_rim_model @@ ?', params[:rim])  || @bikes.where('rear_rim_model @@ ?', params[:rim]) )if params[:rim].present?
+        @bikes = (@bikes.where('front_tyre_model @@ ?', params[:tyre])  || @bikes.where('rear_tyre_model @@ ?', params[:tyre]) )if params[:tyre].present?
+        @bikes = @bikes.where('stem @@ ?', params[:stem]) if params[:stem].present?
+        @bikes = @bikes.where('handlebar @@ ?', params[:handlebar]) if params[:handlebar].present?
       end
 
       def show

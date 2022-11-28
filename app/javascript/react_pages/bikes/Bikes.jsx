@@ -30,19 +30,19 @@ export function Bikes(props) {
   const [rimSizeFilter, setRimSizeFilter] = useState("");
   const [seatPostTypeFilter, setSeatPostTypeFilter] = useState("");
   const [seatPostTravelFilter, setSeatPostTravelFilter] = useState("");
-
+  const [seatPostModelFilter, setSeatPostModelFilter] = useState("");
   const [batteryFilter, setBatteryFilter] = useState("");
   const [batteryCyclesFilter, setBatteryCyclesFilter] = useState("");
   const [mileageFilter, setMileageFilter] = useState("");
   const [localityFilter, setLocalityFilter] = useState("");
-
-
-
-
-
-
-
-
+  const [modelFilter, setModelFilter] = useState("");
+  const [cranksetFilter, setCranksetFilter] = useState("");
+  const [chainFilter, setChainFilter] = useState("");
+  const [rimFilter, setRimFilter] = useState("");
+  const [hubFilter, setHubFilter] = useState("");
+  const [tyreFilter, setTyreFilter] = useState("");
+  const [stemFilter, setStemFilter] = useState("");
+  const [handlebarFilter, setHandlebarFilter] = useState("");
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
@@ -70,29 +70,27 @@ export function Bikes(props) {
     if (rimSizeFilter) url = url + `&rim_size=${rimSizeFilter}`
     if (seatPostTypeFilter) url = url + `&seat_post_type=${seatPostTypeFilter}`
     if (seatPostTravelFilter) url = url + `&seat_post_travel=${seatPostTravelFilter}`
+    if (seatPostModelFilter) url = url + `&seat_post_model=${seatPostModelFilter}`
     if (batteryFilter) url = url + `&battery=${batteryFilter}`
     if (batteryCyclesFilter) url = url + `&battery_cycles=${batteryCyclesFilter}`
     if (mileageFilter) url = url + `&mileage=${mileageFilter}`
     if (localityFilter) url = url + `&locality=${localityFilter}`
-
-
-
-
-
-
-
-
-
-
-
-
+    if (modelFilter) url = url + `&model=${modelFilter}`
+    if (cranksetFilter) url = url + `&crankset=${cranksetFilter}`
+    if (chainFilter) url = url + `&chain=${chainFilter}`
+    if (rimFilter) url = url + `&rim=${rimFilter}`
+    if (hubFilter) url = url + `&hub=${hubFilter}`
+    if (tyreFilter) url = url + `&tyre=${tyreFilter}`
+    if (stemFilter) url = url + `&stem=${stemFilter}`
+    if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
 
     const response = await axios.get(url);
     setBikes(response.data.bikes);
   }, [categoryFilter, modalityFilter, conditionFilter, priceFilter, yearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
-    suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
-    rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
-    batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter])
+      suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
+      rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
+      seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
+      handlebarFilter])
 
 
   const handleFilter = (e) => {
@@ -105,6 +103,24 @@ export function Bikes(props) {
 
     console.log(e)
 
+  }
+
+  const handleBikeTypeFilter = (e) => {
+    console.log(e.target.checked)
+    if (e.target.checked) {
+      setBikeTypeFilter(e.target.value)
+    } else {
+      setBikeTypeFilter("")
+    }
+  }
+
+  const handleConditionFilter = (e) => {
+    console.log(e.target.checked)
+    if (e.target.checked) {
+      setConditionFilter(e.target.value)
+    } else {
+      setConditionFilter("")
+    }
   }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
@@ -258,24 +274,28 @@ export function Bikes(props) {
       <h2 className="text-center text-success">Bikes</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
-          <p className="text-success">Filtrar</p>
+          <h4 className="text-success">Filtros</h4>
             <div className="condition-filter">
                 <h5 className="text-success mt-3">tipo</h5>
-                <label htmlFor="new" className="me-2">
-                  <input
-                    type="radio"
-                    value="e-bike"
-                    onChange={(e) => setBikeTypeFilter(e.target.value)}
-                  />  Elétrica
-                </label>
+                <div className="d-flex justify-content-between">
+                  <label htmlFor="new" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="e-bike"
+                      name="type"
+                      onChange={(e) => handleBikeTypeFilter(e)}
+                    />  Elétrica
+                  </label>
 
-                <label htmlFor="used" className="me-2">
-                  <input
-                    type="radio"
-                    value="normal"
-                    onChange={(e) => setBikeTypeFilter(e.target.value)}
-                  />  Normal
-                </label>
+                  <label htmlFor="used" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="normal"
+                      name="type"
+                      onChange={(e) => handleBikeTypeFilter(e)}
+                    />  Normal
+                  </label>
+                </div>
               </div>
 
             <h5 className="text-success mt-3">categoria</h5>
@@ -342,23 +362,39 @@ export function Bikes(props) {
               </select>
             </>)}
 
+            <div className="model-filter">
+              <h5 className="text-success mt-3">Modelo</h5>
+              <input type="text" className="text-input" onChange={(e) => setModelFilter(e.target.value)}/>
+            </div>
+
+            <div className="locality-filter">
+              <h5 className="text-success mt-3">Local</h5>
+              <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
+            </div>
+
+
             <div className="condition-filter">
               <h5 className="text-success mt-3">condição</h5>
-              <label htmlFor="new" className="me-2">
-                <input
-                  type="radio"
-                  value="new"
-                  onChange={(e) => setConditionFilter(e.target.value)}
-                />  Nova
-              </label>
+              <div className="d-flex justify-content-between">
 
-              <label htmlFor="used" className="me-2">
+                <label htmlFor="new" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="new"
+                    name="condition"
+                    onChange={(e) => handleConditionFilter(e)}
+                  />  Nova
+                </label>
+
+                <label htmlFor="used" className="me-2 text-success">
                 <input
-                  type="radio"
+                  type="checkbox"
                   value="used"
-                  onChange={(e) => setConditionFilter(e.target.value)}
+                  name="condition"
+                  onChange={(e) => handleConditionFilter(e)}
                 />  Usada
-              </label>
+                </label>
+              </div>
             </div>
 
             <div className="price-filter">
@@ -396,10 +432,6 @@ export function Bikes(props) {
               </div>
             </div>
 
-            <div className="locality-filter">
-              <h5 className="text-success mt-3">Local</h5>
-              <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
-            </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
@@ -504,7 +536,6 @@ export function Bikes(props) {
                 </select>
 
                 <h5 className="text-success mt-3">modelo</h5>
-
                 <select
                   className="select-answer"
                   value={frontSuspensionModelFilter}
@@ -588,8 +619,6 @@ export function Bikes(props) {
                 })}
               </select>
 
-
-
               <h5 className="text-success mt-3">modelo traseira</h5>
               <select
                 className="select-answer"
@@ -601,6 +630,16 @@ export function Bikes(props) {
                   return (<option key={index}>{frameSize}</option>);
                 })}
               </select>
+
+              <div className="crankset-filter">
+                <h5 className="text-success mt-3">Pedivela</h5>
+                <input type="text" className="text-input" onChange={(e) => setCranksetFilter(e.target.value)}/>
+              </div>
+
+              <div className="chain-filter">
+                <h5 className="text-success mt-3">Corrente</h5>
+                <input type="text" className="text-input" onChange={(e) => setChainFilter(e.target.value)}/>
+              </div>
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Freios</button>
@@ -663,6 +702,22 @@ export function Bikes(props) {
                   })}
                 </select>
               </>
+
+              <div className="rim-filter">
+                <h5 className="text-success mt-3">Aro</h5>
+                <input type="text" className="text-input" onChange={(e) => setRimFilter(e.target.value)}/>
+              </div>
+
+              <div className="hub-filter">
+                <h5 className="text-success mt-3">Cubo</h5>
+                <input type="text" className="text-input" onChange={(e) => setHubFilter(e.target.value)}/>
+              </div>
+
+
+              <div className="tyre-filter">
+                <h5 className="text-success mt-3">Pneu</h5>
+                <input type="text" className="text-input" onChange={(e) => setTyreFilter(e.target.value)}/>
+              </div>
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Canote</button>
@@ -697,6 +752,24 @@ export function Bikes(props) {
                 </select>
               </>
               )}
+
+              <h5 className="text-success mt-3">Modelo</h5>
+              <input type="text" className="text-input" onChange={(e) => setSeatPostModelFilter(e.target.value)}/>
+            </div>
+
+            <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Cockpit</button>
+            <div id="Cockpit" className="cockpit-filter d-none">
+
+              <div className="hub-filter">
+                <h5 className="text-success mt-3">Mesa</h5>
+                <input type="text" className="text-input" onChange={(e) => setStemFilter(e.target.value)}/>
+              </div>
+
+
+              <div className="handlebar-filter">
+                <h5 className="text-success mt-3">Guidão</h5>
+                <input type="text" className="text-input" onChange={(e) => setHandlebarFilter(e.target.value)}/>
+              </div>
             </div>
 
             {bikeTypeFilter === "e-bike" && (<>
@@ -749,7 +822,7 @@ export function Bikes(props) {
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {bikes.map((bike, idx) => {
             return (
-              <div className="cards-index" bike={bike} key={bike.id}>
+              <div className="w-25" bike={bike} key={bike.id}>
                 <a href={"bikes/" + bike.id} className="remove-link">
                   <div className="cards-bikes">
                     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
@@ -775,18 +848,18 @@ export function Bikes(props) {
                       </button>
                     </div>
                     <h4 className="card-title text-center mt-3">{bike.model}</h4>
-                    <h4 className="text-center mt-1">
+                    <h3 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
-                    </h4>
-                    <hr/>
+                    </h3>
+                    <hr className="index-line"/>
                     <div className="card-content mt-2">
-                      <p className="text-center mt-1">{bike.category.name} | {bike.modality}</p>
+                      <h4 className="text-center mt-1 bike-infos-index">Quaro: {bike.frame_size}</h4>
                       <div className="d-flex justify-content-around">
-                        <p>{bike.suspension_type}</p>
-                        <p>{bike.brake_type}</p>
+                        <h4 className="bike-infos-index">Roda: {bike.rim_size}</h4>
+                        <h4 className="bike-infos-index">{bike.year}</h4>
                       </div>
                     </div>
                   </div>

@@ -6,21 +6,12 @@ export function Products(props) {
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
-
-
-
   const [categoryFilter, setCategoryFilter] = useState("");
   const [productTypeFilter, setProductTypeFilter] = useState("");
   const [conditionFilter, setConditionFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
-
-
-
-
   const [modalityFilter, setModalityFilter] = useState("");
-
   const [productTypeAttributesFilter, setProductTypeAttributesFilter] = useState("");
-
   const [sortBy, setSortBy] = useState("");
 
   useEffect(async () => {
@@ -30,11 +21,7 @@ export function Products(props) {
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (priceFilter) url = url + `&price=${priceFilter}`
-
-
     if (productTypeAttributesFilter) url = url + `&product_attribute_value=${productTypeAttributesFilter}`
-
-
     if (sortBy) url = url + `&sort_by=${sortBy}`
 
     const response = await axios.get(url);
@@ -58,14 +45,19 @@ export function Products(props) {
       console.log(attrs)
 
     }
-    // console.log(attributesForProduct)
-    // console.log(attrs)
+  }
 
+  const handleConditionFilter = (e) => {
+    console.log(e.target.checked)
+    if (e.target.checked) {
+      setConditionFilter(e.target.value)
+    } else {
+      setConditionFilter("")
+    }
   }
 
   return (
     <div className="p-5 br-8">
-
       <h2 className="text-center text-success">Produtos</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
@@ -157,23 +149,26 @@ export function Products(props) {
 
             <div className="condition-filter">
               <h5 className="text-success mt-3">condição</h5>
-              <label htmlFor="new" className="me-2">
-                <input
-                  type="radio"
-                  value="new"
-                  // checked={this.state.selectedOption === "Female"}
-                  onChange={(e) => setConditionFilter(e.target.value)}
-                />Novo
-              </label>
+              <div className="d-flex justify-content-between">
 
-              <label htmlFor="used" className="me-2">
+                <label htmlFor="new" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="new"
+                    name="condition"
+                    onChange={(e) => handleConditionFilter(e)}
+                  />  Novo
+                </label>
+
+                <label htmlFor="used" className="me-2 text-success">
                 <input
-                  type="radio"
+                  type="checkbox"
                   value="used"
-                  // checked={this.state.selectedOption === "Female"}
-                  onChange={(e) => setConditionFilter(e.target.value)}
-                />Usado
-              </label>
+                  name="condition"
+                  onChange={(e) => handleConditionFilter(e)}
+                />  Usado
+                </label>
+              </div>
             </div>
 
             <div className="price-filter">
@@ -228,17 +223,12 @@ export function Products(props) {
                   </>)
                 })}
             </>)}
-            {/* <input
-              type="number"
-              value={modalityFilter}
-              onChange={(e) => setModalityFilter(e.target.value)}
-            /> */}
           </div>
         </div>
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {products.map((product, idx) => {
             return (
-              <div className="cards-index" product={product} key={product.id}>
+              <div className="w-25" product={product} key={product.id}>
                 <a href={"products/" + product.id} className="remove-link">
                   <div className="cards-products">
                     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
@@ -264,18 +254,18 @@ export function Products(props) {
                       </button>
                     </div>
                     <h4 className="card-title text-center mt-3">{product.product_type.name}</h4>
-                    <h4 className="text-center mt-1 product-price">
+                    <h3 className="text-center mt-1 product-price">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
-                    </h4>
-                    <hr/>
+                    </h3>
+                    <hr  className="index-line"/>
                     <div className="card-content mt-2">
-                      <p className="text-center mt-1">{product.category.name} | {product.modality}</p>
+                      <h4 className="text-center mt-1 product-infos-index">{product.category.name}</h4>
                       <div className="d-flex justify-content-around">
-                        <p> {product.brand}</p>
-                        <p>{product.name}</p>
+                        <h4 className="product-infos-index"> {product.brand}</h4>
+                        <h4 className="product-infos-index">{product.name}</h4>
                       </div>
                     </div>
                   </div>
