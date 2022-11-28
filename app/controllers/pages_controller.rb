@@ -8,6 +8,8 @@ class PagesController < ApplicationController
   def new_announce
   end
 
+
+
   private
 
   def set_status
