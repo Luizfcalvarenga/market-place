@@ -190,6 +190,18 @@
   margin-top: 30%;
 }
 
+.review-selected {
+  background-color: $color-primary;
+  color: white;
+  border-color: $color-primary;
+
+  &:hover {
+    color: white;
+  }
+}
+
+
+
 .image-review {
   width: 150px;
   height: 95px;

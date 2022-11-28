@@ -168,12 +168,7 @@ export function BikeForm(props) {
     }
   }
 
-  const handleReviewSection = (e) => {
-    console.log(e.target.innerText)
-    const section = document.getElementById(e.target.innerText)
-    console.log(section)
-    section.classList.toggle("d-none")
-  }
+
 
   async function fetchBike() {
     const response = await axios.get(
@@ -514,6 +509,19 @@ export function BikeForm(props) {
     technicalSection.classList.toggle("d-none")
     sectionActive.classList.toggle("btn-selected")
     console.log(e)
+  }
+
+
+  const handleReviewSection = (e) => {
+    console.log(`${e.target.innerText}(reviews)`)
+    const section = document.getElementById(e.target.innerText + "(review)")
+    const sectionActive = e.target;
+
+    console.log(section)
+    section.classList.toggle("d-none")
+    sectionActive.classList.toggle("review-selected")
+
+
   }
 
   //////////////////////////////////////////////// frames
@@ -903,9 +911,8 @@ export function BikeForm(props) {
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
-        {category === "road" && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Trasmissão<i class="fas fa-chevron-down ms-2"></i></button>
-          <div id="Trasmissão" className="transmission d-none mb-3">
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Transmissão<i class="fas fa-chevron-down ms-2"></i></button>
+        <div id="Transmissão" className="transmission d-none mb-3">
             <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
             <select
               className="select-answer"
@@ -918,6 +925,24 @@ export function BikeForm(props) {
               })}
             </select>
 
+            <label htmlFor="numberOfRearGears" className="mt-4">Marchas traseiras?</label>
+            <select
+              className="select-answer"
+              value={numberOfRearGears}
+              onChange={(e) => setNumberOfRearGears(e.target.value)}
+            >
+              <option value=""></option>
+              {rearGears.map((rearGear, index)=> {
+                return (<option key={index}>{rearGear}</option>);
+              })}
+            </select>
+
+            <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
+            <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
+
+            <label htmlFor="front_gear" className="mt-4">Corrente:</label>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
+          {category === "road" && (<>
             <label htmlFor="front_gear" className="mt-4">Câmbio dianteiro:</label>
             <select className="select-answer" aria-label=".form-select-sm example"
               value={frontDerailleurModel}
@@ -936,18 +961,6 @@ export function BikeForm(props) {
               </>
             )}
 
-            <label htmlFor="numberOfRearGears" className="mt-4">Marchas traseiras?</label>
-            <select
-              className="select-answer"
-              value={numberOfRearGears}
-              onChange={(e) => setNumberOfRearGears(e.target.value)}
-            >
-              <option value=""></option>
-              {rearGears.map((rearGear, index)=> {
-                return (<option key={index}>{rearGear}</option>);
-              })}
-            </select>
-
             <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
             <select className="select-answer" aria-label=".form-select-sm example"
               value={rearDerailleurModel}
@@ -965,18 +978,9 @@ export function BikeForm(props) {
                 <input type="text" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
+          </>)}
 
-            <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
-            <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
-
-            <label htmlFor="front_gear" className="mt-4">Corrente:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
-          </div>
-        </>)}
-
-        {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Trasmissão<i className="fas fa-chevron-down ms-2"></i></button>
-          <div id="transmission" className="transmission d-none mb-3">
+          {(category === "mountain_bike" || category === "dirt_street" || category === "urban" || category === "infant") && (<>
             <label htmlFor="front_gear" className="mt-3">Câmbio dianteiro:</label>
             <select className="select-answer" aria-label=".form-select-sm example"
               value={frontDerailleurModel}
@@ -1012,14 +1016,8 @@ export function BikeForm(props) {
                 <input type="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
-
-            <label htmlFor="crankset" className="mt-4">Pédivela:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
-
-            <label htmlFor="chain" className="mt-4">Corrente:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
-          </div>
-        </>)}
+          </>)}
+        </div>
 
                                                                        {/*//////////////////FREIOS///////////////////////*/}
 
@@ -1432,9 +1430,9 @@ export function BikeForm(props) {
 
       <div id="fifth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais(revisar)</button>
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         {/* <h5 className="text-success mt-3 text-center">Gerais:</h5> */}
-        <div id="Gerais(revisar)" className=" d-none">
+        <div id="Gerais(review)" className=" d-none">
           <div className="d-flex justify-content-between">
             <p><span className="text-success">Tipo:</span> {bikeType}</p>
             <p><span className="text-success">Categoria:</span> {category}</p>
@@ -1462,15 +1460,15 @@ export function BikeForm(props) {
           <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro(revisar)</button>
-        <div id="Quadro(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
+        <div id="Quadro(review)" className="d-none">
           <p><span className="text-success">Marca:</span>{frameBrand}</p>
           <p><span className="text-success">Material:</span>{frameMaterial}</p>
           <p><span className="text-success">Tamanho:</span>{frameSize}</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão(revisar)</button>
-        <div id="Transmissão(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão</button>
+        <div id="Transmissão(review)" className="d-none">
           <p><span className="text-success">Marchas dianteiras:</span> {numberOfFrontGears}</p>
           <p><span className="text-success">Modelo:</span> {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
           <p><span className="text-success">Marchas traseiras:</span> {numberOfRearGears}</p>
@@ -1479,22 +1477,22 @@ export function BikeForm(props) {
           <p><span className="text-success">Corrente:</span> {chain}</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Freios(revisar)</button>
-        <div id="Freios(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Freios</button>
+        <div id="Freios(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {brakeType}</p>
           <p><span className="text-success">Tamanho do disco:</span> {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
           <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões(revisar)</button>
-        <div id="Suspensões(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
+        <div id="Suspensões(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {suspensionType}</p>
           <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
           <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas(revisar)</button>
-        <div id="Rodas(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas</button>
+        <div id="Rodas(review)" className="d-none">
           <p><span className="text-success">Tamanho:</span> {rimSize}</p>
           <p><span className="text-success">Aro dianteiro:</span> {frontRimModel}</p>
           <p><span className="text-success">Aro traseiro:</span> {rearRimModel }</p>
@@ -1504,21 +1502,21 @@ export function BikeForm(props) {
           <p><span className="text-success">Pneu traseiro:</span> {rearTyre }</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Cockpit(revisar)</button>
-        <div id="Cockpit(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Cockpit</button>
+        <div id="Cockpit(review)" className="d-none">
           <p><span className="text-success">Guidão:</span> {handlebar}</p>
           <p><span className="text-success">Mesa:</span> {stem}</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Canote(revisar)</button>
-        <div id="Canote(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Canote</button>
+        <div id="Canote(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {seatPostType}</p>
           <p><span className="text-success">Curso:</span> {seatPostTravel}</p>
           <p><span className="text-success">Modelo:</span> {seatPostModel }</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Acessórios(revisar)</button>
-        <div id="Acessórios(revisar)" className="d-none">
+        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Acessórios</button>
+        <div id="Acessórios(review)" className="d-none">
           <p><span className="text-success">Acompanha(qual?):</span> {accessories === "other" ? otherAccessory : accessories }</p>
           <p><span className="text-success">Descrição:</span> {accessoriesDescription}</p>
           <p><span className="text-success">Pedais:</span> {pedals }</p>
@@ -1526,7 +1524,7 @@ export function BikeForm(props) {
 
         { bikeType === "electric" && (<>
           <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Parte elétrica</button>
-          <div id="Parte elétrica" className="d-none">
+          <div id="Parte elétrica(review)" className="d-none">
             <p><span className="text-success">Capacidade da baterias:</span> {battery === "other" ? otherBattery : battery }</p>
             <p><span className="text-success">Motor:</span> {motor}</p>
             <p><span className="text-success">Km:</span> {mileage} Km</p>
@@ -1537,7 +1535,7 @@ export function BikeForm(props) {
         <h4 className="text-success mt-3 text-center">Imagens</h4>
         {
           photosPreview?.length > 0 ?
-          <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
+          <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
             {
               photosPreview.map((photoPreview, idx) => {
                 return <img src={photoPreview} alt="" className="image-review" />

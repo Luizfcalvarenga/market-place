@@ -124,16 +124,13 @@ export function Bikes(props) {
   }
 
   const handlePriceFilter = (e) => {
-    const maxValue = "2200000"
     setPriceFilter(e.target.value)
     if (e.target.value === "0") {
-      setPriceFilter(maxValue)
+      setPriceFilter("")
     }
   }
 
   const handleYearFilter = (e) => {
-    // const maxValue = "2022"
-
     setYearFilter(e.target.value)
     if (e.target.value === "2002") {
       setYearFilter("")
@@ -369,6 +366,32 @@ export function Bikes(props) {
                 <option value="ciclocross">Ciclocross</option>
                 <option value="cicloviagem">Cicloviagme</option>
                 <option value="gravel">Gravel</option>
+              </select>
+            </>)}
+
+            {!categoryFilter && (<>
+              <h5 className="text-success mt-3">Modalidade</h5>
+              <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+
+              >
+                <option value=""></option>
+                <option value="speed_performance">Speed Performance</option>
+                <option value="triathlon">triathon</option>
+                <option value="ciclocross">Ciclocross</option>
+                <option value="cicloviagem">Cicloviagme</option>
+                <option value="gravel">Gravel</option>
+                <option value="downhill">Downhill</option>
+                <option value="enduro">Enduro</option>
+                <option value="speed">Speed</option>
+                <option value="trail">Trail</option>
+                <option value="xc_cross_country">XC Cross Country</option>
+                <option value="street_bmx">Street BMX</option>
+                <option value="race_bmx">Race BMX</option>
+                <option value="big_wheel_bmx">Big Wheel BMX</option>
+                <option value="dirt_jump">Dirt Jump</option>
               </select>
             </>)}
 
