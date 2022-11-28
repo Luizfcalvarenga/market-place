@@ -271,7 +271,7 @@ export function Bikes(props) {
         <div className="filters col-12 col-md-3 my-1">
           <h4 className="text-success">Filtros</h4>
             <div className="condition-filter">
-                <h5 className="text-success mt-3">tipo</h5>
+                <h5 className="mt-3">tipo</h5>
                 <div className="d-flex justify-content-between">
                   <label htmlFor="new" className="me-2 text-success">
                     <input
