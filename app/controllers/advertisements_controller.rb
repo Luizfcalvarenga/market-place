@@ -1,7 +1,7 @@
 
-class AdvertisementssController < ApplicationController
+class AdvertisementsController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :check_availability_of_order_items_periods, only: [:invoice]
+  # before_action :check_availability_of_order_items_periods, only: [:invoice]
 
   def index
     @advertisements = policy_scope(Advertisements).where(user_id: current_user).where(status: 'paid').order(created_at: :desc)
@@ -10,7 +10,7 @@ class AdvertisementssController < ApplicationController
   def show
     @advertisement = Advertisement.find(params[:id])
     authorize @advertisement
-    @item = @advertisament.advertisable
+    @item = Product.find_by(id: @advertisement.advertisable.id) || Bike.find_by(id: @advertisement.advertisable.id)
   end
 
   def invoice

@@ -6,31 +6,42 @@ class AdvertisementGenerator
   end
 
   def call
-    ActiveRecord::Base.transaction do
-      return if Advertisement.exists?(advertisable: advertisable)
-      @advertisement = Advertisement.create({user: @advertisable.user,
-                                    advertisable_id: @advertisable_id,
-                                    price_in_cents: advertisement_price,
-                                    status: "pending"
+    # return if @advertisable.advertisement.exits?
 
-                                  })
+    ActiveRecord::Base.transaction do
+      @advertisement = Advertisement.create(
+        user: @advertisable.user,
+        advertisable: @advertisable,
+        price_in_cents: @advertisable.price_in_cents / 10,
+        status: "pending"
+      )
+      @advertisement.persisted?
     end
   end
 
-  def advertisement_price
-    first_announce = 50000
-    second_announce = 250000
-    third_announce = 500000
-    fourth_announce = 1000000
+  # def advertisement_price
 
-    if first_announce < Product.find(id: @advertisable.id).price_in_cents < second_announce
-      return 5000
-    elsif second_announce < Product.find(id: @advertisable.id).price_in_cents < third_announce
-      return 10000
-    elsif third_announce < Product.find(id: @advertisable.id).price_in_cents < fourth_announce
-      return 15000
-    elsif Product.find(id: @advertisable.id).price_in_cents > fourth_announce
-      return 20000
-    end
+  #   price_in_cents = nil
+  #   product_price = Product.find(id: @advertisable.id).price_in_cents
+
+  #   case product_price
+  #   when 0..50000
+  #     price_in_cents = 0
+  #   when 50100..250000
+  #     price_in_cents = 5000
+  #   when 250100..500000
+  #     price_in_cents = 10000
+  #   when 500100..1000000
+  #     price_in_cents = 15000
+  #   else
+  #     price_in_cents = 20000
+  #   end
+  #   price_in_cents
+  # end
+
+  private
+
+  def advertisement_params
+    params.require(:advertisement).permit(:advertisable, :user, :price_in_cents, :status)
   end
 end

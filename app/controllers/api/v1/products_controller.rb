@@ -52,14 +52,12 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
+          AdvertisementGenerator.new(@product).call
 
-          if @product.photos.attach ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
-            render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: product_path(@product) }
+          if @product.advertisement.present? || @product.photos.attach ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
+            render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
             render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}
-          end
-          if @product.price_in_cents > 50000
-            AdvertisementGenerator.new(@product).call
           end
         else
           render json: { success: false, errors: {product: @product.errors} }

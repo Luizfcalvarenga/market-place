@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import swal from 'sweetalert';
+
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
@@ -102,16 +104,11 @@ export function ProductForm(props) {
         name: photoName,
         url: fileURL
       }
-
       photoFile.push(nameURL)
       objectUrls.push(fileURL);
-
     }
-
     setPhotosPreview(objectUrls)
     setPhotoFile(photoFile)
-
-
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
   }, [productPhotos])
@@ -226,6 +223,7 @@ export function ProductForm(props) {
           className="select-answer"
           onChange={(e) => createProductAttributes(e, attribute)}
           >
+            <option value=""></option>
             {options?.map((option, index) => {
               return (<option key={index} value={option}>{option}</option>)
             })}
@@ -251,9 +249,11 @@ export function ProductForm(props) {
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", productPrice );
     dataObject.append( "product[quantity]", productQuantity );
-    productPhotos.map((photo) => {
-      dataObject.append( "product[photos][]", photo );
-    })
+    if (productPhotos) {
+      productPhotos.map((photo) => {
+        dataObject.append( "product[photos][]", photo );
+      })
+    }
     for (const [key, value] of Object.entries(productAttributes)) {
       console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
@@ -283,11 +283,10 @@ export function ProductForm(props) {
     const response = await axios[method](url, dataObject);
     if (response.data.success) {
       window.location = response.data.redirect_url;
+      swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       setErrors(response.data.errors);
-      alert(
-        "Erro ao criar a produto: " + JSON.stringify(response.data.errors)
-      );
+      swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
     }
   }
 
@@ -529,6 +528,7 @@ export function ProductForm(props) {
           onChange={(e) => setProductCategory(e.target.value)}
           className="select-answer"
           >
+            <option value=""></option>
             {categories.map((category) => {
               return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
@@ -542,6 +542,7 @@ export function ProductForm(props) {
               onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
               className="select-answer"
             >
+              <option value=""></option>
               {modalities.map((modality, index) => {
                 return (<option key={index}>{modality}</option>);
               })}
@@ -554,6 +555,7 @@ export function ProductForm(props) {
           onChange={(e) => setProductTypeId(e.target.value)}
           className="select-answer"
           >
+            <option value=""></option>
             {productTypes.map((productType) => {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
@@ -659,6 +661,9 @@ export function ProductForm(props) {
           <div id="Gerais" className="">
 
             {/* <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p> */}
+            {/* {productId && (<>
+              <p><span className="text-success">Produto:</span> { allProducts.find(element => element.id === productId).name }</p>
+            </>)} */}
             <p><span className="text-success">Categoria:</span> {productCategory}</p>
             <p><span className="text-success">Modalidade:</span> {productModality}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>

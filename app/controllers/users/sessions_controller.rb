@@ -9,12 +9,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  def create
-    super do |resource|
-      order = Order.find_by(tracker_code: cookies[:tracker_code])
-      order.update(user: resource) if order.user.blank? && !resource.orders.where(status: :pending).exists?
-    end
-  end
+  # def create
+  #   super do |resource|
+  #     order = Order.find_by(tracker_code: cookies[:tracker_code])
+  #     order.update(user: resource) if order.user.blank? && !resource.orders.where(status: :pending).exists?
+  #   end
+  # end
 
   # DELETE /resource/sign_out
   # def destroy

@@ -394,7 +394,7 @@ export function BikeForm(props) {
     const response = await axios[method](url, dataObject);
     if (response.data.success) {
       window.location = response.data.redirect_url;
-      swal("OHH YEAHH", "Criado com sucesso!!!", "success");
+      swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       setErrors(response.data.errors);

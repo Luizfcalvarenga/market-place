@@ -26,6 +26,7 @@ module NuflowShop
       end
     end
 
+    # config.autoloader = :classic
     # config.after_initialize do |_config|
     #   User.update_all(status: User.statuses[:offline])
     # end

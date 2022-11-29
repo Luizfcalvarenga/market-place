@@ -11,16 +11,16 @@ class Advertisement < ApplicationRecord
       email: user.email,
       months: 1,
       items:
-        {
-          description: "Anúncio: #{advertisable.type} / #{advertisable.name}",
+        [{
+          description: "Anúncio de: #{advertisable.name}",
           quantity: 1,
-          price_cents: advertisement_price,
-        },
+          price_cents: price_in_cents,
+        }],
 
 
       payer: {
         name: user.email,
-        cpf_cnpj: user.cpf,
+        cpf_cnpj: user.document_number,
         address: {
           zip_code: user.cep,
           number: "-",

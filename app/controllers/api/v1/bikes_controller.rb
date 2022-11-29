@@ -46,12 +46,13 @@ module Api
               @bike.photos.attach(photo)
             end
           end
+          AdvertisementGenerator.new(@bike).call
+
           if @bike.photos.attach
             render json: { success: true, bike: @bike, photos: @photos, redirect_url: bike_path(@bike) }
           else
             render json: { success: false, errors: {bike: @bike.errors}}
           end
-          AdvertisementGenerator.new(@bike).call
         else
           render json: { success: false, errors: {bike: @bike.errors}}
         end
