@@ -11,7 +11,11 @@ class AdvertisementsController < ApplicationController
   def show
     @advertisement = Advertisement.find(params[:id])
     authorize @advertisement
-    @item = Product.find_by(id: @advertisement.advertisable.id) || Bike.find_by(id: @advertisement.advertisable.id)
+    if @advertisement.advertisable_type == "Product"
+      @item = Product.find_by(id: @advertisement.advertisable.id)
+    elsif @advertisement.advertisable_type == "Bike"
+      @item = Bike.find_by(id: @advertisement.advertisable.id)
+    end
   end
 
   def invoice
