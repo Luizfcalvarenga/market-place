@@ -71,11 +71,9 @@ export function BikeForm(props) {
   const [motor, setMotor] = useState("");
   const [batteryCycles, setBatteryCycles] = useState("");
   const [photosPreview, setPhotosPreview] = useState([]);
-
-
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
-
+  const [advertisementPrice, setAdvertisementPrice ] = useState(null);
   const [photos, setPhotos ] = useState(null);
 
   const [photoFile, setPhotoFile] = useState({
@@ -534,6 +532,16 @@ export function BikeForm(props) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  const handleTerms = (e) => {
+    console.log(e.target)
+    const btnAnnounce = document.getElementById("new-announce")
+    if (e.target.checked) {
+      btnAnnounce.disabled = false;
+    } else {
+      btnAnnounce.disabled = true;
+    }
+  }
+
   //////////////////////////////////////////////// frames
 
   const frameBrands = ["",
@@ -746,6 +754,7 @@ export function BikeForm(props) {
         onChange={(e) =>  setCategory(e.target.value) }
         className="select-answer"
         >
+          <option value=""></option>
           {categories.map((category) => {
             return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
           })}
@@ -902,7 +911,7 @@ export function BikeForm(props) {
         )}
 
         <label htmlFor="priceInCentes" className="mt-4">preço:<span className="requested-information ms-1">*</span></label>
-        <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents}onChange={(e) => setPriceInCents(e.target.value)}/>
+        <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents} onChange={(e) => setPriceInCents(e.target.value)}/>
         { errors && errors.bike && errors.bike.price_in_cents  && (
           <p className="text-danger">{errors.bike.price_in_cents[0]}</p>
         )}
@@ -1576,12 +1585,46 @@ export function BikeForm(props) {
             }
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
-        <div className="text-center  mb-3">
+
+        {(priceInCents < 50000) && (<>
+          <h6>Seu anúncio não será cobrado</h6>
+        </>)}
+
+        { (priceInCents >= 50000) && (priceInCents < 250000) && (<>
+          <div className="d-flex justify-content-center gap-2">
+            <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+            <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
+          </div>
+        </>)}
+
+        {(priceInCents >= 250000) && (priceInCents < 500000) && (<>
+          <div className="d-flex justify-content-center gap-2">
+            <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+            <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
+          </div>
+        </>)}
+
+        {(priceInCents >= 500000) && (priceInCents <= 1000000) &&(<>
+          <div className="d-flex justify-content-center gap-2">
+            <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+            <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
+          </div>
+        </>)}
+
+
+        {(priceInCents > 1000000) && (<>
+          <div className="d-flex justify-content-center gap-2">
+            <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+            <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
+          </div>
+        </>)}
+
+        <div className="text-center mt-3 mb-3">
           {!props.bikeId && (
-            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+            <button id="new-announce" disabled onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
           )}
           {props.bikeId && (
-            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
+            <button id="new-announce" disabled onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
           )}
         </div>
       </div>

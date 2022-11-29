@@ -4,7 +4,8 @@ class AdvertisementsController < ApplicationController
   # before_action :check_availability_of_order_items_periods, only: [:invoice]
 
   def index
-    @advertisements = policy_scope(Advertisements).where(user_id: current_user).where(status: 'paid').order(created_at: :desc)
+    @advertisements = policy_scope(Advertisement).order(created_at: :desc)
+    # @advertisements = Advertisement.where(user: current_user)
   end
 
   def show
@@ -16,6 +17,13 @@ class AdvertisementsController < ApplicationController
   def invoice
     @advertisement = Advertisement.find(params[:id])
     authorize @advertisement
+
+    if @advertisement.is_free?
+      @advertisement.perform_after_payment_confirmation_actions
+      flash[:notice] = "Anúncio criado com sucesso"
+      redirect_to my_products_path and return
+    end
+
     if @advertisement.should_generate_new_invoice?
       ::NovaIugu::InvoiceGenerator.new(@advertisement).call
     else

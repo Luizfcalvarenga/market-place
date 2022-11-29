@@ -2,8 +2,21 @@ class Advertisement < ApplicationRecord
   belongs_to :user
   belongs_to :advertisable, polymorphic: true
 
+  def is_free?
+    price_in_cents.zero?
+  end
+
+
   def perform_after_payment_confirmation_actions
     self.update(status: "paid")
+
+    if is_free?
+      self.update(
+        value: 0,
+        net_value: 0,
+        invoice_paid_at: Time.current
+      )
+    end
   end
 
   def nova_iugu_charge_params_hash
@@ -12,7 +25,7 @@ class Advertisement < ApplicationRecord
       months: 1,
       items:
         [{
-          description: "Anúncio de: #{advertisable.name}",
+          description: "Anúncio de: item##{advertisable.id}",
           quantity: 1,
           price_cents: price_in_cents,
         }],

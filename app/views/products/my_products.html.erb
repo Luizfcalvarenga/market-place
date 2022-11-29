@@ -32,7 +32,7 @@
             <p><strong>Nome:</strong> <%= product.name %></p>
             <p><strong>Categoria:</strong> <%= product.category.name %></p>
             <p><strong>Marca:</strong> <%= product.brand %></p>
-            <p><strong>Preço:</strong> <%= number_to_currency(product.price_in_cents, unit: "R$", separator: ",", delimiter: ".")%></p>
+            <p><strong>Preço:</strong> <%= number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%></p>
             <p><strong>Descrição:</strong> <%= product.description %></p>
             <p><strong>Produto:</strong> <%= product.product_type.name %></p>
             <p><strong>Quantidade:</strong> <%= product.quantity %></p>
@@ -83,7 +83,7 @@
             <p><strong>Local:</strong> <%= bike.locality %></p>
             <p><strong>Categoria:</strong> <%= bike.category.name %></p>
             <p><strong>Tipo:</strong> <%= bike.bike_type %></p>
-            <p><strong>Preço:</strong> <%= number_to_currency(bike.price_in_cents, unit: "R$", separator: ",", delimiter: ".")%></p>
+            <p><strong>Preço:</strong> <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%></p>
             <p><strong>Modalidade:</strong> <%= bike.modality %></p>
             <p><strong>Quantidade:</strong> <%= bike.quantity %></p>
             <p><strong>Modelo:</strong> <%= bike.model %></p>

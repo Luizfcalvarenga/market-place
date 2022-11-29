@@ -1,0 +1,40 @@
+<div class="container advertisements">
+  <h1 class="my-3 text-center text-success">Anuncios</h1>
+  <div class="d-flex flex-wrap justify-content-between">
+    <% @advertisements.each do | advertisement | %>
+      <div class="cards-index-advertisements mb-5 w-40 gap-2">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h6>Anúncio #<%= advertisement.id %></h6>
+              <h6>Total: <%=number_to_currency(advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%> </h6>
+              <div class="d-flex">
+                <% if advertisement.invoice_paid_at.present? %>
+                  <i class="fas fa-handshake ms-2 mt-1" style="color: green;"></i>
+                  <p><span class="topic-cards-index-media ms-3">Pago em: </span> <%= advertisement.invoice_paid_at.strftime("%d/%m/%Y") %> </p>
+                <% else %>
+                  <i class="fas fa-clock ms-2 mt-1" style="color: red;"></i>
+                  <p><span class="topic-cards-index-media ms-3">Aguardando pagamento</p>
+                <% end %>
+              </div>
+            </div>
+            <div>
+              <a href="<%= advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
+            </div>
+          </div>
+          <hr>
+          <% if advertisement.advertisable_type == "Product" %>
+            <p><span class="topic-cards-index-media display-type-item">Produto# <%= advertisement.advertisable.id %> </span> </p>
+            <p><span class="topic-cards-index-media">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+            <p><span class="topic-cards-index-media">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
+          <% elsif advertisement.advertisable_type == "Bike" %>
+            <p><span class="topic-cards-index-media display-type-item">Bike# <%= advertisement.advertisable.id %> </span> </p>
+            <p><span class="topic-cards-index-media">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+            <p><span class="topic-cards-index-media">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
+          <% end%>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

@@ -48,8 +48,8 @@ module Api
           end
           AdvertisementGenerator.new(@bike).call
 
-          if @bike.photos.attach
-            render json: { success: true, bike: @bike, photos: @photos, redirect_url: bike_path(@bike) }
+          if @bike.advertisement.present? || @bike.photos.attach
+            render json: { success: true, bike: @bike, photos: @photos, redirect_url: advertisement_path(@bike.advertisement) }
           else
             render json: { success: false, errors: {bike: @bike.errors}}
           end

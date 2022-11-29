@@ -1,30 +1,43 @@
-<div class="payment-confirmed vh-100 success-text d-none flex center around">
-  <div class="p-5 flex center column">
-    <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
-    <h3>Pagamento confirmado!</h3>
-    <p>Suas campanhas foram geradas com sucesso. Você já pode acessá-los no seu dashboard.</p>
-    <%= link_to products_path(@advertisement.advertisable), class: "after-payment-button-link" do %>
-      <p class="btn btn-dark w-100 p-2 px-5 br-8">Ver meu produtp</p>
+<% if @adertisement.price_in_cents == 0 %>
+  <div class="payment-confirmed vh-100 success-text flex center around">
+    <div class="p-5 flex center column">
+      <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
+      <h3>Seu producto foi anunciado de uma olhada</h3>
+
+      <%= link_to my_products_path, class: "after-payment-button-link" do %>
+        <p class="btn btn-dark w-100 p-2 px-5 br-8">Ver produtos anunciados</p>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="payment-confirmed vh-100 success-text d-none flex center around">
+    <div class="p-5 flex center column">
+      <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
+      <h3>Pagamento confirmado!</h3>
+      <p>Seu anuncio foi criado e pode ser acessado no seu perfil.</p>
+      <%= link_to my_products_path, class: "after-payment-button-link" do %>
+        <p class="btn btn-dark w-100 p-2 px-5 br-8">Ver meu produtp</p>
+      <% end %>
+    </div>
+  </div>
+  <div class="payment-container container" data-advertisement-id="<%= @advertisement.id %>">
+    <div class="my-5">
+      <h1 class="title">Pagamento do pedido</h1>
+      <p><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, o npuncio será gerado e todos terão acesso ao seu produto:</strong> </p>
+      <h3>1 anúncio para: <%= @advertisement.advertisable_type %></h3>
+      <h3>Valor total do pedido: <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></h3>
+      <p class="m-0 bg-primary text-white p-4 br-8 mb-3">
+        <i class="fa fa-info-circle my-3 pe-2"></i>Para pagar com PIX, clique em "Pix Copia e Cola", pague no aplicativo do seu banco, e retorne aqui para acessar seus passes.
+      </p>
+    </div>
+    <% if @advertisement.invoice_url.present? %>
+      <iframe src="<%= @advertisement.invoice_url %>" class="mb-5 invoice" frameborder="0" style="min-height: 1500px; width: 100%"></iframe>
+    <% end %>
+    <% if @advertisement_error %>
+      <p class="danger-text">
+        <i class="fas fa-exclamation-triangle mr-3 p-5 fs-30"></i>
+        Ocorreu um erro no nosso provedor faturamento. Tente novamente amanhã.
+      </p>
     <% end %>
   </div>
-</div>
-<div class="payment-container container" data-order-id="<%= @advertisement.id %>">
-  <div class="my-5">
-    <h1 class="title">Pagamento do pedido</h1>
-    <p><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, o npuncio será gerado e todos terão acesso ao seu produto:</strong> </p>
-    <h3>1 anúncio para: <%= @advertisement.advertisable_type %></h3>
-    <h3>Valor total do pedido: <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></h3>
-    <p class="m-0 bg-primary text-white p-4 br-8 mb-3">
-      <i class="fa fa-info-circle my-3 pe-2"></i>Para pagar com PIX, clique em "Pix Copia e Cola", pague no aplicativo do seu banco, e retorne aqui para acessar seus passes.
-    </p>
-  </div>
-  <% if @advertisement.invoice_url.present? %>
-    <iframe src="<%= @advertisement.invoice_url %>" class="mb-5 invoice" frameborder="0" style="min-height: 1500px; width: 100%"></iframe>
-  <% end %>
-  <% if @advertisement_error %>
-    <p class="danger-text">
-      <i class="fas fa-exclamation-triangle mr-3 p-5 fs-30"></i>
-      Ocorreu um erro no nosso provedor faturamento. Tente novamente amanhã.
-    </p>
-  <% end %>
-</div>
+<% end%>

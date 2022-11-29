@@ -99,3 +99,28 @@
   margin-top: 6rem;
   border-radius: 3px;
 }
+
+
+//////////////////////////////ADVERTISEMENTS
+
+.btn-invoice {
+  background-color: transparent;
+  border-radius: 4px;
+  color: $color-primary;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 1px solid $color-primary;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    color: white;
+    border-color: white;
+  }
+}
