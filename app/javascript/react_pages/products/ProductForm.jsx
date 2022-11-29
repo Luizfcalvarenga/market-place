@@ -484,6 +484,21 @@ export function ProductForm(props) {
     sixthSection.classList.remove("d-none")
   }
 
+  const handleTerms = (e) => {
+    console.log(e.target)
+    const btnAnnounce = document.getElementById("new-announce")
+    // if (e.target.checked) {
+    //   btnAnnounce.disabled = false;
+    // } else {
+    //   btnAnnounce.disabled = true;
+    // }
+    if (btnAnnounce.disabled) {
+      btnAnnounce.removeAttribute("disabled");
+    } else {
+      btnAnnounce.setAttribute("disabled", "disabled");
+    }
+  }
+
 
   return (
     <div className="w-60 new-product-react py-5">
@@ -709,14 +724,71 @@ export function ProductForm(props) {
             }
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
-          <div className="text-center">
-            {props.productId && (
-              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
-            )}
-            {!props.productId && (
-              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-5">Anunciar</button>
-            )}
-          </div>
+
+        {!props.productId && (<>
+          {(productPrice < 50000) && (<>
+            <div className="text-center mt-3 mb-3">
+              <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
+              {!props.productId && (
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+              )}
+            </div>
+          </>)}
+
+          { (productPrice >= 50000) && (productPrice < 250000) && (<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
+            </div>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+              )}
+            </div>
+          </>)}
+
+          {(productPrice >= 250000) && (productPrice < 500000) && (<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
+            </div>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+              )}
+            </div>
+          </>)}
+
+          {(productPrice >= 500000) && (productPrice <= 1000000) &&(<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
+            </div>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+              )}
+            </div>
+          </>)}
+
+          {(productPrice > 1000000) && (<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
+            </div>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+              )}
+            </div>
+          </>)}
+        </>)}
+
+        <div className="text-center">
+          {props.productId && (
+            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
+          )}
+        </div>
         </div>
       </form>
     </div>
