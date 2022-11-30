@@ -201,15 +201,19 @@ export function ProductForm(props) {
       options = [ "", "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
-     } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+     } else if (attribute.name === "rear_suspension_travel" && ["road"].includes(productCategory)) {
       return
-    } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+     } else if (attribute.name === "shock_size" && ["road"].includes(productCategory)) {
       return
-    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper"].includes(productAttributes["brake_type"])) {
+     } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"])) {
       return
-    } else if (attribute.name === "seat_post_travel" && ["rigid"].includes(productAttributes["brake_type"])) {
+    } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"])) {
       return
-    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant"].includes(productCategory)) {
+    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
     } else {
       options = attribute.options
