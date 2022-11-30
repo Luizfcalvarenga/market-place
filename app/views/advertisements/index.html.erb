@@ -12,15 +12,17 @@
                 <% if advertisement.invoice_paid_at.present? %>
                   <i class="fas fa-handshake ms-2 mt-1" style="color: green;"></i>
                   <p><span class="topic-cards-index-media ms-3">Pago em: </span> <%= advertisement.invoice_paid_at.strftime("%d/%m/%Y") %> </p>
-                <% else %>
+                <% else%>
                   <i class="fas fa-clock ms-2 mt-1" style="color: red;"></i>
                   <p><span class="topic-cards-index-media ms-3">Aguardando pagamento</p>
                 <% end %>
               </div>
             </div>
-            <div>
-              <a href="<%= advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
-            </div>
+            <% if !advertisement.is_free? %>
+              <div>
+                <a href="<%= advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
+              </div>
+            <% end %>
           </div>
           <hr>
           <% if advertisement.advertisable_type == "Product" %>

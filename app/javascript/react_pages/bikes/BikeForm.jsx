@@ -1596,7 +1596,7 @@ export function BikeForm(props) {
             <div className="text-center mt-3 mb-3">
               <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
               {!props.bikeId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1606,9 +1606,10 @@ export function BikeForm(props) {
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
             </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1618,9 +1619,10 @@ export function BikeForm(props) {
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
             </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1630,9 +1632,10 @@ export function BikeForm(props) {
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
             </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1642,9 +1645,10 @@ export function BikeForm(props) {
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
             </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Anunciar</button>
+                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1652,7 +1656,7 @@ export function BikeForm(props) {
 
         <div className="text-center mt-3 mb-3">
           {props.bikeId && (
-            <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
+            <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce">Editar</button>
           )}
         </div>
       </div>
