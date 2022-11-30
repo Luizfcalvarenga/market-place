@@ -88,7 +88,10 @@ export function Products(props) {
                       <span className="visually-hidden">Next</span>
                     </button>
                   </div>
-                  <h4 className="card-title text-center mt-3">{product.product_type.name}</h4>
+                  <div className="d-flex justify-content-center gap-2 mt-3">
+                    <h4 className="card-title text-center">{product.brand}</h4>
+                    <h4 className="card-title text-center">{product.model}</h4>
+                  </div>
                   <h4 className="text-center mt-1">
                     {(product.price_in_cents / 100).toLocaleString("pt-BR", {
                       style: "currency",
@@ -97,10 +100,9 @@ export function Products(props) {
                   </h4>
                   <hr/>
                   <div className="card-content mt-2">
-                    <p className="text-center mt-1">{product.category.name} | {product.modality}</p>
                     <div className="d-flex justify-content-around">
-                      <p> {product.brand}</p>
-                      <p>{product.name}</p>
+                      <p> {product.locality}</p>
+                      <p>{product.product_type.name}</p>
                     </div>
                   </div>
                 </div>

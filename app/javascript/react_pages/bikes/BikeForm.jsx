@@ -707,7 +707,7 @@ export function BikeForm(props) {
 
   /////////////////////////////////////////////////BIKE TYPES
 
-  const bikeTypes = ["", "electric", "no_electric"]
+  const bikeTypes = ["", "e-bike", "normal"]
 
   /////////////////////////////////////////////////BIKE TYPES
 

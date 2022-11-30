@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
     if current_user.present?
       @user = current_user
     end
-    
+
     skip_authorization
 
     respond_to do |format|
@@ -101,6 +101,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, photos: [])
+    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :locality, :year, photos: [])
   end
 end

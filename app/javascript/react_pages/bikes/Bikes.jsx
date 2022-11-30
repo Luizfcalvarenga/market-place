@@ -86,7 +86,10 @@ export function Bikes(props) {
                     <span className="visually-hidden">Next</span>
                   </button>
                 </div>
-                <h4 className="card-title text-center mt-3">{bike.model}</h4>
+                <div className="d-flex justify-content-center gap-2 mt-3">
+                  <h4 className="card-title text-center">{bike.frame_brand}</h4>
+                  <h4 className="card-title text-center">{bike.model}</h4>
+                </div>
                 <h4 className="text-center mt-1">
                   {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                     style: "currency",
@@ -95,10 +98,9 @@ export function Bikes(props) {
                 </h4>
                 <hr/>
                 <div className="card-content mt-2">
-                  <p className="text-center mt-1">{bike.category.name} | {bike.modality}</p>
                   <div className="d-flex justify-content-around">
-                    <p>{bike.suspension_type}</p>
-                    <p>{bike.brake_type}</p>
+                    <p>{bike.locality}</p>
+                    <p>Bike | {bike.bike_type}</p>
                   </div>
                 </div>
               </div>

@@ -23,6 +23,11 @@ export function ProductForm(props) {
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
+  const [productLocality, setProductLocality ] = useState(null);
+  const [productYear, setProductYear ] = useState(null);
+  const [otherProductYear, setOtherProductYear ] = useState(null);
+
+
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [photoFile, setPhotoFile] = useState({
@@ -166,6 +171,9 @@ export function ProductForm(props) {
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
+      setProductLocality(response.data.product.locality);
+      setProductYear(response.data.product.year);
+
       if (response.data.product_attributes) {
         setProductAttributes(
           response.data.product_attributes
@@ -185,6 +193,13 @@ export function ProductForm(props) {
     } else {
       currentProductAttributes[attribute.name] = e.target.value
       setProductAttributes(currentProductAttributes)
+    }
+
+    if (attribute.name === "frame_brand") {
+      setProductBrand(e.target.value)
+    }
+    if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value !== "other") {
+      setProductModel(e.target.value)
     }
   }
 
@@ -223,7 +238,7 @@ export function ProductForm(props) {
     return (
       <div attribute={attribute} key={attribute.id} className="">
         <div id="">
-          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
+          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}<span className="requested-information ms-1">*</span></label><br />
           <select
           className="select-answer"
           onChange={(e) => createProductAttributes(e, attribute)}
@@ -253,11 +268,20 @@ export function ProductForm(props) {
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", productPrice );
     dataObject.append( "product[quantity]", productQuantity );
+    dataObject.append( "product[locality]", productLocality );
+
     if (productBrand === "Outra") {
       dataObject.append( "product[brand]", otherProductBrand );
     } else {
       dataObject.append( "product[brand]", productBrand );
     }
+
+    if (productYear === "other") {
+      dataObject.append( "product[year]", otherProductYear );
+    } else {
+      dataObject.append( "product[year]", productYear );
+    }
+
     if (productPhotos) {
       productPhotos.map((photo) => {
         dataObject.append( "product[photos][]", photo );
@@ -278,6 +302,9 @@ export function ProductForm(props) {
       description: productDescription,
       price_in_cents: productPrice,
       quantity: productQuantity,
+      locality: productLocality,
+      year: productYear,
+
       photos: productPhotos,
       productAttributes,
       service: productServiceId
@@ -510,6 +537,7 @@ export function ProductForm(props) {
 
   //////////////////////////////////////////////////////////////////////////////////
   const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]
+  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
 
   return (
     <div className="w-60 new-product-react py-5">
@@ -548,7 +576,7 @@ export function ProductForm(props) {
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
 
-          <label htmlFor="category" className="mt-3">Categoria:</label>
+          <label htmlFor="category" className="mt-3">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
@@ -559,6 +587,9 @@ export function ProductForm(props) {
               return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
             })}
           </select>
+          { errors && errors.product && errors.product.category && (
+            <p className="text-danger">{errors.product.category}</p>
+          )}
 
           { (productCategory === "mountain_bike" || productCategory === "dirt_street" || productCategory === "road") && (<>
 
@@ -573,9 +604,12 @@ export function ProductForm(props) {
                 return (<option key={index}>{modality}</option>);
               })}
             </select>
+            { errors && errors.product && errors.product.modality && (
+              <p className="text-danger">{errors.product.modality}</p>
+            )}
           </>)}
 
-          <label htmlFor="product" className="mt-4">Produto:</label>
+          <label htmlFor="product" className="mt-4">Produto:<span className="requested-information ms-1">*</span></label>
           <select
           value={productTypeId}
           onChange={(e) => setProductTypeId(e.target.value)}
@@ -586,9 +620,12 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
           </select>
+          { errors && errors.product && errors.product.product_type && (
+            <p className="text-danger">{errors.product.product_type}</p>
+          )}
 
           {!(productTypeId === "9") && (<>
-            <label htmlFor="productbrand" className="mt-3">Marca:</label>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
             onChange={(e) => setProductBrand(e.target.value)}
@@ -599,15 +636,28 @@ export function ProductForm(props) {
                 return (<option key={index} value={componentBrand}>{componentBrand}</option>)
               })}
             </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
           </>)}
 
 
           {!["2", "10", "12", "23", "25"].includes(productTypeId) && (<>
 
-            <label htmlFor="productModel" className="mt-4">Modelo:</label>
+            <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
-            { errors && errors.product && errors.product.name && (
-              <p className="text-danger">{errors.product.name}</p>
+            { errors && errors.product && errors.product.model && (
+              <p className="text-danger">{errors.product.model}</p>
             )}
           </>)}
 
@@ -643,13 +693,36 @@ export function ProductForm(props) {
           <div id="fourth-section" className="card-questions mb-5 d-none">
             <h4 className="text-center text-success">Informações adicionais</h4>
 
-            <label htmlFor="productbrand" className="mt-3">Marca:</label>
-            <input type="text" className="text-input"  value={productBrand ? productBrand : ""} onChange={(e) => setProductBrand(e.target.value)}/>
+            <label htmlFor="productLocality" className="mt-3">Local:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input"  value={productLocality ? productLocality : ""} onChange={(e) => setProductLocality(e.target.value)}/>
+            { errors && errors.product && errors.product.locality && (
+              <p className="text-danger">{errors.product.locality[0]}</p>
+            )}
 
-            <label htmlFor="productModel" className="mt-4">Modelo:</label>
-            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
-            { errors && errors.product && errors.product.name && (
-              <p className="text-danger">{errors.product.name}</p>
+
+            <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={productYear}
+              onChange={(e) => setProductYear(e.target.value)}
+
+            >
+              {years.map((year, index)=> {
+                return (<option key={index}>{year}</option>);
+              })}
+            </select>
+            { errors && errors.product && errors.product.year && (
+              <p className="text-danger">{errors.product.year[0]}</p>
+            )}
+
+            { productYear === "other"  && (
+              <>
+                <label htmlFor="otherProductYear" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                <input type="text" className="text-input" onChange={(e) => setOtherProductYear(e.target.value)}/>
+                { errors && errors.product && errors.product.year && (
+                  <p className="text-danger">{errors.product.year}</p>
+                )}
+              </>
             )}
 
 
@@ -657,14 +730,14 @@ export function ProductForm(props) {
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
 
-            <label htmlFor="productPrice" className="mt-4">Preço:</label>
+            <label htmlFor="productPrice" className="mt-4">Preço:<span className="requested-information ms-1">*</span></label>
             <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
             { errors && errors.product && errors.product.price_in_cents && (
               <p className="text-danger">{errors.product.price_in_cents}</p>
             )}
 
 
-            <label htmlFor="productQuantity" className="mt-4">Quantidade:</label>
+            <label htmlFor="productQuantity" className="mt-4">Quantidade:<span className="requested-information ms-1">*</span></label>
             <input type="number" className="text-input" value={productQuantity ? productQuantity : ""} onChange={(e) => setProductQuantity(e.target.value)}/>
             { errors && errors.product && errors.product.quantity && (
               <p className="text-danger">{errors.product.quantity}</p>
@@ -719,11 +792,28 @@ export function ProductForm(props) {
             <p><span className="text-success">Categoria:</span> {productCategory}</p>
             <p><span className="text-success">Modalidade:</span> {productModality}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
+            <p><span className="text-success">Local:</span> {productLocality}</p>
             <p><span className="text-success">Preço:</span>  {(productPrice / 100).toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
-            <p><span className="text-success">Marca:</span> {productBrand}</p>
+            {productYear === "other" && (
+
+              <p><span className="text-success">Ano:</span> {otherProductYear}</p>
+            )}
+            {productYear !== "other" && (
+
+              <p><span className="text-success">Ano:</span> {productYear}</p>
+            )}
+
+            {productBrand === "Outra" && (
+
+              <p><span className="text-success">Marca:</span> {otherProductBrand}</p>
+            )}
+            {productBrand !== "Outra" && (
+
+              <p><span className="text-success">Marca:</span> {productBrand}</p>
+            )}
             <p><span className="text-success">Modelo:</span> {productModel}</p>
           </div>
 

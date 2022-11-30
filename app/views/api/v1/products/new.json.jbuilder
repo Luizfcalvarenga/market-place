@@ -4,8 +4,10 @@ json.category_id @product.category_id
 json.modality @product.modality
 json.product_type_id @product.product_type_id
 json.brand @product.brand
-json.name @product.name
+json.model @product.model
 json.description @product.description
 json.price_in_cents @product.price_in_cents
 json.quantity @product.quantity
 json.photos @product.photos
+json.locality @product.locality
+json.year @product.year

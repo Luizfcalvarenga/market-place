@@ -80,7 +80,10 @@ export function Bike(props) {
 
           <div className="col-12 col-md-4 card-bike">
             <div className="d-flex justify-content-between">
-              <h3 className="card-title mt-3"> {bike.category.name}</h3>
+              <div>
+                <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
+                {/* <h3 className="card-title mt-3"> {bike.model}</h3> */}
+              </div>
               <i className="far fa-heart mt-4"></i>
             </div>
             <h4 className="card-title mt-1">{bike.modality}</h4>
@@ -91,11 +94,14 @@ export function Bike(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p className=""><strong>Local:</strong> {bike.locality} </p>
-              <p className=""><strong>Modelo:</strong> {bike.model}</p>
-              <p className=""><strong>Ano:</strong> {bike.year}</p>
-              <p className=""><strong>Quadro:</strong> {bike.frame_brand}</p>
-              <p className=""><strong>Tipo da bike:</strong> {bike.bike_type}</p>
+              <p className=""><strong className="text-success">Categoria:</strong> {bike.category.name} </p>
+              <p className=""><strong className="text-success">Modalidade:</strong> {bike.modality}</p>
+              <p className=""><strong className="text-success">Tipo da bike:</strong> {bike.bike_type}</p>
+              <p className=""><strong className="text-success">Ano:</strong> {bike.year}</p>
+              <p className=""><strong className="text-success">Tamanho do quadro:</strong> {bike.frame_size}</p>
+              <p className=""><strong className="text-success">Material do quadro:</strong> {bike.frame_material}</p>
+              <p className=""><strong className="text-success">Local:</strong> {bike.locality}</p>
+
             </div>
             <a href={"/user/" + bike.user_id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>

@@ -5,8 +5,11 @@ json.products @products do |product|
   json.modality product.modality
   json.product_type product.product_type
   json.brand product.brand
-  json.name product.name
+  json.model product.model
   json.description product.description
   json.price_in_cents product.price_in_cents
   json.quantity product.quantity
+  json.locality product.locality
+  json.year product.year
+
 end

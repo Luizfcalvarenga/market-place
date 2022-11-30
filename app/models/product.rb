@@ -10,6 +10,7 @@ class Product < ApplicationRecord
 
   has_many_attached :photos
 
+  # validates :category, :modality, :brand, :model, :year, :locality,  presence: true
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
 
