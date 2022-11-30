@@ -353,7 +353,14 @@
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
   margin-top: 2rem;
   padding: 20px;
+  width: 49%;
   p {
     font-size: 16px;
+  }
+
+  .index-line {
+    border: 1px solid grey;
+    width: 100%;
+
   }
 }
