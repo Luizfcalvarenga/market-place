@@ -18,7 +18,8 @@ export function ProductForm(props) {
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
   const [productBrand, setProductBrand] = useState("");
-  const [productName, setProductName] = useState("");
+  const [otherProductBrand, setOtherProductBrand] = useState("");
+  const [productModel, setProductModel] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
@@ -161,7 +162,7 @@ export function ProductForm(props) {
       setCategoryId(response.data.product.category_id);
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
-      setProductName(response.data.product.name);
+      setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
@@ -248,11 +249,15 @@ export function ProductForm(props) {
     dataObject.append( "product[category_id]", categoryId );
     dataObject.append( "product[modality]", productModality );
     dataObject.append( "product[product_type_id]", productTypeId );
-    dataObject.append( "product[brand]", productBrand );
-    dataObject.append( "product[name]", productName );
+    dataObject.append( "product[model]", productModel );
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", productPrice );
     dataObject.append( "product[quantity]", productQuantity );
+    if (productBrand === "Outra") {
+      dataObject.append( "product[brand]", otherProductBrand );
+    } else {
+      dataObject.append( "product[brand]", productBrand );
+    }
     if (productPhotos) {
       productPhotos.map((photo) => {
         dataObject.append( "product[photos][]", photo );
@@ -269,7 +274,7 @@ export function ProductForm(props) {
       modality: productModality,
       product_type_id: productTypeId,
       brand: productBrand,
-      name: productName,
+      model: productModel,
       description: productDescription,
       price_in_cents: productPrice,
       quantity: productQuantity,
@@ -503,6 +508,8 @@ export function ProductForm(props) {
     }
   }
 
+  //////////////////////////////////////////////////////////////////////////////////
+  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]
 
   return (
     <div className="w-60 new-product-react py-5">
@@ -579,6 +586,32 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
           </select>
+
+          {!(productTypeId === "9") && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:</label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              {componentBrands.map((componentBrand, index) => {
+                return (<option key={index} value={componentBrand}>{componentBrand}</option>)
+              })}
+            </select>
+          </>)}
+
+
+          {!["2", "10", "12", "23", "25"].includes(productTypeId) && (<>
+
+            <label htmlFor="productModel" className="mt-4">Modelo:</label>
+            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
+            { errors && errors.product && errors.product.name && (
+              <p className="text-danger">{errors.product.name}</p>
+            )}
+          </>)}
+
+
           <div className="text-center">
             <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
@@ -613,8 +646,8 @@ export function ProductForm(props) {
             <label htmlFor="productbrand" className="mt-3">Marca:</label>
             <input type="text" className="text-input"  value={productBrand ? productBrand : ""} onChange={(e) => setProductBrand(e.target.value)}/>
 
-            <label htmlFor="productName" className="mt-4">Nome:</label>
-            <input type="text" className="text-input" value={productName ? productName : ""} onChange={(e) => setProductName(e.target.value)}/>
+            <label htmlFor="productModel" className="mt-4">Modelo:</label>
+            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.name && (
               <p className="text-danger">{errors.product.name}</p>
             )}
@@ -691,7 +724,7 @@ export function ProductForm(props) {
                     currency: "BRL",
                   })}</p>
             <p><span className="text-success">Marca:</span> {productBrand}</p>
-            <p><span className="text-success">Nome:</span> {productName}</p>
+            <p><span className="text-success">Modelo:</span> {productModel}</p>
           </div>
 
 

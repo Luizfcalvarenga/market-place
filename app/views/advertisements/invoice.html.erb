@@ -1,4 +1,4 @@
-<% if @adertisement.price_in_cents == 0 %>
+<% if @advertisement.price_in_cents == 0 %>
   <div class="payment-confirmed vh-100 success-text flex center around">
     <div class="p-5 flex center column">
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
@@ -15,6 +15,7 @@
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
       <h3>Pagamento confirmado!</h3>
       <p>Seu anuncio foi criado e pode ser acessado no seu perfil.</p>
+      <p class="text-center"><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, a compra será finalizada:</strong> </p>
       <%= link_to my_products_path, class: "after-payment-button-link" do %>
         <p class="btn btn-dark w-100 p-2 px-5 br-8">Ver meu produtp</p>
       <% end %>

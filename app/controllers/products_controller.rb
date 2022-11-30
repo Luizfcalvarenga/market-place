@@ -80,8 +80,7 @@ class ProductsController < ApplicationController
     if current_user.present?
       @user = current_user
     end
-
-
+    
     skip_authorization
 
     respond_to do |format|
@@ -98,17 +97,10 @@ class ProductsController < ApplicationController
     @current_filters = params[:filters]
     @products = Product.all
     @products = @products.where(:product_type_id => @current_filters[:product_type_id]) if @current_filters[:product_type_id]
-
-
-
   end
-
-
-
-
   private
 
   def product_params
-    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity, photos: [])
+    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, photos: [])
   end
 end
