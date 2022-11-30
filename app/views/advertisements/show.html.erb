@@ -1,6 +1,9 @@
 <div class="container advertisement my-5">
   <h3 class="text-center text-success">Meu anuncio</h3>
-  <p> <small>Estamos quase, seu produto foi cadastrado com sucesso, porém só será anunciado após finalizar o processo pagando o invoice.</small> </p>
+  <p class="text-center"> <small>Estamos quase, seu produto foi cadastrado com sucesso, porém só será anunciado após finalizar o processo pagando o invoice.</small> </p>
+  <p class="text-center"> <small> Antes de efetuar o pagamento confira seus dados em seu perfil (cpf e cep)</small></p>
+  <p class="text-center"> <small> Você pode acessar sua fatura na seção de "Anúncios" no seu perfil</small></p>
+
   <h4>
     <span class="text-success">Valor:</span> <%= number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
   </h4>

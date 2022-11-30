@@ -11,7 +11,7 @@
 <div class="payment-container container" data-order-id="<%= @order.id %>">
   <div class="my-5">
     <h1 class="title">Pagamento do pedido</h1>
-    <p><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, a compra será finalizada:</strong> </p>
+    <p class="text-center"><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, a compra será finalizada:</strong> </p>
     <h3>Total itens: <%= @order.order_items.count %></h3>
     <h3>Valor total do pedido: <%= number_to_currency((@order.price_in_cents / 100), unit: "R$", separator: ",", delimiter: ".") %></h3>
     <p class="m-0 bg-primary text-white p-4 br-8 mb-3">

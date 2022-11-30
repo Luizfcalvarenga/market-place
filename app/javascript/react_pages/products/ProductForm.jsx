@@ -747,7 +747,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -760,7 +760,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -773,7 +773,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
@@ -786,7 +786,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" disabled="disabled" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
               )}
             </div>
           </>)}
