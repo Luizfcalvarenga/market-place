@@ -909,6 +909,7 @@
 
       )
 
+      advertisement = Advertisement.create!(advertisable: product, user: user, status: "paid", price_in_cents: 15000)
       product_attributes =  ProductTypeAttribute.where(product_type: product.product_type).each do | product_type_attribute |
         ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample)
       end
@@ -930,6 +931,8 @@
 
     10.times do
       category = [mtb, dirt, road].sample
+      user = [buyer, seller, bike_user].sample
+
 
       bike = Bike.create!(
         category_id:  category.id,
@@ -961,6 +964,8 @@
         description: "Bicicleta em perfeito estado apenas 1 dono.",
         accessories: "Não"
       )
+      advertisement = Advertisement.create!(advertisable: bike, user: user, status: "paid", price_in_cents: 15000)
+
     end
     puts "Seed finished"
   end

@@ -8,7 +8,8 @@ module Api
 
       def index
         @user = current_user
-        @products = Product.where.not(user: @user)
+        # @products = Product.where.not(user: @user)
+        @products = Advertisement.where(status: "paid").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
