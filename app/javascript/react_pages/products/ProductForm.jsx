@@ -201,11 +201,17 @@ export function ProductForm(props) {
     if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value !== "other") {
       setProductModel(e.target.value)
     }
+    if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other") {
+      setProductModel(e.target.value)
+    }
   }
 
   const changeAttribute = (e, attribute) => {
     productAttributes[attribute.name] = e.target.value
     setProductAttributes(productAttributes)
+    if (attribute.name === "brake_model" || attribute.name === "model") {
+      setProductModel(e.target.value)
+    }
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -248,10 +254,19 @@ export function ProductForm(props) {
               return (<option key={index} value={option}>{option}</option>)
             })}
           </select>
+
+
           <div id={attribute.name} class="d-none">
             <label htmlFor="productbrand" className="mt-3">Qual:</label>
             <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
           </div>
+
+          {/* {(attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other" && (
+          <div id={attribute.name} class="d-none">
+            <label htmlFor="productbrand" className="mt-3">Qual:</label>
+            <input type="text" className="text-input" onChange={(e) => setProductModel(e.target.value)}/>
+          </div>
+          )} */}
         </div>
       </div>
     )
@@ -538,7 +553,7 @@ export function ProductForm(props) {
   //////////////////////////////////////////////////////////////////////////////////
   const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]
   const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
-
+  const productsIdsWithSpecificModels = ["2", "10", "12", "23", "25"]
   return (
     <div className="w-60 new-product-react py-5">
       <h1 className="text-success  text-center">Vamos lá...</h1>
@@ -652,7 +667,7 @@ export function ProductForm(props) {
           </>)}
 
 
-          {!["2", "10", "12", "23", "25"].includes(productTypeId) && (<>
+          {!productsIdsWithSpecificModels.includes(productTypeId) && (<>
 
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
