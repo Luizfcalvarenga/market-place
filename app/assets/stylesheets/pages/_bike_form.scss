@@ -101,7 +101,7 @@
 
 .btn-technicality {
   border: 1px solid $color-primary !important;
-  background-color: rgb(10,10,10) !important;
+  background-color: rgb(10,10,10);
   color: $color-primary;
   border-radius: 3px;
 
@@ -109,6 +109,20 @@
   &:hover {
     color: #22e058;
     border-color: #22e058;
+  }
+}
+
+.btn-selected {
+  background-color: $color-primary;
+  color: white;
+  border-color: $color-primary;
+
+  i {
+    transform: rotate(-180deg);
+  }
+
+  &:hover {
+    color: white;
   }
 }
 
@@ -175,6 +189,18 @@
   font-size: 13px;
   margin-top: 30%;
 }
+
+.review-selected {
+  background-color: $color-primary;
+  color: white;
+  border-color: $color-primary;
+
+  &:hover {
+    color: white;
+  }
+}
+
+
 
 .image-review {
   width: 150px;

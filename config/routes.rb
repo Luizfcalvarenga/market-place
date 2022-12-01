@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   get 'user/:id', to: 'users#show', as: 'user'
-  
+
   resources :bikes do
     resource :order_items, only: [:new, :create, :destroy]
 
@@ -47,13 +47,15 @@ Rails.application.routes.draw do
 
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
+  # get 'search', to: 'pages#search', as: "search"
+
 
   resource :profiles
 
   # resource :products
 
   get 'my_products', to: 'products#my_products', as: "my_products"
-  get 'search', to: 'products#search', as: "search"
+  # get 'search', to: 'products#search', as: "search"
 
   # delete 'my_products/product/:id', to: 'profiles#destroy'
 

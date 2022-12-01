@@ -71,17 +71,12 @@ export function BikeForm(props) {
   const [motor, setMotor] = useState("");
   const [batteryCycles, setBatteryCycles] = useState("");
   const [photosPreview, setPhotosPreview] = useState([]);
-
-
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
-
   const [photos, setPhotos ] = useState(null);
-
   const [photoFile, setPhotoFile] = useState({
     index: null,
   });
-
   const [errors, setErrors] = useState({
     bike: {},
   });
@@ -99,7 +94,6 @@ export function BikeForm(props) {
     if (props.bikeId) {
       fetchBike();
       setBikeId(props.bikeId);
-
     }
   }, []);
 
@@ -126,7 +120,6 @@ export function BikeForm(props) {
         setPhotosPreview(undefined)
         return
     }
-
     const photoFile = []
     const objectUrls = []
     for (let i = 0; i < photos.length; i++) {
@@ -137,16 +130,11 @@ export function BikeForm(props) {
         name: photoName,
         url: fileURL
       }
-
       photoFile.push(nameURL)
       objectUrls.push(fileURL);
-
     }
-
     setPhotosPreview(objectUrls)
     setPhotoFile(photoFile)
-
-
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
   }, [photos])
@@ -154,10 +142,8 @@ export function BikeForm(props) {
 
   const createBikePhotos = (e) => {
     const photos = Object.values(e.target.files)
-    // console.log(e.target.files)
     setPhotos(photos)
     console.log(photos)
-
   }
 
   function removeObjectWithId(arr, name) {
@@ -170,7 +156,6 @@ export function BikeForm(props) {
     console.log(e)
     console.log(e.nativeEvent.path[1].childNodes[0].src)
     if (e.nativeEvent.path[1].childNodes[0].src) {
-
       const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
       setPhotosPreview(newPhotosPreview);
       const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
@@ -181,15 +166,8 @@ export function BikeForm(props) {
       const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
       setPhotos(removeObjectWithId(photos, photoToRemove))
     }
-
   }
 
-  const handleReviewSection = (e) => {
-    console.log(e.target.innerText)
-    const section = document.getElementById(e.target.innerText)
-    console.log(section)
-    section.classList.toggle("d-none")
-  }
 
 
   async function fetchBike() {
@@ -297,15 +275,11 @@ export function BikeForm(props) {
     dataObject.append( "bike[handlebar]", handlebar );
     dataObject.append( "bike[stem]", stem );
     dataObject.append( "bike[battery_cycles]", batteryCycles );
-
-
-
     if (photos) {
       photos.map((photo) => {
         dataObject.append( "bike[photos][]", photo );
       })
     }
-
 
     if (frameMaterial === "other") {
       dataObject.append( "bike[frame_material]", otherFrameMaterial );
@@ -385,7 +359,6 @@ export function BikeForm(props) {
       dataObject.append( "bike[accessories]", accessories );
     }
 
-
     const url = props.bikeId
     ? `/api/v1/bikes/${props.bikeId}`
     : "/api/v1/bikes";
@@ -398,10 +371,8 @@ export function BikeForm(props) {
     } else {
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       setErrors(response.data.errors);
-
     }
   }
-
 
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
@@ -488,10 +459,8 @@ export function BikeForm(props) {
       progressThree.classList.add("section-done")
       progressFour.classList.add("section-done")
       progressFive.classList.add("section-done")
-
     }
   }
-
 
   const handleFirstStep = (e) => {
     const progressOne = document.getElementById("progress-1")
@@ -534,9 +503,30 @@ export function BikeForm(props) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  const handleTechnicalSection = (e) => {
+    const technicalSection = document.getElementById(e.target.innerText);
+    const sectionActive = e.target;
+    technicalSection.classList.toggle("d-none")
+    sectionActive.classList.toggle("btn-selected")
+    console.log(e)
+  }
+
+
+  const handleReviewSection = (e) => {
+    console.log(`${e.target.innerText}(reviews)`)
+    const section = document.getElementById(e.target.innerText + "(review)")
+    const sectionActive = e.target;
+
+    console.log(section)
+    section.classList.toggle("d-none")
+    sectionActive.classList.toggle("review-selected")
+
+
+  }
+
   //////////////////////////////////////////////// frames
 
-  const frameBrands = ["",
+  const frameBrands = [
     "alfameq",
     "astro",
     "audax",
@@ -627,86 +617,74 @@ export function BikeForm(props) {
     "other"
   ].sort()
 
-  const roadFrameSizes =  ["", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["", "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const frameMaterials = ["", "aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
+  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
   //////////////////////////////////////////////// suspensions
 
-  const suspensionTypes = ["", "no_suspension", "full_suspension", "hardtail"]
-  const frontSuspensionTravels = ["", "80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
-  const rearSuspensionTravels = ["", "80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
-
-  const shockSizes = ["", "165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-
-  const mtbDirtUrbanFrontSuspensionModels = ["", "FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
-
-
-  const mtbDirtUrbanRearSuspensionModels = ["", "FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
+  const suspensionTypes = ["no_suspension", "full_suspension", "hardtail"]
+  const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
+  const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
+  const shockSizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+  const mtbDirtUrbanFrontSuspensionModels = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
+  const mtbDirtUrbanRearSuspensionModels = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
 
  ///////////////////////////////////////////////// brake
 
-  const brakeTypes = ["", "v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
-  const discSizes = ["", "140mm", "160mm", "180mm", "200mm", "203mm", "other" ]
-  const roadBrakeModels = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
-  const mtbDirtUrbanBrakeModels = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
-
-
+  const brakeTypes = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+  const discSizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ]
+  const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+  const mtbDirtUrbanBrakeModels = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
 
   //////////////////////////////////////////////// seat post
 
-  const seatPostTypes = ["", "retractable", "rigid" ]
-  const seatPostTravels = ["", "50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
+  const seatPostTypes = ["retractable", "rigid" ]
+  const seatPostTravels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
 
   /////////////////////////////////////////////// gears
 
   const frontGears = [0, 1, 2, 3]
   const rearGears = [0, 1, 7, 8, 9, 10, 11, 12]
-
-  const roadFrontDerailleurModels = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
-  const mtbDirtUrbanFrontDerailleurModels = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
-
-  const roadRearDerailleurModels = ["", "SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
-  const mtbDirtUrbanRearDerailleurModels = ["", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
+  const roadFrontDerailleurModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
+  const mtbDirtUrbanFrontDerailleurModels = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
+  const roadRearDerailleurModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+  const mtbDirtUrbanRearDerailleurModels = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
 
   ///////////////////////////////////////////// rim
 
-  const rimSizes = ["", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "700C", "650B", "Fatbike"]
+  const rimSizes = ["20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "700C", "650B", "Fatbike"]
 
   /////////////////////////////////////////// conditions
-  const bikeConditions = ["", "new", "used", ];
-  const structuralVisualConditions = ["", "perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired"]
-  const operatingConditions = ["", "rears_worn_out_higher_75", "hifters_not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
+  const bikeConditions = ["new", "used", ];
+  const structuralVisualConditions = ["perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired"]
+  const operatingConditions = ["rears_worn_out_higher_75", "hifters_not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
 
  ////////////////////////////////////////////////// documentation
 
- const documentationTypes = ["", "Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro", "Sem Documento"]
+ const documentationTypes = ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro", "Sem Documento"]
 
  //////////////////////////////////////////////// batteries
 
- const batteries = ["", "320wH", "500Wh", "625Wh", "700Wh", "other"]
+ const batteries = ["320wH", "500Wh", "625Wh", "700Wh", "other"]
 
  //////////////////////////////////////////////YEARS
 
-
-  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
-
+  const years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
 
   /////////////////////////////////////////////////BIKE TYPES
 
-  const bikeTypes = ["", "electric", "no_electric"]
+  const bikeTypes = ["e-bike", "normal"]
 
   /////////////////////////////////////////////////BIKE TYPES
 
-  const withinAccessories = ["", "no", "yes"]
+  const withinAccessories = ["no", "yes"]
 
   //////////////////////////////////////////////ACCESSORIES
 
-
-  const accessoryOptions = ["", "Não", "Pedal", "Ciclocomputador", "Lanterna traseira", "Farol", "Bolsa de acessórios", "Suporte de garrafinha", "Outro"]
+  const accessoryOptions = ["Não", "Pedal", "Ciclocomputador", "Lanterna traseira", "Farol", "Bolsa de acessórios", "Suporte de garrafinha", "Outro"]
 
   return (
-
     <div className="w-60 new-bike-react py-5">
       <h1 className="text-success pb-3 text-center">Vamos lá...</h1>
       <ul className="list-group list-group-horizontal-sm progress-bar pb-5">
@@ -719,19 +697,17 @@ export function BikeForm(props) {
         <li id="progress-4" className="progress progress-4"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>4</button></li>
         <hr className="progress-path"/>
         <li id="progress-5" className="progress progress-5"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>5</button></li>
-
       </ul>
 
       <div id="first-section" className="card-bike-select mb-5">
         <h4 className="text-center text-success">Informações gerais</h4>
-
-
         <label htmlFor="bikeType" className="mt-3 text-start">Tipo da bike: <span className="requested-information ms-1">*</span></label>
         <select
           className="select-answer"
           value={bikeType}
           onChange={(e) => setBikeType(e.target.value)}
         >
+          <option value=""></option>
           {bikeTypes.map((bikeType, index) => {
             return (<option key={index}>{bikeType}</option>);
           })}
@@ -746,6 +722,7 @@ export function BikeForm(props) {
         onChange={(e) =>  setCategory(e.target.value) }
         className="select-answer"
         >
+          <option value=""></option>
           {categories.map((category) => {
             return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
           })}
@@ -755,13 +732,13 @@ export function BikeForm(props) {
         )}
 
         { (category === "mountain_bike" || category === "dirt_street" || category === "road") && (<>
-
           <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
           <select
             value={modality}
             onChange={(e) => e.preventDefault && setModality(e.target.value)}
             className="select-answer"
           >
+            <option value=""></option>
             {modalities.map((modality, index) => {
               return (<option key={index}>{modality}</option>);
             })}
@@ -778,8 +755,8 @@ export function BikeForm(props) {
             className="select-answer"
             value={frameSize}
             onChange={(e) => setFrameSize(e.target.value)}
-
           >
+            <option value=""></option>
             {roadFrameSizes.map((frameSize, index)=> {
               return (<option key={index}>{frameSize}</option>);
             })}
@@ -795,8 +772,8 @@ export function BikeForm(props) {
             className="select-answer"
             value={frameSize}
             onChange={(e) => setFrameSize(e.target.value)}
-
           >
+            <option value=""></option>
             {dirtMtbFrameSizes.map((frameSize, index)=> {
               return (<option key={index}>{frameSize}</option>);
             })}
@@ -811,8 +788,8 @@ export function BikeForm(props) {
           className="select-answer"
           value={frameBrand}
           onChange={(e) => setFrameBrand(e.target.value)}
-
         >
+          <option value=""></option>
           {frameBrands.map((frameBrand, index) => {
             return (<option key={index}>{frameBrand}</option>);
           })}
@@ -826,8 +803,8 @@ export function BikeForm(props) {
           className="select-answer"
           value={frameMaterial}
           onChange={(e) => setFrameMaterial(e.target.value)}
-
         >
+          <option value=""></option>
           {frameMaterials.map((frameMaterial, index)=> {
             return (<option key={index}>{frameMaterial}</option>);
           })}
@@ -848,8 +825,8 @@ export function BikeForm(props) {
           className="select-answer"
           value={documentationType}
           onChange={(e) => setDocumentationType(e.target.value)}
-
         >
+          <option value=""></option>
           {documentationTypes.map((documentationType, index)=> {
             return (<option key={index}>{documentationType}</option>);
           })}
@@ -863,8 +840,8 @@ export function BikeForm(props) {
           className="select-answer"
           value={bikeCondition}
           onChange={(e) => setBikeCondition(e.target.value)}
-
         >
+          <option value=""></option>
           {bikeConditions.map((bikeCondition, index)=> {
               return (<option key={index}>{bikeCondition}</option>);
             })}
@@ -878,8 +855,8 @@ export function BikeForm(props) {
           className="select-answer"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-
         >
+          <option value=""></option>
           {years.map((year, index)=> {
             return (<option key={index}>{year}</option>);
           })}
@@ -919,7 +896,6 @@ export function BikeForm(props) {
           <p className="text-danger">{errors.bike.locality[0]}</p>
         )}
 
-
         <label htmlFor="weight" className="mt-4">peso:(opicional)</label>
         <input type="number" className="text-input" placeholder="Em Kg" value={weight}onChange={(e) => setWeight(e.target.value)}/>
 
@@ -935,23 +911,44 @@ export function BikeForm(props) {
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
-        {category === "road" && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão<i class="fas fa-chevron-down ms-2"></i></button>
-          <div id="transmission" className="transmission d-none mb-3">
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Transmissão<i class="fas fa-chevron-down ms-2"></i></button>
+        <div id="Transmissão" className="transmission d-none mb-3">
             <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
             <select
               className="select-answer"
               value={numberOfFrontGears}
               onChange={(e) => setNumberOfFrontGears(e.target.value)}
             >
+              <option value=""></option>
               {frontGears.map((frontGear, index)=> {
                 return (<option key={index}>{frontGear}</option>);
               })}
             </select>
 
+            <label htmlFor="numberOfRearGears" className="mt-4">Marchas traseiras?</label>
+            <select
+              className="select-answer"
+              value={numberOfRearGears}
+              onChange={(e) => setNumberOfRearGears(e.target.value)}
+            >
+              <option value=""></option>
+              {rearGears.map((rearGear, index)=> {
+                return (<option key={index}>{rearGear}</option>);
+              })}
+            </select>
+
+            <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
+            <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
+
+            <label htmlFor="front_gear" className="mt-4">Corrente:</label>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
+          {category === "road" && (<>
             <label htmlFor="front_gear" className="mt-4">Câmbio dianteiro:</label>
-            <select class="select-answer" aria-label=".form-select-sm example"  value={frontDerailleurModel}
-            onChange={(e) => setFrontDerailleurModel(e.target.value)}>
+            <select className="select-answer" aria-label=".form-select-sm example"
+              value={frontDerailleurModel}
+              onChange={(e) => setFrontDerailleurModel(e.target.value)}
+            >
+              <option value=""></option>
               {roadFrontDerailleurModels.map((frontDerailleurModel, index)=> {
                 return (<option key={index}>{frontDerailleurModel}</option>);
               })}
@@ -960,25 +957,16 @@ export function BikeForm(props) {
             { frontDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text-input" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
-            <label htmlFor="numberOfRearGears" className="mt-4">Marchas traseiras?</label>
-            <select
-              className="select-answer"
-              value={numberOfRearGears}
-              onChange={(e) => setNumberOfRearGears(e.target.value)}
-
-            >
-              {rearGears.map((rearGear, index)=> {
-                return (<option key={index}>{rearGear}</option>);
-              })}
-            </select>
-
             <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
-            <select class="select-answer" aria-label=".form-select-sm example"  value={rearDerailleurModel}
-            onChange={(e) => setRearDerailleurModel(e.target.value)}>
+            <select className="select-answer" aria-label=".form-select-sm example"
+              value={rearDerailleurModel}
+              onChange={(e) => setRearDerailleurModel(e.target.value)}
+            >
+              <option value=""></option>
               {roadRearDerailleurModels.map((rearDerailleurModel, index)=> {
                 return (<option key={index}>{rearDerailleurModel}</option>);
               })}
@@ -987,26 +975,18 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text-input" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
+          </>)}
 
-            <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
-            <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
-
-            <label htmlFor="front_gear" className="mt-4">Corrente:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
-
-          </div>
-        </>)}
-
-        {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("transmission").classList.toggle("d-none")}>Trasmissão<i className="fas fa-chevron-down ms-2"></i></button>
-          <div id="transmission" className="transmission d-none mb-3">
-
+          {(category === "mountain_bike" || category === "dirt_street" || category === "urban" || category === "infant") && (<>
             <label htmlFor="front_gear" className="mt-3">Câmbio dianteiro:</label>
-            <select className="select-answer" aria-label=".form-select-sm example"  value={frontDerailleurModel}
-            onChange={(e) => setFrontDerailleurModel(e.target.value)}>
+            <select className="select-answer" aria-label=".form-select-sm example"
+              value={frontDerailleurModel}
+              onChange={(e) => setFrontDerailleurModel(e.target.value)}
+            >
+              <option value=""></option>
               {mtbDirtUrbanFrontDerailleurModels.map((frontDerailleurModels, index)=> {
                 return (<option key={index}>{frontDerailleurModels}</option>);
               })}
@@ -1020,8 +1000,11 @@ export function BikeForm(props) {
             )}
 
             <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
-            <select className="select-answer" aria-label=".form-select-sm example" value={rearDerailleurModel}
-            onChange={(e) => setRearDerailleurModel(e.target.value)}>
+            <select className="select-answer" aria-label=".form-select-sm example"
+              value={rearDerailleurModel}
+              onChange={(e) => setRearDerailleurModel(e.target.value)}
+              >
+              <option value=""></option>
               {mtbDirtUrbanRearDerailleurModels.map((rearDerailleurModels, index)=> {
                 return (<option key={index}>{rearDerailleurModels}</option>);
               })}
@@ -1033,40 +1016,32 @@ export function BikeForm(props) {
                 <input type="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
-
-            <label htmlFor="crankset" className="mt-4">Pédivela:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
-
-            <label htmlFor="chain" className="mt-4">Corrente:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
-          </div>
-        </>)}
+          </>)}
+        </div>
 
                                                                        {/*//////////////////FREIOS///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("brakes").classList.toggle("d-none")}>Freios<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="brakes" className="brake d-none mb-3">
-
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Freios<i className="fas fa-chevron-down ms-2"></i></button>
+        <div id="Freios" className="brake d-none mb-3">
           <label htmlFor="brakeType" className="mt-3">Qual o tipo de freio?</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={brakeType}
             onChange={(e) => setBrakeType(e.target.value)}
-
           >
+            <option value=""></option>
             {brakeTypes.map((brakeType, index)=> {
               return (<option key={index}>{brakeType}</option>);
             })}
           </select>
-
           {(brakeType === "hydraulic_disc" || brakeType === "mechanical_disc") && (<>
             <label htmlFor="disc_size" className="mt-4">Tamanho do disco?</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={brakeDiscSize}
               onChange={(e) => setBrakeDiscSize(e.target.value)}
-
             >
+              <option value=""></option>
               {discSizes.map((discSize, index)=> {
                 return (<option key={index}>{discSize}</option>);
               })}
@@ -1084,8 +1059,8 @@ export function BikeForm(props) {
               className="select-answer" aria-label=".form-select-sm example"
               value={brakeModel}
               onChange={(e) => setBrakeModel(e.target.value)}
-
             >
+              <option value=""></option>
               {roadBrakeModels.map((roadBrakeModel, index)=> {
                 return (<option key={index}>{roadBrakeModel}</option>);
               })}
@@ -1098,8 +1073,8 @@ export function BikeForm(props) {
               className="select-answer" aria-label=".form-select-sm example"
               value={brakeModel}
               onChange={(e) => setBrakeModel(e.target.value)}
-
             >
+              <option value=""></option>
               {roadBrakeModels.map((roadBrakeModel, index)=> {
                 return (<option key={index}>{roadBrakeModel}</option>);
               })}
@@ -1108,29 +1083,25 @@ export function BikeForm(props) {
           <br />
 
           {brakeModel === "other" && (<>
-
             <label htmlFor="front_gear" className="mt-4">Qual:</label>
             <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeModel(e.target.value)}/>
-
           </>)}
         </div>
 
                                                                         {/*//////////////////SUSPENSÂO///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("suspensions").classList.toggle("d-none")}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
-
-        <div id="suspensions" className="suspension d-none mb-3">
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
+        <div id="Suspensões" className="suspension d-none mb-3">
           <label htmlFor="suspensionType" className="mt-3">Qual o tipo de suspensão?</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={suspensionType}
             onChange={(e) => setSuspensionType(e.target.value)}
-
           >
+            <option value=""></option>
             {suspensionTypes.map((suspensionType, index)=> {
                 return (<option key={index}>{suspensionType}</option>);
               })}
-
           </select>
 
           {suspensionType === "full_suspension" && (<>
@@ -1139,8 +1110,8 @@ export function BikeForm(props) {
               className="select-answer" aria-label=".form-select-sm example"
               value={frontSuspensionTravel}
               onChange={(e) => setFrontSuspensionTravel(e.target.value)}
-
             >
+              <option value=""></option>
               {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
                 return (<option key={index}>{frontSuspensionTravel}</option>);
               })}
@@ -1158,8 +1129,8 @@ export function BikeForm(props) {
               className="select-answer" aria-label=".form-select-sm example"
               value={rearSuspensionTravel}
               onChange={(e) => setRearSuspensionTravel(e.target.value)}
-
             >
+              <option value=""></option>
               {rearSuspensionTravels.map((rearSuspensionTravel, index)=> {
                 return (<option key={index}>{rearSuspensionTravel}</option>);
               })}
@@ -1180,8 +1151,8 @@ export function BikeForm(props) {
               className="select-answer" aria-label=".form-select-sm example"
               value={frontSuspensionTravel}
               onChange={(e) => setFrontSuspensionTravel(e.target.value)}
-
             >
+              <option value=""></option>
               {frontSuspensionTravels.map((rearSuspensionTravel, index)=> {
                 return (<option key={index}>{rearSuspensionTravel}</option>);
               })}
@@ -1199,8 +1170,11 @@ export function BikeForm(props) {
           {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && (suspensionType === "hardtail" || suspensionType === "full_suspension" ) &&(
             <>
               <label htmlFor="frontSuspensionModel" className="mt-4">modelo Suspensão dianteira:</label>
-              <select className="select-answer" aria-label=".form-select-sm example"  value={frontSuspensionModel}
-              onChange={(e) => setFrontSuspensionModel(e.target.value)}>
+              <select className="select-answer" aria-label=".form-select-sm example"
+                value={frontSuspensionModel}
+                onChange={(e) => setFrontSuspensionModel(e.target.value)}
+              >
+                <option value=""></option>
                 {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
                   return (<option key={index}>{frontSuspensionModels}</option>);
                 })}
@@ -1214,8 +1188,11 @@ export function BikeForm(props) {
               )}
 
               <label htmlFor="RearSuspensionModel" className="mt-4">Modelo Suspensão traseira:</label>
-              <select className="select-answer" aria-label=".form-select-sm example"  value={rearSuspensionModel}
-              onChange={(e) => setRearSuspensionModel(e.target.value)}>
+              <select className="select-answer" aria-label=".form-select-sm example"
+                value={rearSuspensionModel}
+                onChange={(e) => setRearSuspensionModel(e.target.value)}
+                >
+                <option value=""></option>
                 {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModels, index)=> {
                   return (<option key={index}>{rearSuspensionModels}</option>);
                 })}
@@ -1233,15 +1210,15 @@ export function BikeForm(props) {
 
                                                                         {/*//////////////////RODAS///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("rims").classList.toggle("d-none") }>Rodas<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="rims" className="rims d-none mb-3">
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Rodas<i className="fas fa-chevron-down ms-2"></i></button>
+        <div id="Rodas" className="rims d-none mb-3">
           <label htmlFor="bikeCondition" className="mt-4">Tamanho da roda:</label>
           <select
             className="select-answer"
             value={rimSize}
             onChange={(e) => setRimSize(e.target.value)}
-
           >
+            <option value=""></option>
             {rimSizes.map((rimSize, index)=> {
                 return (<option key={index}>{rimSize}</option>);
               })}
@@ -1268,27 +1245,25 @@ export function BikeForm(props) {
 
                                                                         {/*//////////////////COCKPIT///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("cockpit").classList.toggle("d-none") }>Cockpit<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="cockpit" className="cockpit d-none mb-3">
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Cockpit<i className="fas fa-chevron-down ms-2"></i></button>
+        <div id="Cockpit" className="cockpit d-none mb-3">
           <label htmlFor="handlebar" className="mt-3">Guidao:</label>
           <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={handlebar} onChange={(e) => setHandlebar(e.target.value)}/>
-
           <label htmlFor="stem" className="mt-4">Mesa:</label>
           <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={stem} onChange={(e) => setStem(e.target.value)}/>
         </div>
 
                                                                         {/*//////////////////CANOTE///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("seat-post").classList.toggle("d-none") }>Canote<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="seat-post" className="seat-post d-none mb-3">
-
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Canote<i className="fas fa-chevron-down ms-2"></i></button>
+        <div id="Canote" className="seat-post d-none mb-3">
           <label htmlFor="seatPostType" className="mt-3">Tipo de canote?</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={seatPostType}
             onChange={(e) => setSeatPostType(e.target.value)}
-
           >
+            <option value=""></option>
             {seatPostTypes.map((seatPostType, index)=> {
                 return (<option key={index}>{seatPostType}</option>);
               })}
@@ -1300,8 +1275,8 @@ export function BikeForm(props) {
               className="select-answer" aria-label=".form-select-sm example"
               value={seatPostTravel}
               onChange={(e) => setSeatPostTravel(e.target.value)}
-
             >
+              <option value=""></option>
               {seatPostTravels.map((seatPostTravel, index)=> {
                 return (<option key={index}>{seatPostTravel}</option>);
               })}
@@ -1322,14 +1297,15 @@ export function BikeForm(props) {
                                                                         {/*//////////////////BATERIA///////////////////////*/}
 
         { bikeType === "electric" && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("battery").classList.toggle("d-none") }>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
-          <div id="battery" className="rims d-none mb-3">
+          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
+          <div id="Parte elétrica" className="rims d-none mb-3">
             <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={battery}
               onChange={(e) => setBattery(e.target.value)}
             >
+              <option value=""></option>
               {batteries.map((battery, index)=> {
                 return (<option key={index}>{battery}</option>);
               })}
@@ -1339,8 +1315,6 @@ export function BikeForm(props) {
               <label htmlFor="otherBattery" className="mt-4">Qual?</label>
               <input type="text"  className="text-input" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
             </>)}
-
-
 
             <label htmlFor="motor" className="mt-4">Motor:</label>
             <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={motor} onChange={(e) => setMotor(e.target.value)}/>
@@ -1355,15 +1329,15 @@ export function BikeForm(props) {
 
                                                                         {/*//////////////////Accessories///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={() => document.getElementById("accessories").classList.toggle("d-none") }>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="accessories" className="accessories d-none mb-3">
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
+        <div id="Acessórios" className="accessories d-none mb-3">
           <label htmlFor="" className="mt-3">Sua bike acompanha algum acessório?</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={accessories}
             onChange={(e) => setAccessories(e.target.value)}
-
           >
+            <option value=""></option>
             {accessoryOptions.map((accessorieOption, index)=> {
               return (<option key={index}>{accessorieOption}</option>);
             })}
@@ -1371,7 +1345,7 @@ export function BikeForm(props) {
 
           { accessories === "Outro" && (<>
             <label htmlFor="otherAccessory" className="mt-4">Qual?</label>
-            <input type="text-input"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
+            <input type="text"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
           </>)}
 
           { accessories !== "Não" && (<>
@@ -1403,11 +1377,11 @@ export function BikeForm(props) {
               onChange={(e) => setStructuralVisualCondition(e.target.value)}
 
             >
+              <option value=""></option>
               {structuralVisualConditions.map((structuralVisualCondition, index)=> {
                 return (<option key={index}>{structuralVisualCondition}</option>);
               })}
             </select>
-
 
             <label htmlFor="operatingCondition" className="mt-4">Condição estrutural/visual?</label>
             <select
@@ -1415,6 +1389,7 @@ export function BikeForm(props) {
               value={operatingCondition}
               onChange={(e) => setOperatingCondition(e.target.value)}
             >
+              <option value=""></option>
               {operatingConditions.map((operatingCondition, index)=> {
                 return (<option key={index}>{operatingCondition}</option>);
               })}
@@ -1457,7 +1432,7 @@ export function BikeForm(props) {
         <h4 className="text-center text-success">Revise as informações</h4>
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         {/* <h5 className="text-success mt-3 text-center">Gerais:</h5> */}
-        <div id="Gerais" className=" d-none">
+        <div id="Gerais(review)" className=" d-none">
           <div className="d-flex justify-content-between">
             <p><span className="text-success">Tipo:</span> {bikeType}</p>
             <p><span className="text-success">Categoria:</span> {category}</p>
@@ -1470,7 +1445,6 @@ export function BikeForm(props) {
             <p><span className="text-success">Peso:</span> {weight}Kg</p>
           </div>
 
-
           <div className="d-flex justify-content-between">
             <p><span className="text-success">Modelo:</span> {model}</p>
             <p><span className="text-success">Preço:</span>  {(priceInCents / 100).toLocaleString("pt-BR", {
@@ -1479,7 +1453,6 @@ export function BikeForm(props) {
                   })}</p>
             <p><span className="text-success">Cidade:</span> {locality}</p>
           </div>
-
           <p><span className="text-success">Documentação:</span> {documentationType}</p>
           <p><span className="text-success">Condição:</span> {bikeCondition}</p>
           <p><span className="text-success">Condição operacional:</span> {operatingCondition}</p>
@@ -1487,88 +1460,82 @@ export function BikeForm(props) {
           <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
 
-
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
-        <div id="Quadro" className="d-none">
-          <p>Marca: {frameBrand}</p>
-          <p>Material: {frameMaterial}</p>
-          <p>Tamanho: {frameSize}</p>
+        <div id="Quadro(review)" className="d-none">
+          <p><span className="text-success">Marca:</span>{frameBrand}</p>
+          <p><span className="text-success">Material:</span>{frameMaterial}</p>
+          <p><span className="text-success">Tamanho:</span>{frameSize}</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão</button>
-        <div id="Transmissão" className="d-none">
-          <p>Marchas dianteiras: {numberOfFrontGears}</p>
-          <p>Modelo: {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
-          <p>Marchas traseiras: {numberOfRearGears}</p>
-          <p>Modelo: {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
-          <p>Pedivela: {crankset}</p>
-          <p>Corrent: {chain}</p>
+        <div id="Transmissão(review)" className="d-none">
+          <p><span className="text-success">Marchas dianteiras:</span> {numberOfFrontGears}</p>
+          <p><span className="text-success">Modelo:</span> {frontDerailleurModel === "other" ? otherFrontDerailleurModel : frontDerailleurModel }</p>
+          <p><span className="text-success">Marchas traseiras:</span> {numberOfRearGears}</p>
+          <p><span className="text-success">Modelo:</span> {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
+          <p><span className="text-success">Pedivela:</span> {crankset}</p>
+          <p><span className="text-success">Corrente:</span> {chain}</p>
         </div>
-
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Freios</button>
-        <div id="Freios" className="d-none">
-          <p>Tipo: {brakeType}</p>
-          <p>Tamanho disco: {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
-          <p>Modelo: {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
+        <div id="Freios(review)" className="d-none">
+          <p><span className="text-success">Tipo:</span> {brakeType}</p>
+          <p><span className="text-success">Tamanho do disco:</span> {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
+          <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
-
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
-        <div id="Suspensões" className="d-none">
-          <p>Tipo: {suspensionType}</p>
-          <p>Curso dianteira: {frontSuspensionTravel}</p>
-          <p>Curso traseira: {rearSuspensionTravel }</p>
+        <div id="Suspensões(review)" className="d-none">
+          <p><span className="text-success">Tipo:</span> {suspensionType}</p>
+          <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
+          <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
         </div>
-
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas</button>
-        <div id="Rodas" className="d-none">
-          <p>Tamanho: {rimSize}</p>
-          <p>Aro dianteiro: {frontRimModel}</p>
-          <p>Aro traseiro: {rearRimModel }</p>
-          <p>Cubo dianteiro: {frontHub}</p>
-          <p>Cubo traseiro: {rearHub }</p>
-          <p>Pneu dianteiro: {frontTyre}</p>
-          <p>Pneu traseiro: {rearTyre }</p>
+        <div id="Rodas(review)" className="d-none">
+          <p><span className="text-success">Tamanho:</span> {rimSize}</p>
+          <p><span className="text-success">Aro dianteiro:</span> {frontRimModel}</p>
+          <p><span className="text-success">Aro traseiro:</span> {rearRimModel }</p>
+          <p><span className="text-success">Cudo dianteiro:</span> {frontHub}</p>
+          <p><span className="text-success">Cubo traseiro:</span> {rearHub }</p>
+          <p><span className="text-success">Pneu dianteiro:</span> {frontTyre}</p>
+          <p><span className="text-success">Pneu traseiro:</span> {rearTyre }</p>
         </div>
-
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Cockpit</button>
-        <div id="Cockpit" className="d-none">
-          <p>Guidão: {handlebar}</p>
-          <p>mesa: {stem}</p>
+        <div id="Cockpit(review)" className="d-none">
+          <p><span className="text-success">Guidão:</span> {handlebar}</p>
+          <p><span className="text-success">Mesa:</span> {stem}</p>
         </div>
 
-
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Canote</button>
-        <div id="Canote" className="d-none">
-          <p>Tipo: {seatPostType}</p>
-          <p>Curso: {seatPostTravel}</p>
-          <p>Modelo: {seatPostModel }</p>
+        <div id="Canote(review)" className="d-none">
+          <p><span className="text-success">Tipo:</span> {seatPostType}</p>
+          <p><span className="text-success">Curso:</span> {seatPostTravel}</p>
+          <p><span className="text-success">Modelo:</span> {seatPostModel }</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Acessórios</button>
-        <div id="Acessórios" className="d-none">
-          <p>Acompanha?(qual?): {accessories === "other" ? otherAccessory : accessories }</p>
-          <p>Descrição: {accessoriesDescription}</p>
-          <p>pedais: {pedals }</p>
+        <div id="Acessórios(review)" className="d-none">
+          <p><span className="text-success">Acompanha(qual?):</span> {accessories === "other" ? otherAccessory : accessories }</p>
+          <p><span className="text-success">Descrição:</span> {accessoriesDescription}</p>
+          <p><span className="text-success">Pedais:</span> {pedals }</p>
         </div>
 
         { bikeType === "electric" && (<>
           <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Parte elétrica</button>
-          <div id="Parte elétrica" className="d-none">
-            <p>Capacidade bateria: {battery === "other" ? otherBattery : battery }</p>
-            <p>Motor: {motor}</p>
-            <p>Km: {mileage}</p>
-            <p>Ciclos bateria: {batteryCycles}</p>
+          <div id="Parte elétrica(review)" className="d-none">
+            <p><span className="text-success">Capacidade da baterias:</span> {battery === "other" ? otherBattery : battery }</p>
+            <p><span className="text-success">Motor:</span> {motor}</p>
+            <p><span className="text-success">Km:</span> {mileage} Km</p>
+            <p><span className="text-success">Ciclos da bateria:</span> {batteryCycles}</p>
           </div>
         </>)}
 
         <h4 className="text-success mt-3 text-center">Imagens</h4>
         {
           photosPreview?.length > 0 ?
-          <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
+          <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
             {
               photosPreview.map((photoPreview, idx) => {
                 return <img src={photoPreview} alt="" className="image-review" />

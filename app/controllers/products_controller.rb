@@ -94,17 +94,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def search
-    @current_filters = params[:filters]
-    @products = Product.all
-    @products = @products.where(:product_type_id => @current_filters[:product_type_id]) if @current_filters[:product_type_id]
-
-
-
-  end
-
-
-
 
   private
 
