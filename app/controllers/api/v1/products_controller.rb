@@ -10,10 +10,17 @@ module Api
         @user = current_user
         # @products = Product.where.not(user: @user)
         @products = Advertisement.where(status: "paid").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
+        @product_types = ProductType.all
+        @product_type_attributes = ProductTypeAttribute.all
+        @products = Product.where.not(user: @user)
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
-
+        @products = @products.where(product_type_: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
+        @products = @products.where('price_in_cents BETWEEN ? AND ?', 0, params[:price]).order(price_in_cents: :asc) if params[:price].present?
+        @products = @products.where(product_type_id: params[:product_type_id]).joins(:product_attributes).where(value: params[:product_attribute_value]) if params[:product_attribute_value].present?
+        @products = ProductAttribute.where(value: params[:product_attribute_value]).map { |value| value.product } if params[:product_attribute_value].present?
+        @products = @products.where('brand @@ ?', params[:brand]) if params[:brand].present?
 
         if params[:sort_by] == "price_ascending"
           @products = @products.order(price_in_cents: :asc)

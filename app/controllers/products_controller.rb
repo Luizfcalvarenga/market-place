@@ -98,6 +98,7 @@ class ProductsController < ApplicationController
     @products = Product.all
     @products = @products.where(:product_type_id => @current_filters[:product_type_id]) if @current_filters[:product_type_id]
   end
+
   private
 
   def product_params
