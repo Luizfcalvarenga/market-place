@@ -73,10 +73,7 @@ export function BikeForm(props) {
   const [photosPreview, setPhotosPreview] = useState([]);
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
-<<<<<<< HEAD
   const [advertisementPrice, setAdvertisementPrice ] = useState(null);
-=======
->>>>>>> main
   const [photos, setPhotos ] = useState(null);
   const [photoFile, setPhotoFile] = useState({
     index: null,
