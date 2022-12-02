@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NormalBikeImage from "../../../assets/images/normal-bike.png";
-import EBikeImage from "../../../assets/images/electric-bike.png";
+import EBikeImage from "../../../assets/images/e-bike.png";
 
 
 
