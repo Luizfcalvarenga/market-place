@@ -948,11 +948,7 @@ export function BikeForm(props) {
               })}
             </select>
 
-            <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
-            <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
 
-            <label htmlFor="front_gear" className="mt-4">Corrente:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
           {category === "road" && (<>
             <label htmlFor="front_gear" className="mt-4">Câmbio dianteiro:</label>
             <select className="select-answer" aria-label=".form-select-sm example"
@@ -1006,7 +1002,7 @@ export function BikeForm(props) {
             { frontDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1024,10 +1020,16 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text"  className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
           </>)}
+
+          <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
+          <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
+
+          <label htmlFor="front_gear" className="mt-4">Corrente:</label>
+          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
         </div>
 
                                                                        {/*//////////////////FREIOS///////////////////////*/}
@@ -1303,7 +1305,7 @@ export function BikeForm(props) {
           </select>
 
           {seatPostType === "retractable" && (<>
-            <label htmlFor="seatPostTravel" className="mt-4">Curso do canote?</label>
+            <label htmlFor="seatPostTravel" className="mt-4">Curso do canote:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={seatPostTravel}
@@ -1323,7 +1325,7 @@ export function BikeForm(props) {
             )}
           </>)}
 
-          <label htmlFor="seatPostModel" className="mt-4">Modelo:</label>
+          <label htmlFor="seatPostModel" className="mt-4">Marca | Modelo:</label>
           <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example"  value={seatPostModel} onChange={(e) => setSeatPostModel(e.target.value)}/>
         </div>
 

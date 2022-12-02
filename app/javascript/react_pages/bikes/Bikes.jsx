@@ -521,7 +521,8 @@ export function Bikes(props) {
               </select>
 
               {["full_suspension", "hardtail"].includes(suspensionTypeFilter) && (<>
-                <h5 className="text-success mt-3">curso dianteira</h5>
+                <h5 className="mt-3">dianteira</h5>
+                <h5 className="text-success mt-3">curso</h5>
                 <select
                   className="select-answer"
                   value={frontSuspensionTravelFilter}
@@ -533,7 +534,7 @@ export function Bikes(props) {
                   })}
                 </select>
 
-                <h5 className="text-success mt-3">modelo</h5>
+                <h5 className="text-success mt-3">Marca | modelo</h5>
                 <select
                   className="select-answer"
                   value={frontSuspensionModelFilter}
@@ -547,7 +548,8 @@ export function Bikes(props) {
               </>)}
 
               {suspensionTypeFilter === "full_suspension" && (<>
-                <h5 className="text-success mt-3">curso traseira</h5>
+                <h5 className="mt-3">traseira</h5>
+                <h5 className="text-success mt-3">curso</h5>
                 <select
                   className="select-answer"
                   value={rearSuspensionTravelFilter}
@@ -559,7 +561,7 @@ export function Bikes(props) {
                   })}
                 </select>
 
-                <h5 className="text-success mt-3">modelo</h5>
+                <h5 className="text-success mt-3">Marca | modelo</h5>
                 <select
                   className="select-answer"
                   value={rearSuspensionModelFilter}
@@ -575,7 +577,8 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Transmissão</button>
             <div id="Transmissão" className="suspension-filter d-none">
-              <h5 className="text-success mt-3">marchas dianteiras</h5>
+              <h5 className="mt-3">dianteira</h5>
+              <h5 className="text-success mt-3">n ºmarchas</h5>
               <select
                 className="select-answer"
                 value={frontGearsFilter}
@@ -588,7 +591,7 @@ export function Bikes(props) {
                 })}
               </select>
 
-              <h5 className="text-success mt-3">modelo dianteira</h5>
+              <h5 className="text-success mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={frontDerailleurModelFilter}
@@ -600,7 +603,8 @@ export function Bikes(props) {
                 })}
               </select>
 
-              <h5 className="text-success mt-3">marchas traseiras</h5>
+              <h5 className="mt-3">traseira</h5>
+              <h5 className="text-success mt-3">nº marchas</h5>
               <select
                 className="select-answer"
                 value={rearGearsFilter}
@@ -612,7 +616,7 @@ export function Bikes(props) {
                 })}
               </select>
 
-              <h5 className="text-success mt-3">modelo traseira</h5>
+              <h5 className="text-success mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={rearDerailleurModelFilter}
@@ -664,7 +668,7 @@ export function Bikes(props) {
                 </select>
                 </>)}
 
-              <h5 className="text-success mt-3">modelo</h5>
+              <h5 className="text-success mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={brakeModelFilter}
