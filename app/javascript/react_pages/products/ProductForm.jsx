@@ -538,16 +538,7 @@ export function ProductForm(props) {
   const handleTerms = (e) => {
     console.log(e.target)
     const btnAnnounce = document.getElementById("new-announce")
-    // if (e.target.checked) {
-    //   btnAnnounce.disabled = false;
-    // } else {
-    //   btnAnnounce.disabled = true;
-    // }
-    if (btnAnnounce.disabled) {
-      btnAnnounce.removeAttribute("disabled");
-    } else {
-      btnAnnounce.setAttribute("disabled", "disabled");
-    }
+    btnAnnounce.classList.toggle("disable-btn-form")
   }
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -587,10 +578,8 @@ export function ProductForm(props) {
 
 
       <form id="product-form" className="">
-
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
-
           <label htmlFor="category" className="mt-3">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
@@ -744,19 +733,25 @@ export function ProductForm(props) {
             <label htmlFor="productDescription" className="mt-4">Descrição:</label>
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
+            <div className="d-flex  justify-content-between gap-3">
 
-            <label htmlFor="productPrice" className="mt-4">Preço:<span className="requested-information ms-1">*</span></label>
-            <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
-            { errors && errors.product && errors.product.price_in_cents && (
-              <p className="text-danger">{errors.product.price_in_cents}</p>
-            )}
+              <div className="w-50">
+                <label htmlFor="productPrice" className="mt-4 w-100">Preço:<span className="requested-information ms-1">*</span></label> <br />
+                <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
+                { errors && errors.product && errors.product.price_in_cents && (
+                  <p className="text-danger">{errors.product.price_in_cents}</p>
+                )}
+              </div>
 
+              <div className="w-50">
+                <label htmlFor="productQuantity" className="mt-4 w-100">Quantidade:<span className="requested-information ms-1">*</span></label> <br />
+                <input type="number" className="text-input" value={productQuantity ? productQuantity : ""} onChange={(e) => setProductQuantity(e.target.value)}/>
+                { errors && errors.product && errors.product.quantity && (
+                  <p className="text-danger">{errors.product.quantity}</p>
+                )}
+              </div>
 
-            <label htmlFor="productQuantity" className="mt-4">Quantidade:<span className="requested-information ms-1">*</span></label>
-            <input type="number" className="text-input" value={productQuantity ? productQuantity : ""} onChange={(e) => setProductQuantity(e.target.value)}/>
-            { errors && errors.product && errors.product.quantity && (
-              <p className="text-danger">{errors.product.quantity}</p>
-            )}
+            </div>
 
             <div className="text-center">
               <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
@@ -885,7 +880,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}
@@ -898,7 +893,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}
@@ -911,7 +906,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}
@@ -924,7 +919,7 @@ export function ProductForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}

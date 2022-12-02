@@ -9,10 +9,19 @@ export function Products(props) {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [productTypeFilter, setProductTypeFilter] = useState("");
   const [conditionFilter, setConditionFilter] = useState("");
-  const [priceFilter, setPriceFilter] = useState("");
+  const [minPriceFilter, setMinPriceFilter] = useState("");
+  const [maxPriceFilter, setMaxPriceFilter] = useState("");
+
   const [modalityFilter, setModalityFilter] = useState("");
   const [productAttributesFilter, setProductAttributesFilter] = useState("");
   const [brandFilter, setBrandFilter] = useState("");
+  const [modelFilter, setModelFilter] = useState("");
+  const [minYearFilter, setMinYearFilter] = useState("");
+  const [maxYearFilter, setMaxYearFilter] = useState("");
+
+  const [localityFilter, setLocalityFilter] = useState("");
+
+
 
   const [sortBy, setSortBy] = useState("");
 
@@ -22,9 +31,18 @@ export function Products(props) {
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
-    if (priceFilter) url = url + `&price=${priceFilter}`
+    if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
+    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
+
     if (productAttributesFilter) url = url + `&product_attribute_value=${productAttributesFilter}`
     if (brandFilter) url = url + `&brand=${brandFilter}`
+    if (modelFilter) url = url + `&model=${modelFilter}`
+    if (localityFilter) url = url + `&locality=${localityFilter}`
+    if (minYearFilter) url = url + `&min_year=${minYearFilter}`
+    if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
+
+
+
 
     if (sortBy) url = url + `&sort_by=${sortBy}`
 
@@ -34,7 +52,7 @@ export function Products(props) {
     setProductTypes(response.data.product_types)
     setProductTypeAttributes(response.data.product_type_attributes)
 
-  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, priceFilter, productAttributesFilter, brandFilter])
+  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter])
 
   const handleProductAtributes = (e) => {
     console.log(e)
@@ -47,7 +65,6 @@ export function Products(props) {
       console.log(attrs)
       attrs.shift()
       console.log(attrs)
-
     }
   }
 
@@ -91,21 +108,45 @@ export function Products(props) {
     }
   }
 
-  const handlePriceFilter = (e) => {
-    setPriceFilter(e.target.value)
-    if (e.target.value === "0") {
-      setPriceFilter("")
-    }
-  }
+
+  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED"].sort()
+  const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
+    "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
+    "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
+  ].sort()
+
+
 
   return (
-    <div className="p-5 br-8">
+    <div className="p-5 br-8  index-container">
       <h2 className="text-center text-success">Produtos</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
           <p className="text-success">Filtrar</p>
           <div className="">
-            <h5 className="text-success">Produto</h5>
+            <div className="condition-filter">
+              <h5 className="text-success mt-3">condição</h5>
+              <div className="d-flex justify-content-between">
+                <label htmlFor="new" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="new"
+                    name="condition"
+                    onChange={(e) => handleConditionFilter(e)}
+                  />  Novo
+                </label>
+
+                <label htmlFor="used" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="used"
+                    name="condition"
+                    onChange={(e) => handleConditionFilter(e)}
+                  />  Usado
+                </label>
+              </div>
+            </div>
+            <h5 className="text-success mt-3">Produto</h5>
             <select
               value={productTypeFilter}
               onChange={(e) => handleProductAtributes(e)}
@@ -130,12 +171,6 @@ export function Products(props) {
               <option value="infant">Infantil</option>
               <option value="urban">Urbano</option>
             </select>
-
-            {/* <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <option value=""></option>
-              <option value="price_ascending">Prc Asc</option>
-              <option value="price_descending">Prc Desc</option>
-            </select> */}
 
             {categoryFilter === "mountain_bike" && (<>
               <h5 className="text-success mt-3">Modalidade</h5>
@@ -215,51 +250,56 @@ export function Products(props) {
               </select>
             </>)}
 
-            <div className="model-filter">
+            <div className="brand-filter">
               <h5 className="text-success mt-3">Marca</h5>
-              <input type="text" className="text-input" onChange={(e) => setBrandFilter(e.target.value)}/>
+              <select
+              value={brandFilter ? brandFilter : ""}
+              onChange={(e) => setBrandFilter(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {componentBrands.map((componentBrand, index) => {
+                  return (<option key={index} value={componentBrand}>{componentBrand}</option>)
+                })}
+              </select>
             </div>
 
-            <div className="condition-filter">
-              <h5 className="text-success mt-3">condição</h5>
-              <div className="d-flex justify-content-between">
+            <div className="model-filter">
+              <h5 className="text-success mt-3">Modelo</h5>
+              <select
+              value={modelFilter ? modelFilter : ""}
+              onChange={(e) => setModelFilter(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {componentModels.map((componentModel, index) => {
+                  return (<option key={index} value={componentModel}>{componentModel}</option>)
+                })}
+              </select>
+            </div>
 
-                <label htmlFor="new" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="new"
-                    name="condition"
-                    onChange={(e) => handleConditionFilter(e)}
-                  />  Novo
-                </label>
-
-                <label htmlFor="used" className="me-2 text-success">
-                <input
-                  type="checkbox"
-                  value="used"
-                  name="condition"
-                  onChange={(e) => handleConditionFilter(e)}
-                />  Usado
-                </label>
-              </div>
+            <div className="locality-filter">
+              <h5 className="text-success mt-3">Local</h5>
+              <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
             </div>
 
             <div className="price-filter">
-              <div className="d-flex justify-content-between">
+              <div className="">
                 <h5 className="text-success mt-3">preço</h5>
-                {priceFilter && (<>
-                  <h5 className="text-success mt-3">
-                  {(priceFilter / 100).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </h5>
-                </>)}
+                <div className="d-flex justify-content-between">
+                  <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
+                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
+                </div>
               </div>
-              <input type="range" class="form-range" min="0" max="500000" id="customRange1" step="100" onChange={(e) => handlePriceFilter(e)} />
-              <div className="d-flex justify-content-between">
-                <h6 className="text-success price-filter-text"><small>R$0,00</small></h6>
-                <h6 className="text-success price-filter-text"><small>R$5.000,00</small></h6>
+            </div>
+
+            <div className="year-filter">
+            <div className="">
+                <h5 className="text-success mt-3">ano</h5>
+                <div className="d-flex justify-content-between">
+                  <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
+                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
+                </div>
               </div>
             </div>
 
@@ -267,39 +307,13 @@ export function Products(props) {
               <h5 className="text-success mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {
                   return renderProductAttributeSelect(attribute, index)
-                  // return (<>
-                  //   <h5 className="text-success mt-3">{attribute.prompt}</h5>
-                  //   <select
-                  //     className="select-answer"
-                  //     onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
-                  //     >
-                  //       {attribute.options.map((option, index) => {
-                  //         return (<option key={index} value={option}>{option}</option>)
-                  //       })}
-                  //   </select>
-                  // </>)
                 })}
             </>)}
 
             {productTypeFilter.length === 1 && (<>
               <h5 className="text-success mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {
-
-                    return renderProductAttributeSelect(attribute, index)
-                    // return (<option key={index} value={option}>{option}</option>)
-
-                  // return (<>
-                  //   <h5 className="text-success mt-3">{attribute.prompt}</h5>
-                  //   <select
-                  //     className="select-answer"
-                  //     onChange={(e) => setProductTypeAttributesFilter(e, attribute)}
-                  //     >
-                  //       <option value=""></option>
-                  //       {attribute.options.map((option, index) => {
-                  //         // return (<option key={index} value={option}>{option}</option>)
-                  //       })}
-                  //   </select>
-                  // </>)
+                  return renderProductAttributeSelect(attribute, index)
                 })}
             </>)}
           </div>
@@ -307,7 +321,7 @@ export function Products(props) {
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {products.map((product, idx) => {
             return (
-              <div className="w-25" product={product} key={product.id}>
+              <div className="w-25" product={product} key={product.id} id="mobile">
                 <a href={"products/" + product.id} className="remove-link">
                   <div className="cards-products">
                     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
@@ -332,30 +346,45 @@ export function Products(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Next</span>
-                    </button>
-                  </div>
-                  <div className="d-flex justify-content-center gap-2 mt-3">
-                    <h4 className="card-title text-center">{product.brand}</h4>
-                    <h4 className="card-title text-center">{product.model}</h4>
-                  </div>
-                  <h4 className="text-center mt-1">
-                    {(product.price_in_cents / 100).toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </h4>
-                  <hr/>
-                  <div className="card-content mt-2">
-                    <div className="d-flex justify-content-around">
-                      <p> {product.locality}</p>
-                      <p>{product.product_type.name}</p>
+                    <div className="d-flex justify-content-center gap-2 mt-3">
+                      <h4 className="card-title text-center">{product.brand}</h4>
+                      <h4 className="card-title text-center">{product.model}</h4>
+                    </div>
+                    <h4 className="text-center card-title mt-1">
+                      {(product.price_in_cents / 100).toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </h4>
+                    <hr className="index-line"/>
+                    <div className="card-content mt-2">
+                      <div className="d-flex justify-content-around">
+                        <div className="infos">
+                          <p>{product.locality}</p>
+                          <p>{product.product_type.name}</p>
+                        </div>
+                        <div className="infos">
+                          <p><i class="far fa-heart"></i></p>
+                          { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
+                            <p><i class="fas fa-font ms-1"></i></p>
+                          )}
+                          { ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].includes(product.product_type.name) &&(
+                            <p><i className="fas fa-cog"></i></p>
+                          )}
+                          { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
+                            <p><i className="fas fa-hard-hat"></i></p>
+                          )}
+                          { ["cap", "glasses"].includes(product.product_type.name) &&(
+                            <p><i className="fas fa-glasses"></i></p>
+                          )}
+                          { ["air_bomb", "lubricant", "sealant"].includes(product.product_type.name) &&(
+                            <p><i className="fas fa-wrench"></i></p>
+                          )}
+                          { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
+                            <p><i className="fas fa-tshirt"></i></p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </a>

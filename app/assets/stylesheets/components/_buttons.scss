@@ -124,3 +124,8 @@
     border-color: white;
   }
 }
+
+.disable-btn-form{
+  cursor: not-allowed;
+  pointer-events: none;
+}

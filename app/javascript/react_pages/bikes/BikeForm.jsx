@@ -505,18 +505,8 @@ export function BikeForm(props) {
   }
 
   const handleTerms = (e) => {
-    console.log(e.target)
     const btnAnnounce = document.getElementById("new-announce")
-    // if (e.target.checked) {
-    //   btnAnnounce.disabled = false;
-    // } else {
-    //   btnAnnounce.disabled = true;
-    // }
-    if (btnAnnounce.disabled) {
-      btnAnnounce.removeAttribute("disabled");
-    } else {
-      btnAnnounce.setAttribute("disabled", "disabled");
-    }
+    btnAnnounce.classList.toggle("disable-btn-form")
   }
 
   const handleTechnicalSection = (e) => {
@@ -894,17 +884,22 @@ export function BikeForm(props) {
           <p className="text-danger">{errors.bike.model[0]}</p>
         )}
 
-        <label htmlFor="priceInCentes" className="mt-4">preço:<span className="requested-information ms-1">*</span></label>
-        <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents} onChange={(e) => setPriceInCents(e.target.value)}/>
-        { errors && errors.bike && errors.bike.price_in_cents  && (
-          <p className="text-danger">{errors.bike.price_in_cents[0]}</p>
-        )}
-
-        <label htmlFor="quantity" className="mt-4">quantidade:<span className="requested-information ms-1">*</span></label>
-        <input type="number" className="text-input" value={quantity}onChange={(e) => setQuantity(e.target.value)}/>
-        { errors && errors.bike && errors.bike.quantity  && (
-          <p className="text-danger">{errors.bike.quantity[0]}</p>
-        )}
+        <div className="d-flex justify-content-between gap-3">
+          <div className="w-50">
+            <label htmlFor="priceInCentes" className="mt-4">preço:<span className="requested-information ms-1">*</span></label>
+            <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents} onChange={(e) => setPriceInCents(e.target.value)}/>
+            { errors && errors.bike && errors.bike.price_in_cents  && (
+              <p className="text-danger">{errors.bike.price_in_cents[0]}</p>
+            )}
+          </div>
+          <div className="w-50">
+            <label htmlFor="quantity" className="mt-4">quantidade:<span className="requested-information ms-1">*</span></label>
+            <input type="number" className="text-input" value={quantity}onChange={(e) => setQuantity(e.target.value)}/>
+            { errors && errors.bike && errors.bike.quantity  && (
+              <p className="text-danger">{errors.bike.quantity[0]}</p>
+            )}
+          </div>
+        </div>
 
         <label htmlFor="locality" className="mt-4">cidade:<span className="requested-information ms-1">*</span></label>
         <input type="text" className="text-input"  value={locality}onChange={(e) => setLocality(e.target.value)}/>
@@ -929,7 +924,7 @@ export function BikeForm(props) {
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
         <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Transmissão<i class="fas fa-chevron-down ms-2"></i></button>
         <div id="Transmissão" className="transmission d-none mb-3">
-            <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras?</label>
+            <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras:</label>
             <select
               className="select-answer"
               value={numberOfFrontGears}
@@ -941,7 +936,7 @@ export function BikeForm(props) {
               })}
             </select>
 
-            <label htmlFor="numberOfRearGears" className="mt-4">Marchas traseiras?</label>
+            <label htmlFor="numberOfRearGears" className="mt-4">Marchas traseiras:</label>
             <select
               className="select-answer"
               value={numberOfRearGears}
@@ -996,7 +991,7 @@ export function BikeForm(props) {
             )}
           </>)}
 
-          {(category === "mountain_bike" || category === "dirt_street" || category === "urban" || category === "infant") && (<>
+          {["mountain_bike", "dirt_street", "urban", "infant"].includes(category) && (<>
             <label htmlFor="front_gear" className="mt-3">Câmbio dianteiro:</label>
             <select className="select-answer" aria-label=".form-select-sm example"
               value={frontDerailleurModel}
@@ -1039,7 +1034,7 @@ export function BikeForm(props) {
 
         <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Freios<i className="fas fa-chevron-down ms-2"></i></button>
         <div id="Freios" className="brake d-none mb-3">
-          <label htmlFor="brakeType" className="mt-3">Qual o tipo de freio?</label>
+          <label htmlFor="brakeType" className="mt-3">Tipo de freio:</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={brakeType}
@@ -1051,7 +1046,7 @@ export function BikeForm(props) {
             })}
           </select>
           {(brakeType === "hydraulic_disc" || brakeType === "mechanical_disc") && (<>
-            <label htmlFor="disc_size" className="mt-4">Tamanho do disco?</label>
+            <label htmlFor="disc_size" className="mt-4">Tamanho do disco:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={brakeDiscSize}
@@ -1070,7 +1065,7 @@ export function BikeForm(props) {
           </>)}
 
           {category === "road" && (<>
-            <label htmlFor="brakeModel" className="mt-4">Modelo?</label>
+            <label htmlFor="brakeModel" className="mt-4">Marca | Modelo:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={brakeModel}
@@ -1084,7 +1079,7 @@ export function BikeForm(props) {
           </>)}
 
           {(category === "mountain_bike" || category ===  "dirt_street" || category ===  "urban") && (<>
-            <label htmlFor="brakeModel" className="mt-4">Modelo?</label>
+            <label htmlFor="brakeModel" className="mt-4">Marca | Modelo</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={brakeModel}
@@ -1108,7 +1103,7 @@ export function BikeForm(props) {
 
         <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
         <div id="Suspensões" className="suspension d-none mb-3">
-          <label htmlFor="suspensionType" className="mt-3">Qual o tipo de suspensão?</label>
+          <label htmlFor="suspensionType" className="mt-3">Tipo de suspensão:</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={suspensionType}
@@ -1121,7 +1116,7 @@ export function BikeForm(props) {
           </select>
 
           {suspensionType === "full_suspension" && (<>
-            <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira?</label>
+            <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={frontSuspensionTravel}
@@ -1140,7 +1135,7 @@ export function BikeForm(props) {
               </>
             )}
 
-            <label htmlFor="rearSuspensionTravel" className="mt-4">Suspensão traseira?</label>
+            <label htmlFor="rearSuspensionTravel" className="mt-4">Suspensão traseira:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={rearSuspensionTravel}
@@ -1162,7 +1157,7 @@ export function BikeForm(props) {
           )}
 
           {suspensionType === "hardtail" && (<>
-            <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira?</label>
+            <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
               value={frontSuspensionTravel}
@@ -1183,9 +1178,9 @@ export function BikeForm(props) {
           </>
           )}
 
-          {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && (suspensionType === "hardtail" || suspensionType === "full_suspension" ) &&(
+          {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && suspensionType === "full_suspension"  &&(
             <>
-              <label htmlFor="frontSuspensionModel" className="mt-4">modelo Suspensão dianteira:</label>
+              <label htmlFor="frontSuspensionModel" className="mt-4">Marca | Modelo (dianteira):</label>
               <select className="select-answer" aria-label=".form-select-sm example"
                 value={frontSuspensionModel}
                 onChange={(e) => setFrontSuspensionModel(e.target.value)}
@@ -1203,7 +1198,7 @@ export function BikeForm(props) {
                 </>
               )}
 
-              <label htmlFor="RearSuspensionModel" className="mt-4">Modelo Suspensão traseira:</label>
+              <label htmlFor="RearSuspensionModel" className="mt-4">Marca | Modelo (traseira):</label>
               <select className="select-answer" aria-label=".form-select-sm example"
                 value={rearSuspensionModel}
                 onChange={(e) => setRearSuspensionModel(e.target.value)}
@@ -1218,6 +1213,28 @@ export function BikeForm(props) {
                 <>
                   <label htmlFor="otherRearSuspensionModel" className="mt-4">Qual?</label>
                   <input type="text" className="text-input" onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
+                </>
+              )}
+            </>
+          )}
+
+          {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && suspensionType === "hardtail" &&(
+            <>
+              <label htmlFor="frontSuspensionModel" className="mt-4">Marca | Modelo (dianteira):</label>
+              <select className="select-answer" aria-label=".form-select-sm example"
+                value={frontSuspensionModel}
+                onChange={(e) => setFrontSuspensionModel(e.target.value)}
+              >
+                <option value=""></option>
+                {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
+                  return (<option key={index}>{frontSuspensionModels}</option>);
+                })}
+              </select>
+              <br />
+              { frontSuspensionModel === "other"  && (
+                <>
+                  <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
+                  <input type="text-input" className="text-input" onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
                 </>
               )}
             </>
@@ -1273,7 +1290,7 @@ export function BikeForm(props) {
 
         <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Canote<i className="fas fa-chevron-down ms-2"></i></button>
         <div id="Canote" className="seat-post d-none mb-3">
-          <label htmlFor="seatPostType" className="mt-3">Tipo de canote?</label>
+          <label htmlFor="seatPostType" className="mt-3">Tipo de canote:</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={seatPostType}
@@ -1347,7 +1364,7 @@ export function BikeForm(props) {
 
         <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
         <div id="Acessórios" className="accessories d-none mb-3">
-          <label htmlFor="" className="mt-3">Sua bike acompanha algum acessório?</label>
+          <label htmlFor="" className="mt-3">Acessório:</label>
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={accessories}
@@ -1578,7 +1595,7 @@ export function BikeForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1591,7 +1608,7 @@ export function BikeForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1604,7 +1621,7 @@ export function BikeForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}
@@ -1617,7 +1634,7 @@ export function BikeForm(props) {
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
               )}
             </div>
           </>)}

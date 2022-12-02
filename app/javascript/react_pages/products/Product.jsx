@@ -14,7 +14,7 @@ export function Product(props) {
 
   return (
 
-    <div className="product-show" product={product} key={product} >
+    <div className="product-show index-container" product={product} key={product}>
       {product && (
         <div className="row row-cols-1">
           <div className="other-infos  col-12 col-md-8">

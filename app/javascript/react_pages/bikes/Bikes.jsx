@@ -6,9 +6,11 @@ export function Bikes(props) {
   const [bikes, setBikes] = useState([])
   const [categoryFilter, setCategoryFilter] = useState("");
   const [conditionFilter, setConditionFilter] = useState("");
-  const [priceFilter, setPriceFilter] = useState("");
+  const [minPriceFilter, setMinPriceFilter] = useState("");
+  const [maxPriceFilter, setMaxPriceFilter] = useState("");
   const [modalityFilter, setModalityFilter] = useState("");
-  const [yearFilter, setYearFilter] = useState("");
+  const [minYearFilter, setMinYearFilter] = useState("");
+  const [maxYearFilter, setMaxYearFilter] = useState("");
   const [bikeTypeFilter, setBikeTypeFilter] = useState("");
   const [frameBrandFilter, setFrameBrandFilter] = useState("");
   const [frameSizeFilter, setFrameSizeFilter] = useState("");
@@ -18,12 +20,10 @@ export function Bikes(props) {
   const [frontSuspensionModelFilter, setFrontSuspensionModelFilter] = useState("");
   const [rearSuspensionTravelFilter, setRearSuspensionTravelFilter] = useState("");
   const [rearSuspensionModelFilter, setRearSuspensionModelFilter] = useState("");
-
   const [frontGearsFilter, setFrontGearsFilter] = useState("");
   const [rearGearsFilter, setRearGearsFilter] = useState("");
   const [frontDerailleurModelFilter, setFrontDerailleurModelFilter] = useState("");
   const [rearDerailleurModelFilter, setRearDerailleurModelFilter] = useState("");
-
   const [brakeTypeFilter, setBrakeTypeFilter] = useState("");
   const [brakeDiscSizeFilter, setBrakeDiscSizeFilter] = useState("");
   const [brakeModelFilter, setBrakeModelFilter] = useState("");
@@ -49,8 +49,10 @@ export function Bikes(props) {
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
-    if (priceFilter) url = url + `&price=${priceFilter}`
-    if (yearFilter) url = url + `&year=${yearFilter}`
+    if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
+    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
+    if (minYearFilter) url = url + `&min-year=${minYearFilter}`
+    if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (bikeTypeFilter) url = url + `&bike_type=${bikeTypeFilter}`
     if (frameSizeFilter) url = url + `&frame_size=${frameSizeFilter}`
     if (frameBrandFilter) url = url + `&frame_brand=${frameBrandFilter}`
@@ -86,7 +88,7 @@ export function Bikes(props) {
 
     const response = await axios.get(url);
     setBikes(response.data.bikes);
-  }, [categoryFilter, modalityFilter, conditionFilter, priceFilter, yearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
+  }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
       suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
       rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
       seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
@@ -123,19 +125,7 @@ export function Bikes(props) {
     }
   }
 
-  const handlePriceFilter = (e) => {
-    setPriceFilter(e.target.value)
-    if (e.target.value === "0") {
-      setPriceFilter("")
-    }
-  }
 
-  const handleYearFilter = (e) => {
-    setYearFilter(e.target.value)
-    if (e.target.value === "2002") {
-      setYearFilter("")
-    }
-  }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   const frameBrands = [
@@ -225,14 +215,13 @@ export function Bikes(props) {
     "surly",
     "soma",
     "diamondback",
-    "dahon",
-    "other"
+    "dahon"
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
   const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-  const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
+  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
+  const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay"]
 
   /////////////////////////////////////////////////////////////////////////////////////SUSPENSÃO////////////////////////////////////////////////////////////////////////////
 
@@ -241,9 +230,9 @@ export function Bikes(props) {
   const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
   const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
 
-  const shockSizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
+  const shockSizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197" ]
   const allRearSuspensionTravel = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
-  const mtbDirtUrbanFrontSuspensionModels = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
+  const mtbDirtUrbanFrontSuspensionModels = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "ROCKSHOX 30", "ROCKSHOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB"]
 
 
   const mtbDirtUrbanRearSuspensionModels = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "other"]
@@ -279,33 +268,56 @@ export function Bikes(props) {
  const batteries = ["320wH", "500Wh", "625Wh", "700Wh"]
 
   return (
-    <div className="p-5 br-8">
+    <div className="p-5 br-8 index-container">
       <h2 className="text-center text-success">Bikes</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
           <h4 className="text-success">Filtros</h4>
             <div className="condition-filter">
-                <h5 className="mt-3">tipo</h5>
-                <div className="d-flex justify-content-between">
-                  <label htmlFor="new" className="me-2 text-success">
-                    <input
-                      type="checkbox"
-                      value="e-bike"
-                      name="type"
-                      onChange={(e) => handleBikeTypeFilter(e)}
-                    />  Elétrica
-                  </label>
+              <h5 className="text-success mt-3">tipo</h5>
+              <div className="d-flex justify-content-between">
+                <label htmlFor="new" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="e-bike"
+                    name="type"
+                    onChange={(e) => handleBikeTypeFilter(e)}
+                  />  E-bike
+                </label>
 
-                  <label htmlFor="used" className="me-2 text-success">
-                    <input
-                      type="checkbox"
-                      value="normal"
-                      name="type"
-                      onChange={(e) => handleBikeTypeFilter(e)}
-                    />  Normal
-                  </label>
-                </div>
+                <label htmlFor="used" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="normal"
+                    name="type"
+                    onChange={(e) => handleBikeTypeFilter(e)}
+                  />  Normal
+                </label>
               </div>
+            </div>
+
+            <div className="condition-filter">
+              <h5 className="text-success mt-3">condição</h5>
+              <div className="d-flex justify-content-between">
+                <label htmlFor="new" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="new"
+                    name="condition"
+                    onChange={(e) => handleConditionFilter(e)}
+                  />  Nova
+                </label>
+
+                <label htmlFor="used" className="me-2 text-success">
+                <input
+                  type="checkbox"
+                  value="used"
+                  name="condition"
+                  onChange={(e) => handleConditionFilter(e)}
+                />  Usada
+                </label>
+              </div>
+            </div>
 
             <h5 className="text-success mt-3">categoria</h5>
             <select
@@ -395,6 +407,18 @@ export function Bikes(props) {
               </select>
             </>)}
 
+            <h5 className="text-success mt-3">marca</h5>
+            <select
+              className="select-answer"
+              value={frameBrandFilter}
+              onChange={(e) => setFrameBrandFilter(e.target.value)}
+            >
+              <option value=""></option>
+              {frameBrands.map((frameBrand, index) => {
+                return (<option key={index}>{frameBrand}</option>);
+              })}
+            </select>
+
             <div className="model-filter">
               <h5 className="text-success mt-3">Modelo</h5>
               <input type="text" className="text-input" onChange={(e) => setModelFilter(e.target.value)}/>
@@ -405,65 +429,25 @@ export function Bikes(props) {
               <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
             </div>
 
-            <div className="condition-filter">
-              <h5 className="text-success mt-3">condição</h5>
-              <div className="d-flex justify-content-between">
-
-                <label htmlFor="new" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="new"
-                    name="condition"
-                    onChange={(e) => handleConditionFilter(e)}
-                  />  Nova
-                </label>
-
-                <label htmlFor="used" className="me-2 text-success">
-                <input
-                  type="checkbox"
-                  value="used"
-                  name="condition"
-                  onChange={(e) => handleConditionFilter(e)}
-                />  Usada
-                </label>
-              </div>
-            </div>
-
             <div className="price-filter">
-              <div className="d-flex justify-content-between">
+              <div className="">
                 <h5 className="text-success mt-3">preço</h5>
-                {priceFilter && (<>
-                  <h5 className="text-success mt-3">
-                  {(priceFilter / 100).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </h5>
-                </>)}
-              </div>
-              <input type="range" class="form-range" min="0" max="2200000" id="customRange1" step="10000" onChange={(e) => handlePriceFilter(e)} />
-              <div className="d-flex justify-content-between">
-                <h6 className="text-success price-filter-text"><small>R$0,00</small></h6>
-                <h6 className="text-success price-filter-text"><small>R$22.000,00</small></h6>
+                <div className="d-flex justify-content-between">
+                  <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
+                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
+                </div>
               </div>
             </div>
 
-            <div className="year-filter">
+            <div className="year-filter mb-3">
+              <h5 className="text-success mt-3">ano</h5>
               <div className="d-flex justify-content-between">
-                <h5 className="text-success mt-3">ano</h5>
-                {yearFilter && (<>
-                  <h5 className="text-success mt-3">
-                  {yearFilter}
-                </h5>
-                </>)}
-              </div>
-              <input type="range" class="form-range" min="2002" max="2022" id="customRange1" step="1" onChange={(e) => handleYearFilter(e)} />
-              <div className="d-flex justify-content-between">
-                <h6 className="text-success price-filter-text"><small>2002</small></h6>
-                <h6 className="text-success price-filter-text"><small>2022</small></h6>
+                <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
+                <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
               </div>
             </div>
 
+            <h5 className=" text-success">Componentes</h5>
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
               {!categoryFilter && (<>
@@ -508,18 +492,6 @@ export function Bikes(props) {
                   })}
                 </select>
               </>)}
-
-              <h5 className="text-success mt-3">marca</h5>
-              <select
-                className="select-answer"
-                value={frameBrandFilter}
-                onChange={(e) => setFrameBrandFilter(e.target.value)}
-              >
-                <option value=""></option>
-                {frameBrands.map((frameBrand, index) => {
-                  return (<option key={index}>{frameBrand}</option>);
-                })}
-              </select>
 
               <h5 className="text-success mt-3">material</h5>
               <select
@@ -833,10 +805,10 @@ export function Bikes(props) {
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {bikes.map((bike, idx) => {
             return (
-              <div className="w-25" bike={bike} key={bike.id}>
+              <div className="w-25" bike={bike} key={bike.id} id="mobile">
                 <a href={"bikes/" + bike.id} className="remove-link">
                   <div className="cards-bikes">
-                    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                    <div id={`carouselExampleControls ${bike.id}`} className="carousel slide" data-bs-ride="carousel">
                       <div className="carousel-inner">
                         <i className="fas fa-heart card-favorite"></i>
                         <div className="carousel-item active">
@@ -849,28 +821,41 @@ export function Bikes(props) {
                           <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
                         </div>
                       </div>
-                      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      <button className="carousel-control-prev" type="button" data-bs-target={`#carouselExampleControls ${bike.id}`} data-bs-slide="prev">
                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Previous</span>
                       </button>
-                      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <button className="carousel-control-next" type="button" data-bs-target={`#carouselExampleControls ${bike.id}`} data-bs-slide="next">
                         <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <h4 className="card-title text-center mt-3">{bike.model}</h4>
-                    <h3 className="text-center mt-1">
+                    <div className="d-flex justify-content-center gap-2 mt-3">
+                      <h4 className="card-title text-center">{bike.frame_brand}</h4>
+                      <h4 className="card-title text-center">{bike.model}</h4>
+                    </div>
+                    <h4 className="text-center card-title mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
-                    </h3>
+                    </h4>
                     <hr className="index-line"/>
                     <div className="card-content mt-2">
-                      <h4 className="text-center mt-1 bike-infos-index">Quaro: {bike.frame_size}</h4>
                       <div className="d-flex justify-content-around">
-                        <h4 className="bike-infos-index">Roda: {bike.rim_size}</h4>
-                        <h4 className="bike-infos-index">{bike.year}</h4>
+                        <div className="infos">
+                          <p>{bike.locality}</p>
+                          <p>{bike.bike_type}</p>
+                        </div>
+                        <div className="infos">
+                          <p><i class="far fa-heart"></i></p>
+                          { bike.bike_type === "normal" &&(
+                            <p> <i class="fas fa-bicycle"></i></p>
+                          )}
+                          {  bike.bike_type === "e-bike" &&(
+                            <p><i className="fas fa-charging-station ms-1"></i></p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
