@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from "react";
+import EquipamentImage from "../../../assets/images/helmet.png";
+import AccessorieImage from "../../../assets/images/accessories.png";
+import ComponentImage from "../../../assets/images/frame.png";
+import CasualImage from "../../../assets/images/cap.png";
+import ClotheImage from "../../../assets/images/tshirt.png";
+import MaintenanceImage from "../../../assets/images/tools.png";
+
+
 
 
 export function Products(props) {
@@ -366,22 +374,22 @@ export function Products(props) {
                         <div className="infos">
                           <p><i class="far fa-heart"></i></p>
                           { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
-                            <p><i class="fas fa-font ms-1"></i></p>
+                            <img src={AccessorieImage} alt="" className="icon-card-index"/>
                           )}
                           { ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].includes(product.product_type.name) &&(
-                            <p><i className="fas fa-cog"></i></p>
+                            <img src={ComponentImage} alt="" className="icon-card-index"/>
                           )}
                           { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                            <p><i className="fas fa-hard-hat"></i></p>
+                            <img src={EquipamentImage} alt="" className="icon-card-index"/>
                           )}
                           { ["cap", "glasses"].includes(product.product_type.name) &&(
-                            <p><i className="fas fa-glasses"></i></p>
+                            <img src={CasualImage} alt="" className="icon-card-index"/>
                           )}
                           { ["air_bomb", "lubricant", "sealant"].includes(product.product_type.name) &&(
-                            <p><i className="fas fa-wrench"></i></p>
+                            <img src={MaintenanceImage} alt="" className="icon-card-index"/>
                           )}
                           { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
-                            <p><i className="fas fa-tshirt"></i></p>
+                            <img src={ClotheImage} alt="" className="icon-card-index"/>
                           )}
                         </div>
                       </div>

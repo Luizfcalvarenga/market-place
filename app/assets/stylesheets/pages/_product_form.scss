@@ -94,6 +94,7 @@ option {
   border-color: $color-primary;
   border-radius: 5px;
   color: $color-primary;
+  font-size: 20px;
   width: 100%;
   height: 80px;
 
@@ -308,4 +309,10 @@ option {
 .btn-new-announce:hover {
   // transform: scale(1.05) rotate(-1deg);
   box-shadow: 0px 0px 20px 0px #00c4545e;
+}
+
+.icon-card-form {
+  width: 30px;
+  height: 30px;
+  filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
 }

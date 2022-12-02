@@ -7,8 +7,6 @@ export function BikeForm(props) {
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
   const [category, setCategory] = useState("");
-  const [services, setServices] = useState([]);
-  const [serviceId, setServiceId] = useState("");
   const [modalities, setModalities] = useState([]);
   const [modality, setModality] = useState("");
   const [bikeType, setBikeType] = useState("");

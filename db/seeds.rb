@@ -103,7 +103,7 @@
    fanny_pack = ProductType.create(name: "fanny_pack")
    sneaker = ProductType.create(name: "sneaker")
 
-   ############################################################## EQUIPMENT
+   ############################################################## Maintanence
 
     air_bomb = ProductType.create(name: "air_bomb")
     lubricant = ProductType.create(name: "lubricant")

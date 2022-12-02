@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import swal from 'sweetalert';
+import EquipamentImage from "../../../assets/images/helmet.png";
+import AccessorieImage from "../../../assets/images/accessories.png";
+import ComponentImage from "../../../assets/images/frame.png";
+import CasualImage from "../../../assets/images/cap.png";
+import ClotheImage from "../../../assets/images/tshirt.png";
+import MaintenanceImage from "../../../assets/images/tools.png";
 
 
 export function ProductForm(props) {
@@ -565,14 +571,14 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i className="fas fa-charging-station"></i> </button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i className="fas fa-cog"></i></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/> <i className="fas fa-hard-hat"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/><img src={EquipamentImage} alt="" className="icon-card-form"/></button>
         </div>
         <div className="d-flex justify-content-between py-3 gap-3">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/> <i className="fas fa-glasses"></i></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/> <i className="fas fa-wrench"></i></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/> <i className="fas fa-tshirt"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/><img src={CasualImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/><img src={MaintenanceImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
       </div>
 

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import NormalBikeImage from "../../../assets/images/normal-bike.png";
+import EBikeImage from "../../../assets/images/electric-bike.png";
 
 
 
@@ -854,10 +856,10 @@ export function Bikes(props) {
                         <div className="infos">
                           <p><i class="far fa-heart"></i></p>
                           { bike.bike_type === "normal" &&(
-                            <p> <i class="fas fa-bicycle"></i></p>
+                            <img src={NormalBikeImage} alt="" className="icon-card-index"/>
                           )}
                           {  bike.bike_type === "e-bike" &&(
-                            <p><i className="fas fa-charging-station ms-1"></i></p>
+                            <img src={EBikeImage} alt="" className="icon-card-index"/>
                           )}
                         </div>
                       </div>
