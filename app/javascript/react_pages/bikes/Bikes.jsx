@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import NormalBikeImage from "../../../assets/images/normal-bike.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
 
-
-
 export function Bikes(props) {
   const [bikes, setBikes] = useState([])
   const [categoryFilter, setCategoryFilter] = useState("");
