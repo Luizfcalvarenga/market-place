@@ -29,5 +29,4 @@ class UsersController < ApplicationController
     notifications = @single_chat.notifications_as_chat.where(recipient: current_user).unread
     notifications.update_all(read_at: Time.zone.now)
   end
-
 end
