@@ -17,6 +17,8 @@ class AdvertisementGenerator
       )
       @advertisement.persisted?
     end
+
+    AdvertisementMailer.with(advertisement: @advertisement).advertisement_creation.deliver_now
   end
 
   def advertisement_price

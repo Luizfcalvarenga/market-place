@@ -6,8 +6,10 @@
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <div>
-              <h6>Anúncio #<%= advertisement.id %></h6>
-              <h6>Total: <%=number_to_currency(advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%> </h6>
+              <h6><span class="text-success">Anúncio</span> #<%= advertisement.id %></h6>
+              <h6><span class="text-success">Total:</span> <%=number_to_currency(advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%> </h6>
+              <h6><span class="text-success">Status:</span> <%= advertisement.status %> </h6>
+
               <div class="d-flex">
                 <% if advertisement.invoice_paid_at.present? %>
                   <i class="fas fa-handshake mt-1" style="color: green;"></i>
@@ -27,13 +29,13 @@
           <hr class="index-line">
           <% if advertisement.advertisable_type == "Product" %>
             <div class="d-flex justify-content-between">
-              <p><span class="text-success">Produto# </span> <%= advertisement.advertisable.id %> </p>
+              <p><span class="text-success">Produto </span> #<%= advertisement.advertisable.id %> </p>
               <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
               <p><span class="text-success">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
             </div>
           <% elsif advertisement.advertisable_type == "Bike" %>
             <div class="d-flex justify-content-between">
-              <p><span class="text-success">Bike#  </span><%= advertisement.advertisable.id %> </p>
+              <p><span class="text-success">Bike </span>#<%= advertisement.advertisable.id %> </p>
               <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
               <p><span class="text-success">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
             </div>

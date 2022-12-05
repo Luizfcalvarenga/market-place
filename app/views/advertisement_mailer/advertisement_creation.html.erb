@@ -1,0 +1,62 @@
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+    border: 1px solid #00c454;
+    border-radius: 50px;
+    box-shadow: 5px 8px 12px #e0e0e0;
+    align-items: center;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    background: #101010;
+  }
+
+  h6 {
+    font-size: 12;
+    font-weight: lighter;
+  }
+
+  .orange {
+    background-color: #00c454;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .mail-content {
+    padding: 0 20px;
+  }
+</style>
+
+<body>
+  <div class="orange">
+    <h3>Anuncio criado com sucesso!</h3>
+  </div>
+  <div class="mail-content">
+    <% if @advertisement.user.full_name %>
+    <h2>Olá <%= @advertisement.user.full_name %>,</h2>
+    <% else %>
+    <h2>Olá,</h2>
+    <% end %>
+
+
+
+    <p> já recebemos o seu pedido!</p>
+    <p>Estamos quase lá!</p>
+
+    <p>Você pode acessar sua fatura para pagamento no link avaixo.</p>
+    <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
+    <h3>Detalhes do seu pedido:</h3>
+    <p><strong>Pedido:</strong> #<%= @advertisement.id %></p>
+    <p><strong>Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
+    <p><strong>Anunciado:</strong> <%= @advertisement.advertisable_type %></p>
+    <p><strong>Status:</strong> <%= @advertisement.status %></p>
+
+    <h6>Dúvidas? Entre em contato com  através do email <strong>  </strong></h6>
+  </div>
+</body>
