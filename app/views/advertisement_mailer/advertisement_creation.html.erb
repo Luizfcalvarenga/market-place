@@ -19,6 +19,9 @@
     font-size: 12;
     font-weight: lighter;
     color: white;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 40px;
   }
 
   .orange {
@@ -101,6 +104,21 @@
     width: 22px;
     height: 22px;
   }
+
+  .footer-brand {
+    margin-top: 10px;
+  }
+
+  .footer-line {
+    border: 0.1px solid #00c454;
+    width: 30%;
+    height: 0.2px;
+  }
+
+  .invoice-link {
+    text-align: center;
+    margin: 0 !important;
+  }
 </style>
 
 <body>
@@ -117,17 +135,20 @@
     <p class="item-name">Estamos quase lá!</p>
     <p class="item-name">os próximos passos serão o pagamento e aprovação do anúncio, você receberá as atualizações por email, fique atento.</p>
     <p class="item-name">Você pode acessar sua fatura para pagamento no link avaixo.</p>
-    <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
-    <p class="detail-info">se você já pagou pelo anúncio desconsidere o link acima.</p>
+    <div class="invoice-link">
+      <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
+      <p class="detail-info">Se você já pagou pelo anúncio desconsidere o link acima.</p>
+    </div>
     <h2>Detalhes do seu pedido:</h2>
     <p><strong class="item-name">Pedido:</strong> #<%= @advertisement.id %></p>
     <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
     <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_type %></p>
     <p><strong class="item-name">Status:</strong> <%= @advertisement.status %></p>
-    <h6>Dúvidas? Entre em contato com  através do email <strong>  </strong></h6>
+    <h6>Dúvidas? Entre em contato com  através do email <strong></strong></h6>
+    <hr class="footer-line">
     <div class="footer">
 
-      <%= image_tag "white_logo.png" %>
+      <%= image_tag "white_logo.png", class: "footer-brand"%>
 
       <div class="social-icons">
         <a href="#" class="footer-icon"><%= image_tag "youtube.png", class: "social-icon" %></a>
