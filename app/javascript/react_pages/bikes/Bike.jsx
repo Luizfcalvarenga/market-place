@@ -53,7 +53,7 @@ export function Bike(props) {
             </div>
 
             <h3 className="text-success mb-4 mt-3">Características Técnicas</h3>
-            <ul class="main__menu mb-4">
+            <ul class="main__menu">
               <li class="list-item w-100 mb-4">
                 <div class="kabobs item--js">
                   <img src={FrameImage} alt="" className="bike-part-card mt-1"/> <br />
@@ -214,10 +214,6 @@ export function Bike(props) {
                 </ul>
               </li>
 
-
-
-
-
               <li class="list-item w-100 mb-4">
                 <div class="kabobs item--js">
                   <img src={HandlebarImage} alt="" className="bike-part-card mt-1"/> <br />
@@ -328,7 +324,7 @@ export function Bike(props) {
               </li>
 
 
-              <li class="list-item w-100 mb-4">
+              <li class="list-item w-100">
                 <div class="kabobs item--js">
                   <img src={AccessorieImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Acessórios</span>
@@ -350,7 +346,7 @@ export function Bike(props) {
               </li>
 
               { bike.bike_type === "e-bike" && (
-                <li class="list-item w-100 mb-4">
+                <li class="list-item w-100 mt-4">
                   <div class="kabobs item--js">
                     <img src={EBikeImage} alt="" className="bike-part-card mt-1"/> <br />
                     <span className="text-success mb-3">Elétrica</span>

@@ -121,10 +121,10 @@ a {
         .drop-item {
           opacity: 0;
           transform-origin: top center;
-          @for $i from 1 through 8 {
+          @for $i from 1 through 9 {
             &:nth-child(#{$i}) {
               animation-name: topToBottom;
-              animation-duration: 400ms;
+              animation-duration: 300ms;
               animation-delay: (150ms * $i) - 300;
               animation-timing-function: ease-in-out;
               animation-fill-mode: forwards;
@@ -195,13 +195,14 @@ a {
 }
 
 @keyframes topToBottom {
-  0% {
-    opacity: 0;
-    transform: rotateX(-90deg);
-  }
+  // 0% {
+  //   opacity: 0;
+  //   transform: translateY(100%);
+  // }
   100% {
     opacity: 1;
-    transform: rotateX(0deg);
+    transform: translateY();
+
   }
 }
 
