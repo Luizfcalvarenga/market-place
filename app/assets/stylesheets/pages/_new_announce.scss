@@ -1,5 +1,6 @@
 .page-body {
-  background-color: #F4F4F9;
+  background-color: rgb(16,16,16);
+
 }
 
 .new_announce_banner {
@@ -10,9 +11,16 @@
   margin-top: -150px;
 }
 
-.fa-truck, .fa-thumbs-up, .fa-shield-alt, .fa-cogs {
+.fa-truck, .fa-thumbs-up, .fa-credit-card, .fa-user-edit {
   font-size: 25px;
 }
+
+.announce-icons {
+  width: 50px;
+  height: 50px;
+  filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+}
+
 
 .frequent-questions {
   border-top: 1px solid transparent;
@@ -27,12 +35,44 @@
   border: 1px solid grey;
   border-radius: 3px;
   .accordion-body {
-    background-color: #F4F4F9;
+    background-color: rgb(16,16,16);
 
   }
 
   .accordion-button {
-    background-color: #F4F4F9;
+    background-color: rgb(16,16,16);
     color: $color-primary;
   }
+}
+
+.card-price {
+  border: 1px solid $color-primary;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  background-color: transparent;
+  // box-shadow: 0px 0px 20px 0px #00c4545e;
+}
+.new-announce-btns {
+  display: contents;
+
+
+}
+
+@media (max-width: 765px) {
+
+  .frequent-questions {
+
+    margin: 0;
+    width: 100%;
+
+  }
+
+  .new_announce_banner {
+    height: 45vh;
+    background-image: none;
+    margin: auto;
+
+  }
+
 }
