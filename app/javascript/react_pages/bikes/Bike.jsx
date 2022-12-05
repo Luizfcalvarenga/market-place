@@ -53,173 +53,336 @@ export function Bike(props) {
             </div>
 
             <h3 className="text-success mb-4 mt-3">Características Técnicas</h3>
-            <ul class="main__menu">
-              <li class="list-item">
-                <a href="#" class="kabobs item--js">
-                  <span>Quadro</span>
-                  <img src={FrameImage} alt="" className="bike-part-card"/>
-                </a>
+            <ul class="main__menu mb-4">
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={FrameImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Quadro</span>
+                </div>
                 <ul class="drop-menu menu-2">
-                  <li class="drop-item"><p className="me-2 mb-3 text-success ms-2"><strong>Marca:</strong> <span className="me-3 bike-info">{bike.frame_brand}</span></p></li>
-                  <li class="drop-item"><p className="me-2 mb-3 text-success ms-2"><strong>Tamanho:</strong> <span className="me-3 bike-info">{bike.frame_size}</span></p></li>
-                  <li class="drop-item"><p className="me-2 mb-3 text-success ms-2"><strong>Material:</strong> <span className="me-3 bike-info">{bike.frame_material}</span></p></li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.frame_brand}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.frame_size}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Material:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.frame_material}</p>
+                    </div>
+                  </li>
                 </ul>
               </li>
-            </ul>
-            <div className="row row-cols-1">
-              <div className="col-10 col-md-4">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={FrameImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Quadro</h4>
-                    </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Quadro</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Marca:</strong> <span className="me-3 bike-info">{bike.frame_brand}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Tamanho:</strong> <span className="me-3 bike-info">{bike.frame_size}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Material:</strong> <span className="me-3 bike-info">{bike.frame_material}</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div className="col-10 col-md-4">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={CrankImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Transmissão</h4>
-                    </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Transmissão</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Nº Marchas(D):</strong> <span className="me-3 bike-info">{bike.number_of_front_gears}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Modelo:</strong> <span className="me-3 bike-info">{bike.front_derailleur_model}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Nº Marchas(T):</strong> <span className="me-3 bike-info">{bike.number_of_rear_gears}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Modelo:</strong> <span className="me-3 bike-info">{bike.rear_derailleur_model}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Pedivela:</strong> <span className="me-3 bike-info">{bike.crankset}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Corrente:</strong> <span className="me-3 bike-info">{bike.chain}</span></p>
-                    </div>
-                  </div>
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={CrankImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Transmissão</span>
                 </div>
-              </div><div className="col-10 col-md-4">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={SuspensionImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Suspensão</h4>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
                     </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Suspensão</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Dianteira:</strong> <span className="me-3 bike-info">{bike.front_suspension_travel}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Modelo:</strong> <span className="me-3 bike-info">{bike.front_suspension_model}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Traseira:</strong> <span className="me-3 bike-info">{bike.rear_suspension_travel}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Modelo:</strong> <span className="me-3 bike-info">{bike.rear_suspension_model}</span></p>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Corrente:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
                     </div>
-                  </div>
-                </div>
-              </div><div className="col-10 col-md-4 mt-3">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={BrakesImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Freios</h4>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
                     </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Freios</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Tipo:</strong> <span className="me-3 bike-info">{bike.brake_type}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Disco:</strong> <span className="me-3 bike-info">{bike.brake_disc_size}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Modelo:</strong> <span className="me-3 bike-info">{bike.brake_model}</span></p>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.number_of_front_gears}</p>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-10 col-md-4 mt-3">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={HandlebarImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Cockpit</h4>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.front_derailleur_model}</p>
                     </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Cockpit</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Mesa:</strong> <span className="me-3 bike-info">{bike.stem}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Guidão:</strong> <span className="me-3 bike-info">{bike.handlebar}</span></p>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-10 col-md-4 mt-3">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={MountainBikeImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Rodas</h4>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.number_of_rear_gears}</p>
                     </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Rodas</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Tamanho:</strong> <span className="me-3 bike-info">{bike.rim_size}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Aro(D):</strong> <span className="me-3 bike-info">{bike.front_rim_model}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Aro(T):</strong> <span className="me-3 bike-info">{bike.rear_rim_model}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Pneu(D):</strong> <span className="me-3 bike-info">{bike.front_tyre}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Pneu(T):</strong> <span className="me-3 bike-info">{bike.rear_tyre}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Cubo(D):</strong> <span className="me-3 bike-info">{bike.front_hub}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Cubo(T):</strong> <span className="me-3 bike-info">{bike.rear_hub}</span></p>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-10 col-md-4 mt-3">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={SaddleImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Canote</h4>
-                    </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Canote</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Tipo:</strong> <span className="me-3 bike-info">{bike.seat_post_type}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Tamanho:</strong> <span className="me-3 bike-info">{bike.seat_post_travel}</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-10 col-md-4 mt-3">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={AccessorieImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Acessórios</h4>
-                    </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Acessórios</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Qual:</strong> <span className="me-3 bike-info">{bike.accessories}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Descrição:</strong> <span className="me-3 bike-info">{bike.accessories_description}</span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  </li>
 
-              {bike.bike_type === "e-bike" && (
-                <div className="col-10 col-md-4 mt-3">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img src={EBikeImage} alt="" className="bike-part-card"/>
-                      <h4 className="mt-3 text-success">Elétrica</h4>
-                    </div>
-                    <div class="flip-card-back">
-                      <h4 className="mt-3 text-success">Elétrica</h4>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Bateria:</strong> <span className="me-3 bike-info">{bike.battery}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Ciclos:</strong> <span className="me-3 bike-info">{bike.battery_cycles}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Km:</strong> <span className="me-3 bike-info">{bike.mileage}</span></p>
-                      <p className="me-2 mb-3 text-success ms-2"><strong>Motor:</strong> <span className="me-3 bike-info">{bike.motor}</span></p>
-                    </div>
-                  </div>
+                </ul>
+              </li>
+
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={SuspensionImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Suspensão</span>
                 </div>
-              </div>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.suspension_type}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.front_suspension_travel}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.front_suspension_model}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_suspension_travel}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_suspension_model}</p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={BrakesImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Freios</span>
+                </div>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.brake_type}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Disco:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.brake_disc_size}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca | Modeo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.brake_model}</p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+
+
+
+
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={HandlebarImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Cockpit</span>
+                </div>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Mesa:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.stem}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Guidão:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.handlebar}</p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={MountainBikeImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Rodas</span>
+                </div>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Tamano:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rim_size}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.front_rim_model}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.front_hub}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.front_tyre}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_rim_model}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_hub}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.rear_tyre}</p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={SaddleImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Canote</span>
+                </div>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.seat_post_type}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.seat_post_travel}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.seat_post_model}</p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+
+              <li class="list-item w-100 mb-4">
+                <div class="kabobs item--js">
+                  <img src={AccessorieImage} alt="" className="bike-part-card mt-1"/> <br />
+                  <span className="text-success mb-3">Acessórios</span>
+                </div>
+                <ul class="drop-menu menu-2">
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.accessories}</p>
+                    </div>
+                  </li>
+                  <li class="drop-item">
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
+                      <p className="bike-info ms-2 align-middle">{bike.accessories_description}</p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              { bike.bike_type === "e-bike" && (
+                <li class="list-item w-100 mb-4">
+                  <div class="kabobs item--js">
+                    <img src={EBikeImage} alt="" className="bike-part-card mt-1"/> <br />
+                    <span className="text-success mb-3">Elétrica</span>
+                  </div>
+                  <ul class="drop-menu menu-2">
+                    <li class="drop-item">
+                      <div className="text-success item list-item d-flex ms-3">
+                        <p className="bike-attrs-parts"><strong>Bateria:</strong> </p>
+                        <p className="bike-info ms-2 align-middle">{bike.battery}</p>
+                      </div>
+                    </li>
+                    <li class="drop-item">
+                      <div className="text-success item list-item d-flex ms-3">
+                        <p className="bike-attrs-parts"><strong>Ciclos:</strong> </p>
+                        <p className="bike-info ms-2 align-middle">{bike.battery_cycles}</p>
+                      </div>
+                    </li>
+                    <li class="drop-item">
+                      <div className="text-success item list-item d-flex ms-3">
+                        <p className="bike-attrs-parts"><strong>Km:</strong> </p>
+                        <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
+                      </div>
+                    </li> <li class="drop-item">
+                      <div className="text-success item list-item d-flex ms-3">
+                        <p className="bike-attrs-parts"><strong>Motor:</strong> </p>
+                        <p className="bike-info ms-2 align-middle">{bike.motor}</p>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
               )}
-            </div>
+            </ul>
           </div>
 
           <div className="col-12 col-md-4 card-bike">
