@@ -2,6 +2,22 @@ class Advertisement < ApplicationRecord
   belongs_to :user
   belongs_to :advertisable, polymorphic: true
 
+  enum status: {
+    pending: "pending",
+    started: "started",
+    paid: "paid",
+    waiting_review: "waiting_review",
+    approved: "approved",
+    adjustments_requested: "adjustments_requested",
+    rejected: "rejected",
+  }
+
+  FILE_UPLOAD_FIELDS = [
+    :card_photo, :card_document_photo_front, :card_document_photo_back,
+    :card_institution_statement_photo, :photo, :document_photo_front,
+    :document_photo_back, :institution_statement_photo
+  ]
+  
   def is_free?
     price_in_cents.zero?
   end

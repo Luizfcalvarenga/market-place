@@ -1,0 +1,135 @@
+<div id="navbar" class="navbar navbar-expand-md navbar-light-lg">
+  <div class="collapse navbar-collapse d-flex justify-content-around page-desktop">
+    <div class="flex center around ms-3">
+      <%= link_to root_path, class: "nav-link" do %>
+        <%= image_tag "white_logo.png", class: "navbar-brand" %>
+      <% end %>
+    </div>
+    <div class="f-40  w-100">
+      <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-between gap-10">
+        <li id="navbar-form" class="nav-item active form-inline d-none">
+          <div class="input-group input-group-navbar">
+            <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
+            <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
+          </div>
+        </li>
+        <div id="navbar-links" class="nav-links d-flex">
+          <li class="nav-item active">
+            <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Financeiro", "https://nuflowshop.com.br/blog/", class: "nav-link mx-3" %>
+          </li>
+        </div>
+        <li class="nav-item active mt-2">
+          <button id="search-btn" class="nav-link ms-3">
+            <i class="fas fa-search" id="search-icon"></i>
+          </button>
+        </li>
+        <li class="nav-item mt-3">
+          <button id="close-btn" class="nav-link d-none mb-2 ms-3">
+            <i class="fas fa-times" id="close-icon"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="f-40 px-2 mt-2">
+      <ul class="navbar-nav font-bebas-neue d-flex flex-row d-flex justify-content-start gap-24">
+        <% if current_user.present? %>
+          <li class="nav-item active mt-1" style="color: white;">
+            <%= link_to order_path(current_user.orders.last.id) do %>
+              <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= current_user.orders.last.order_items.count %></span></i>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="nav-item active mt-1" style="color: white;">
+          <%= link_to "#" do %>
+            <i class="fa fa-heart text-success"></i>
+          <% end %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <button class="btn" type="button" class="dropbtn">
+              <%= image_tag "white_logo.png", class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+            </button>
+            <div class="dropdown-content dropdown-content-user">
+              <div class="drpdw-bike">
+                <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
+                <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
+                <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
+                <%= link_to "Conta", edit_profiles_path, class: "text-white ms-2" %>
+                <hr>
+                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link ms-2 mt-1" %>
+              </div>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link text-decoration-underline nav-login" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <% if mobile_device? %>
+    <div class="flex center between w-100 px-5">
+      <%= link_to root_path, class: "nav-link" do %>
+        <%= image_tag "white_logo.png", class: "navbar-brand" %>
+      <% end %>
+      <%= link_to "#" do %>
+        <i class="fas fa-shopping-cart text-success me-4"></i><span  class="cart-counter mb-3"><%= rand(1..5) %></span></i>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="text-success fas fa-bars"></i>
+      </button>
+    </div>
+    <div class="input-group input-group-navbar nav-form">
+      <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
+      <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="flex center around mobile-menu">
+        <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
+          <li class="nav-item active">
+            <%= link_to "BIKES", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "VENDER", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "COMPONENTES", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "SERVIÇOS", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "INSTITUCIONAL", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "EVENTOS", "https://nuflowpass.com.br/", class: "nav-link", target: :_blank %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link", target: :_blank %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to "CARRINHO", "#", class: "text-success nav-link text-decoration-underline" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "LOGIN", new_user_session_path, class: "text-success nav-link text-decoration-underline" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>

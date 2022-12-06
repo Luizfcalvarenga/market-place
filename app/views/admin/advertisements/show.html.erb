@@ -1,0 +1,78 @@
+<div class="page-padding px-5">
+  <p class="info-text w-100 p-4 br-8 text-center text-uppercase fw-700 mb-5">Revisão do pedido #<%= @advertisement.id %></p>
+
+  <form action="/admin/advertisements/<%= @advertisement.id %>/adjustment_requests" method="post" id="order-review-form" data-order-id="<%= @advertisement.id %>">
+    <div class="table m-0">
+      <div class="table-row header blue">
+        <div class="cell">
+          Detalhes do pedido
+        </div>
+      </div>
+    </div>
+
+    <div class="table">
+      <div class="table-row">
+        <div class="cell">Status</div>
+        <div class="cell"><p class="m-0 px-3 py-1 br-4 text-center text-white <%= @advertisement.status%>"><%= @advertisement.status %></p></div>
+      </div>
+      <div class="table-row">
+        <div class="cell">Status do pagamento</div>
+        <div class="cell"><p class="m-0 px-3 py-1 br-4 text-center text-white "><%= @advertisement.invoice_status %></p></div>
+      </div>
+      <div class="table-row">
+        <div class="cell">Data de criação</div>
+        <div class="cell"><%= @advertisement.created_at.strftime("%d/%m/%Y - %H:%M") %></div>
+      </div>
+      <div class="table-row">
+        <div class="cell">Usuário</div>
+        <div class="cell"><%= @user.full_name %> || <%= @user.email %></div>
+      </div>
+      <div class="table-row">
+        <div class="cell">O que foi anunciado</div>
+        <div class="cell"><%= @product_type %></div>
+      </div>
+    </div>
+
+
+    <% if @advertisement.invoice_url.present? %>
+      <%= link_to @advertisement.invoice_url, target: :_blank do %>
+        <p class="m-0 btn btn-primary w-100 text-white my-3">Ver fatura</p>
+      <% end %>
+    <% else %>
+      <p class="m-0 btn btn-primary disabled w-100 text-white mt-3">Fatura ainda não gerada</p>
+    <% end %>
+
+
+
+
+    <div class="spacer-30"></div>
+
+    <p class="info-text w-100 p-4 br-8 text-center fw-700 mb-3"><i class="fa fa-info-circle fs-20 me-3"></i> O endereço retornado para o CEP inserido é: <span id="order-cep-return"></span></p>
+
+    <div class="table m-0">
+      <div class="table-row header blue">
+        <div class="cell">
+          Informações do pedido
+        </div>
+      </div>
+    </div>
+
+    <% if @advertisement.waiting_review?  %>
+      <div class="action-buttons flex center between mt-5">
+        <div class="w-100">
+          <%= link_to admin_advertisement_approve_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>
+            <p class="m-0 btn btn-success w-100 text-white">Aprovar pedido</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to admin_advertisement_reject_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer bloquear o pedido para sempre?" } do %>
+          <p class="m-0 mt-3 btn btn-danger w-100 text-white">Bloquear pedido</p>
+        <% end %>
+      </div>
+    </div>
+  </form>
+</div>

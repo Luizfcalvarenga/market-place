@@ -709,6 +709,8 @@
     buyer = User.create!(email: "user@app.com", password: "123456" )
     seller = User.create!(email: "test@app.com", password: "123456" )
     bike_user = User.create!(email: "bike@app.com", password: "123456" )
+    admin = User.create!(email: "admin@app.com", password: "123456", access: "admin" )
+
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 

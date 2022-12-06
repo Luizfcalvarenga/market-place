@@ -22,6 +22,12 @@ class User < ApplicationRecord
   # validates :cep, :document_number, :phone_number,  presence: true
   enum status: %i[offline away online]
 
+  enum access: {
+    user: "user",
+    admin: "admin",
+  }
+
+
   after_commit :add_default_photo, on: %i[create update]
 
   def broadcast_update
