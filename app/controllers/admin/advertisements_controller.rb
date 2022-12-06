@@ -16,6 +16,7 @@ module Admin
       @product = @advertisement.advertisable
       @product_type = @advertisement.advertisable_type
       @user = @advertisement.user
+      @parms_to_edit  = nil
     end
 
     def approve
@@ -51,6 +52,25 @@ module Admin
         flash[:alert] = service.errors.to_s
         redirect_to admin_advertisement_path(id: @advertisement.id)
       end
+    end
+
+    def ajust_product_info
+      @advertisement = Advertisement.find(params[:advertisement_id])
+      @product = @advertisement.advertisable
+      @attr_to_update = nil
+      @new_value = nil
+
+
+      params.each do |key, value|
+        if value.present? && (key != "advertisement_id" && key != "_method" && key != "action" && key != "controller")
+          @attr_to_update = key.to_sym
+          @new_value = value
+        end
+      end
+
+      # @product.update(@attr_to_update @new_value)
+
+      raise
     end
   end
 end

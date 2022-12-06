@@ -1,7 +1,7 @@
 <div class="page-padding px-5">
   <p class="info-text w-100 p-4 br-8 text-center text-uppercase fw-700 mb-5">Revisão do pedido #<%= @advertisement.id %></p>
 
-  <form action="/admin/advertisements/<%= @advertisement.id %>/adjustment_requests" method="post" id="advertisement-review-form" data-advertisement-id="<%= @advertisement.id %>">
+  <form action="/admin/advertisements/<%= @advertisement.id %>/ajust_product_info" method="patch" id="advertisement-review-form" data-advertisement-id="<%= @advertisement.id %>">
     <div class="table m-0">
       <div class="table-row header blue">
         <h3 class="text-center text-success">
@@ -63,9 +63,40 @@
 
     <div class="table m-0">
       <div class="table-row header blue">
-        <h3 class="text-center text-success">
-          Informações <%= @advertisement.advertisable_type %> anunciado
-        </h3>
+        <div class="d-flex justify-content-between alig-middle">
+          <h3 class="text-center text-success">
+            Informações <%= @advertisement.advertisable_type %> anunciado
+          </h3>
+          <% if @product.photos.attached? %>
+            <div class="review-images-admin w-50">
+              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <% @product.photos.each_with_index do |photo, i| %>
+                    <div class="carousel-item <%= i.zero? ? "active" : ""  %>" >
+                      <%= cl_image_tag photo.key, class: 'img-carousel'  %>
+                      <div class="carousel-caption">
+                      <p class='carousel-name'>produto#<%= @product.id%></p>
+                      </div>
+                    </div>
+                    <% end %>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+          <% else %>
+            <h5 class="text-center text-success">
+              Nenhuma imagem adicionada ao anuncio
+            </h5>
+          <% end %>
+        </div>
+        <hr>
         <% if @advertisement.advertisable_type == "Product" %>
           <div class="table">
             <div class="d-flex ">
@@ -181,36 +212,36 @@
                 <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
               </div>
             </div>
-            <div class="w-50" data-column="year">
+            <div class="w-50" data-column="locality">
               <div class="d-flex">
-                <p class="text-success">Ano:</p>
-                <p class="ms-3 field-value"><%= @product.year  %></p>
+                <p class="text-success">Cidade:</p>
+                <p class="ms-3 field-value"><%= @product.locality  %></p>
               </div>
               <div class="d-flex ">
-                <input name="year" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <input name="locality" value="<%= @param_to_edit%>" type="text" class="text-input w-100">
+                <button type="submit" class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</button>
               </div>
             </div>
           </div>
 
           <div class="d-flex ">
-            <div class="w-50" data-column="locality">
+            <div class="w-50" data-column="year">
               <div class="d-flex">
-                <p class="text-success">Tipo:</p>
-                <p class="ms-3 field-value"><%= @product.locality %></p>
+                <p class="text-success">Ano:</p>
+                <p class="ms-3 field-value"><%= @product.year %></p>
               </div>
               <div class="d-flex">
-                <input name="locality" type="text" class="text-input w-100">
+                <input name="year" type="text" class="text-input w-100">
                 <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
               </div>
             </div>
-            <div class="w-50" data-column="quantity">
+            <div class="w-50" data-column="weight">
               <div class="d-flex">
-                <p class="text-success">Quantidade:</p>
-                <p class="ms-3 field-value"><%= @product.quantity  %></p>
+                <p class="text-success">Peso:</p>
+                <p class="ms-3 field-value"><%= @product.weight %>Kg</p>
               </div>
               <div class="d-flex ">
-                <input name="quantity" type="text" class="text-input w-100">
+                <input name="weight" type="text" class="text-input w-100">
                 <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
               </div>
             </div>
@@ -248,17 +279,28 @@
                 <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
               </div>
             </div>
-            <div class="w-50" data-column="description">
+
+            <div class="w-50" data-column="quantity">
               <div class="d-flex">
-                <p class="text-success">Descrição:</p>
-                <p class="ms-3 field-value"><%= @product.description%></p>
+                <p class="text-success">Quantidade:</p>
+                <p class="ms-3 field-value"><%= @product.quantity%></p>
+              </div>
+              <div class="d-flex">
+                <input name="quantity" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-100" data-column="description">
+              <div class="d-flex">
+                <p class="text-success">descrição:</p>
+                <p class="ms-3 field-value"><%= @product.description %></p>
               </div>
               <div class="d-flex">
                 <input name="description" type="text" class="text-input w-100">
                 <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
               </div>
             </div>
-          </div>
 
 
           <h4 class="text-center text-white my-3">Quadro</h4>
@@ -368,7 +410,7 @@
 
           <h4 class="text-center text-white my-3">Suspensão</h4>
           <div class="d-flex">
-            <div class="w-50" data-column="suspension_type">
+            <div class="w-100" data-column="suspension_type">
               <div class="d-flex">
                 <p class="text-success">Tipo:</p>
                 <p class="ms-3 field-value"><%= @product.suspension_type %></p>
@@ -429,7 +471,7 @@
 
           <h4 class="text-center text-white my-3">Rodas</h4>
           <div class="d-flex">
-            <div class="w-50" data-column="rim_size">
+            <div class="w-100" data-column="rim_size">
               <div class="d-flex">
                 <p class="text-success">Tipo:</p>
                 <p class="ms-3 field-value"><%= @product.rim_size %></p>
