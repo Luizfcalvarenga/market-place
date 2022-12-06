@@ -8,7 +8,7 @@ module Api
 
       def index
         @user = current_user
-        @products = Advertisement.where(status: "paid").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
+        @products = Advertisement.where(status: "approved").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
         @product_types = ProductType.all
         @product_type_attributes = ProductTypeAttribute.all
         @products = Product.where.not(user: @user)
