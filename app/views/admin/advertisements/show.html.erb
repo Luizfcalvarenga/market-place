@@ -1,38 +1,55 @@
 <div class="page-padding px-5">
   <p class="info-text w-100 p-4 br-8 text-center text-uppercase fw-700 mb-5">Revisão do pedido #<%= @advertisement.id %></p>
 
-  <form action="/admin/advertisements/<%= @advertisement.id %>/adjustment_requests" method="post" id="order-review-form" data-order-id="<%= @advertisement.id %>">
+  <form action="/admin/advertisements/<%= @advertisement.id %>/adjustment_requests" method="post" id="advertisement-review-form" data-advertisement-id="<%= @advertisement.id %>">
     <div class="table m-0">
       <div class="table-row header blue">
-        <div class="cell">
-          Detalhes do pedido
-        </div>
+        <h3 class="text-center text-success">
+          Detalhes do anúncio
+        </h3>
       </div>
     </div>
 
     <div class="table">
       <div class="table-row">
-        <div class="cell">Status</div>
-        <div class="cell"><p class="m-0 px-3 py-1 br-4 text-center text-white <%= @advertisement.status%>"><%= @advertisement.status %></p></div>
+        <div class="d-flex">
+          <h4 class="m-0 text-success">Status do anúncio:</h4>
+          <p class="m-0 field-value"><%= @advertisement.status %></p>
+        </div>
       </div>
       <div class="table-row">
-        <div class="cell">Status do pagamento</div>
-        <div class="cell"><p class="m-0 px-3 py-1 br-4 text-center text-white "><%= @advertisement.invoice_status %></p></div>
+        <div class="d-flex">
+          <h4 class="m-0 text-success">Status do pagamento:</h4>
+          <p class="m-0 field-value"><%= @advertisement.invoice_status %></p>
+        </div>
+
       </div>
       <div class="table-row">
-        <div class="cell">Data de criação</div>
-        <div class="cell"><%= @advertisement.created_at.strftime("%d/%m/%Y - %H:%M") %></div>
+        <div class="d-flex">
+          <h4 class="m-0 text-success">Data de criação:</h4>
+          <p class="m-0 field-value"><%= @advertisement.created_at.strftime("%d/%m/%Y - %H:%M") %></p>
+        </div>
       </div>
       <div class="table-row">
-        <div class="cell">Usuário</div>
-        <div class="cell"><%= @user.full_name %> || <%= @user.email %></div>
+        <div class="d-flex">
+          <h4 class="m-0 text-success">Usuário:</h4>
+          <p class="m-0 field-value"><%= @user.full_name  ||  @user.email %></p>
+        </div>
+
       </div>
       <div class="table-row">
-        <div class="cell">O que foi anunciado</div>
-        <div class="cell"><%= @product_type %></div>
+        <div class="d-flex">
+          <h4 class="m-0 text-success">O que foi anunciado:</h4>
+          <p class="m-0 field-value"><%= @product_type %></p>
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="d-flex">
+          <h4 class="m-0 text-success">Valor do anúncio:</h4>
+          <p class="m-0 field-value"><%= number_to_currency(@advertisement.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+        </div>
       </div>
     </div>
-
 
     <% if @advertisement.invoice_url.present? %>
       <%= link_to @advertisement.invoice_url, target: :_blank do %>
@@ -42,123 +59,604 @@
       <p class="m-0 btn btn-primary disabled w-100 text-white mt-3">Fatura ainda não gerada</p>
     <% end %>
 
-
-
-
     <div class="spacer-30"></div>
-
-    <p class="info-text w-100 p-4 br-8 text-center fw-700 mb-3"><i class="fa fa-info-circle fs-20 me-3"></i> O endereço retornado para o CEP inserido é: <span id="order-cep-return"></span></p>
 
     <div class="table m-0">
       <div class="table-row header blue">
-        <div class="cell">
-          Informações do pedido
-
-        </div>
+        <h3 class="text-center text-success">
+          Informações <%= @advertisement.advertisable_type %> anunciado
+        </h3>
         <% if @advertisement.advertisable_type == "Product" %>
-          <p><span className="text-success">Categoria:</span><%= @product.category.name %> </p>
-          <p><span className="text-success">Modalidade:</span><%= @product.modality %> </p>
-          <p><span className="text-success">Quantidade:</span><%= @product.quantity %></p>
-          <p><span className="text-success">Local:</span><%= @product.locality %></p>
-          <p><span className="text-success">Preço:</span> <%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></p>
-          <p><span className="text-success">Ano:</span> <%= @product.year %></p>
-          <p><span className="text-success">Marca:</span><%= @product.brand %></p>
-          <p><span className="text-success">Modelo:</span><%= @product.model %></p>
-          <p><span className="text-success">Descrição:</span><%= @product.description %></p>
+          <div class="table">
+            <div class="d-flex ">
+              <div class="w-50" data-column="category">
+                <div class="d-flex">
+                  <p class="text-success">Categoria:</p>
+                  <p class="ms-3 field-value"><%= @product.category.name %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="category" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+              <div class="w-50" data-column="modality">
+                <div class="d-flex">
+                  <p class="text-success">Modalidade:</p>
+                  <p class="ms-3 field-value"><%= @product.modality %></p>
+                </div>
+                <div class="d-flex ">
+                  <input name="modality" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex ">
+              <div class="w-50" data-column="brand">
+                <div class="d-flex">
+                  <p class="text-success">Marca:</p>
+                  <p class="ms-3 field-value"><%= @product.brand %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="brand" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+              <div class="w-50" data-column="model">
+                <div class="d-flex">
+                  <p class="text-success">Modelo:</p>
+                  <p class="ms-3 field-value"><%= @product.model %></p>
+                </div>
+                <div class="d-flex ">
+                  <input name="model" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex ">
+              <div class="w-50" data-column="quantity">
+                <div class="d-flex">
+                  <p class="text-success">Quantidade:</p>
+                  <p class="ms-3 field-value"><%= @product.quantity %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="quantity" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+              <div class="w-50" data-column="price_in_cents">
+                <div class="d-flex">
+                  <p class="text-success">Preço:</p>
+                  <p class="ms-3 field-value"><%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+                </div>
+                <div class="d-flex ">
+                  <input name="price_in_cents" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex ">
+              <div class="w-50" data-column="locality">
+                <div class="d-flex">
+                  <p class="text-success">Cidade:</p>
+                  <p class="ms-3 field-value"><%= @product.locality %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="locality" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+              <div class="w-50" data-column="yer">
+                <div class="d-flex">
+                  <p class="text-success">Ano:</p>
+                  <p class="ms-3 field-value"><%= @product.year  %></p>
+                </div>
+                <div class="d-flex ">
+                  <input name="year" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+            </div>
+              <div class="w-100" data-column="description">
+              <div class="d-flex">
+                <p class="text-success">Descrição:</p>
+                <p class=" field-value"><%= @product.description  %></p>
+              </div>
+              <div class="d-flex ">
+                <input name="description" type="text" class="text-input w-100">
+                <p class="ms-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
         <% elsif @advertisement.advertisable_type == "Bike" %>
 
-          <p><span className="text-success">Categoria:</span><%= @product.category.name %> </p>
-          <p><span className="text-success">Modalidade:</span><%= @product.modality %> </p>
-          <p><span className="text-success">Quantidade:</span><%= @product.quantity %></p>
-          <p><span className="text-success">Local:</span><%= @product.locality %></p>
-          <p><span className="text-success">Preço:</span> <%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></p>
-          <p><span className="text-success">Ano:</span> <%= @product.year %></p>
-          <p><span className="text-success">Marca:</span><%= @product.frame_brand %></p>
-          <p><span className="text-success">Modelo:</span><%= @product.model %></p>
-          <p><span className="text-success">Tipo:</span><%= @product.bike_type %></p>
-          <p><span className="text-success">Descrição:</span><%= @product.description %></p>
+          <div class="d-flex ">
+            <div class="w-50" data-column="bike_type">
+              <div class="d-flex">
+                <p class="text-success">Tipo:</p>
+                <p class="ms-3 field-value"><%= @product.bike_type %></p>
+              </div>
+              <div class="d-flex">
+                <input name="bike_type" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="year">
+              <div class="d-flex">
+                <p class="text-success">Ano:</p>
+                <p class="ms-3 field-value"><%= @product.year  %></p>
+              </div>
+              <div class="d-flex ">
+                <input name="year" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
-          <h5>Quadro</h5>
-          <p><span className="text-success">Tamanho:</span><%= @product.frame_size %> </p>
-          <p><span className="text-success">Marca:</span><%= @product.frame_brand %> </p>
-          <p><span className="text-success">Material:</span><%= @product.frame_material %></p>
+          <div class="d-flex ">
+            <div class="w-50" data-column="locality">
+              <div class="d-flex">
+                <p class="text-success">Tipo:</p>
+                <p class="ms-3 field-value"><%= @product.locality %></p>
+              </div>
+              <div class="d-flex">
+                <input name="locality" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="quantity">
+              <div class="d-flex">
+                <p class="text-success">Quantidade:</p>
+                <p class="ms-3 field-value"><%= @product.quantity  %></p>
+              </div>
+              <div class="d-flex ">
+                <input name="quantity" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex ">
+            <div class="w-50" data-column="category">
+              <div class="d-flex">
+                <p class="text-success">Categoria:</p>
+                <p class="ms-3 field-value"><%= @product.category.name%></p>
+              </div>
+              <div class="d-flex">
+                <input name="category" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="model">
+              <div class="d-flex">
+                <p class="text-success">Modelo:</p>
+                <p class="ms-3 field-value"><%= @product.model  %></p>
+              </div>
+              <div class="d-flex ">
+                <input name="model" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50" data-column="price_in_cents">
+              <div class="d-flex">
+                <p class="text-success">Preço:</p>
+                <p class="ms-3 field-value"><%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></p>
+              </div>
+              <div class="d-flex">
+                <input name="price_in_cents" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="description">
+              <div class="d-flex">
+                <p class="text-success">Descrição:</p>
+                <p class="ms-3 field-value"><%= @product.description%></p>
+              </div>
+              <div class="d-flex">
+                <input name="description" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
-          <h5>Transmissão</h5>
-          <p><span className="text-success">Pedivela:</span><%= @product.crankset %></p>
-          <p><span className="text-success">Corrente:</span><%= @product.chain %></p>
-          <p>Dianteira</p>
-          <p><span className="text-success">Marchas:</span><%= @product.number_of_front_gears %> </p>
-          <p><span className="text-success">Marca | Modelo:</span><%= @product.front_derailleur_model %> </p>
-          <p>Traseira</p>
-          <p><span className="text-success">Marchas:</span><%= @product.number_of_rear_gears %> </p>
-          <p><span className="text-success">Marca | Modelo:</span><%= @product.rear_derailleur_model %> </p>
 
-          <h5>Suspensão</h5>
-          <p><span className="text-success">Tipo:</span><%= @product.suspension_type %></p>
-          <p>Dianteira</p>
-          <p><span className="text-success">Curso:</span><%= @product.front_suspension_travel %> </p>
-          <p><span className="text-success">Marca | Modelo:</span><%= @product.front_suspension_model %> </p>
-          <p>Traseira</p>
-          <p><span className="text-success">Curso:</span><%= @product.rear_suspension_travel %> </p>
-          <p><span className="text-success">Marca | Modelo:</span><%= @product.rear_suspension_model %> </p>
+          <h4 class="text-center text-white my-3">Quadro</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="frame_brand">
+              <div class="d-flex">
+                <p class="text-success">Marca:</p>
+                <p class="ms-3 field-value"><%= @product.frame_brand %></p>
+              </div>
+              <div class="d-flex">
+                <input name="frame_brand" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="frame_size">
+              <div class="d-flex">
+                <p class="text-success">Tamanho:</p>
+                <p class="ms-3 field-value"><%= @product.frame_size%></p>
+              </div>
+              <div class="d-flex">
+                <input name="frame_size" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="frame_material">
+              <div class="d-flex">
+                <p class="text-success">Material:</p>
+                <p class="ms-3 field-value"><%= @product.frame_material%></p>
+              </div>
+              <div class="d-flex">
+                <input name="frame_material" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
 
-          <h5>Rodas</h5>
-          <p><span className="text-success">Tamanho:</span><%= @product.rim_size %></p>
-          <p>Dianteira</p>
-          <p><span className="text-success">Aro:</span><%= @product.front_rim_model %> </p>
-          <p><span className="text-success">Cubo:</span><%= @product.front_hub %> </p>
-          <p><span className="text-success">Pneu:</span><%= @product.front_tyre %> </p>
-          <p>Traseira</p>
-          <p><span className="text-success">Aro:</span><%= @product.rear_rim_model %> </p>
-          <p><span className="text-success">Cubo:</span><%= @product.rear_hub %> </p>
-          <p><span className="text-success">Pneu:</span><%= @product.rear_tyre %> </p>
+          <h4 class="text-center text-white my-3">Transmissão</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="crankset">
+              <div class="d-flex">
+                <p class="text-success">Pedivela:</p>
+                <p class="ms-3 field-value"><%= @product.crankset %></p>
+              </div>
+              <div class="d-flex">
+                <input name="crankset" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="chain ">
+              <div class="d-flex">
+                <p class="text-success">Corrente:</p>
+                <p class="ms-3 field-value"><%= @product.chain %></p>
+              </div>
+              <div class="d-flex">
+                <input name="chain " type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white my-1">Dianteira</p>
+          <div class="d-flex">
+            <div class="w-50" data-column="number_of_front_gears">
+              <div class="d-flex">
+                <p class="text-success">Nº Marchas:</p>
+                <p class="ms-3 field-value"><%= @product.number_of_front_gears %></p>
+              </div>
+              <div class="d-flex">
+                <input name="number_of_front_gears" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="front_derailleur_model ">
+              <div class="d-flex">
+                <p class="text-success">Modelo:</p>
+                <p class="ms-3 field-value"><%= @product.front_derailleur_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="front_derailleur_model " type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white my-1">Traseira</p>
+          <div class="d-flex">
+            <div class="w-50" data-column="number_of_rear_gears">
+              <div class="d-flex">
+                <p class="text-success">Nº Marchas:</p>
+                <p class="ms-3 field-value"><%= @product.number_of_rear_gears %></p>
+              </div>
+              <div class="d-flex">
+                <input name="number_of_rear_gears" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="rear_derailleur_model ">
+              <div class="d-flex">
+                <p class="text-success">Modelo:</p>
+                <p class="ms-3 field-value"><%= @product.rear_derailleur_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rear_derailleur_model " type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
-          <h5>Canote</h5>
-          <p><span className="text-success">Tipo:</span><%= @product.seat_post_type %></p>
-          <p><span className="text-success">Curso:</span><%= @product.seat_post_travel %></p>
-          <p><span className="text-success">Marca | Modelo:</span><%= @product.seat_post_model %></p>
+          <h4 class="text-center text-white my-3">Suspensão</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="suspension_type">
+              <div class="d-flex">
+                <p class="text-success">Tipo:</p>
+                <p class="ms-3 field-value"><%= @product.suspension_type %></p>
+              </div>
+              <div class="d-flex">
+                <input name="suspension_type" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white my-1">Dianteira</p>
+          <div class="d-flex">
+            <div class="w-50" data-column="front_suspension_travel">
+              <div class="d-flex">
+                <p class="text-success">Curso:</p>
+                <p class="ms-3 field-value"><%= @product.front_suspension_travel %></p>
+              </div>
+              <div class="d-flex">
+                <input name="front_suspension_travel" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="front_suspension_model">
+              <div class="d-flex">
+                <p class="text-success">Modelo:</p>
+                <p class="ms-3 field-value"><%= @product.front_suspension_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="front_suspension_model" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white my-1">Traseira</p>
+          <div class="d-flex">
+            <div class="w-50" data-column="rear_suspension_travel">
+              <div class="d-flex">
+                <p class="text-success">Curso:</p>
+                <p class="ms-3 field-value"><%= @product.rear_suspension_travel %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rear_suspension_travel" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="rear_suspension_model">
+              <div class="d-flex">
+                <p class="text-success">Modelo:</p>
+                <p class="ms-3 field-value"><%= @product.rear_suspension_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rear_suspension_model" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
-          <h5>Cockpit</h5>
-          <p><span className="text-success">Guidão:</span><%= @product.handlebar %></p>
-          <p><span className="text-success">Mesa:</span><%= @product.stem %></p>
 
-          <h5>Acessórios</h5>
-          <p><span className="text-success">Acompanha:</span><%= @product.accessories %> </p>
-          <p><span className="text-success">Descrição:</span><%= @product.accessories_description %> </p>
+          <h4 class="text-center text-white my-3">Rodas</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="rim_size">
+              <div class="d-flex">
+                <p class="text-success">Tipo:</p>
+                <p class="ms-3 field-value"><%= @product.rim_size %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rim_size" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white my-1">Dianteira</p>
+          <div class="d-flex">
+            <div class="w-50" data-column="front_rim_model">
+              <div class="d-flex">
+                <p class="text-success">Aro:</p>
+                <p class="ms-3 field-value"><%= @product.front_rim_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="front_rim_model" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="front_hub">
+              <div class="d-flex">
+                <p class="text-success">Cubo:</p>
+                <p class="ms-3 field-value"><%= @product.front_hub %></p>
+              </div>
+              <div class="d-flex">
+                <input name="front_hub" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="front_tyre">
+              <div class="d-flex">
+                <p class="text-success">Pneu:</p>
+                <p class="ms-3 field-value"><%= @product.front_tyre %></p>
+              </div>
+              <div class="d-flex">
+                <input name="front_tyre" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-white my-1">Traseira</p>
+          <div class="d-flex">
+            <div class="w-50" data-column="rear_rim_model">
+              <div class="d-flex">
+                <p class="text-success">Aro:</p>
+                <p class="ms-3 field-value"><%= @product.rear_rim_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rear_rim_model" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="rear_hub">
+              <div class="d-flex">
+                <p class="text-success">Cubo:</p>
+                <p class="ms-3 field-value"><%= @product.rear_hub %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rear_hub" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="rear_tyre">
+              <div class="d-flex">
+                <p class="text-success">Pneu:</p>
+                <p class="ms-3 field-value"><%= @product.rear_tyre %></p>
+              </div>
+              <div class="d-flex">
+                <input name="rear_tyre" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <h4 class="text-center text-white my-3">Canote</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="seat_post_type">
+              <div class="d-flex">
+                <p class="text-success">Tipo:</p>
+                <p class="ms-3 field-value"><%= @product.seat_post_type %></p>
+              </div>
+              <div class="d-flex">
+                <input name="seat_post_type" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="seat_post_travel">
+              <div class="d-flex">
+                <p class="text-success">Curso:</p>
+                <p class="ms-3 field-value"><%= @product.seat_post_travel %></p>
+              </div>
+              <div class="d-flex">
+                <input name="seat_post_travel" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="seat_post_model">
+              <div class="d-flex">
+                <p class="text-success">Modelo:</p>
+                <p class="ms-3 field-value"><%= @product.seat_post_model %></p>
+              </div>
+              <div class="d-flex">
+                <input name="seat_post_model" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="text-center text-white my-3">Cockpit</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="stem">
+              <div class="d-flex">
+                <p class="text-success">Mesa:</p>
+                <p class="ms-3 field-value"><%= @product.stem %></p>
+              </div>
+              <div class="d-flex">
+                <input name="stem" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="handlebar ">
+              <div class="d-flex">
+                <p class="text-success">Guidão:</p>
+                <p class="ms-3 field-value"><%= @product.handlebar %></p>
+              </div>
+              <div class="d-flex">
+                <input name="handlebar " type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="text-center text-white my-3">Acessórios</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="accessories">
+              <div class="d-flex">
+                <p class="text-success">Acompanha:</p>
+                <p class="ms-3 field-value"><%= @product.accessories %></p>
+              </div>
+              <div class="d-flex">
+                <input name="accessories" type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+            <div class="w-50" data-column="accessories_description ">
+              <div class="d-flex">
+                <p class="text-success">Descrição:</p>
+                <p class="ms-3 field-value"><%= @product.accessories_description %></p>
+              </div>
+              <div class="d-flex">
+                <input name="accessories_description " type="text" class="text-input w-100">
+                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              </div>
+            </div>
+          </div>
 
           <% if @product.bike_type == "e-bike" %>
+            <h4 class="text-center text-white my-3">Elétrica</h4>
+            <div class="d-flex">
+              <div class="w-50" data-column="battery">
+                <div class="d-flex">
+                  <p class="text-success">Bateria:</p>
+                  <p class="ms-3 field-value"><%= @product.battery %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="battery" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+              <div class="w-50" data-column="battery_cycles ">
+                <div class="d-flex">
+                  <p class="text-success">Ciclos:</p>
+                  <p class="ms-3 field-value"><%= @product.battery_cycles %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="battery_cycles " type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+            </div>
 
-
-            <h5>Elétrica</h5>
-            <p><span className="text-success">Bateria:</span><%= @product.rear_rim_model %> </p>
-            <p><span className="text-success">Ciclos:</span><%= @product.rear_hub %> </p>
-            <p><span className="text-success">Km:</span><%= @product.rear_tyre %> </p>
-            <p><span className="text-success">Motor:</span><%= @product.frame_size %> </p>
+            <div class="d-flex">
+              <div class="w-50" data-column="mileage">
+                <div class="d-flex">
+                  <p class="text-success">Km:</p>
+                  <p class="ms-3 field-value"><%= @product.mileage %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="mileage" type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+              <div class="w-50" data-column="motor ">
+                <div class="d-flex">
+                  <p class="text-success">Motor:</p>
+                  <p class="ms-3 field-value"><%= @product.motor %></p>
+                </div>
+                <div class="d-flex">
+                  <input name="motor " type="text" class="text-input w-100">
+                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                </div>
+              </div>
+            </div>
           <% end %>
-
-
         <% end %>
       </div>
     </div>
 
-    <% if @advertisement.waiting_review?  %>
-      <div class="action-buttons flex center between mt-5">
-        <div class="w-100">
-          <%= link_to admin_advertisement_approve_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>
-            <p class="m-0 btn btn-success w-100 text-white">Aprovar pedido</p>
-          <% end %>
+    <div class="mb-4">
+      <% if @advertisement.waiting_review?  %>
+        <div class="action-buttons flex center between mt-5">
+          <div class="w-100">
+            <%= link_to admin_advertisement_approve_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>
+              <p class="m-0 btn btn-success w-100 text-white">Aprovar pedido</p>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= link_to admin_advertisement_reject_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer bloquear o pedido para sempre?" } do %>
-          <p class="m-0 mt-3 btn btn-danger w-100 text-white">Bloquear pedido</p>
-        <% end %>
-      </div>
+      <%= link_to admin_advertisement_reject_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer bloquear o pedido para sempre?" } do %>
+        <p class="m-0 mt-3 btn btn-danger w-100 text-white">Bloquear pedido</p>
+      <% end %>
     </div>
   </form>
 </div>

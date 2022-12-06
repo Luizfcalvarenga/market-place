@@ -59,7 +59,7 @@
           <div class="d-flex">
             <% if advertisement.status === "waiting_review" %>
               <%= link_to admin_advertisement_path(advertisement.id) do %>
-                <i class="fas fa-search"></i>Revisar
+                <i class="fas fa-search  mt-2"></i>Revisar
               <% end %>
             <% elsif  advertisement.status === "pending" %>
               <i class="fas fa-clock mt-1" style="color: red;"></i>
