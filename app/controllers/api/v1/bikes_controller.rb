@@ -7,8 +7,8 @@ module Api
       skip_before_action :authenticate_user!
 
       def index
-        @bikes = Advertisement.where(status: "approved").where(advertisable_type: "Bike").map {|advertisement| advertisement.advertisable }
-
+        
+        @bikes = Bike.joins(:advertisements).where(advertisements: {status: "approved"})
         @bikes = @bikes.where(category: params[:category]) if params[:category].present?
         @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?
 

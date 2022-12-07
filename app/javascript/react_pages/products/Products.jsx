@@ -332,24 +332,27 @@ export function Products(props) {
               <div className="w-25" product={product} key={product.id} id="mobile">
                 <a href={"products/" + product.id} className="remove-link">
                   <div className="cards-products">
-                    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                    <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">
+                      {product.photos && (
                       <div className="carousel-inner">
-                        <i className="fas fa-heart card-favorite"></i>
-                        <div className="carousel-item active">
-                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                        </div>
-                        <div className="carousel-item">
-                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                        </div>
-                        <div className="carousel-item">
-                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                        </div>
+                        {product.photos.map((photo, index) => {
+                          return (
+
+                            <div className="carousel-item">
+                              <img src={photo} className="d-block w-100 img-card-index" alt="" />
+                            </div>
+                          )
+                        })}
                       </div>
-                      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                      )}
+                      <div className="carousel-item active">
+                        <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                      </div>
+                      <button className="carousel-control-prev" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="prev">
                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Previous</span>
                       </button>
-                      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                      <button className="carousel-control-next" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="next">
                         <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Next</span>
                       </button>

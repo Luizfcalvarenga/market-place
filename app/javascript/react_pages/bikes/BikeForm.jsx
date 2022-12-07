@@ -95,7 +95,7 @@ export function BikeForm(props) {
       setBikeId(props.bikeId);
       setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
       //jeito por enquanto pra setar modalidades, todas de uma vez
-    
+
     }
   }, []);
 
@@ -728,8 +728,8 @@ export function BikeForm(props) {
         className="select-answer"
         >
           <option value=""></option>
-          {categories.map((category) => {
-            return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
+          {Object.keys(categories).map((category) => {
+            return (<option key={category.id} value={category} className="answers-options">{categories[category]}</option>)
           })}
         </select>
         { errors && errors.bike && errors.bike.category && (

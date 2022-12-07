@@ -57,12 +57,12 @@ class BikesController < ApplicationController
   end
 
   def get_information_for_new_bike
-    @categories = Category.all
+    @categories = Category::CATEGORY_OPTIONS
     @services = Service.all
     if current_user.present?
       @user = current_user
     end
-
+    
     skip_authorization
 
     respond_to do |format|

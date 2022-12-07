@@ -14,4 +14,5 @@ class Bike < ApplicationRecord
 
   default_scope { where(removed_at: nil) }
 
+
 end

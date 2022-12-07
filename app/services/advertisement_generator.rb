@@ -7,7 +7,6 @@ class AdvertisementGenerator
 
   def call
     # return if @advertisable.advertisement.exits?
-
     ActiveRecord::Base.transaction do
       @advertisement = Advertisement.create(
         user: @advertisable.user,
@@ -17,7 +16,6 @@ class AdvertisementGenerator
       )
       @advertisement.persisted?
     end
-
     AdvertisementMailer.with(advertisement: @advertisement).advertisement_creation.deliver_now
   end
 
