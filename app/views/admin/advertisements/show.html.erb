@@ -1348,12 +1348,7 @@
           </div>
         </div>
       <% end %>
-
-      <input type="submit" value="Submit" class="btn btn-primary">
-
-      <%= link_to admin_advertisement_reject_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer bloquear o pedido para sempre?" } do %>
-        <p class="m-0 mt-3 btn btn-danger w-100 text-white">Rejeitar anúncio</p>
-      <% end %>
+      <button type="submit" value="Submit" class="btn btn-danger mt-3 w-100">Adicionar revisão</button>
     </div>
   </form>
 </div>

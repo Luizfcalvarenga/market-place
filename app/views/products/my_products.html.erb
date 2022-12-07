@@ -6,8 +6,8 @@
   <% else %>
     <% @products.each do |product| %>
       <div class="my-product-card mt-3">
-        <div class="row row-cols-1">
-          <div id="carouselExampleControls" class="carousel slide col-12 col-md-5" data-bs-ride="carousel">
+        <div class="d-flex">
+          <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
             <% if product.photos.attached? %>
               <div class="carousel-inner">
                 <% product.photos.each_with_index do |photo, i| %>
@@ -28,7 +28,7 @@
                 <span class="visually-hidden">Next</span>
               </button>
           </div>
-          <div class="col-12 col-md-5 mt-3 ">
+          <div class="w-50 mt-3 ms-3">
             <p><strong>Marca:</strong> <%= product.brand %></p>
             <p><strong>Nome:</strong> <%= product.model %></p>
             <p><strong>Categoria:</strong> <%= product.category.name %></p>
@@ -40,15 +40,17 @@
           <div class="col-12 col-md-2 mt-3">
             <% if product.advertisement.status === "waiting_review" %>
               <p><span class="topic-cards-index-media text-primary"><i class="fas fa-clock mt-1 me-2"></i>Aguardando revisão</p>
+            <% elsif  product.advertisement.status === "pending" %>
+              <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Aguardando pagamento</p>
             <% elsif  product.advertisement.status === "approved" %>
               <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>
             <% elsif  product.advertisement.status === "update_request" %>
               <p><span class="topic-cards-index-media text-warning"><i class="fas fa-clock mt-1 me-2"></i>Necessita update</p>
             <% end %>
-            <%= link_to edit_product_path(product.id), class: " mt-3 links-profile"  do %>
+            <%= link_to edit_product_path(product.id), class: "text-success mt-3 links-profile"  do %>
               <i class="fas fa-pen"></i>  Editar
             <% end %>
-            <%= link_to product, method: :delete, data: { confirm: "Tem certeza que deseja remover #{product.product_type.name}?"}, class: " links-profile"  do %>
+            <%= link_to product, method: :delete, data: { confirm: "Tem certeza que deseja remover #{product.product_type.name}?"}, class: "text-warning links-profile"  do %>
               <i class="fas fa-trash-alt"></i>  Remover
             <% end %>
           </div>
@@ -64,8 +66,8 @@
   <% else %>
     <% @bikes.each do |bike| %>
       <div class="my-product-card mt-3">
-        <div class="row row-cols-1">
-          <div id="carouselExampleControls" class="carousel slide col-12 col-md-5" data-bs-ride="carousel">
+        <div class="d-flex ">
+          <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
             <% if bike.photos.attached? %>
               <div class="carousel-inner">
                 <% bike.photos.each_with_index do |photo, i| %>
@@ -86,7 +88,7 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
-          <div class="col-12 col-md-5 mt-3 ">
+          <div class="w-50 mt-3 ms-3 my-product-infos">
             <p><strong>Local:</strong> <%= bike.locality %></p>
             <p><strong>Categoria:</strong> <%= bike.category.name %></p>
             <p><strong>Tipo:</strong> <%= bike.bike_type %></p>
@@ -98,15 +100,17 @@
           <div class="col-12 col-md-2 mt-3">
            <% if bike.advertisement.status === "waiting_review" %>
               <p><span class="topic-cards-index-media text-primary"><i class="fas fa-clock mt-1 me-2"></i>Aguardando revisão</p>
+            <% elsif  bike.advertisement.status === "pending" %>
+              <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Aguardando pagamento</p>
             <% elsif  bike.advertisement.status === "approved" %>
               <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>
             <% elsif  bike.advertisement.status === "update_request" %>
               <p><span class="topic-cards-index-media text-warning"><i class="fas fa-clock mt-1 me-2"></i>Necessita update</p>
             <% end %>
-            <%= link_to edit_bike_path(bike), class: " mt-3 links-profile"  do %>
-              <i class="fas fa-pen"></i>  Editar
+            <%= link_to edit_bike_path(bike), class: " mt-1 links-profile text-success"  do %>
+              <i class="fas fa-pen"></i>  Editar <br>
             <% end %>
-            <%= link_to remove_path(bike), method: :delete, data: { confirm: "Tem certeza que deseja remover #{bike.model}?"}, class: " links-profile"  do %>
+            <%= link_to remove_path(bike), method: :delete, data: { confirm: "Tem certeza que deseja remover #{bike.model}?"}, class: " links-profile text-warning"  do %>
               <i class="fas fa-trash-alt"></i>  Remover
             <% end %>
           </div>

@@ -736,7 +736,7 @@
 
       )
 
-      advertisement = Advertisement.create!(advertisable: product, user: user, status: "waiting_review", price_in_cents: 15000)
+      advertisement = Advertisement.create!(advertisable: product, user: user, status: ["waiting_review", "pending", "approved"].sample, price_in_cents: 15000)
       product_attributes =  ProductTypeAttribute.where(product_type: product.product_type).each do | product_type_attribute |
         ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample)
       end
@@ -787,7 +787,7 @@
         description: "Bicicleta em perfeito estado apenas 1 dono.",
         accessories: "Não"
       )
-      advertisement = Advertisement.create!(advertisable: bike, user: user, status: "waiting_review", price_in_cents: 15000)
+      advertisement = Advertisement.create!(advertisable: bike, user: user, status: ["waiting_review", "pending", "approved"].sample, price_in_cents: 15000)
 
     end
     puts "Seed finished"

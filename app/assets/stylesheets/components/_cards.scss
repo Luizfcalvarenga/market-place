@@ -364,3 +364,17 @@
 
   }
 }
+
+@media (max-width: 765px) {
+  .cards-index-advertisements {
+    width: 100%;
+  }
+
+  .cards-grid {
+    display: block;
+  }
+
+  .links-profile {
+    margin: 5px;
+  }
+}

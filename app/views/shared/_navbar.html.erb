@@ -75,8 +75,8 @@
         </li>
         <% if current_user.present? %>
           <li class="nav-item active mt-1" style="color: white;">
-            <%= link_to order_path(current_user.orders.last.id) do %>
-              <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= current_user.orders.last.order_items.count %></span></i>
+            <%= link_to user_path(User.find(4)) do %>
+              <i class="fas fa-comment-alt text-success"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
         <% end %>

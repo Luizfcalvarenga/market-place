@@ -59,18 +59,18 @@
           <div class="d-flex">
             <% if advertisement.status === "waiting_review" %>
               <%= link_to admin_advertisement_path(advertisement.id) do %>
-              <i class="fas fa-search mt-2"></i>
-                 <span class="ms-4">Revisar</span>
+              <i class="fas fa-search mt-2 text-primary"></i>
+                 <span class="ms-4 text-primary">Revisar</span>
               <% end %>
             <% elsif  advertisement.status === "pending" %>
-              <i class="fas fa-clock mt-1" style="color: red;"></i>
-              <p><span class="topic-cards-index-media ms-3">Aguardando pagamento</p>
+              <i class="fas fa-clock mt-1 text-danger" ></i>
+              <p><span class="topic-cards-index-media ms-3 text-danger">Aguardando pagamento</p>
             <% elsif  advertisement.status === "update_request" %>
-              <i class="fas fa-clock mt-1" style="color: red;"></i>
-              <p><span class="topic-cards-index-media ms-3">Aguardando update</p>
+              <i class="fas fa-clock mt-1 text-warning" ></i>
+              <p><span class="topic-cards-index-media ms-3 text-warning">Aguardando update</p>
             <% else %>
-              <i class="fas fa-check mt-1" style="color: green;"></i>
-              <p><span class="topic-cards-index-media ms-3">Finalizado</p>
+              <i class="fas fa-check mt-1 text-success"></i>
+              <p><span class="topic-cards-index-media ms-3 text-success">Finalizado</p>
             <% end %>
           </div>
         </td>

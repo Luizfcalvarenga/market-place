@@ -87,6 +87,11 @@
 
 .links-profile {
   text-decoration: none;
+
+  .fa-heart {
+    color: $color-primary;
+    font-size: 18px;
+  }
 }
 
 .edit-modal {

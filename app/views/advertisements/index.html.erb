@@ -1,6 +1,6 @@
 <div class="container advertisements mb-5">
   <h1 class="my-3 text-center text-success">Anuncios</h1>
-  <div class="d-flex flex-wrap justify-content-between">
+  <div class="d-flex flex-wrap justify-content-between cards-grid">
     <% @advertisements.each do | advertisement | %>
       <div class="cards-index-advertisements  gap-2">
         <div class="card-body">
@@ -24,7 +24,9 @@
               <% else%>
                 <p><span class="topic-cards-index-media text-danger"><i class="fas fa-credit-card mt-1 me-2"></i>Aguardando pagamento</p>
               <% end %>
-              <% if advertisement.status === "waiting_review" %>
+              <% if advertisement.status === "pending" %>
+                <p><span class="topic-cards-index-media text-warning"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
+              <% elsif  advertisement.status === "waiting_review" %>
                 <p><span class="topic-cards-index-media text-primary"><i class="fas fa-clock mt-1 me-2"></i>Aguardando revisão</p>
               <% elsif  advertisement.status === "approved" %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>
