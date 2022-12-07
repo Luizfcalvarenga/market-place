@@ -58,9 +58,9 @@
         <td data-label="Ações">
           <div class="d-flex">
             <% if advertisement.status === "waiting_review" %>
-              <%= link_to admin_advertisement_path(advertisement.id) do %>
-              <i class="fas fa-search mt-2 text-primary"></i>
-                 <span class="ms-4 text-primary">Revisar</span>
+              <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2" do %>
+                <i class="fas fa-search mt-1"></i>
+                 <span class="ms-2">Revisar</span>
               <% end %>
             <% elsif  advertisement.status === "pending" %>
               <i class="fas fa-clock mt-1 text-danger" ></i>

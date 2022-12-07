@@ -344,6 +344,12 @@
   height: 300px;
   box-shadow: 0px 0px 20px 0px #00c4545e;
 
+  .links-profile {
+    &:hover {
+      color: #eafceb !important;
+    }
+  }
+
 }
 
 .cards-index-advertisements {
@@ -361,19 +367,46 @@
   .index-line {
     border: 1px solid grey;
     width: 100%;
-
   }
+
 }
 
 @media (max-width: 765px) {
   .cards-index-advertisements {
     width: 100%;
   }
+  .my-product-card {
+    .carousel{
+      display: none;
+    //   position: relative;
+    //   margin-top: 20px;
+    //   right: -54%;
+    //   width: 40%;
+    //   height: 120px;
 
+    //   .my-product-img {
+    //     width: 100%;
+    //     height: 120px !important;
+    //     border-radius: 5px;
+    //   }
+    }
+    // .mobile-device {
+    //   display: block !important;
+    // }
+
+      .topic-cards-index-media {
+        margin-right: 5px;
+      }
+  }
   .cards-grid {
     display: block;
   }
 
+  .my-products-infos {
+    p {
+      font-size: 18px !important;
+    }
+  }
   .links-profile {
     margin: 5px;
   }

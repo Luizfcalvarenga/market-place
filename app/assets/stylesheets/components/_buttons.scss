@@ -138,3 +138,21 @@
 .fa-check, .fa-times {
   font-size: 1rem;
 }
+
+
+///////////Admin
+
+.review-btn {
+  color: #4444d1;
+  .fa-search {
+    color: #4444d1;
+  }
+  &:hover {
+    color: white !important;
+    .fa-search {
+      color: white !important;
+
+
+    }
+  }
+}
