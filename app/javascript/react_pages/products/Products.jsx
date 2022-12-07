@@ -224,7 +224,7 @@ export function Products(props) {
               >
                 <option value=""></option>
                 <option value="speed_performance">Speed Performance</option>
-                <option value="triathlon">triathon</option>
+                <option value="triathlon">Triathon</option>
                 <option value="ciclocross">Ciclocross</option>
                 <option value="cicloviagem">Cicloviagme</option>
                 <option value="gravel">Gravel</option>

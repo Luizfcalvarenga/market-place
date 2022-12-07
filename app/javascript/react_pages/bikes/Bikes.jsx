@@ -129,104 +129,102 @@ export function Bikes(props) {
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   const frameBrands = [
-    "alfameq",
-    "astro",
-    "audax",
-    "bH",
-    "bianchi",
-    "bMC",
-    "caloi",
-    "cannondale",
-    "canyon",
-    "carrera",
-    "cervelo",
-    "corratec",
-    "cube",
+    "Alfameq",
+    "Astro",
+    "Audax",
+    "BH",
+    "Bianchi",
+    "BMC",
+    "Caloi",
+    "Cannondale",
+    "Canyon",
+    "Carrera",
+    "Cervelo",
+    "Corratec",
+    "Cube",
     "dabomb",
-    "felt",
-    "first",
-    "focus",
-    "fuji",
-    "giant",
-    "groove",
-    "gT",
-    "gTS",
-    "ibis",
-    "jamis",
-    "kona",
-    "lapierre",
-    "marin",
-    "merida",
-    "mosso",
-    "oggi",
-    "orbea",
-    "pinarello",
-    "raleigh",
-    "rava",
-    "ridley",
-    "santa_cruz",
-    "schwinn",
-    "scott",
-    "sense",
-    "soul",
-    "specialized",
-    "swift Carbon",
-    "trek",
-    "tsw",
-    "wilier",
-    "yt",
-    "argon_21",
-    "bliv",
-    "blue",
-    "bottecchia",
-    "cipollini",
-    "cly",
-    "cumberland",
-    "de_rosa",
-    "e_moving",
-    "gary_fisher",
-    "gioia",
-    "kaiena",
-    "kestrel",
-    "kode",
-    "kuota",
-    "lazzaretti",
-    "lev_e_bike",
-    "litespeed",
-    "look",
-    "lotus",
-    "mercian",
-    "miyamura Gravel",
-    "open",
-    "quintana_roo",
-    "redland",
-    "riva",
-    "rose",
-    "sava",
-    "sundown",
-    "time",
-    "trinx",
-    "trust",
-    "velorbis",
-    "vicinitech",
-    "victory",
-    "eddy_merckx",
-    "salsa",
-    "surly",
-    "soma",
-    "diamondback",
-    "dahon"
+    "Felt",
+    "First",
+    "Focus",
+    "Fuji",
+    "Giant",
+    "Groove",
+    "GT",
+    "GTS",
+    "Ibis",
+    "Jamis",
+    "Kona",
+    "Lapierre",
+    "Marin",
+    "Merida",
+    "Mosso",
+    "Oggi",
+    "Orbea",
+    "Pinarello",
+    "Raleigh",
+    "Rava",
+    "Ridley",
+    "Santa_cruz",
+    "Schwinn",
+    "Scott",
+    "Sense",
+    "Soul",
+    "Specialized",
+    "Swift Carbon",
+    "Trek",
+    "Tsw",
+    "Wilier",
+    "YT",
+    "Argon 21",
+    "Bliv",
+    "Blue",
+    "Bottecchia",
+    "Cipollini",
+    "Cly",
+    "Cumberland",
+    "De Rosa",
+    "E Moving",
+    "Gary Fisher",
+    "Gioia",
+    "Kaiena",
+    "Kestrel",
+    "Kode",
+    "Kuota",
+    "Lazzaretti",
+    "Lev E-Bike",
+    "Litespeed",
+    "Look",
+    "Lotus",
+    "Mercian",
+    "Miyamura Gravel",
+    "Open",
+    "Quintana Roo",
+    "Redland",
+    "Riva",
+    "Rose",
+    "Sava",
+    "Sundown",
+    "Time",
+    "Trinx",
+    "Trust",
+    "Velorbis",
+    "Vicinitech",
+    "Victory",
+    "Eddy Merckx",
+    "Salsa",
+    "Surly",
+    "Soma",
+    "Diamondback",
+    "Dahon"
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
   const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
   const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
-  const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay"]
 
   /////////////////////////////////////////////////////////////////////////////////////SUSPENSÃO////////////////////////////////////////////////////////////////////////////
 
 
-  const suspensionTypes = ["no_suspension", "full_suspension", "hardtail"]
   const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
   const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
 
@@ -249,7 +247,6 @@ export function Bikes(props) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////FREIOS////////////////////////////////////////////////////////////////
 
-  const brakeTypes = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
   const discSizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "205mm", "210mm", "215mm", "220mm", "225mm" ]
  const brakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level"]
 
@@ -260,7 +257,6 @@ export function Bikes(props) {
 
  /////////////////////////////////////////////////////////////////////////////////////////////CANOTE//////////////////////////////////////////////////////////////////////
 
- const seatPostTypes = ["retractable", "rigid" ]
  const seatPostTravels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "210mm", "215mm", "220mm" ]
 
  ////////////////////////////////////////////////////////////////////////////////////////BATERIA/////////////////////////////
@@ -350,7 +346,7 @@ export function Bikes(props) {
               </select>
             </>)}
 
-            {categoryFilter === "dit_street" && (<>
+            {categoryFilter === "dirt_street" && (<>
               <h5 className="text-success mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
@@ -374,7 +370,7 @@ export function Bikes(props) {
               >
                 <option value=""></option>
                 <option value="speed_performance">Speed Performance</option>
-                <option value="triathlon">triathon</option>
+                <option value="triathlon">Triathon</option>
                 <option value="ciclocross">Ciclocross</option>
                 <option value="cicloviagem">Cicloviagme</option>
                 <option value="gravel">Gravel</option>
@@ -391,7 +387,7 @@ export function Bikes(props) {
               >
                 <option value=""></option>
                 <option value="speed_performance">Speed Performance</option>
-                <option value="triathlon">triathon</option>
+                <option value="triathlon">Triathon</option>
                 <option value="ciclocross">Ciclocross</option>
                 <option value="cicloviagem">Cicloviagme</option>
                 <option value="gravel">Gravel</option>
@@ -500,9 +496,9 @@ export function Bikes(props) {
                 onChange={(e) => setFrameMaterialFilter(e.target.value)}
               >
                 <option value=""></option>
-                {frameMaterials.map((frameMaterial, index)=> {
-                  return (<option key={index}>{frameMaterial}</option>);
-                })}
+                <option value="carbon">Carbono</option>
+                <option value="aluminum">Aluminio</option>
+                <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
               </select>
             </div>
 
@@ -515,9 +511,9 @@ export function Bikes(props) {
                 onChange={(e) => setSuspensionTypeFilter(e.target.value)}
               >
                 <option value=""></option>
-                {suspensionTypes.map((suspensionType, index)=> {
-                  return (<option key={index}>{suspensionType}</option>);
-                })}
+                <option value="no_suspension">Sem Suspensão</option>
+                <option value="full_suspension">Full Suspension</option>
+                <option value="hardtail">hardtail</option>
               </select>
 
               {["full_suspension", "hardtail"].includes(suspensionTypeFilter) && (<>
@@ -649,9 +645,11 @@ export function Bikes(props) {
 
               >
                 <option value=""></option>
-                {brakeTypes.map((brakeType, index)=> {
-                  return (<option key={index}>{brakeType}</option>);
-                })}
+                <option value="v_brake">V-Brake (frenagem no aro)</option>
+                <option value="hydraulic_disc">À Disco - Hidráulico</option>
+                <option value="mechanical_disc">À Disco - Mecânico</option>
+                <option value="coaster_brake">Contra pedal</option>
+                <option value="caliper">Cantilevers</option>
               </select>
 
               {(brakeTypeFilter === "hydraulic_disc" || brakeTypeFilter === "mechanical_disc") && (<>
@@ -722,9 +720,9 @@ export function Bikes(props) {
                 onChange={(e) => setSeatPostTypeFilter(e.target.value)}
               >
                 <option value=""></option>
-                {seatPostTypes.map((seatPostType, index)=> {
-                  return (<option key={index}>{seatPostType}</option>);
-                })}
+                <option value="retractable">Retratil</option>
+                <option value="rigid">Rígido</option>
+
               </select>
 
               {seatPostTypeFilter === 'retractable' &&(

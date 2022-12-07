@@ -71,7 +71,6 @@ export function BikeForm(props) {
   const [photosPreview, setPhotosPreview] = useState([]);
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
-  const [advertisementPrice, setAdvertisementPrice ] = useState(null);
   const [photos, setPhotos ] = useState(null);
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -85,7 +84,6 @@ export function BikeForm(props) {
      .then((response) => response.json())
      .then((data) => {
       setCategories(data.categories)
-      setServices(data.services)
       if (data.user) {
         setUser(data.user.id)
       }
@@ -109,9 +107,9 @@ export function BikeForm(props) {
 
   useEffect(() => {
     if (category === "urban") {
-      setModality(modalities[0])
+      setModality("urban")
     } else if (category === "infant") {
-      setModality(modalities[0])
+      setModality("infant")
     }
   });
 
@@ -168,7 +166,27 @@ export function BikeForm(props) {
     }
   }
 
+  const handleDisplay = (string) => {
 
+
+    //split the above string into an array of strings
+    //whenever a blank space is encountered
+
+    const array = string.split(" ");
+
+    //loop through each element of the array and capitalize the first letter.
+
+
+    for (var i = 0; i < array.length; i++) {
+        array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1);
+
+    }
+
+    //Join all the elements of the array back into a string
+    //using a blankspace as a separator
+    array.join(" ");
+
+  }
 
   async function fetchBike() {
     const response = await axios.get(
@@ -532,94 +550,93 @@ export function BikeForm(props) {
   //////////////////////////////////////////////// frames
 
   const frameBrands = [
-    "alfameq",
-    "astro",
-    "audax",
-    "bH",
-    "bianchi",
-    "bMC",
-    "caloi",
-    "cannondale",
-    "canyon",
-    "carrera",
-    "cervelo",
-    "corratec",
-    "cube",
-    "dabomb",
-    "felt",
-    "first",
-    "focus",
-    "fuji",
-    "giant",
-    "groove",
-    "gT",
-    "gTS",
-    "ibis",
-    "jamis",
-    "kona",
-    "lapierre",
-    "marin",
-    "merida",
-    "mosso",
-    "oggi",
-    "orbea",
-    "pinarello",
-    "raleigh",
-    "rava",
-    "ridley",
-    "santa_cruz",
-    "schwinn",
-    "scott",
-    "sense",
-    "soul",
-    "specialized",
-    "swift Carbon",
-    "trek",
-    "tsw",
-    "wilier",
-    "yt",
-    "argon_21",
-    "bliv",
-    "blue",
-    "bottecchia",
-    "cipollini",
-    "cly",
-    "cumberland",
-    "de_rosa",
-    "e_moving",
-    "gary_fisher",
-    "gioia",
-    "kaiena",
-    "kestrel",
-    "kode",
-    "kuota",
-    "lazzaretti",
-    "lev_e_bike",
-    "litespeed",
-    "look",
-    "lotus",
-    "mercian",
-    "miyamura Gravel",
-    "open",
-    "quintana_roo",
-    "redland",
-    "riva",
-    "rose",
-    "sava",
-    "sundown",
-    "time",
-    "trinx",
-    "trust",
-    "velorbis",
-    "vicinitech",
-    "victory",
-    "eddy_merckx",
-    "salsa",
-    "surly",
-    "soma",
-    "diamondback",
-    "dahon",
-    "other"
+    "Alfameq",
+    "Astro",
+    "Audax",
+    "BH",
+    "Bianchi",
+    "BMC",
+    "Caloi",
+    "Cannondale",
+    "Canyon",
+    "Carrera",
+    "Cervelo",
+    "Corratec",
+    "Cube",
+    "Dabomb",
+    "Felt",
+    "First",
+    "Focus",
+    "Fuji",
+    "Giant",
+    "Groove",
+    "GT",
+    "GTS",
+    "Ibis",
+    "Jamis",
+    "Kona",
+    "Lapierre",
+    "Marin",
+    "Merida",
+    "Mosso",
+    "Oggi",
+    "Orbea",
+    "Pinarello",
+    "Raleigh",
+    "Rava",
+    "Ridley",
+    "Santa_cruz",
+    "Schwinn",
+    "Scott",
+    "Sense",
+    "Soul",
+    "Specialized",
+    "Swift Carbon",
+    "Trek",
+    "Tsw",
+    "Wilier",
+    "YT",
+    "Argon 21",
+    "Bliv",
+    "Blue",
+    "Bottecchia",
+    "Cipollini",
+    "Cly",
+    "Cumberland",
+    "De Rosa",
+    "E Moving",
+    "Gary Fisher",
+    "Gioia",
+    "Kaiena",
+    "Kestrel",
+    "Kode",
+    "Kuota",
+    "Lazzaretti",
+    "Lev E-Bike",
+    "Litespeed",
+    "Look",
+    "Lotus",
+    "Mercian",
+    "Miyamura Gravel",
+    "Open",
+    "Quintana Roo",
+    "Redland",
+    "Riva",
+    "Rose",
+    "Sava",
+    "Sundown",
+    "Time",
+    "Trinx",
+    "Trust",
+    "Velorbis",
+    "Vicinitech",
+    "Victory",
+    "Eddy Merckx",
+    "Salsa",
+    "Surly",
+    "Soma",
+    "Diamondback",
+    "Dahon"
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
@@ -628,7 +645,6 @@ export function BikeForm(props) {
 
   //////////////////////////////////////////////// suspensions
 
-  const suspensionTypes = ["no_suspension", "full_suspension", "hardtail"]
   const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
   const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
   const shockSizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
@@ -637,14 +653,12 @@ export function BikeForm(props) {
 
  ///////////////////////////////////////////////// brake
 
-  const brakeTypes = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
   const discSizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ]
   const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
   const mtbDirtUrbanBrakeModels = ["SHIMANO  SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "other"]
 
   //////////////////////////////////////////////// seat post
 
-  const seatPostTypes = ["retractable", "rigid" ]
   const seatPostTravels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
 
   /////////////////////////////////////////////// gears
@@ -658,16 +672,7 @@ export function BikeForm(props) {
 
   ///////////////////////////////////////////// rim
 
-  const rimSizes = ["20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "700C", "650B", "Fatbike"]
-
-  /////////////////////////////////////////// conditions
-  const bikeConditions = ["new", "used", ];
-  const structuralVisualConditions = ["perfect_condition", "minor_surface_scratches", "spalls_in_paint", "painted_frame", "frame_welded_repaired", "frame_cracks_or_fissures_must_be_repaired", "components_welded_repaired", "components_cracks_or_fissures_must_be_repaired"]
-  const operatingConditions = ["rears_worn_out_higher_75", "hifters_not_working_properly", "front_suspension_not_working_properly", "rear_suspension_not_working_properly", "suspensions_lock_not_working_properly", "brake_not_working_properly", "retractable_seat_post_not_working_properly", "creaking_when_pedaling", "wheels_bent", "tyres_worn_out_minus_50"]
-
- ////////////////////////////////////////////////// documentation
-
- const documentationTypes = ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro", "Sem Documento"]
+  const rimSizes = ["16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
 
  //////////////////////////////////////////////// batteries
 
@@ -677,17 +682,9 @@ export function BikeForm(props) {
 
   const years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
 
-  /////////////////////////////////////////////////BIKE TYPES
-
-  const bikeTypes = ["e-bike", "normal"]
-
-  /////////////////////////////////////////////////BIKE TYPES
-
-  const withinAccessories = ["no", "yes"]
 
   //////////////////////////////////////////////ACCESSORIES
-
-  const accessoryOptions = ["Não", "Pedal", "Ciclocomputador", "Lanterna traseira", "Farol", "Bolsa de acessórios", "Suporte de garrafinha", "Outro"]
+ const accessoryOptions = ["Não", "Pedal", "Ciclocomputador", "Lanterna Traseira", "Farol", , "Bolsa de Acessórios", "Suporte de garrafinha"]
 
   return (
     <div className="w-60 new-bike-react py-5">
@@ -713,9 +710,8 @@ export function BikeForm(props) {
           onChange={(e) => setBikeType(e.target.value)}
         >
           <option value=""></option>
-          {bikeTypes.map((bikeType, index) => {
-            return (<option key={index}>{bikeType}</option>);
-          })}
+          <option value="bike">Bike</option>
+          <option value="e-bike">E-Bike</option>
         </select>
         { errors && errors.bike && errors.bike.bike_type && (
           <p className="text-danger">{errors.bike.bike_type[0]}</p>
@@ -728,15 +724,20 @@ export function BikeForm(props) {
         className="select-answer"
         >
           <option value=""></option>
-          {Object.keys(categories).map((category) => {
-            return (<option key={category.id} value={category} className="answers-options">{categories[category]}</option>)
-          })}
+          <option value="mountain_bike">Mountain Bike</option>
+          <option value="dirt_street">Dirt</option>
+          <option value="road">Road</option>
+          <option value="infant">Infantil</option>
+          <option value="urban">Urbano</option>
         </select>
         { errors && errors.bike && errors.bike.category && (
           <p className="text-danger">{errors.bike.category[0]}</p>
         )}
 
-        { (category === "mountain_bike" || category === "dirt_street" || category === "road") && (<>
+
+
+        {category === "mountain_bike" && (<>
+
           <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
           <select
             value={modality}
@@ -744,14 +745,47 @@ export function BikeForm(props) {
             className="select-answer"
           >
             <option value=""></option>
-            {modalities.map((modality, index) => {
-              return (<option key={index}>{modality}</option>);
-            })}
+            <option value="downhill">Downhill</option>
+              <option value="enduro">Enduro</option>
+              <option value="gravel">Gravel</option>
+              <option value="speed">Speed</option>
+              <option value="trail">Trail</option>
+              <option value="xc_cross_country">XC Cross Country</option>
           </select>
-          { errors && errors.bike && errors.bike.modality && (
-            <p className="text-danger">{errors.bike.modality[0]}</p>
-          )}
         </>)}
+
+        {category === "dirt_street" && (<>
+          <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+          <select
+            value={modality}
+            onChange={(e) => e.preventDefault && setModality(e.target.value)}
+            className="select-answer"
+          >
+            <option value=""></option>
+            <option value="street_bmx">Street BMX</option>
+            <option value="race_bmx">Race BMX</option>
+            <option value="big_wheel_bmx">Big Wheel BMX</option>
+            <option value="dirt_jump">Dirt Jump</option>
+          </select>
+        </>)}
+
+        {category === "road" && (<>
+          <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+          <select
+            value={modality}
+            onChange={(e) => e.preventDefault && setModality(e.target.value)}
+            className="select-answer"
+          >
+            <option value=""></option>
+            <option value="speed_performance">Speed Performance</option>
+            <option value="triathlon">Triathon</option>
+            <option value="ciclocross">Ciclocross</option>
+            <option value="cicloviagem">Cicloviagme</option>
+            <option value="gravel">Gravel</option>
+          </select>
+        </>)}
+
+
 
 
         {category === "road" && (<>
@@ -832,13 +866,12 @@ export function BikeForm(props) {
           onChange={(e) => setDocumentationType(e.target.value)}
         >
           <option value=""></option>
-          {documentationTypes.map((documentationType, index)=> {
-            return (<option key={index}>{documentationType}</option>);
-          })}
+          <option value="receipt">Nota Fiscal</option>
+          <option value="import_document">Documento de Importação</option>
+          <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
+          <option value="no_documentation">Sem Documento</option>
+
         </select>
-        { errors && errors.bike && errors.bike.documentation_type && (
-          <p className="text-danger">{errors.bike.documentation_type[0]}</p>
-        )}
 
         <label htmlFor="bikeCondition" className="mt-4">Condição da bike:<span className="requested-information ms-1">*</span></label>
         <select
@@ -847,9 +880,8 @@ export function BikeForm(props) {
           onChange={(e) => setBikeCondition(e.target.value)}
         >
           <option value=""></option>
-          {bikeConditions.map((bikeCondition, index)=> {
-              return (<option key={index}>{bikeCondition}</option>);
-            })}
+          <option value="new">Nova</option>
+          <option value="used">Usada</option>
         </select>
         { errors && errors.bike && errors.bike.bike_conditions && (
           <p className="text-danger">{errors.bike.bike_conditions[0]}</p>
@@ -877,7 +909,7 @@ export function BikeForm(props) {
           </>
         )}
 
-        <label htmlFor="model" className="mt-4">modelo:<span className="requested-information ms-1">*</span></label>
+        <label htmlFor="model" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
         <input type="text" className="text-input"  value={model} onChange={(e) => setModel(e.target.value)}/>
         { errors && errors.bike && errors.bike.model && (
           <p className="text-danger">{errors.bike.model[0]}</p>
@@ -885,7 +917,7 @@ export function BikeForm(props) {
 
         <div className="d-flex justify-content-between gap-3">
           <div className="w-50">
-            <label htmlFor="priceInCentes" className="mt-4">preço:<span className="requested-information ms-1">*</span></label>
+            <label htmlFor="priceInCentes" className="mt-4">Preço:<span className="requested-information ms-1">*</span></label>
             <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents} onChange={(e) => setPriceInCents(e.target.value)}/>
             { errors && errors.bike && errors.bike.price_in_cents  && (
               <p className="text-danger">{errors.bike.price_in_cents[0]}</p>
@@ -1042,9 +1074,11 @@ export function BikeForm(props) {
             onChange={(e) => setBrakeType(e.target.value)}
           >
             <option value=""></option>
-            {brakeTypes.map((brakeType, index)=> {
-              return (<option key={index}>{brakeType}</option>);
-            })}
+            <option value="v_brake">V-Brake (frenagem no aro)</option>
+            <option value="hydraulic_disc">À Disco - Hidráulico</option>
+            <option value="mechanical_disc">À Disco - Mecânico</option>
+            <option value="coaster_brake">Contra pedal</option>
+            <option value="caliper">Cantilevers</option>
           </select>
           {(brakeType === "hydraulic_disc" || brakeType === "mechanical_disc") && (<>
             <label htmlFor="disc_size" className="mt-4">Tamanho do disco:</label>
@@ -1111,9 +1145,9 @@ export function BikeForm(props) {
             onChange={(e) => setSuspensionType(e.target.value)}
           >
             <option value=""></option>
-            {suspensionTypes.map((suspensionType, index)=> {
-                return (<option key={index}>{suspensionType}</option>);
-              })}
+            <option value="no_suspension">Sem Suspensão</option>
+            <option value="full_suspension">Full Suspension</option>
+            <option value="hardtail">hardtail</option>
           </select>
 
           {suspensionType === "full_suspension" && (<>
@@ -1298,9 +1332,8 @@ export function BikeForm(props) {
             onChange={(e) => setSeatPostType(e.target.value)}
           >
             <option value=""></option>
-            {seatPostTypes.map((seatPostType, index)=> {
-                return (<option key={index}>{seatPostType}</option>);
-              })}
+            <option value="retractable">Retrátil</option>
+            <option value="rigid">Rigido</option>
           </select>
 
           {seatPostType === "retractable" && (<>
@@ -1411,10 +1444,14 @@ export function BikeForm(props) {
               onChange={(e) => setStructuralVisualCondition(e.target.value)}
 
             >
-              <option value=""></option>
-              {structuralVisualConditions.map((structuralVisualCondition, index)=> {
-                return (<option key={index}>{structuralVisualCondition}</option>);
-              })}
+              <option value="perfect_condition">Condição Perfeita</option>
+              <option value="minor_surface_scratches">Pequenos riscos ou arranhões superficiais.</option>
+              <option value="spalls_in_paint">Lascas na pintura</option>
+              <option value="painted_frame">Quadro foi pintado</option>
+              <option value="frame_welded_repaired">Quadro foi soldado ou reparado</option>
+              <option value="frame_cracks_or_fissures_must_be_repaired">Quadro possui trincas ou fissuras</option>
+              <option value="components_welded_repaired">Algum Componento já foi soldado ou reparado</option>
+              <option value="components_cracks_or_fissures_must_be_repaired">Algum componente possui fissura ou necessita reparo</option>
             </select>
 
             <label htmlFor="operatingCondition" className="mt-4">Condição estrutural/visual?</label>
@@ -1424,9 +1461,16 @@ export function BikeForm(props) {
               onChange={(e) => setOperatingCondition(e.target.value)}
             >
               <option value=""></option>
-              {operatingConditions.map((operatingCondition, index)=> {
-                return (<option key={index}>{operatingCondition}</option>);
-              })}
+              <option value="rears_worn_out_higher_75">Relação desgastada (+75%)</option>
+              <option value="shifters_not_working_properly">Troca de marchas não funciona perfeitamente</option>
+              <option value="front_suspension_not_working_properly">Suspensão dianteira não funciona perfeitamente</option>
+              <option value="rear_suspension_not_working_properly">Suspensão traseira não funciona perfeitamente</option>
+              <option value="suspensions_lock_not_working_properly">Travas da suspensão não funcionam perfeitamente</option>
+              <option value="brake_not_working_properly">Freio não funciona perfeitamente</option>
+              <option value="retractable_seat_post_not_working_properly">Canote retrátil não funciona perfeitamente</option>
+              <option value="creaking_when_pedaling">Apresenta rangidos ao pedalar</option>
+              <option value="wheels_bent">Rodas empenadas</option>
+              <option value="tyres_worn_out_minus_50">Pneus desgatados (+50%)</option>
             </select>
           </>)}
         </div>

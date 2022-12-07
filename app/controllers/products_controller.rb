@@ -18,6 +18,10 @@ class ProductsController < ApplicationController
   end
 
   def new
+    if current_user.document_number.blank? && current_user.cep.blank?
+      redirect_to edit_profiles_path
+      flash[:alert] = "você deve preencher seu documento e cep para cadastrar algo."
+    end
     @product = Product.new
     skip_authorization
     @product_types = ProductType.all
@@ -76,7 +80,6 @@ class ProductsController < ApplicationController
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all
-    @services = Service.all
     if current_user.present?
       @user = current_user
     end
@@ -87,8 +90,7 @@ class ProductsController < ApplicationController
       format.json { render json: {
         types_of_product: @product_types,
         categories: @categories,
-        user: @user,
-        services: @services
+        user: @user
       } }
     end
   end

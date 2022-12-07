@@ -586,23 +586,24 @@ export function ProductForm(props) {
       <form id="product-form" className="">
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
-          <label htmlFor="category" className="mt-3">Categoria:<span className="requested-information ms-1">*</span></label>
+          <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
-          onChange={(e) => setProductCategory(e.target.value)}
+          onChange={(e) =>  setProductCategory(e.target.value) }
           className="select-answer"
           >
             <option value=""></option>
-            {categories.map((category) => {
-              return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
-            })}
+            <option value="mountain_bike">Mountain Bike</option>
+            <option value="dirt_street">Dirt</option>
+            <option value="road">Road</option>
+            <option value="infant">Infantil</option>
+            <option value="urban">Urbano</option>
           </select>
           { errors && errors.product && errors.product.category && (
-            <p className="text-danger">{errors.product.category}</p>
+            <p className="text-danger">{errors.product.category[0]}</p>
           )}
 
-          { (productCategory === "mountain_bike" || productCategory === "dirt_street" || productCategory === "road") && (<>
-
+          {productCategory === "mountain_bike" && (<>
             <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
             <select
               value={productModality}
@@ -610,14 +611,46 @@ export function ProductForm(props) {
               className="select-answer"
             >
               <option value=""></option>
-              {modalities.map((modality, index) => {
-                return (<option key={index}>{modality}</option>);
-              })}
+              <option value="downhill">Downhill</option>
+                <option value="enduro">Enduro</option>
+                <option value="gravel">Gravel</option>
+                <option value="speed">Speed</option>
+                <option value="trail">Trail</option>
+                <option value="xc_cross_country">XC Cross Country</option>
             </select>
-            { errors && errors.product && errors.product.modality && (
-              <p className="text-danger">{errors.product.modality}</p>
-            )}
           </>)}
+
+          {productCategory === "dirt_street" && (<>
+            <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+            <select
+              value={productModality}
+              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
+              className="select-answer"
+            >
+              <option value=""></option>
+              <option value="street_bmx">Street BMX</option>
+              <option value="race_bmx">Race BMX</option>
+              <option value="big_wheel_bmx">Big Wheel BMX</option>
+              <option value="dirt_jump">Dirt Jump</option>
+            </select>
+          </>)}
+
+          {productCategory === "road" && (<>
+            <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+            <select
+              value={productModality}
+              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
+              className="select-answer"
+            >
+              <option value=""></option>
+              <option value="speed_performance">Speed Performance</option>
+              <option value="triathlon">Triathon</option>
+              <option value="ciclocross">Ciclocross</option>
+              <option value="cicloviagem">Cicloviagme</option>
+              <option value="gravel">Gravel</option>
+            </select>
+          </>)}
+
 
           <label htmlFor="product" className="mt-4">Produto:<span className="requested-information ms-1">*</span></label>
           <select

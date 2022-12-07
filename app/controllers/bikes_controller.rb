@@ -13,6 +13,10 @@ class BikesController < ApplicationController
   end
 
   def new
+    if current_user.document_number.blank? && current_user.cep.blank?
+      redirect_to edit_profiles_path
+      flash[:notice] = "você deve preencher seu documento e cep para cadastrar algo."
+    end
     @bike = Bike.new
     skip_authorization
     @categories = Category.all
@@ -57,12 +61,12 @@ class BikesController < ApplicationController
   end
 
   def get_information_for_new_bike
-    @categories = Category::CATEGORY_OPTIONS
+    @categories = Category.all
     @services = Service.all
     if current_user.present?
       @user = current_user
     end
-    
+
     skip_authorization
 
     respond_to do |format|
