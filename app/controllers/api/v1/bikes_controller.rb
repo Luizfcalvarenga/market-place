@@ -112,7 +112,14 @@ module Api
         @bike = Bike.find(params[:id])
         authorize @bike
         if @bike.update(bike_params)
-          render json: { success: true, bike: @bike, redirect_url: bike_path(@bike)}
+          @advertisement = Advertisement.where(advertisable: @bike).first
+          @advertisable = @bike
+          AdvertisementUpdater.new(@advertisement, @advertisable).call
+          if @advertisement.update(status: "waiting_review")
+            render json: { success: true, bike: @bike, redirect_url: bike_path(@bike)}
+          else
+            render json: { success: false, errors: {}}, status: 422
+          end
         else
           render json: { success: false, errors: {bike: @bike.error }}, status: 422
         end

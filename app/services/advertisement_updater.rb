@@ -1,9 +1,9 @@
 class AdvertisementUpdater
-  attr_reader :advertisement, :product
+  attr_reader :advertisement, :advertisable
 
-  def initialize(advertisement, product)
+  def initialize(advertisement, advertisable)
     @advertisement = advertisement
-    @product = product
+    @advertisable = advertisable
 
   end
 
@@ -12,7 +12,7 @@ class AdvertisementUpdater
 
     ActiveRecord::Base.transaction do
       @advertisement.update(
-        advertisable: @product,
+        advertisable: @advertisable,
         status: "waiting_review"
       )
       # @advertisement.update?

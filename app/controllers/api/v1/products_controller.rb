@@ -8,7 +8,8 @@ module Api
 
       def index
         @user = current_user
-        @products = Advertisement.where(status: "approved").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
+        # @products = Advertisement.where(status: "approved").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
+        # NÃO CONSIGO USER WHERE NO FILTRO JÁ QUE PRODUTOS ACIMA NÃO É UMA RELATION
         @product_types = ProductType.all
         @product_type_attributes = ProductTypeAttribute.all
         @products = Product.where.not(user: @user)
@@ -95,9 +96,10 @@ module Api
         authorize @product
 
         if @product.update(product_params) || @product_attributes.update(product_attribute_params)
-          @advertisement = Advertisement.where(advertisable: @product)
-          AdvertisementUpdater.new(@advertisement, @product).call
-          if @product.advertisement.update(params[:status])
+          @advertisement = Advertisement.where(advertisable: @product).first
+          @advertisable = @product
+          AdvertisementUpdater.new(@advertisement, @advertisable).call
+          if @advertisement.update(status: "waiting_review")
             render json: { success: true, product: @product, redirect_url: product_path(@product)}
           else
             render json: { success: false, errors: {}}, status: 422
@@ -117,6 +119,7 @@ module Api
         params.require(:product_attribute).permit(:value)
 
       end
+
     end
   end
 end

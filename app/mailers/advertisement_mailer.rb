@@ -27,8 +27,6 @@ class AdvertisementMailer < ApplicationMailer
   def advertisement_updater
     @advertisement = params[:advertisement]
     # @client = User.find(id: @advertisement.user_id)
-    @advertisable = @advertisement.advertisable
-    binding.pry
-    mail(to: "nuflow@shop.com", subject: "Anuncios revisado!!!")
+    mail(to:"nuflow@shop.com", subject: "Anuncio revisado!!!")
   end
 end
