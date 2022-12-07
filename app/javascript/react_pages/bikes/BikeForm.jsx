@@ -93,6 +93,9 @@ export function BikeForm(props) {
     if (props.bikeId) {
       fetchBike();
       setBikeId(props.bikeId);
+      setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
+      //jeito por enquanto pra setar modalidades, todas de uma vez
+    
     }
   }, []);
 
@@ -101,8 +104,6 @@ export function BikeForm(props) {
       console.log(categories)
       setModalities(categories.find(element => element.name === category).modalities)
       setCategoryId(categories.find(element => element.name === category).id);
-    } else if (props.bikeId) {
-      //NO EDIT O COMPORTAMENTO ERA ESTRANHO, NÃO ACHAVA AS MODALIDADES, FIND EM CATEGORIAS RETORNAVA NULL, VERIFICAR CERTINHO DEPOIS
     }
   });
 

@@ -93,8 +93,15 @@ module Api
           end
         end
         authorize @product
+
         if @product.update(product_params) || @product_attributes.update(product_attribute_params)
-          render json: { success: true, product: @product, redirect_url: product_path(@product)}
+          @advertisement = Advertisement.where(advertisable: @product)
+          AdvertisementUpdater.new(@advertisement, @product).call
+          if @product.advertisement.update(params[:status])
+            render json: { success: true, product: @product, redirect_url: product_path(@product)}
+          else
+            render json: { success: false, errors: {}}, status: 422
+          end
         else
           render json: { success: false, errors: {product: @product.error, product_attributes: @product_attributes.errors }}, status: 422
         end

@@ -40,14 +40,30 @@ module Admin
     def reject
       @advertisement = Advertisement.find(params[:advertisement_id])
       @advertisements = Advertisement.all
+      @attrs_rejected =[]
+      @values_to_review =[]
 
-      service = AdvertisementRejecter.new(@advertisement, current_user)
+
+      params.each do |key, value|
+        if key.include? "reject"
+          @attrs_rejected << key
+          @values_to_review << value
+        end
+      end
+
+      if params[:comments].present?
+        @comments = params[:comments]
+      end
+      @attrs_rejected
+      @values_to_review
+      @comments
+      service = AdvertisementRejecter.new(@advertisement, @comments, @values_to_review, @attrs_rejected, current_user)
 
       if service.call
         flash[:notice] = "Anuncio rejeitado"
         next_waiting_review_advertisement =  @advertisements.waiting_review.order(created_at: :asc).first
-        redirect_to admin_advertsement_path(id: next_waiting_review_advertsement.id) and return if next_waiting_review_advertsement.present?
-        redirect_to admin_advertsements_path and return
+        redirect_to admin_advertisement_path(id: next_waiting_review_advertisement.id) and return if next_waiting_review_advertisement.present?
+        redirect_to admin_advertisements_path and return
       else
         flash[:alert] = service.errors.to_s
         redirect_to admin_advertisement_path(id: @advertisement.id)

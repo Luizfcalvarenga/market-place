@@ -1,7 +1,7 @@
 <div class="page-padding px-5">
   <p class="info-text w-100 p-4 br-8 text-center text-uppercase fw-700 mb-5">Revisão do pedido #<%= @advertisement.id %></p>
 
-  <form action="/admin/advertisements/<%= @advertisement.id %>/ajust_product_info" method="patch" id="advertisement-review-form" data-advertisement-id="<%= @advertisement.id %>">
+  <form action="/admin/advertisements/<%= @advertisement.id %>/reject" method="patch" id="advertisement-review-form" data-advertisement-id="<%= @advertisement.id %>">
     <div class="table m-0">
       <div class="table-row header blue">
         <h3 class="text-center text-success">
@@ -102,99 +102,216 @@
             <div class="d-flex ">
               <div class="w-50" data-column="category">
                 <div class="d-flex">
-                  <p class="text-success">Categoria:</p>
-                  <p class="ms-3 field-value"><%= @product.category.name %></p>
+                  <p class="mb-0 text-success">Categoria:</p>
+                  <p class="mb-0 ms-2 field-value"><%= @product.category.name %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="category" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                  <label htmlFor="accept category" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.category.name %>"
+                      name="accept category"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject category" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.category.name %>"
+                      name="reject category"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
               <div class="w-50" data-column="modality">
                 <div class="d-flex">
-                  <p class="text-success">Modalidade:</p>
-                  <p class="ms-3 field-value"><%= @product.modality %></p>
+                  <p class="m-0 text-success">Modalidade:</p>
+                  <p class="ms-2 mb-2 mb-0 field-value"><%= @product.modality %></p>
                 </div>
-                <div class="d-flex ">
-                  <input name="modality" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <div class="d-flex">
+                  <label htmlFor="accept modality" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.modality %>"
+                      name="accept modality"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject modality" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.modality %>"
+                      name="reject modality"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
             </div>
             <div class="d-flex ">
               <div class="w-50" data-column="brand">
                 <div class="d-flex">
-                  <p class="text-success">Marca:</p>
-                  <p class="ms-3 field-value"><%= @product.brand %></p>
+                  <p class="m-0 text-success">Marca:</p>
+                  <p class="ms-2 mb-2 mb-0 field-value"><%= @product.brand %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="brand" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                  <label htmlFor="accept brand" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.brand %>"
+                      name="accept brand"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject brand" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.brand %>"
+                      name="reject brand"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
               <div class="w-50" data-column="model">
                 <div class="d-flex">
-                  <p class="text-success">Modelo:</p>
-                  <p class="ms-3 field-value"><%= @product.model %></p>
+                  <p class="m-0 text-success">Modelo:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.model %></p>
                 </div>
-                <div class="d-flex ">
-                  <input name="model" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <div class="d-flex">
+                  <label htmlFor="accept model" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.model %>"
+                      name="accept model"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject model" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.model %>"
+                      name="reject model"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
             </div>
             <div class="d-flex ">
               <div class="w-50" data-column="quantity">
                 <div class="d-flex">
-                  <p class="text-success">Quantidade:</p>
-                  <p class="ms-3 field-value"><%= @product.quantity %></p>
+                  <p class="m-0 text-success">Quantidade:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.quantity %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="quantity" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                  <label htmlFor="accept quantity" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.quantity %>"
+                      name="accept quantity"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject quantity" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.quantity %>"
+                      name="reject quantity"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
               <div class="w-50" data-column="price_in_cents">
                 <div class="d-flex">
-                  <p class="text-success">Preço:</p>
-                  <p class="ms-3 field-value"><%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+                  <p class="m-0 text-success">Preço:</p>
+                  <p class="ms-2 mb-0 field-value"><%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".")  %></p>
                 </div>
-                <div class="d-flex ">
-                  <input name="price_in_cents" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <div class="d-flex">
+                  <label htmlFor="accept price_in_cents" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.price_in_cents %>"
+                      name="accept price_in_cents"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject price_in_cents" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.price_in_cents %>"
+                      name="reject price_in_cents"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
             </div>
             <div class="d-flex ">
               <div class="w-50" data-column="locality">
                 <div class="d-flex">
-                  <p class="text-success">Cidade:</p>
-                  <p class="ms-3 field-value"><%= @product.locality %></p>
+                  <p class="m-0 text-success">Cidade:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.locality %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="locality" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                  <label htmlFor="accept localiy" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.locality %>"
+                      name="accept localiy"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject locality" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.locality %>"
+                      name="reject locality"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
               <div class="w-50" data-column="yer">
                 <div class="d-flex">
-                  <p class="text-success">Ano:</p>
-                  <p class="ms-3 field-value"><%= @product.year  %></p>
+                  <p class="m-0 text-success">Ano:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.year  %></p>
                 </div>
-                <div class="d-flex ">
-                  <input name="year" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <div class="d-flex">
+                  <label htmlFor="accept year" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @product.year  %>"
+                      name="accept year"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject year" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @product.year  %>"
+                      name="reject year"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
                 </div>
               </div>
             </div>
               <div class="w-100" data-column="description">
               <div class="d-flex">
-                <p class="text-success">Descrição:</p>
-                <p class=" field-value"><%= @product.description  %></p>
+                <p class="m-0 text-success">Descrição:</p>
+                <p class="2 mb-0 field-value"><%= @product.description  %></p>
               </div>
-              <div class="d-flex ">
-                <input name="description" type="text" class="text-input w-100">
-                <p class="ms-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              <div class="d-flex">
+                <label htmlFor="accept description" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.description  %>"
+                    name="accept description"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject description" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.description  %>"
+                    name="reject description"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -204,22 +321,48 @@
           <div class="d-flex ">
             <div class="w-50" data-column="bike_type">
               <div class="d-flex">
-                <p class="text-success">Tipo:</p>
-                <p class="ms-3 field-value"><%= @product.bike_type %></p>
+                <p class="m-0 text-success">Tipo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.bike_type %></p>
               </div>
               <div class="d-flex">
-                <input name="bike_type" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept bike_type" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.bike_type %>"
+                    name="accept bike_type"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject bike_type" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.bike_type %>"
+                    name="reject bike_type"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="locality">
               <div class="d-flex">
-                <p class="text-success">Cidade:</p>
-                <p class="ms-3 field-value"><%= @product.locality  %></p>
+                <p class="m-0 text-success">Cidade:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.locality  %></p>
               </div>
-              <div class="d-flex ">
-                <input name="locality" value="<%= @param_to_edit%>" type="text" class="text-input w-100">
-                <button type="submit" class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</button>
+              <div class="d-flex">
+                <label htmlFor="accept locality" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.locality  %>"
+                    name="accept locality"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject locality" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.locality  %>"
+                    name="reject locality"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -227,78 +370,169 @@
           <div class="d-flex ">
             <div class="w-50" data-column="year">
               <div class="d-flex">
-                <p class="text-success">Ano:</p>
-                <p class="ms-3 field-value"><%= @product.year %></p>
+                <p class="m-0 text-success">Ano:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.year %></p>
               </div>
               <div class="d-flex">
-                <input name="year" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept year" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.year %>"
+                    name="accept year"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject year" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.year %>"
+                    name="reject year"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="weight">
               <div class="d-flex">
-                <p class="text-success">Peso:</p>
-                <p class="ms-3 field-value"><%= @product.weight %>Kg</p>
+                <p class="m-0 text-success">Peso:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.weight %>Kg</p>
               </div>
-              <div class="d-flex ">
-                <input name="weight" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              <div class="d-flex">
+                <label htmlFor="accept weight" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.weight %>"
+                    name="accept weight"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject weight" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.weight %>"
+                    name="reject weight"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
           <div class="d-flex ">
             <div class="w-50" data-column="category">
               <div class="d-flex">
-                <p class="text-success">Categoria:</p>
-                <p class="ms-3 field-value"><%= @product.category.name%></p>
+                <p class="m-0 text-success">Categoria:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.category.name%></p>
               </div>
               <div class="d-flex">
-                <input name="category" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept category" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.category.name%>"
+                    name="accept category"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject category" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.category.name%>"
+                    name="reject category"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="model">
               <div class="d-flex">
-                <p class="text-success">Modelo:</p>
-                <p class="ms-3 field-value"><%= @product.model  %></p>
+                <p class="m-0 text-success">Modelo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.model  %></p>
               </div>
-              <div class="d-flex ">
-                <input name="model" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+              <div class="d-flex">
+                <label htmlFor="accept model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.model  %>"
+                    name="accept model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.model  %>"
+                    name="reject model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
           <div class="d-flex">
             <div class="w-50" data-column="price_in_cents">
               <div class="d-flex">
-                <p class="text-success">Preço:</p>
-                <p class="ms-3 field-value"><%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></p>
+                <p class="m-0 text-success">Preço:</p>
+                <p class="ms-2 mb-0 field-value"><%= number_to_currency(@product.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></p>
               </div>
               <div class="d-flex">
-                <input name="price_in_cents" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept price_in_cents" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.price_in_cents  %>"
+                    name="accept price_in_cents"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject price_in_cents" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.price_in_cents  %>"
+                    name="reject price_in_cents"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
 
             <div class="w-50" data-column="quantity">
               <div class="d-flex">
-                <p class="text-success">Quantidade:</p>
-                <p class="ms-3 field-value"><%= @product.quantity%></p>
+                <p class="m-0 text-success">Quantidade:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.quantity%></p>
               </div>
               <div class="d-flex">
-                <input name="quantity" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept quantity" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.quantity%>"
+                    name="accept quantity"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject quantity" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.quantity%>"
+                    name="reject quantity"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
           <div class="w-100" data-column="description">
               <div class="d-flex">
-                <p class="text-success">descrição:</p>
-                <p class="ms-3 field-value"><%= @product.description %></p>
+                <p class="m-0 text-success">descrição:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.description %></p>
               </div>
               <div class="d-flex">
-                <input name="description" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept description" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.description %>"
+                    name="accept description"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject description" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.description %>"
+                    name="reject description"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
 
@@ -307,32 +541,71 @@
           <div class="d-flex">
             <div class="w-50" data-column="frame_brand">
               <div class="d-flex">
-                <p class="text-success">Marca:</p>
-                <p class="ms-3 field-value"><%= @product.frame_brand %></p>
+                <p class="m-0 text-success">Marca:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.frame_brand %></p>
               </div>
               <div class="d-flex">
-                <input name="frame_brand" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept frame_brand" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.frame_brand %>"
+                    name="accept frame_brand"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject frame_brand" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.frame_brand %>"
+                    name="reject frame_brand"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="frame_size">
               <div class="d-flex">
-                <p class="text-success">Tamanho:</p>
-                <p class="ms-3 field-value"><%= @product.frame_size%></p>
+                <p class="m-0 text-success">Tamanho:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.frame_size%></p>
               </div>
               <div class="d-flex">
-                <input name="frame_size" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept frame_size" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.frame_size%>"
+                    name="accept frame_size"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject frame_size" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.frame_size%>"
+                    name="reject frame_size"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="frame_material">
               <div class="d-flex">
-                <p class="text-success">Material:</p>
-                <p class="ms-3 field-value"><%= @product.frame_material%></p>
+                <p class="m-0 text-success">Material:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.frame_material%></p>
               </div>
               <div class="d-flex">
-                <input name="frame_material" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept frame_material" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.frame_material%>"
+                    name="accept frame_material"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject frame_material" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.frame_material%>"
+                    name="reject frame_material"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -342,22 +615,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="crankset">
               <div class="d-flex">
-                <p class="text-success">Pedivela:</p>
-                <p class="ms-3 field-value"><%= @product.crankset %></p>
+                <p class="m-0 text-success">Pedivela:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.crankset %></p>
               </div>
               <div class="d-flex">
-                <input name="crankset" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept crankset" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.crankset %>"
+                    name="accept crankset"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject crankset" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.crankset %>"
+                    name="reject crankset"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="chain ">
               <div class="d-flex">
-                <p class="text-success">Corrente:</p>
-                <p class="ms-3 field-value"><%= @product.chain %></p>
+                <p class="m-0 text-success">Corrente:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.chain %></p>
               </div>
               <div class="d-flex">
-                <input name="chain " type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept chain" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.chain %>"
+                    name="accept chain"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject chain" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.chain %>"
+                    name="reject chain"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -365,22 +664,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="number_of_front_gears">
               <div class="d-flex">
-                <p class="text-success">Nº Marchas:</p>
-                <p class="ms-3 field-value"><%= @product.number_of_front_gears %></p>
+                <p class="m-0 text-success">Nº Marchas:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.number_of_front_gears %></p>
               </div>
               <div class="d-flex">
-                <input name="number_of_front_gears" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept number_of_front_gears" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.number_of_front_gears %>"
+                    name="accept number_of_front_gears"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject number_of_front_gears" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.number_of_front_gears %>"
+                    name="reject number_of_front_gears"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="front_derailleur_model ">
               <div class="d-flex">
-                <p class="text-success">Modelo:</p>
-                <p class="ms-3 field-value"><%= @product.front_derailleur_model %></p>
+                <p class="m-0 text-success">Modelo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.front_derailleur_model %></p>
               </div>
               <div class="d-flex">
-                <input name="front_derailleur_model " type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept front_derailleur_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.front_derailleur_model %>"
+                    name="accept front_derailleur_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject front_derailleur_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.front_derailleur_model %>"
+                    name="reject front_derailleur_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -388,22 +713,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="number_of_rear_gears">
               <div class="d-flex">
-                <p class="text-success">Nº Marchas:</p>
-                <p class="ms-3 field-value"><%= @product.number_of_rear_gears %></p>
+                <p class="m-0 text-success">Nº Marchas:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.number_of_rear_gears %></p>
               </div>
               <div class="d-flex">
-                <input name="number_of_rear_gears" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept number_of_rear_gears" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.number_of_rear_gears %>"
+                    name="accept number_of_rear_gears"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject number_of_rear_gears" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.number_of_rear_gears %>"
+                    name="reject number_of_rear_gears"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="rear_derailleur_model ">
               <div class="d-flex">
-                <p class="text-success">Modelo:</p>
-                <p class="ms-3 field-value"><%= @product.rear_derailleur_model %></p>
+                <p class="m-0 text-success">Modelo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rear_derailleur_model %></p>
               </div>
               <div class="d-flex">
-                <input name="rear_derailleur_model " type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rear_derailleur_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rear_derailleur_model %>"
+                    name="accept rear_derailleur_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rear_derailleur_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rear_derailleur_model %>"
+                    name="reject rear_derailleur_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -412,12 +763,25 @@
           <div class="d-flex">
             <div class="w-100" data-column="suspension_type">
               <div class="d-flex">
-                <p class="text-success">Tipo:</p>
-                <p class="ms-3 field-value"><%= @product.suspension_type %></p>
+                <p class="m-0 text-success">Tipo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.suspension_type %></p>
               </div>
               <div class="d-flex">
-                <input name="suspension_type" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept suspension_type" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.suspension_type %>"
+                    name="accept suspension_type"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject suspension_type" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.suspension_type %>"
+                    name="reject suspension_type"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -425,22 +789,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="front_suspension_travel">
               <div class="d-flex">
-                <p class="text-success">Curso:</p>
-                <p class="ms-3 field-value"><%= @product.front_suspension_travel %></p>
+                <p class="m-0 text-success">Curso:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.front_suspension_travel %></p>
               </div>
               <div class="d-flex">
-                <input name="front_suspension_travel" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept front_suspension_travel" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.front_suspension_travel %>"
+                    name="accept front_suspension_travel"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject front_suspension_travel" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.front_suspension_travel %>"
+                    name="reject front_suspension_travel"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="front_suspension_model">
               <div class="d-flex">
-                <p class="text-success">Modelo:</p>
-                <p class="ms-3 field-value"><%= @product.front_suspension_model %></p>
+                <p class="m-0 text-success">Modelo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.front_suspension_model %></p>
               </div>
               <div class="d-flex">
-                <input name="front_suspension_model" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept front_suspension_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.front_suspension_model %>"
+                    name="accept front_suspension_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject front_suspension_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.front_suspension_model %>"
+                    name="reject front_suspension_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -448,22 +838,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="rear_suspension_travel">
               <div class="d-flex">
-                <p class="text-success">Curso:</p>
-                <p class="ms-3 field-value"><%= @product.rear_suspension_travel %></p>
+                <p class="m-0 text-success">Curso:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rear_suspension_travel %></p>
               </div>
               <div class="d-flex">
-                <input name="rear_suspension_travel" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rear_suspension_travel" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rear_suspension_travel %>"
+                    name="accept rear_suspension_travel"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rear_suspension_travel" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rear_suspension_travel %>"
+                    name="reject rear_suspension_travel"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="rear_suspension_model">
               <div class="d-flex">
-                <p class="text-success">Modelo:</p>
-                <p class="ms-3 field-value"><%= @product.rear_suspension_model %></p>
+                <p class="m-0 text-success">Modelo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rear_suspension_model %></p>
               </div>
               <div class="d-flex">
-                <input name="rear_suspension_model" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rear_suspension_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rear_suspension_model %>"
+                    name="accept rear_suspension_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rear_suspension_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rear_suspension_model %>"
+                    name="reject rear_suspension_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -473,12 +889,25 @@
           <div class="d-flex">
             <div class="w-100" data-column="rim_size">
               <div class="d-flex">
-                <p class="text-success">Tipo:</p>
-                <p class="ms-3 field-value"><%= @product.rim_size %></p>
+                <p class="m-0 text-success">Tipo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rim_size %></p>
               </div>
               <div class="d-flex">
-                <input name="rim_size" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rim_size" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rim_size %>"
+                    name="accept rim_size"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rim_size" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rim_size %>"
+                    name="reject rim_size"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -486,32 +915,71 @@
           <div class="d-flex">
             <div class="w-50" data-column="front_rim_model">
               <div class="d-flex">
-                <p class="text-success">Aro:</p>
-                <p class="ms-3 field-value"><%= @product.front_rim_model %></p>
+                <p class="m-0 text-success">Aro:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.front_rim_model %></p>
               </div>
               <div class="d-flex">
-                <input name="front_rim_model" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept front_rim_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.front_rim_model %>"
+                    name="accept front_rim_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject front_rim_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.front_rim_model %>"
+                    name="reject front_rim_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="front_hub">
               <div class="d-flex">
-                <p class="text-success">Cubo:</p>
-                <p class="ms-3 field-value"><%= @product.front_hub %></p>
+                <p class="m-0 text-success">Cubo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.front_hub %></p>
               </div>
               <div class="d-flex">
-                <input name="front_hub" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept front_hub" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.front_hub %>"
+                    name="accept front_hub"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject front_hub" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.front_hub %>"
+                    name="reject front_hub"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="front_tyre">
               <div class="d-flex">
-                <p class="text-success">Pneu:</p>
-                <p class="ms-3 field-value"><%= @product.front_tyre %></p>
+                <p class="m-0 text-success">Pneu:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.front_tyre %></p>
               </div>
               <div class="d-flex">
-                <input name="front_tyre" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept front_tyre" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.front_tyre %>"
+                    name="accept front_tyre"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject front_tyre" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.front_tyre %>"
+                    name="reject front_tyre"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -519,32 +987,71 @@
           <div class="d-flex">
             <div class="w-50" data-column="rear_rim_model">
               <div class="d-flex">
-                <p class="text-success">Aro:</p>
-                <p class="ms-3 field-value"><%= @product.rear_rim_model %></p>
+                <p class="m-0 text-success">Aro:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rear_rim_model %></p>
               </div>
               <div class="d-flex">
-                <input name="rear_rim_model" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rear_rim_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rear_rim_model %>"
+                    name="accept rear_rim_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rear_rim_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rear_rim_model %>"
+                    name="reject rear_rim_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="rear_hub">
               <div class="d-flex">
-                <p class="text-success">Cubo:</p>
-                <p class="ms-3 field-value"><%= @product.rear_hub %></p>
+                <p class="m-0 text-success">Cubo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rear_hub %></p>
               </div>
               <div class="d-flex">
-                <input name="rear_hub" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rear_hub" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rear_hub %>"
+                    name="accept rear_hub"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rear_hub" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rear_hub %>"
+                    name="reject rear_hub"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="rear_tyre">
               <div class="d-flex">
-                <p class="text-success">Pneu:</p>
-                <p class="ms-3 field-value"><%= @product.rear_tyre %></p>
+                <p class="m-0 text-success">Pneu:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.rear_tyre %></p>
               </div>
               <div class="d-flex">
-                <input name="rear_tyre" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept rear_tyre" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.rear_tyre %>"
+                    name="accept rear_tyre"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject rear_tyre" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.rear_tyre %>"
+                    name="reject rear_tyre"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -555,32 +1062,71 @@
           <div class="d-flex">
             <div class="w-50" data-column="seat_post_type">
               <div class="d-flex">
-                <p class="text-success">Tipo:</p>
-                <p class="ms-3 field-value"><%= @product.seat_post_type %></p>
+                <p class="m-0 text-success">Tipo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.seat_post_type %></p>
               </div>
               <div class="d-flex">
-                <input name="seat_post_type" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept seat_post_type" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.seat_post_type %>"
+                    name="accept seat_post_type"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject seat_post_type" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.seat_post_type %>"
+                    name="reject seat_post_type"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="seat_post_travel">
               <div class="d-flex">
-                <p class="text-success">Curso:</p>
-                <p class="ms-3 field-value"><%= @product.seat_post_travel %></p>
+                <p class="m-0 text-success">Curso:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.seat_post_travel %></p>
               </div>
               <div class="d-flex">
-                <input name="seat_post_travel" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept seat_post_travel" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.seat_post_travel %>"
+                    name="accept seat_post_travel"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject seat_post_travel" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.seat_post_travel %>"
+                    name="reject seat_post_travel"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="seat_post_model">
               <div class="d-flex">
-                <p class="text-success">Modelo:</p>
-                <p class="ms-3 field-value"><%= @product.seat_post_model %></p>
+                <p class="m-0 text-success">Modelo:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.seat_post_model %></p>
               </div>
               <div class="d-flex">
-                <input name="seat_post_model" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept seat_post_model" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.seat_post_model %>"
+                    name="accept seat_post_model"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject seat_post_model" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.seat_post_model %>"
+                    name="reject seat_post_model"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -589,22 +1135,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="stem">
               <div class="d-flex">
-                <p class="text-success">Mesa:</p>
-                <p class="ms-3 field-value"><%= @product.stem %></p>
+                <p class="m-0 text-success">Mesa:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.stem %></p>
               </div>
               <div class="d-flex">
-                <input name="stem" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept stem" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.stem %>"
+                    name="accept stem"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject stem" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.stem %>"
+                    name="reject stem"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="handlebar ">
               <div class="d-flex">
-                <p class="text-success">Guidão:</p>
-                <p class="ms-3 field-value"><%= @product.handlebar %></p>
+                <p class="m-0 text-success">Guidão:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.handlebar %></p>
               </div>
               <div class="d-flex">
-                <input name="handlebar " type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept handlebar" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.handlebar %>"
+                    name="accept handlebar"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject handlebar" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.handlebar %>"
+                    name="reject handlebar"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -613,22 +1185,48 @@
           <div class="d-flex">
             <div class="w-50" data-column="accessories">
               <div class="d-flex">
-                <p class="text-success">Acompanha:</p>
-                <p class="ms-3 field-value"><%= @product.accessories %></p>
+                <p class="m-0 text-success">Acompanha:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.accessories %></p>
               </div>
               <div class="d-flex">
-                <input name="accessories" type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept accessories" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.accessories %>"
+                    name="accept accessories"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject accessories" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.accessories %>"
+                    name="reject accessories"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
             <div class="w-50" data-column="accessories_description ">
               <div class="d-flex">
-                <p class="text-success">Descrição:</p>
-                <p class="ms-3 field-value"><%= @product.accessories_description %></p>
+                <p class="m-0 text-success">Descrição:</p>
+                <p class="ms-2 mb-0 field-value"><%= @product.accessories_description %></p>
               </div>
               <div class="d-flex">
-                <input name="accessories_description " type="text" class="text-input w-100">
-                <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
+                <label htmlFor="accept accessories_description" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.accessories_description %>"
+                    name="accept accessories_description"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject accessories_description" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.accessories_description %>"
+                    name="reject accessories_description"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
               </div>
             </div>
           </div>
@@ -638,46 +1236,98 @@
             <div class="d-flex">
               <div class="w-50" data-column="battery">
                 <div class="d-flex">
-                  <p class="text-success">Bateria:</p>
-                  <p class="ms-3 field-value"><%= @product.battery %></p>
+                  <p class="m-0 text-success">Bateria:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.battery %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="battery" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
-                </div>
+                <label htmlFor="accept battery" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.battery %>"
+                    name="accept battery"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject battery" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.battery %>"
+                    name="reject battery"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
               </div>
               <div class="w-50" data-column="battery_cycles ">
                 <div class="d-flex">
-                  <p class="text-success">Ciclos:</p>
-                  <p class="ms-3 field-value"><%= @product.battery_cycles %></p>
+                  <p class="m-0 text-success">Ciclos:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.battery_cycles %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="battery_cycles " type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
-                </div>
+                <label htmlFor="accept battery_cycles" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.battery_cycles %>"
+                    name="accept battery_cycles"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject battery_cycles" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.battery_cycles %>"
+                    name="reject battery_cycles"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
               </div>
             </div>
 
             <div class="d-flex">
               <div class="w-50" data-column="mileage">
                 <div class="d-flex">
-                  <p class="text-success">Km:</p>
-                  <p class="ms-3 field-value"><%= @product.mileage %></p>
+                  <p class="m-0 text-success">Km:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.mileage %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="mileage" type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
-                </div>
+                <label htmlFor="accept mileage" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.mileage %>"
+                    name="accept mileage"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject mileage" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.mileage %>"
+                    name="reject mileage"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
               </div>
               <div class="w-50" data-column="motor ">
                 <div class="d-flex">
-                  <p class="text-success">Motor:</p>
-                  <p class="ms-3 field-value"><%= @product.motor %></p>
+                  <p class="m-0 text-success">Motor:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @product.motor %></p>
                 </div>
                 <div class="d-flex">
-                  <input name="motor " type="text" class="text-input w-100">
-                  <p class="ms-3 mt-1 d-flex text-success"><i class="fas fa-pen-square mt-1 me-2"></i>Editar</p>
-                </div>
+                <label htmlFor="accept motor" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @product.motor %>"
+                    name="accept motor"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject motor" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @product.motor %>"
+                    name="reject motor"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
               </div>
             </div>
           <% end %>
@@ -685,19 +1335,24 @@
       </div>
     </div>
 
+    <h4>Comentários:</h4>
+    <input type="text" class="text-input" name="comments">
+
     <div class="mb-4">
       <% if @advertisement.waiting_review?  %>
         <div class="action-buttons flex center between mt-5">
           <div class="w-100">
             <%= link_to admin_advertisement_approve_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>
-              <p class="m-0 btn btn-success w-100 text-white">Aprovar pedido</p>
+              <p class="m-0 btn btn-success w-100 text-white">Aprovar anúncio</p>
             <% end %>
           </div>
         </div>
       <% end %>
 
+      <input type="submit" value="Submit" class="btn btn-primary">
+
       <%= link_to admin_advertisement_reject_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer bloquear o pedido para sempre?" } do %>
-        <p class="m-0 mt-3 btn btn-danger w-100 text-white">Bloquear pedido</p>
+        <p class="m-0 mt-3 btn btn-danger w-100 text-white">Rejeitar anúncio</p>
       <% end %>
     </div>
   </form>

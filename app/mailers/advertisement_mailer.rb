@@ -16,9 +16,19 @@ class AdvertisementMailer < ApplicationMailer
 
   def advertisement_rejecter
     @advertisement = params[:advertisement]
+    @attrs_rejected = params[:attrs_rejected]
+    @values_to_review = params[:values_to_review]
+    @comments = params[:comments]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
     mail(to: @client.email, subject: "Anúncio reprovado, revise as informações!!!")
   end
 
+  def advertisement_updater
+    @advertisement = params[:advertisement]
+    # @client = User.find(id: @advertisement.user_id)
+    @advertisable = @advertisement.advertisable
+    binding.pry
+    mail(to: "nuflow@shop.com", subject: "Anuncios revisado!!!")
+  end
 end

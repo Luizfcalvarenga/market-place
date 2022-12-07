@@ -4,7 +4,7 @@
     width: 90%;
     /* margin: 0 auto; */
     margin-top: 10px;
-    border: 1px solid red;
+    border: 1px solid #00c454;
     border-radius: 50px;
     box-shadow: 5px 8px 12px #e0e0e0;
     align-items: center;
@@ -25,7 +25,7 @@
   }
 
   .orange {
-    background-color: red;
+    background-color: #00c454;
     color: white !important;
     padding: 5px;
     text-align: center;
@@ -35,7 +35,6 @@
   .mail-content {
     padding: 0 20px;
   }
-
   p {
     color: white;
   }
@@ -120,49 +119,18 @@
     text-align: center;
     margin: 0 !important;
   }
-
-  .review-result {
-    display: flex;
-    gap: 30px;
-  }
-  .info-review {
-    color: red;
-  }
 </style>
 
 <body>
   <div class="orange">
-    <h3>Revisar anúncio!</h3>
+    <h3>Anuncio atualizado e em fase de revisão!</h3>
   </div>
   <div class="mail-content">
-    <% if @advertisement.user.full_name %>
-    <h2>Olá <%= @advertisement.user.full_name %>,</h2>
-    <% else %>
     <h2>Olá,</h2>
-    <% end %>
-    <p class="item-name">Seu anúncio foi reprovado, abaixo as informações para corrigir!</p>
-    <% if @cooments %>
-      <p> <small>Cometário:</small> </p>
-      <p><%= @comments %></p>
-    <% end %>
+    <p class="item-name">O anúndio #<%= @advertisement.id %> foi atualizado, revise as novas informações</p>
 
-    <div class="review-result">
-      <div class="rejected-attrs">
-        <% @attrs_rejected.each do |attr_rejected | %>
-          <p class="info-review"><%= attr_rejected %>:</p>
-        <% end %>
-      </div>
-      <div class="user-infos">
-        <% @values_to_review.each do |value | %>
-          <p class="info-review"><%= value %></p>
-        <% end %>
-      </div>
-    </div>
+    <a href="https://localhost:3000/admin/advertisements/<%= @advertisement.id %>" target="_blank" class="btn-invoice">Revisar</a>
 
-    <p class="item-name">Para saber mais você pode entrar em contato com nosso time no link abaixo:</p>
-    <div class="invoice-link">
-      <a href="https://wa.me/553196225074" target="_blank" class="btn-invoice">Duvidas</a>
-    </div>
     <h2>Detalhes do seu pedido:</h2>
     <p><strong class="item-name">Pedido:</strong> #<%= @advertisement.id %></p>
     <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>

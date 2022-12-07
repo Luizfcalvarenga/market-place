@@ -58,9 +58,9 @@ export function ProductForm(props) {
      })
     if (props.productId) {
       fetchProduct();
-      setProductId(props.productId)
-
-
+      setProductId(props.productId);
+      setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
+      //jeito por enquanto pra setar modalidades, todas de uma vez
     }
   }, []);
 
@@ -68,10 +68,10 @@ export function ProductForm(props) {
     if (productCategory && !props.productId) {
       setModalities(categories.find(element => element.name === productCategory).modalities)
       setCategoryId(categories.find(element => element.name === productCategory).id);
-    } else if (props.productId) {
-      //NO EDIT O COMPORTAMENTO ERA ESTRANHO, NÃO ACHAVA AS MODALIDADES, FIND EM CATEGORIAS RETORNAVA NULL, VERIFICAR CERTINHO DEPOIS
     }
   });
+
+
 
   useEffect(() => {
     if (productCategory === "urban") {
@@ -797,7 +797,7 @@ export function ProductForm(props) {
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
 
           <h4 className="text-center text-success">Revise as informações</h4>
-          {/* <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Gerais</button> */}
+
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
 

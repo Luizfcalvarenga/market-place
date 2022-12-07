@@ -4,27 +4,20 @@ class Advertisement < ApplicationRecord
 
   enum status: {
     pending: "pending",
-    started: "started",
     paid: "paid",
     waiting_review: "waiting_review",
     approved: "approved",
     adjustments_requested: "adjustments_requested",
-    rejected: "rejected",
+    update_request: "update_request",
   }
 
-  FILE_UPLOAD_FIELDS = [
-    :card_photo, :card_document_photo_front, :card_document_photo_back,
-    :card_institution_statement_photo, :photo, :document_photo_front,
-    :document_photo_back, :institution_statement_photo
-  ]
-  
   def is_free?
     price_in_cents.zero?
   end
 
 
   def perform_after_payment_confirmation_actions
-    self.update(status: "paid")
+    self.update(status: "waiting_review")
 
     if is_free?
       self.update(
