@@ -13,3 +13,4 @@ json.product_type_attributes @product_type_attributes
 json.photos @product.photos
 json.locality @product.locality
 json.year @product.year
+json.photos @product.photos.map(&:url)

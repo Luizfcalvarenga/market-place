@@ -51,5 +51,6 @@ json.bikes @bikes do |bike|
   json.rim_size bike.rim_size
   json.pedals bike.pedals
   json.battery_cycles bike.battery_cycles
-  json.photos bike.photos
+  json.photos bike.photos.first(2).map(&:url)
+
 end

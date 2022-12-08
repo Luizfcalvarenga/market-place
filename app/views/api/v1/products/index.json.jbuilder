@@ -11,7 +11,7 @@ json.products @products do |product|
   json.quantity product.quantity
   json.locality product.locality
   json.year product.year
-  json.photos product.photos.map(&:url)
+  json.photos product.photos.first(2).map(&:url)
 end
 json.product_types @product_types
 json.product_type_attributes @product_type_attributes

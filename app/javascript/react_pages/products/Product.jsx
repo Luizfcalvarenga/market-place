@@ -26,17 +26,25 @@ export function Product(props) {
           <div className="other-infos  col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
-                <i className="fas fa-heart card-favorite"></i>
-                <div className="carousel-item active">
-                  <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-show" alt="" />
-                </div>
-                <div className="carousel-item">
-                  <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-show" alt="" />
-                </div>
-                <div className="carousel-item">
-                  <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-show" alt="" />
-                </div>
+                {product.photos.map((photo, index) => {
+                  return (
+
+                    <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                      <img src={photo} className="d-block w-100 img-card-show" alt="" />
+                    </div>
+                  )
+                })}
               </div>
+              {product.photos.length === 0 && (
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
+                  </div>
+                </div>
+              )}
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span className="visually-hidden">Previous</span>
