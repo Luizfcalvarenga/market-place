@@ -16,17 +16,25 @@ Rails.application.routes.draw do
   end
 
   get 'user/:id', to: 'users#show', as: 'user'
+  resources :advertisements, only: [:index, :show, :destroy]
+  get "advertisements/:id/invoice", to: "advertisements#invoice", as: "advertisement_invoice"
+  get "advertisements/:id/status", to: "advertisements#status", as: "advertisement_status", format: :json
 
-  resources :bikes do
-    resource :order_items, only: [:new, :create, :destroy]
-
-  end
+  resources :bikes
 
   resource :order_items, only: [ :destroy ], as: :destroy
   resource :bikes, only: [ :destroy ], as: :remove
 
-  resources :products do
-    resource :order_items, only: [:new, :create, :destroy]
+  resources :products
+
+  namespace :admin do
+    resources :users
+    resources :advertisements do
+      patch :approve
+      patch :reject
+      patch :ajust_product_info
+
+    end
   end
 
 

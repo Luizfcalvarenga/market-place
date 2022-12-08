@@ -1,0 +1,85 @@
+<div class="px-5">
+  <div class="flex center around">
+    <h1 class="title w-60">Anúncios</h1>
+
+    <%= simple_form_for(:advertisements, url: admin_advertisements_url, method: :get) do |f| %>
+      <div class="flex justify-content-end align-items-center w-100">
+        <div class="f-10"><%= select_month(@reference_date, {field_name: "month"}, {class: "w-90"}) %></div>
+        <div class="f-10"><%= select_year(@reference_date, {start_year: 2020, end_year: Time.current.year, field_name: "year"}, {class: "w-90"}) %></div>
+        <%= f.submit "Trocar", class: "btn btn-success f-10" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row my-3 justify-content-center">
+    <div class="col-12 col-md-3 p-2">
+      <div class="br-8 bg-dark flex center around flex-column p-4">
+        <p class="fw-bold text-white">Mês de referência</p>
+        <p class="fw-bold text-white fs-30 m-0"><%= @reference_date.strftime("%m/%Y") %></p>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 p-2 br-8">
+      <div class="br-8 bg-dark flex center around flex-column p-4">
+        <p class="fw-bold text-white">Anuncios vendidos</p>
+        <p class="fw-bold text-white fs-30 m-0"><%= @advertisements.count %></p>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 p-2 br-8">
+      <div class="br-8 bg-dark flex center around flex-column p-4">
+        <p class="fw-bold text-white">Receita</p>
+        <p class="fw-bold text-white fs-30 m-0"><%= number_to_currency( @net_total_sales/100, unit: "R$", separator: ",", delimiter: ".") %></p>
+      </div>
+    </div>
+  </div>
+
+
+  <table class="w-100">
+    <thead>
+      <tr>
+        <th scope="col" class="w-20">Usuário</th>
+        <th scope="col" class="w-5">ID Pedido</th>
+        <th scope="col">Pago em</th>
+        <th scope="col">Status</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Criado em</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @advertisements.each do |advertisement| %>
+      <tr>
+        <td data-label="Usuário"><%= advertisement.user.email %></td>
+        <td data-label="Nome do usuário"><%= advertisement.id %></td>
+        <td data-label="Gerado em"><%= advertisement.invoice_paid_at&.strftime("%d/%m/%Y - %H:%M") || "-" %></td>
+        <td data-label="Status"><%= advertisement.status %></td>
+
+        <td data-label="Valor"><%= number_to_currency(advertisement.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></td>
+        <td data-label="Criado em"><%= advertisement.created_at.strftime("%d/%m/%Y - %H:%M")  %></td>
+        <td data-label="Ações">
+          <div class="d-flex">
+            <% if advertisement.status === "waiting_review" %>
+              <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2" do %>
+                <i class="fas fa-search mt-1"></i>
+                 <span class="ms-2">Revisar</span>
+              <% end %>
+            <% elsif  advertisement.status === "pending" %>
+              <i class="fas fa-clock mt-1 text-danger" ></i>
+              <p><span class="topic-cards-index-media ms-3 text-danger">Aguardando pagamento</p>
+            <% elsif  advertisement.status === "update_request" %>
+              <i class="fas fa-clock mt-1 text-warning" ></i>
+              <p><span class="topic-cards-index-media ms-3 text-warning">Aguardando update</p>
+            <% else %>
+              <i class="fas fa-check mt-1 text-success"></i>
+              <p><span class="topic-cards-index-media ms-3 text-success">Finalizado</p>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @advertisements.blank? %>
+    <p class="text-white p-4">Nenhum anúncio vendido neste mês.</p>
+  <% end %>
+</div>

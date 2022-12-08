@@ -63,10 +63,6 @@
                           required: true,
                           autofocus: true,
                           input_html: { class: "mask-cep" } %>
-              <%= f.input :address,
-                          required: true,
-                          autofocus: true,
-                          input_html: { class: "" } %>
               <%= f.input :password,
                           required: true,
                           hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),

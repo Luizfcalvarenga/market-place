@@ -3,13 +3,14 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :product_type
 
-
+  has_one :advertisement, as: :advertisable
   has_many :chats
   has_many :product_attributes
   has_many :product_type_attributes, through: :product_attributes
 
   has_many_attached :photos
 
+  # validates :category, :modality, :brand, :model, :year, :locality,  presence: true
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
 

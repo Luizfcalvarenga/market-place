@@ -10,12 +10,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super do |resource|
-      order = Order.find_by(tracker_code: cookies[:tracker_code])
-      order.update(user: resource) if order.user.blank? && !resource.orders.where(status: :pending).exists?
-    end
-  end
+  # def create
+  #   super do |resource|
+  #     order = Order.find_by(tracker_code: cookies[:tracker_code])
+  #     order.update(user: resource) if order.user.blank? && !resource.orders.where(status: :pending).exists?
+  #   end
+  # end
 
   # GET /resource/edit
   # def edit

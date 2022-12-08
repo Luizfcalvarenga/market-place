@@ -10,6 +10,7 @@ class User < ApplicationRecord
   after_create_commit { broadcast_append_to "users" }
   after_update_commit { broadcast_update }
 
+  has_many :advertisements
   has_many :orders
   has_many :messages
   has_many :participants
@@ -18,8 +19,14 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-
+  # validates :cep, :document_number, :phone_number,  presence: true
   enum status: %i[offline away online]
+
+  enum access: {
+    user: "user",
+    admin: "admin",
+  }
+
 
   after_commit :add_default_photo, on: %i[create update]
 

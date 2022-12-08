@@ -1,0 +1,61 @@
+<div class="container advertisement my-5">
+  <h3 class="text-center text-success">Meu anuncio</h3>
+  <p class="text-center"> <small>Estamos quase, seu produto foi cadastrado com sucesso, porém só será anunciado após finalizar o processo pagando o invoice.</small> </p>
+  <p class="text-center"> <small> Antes de efetuar o pagamento confira seus dados em seu perfil (cpf e cep)</small></p>
+  <p class="text-center"> <small> Você pode acessar sua fatura na seção de "Anúncios" no seu perfil</small></p>
+
+  <h4>
+    <span class="text-success">Valor:</span> <%= number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
+  </h4>
+  <h4>
+    <span class="text-success">Item:</span> <%= @advertisement.advertisable_type %>
+  </h4>
+  <% if @advertisement.advertisable_type === "Product" %>
+    <h4 class="text-center text-success mt-3">Produto</h4>
+    <div class="d-flex justify-content-around my-3">
+      <div>
+        <p><span class="text-success me-2">Tipo:</span><%= ProductType.find_by(id: @item.product_type_id).name %></p>
+        <p><span class="text-success me-2">Categoria:</span><%= @item.category.name %></p>
+        <p><span class="text-success me-2">Modalidade:</span><%= @item.modality %></p>
+        <p><span class="text-success me-2">Descrição:</span><%= @item.description %></p>
+        <p><span class="text-success me-2">Local:</span><%= @item.locality %></p>
+
+      </div>
+      <div>
+        <p><span class="text-success me-2">Marca:</span><%= @item.brand %></p>
+        <p><span class="text-success me-2">Nome:</span><%= @item.model %></p>
+        <p><span class="text-success me-2">Ano:</span><%= @item.year %></p>
+        <p><span class="text-success me-2">Quantidade:</span><%= @item.quantity %></p>
+        <p><span class="text-success me-2">Preço:</span><%= number_to_currency(@item.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2">
+      <%= link_to "Anunciar", new_announce_path, class: "btn-orders btn btn-outline mt-2 w-25" %>
+      <%= link_to "Finalizar anúncio", advertisement_invoice_path, class: "btn-orders btn btn-primary mt-2 w-25", data: { confirm: "Ao clicar em ok, eu confirmo que li e entendi os termos e condições desta compra."} %>
+    </div>
+
+  <% elsif @advertisement.advertisable_type === "Bike"  %>
+    <h4>Bike</h4>
+    <div class="d-flexjustify-content-around my-3">
+      <div>
+        <p><span class="text-success me-2">Categoria:</span><%= @item.category.name %></p>
+        <p><span class="text-success me-2">Modalidade:</span><%= @item.modality %></p>
+        <p><span class="text-success me-2">Tipo:</span><%= @item.bike_type %></p>
+        <p><span class="text-success me-2">Condição:</span><%= @item.bike_condition %></p>
+      </div>
+      <div>
+        <p><span class="text-success me-2">Local:</span><%= @item.locality %></p>
+        <p><span class="text-success me-2">Ano:</span><%= @item.year %></p>
+        <p><span class="text-success me-2">Quantidade:</span><%= @item.quantity %></p>
+        <p><span class="text-success me-2">Preço:</span><%= number_to_currency(@item.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2">
+      <%= link_to "Anunciar", new_announce_path, class: "btn-orders btn btn-outline mt-2 w-25" %>
+      <%= link_to "Finalizar anúncio", advertisement_invoice_path, class: "btn-orders btn btn-primary mt-2 w-25", data: { confirm: "Ao clicar em ok, eu confirmo que li e entendi os termos e condições desta compra."} %>
+    </div>
+
+  <% end %>
+</div>

@@ -6,6 +6,8 @@ class BikesController < ApplicationController
 
   def index
     @bikes = Bike.all
+    @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+
   end
 
   def show
@@ -13,6 +15,15 @@ class BikesController < ApplicationController
   end
 
   def new
+    if current_user.blank?
+      redirect_to new_user_session_path
+      flash[:alert] = "você deve criar uma conta com documento e cep para anunciar."
+    elsif
+      current_user.document_number.blank? && current_user.cep.blank?
+      redirect_to edit_profiles_path
+      flash[:alert] = "você deve preencher seu documento e cep para anunciar."
+    end
+
     @bike = Bike.new
     skip_authorization
     @categories = Category.all

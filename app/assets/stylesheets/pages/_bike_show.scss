@@ -8,6 +8,19 @@
 
 .bike-info {
   color: #b5b5b5;
+  font-size: 24px;
+  margin: auto 0;
+}
+
+.bike-attrs-parts {
+  font-size: 24px;
+  margin: auto 0;
+}
+
+.bike-orientation {
+  font-size: 24px;
+  margin: auto ;
+  color: rgb(0,195,54);
 }
 
 .img-show-bike {
@@ -38,13 +51,179 @@
   top: 7rem;
   height: 82vh;
   border: 1px solid $color-primary;
-
-
   .fa-heart {
     color: $color-primary;
   }
-
   p {
     margin-bottom: .5rem !important;
   }
+}
+
+
+.bike-part-card {
+  width:65px;
+  height:65px;
+  filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+}
+
+/*Colors*/
+$red: #ff3333;
+$yellow: #ffcc33;
+$aqua: #55dde0;
+$lightPurple: #9966cc;
+$tealBLue: #33658a;
+$linear: linear-gradient(90deg, #3f4593, #5960bd);
+
+/* Reset*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.kabobs {
+  border: 1px solid $color-primary;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  font-size: 24px;
+}
+/* Start Style*/
+.main__menu {
+  display: block;
+  // grid-template-columns: repeat(5, 1fr);
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    //opacity:0;
+  }
+  .list-item {
+    &:hover {
+      .drop-menu li {
+        display: block;
+        border-bottom: 1px solid $color-primary;
+        border-left: 1px solid $color-primary;
+        border-right: 1px solid $color-primary;
+
+      }
+      .menu-2 {
+        perspective: 1000px;
+        .drop-item {
+          opacity: 0;
+          transform-origin: top center;
+          @for $i from 1 through 9 {
+            &:nth-child(#{$i}) {
+              animation-name: topToBottom;
+              animation-duration: 300ms;
+              animation-delay: (150ms * $i) - 300;
+              animation-timing-function: ease-in-out;
+              animation-fill-mode: forwards;
+            }
+          }
+        }
+      }
+
+      .kabobs {
+        border-top: 6px solid $color-primary;
+
+      }
+
+    }
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 90px;
+      color: #fff;
+      cursor: unset;
+      &:hover {
+        cursor: pointer;
+      }
+      span {
+        font: 600 25px 'Roboto', sans-serif;
+        order: 2;
+      }
+      &.kabobs {
+        background: transparente;
+
+      }
+
+      i {
+        color: #fff;
+        font-size: 100px;
+      }
+    }
+    .last {
+      border-radius: 0 0 3px 3px;
+    }
+    .drop-menu {
+      .drop-item {
+        display: none;
+        .list-item {
+          height: 50px;
+          font: 300 22px 'Roboto', sans-serif;
+          &.item {
+            background: transparent;
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@keyframes leftToRight {
+  0% {
+    opacity: 0;
+    transform: rotateY(-90deg) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) translateY(0px);
+  }
+}
+
+@keyframes topToBottom {
+  // 0% {
+  //   opacity: 0;
+  //   transform: translateY(100%);
+  // }
+  100% {
+    opacity: 1;
+    transform: translateY();
+
+  }
+}
+
+
+@keyframes itemBounce {
+    0% {
+        opacity:0;
+        transform:scale(0.3) translateY(-60px);
+    }
+    80% {
+        transform:scale(1.2) translateY(10px);
+    }
+    100% {
+        opacity:1;
+        transform:scale(1) translateY(0px);
+    }
+}
+
+.img-card-show {
+
+  height: 75vh;
+  border-radius: 5px;
+  border: none;
 }

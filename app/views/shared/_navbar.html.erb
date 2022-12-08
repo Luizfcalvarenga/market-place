@@ -20,18 +20,18 @@
               <div class="dropdown-content">
                 <div class="drpdw-bike mx-5 margin-right">
                   <h4 class="text-center text-success mt-3">BIKES</h4>
-                  <%= link_to "Speed", "#", class: "text-white" %>
-                  <%= link_to "Gravel", "#", class: "text-white" %>
-                  <%= link_to "Triathlon", "#", class: "text-white" %>
-                  <%= link_to "E-bike", "#", class: "text-white" %>
+                  <%= link_to "Speed", "/bikes?modality=speed", class: "text-white" %>
+                  <%= link_to "Gravel", "/bikes?modality=gravel", class: "text-white" %>
+                  <%= link_to "Triathlon", "/bikes?modality=triathlon", class: "text-white" %>
+                  <%= link_to "E-bike", "/bikes?bike_type=e-bike", class: "text-white" %>
                   <%= link_to "Ver mais ->", bikes_path, class: "text-white pb-3" %>
                 </div>
                 <div class="drpdw-components mx-5">
                   <h4 class="text-center text-success mt-3">COMPONENTES</h4>
-                  <%= link_to "Freios", products_path(product_type_id: 1), class: "text-white" %>
-                  <%= link_to "Quadro", "#", class: "text-white" %>
-                  <%= link_to "Suspensões", "#", class: "text-white" %>
-                  <%= link_to "Rodas", "#", class: "text-white" %>
+                  <%= link_to "Freios", "/products?product_type=brake", class: "text-white" %>
+                  <%= link_to "Quadro", "/products?product_type=frame", class: "text-white" %>
+                  <%= link_to "Suspensões", "/products?product_type=suspension", class: "text-white" %>
+                  <%= link_to "Rodas", "/products?product_type=rim", class: "text-white" %>
                   <%= link_to "Ver mais ->", products_path, class: "text-white pb-3" %>
                 </div>
                 <div class="drpdw-services mx-5">
@@ -75,8 +75,8 @@
         </li>
         <% if current_user.present? %>
           <li class="nav-item active mt-1" style="color: white;">
-            <%= link_to order_path(current_user.orders.last.id) do %>
-              <i class="fas fa-shopping-cart text-success"> <span  class="cart-counter"><%= current_user.orders.last.order_items.count %></span></i>
+            <%= link_to user_path(User.find(4)) do %>
+              <i class="fas fa-comment-alt text-success"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
         <% end %>

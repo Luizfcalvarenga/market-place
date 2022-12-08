@@ -18,6 +18,15 @@ class ProductsController < ApplicationController
   end
 
   def new
+    if current_user.blank?
+      redirect_to new_user_session_path
+      flash[:alert] = "você deve criar uma conta com documento e cep para anunciar."
+    elsif
+      current_user.document_number.blank? && current_user.cep.blank?
+      redirect_to edit_profiles_path
+      flash[:alert] = "você deve preencher seu documento e cep para anunciar."
+    end
+
     @product = Product.new
     skip_authorization
     @product_types = ProductType.all
@@ -76,11 +85,9 @@ class ProductsController < ApplicationController
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all
-    @services = Service.all
     if current_user.present?
       @user = current_user
     end
-
 
     skip_authorization
 
@@ -88,16 +95,20 @@ class ProductsController < ApplicationController
       format.json { render json: {
         types_of_product: @product_types,
         categories: @categories,
-        user: @user,
-        services: @services
+        user: @user
       } }
     end
   end
 
+  def search
+    @current_filters = params[:filters]
+    @products = Product.all
+    @products = @products.where(:product_type_id => @current_filters[:product_type_id]) if @current_filters[:product_type_id]
+  end
 
   private
 
   def product_params
-    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :name, :description, :price_in_cents, :quantity, photos: [])
+    params.require(:product).permit(:user_id, :category_id, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :locality, :year, photos: [])
   end
 end

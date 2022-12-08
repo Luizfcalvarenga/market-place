@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from "react";
+import swal from 'sweetalert';
+import EquipamentImage from "../../../assets/images/helmet.png";
+import AccessorieImage from "../../../assets/images/accessories.png";
+import ComponentImage from "../../../assets/images/frame.png";
+import CasualImage from "../../../assets/images/cap.png";
+import ClotheImage from "../../../assets/images/tshirt.png";
+import MaintenanceImage from "../../../assets/images/tools.png";
+
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
@@ -16,10 +24,16 @@ export function ProductForm(props) {
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
   const [productBrand, setProductBrand] = useState("");
-  const [productName, setProductName] = useState("");
+  const [otherProductBrand, setOtherProductBrand] = useState("");
+  const [productModel, setProductModel] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
+  const [productLocality, setProductLocality ] = useState(null);
+  const [productYear, setProductYear ] = useState(null);
+  const [otherProductYear, setOtherProductYear ] = useState(null);
+
+
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [photoFile, setPhotoFile] = useState({
@@ -44,9 +58,9 @@ export function ProductForm(props) {
      })
     if (props.productId) {
       fetchProduct();
-      setProductId(props.productId)
-
-
+      setProductId(props.productId);
+      setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
+      //jeito por enquanto pra setar modalidades, todas de uma vez
     }
   }, []);
 
@@ -54,10 +68,10 @@ export function ProductForm(props) {
     if (productCategory && !props.productId) {
       setModalities(categories.find(element => element.name === productCategory).modalities)
       setCategoryId(categories.find(element => element.name === productCategory).id);
-    } else if (props.productId) {
-      //NO EDIT O COMPORTAMENTO ERA ESTRANHO, NÃO ACHAVA AS MODALIDADES, FIND EM CATEGORIAS RETORNAVA NULL, VERIFICAR CERTINHO DEPOIS
     }
   });
+
+
 
   useEffect(() => {
     if (productCategory === "urban") {
@@ -102,16 +116,11 @@ export function ProductForm(props) {
         name: photoName,
         url: fileURL
       }
-
       photoFile.push(nameURL)
       objectUrls.push(fileURL);
-
     }
-
     setPhotosPreview(objectUrls)
     setPhotoFile(photoFile)
-
-
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
   }, [productPhotos])
@@ -164,10 +173,13 @@ export function ProductForm(props) {
       setCategoryId(response.data.product.category_id);
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
-      setProductName(response.data.product.name);
+      setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
+      setProductLocality(response.data.product.locality);
+      setProductYear(response.data.product.year);
+
       if (response.data.product_attributes) {
         setProductAttributes(
           response.data.product_attributes
@@ -188,11 +200,24 @@ export function ProductForm(props) {
       currentProductAttributes[attribute.name] = e.target.value
       setProductAttributes(currentProductAttributes)
     }
+
+    if (attribute.name === "frame_brand") {
+      setProductBrand(e.target.value)
+    }
+    if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value !== "other") {
+      setProductModel(e.target.value)
+    }
+    if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other") {
+      setProductModel(e.target.value)
+    }
   }
 
   const changeAttribute = (e, attribute) => {
     productAttributes[attribute.name] = e.target.value
     setProductAttributes(productAttributes)
+    if (attribute.name === "brake_model" || attribute.name === "model") {
+      setProductModel(e.target.value)
+    }
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
@@ -204,15 +229,19 @@ export function ProductForm(props) {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
-     } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+     } else if (attribute.name === "rear_suspension_travel" && ["road"].includes(productCategory)) {
       return
-    } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail"].includes(productAttributes["suspension_type"])) {
+     } else if (attribute.name === "shock_size" && ["road"].includes(productCategory)) {
       return
-    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper"].includes(productAttributes["brake_type"])) {
+     } else if (attribute.name === "rear_suspension_travel" && ["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"])) {
       return
-    } else if (attribute.name === "seat_post_travel" && ["rigid"].includes(productAttributes["brake_type"])) {
+    } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"])) {
       return
-    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant"].includes(productCategory)) {
+    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
     } else {
       options = attribute.options
@@ -221,7 +250,7 @@ export function ProductForm(props) {
     return (
       <div attribute={attribute} key={attribute.id} className="">
         <div id="">
-          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
+          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}<span className="requested-information ms-1">*</span></label><br />
           <select
           className="select-answer"
           onChange={(e) => createProductAttributes(e, attribute)}
@@ -231,10 +260,19 @@ export function ProductForm(props) {
               return (<option key={index} value={option}>{option}</option>)
             })}
           </select>
+
+
           <div id={attribute.name} class="d-none">
             <label htmlFor="productbrand" className="mt-3">Qual:</label>
             <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
           </div>
+
+          {/* {(attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other" && (
+          <div id={attribute.name} class="d-none">
+            <label htmlFor="productbrand" className="mt-3">Qual:</label>
+            <input type="text" className="text-input" onChange={(e) => setProductModel(e.target.value)}/>
+          </div>
+          )} */}
         </div>
       </div>
     )
@@ -242,19 +280,39 @@ export function ProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(e)
+    e.target.classList.add("d-none")
+    const spinner = document.getElementById("spinner")
+    spinner.classList.remove("d-none")
+
     const dataObject = new FormData();
     dataObject.append( "product[user_id]", user );
     dataObject.append( "product[category_id]", categoryId );
     dataObject.append( "product[modality]", productModality );
     dataObject.append( "product[product_type_id]", productTypeId );
-    dataObject.append( "product[brand]", productBrand );
-    dataObject.append( "product[name]", productName );
+    dataObject.append( "product[model]", productModel );
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", productPrice );
     dataObject.append( "product[quantity]", productQuantity );
-    productPhotos.map((photo) => {
-      dataObject.append( "product[photos][]", photo );
-    })
+    dataObject.append( "product[locality]", productLocality );
+
+    if (productBrand === "Outra") {
+      dataObject.append( "product[brand]", otherProductBrand );
+    } else {
+      dataObject.append( "product[brand]", productBrand );
+    }
+
+    if (productYear === "other") {
+      dataObject.append( "product[year]", otherProductYear );
+    } else {
+      dataObject.append( "product[year]", productYear );
+    }
+
+    if (productPhotos) {
+      productPhotos.map((photo) => {
+        dataObject.append( "product[photos][]", photo );
+      })
+    }
     for (const [key, value] of Object.entries(productAttributes)) {
       console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
@@ -266,10 +324,13 @@ export function ProductForm(props) {
       modality: productModality,
       product_type_id: productTypeId,
       brand: productBrand,
-      name: productName,
+      model: productModel,
       description: productDescription,
       price_in_cents: productPrice,
       quantity: productQuantity,
+      locality: productLocality,
+      year: productYear,
+
       photos: productPhotos,
       productAttributes,
       service: productServiceId
@@ -284,11 +345,12 @@ export function ProductForm(props) {
     const response = await axios[method](url, dataObject);
     if (response.data.success) {
       window.location = response.data.redirect_url;
+      swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       setErrors(response.data.errors);
-      alert(
-        "Erro ao criar a produto: " + JSON.stringify(response.data.errors)
-      );
+      swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
+      e.target.classList.remove("d-none")
+      document.getElementById("spinner").classList.add("de-none")
     }
   }
 
@@ -486,7 +548,16 @@ export function ProductForm(props) {
     sixthSection.classList.remove("d-none")
   }
 
+  const handleTerms = (e) => {
+    console.log(e.target)
+    const btnAnnounce = document.getElementById("new-announce")
+    btnAnnounce.classList.toggle("disable-btn-form")
+  }
 
+  //////////////////////////////////////////////////////////////////////////////////
+  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]
+  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
+  const productsIdsWithSpecificModels = ["2", "10", "12", "23", "25"]
   return (
     <div className="w-60 new-product-react py-5">
       <h1 className="text-success  text-center">Vamos lá...</h1>
@@ -507,37 +578,39 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><i className="fas fa-charging-station"></i> </button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/> <i className="fas fa-cog"></i></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/> <i className="fas fa-hard-hat"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/><img src={EquipamentImage} alt="" className="icon-card-form"/></button>
         </div>
         <div className="d-flex justify-content-between py-3 gap-3">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/> <i className="fas fa-glasses"></i></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/> <i className="fas fa-wrench"></i></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/> <i className="fas fa-tshirt"></i></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/><img src={CasualImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/><img src={MaintenanceImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
       </div>
 
 
       <form id="product-form" className="">
-
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
-
-          <label htmlFor="category" className="mt-3">Categoria:</label>
+          <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
-          onChange={(e) => setProductCategory(e.target.value)}
+          onChange={(e) =>  setProductCategory(e.target.value) }
           className="select-answer"
           >
             <option value=""></option>
-            {categories.map((category) => {
-              return (<option key={category.id} value={category.name} className="answers-options">{category.name}</option>)
-            })}
+            <option value="mountain_bike">Mountain Bike</option>
+            <option value="dirt_street">Dirt</option>
+            <option value="road">Road</option>
+            <option value="infant">Infantil</option>
+            <option value="urban">Urbano</option>
           </select>
+          { errors && errors.product && errors.product.category && (
+            <p className="text-danger">{errors.product.category[0]}</p>
+          )}
 
-          { (productCategory === "mountain_bike" || productCategory === "dirt_street" || productCategory === "road") && (<>
-
+          {productCategory === "mountain_bike" && (<>
             <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
             <select
               value={productModality}
@@ -545,13 +618,48 @@ export function ProductForm(props) {
               className="select-answer"
             >
               <option value=""></option>
-              {modalities.map((modality, index) => {
-                return (<option key={index}>{modality}</option>);
-              })}
+              <option value="downhill">Downhill</option>
+                <option value="enduro">Enduro</option>
+                <option value="gravel">Gravel</option>
+                <option value="speed">Speed</option>
+                <option value="trail">Trail</option>
+                <option value="xc_cross_country">XC Cross Country</option>
             </select>
           </>)}
 
-          <label htmlFor="product" className="mt-4">Produto:</label>
+          {productCategory === "dirt_street" && (<>
+            <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+            <select
+              value={productModality}
+              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
+              className="select-answer"
+            >
+              <option value=""></option>
+              <option value="street_bmx">Street BMX</option>
+              <option value="race_bmx">Race BMX</option>
+              <option value="big_wheel_bmx">Big Wheel BMX</option>
+              <option value="dirt_jump">Dirt Jump</option>
+            </select>
+          </>)}
+
+          {productCategory === "road" && (<>
+            <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
+            <select
+              value={productModality}
+              onChange={(e) => e.preventDefault && setProductModality(e.target.value)}
+              className="select-answer"
+            >
+              <option value=""></option>
+              <option value="speed_performance">Speed Performance</option>
+              <option value="triathlon">Triathon</option>
+              <option value="ciclocross">Ciclocross</option>
+              <option value="cicloviagem">Cicloviagme</option>
+              <option value="gravel">Gravel</option>
+            </select>
+          </>)}
+
+
+          <label htmlFor="product" className="mt-4">Produto:<span className="requested-information ms-1">*</span></label>
           <select
           value={productTypeId}
           onChange={(e) => setProductTypeId(e.target.value)}
@@ -562,6 +670,48 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
             })}
           </select>
+          { errors && errors.product && errors.product.product_type && (
+            <p className="text-danger">{errors.product.product_type}</p>
+          )}
+
+          {!(productTypeId === "9") && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              {componentBrands.map((componentBrand, index) => {
+                return (<option key={index} value={componentBrand}>{componentBrand}</option>)
+              })}
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+
+          {!productsIdsWithSpecificModels.includes(productTypeId) && (<>
+
+            <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
+            { errors && errors.product && errors.product.model && (
+              <p className="text-danger">{errors.product.model}</p>
+            )}
+          </>)}
+
+
           <div className="text-center">
             <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
@@ -593,32 +743,61 @@ export function ProductForm(props) {
           <div id="fourth-section" className="card-questions mb-5 d-none">
             <h4 className="text-center text-success">Informações adicionais</h4>
 
-            <label htmlFor="productbrand" className="mt-3">Marca:</label>
-            <input type="text" className="text-input"  value={productBrand ? productBrand : ""} onChange={(e) => setProductBrand(e.target.value)}/>
+            <label htmlFor="productLocality" className="mt-3">Local:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input"  value={productLocality ? productLocality : ""} onChange={(e) => setProductLocality(e.target.value)}/>
+            { errors && errors.product && errors.product.locality && (
+              <p className="text-danger">{errors.product.locality[0]}</p>
+            )}
 
-            <label htmlFor="productName" className="mt-4">Nome:</label>
-            <input type="text" className="text-input" value={productName ? productName : ""} onChange={(e) => setProductName(e.target.value)}/>
-            { errors && errors.product && errors.product.name && (
-              <p className="text-danger">{errors.product.name}</p>
+
+            <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={productYear}
+              onChange={(e) => setProductYear(e.target.value)}
+
+            >
+              {years.map((year, index)=> {
+                return (<option key={index}>{year}</option>);
+              })}
+            </select>
+            { errors && errors.product && errors.product.year && (
+              <p className="text-danger">{errors.product.year[0]}</p>
+            )}
+
+            { productYear === "other"  && (
+              <>
+                <label htmlFor="otherProductYear" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                <input type="text" className="text-input" onChange={(e) => setOtherProductYear(e.target.value)}/>
+                { errors && errors.product && errors.product.year && (
+                  <p className="text-danger">{errors.product.year}</p>
+                )}
+              </>
             )}
 
 
             <label htmlFor="productDescription" className="mt-4">Descrição:</label>
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
+            <div className="d-flex  justify-content-between gap-3">
 
-            <label htmlFor="productPrice" className="mt-4">Preço:</label>
-            <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
-            { errors && errors.product && errors.product.price_in_cents && (
-              <p className="text-danger">{errors.product.price_in_cents}</p>
-            )}
+              <div className="w-50">
+                <label htmlFor="productPrice" className="mt-4 w-100">Preço:<span className="requested-information ms-1">*</span></label> <br />
+                <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
+                { errors && errors.product && errors.product.price_in_cents && (
+                  <p className="text-danger">{errors.product.price_in_cents}</p>
+                )}
+              </div>
 
+              <div className="w-50">
+                <label htmlFor="productQuantity" className="mt-4 w-100">Quantidade:<span className="requested-information ms-1">*</span></label> <br />
+                <input type="number" className="text-input" value={productQuantity ? productQuantity : ""} onChange={(e) => setProductQuantity(e.target.value)}/>
+                { errors && errors.product && errors.product.quantity && (
+                  <p className="text-danger">{errors.product.quantity}</p>
+                )}
+              </div>
 
-            <label htmlFor="productQuantity" className="mt-4">Quantidade:</label>
-            <input type="number" className="text-input" value={productQuantity ? productQuantity : ""} onChange={(e) => setProductQuantity(e.target.value)}/>
-            { errors && errors.product && errors.product.quantity && (
-              <p className="text-danger">{errors.product.quantity}</p>
-            )}
+            </div>
 
             <div className="text-center">
               <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
@@ -658,20 +837,40 @@ export function ProductForm(props) {
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
 
           <h4 className="text-center text-success">Revise as informações</h4>
-          {/* <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Gerais</button> */}
+
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
 
             {/* <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p> */}
+            {/* {productId && (<>
+              <p><span className="text-success">Produto:</span> { allProducts.find(element => element.id === productId).name }</p>
+            </>)} */}
             <p><span className="text-success">Categoria:</span> {productCategory}</p>
             <p><span className="text-success">Modalidade:</span> {productModality}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
+            <p><span className="text-success">Local:</span> {productLocality}</p>
             <p><span className="text-success">Preço:</span>  {(productPrice / 100).toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
-            <p><span className="text-success">Marca:</span> {productBrand}</p>
-            <p><span className="text-success">Nome:</span> {productName}</p>
+            {productYear === "other" && (
+
+              <p><span className="text-success">Ano:</span> {otherProductYear}</p>
+            )}
+            {productYear !== "other" && (
+
+              <p><span className="text-success">Ano:</span> {productYear}</p>
+            )}
+
+            {productBrand === "Outra" && (
+
+              <p><span className="text-success">Marca:</span> {otherProductBrand}</p>
+            )}
+            {productBrand !== "Outra" && (
+
+              <p><span className="text-success">Marca:</span> {productBrand}</p>
+            )}
+            <p><span className="text-success">Modelo:</span> {productModel}</p>
           </div>
 
 
@@ -708,14 +907,90 @@ export function ProductForm(props) {
             }
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
-          <div className="text-center">
-            {props.productId && (
-              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt3">Editar</button>
-            )}
-            {!props.productId && (
-              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-5">Anunciar</button>
-            )}
-          </div>
+
+        {!props.productId && (<>
+          {(productPrice < 50000) && (<>
+            <div className="text-center mt-3 mb-3">
+              <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
+              {!props.productId && (<>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
+            </div>
+          </>)}
+
+          { (productPrice >= 50000) && (productPrice < 250000) && (<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
+            </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (<>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
+            </div>
+          </>)}
+
+          {(productPrice >= 250000) && (productPrice < 500000) && (<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
+            </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (<>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
+            </div>
+          </>)}
+
+          {(productPrice >= 500000) && (productPrice <= 1000000) &&(<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
+            </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (<>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+              </>)}
+            </div>
+          </>)}
+
+          {(productPrice > 1000000) && (<>
+            <div className="d-flex justify-content-center gap-2">
+              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
+            </div>
+            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <div className="text-center mt-3 mb-3">
+              {!props.productId && (<>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
+            </div>
+          </>)}
+        </>)}
+
+        <div className="text-center">
+          {props.productId && (<>
+            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
+            <div id="spinner" className="spinner-border text-success d-none" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </>)}
+        </div>
         </div>
       </form>
     </div>

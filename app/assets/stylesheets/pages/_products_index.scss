@@ -16,7 +16,7 @@
 .cards-products {
   border: 1px solid transparent;
   border-radius: 5px;
-  height: 400px;
+  height: 370px;
   margin: 5px;
   background-color: transparent;
   box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
@@ -49,4 +49,10 @@
 .product-infos-index {
   color: #919991 !important;
   font-size: 21px !important;
+}
+
+.icon-card-index {
+  width: 22px;
+  height: 22px;
+  filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
 }

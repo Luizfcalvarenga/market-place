@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_17_000925) do
+ActiveRecord::Schema.define(version: 2022_12_05_225745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,25 @@ ActiveRecord::Schema.define(version: 2022_11_17_000925) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "advertisements", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "advertisable_type", null: false
+    t.bigint "advertisable_id", null: false
+    t.integer "invoice_id"
+    t.string "invoice_url"
+    t.string "invoice_pdf"
+    t.integer "net_value"
+    t.integer "price_in_cents"
+    t.integer "value"
+    t.datetime "invoice_paid_at"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "invoice_status"
+    t.index ["advertisable_type", "advertisable_id"], name: "index_advertisements_on_advertisable"
+    t.index ["user_id"], name: "index_advertisements_on_user_id"
   end
 
   create_table "bikes", force: :cascade do |t|
@@ -229,7 +248,7 @@ ActiveRecord::Schema.define(version: 2022_11_17_000925) do
     t.bigint "category_id"
     t.bigint "product_type_id", null: false
     t.string "modality"
-    t.string "name"
+    t.string "model"
     t.text "description"
     t.integer "price_in_cents"
     t.integer "quantity"
@@ -237,6 +256,8 @@ ActiveRecord::Schema.define(version: 2022_11_17_000925) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "brand"
     t.datetime "removed_at"
+    t.string "locality"
+    t.string "year"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
     t.index ["user_id"], name: "index_products_on_user_id"
@@ -269,12 +290,14 @@ ActiveRecord::Schema.define(version: 2022_11_17_000925) do
     t.string "phone_number"
     t.integer "status", default: 0
     t.integer "current_chat"
+    t.string "access", default: "user"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "advertisements", "users"
   add_foreign_key "bikes", "categories"
   add_foreign_key "bikes", "services"
   add_foreign_key "bikes", "users"

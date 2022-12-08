@@ -3,14 +3,14 @@ document.addEventListener("turbolinks:load", () => {
 
   if (!paymentContainer) return;
 
-  const orderId = paymentContainer.dataset.orderId;
+  const advertisementId = paymentContainer.dataset.advertisementId;
   let stopPolling = false;
 
-  if (!orderId) return;
+  if (!advertisementId) return;
 
   const poolFunction = async () => {
     if (stopPolling) return;
-    const url = `/orders/${orderId}/status.json`;
+    const url = `/advertisements/${advertisementId}/status.json`;
 
     const response = await axios.get(url);
 

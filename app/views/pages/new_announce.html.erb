@@ -1,11 +1,14 @@
 <div class="h-100 w-100 page-body pb-5">
-  <div class="<%= mobile_device? ? "w-90" : "w-100" %> new_announce_banner">
+  <div class="<%= mobile_device? ? "w-100" : "w-100" %> new_announce_banner">
     <div class="spacer-100 page-desktop"></div>
     <h1 class="pt-5 mt-5">ANUNCIE COM A <span class="text-success mt-3">NUFLOW</span></h1>
     <p class="text-white">Anuncie bikes e componentes com facilidade e segurança sem sair de casa.</p>
     <p class="text-white">O que gostaria de anunciar?</p>
-    <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4" %>
-    <%= link_to "PRODUTOS", new_product_path, class: "btn btn-outline mt-3 px-4 ms-3" %>
+    <div class="row new-announce-btns">
+      
+      <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4 col-8 col-md-2" %>
+      <%= link_to "PRODUTOS", new_product_path, class: "btn btn-outline mt-3 px-2 ms-3 col-8 col-md-2" %>
+    </div>
     <% if false %>
       <div class="input-group my-4 text-center">
         <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Bicicletas, assessórios, serviços, etc..." %>" aria-label="Bicicletas, assessórios, serviços, etc..." aria-describedby="button-addon2">
@@ -14,37 +17,68 @@
     <% end %>
   </div>
 
-  <h3 class="text-center text-success mt-3">Confira nossos serviços</h3>
-
-
-  <div class="row row-cols-1 mt-5  px-5">
-    <div class="col-12 col-md-3">
-      <p class="text-center"><i class="fas fa-cogs text-success"></i></p>
-      <h4 class="text-center text-success">Bike Check</h4>
-      <p class="text-center"><small>Verificação da sua bike para uma entrega sem sustos</small></p>
+  <h3 class="text-center text-success mt-3">Nossos preços</h3>
+  <div class="row row-cols-1 mt-3 justify-content-around">
+    <div class="col-10 col-md-2 card-price">
+      <h4 class="text-center text-success">Anúncio gratuito</h4>
+      <p class="text-center"><small>Produto anunciado até R$500,00</small></p>
+      <p class="text-center"><small>Você não paga pelo anúncio.</small></p>
     </div>
 
-    <div class="col-12 col-md-3">
-      <p class="text-center"><i class="far fa-thumbs-up text-success"></i></p>
-      <h4 class="text-center text-success">Certificado</h4>
-      <p class="text-center"><small>Facilidade e segurança na entrega com frete da Nuflow</small></p>
+    <div class="col-10 col-md-2 card-price">
+      <h4 class="text-center text-success">R$ 50,00</h4>
+      <p class="text-center"><small>Produto anunciado entre R$500,00 e R$2.500,00</small></p>
+      <p class="text-center"><small>Você paga R$50,00 pelo anúncio.</small></p>
     </div>
 
-    <div class="col-12 col-md-3">
-      <p class="text-center"><i class="fas fa-shield-alt text-success"></i></p>
-      <h4 class="text-center text-success">Compra segura</h4>
-      <p class="text-center"><small>Pagamento assegurado, garantia de entrega</small></p>
+    <div class="col-10 col-md-2 card-price">
+      <h4 class="text-center text-success">R$100,00</h4>
+      <p class="text-center"><small>Produto anunciado entre R$2.500,00 e R$5.000,00</small></p>
+      <p class="text-center"><small>Você paga R$100,00 pelo anúncio.</small></p>
     </div>
 
-    <div class="col-12 col-md-3">
-      <p class="text-center"><i class="fas fa-truck text-success"></i></p>
-      <h4 class="text-center text-success">Logística</h4>
-      <p class="text-center"><small>Facilidade e segurança na entrega com frete da Nuflow</small></p>
+    <div class="col-10 col-md-2 card-price">
+      <h4 class="text-center text-success">R$150,00</h4>
+      <p class="text-center"><small>Produto anunciado entre R$5.000,00 e R$10.000,00</small></p>
+      <p class="text-center"><small>Você paga R$150,00 pelo anúncio.</small></p>
+    </div>
+
+     <div class="col-10 col-md-2  card-price">
+      <h4 class="text-center text-success">R$200,00</h4>
+      <p class="text-center"><small>Produto anunciado acima de R$10.000,00</small></p>
+      <p class="text-center"><small>Você paga R$200,00 pelo anúncio.</small></p>
     </div>
   </div>
 
-  <div class="frequent-questions px-5 mt-3">
-    <h4 class="text-center text-success mb-4">Ainda com duvida?</h4>
+  <h3 class="text-center text-success mt-5">Como funciona</h3>
+  <div class="row row-cols-1 mt-3 justify-content-around">
+    <div class="col-10 col-md-3">
+      <p class="text-center"><%= image_tag "online-registration.png", class: "announce-icons" %></p>
+      <h4 class="text-center text-success">Cadastro</h4>
+      <p class="text-center"><small>Você faz o cadastro da sua bike ou produto adicionando o máximo de informações, isso é importante para seu anúncio ficar completo.</small></p>
+    </div>
+
+    <div class="col-10 col-md-3">
+      <p class="text-center"><%= image_tag "operation.png", class: "announce-icons" %></p>
+      <h4 class="text-center text-success">Pagamento</h4>
+      <p class="text-center"><small>O pagamento dos anúncios são baseados no preço do produto anunciado, são valores fixos distribuidos em faixas de preços que podem ser conferidas abaixo </small></p>
+    </div>
+
+    <div class="col-10 col-md-3">
+      <p class="text-center"><%= image_tag "approval.png", class: "announce-icons" %></p>
+      <h4 class="text-center text-success">Aprovação</h4>
+      <p class="text-center"><small>Seu anúncio é encaminhado para revisão e caso esteja tudo em ordem ele será aprovado pela nossa equipe, quanto mais informações, mais chances de ser aprovado</small></p>
+    </div>
+
+    <div class="col-10 col-md-3">
+      <p class="text-center"><%= image_tag "disseminate.png", class: "announce-icons" %></p>
+      <h4 class="text-center text-success">Publicação</h4>
+      <p class="text-center"><small>Agora sim, seu anúnvio será publicado em nosso sistema e terá  a visualização te todos os nossos usuários, eles poderam entrar em contato para negociar pelo chat do próprio sistema</small></p>
+    </div>
+  </div>
+
+  <div class="frequent-questions px-5 mt-2">
+    <h3 class="text-center text-success mb-4">Ainda com duvida</h3>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">

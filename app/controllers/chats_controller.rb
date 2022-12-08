@@ -6,12 +6,17 @@ class ChatsController < ApplicationController
   def index
     @chat = Chat.new
     @chats = policy_scope(Chat)
-    @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
+    # @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
+    if Chat.where(is_private: true).present?
+      @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
+    else
+      @users = []
+    end
     if params[:query].present?
       sql_query = "full_name ILIKE :query OR email ILIKE :query"
       @users = User.where(sql_query, query: "%#{params[:query]}%")
     else
-      @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
+      @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])} if @conversations.present?
     end
     current_user.update(current_chat: nil)
     render 'index'
@@ -26,9 +31,7 @@ class ChatsController < ApplicationController
 
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
-
-
-    @users = User.all_except(current_user)
+    # @users = User.all_except(current_user)
     set_notifications_to_read
     render 'index'
   end

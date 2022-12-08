@@ -1,0 +1,158 @@
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 90%;
+    /* margin: 0 auto; */
+    margin-top: 10px;
+    border: 1px solid #00c454;
+    border-radius: 50px;
+    box-shadow: 5px 8px 12px #e0e0e0;
+    align-items: center;
+    margin: 20px auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    background: #101010;
+  }
+
+  h6 {
+    font-size: 12;
+    font-weight: lighter;
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 40px;
+  }
+
+  .orange {
+    background-color: #00c454;
+    color: white !important;
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .mail-content {
+    padding: 0 20px;
+  }
+  p {
+    color: white;
+  }
+
+  .item-name, h2 {
+    color: #00c454;
+  }
+
+  .detail-info {
+    color: #00c454;
+    font-size: 12px;
+  }
+
+  .btn-invoice {
+    background-color: transparent;
+    border-radius: 4px;
+    color: #00c454;
+    cursor: pointer;
+    display: inline-block;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 1px solid #00c454;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .btn-invoice:hover {
+    box-shadow: 0px 0px 20px 0px #00c4545e;
+  }
+
+  .social-icon {
+    width: 25px;
+    height: 25px;
+    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .social-icon:hover {
+    filter: invert(46%) sepia(117%) saturate(1261%) hue-rotate(128deg) brightness(100%) contrast(102%);
+
+  }
+
+ .social-icon-face {
+    width: 22px;
+    height: 22px;
+    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+  }
+
+  .social-icon-face:hover {
+    filter: invert(46%) sepia(117%) saturate(1261%) hue-rotate(128deg) brightness(100%) contrast(102%);
+  }
+
+  .footer {
+    text-align: center;
+  }
+
+  .footer-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .footer-brand {
+    margin-top: 10px;
+  }
+
+  .footer-line {
+    border: 0.1px solid #00c454;
+    width: 30%;
+    height: 0.2px;
+  }
+
+  .invoice-link {
+    text-align: center;
+    margin: 0 !important;
+  }
+</style>
+
+<body>
+  <div class="orange">
+    <h3>Anuncio publicado com sucesso!</h3>
+  </div>
+  <div class="mail-content">
+    <% if @advertisement.user.full_name %>
+    <h2>Olá <%= @advertisement.user.full_name %>,</h2>
+    <% else %>
+    <h2>Olá,</h2>
+    <% end %>
+    <p class="item-name">Seu anúncio foi aprovado!</p>
+
+    <p class="item-name">Você pode acessa-lo no link abaixo.</p>
+    <div class="invoice-link">
+      <a href="https://localhost:3000/products/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
+    </div>
+    <h2>Detalhes do seu pedido:</h2>
+    <p><strong class="item-name">Pedido:</strong> #<%= @advertisement.id %></p>
+    <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
+    <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_type %></p>
+    <p><strong class="item-name">Status:</strong> <%= @advertisement.status %></p>
+    <h6>Dúvidas? Entre em contato com  através do email <strong></strong></h6>
+    <hr class="footer-line">
+    <div class="footer">
+
+      <%= image_tag "white_logo.png", class: "footer-brand"%>
+
+      <div class="social-icons">
+        <a href="#" class="footer-icon"><%= image_tag "youtube.png", class: "social-icon" %></a>
+        <a href="#"><%= image_tag "instagram.png", class: "social-icon" %></a>
+        <a href="#"><%= image_tag "facebook.png", class: "social-icon-face" %></a>
+      </div>
+    </div>
+  </div>
+</body>

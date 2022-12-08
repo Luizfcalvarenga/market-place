@@ -87,6 +87,11 @@
 
 .links-profile {
   text-decoration: none;
+
+  .fa-heart {
+    color: $color-primary;
+    font-size: 18px;
+  }
 }
 
 .edit-modal {
@@ -98,4 +103,56 @@
 .modal {
   margin-top: 6rem;
   border-radius: 3px;
+}
+
+
+//////////////////////////////ADVERTISEMENTS
+
+.btn-invoice {
+  background-color: transparent;
+  border-radius: 4px;
+  color: $color-primary;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 1px solid $color-primary;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  &:hover {
+    color: white;
+    border-color: white;
+  }
+}
+
+.disable-btn-form{
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.fa-check, .fa-times {
+  font-size: 1rem;
+}
+
+
+///////////Admin
+
+.review-btn {
+  color: #4444d1;
+  .fa-search {
+    color: #4444d1;
+  }
+  &:hover {
+    color: white !important;
+    .fa-search {
+      color: white !important;
+
+
+    }
+  }
 }
