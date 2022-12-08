@@ -14,6 +14,7 @@ class Bike < ApplicationRecord
 
   default_scope { where(removed_at: nil) }
 
+
   TYPE_OPTIONS = {
     bike: "Bike",
     e_bike: "E-Bike"

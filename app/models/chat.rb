@@ -1,5 +1,4 @@
 class Chat < ApplicationRecord
-  # validates_uniqueness_of :name
   belongs_to :bike, optional: true
   scope :public_chats, -> { where(is_private: false) }
   after_update_commit { broadcast_if_public }

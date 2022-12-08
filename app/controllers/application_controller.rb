@@ -1,18 +1,15 @@
 class ApplicationController < ActionController::Base
 	include Pundit
-
-
-
   before_action :turbo_frame_request_variant
-
 	before_action :authenticate_user!, unless: :auth_request?
+  before_action :current_order
+  before_action :set_current_user
+
+	skip_before_action :verify_authenticity_token
 
 	after_action :verify_authorized, except: :index, unless: :skip_pundit?
 	after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
-	skip_before_action :verify_authenticity_token
 
-  before_action :current_order
-  before_action :set_current_user
 
 	private
 

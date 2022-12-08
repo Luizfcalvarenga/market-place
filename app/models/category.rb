@@ -2,6 +2,7 @@ class Category < ApplicationRecord
   has_many :bikes
   has_many :products
 
+
   CATEGORY_OPTIONS = {
     mountaion_bike: "Mountain Bike",
     dirt_street: "Dirt Street",
