@@ -18,10 +18,15 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if current_user.document_number.blank? && current_user.cep.blank?
+    if current_user.blank?
+      redirect_to new_user_session_path
+      flash[:alert] = "você deve criar uma conta com documento e cep para anunciar."
+    elsif
+      current_user.document_number.blank? && current_user.cep.blank?
       redirect_to edit_profiles_path
-      flash[:alert] = "você deve preencher seu documento e cep para cadastrar algo."
+      flash[:alert] = "você deve preencher seu documento e cep para anunciar."
     end
+
     @product = Product.new
     skip_authorization
     @product_types = ProductType.all

@@ -755,7 +755,7 @@
     10.times do
       category = [mtb, dirt, road].sample
       user = [buyer, seller, bike_user].sample
-      types = ["e-bike", "normal"]
+      types = ["e-bike", "bike"]
 
       bike = Bike.create!(
         category_id:  category.id,

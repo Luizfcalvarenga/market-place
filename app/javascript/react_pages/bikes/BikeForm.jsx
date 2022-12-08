@@ -850,9 +850,9 @@ export function BikeForm(props) {
           onChange={(e) => setFrameMaterial(e.target.value)}
         >
           <option value=""></option>
-          {frameMaterials.map((frameMaterial, index)=> {
-            return (<option key={index}>{frameMaterial}</option>);
-          })}
+          <option value="carbon">Carbono</option>
+          <option value="aluminum">Aluminio</option>
+          <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
         </select>
         { errors && errors.bike && errors.bike.frame_material && (
           <p className="text-danger">{errors.bike.frame_material[0]}</p>
