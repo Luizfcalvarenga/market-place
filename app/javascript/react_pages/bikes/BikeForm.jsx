@@ -252,6 +252,10 @@ export function BikeForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    e.target.classList.add("d-none")
+    const spinner = document.getElementById("spinner")
+    spinner.classList.remove("d-none")
+
     const dataObject = new FormData();
     dataObject.append( "bike[user_id]", user );
     dataObject.append( "bike[category_id]", categoryId );
@@ -389,6 +393,8 @@ export function BikeForm(props) {
     } else {
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       setErrors(response.data.errors);
+      e.target.classList.remove("d-none")
+      document.getElementById("spinner").classList.add("de-none")
     }
   }
 
@@ -1626,9 +1632,13 @@ export function BikeForm(props) {
           {(priceInCents < 50000) && (<>
             <div className="text-center mt-3 mb-3">
               <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
-              {!props.bikeId && (
+              {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
-              )}
+
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -1639,9 +1649,12 @@ export function BikeForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.bikeId && (
+              {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -1652,9 +1665,12 @@ export function BikeForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.bikeId && (
+              {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -1665,9 +1681,12 @@ export function BikeForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.bikeId && (
+            {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -1678,17 +1697,23 @@ export function BikeForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.bikeId && (
+              {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
         </>)}
 
         <div className="text-center mt-3 mb-3">
-          {props.bikeId && (
+          {props.bikeId && (<>
             <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce">Editar</button>
-          )}
+            <div id="spinner" className="spinner-border text-success d-none" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </>)}
         </div>
       </div>
     </div>

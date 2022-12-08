@@ -40,7 +40,10 @@
       <div class="table-row">
         <div class="d-flex">
           <h4 class="m-0 text-success">O que foi anunciado:</h4>
-          <p class="m-0 field-value"><%= @product_type %></p>
+          <% if @advertisement.advertisable_type == "Product" %>
+            <p class="m-0 field-value"><%= @product.product_type.name_display %></p>
+          <% end %>
+          <p class="m-0 field-value"><%= @advertisement.advertisable_type %></p>
         </div>
       </div>
       <div class="table-row">
@@ -75,7 +78,7 @@
                     <div class="carousel-item <%= i.zero? ? "active" : ""  %>" >
                       <%= cl_image_tag photo.key, class: 'img-carousel'  %>
                       <div class="carousel-caption">
-                      <p class='carousel-name'>produto#<%= @product.id%></p>
+                      <p class='carousel-name'>produto#<%= @product.id %></p>
                       </div>
                     </div>
                     <% end %>

@@ -58,7 +58,7 @@ class ProductType < ApplicationRecord
   }
 
   def name_display
-    PRODUCT_TYPE_OPTIONS[product_type.to_sym]
+    PRODUCT_TYPE_OPTIONS[name.to_sym]
   end
 
 

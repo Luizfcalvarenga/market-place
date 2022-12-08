@@ -32,7 +32,7 @@
             <p><strong>Local:</strong> <%= product.locality %></p>
             <p><strong>Ano:</strong> <%= product.year %></p>
             <p><strong>Preço:</strong> <%= number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%></p>
-            <p><strong>Produto:</strong> <%= product.product_type.name %></p>
+            <p><strong>Produto:</strong> <%= product.product_type.name_display %></p>
             <p><strong>Anúncio:</strong> #<%= product.advertisement.id %></p>
           </div>
           <div class="col-md-2 mt-3">
@@ -90,7 +90,7 @@
             <p><strong>Local:</strong> <%= bike.locality %></p>
             <p><strong>Ano:</strong> <%= bike.year %></p>
             <p><strong>Preço:</strong> <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%></p>
-            <p><strong>Tipo:</strong> <%= bike.bike_type %></p>
+            <p><strong>Tipo:</strong> <%= bike.type_display %></p>
             <p><strong>Anúncio:</strong> #<%= bike.advertisement.id %></p>
 
           </div>

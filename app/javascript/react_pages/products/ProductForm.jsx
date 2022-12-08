@@ -280,6 +280,11 @@ export function ProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(e)
+    e.target.classList.add("d-none")
+    const spinner = document.getElementById("spinner")
+    spinner.classList.remove("d-none")
+
     const dataObject = new FormData();
     dataObject.append( "product[user_id]", user );
     dataObject.append( "product[category_id]", categoryId );
@@ -344,6 +349,8 @@ export function ProductForm(props) {
     } else {
       setErrors(response.data.errors);
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
+      e.target.classList.remove("d-none")
+      document.getElementById("spinner").classList.add("de-none")
     }
   }
 
@@ -905,9 +912,12 @@ export function ProductForm(props) {
           {(productPrice < 50000) && (<>
             <div className="text-center mt-3 mb-3">
               <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
-              {!props.productId && (
+              {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -918,9 +928,12 @@ export function ProductForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.productId && (
+              {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -931,9 +944,12 @@ export function ProductForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.productId && (
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+              {!props.productId && (<>
+                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
 
@@ -944,9 +960,9 @@ export function ProductForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.productId && (
+              {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+              </>)}
             </div>
           </>)}
 
@@ -957,17 +973,23 @@ export function ProductForm(props) {
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="text-center mt-3 mb-3">
-              {!props.productId && (
+              {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              )}
+                <div id="spinner" className="spinner-border text-success d-none" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </>)}
             </div>
           </>)}
         </>)}
 
         <div className="text-center">
-          {props.productId && (
+          {props.productId && (<>
             <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
-          )}
+            <div id="spinner" className="spinner-border text-success d-none" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </>)}
         </div>
         </div>
       </form>

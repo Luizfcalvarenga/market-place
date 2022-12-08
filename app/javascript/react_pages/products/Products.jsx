@@ -220,7 +220,6 @@ export function Products(props) {
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
-
               >
                 <option value=""></option>
                 <option value="speed_performance">Speed Performance</option>
@@ -228,7 +227,6 @@ export function Products(props) {
                 <option value="ciclocross">Ciclocross</option>
                 <option value="cicloviagem">Cicloviagme</option>
                 <option value="gravel">Gravel</option>
-
               </select>
             </>)}
 
@@ -333,7 +331,7 @@ export function Products(props) {
                 <a href={"products/" + product.id} className="remove-link">
                   <div className="cards-products">
                     <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">
-                      {product.photos && (
+                      {product.photos.length > 0 && (
                         <div className="carousel-inner">
                           {product.photos.map((photo, index) => {
                             return (
@@ -345,12 +343,13 @@ export function Products(props) {
                           })}
                         </div>
                       )}
-
-                      <div className="carousel-inner">
-                        <div className="carousel-item active">
-                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                      {product.photos.length === 0 && (
+                        <div className="carousel-inner">
+                          <div className="carousel-item active">
+                            <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                          </div>
                         </div>
-                      </div>
+                      )}
 
                       <button className="carousel-control-prev" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="prev">
                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>

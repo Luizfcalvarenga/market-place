@@ -14,5 +14,14 @@ class Bike < ApplicationRecord
 
   default_scope { where(removed_at: nil) }
 
+  TYPE_OPTIONS = {
+    bike: "Bike",
+    e_bike: "E-Bike"
+  }
+
+
+  def type_display
+    TYPE_OPTIONS[bike_type.to_sym]
+  end
 
 end
