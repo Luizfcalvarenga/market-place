@@ -1,4 +1,7 @@
 class Bike < ApplicationRecord
+
+
+
   belongs_to :user
   belongs_to :category
   belongs_to :service, optional: true

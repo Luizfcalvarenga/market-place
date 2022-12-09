@@ -284,7 +284,7 @@ export function Bikes(props) {
                 <label htmlFor="used" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="normal"
+                    value="bike"
                     name="type"
                     onChange={(e) => handleBikeTypeFilter(e)}
                   />  Normal
@@ -859,7 +859,7 @@ export function Bikes(props) {
                         </div>
                         <div className="infos">
                           <p><i class="far fa-heart"></i></p>
-                          { bike.bike_type === "normal" &&(
+                          { bike.bike_type === "bike" &&(
                             <img src={NormalBikeImage} alt="" className="icon-card-index"/>
                           )}
                           {  bike.bike_type === "e-bike" &&(
