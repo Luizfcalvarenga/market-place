@@ -10,8 +10,8 @@ class PagesController < ApplicationController
 
   def search
 
-    @products = Product.order(year: :desc)
-    @bikes = Bike.order(year: :desc)
+    # @products = Product.order(year: :desc)
+    # @bikes = Bike.order(year: :desc)
 
     if params[:query].present?
       # @bikes = PgSearch.multisearch(params[:query])
@@ -23,6 +23,7 @@ class PagesController < ApplicationController
         OR model @@ :query
         OR locality @@ :query
         OR product_types.name @@ :query
+
       SQL
       @products = Product.joins(:product_type).where(product_sql_query, query: "%#{params[:query]}%")
 

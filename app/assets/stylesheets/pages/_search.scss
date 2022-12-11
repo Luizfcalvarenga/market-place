@@ -1,0 +1,51 @@
+.cards-bikes {
+  border: 1px solid $color-primary;
+  border-radius: 5px;
+  height: auto;
+  margin: 5px;
+  background-color: rgb(21,21,21);
+
+  .card-img {
+    height: 275px !important;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 20px 0px #00c4545e;
+
+    h4 {
+      color: inherit !important;
+    }
+  }
+}
+
+.cards-products {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  height: auto;
+  margin: 5px;
+  background-color: #F4F4F9;
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  .card-img {
+    // height: 298px !important;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+  }
+
+  .product-price {
+    color: #009d43;
+
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 20px 0px #00c4545e;
+
+    h4 {
+      color: inherit;
+    }
+    .product-infos-index {
+      color: inherit !important;
+    }
+  }
+}

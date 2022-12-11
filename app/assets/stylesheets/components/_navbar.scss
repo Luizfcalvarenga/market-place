@@ -9,6 +9,7 @@ $color-primary: #00c454;
   position: sticky;
   top: 0;
   z-index: 10000;
+  max-height: 120px !important;
 }
 
 .navbar-scroll {
@@ -123,17 +124,25 @@ $color-primary: #00c454;
   background-color: rgba(16, 16, 16, 0.8);
   border: 1px solid $color-primary;
   border-radius: 0 0 4px 4px;
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .search-list-item {
   border-bottom: 1px solid $color-primary;
+  align-items: center;
   p {
     font-size: 15px;
     margin-bottom: 0 !important;
   }
 }
+.btn-search-all {
+  font-size: 16px;
 
+  .fa-angle-double-right {
+    font-size: 16px;
+  }
+
+}
 @media (max-width: 768px) {
   .navbar {
     height: 150px !important;

@@ -7,7 +7,7 @@
     </div>
     <div class="f-40  w-100">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-between gap-10">
-        <li id="navbar-form" class="nav-item active form-inline d-none">
+        <li id="navbar-form" class="nav-item active form-inline d-none w-100">
           <div data-controller="search" class="input-group input-group-navbar">
             <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar" , data: { search_target: 'form' } } do |form| %>
               <%= form.text_field :query,
