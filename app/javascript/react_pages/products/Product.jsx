@@ -114,7 +114,7 @@ export function Product(props) {
                 <img src={ComponentImage} alt="" className="icon-card-index mt-4"/>
               )}
               { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                <img src={EquipamentImage} alt="" className="icon-card-index"/>
+                <img src={EquipamentImage} alt="" className="icon-card-index mt-4"/>
               )}
               { ["cap", "glasses"].includes(product.product_type.name) &&(
                 <img src={CasualImage} alt="" className="icon-card-index mt-4"/>
@@ -125,7 +125,11 @@ export function Product(props) {
               { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
                 <img src={ClotheImage} alt="" className="icon-card-index mt-4"/>
               )}
-              <i className="far fa-heart mt-4"></i>
+              <form action={`/likes`} method="post" class="w-10 mt-4" >
+                <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
+                <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
+                <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+              </form>
             </div>
             <div className="card-content">
               <h4 className="text-success mt-1">

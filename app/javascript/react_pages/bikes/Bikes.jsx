@@ -858,12 +858,15 @@ export function Bikes(props) {
                           <p>{bike.bike_type}</p>
                         </div>
                         <div className="infos">
-                          <p><i class="far fa-heart"></i></p>
+                          <form action={`/likes`} method="post" >
+                            <input type="hidden" name="like[likable_id]" id="bike-id" value={bike.id}/>
+                            <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+                          </form>
                           { bike.bike_type === "bike" &&(
-                            <img src={NormalBikeImage} alt="" className="icon-card-index"/>
+                            <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           {  bike.bike_type === "e-bike" &&(
-                            <img src={EBikeImage} alt="" className="icon-card-index"/>
+                            <img src={EBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}
                         </div>
                       </div>

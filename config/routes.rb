@@ -21,6 +21,18 @@ Rails.application.routes.draw do
   get "advertisements/:id/status", to: "advertisements#status", as: "advertisement_status", format: :json
 
   resources :bikes
+  # do
+  #   resources :likes, only: [ :create ]
+
+  # end
+
+
+  resources :likes, only: [:index, :create, :destroy ]
+
+  resources :products
+  #  do
+  #   resources :likes, only: [ :create ]
+  # end
 
   resource :order_items, only: [ :destroy ], as: :destroy
   resource :bikes, only: [ :destroy ], as: :remove
@@ -37,15 +49,11 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :product_attributes
   post 'create_attribute_for_product', to: 'product_attributes#create_attribute_for_product'
-
-
   get 'get_information_for_new_product', to: 'products#get_information_for_new_product'
   get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
   get 'get_product_attributes', to: 'product_attributes#get_product_attributes'
-
   get 'get_information_for_new_bike', to: 'bikes#get_information_for_new_bike'
 
 
@@ -53,20 +61,10 @@ Rails.application.routes.draw do
   get "orders/:id/invoice", to: "orders#invoice", as: "order_invoice"
   get "orders/:id/status", to: "orders#status", as: "order_status", format: :json
 
-
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
   get 'search', to: 'pages#search', as: "search"
-
-
   resource :profiles
-
-  # resource :products
-
   get 'my_products', to: 'products#my_products', as: "my_products"
-  # get 'search', to: 'products#search', as: "search"
-
-  # delete 'my_products/product/:id', to: 'profiles#destroy'
-
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

@@ -13,6 +13,8 @@ class Bike < ApplicationRecord
   belongs_to :service, optional: true
 
   has_one :advertisement, as: :advertisable
+  has_many :likes, as: :likeble
+
   has_many :order_items
   has_many :chats
   has_many_attached :photos

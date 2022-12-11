@@ -378,7 +378,11 @@ export function Products(props) {
                           <p>{product.product_type.name}</p>
                         </div>
                         <div className="infos">
-                          <p><i class="far fa-heart"></i></p>
+                        <form action={`/likes`} method="post" >
+                          <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
+                          <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
+                          <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+                        </form>
                           { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
                             <img src={AccessorieImage} alt="" className="icon-card-index"/>
                           )}

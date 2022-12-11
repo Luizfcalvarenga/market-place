@@ -156,3 +156,29 @@
     }
   }
 }
+
+.like-btn {
+  border: none;
+  background-color: transparent;
+  &:hover {
+    .fa-heart {
+      color: red !important;
+
+    }
+  }
+}
+
+.dislike-btn {
+  .fa-heart {
+    color: red !important;
+
+  }
+
+  &:hover {
+    .fa-heart {
+      color: rgba(16, 16, 16, 0.9) !important;
+
+    }
+  }
+
+}

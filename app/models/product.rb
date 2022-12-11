@@ -14,6 +14,7 @@ class Product < ApplicationRecord
   belongs_to :product_type
 
   has_one :advertisement, as: :advertisable
+  has_many :likes, as: :likeble
   has_many :chats
   has_many :product_attributes
   has_many :product_type_attributes, through: :product_attributes

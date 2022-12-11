@@ -395,7 +395,11 @@ export function Bike(props) {
                 <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
                 {/* <h3 className="card-title mt-3"> {bike.model}</h3> */}
               </div>
-              <i className="far fa-heart mt-4"></i>
+              <form action={`/likes`} method="post" className="mt-4 w-10">
+                <input type="hidden" name="[likeble_id]" id="bike-id" value={bike.id}/>
+                <input type="hidden" name="[likeble_type]" id="bike-id" value="Bike"/>
+                <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+              </form>
             </div>
             <h4 className="card-title mt-1">{bike.modality}</h4>
             <div className="card-content">
