@@ -101,9 +101,9 @@ $color-primary: #00c454;
 }
 
 .nav-form {
-  height: 40px;
-  border-radius: 20px;
-  border: transparent;
+  height: 40px !important;
+  border-radius: 20px 0 0 20px !important;
+  border: none !important;
   outline: none !important;
   box-shadow: none !important;
   transition-duration: 1000ms;
@@ -119,6 +119,20 @@ $color-primary: #00c454;
   font-size: 18px;
 }
 
+.search-list {
+  background-color: rgba(16, 16, 16, 0.8);
+  border: 1px solid $color-primary;
+  border-radius: 0 0 4px 4px;
+  z-index: 1000;
+}
+
+.search-list-item {
+  border-bottom: 1px solid $color-primary;
+  p {
+    font-size: 15px;
+    margin-bottom: 0 !important;
+  }
+}
 
 @media (max-width: 768px) {
   .navbar {

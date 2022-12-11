@@ -1,0 +1,36 @@
+
+
+
+<div data-search-target="list">
+  <ul class="search-list">
+    <% if @bikes.present? %>
+      <h5>Bikes</h5>
+      <% @bikes.each do | bike | %>
+        <%= link_to bike_path(bike), class: "links" do %>
+          <li class="d-flex justify-content-between search-list-item mb-3 mx-3 align-middle">
+            <% if bike.photos.attached? %>
+              <%= cl_image_tag bike.photos.first.key class: "search-img mb-3" %>
+            <% else %>
+              <%= image_tag "bike-forest.png", class: "search-img mb-3" %>
+            <% end %>
+            <div>
+              <p><span class="text-success"> Marca:</span> <%= bike.frame_brand %> </p>
+              <p><span class="text-success"> Modelo:</span> <%= bike.model %> </p>
+            </div>
+            <div>
+              <p><span class="text-success"> Preço:</span> <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %> </p>
+              <p><span class="text-success"> Local:</span> <%= bike.locality %> </p>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @products.present? %>
+      <h5>Produtos</h5>
+      <% @products.each do | product | %>
+        <li><%= product.id %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

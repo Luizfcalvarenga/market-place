@@ -8,9 +8,22 @@
     <div class="f-40  w-100">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-between gap-10">
         <li id="navbar-form" class="nav-item active form-inline d-none">
-          <div class="input-group input-group-navbar">
-            <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
-            <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
+          <div data-controller="search" class="input-group input-group-navbar">
+            <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar" , data: { search_target: 'form' } } do |form| %>
+              <%= form.text_field :query,
+                 class: "form-control nav-form",
+                 placeholder: 'Pesquisar',
+                 value: params[:query],
+                 data: {
+                  search_target: 'searchInput',
+                  action: "keyup->search#update"
+                } %>
+              <%= form.button class: "btn search-btn" do %>
+                <i class="fas fa-search form-icon"></i>
+              <% end %>
+            <% end %>
+            <div data-search-target="list">
+            </div>
           </div>
         </li>
         <div id="navbar-links" class="nav-links d-flex">
@@ -128,10 +141,26 @@
         <i class="text-success fas fa-bars"></i>
       </button>
     </div>
-    <div class="input-group input-group-navbar nav-form">
-      <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
-      <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
+
+    <div data-controller="search" class="input-group input-group-navbar px-1">
+      <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar" , data: { search_target: 'form' } } do |form| %>
+        <%= form.text_field :query,
+            class: "form-control nav-form",
+            placeholder: 'Pesquisar',
+            value: params[:query],
+            data: {
+            search_target: 'searchInput',
+            action: "keyup->search#update"
+          } %>
+        <%= form.button class: "btn search-btn" do %>
+          <i class="fas fa-search form-icon"></i>
+        <% end %>
+      <% end %>
+      <div data-search-target="list">
+      </div>
     </div>
+
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="flex center around mobile-menu">
         <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">

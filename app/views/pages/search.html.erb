@@ -1,0 +1,15 @@
+  <% if @bikes.present? %>
+    <ul>
+      <% @bikes.each do | bike | %>
+        <li><%= bike.id %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+    <% if @products.present? %>
+    <ul>
+      <% @products.each do | product | %>
+        <li><%= product.id %></li>
+      <% end %>
+    </ul>
+  <% end %>

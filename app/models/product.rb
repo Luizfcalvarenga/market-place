@@ -1,4 +1,14 @@
 class Product < ApplicationRecord
+  include PgSearch::Model
+  multisearchable against: [:model, :brand]
+  pg_search_scope :global_search,
+  against: [ :model, :brand ],
+  associated_against: {
+    product_type: [ :name ]
+  },
+  using: {
+    tsearch: { prefix: true }
+  }
   belongs_to :user
   belongs_to :category
   belongs_to :product_type

@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
-  # get 'search', to: 'pages#search', as: "search"
+  get 'search', to: 'pages#search', as: "search"
 
 
   resource :profiles
