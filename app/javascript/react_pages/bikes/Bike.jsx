@@ -61,26 +61,26 @@ export function Bike(props) {
             </div>
 
             <h3 className="text-success mb-4 mt-3">Características Técnicas</h3>
-            <ul class="main__menu">
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+            <ul className="main__menu">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={FrameImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Quadro</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.frame_brand}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.frame_size}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Material:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.frame_material}</p>
@@ -89,53 +89,53 @@ export function Bike(props) {
                 </ul>
               </li>
 
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={CrankImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Transmissão</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Corrente:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.number_of_front_gears}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.front_derailleur_model}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.number_of_rear_gears}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
@@ -145,47 +145,47 @@ export function Bike(props) {
                 </ul>
               </li>
 
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={SuspensionImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Suspensão</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.suspension_type}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.front_suspension_travel}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.front_suspension_model}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_suspension_travel}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_suspension_model}</p>
@@ -195,25 +195,25 @@ export function Bike(props) {
               </li>
 
 
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={BrakesImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Freios</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.brake_type}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Disco:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.brake_disc_size}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca | Modeo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.brake_model}</p>
@@ -222,19 +222,19 @@ export function Bike(props) {
                 </ul>
               </li>
 
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={HandlebarImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Cockpit</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Mesa:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.stem}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Guidão:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.handlebar}</p>
@@ -243,59 +243,59 @@ export function Bike(props) {
                 </ul>
               </li>
 
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={MountainBikeImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Rodas</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tamano:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rim_size}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.front_rim_model}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.front_hub}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.front_tyre}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_rim_model}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_hub}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.rear_tyre}</p>
@@ -304,25 +304,25 @@ export function Bike(props) {
                 </ul>
               </li>
 
-              <li class="list-item w-100 mb-4">
-                <div class="kabobs item--js">
+              <li className="list-item w-100 mb-4">
+                <div className="kabobs item--js">
                   <img src={SaddleImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Canote</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.seat_post_type}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.seat_post_travel}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.seat_post_model}</p>
@@ -332,19 +332,19 @@ export function Bike(props) {
               </li>
 
 
-              <li class="list-item w-100">
-                <div class="kabobs item--js">
+              <li className="list-item w-100">
+                <div className="kabobs item--js">
                   <img src={AccessorieImage} alt="" className="bike-part-card mt-1"/> <br />
                   <span className="text-success mb-3">Acessórios</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.accessories}</p>
                     </div>
                   </li>
-                  <li class="drop-item">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{bike.accessories_description}</p>
@@ -354,30 +354,30 @@ export function Bike(props) {
               </li>
 
               { bike.bike_type === "e-bike" && (
-                <li class="list-item w-100 mt-4">
-                  <div class="kabobs item--js">
+                <li className="list-item w-100 mt-4">
+                  <div className="kabobs item--js">
                     <img src={EBikeImage} alt="" className="bike-part-card mt-1"/> <br />
                     <span className="text-success mb-3">Elétrica</span>
                   </div>
-                  <ul class="drop-menu menu-2">
-                    <li class="drop-item">
+                  <ul className="drop-menu menu-2">
+                    <li className="drop-item">
                       <div className="text-success item list-item d-flex ms-3">
                         <p className="bike-attrs-parts"><strong>Bateria:</strong> </p>
                         <p className="bike-info ms-2 align-middle">{bike.battery}</p>
                       </div>
                     </li>
-                    <li class="drop-item">
+                    <li className="drop-item">
                       <div className="text-success item list-item d-flex ms-3">
                         <p className="bike-attrs-parts"><strong>Ciclos:</strong> </p>
                         <p className="bike-info ms-2 align-middle">{bike.battery_cycles}</p>
                       </div>
                     </li>
-                    <li class="drop-item">
+                    <li className="drop-item">
                       <div className="text-success item list-item d-flex ms-3">
                         <p className="bike-attrs-parts"><strong>Km:</strong> </p>
                         <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
                       </div>
-                    </li> <li class="drop-item">
+                    </li> <li className="drop-item">
                       <div className="text-success item list-item d-flex ms-3">
                         <p className="bike-attrs-parts"><strong>Motor:</strong> </p>
                         <p className="bike-info ms-2 align-middle">{bike.motor}</p>
@@ -398,7 +398,7 @@ export function Bike(props) {
               <form action={`/likes`} method="post" className="mt-4 w-10">
                 <input type="hidden" name="[likeble_id]" id="bike-id" value={bike.id}/>
                 <input type="hidden" name="[likeble_type]" id="bike-id" value="Bike"/>
-                <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+                <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
               </form>
             </div>
             <h4 className="card-title mt-1">{bike.modality}</h4>

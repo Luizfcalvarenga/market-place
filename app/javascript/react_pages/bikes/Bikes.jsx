@@ -780,7 +780,7 @@ export function Bikes(props) {
                   </h5>
                   </>)}
                 </div>
-                <input type="range" class="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
+                <input type="range" className="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
                 <div className="d-flex justify-content-between">
                   <h6 className="text-success price-filter-text"><small>0</small></h6>
                   <h6 className="text-success price-filter-text"><small>50</small></h6>
@@ -794,7 +794,7 @@ export function Bikes(props) {
                   </h5>
                   </>)}
                 </div>
-                <input type="range" class="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
+                <input type="range" className="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
                 <div className="d-flex justify-content-between">
                   <h6 className="text-success price-filter-text"><small>0</small></h6>
                   <h6 className="text-success price-filter-text"><small>200Km</small></h6>
@@ -840,7 +840,7 @@ export function Bikes(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <div className="d-flex justify-content-center gap-2 mt-3">
+                    <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{bike.frame_brand}</h4>
                       <h4 className="card-title text-center">{bike.model}</h4>
                     </div>
@@ -852,7 +852,7 @@ export function Bikes(props) {
                     </h4>
                     <hr className="index-line"/>
                     <div className="card-content mt-2">
-                      <div className="d-flex justify-content-around">
+                      <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{bike.locality}</p>
                           <p>{bike.bike_type}</p>
@@ -860,7 +860,7 @@ export function Bikes(props) {
                         <div className="infos">
                           <form action={`/likes`} method="post" >
                             <input type="hidden" name="like[likable_id]" id="bike-id" value={bike.id}/>
-                            <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+                            <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
                           </form>
                           { bike.bike_type === "bike" &&(
                             <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>

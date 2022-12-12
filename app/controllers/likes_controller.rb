@@ -18,23 +18,22 @@ class LikesController < ApplicationController
     elsif params[:likeble_type] == "Product"
       @likeble = Product.find(params[:likeble_id].to_i)
     end
-
-    # if already_liked?
-    #   flash[:notice] = "You can't like more than once"
-    #   return
-    # end
-    return if  Like.where(user_id: current_user.id, likeble_id:params[:likeble_id]).exists?
+    skip_authorization
 
 
+
+    if Like.where(user_id: current_user.id, likeble: @likeble).present?
+      flash[:notice] = "Você já gostou desse produto!!!"
+      return
+    end
     ActiveRecord::Base.transaction do
       @like = Like.create(
         user: current_user,
         likeble: @likeble,
       )
       @like.persisted?
-    end
 
-    authorize @like
+    end
 
     if @like.save
       redirect_to likes_path
@@ -45,12 +44,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
-
     @like = Like.find(params[:id])
     authorize @like
-
-
-
 
     @like.destroy
     redirect_to likes_path

@@ -161,8 +161,8 @@ export function Products(props) {
               className="select-answer"
             >
               <option value=""></option>
-              {productTypes.map((productType) => {
-                return (<option value={productType.id}>{productType.name}</option>)
+              {productTypes.map((productType, index) => {
+                return (<option key={index} value={productType.id}>{productType.name}</option>)
               })}
             </select>
 
@@ -186,7 +186,6 @@ export function Products(props) {
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
-
               >
                 <option value=""></option>
                 <option value="downhill">Downhill</option>
@@ -360,7 +359,7 @@ export function Products(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <div className="d-flex justify-content-center gap-2 mt-3">
+                    <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
                     </div>
@@ -372,7 +371,7 @@ export function Products(props) {
                     </h4>
                     <hr className="index-line"/>
                     <div className="card-content mt-2">
-                      <div className="d-flex justify-content-around">
+                      <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{product.locality}</p>
                           <p>{product.product_type.name}</p>
@@ -381,25 +380,25 @@ export function Products(props) {
                         <form action={`/likes`} method="post" >
                           <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
                           <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
-                          <button type="submit" className="like-btn"><i class="far fa-heart"></i></button>
+                          <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
                         </form>
                           { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
-                            <img src={AccessorieImage} alt="" className="icon-card-index"/>
+                            <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           { ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].includes(product.product_type.name) &&(
-                            <img src={ComponentImage} alt="" className="icon-card-index"/>
+                            <img src={ComponentImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                            <img src={EquipamentImage} alt="" className="icon-card-index"/>
+                            <img src={EquipamentImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           { ["cap", "glasses"].includes(product.product_type.name) &&(
-                            <img src={CasualImage} alt="" className="icon-card-index"/>
+                            <img src={CasualImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           { ["air_bomb", "lubricant", "sealant"].includes(product.product_type.name) &&(
-                            <img src={MaintenanceImage} alt="" className="icon-card-index"/>
+                            <img src={MaintenanceImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
-                            <img src={ClotheImage} alt="" className="icon-card-index"/>
+                            <img src={ClotheImage} alt="" className="icon-card-index ms-1"/>
                           )}
                         </div>
                       </div>

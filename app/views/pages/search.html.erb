@@ -1,12 +1,12 @@
-<div class="container py-3">
+<div class="container py-3 <%= mobile_device? ? "w-90" : "w-80" %>">
   <p>Procurando por <span class="text-success"><%= params[:query] %></span></p>
   <% if @bikes.present? %>
     <div class="row row-cols-1">
-      <h3 class="text-center text-success">Bikes</h3>
+      <h3 class="text-center text-success my-3">Bikes</h3>
       <% @bikes.each do | bike | %>
         <%= link_to bike_path(bike), class: "col-12 col-md-3" do %>
-          <div class="cards-bikes ">
-            <div id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
+          <div class="cards-bikes-likes">
+            <div id="carouselExampleControls <%=bike.id%>" class="carousel slide w-100" data-bs-ride="carousel">
               <% if bike.photos.attached? %>
                 <div class="carousel-inner">
                   <% bike.photos.each_with_index do |photo, i| %>
@@ -18,11 +18,11 @@
               <% else  %>
                   <%= image_tag "bike-forest.png", class: "card-img" %>
               <% end %>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls <%=bike.id%>" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls <%=bike.id%>" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
@@ -63,11 +63,11 @@
 
   <% if @products.present? %>
     <div class="row row-cols-1">
-      <h3 class="text-center text-success">Produtos</h3>
+      <h3 class="text-center text-success my-3">Produtos</h3>
       <% @products.each do | product | %>
-        <%= link_to product_path(product), class: "links col-12 col-md-3" do %>
-          <div class="cards-products">
-            <div id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
+        <%= link_to product_path(product), class: "col-12 col-md-3" do %>
+          <div class="cards-products-likes">
+            <div id="carouselExampleControls <%=product.id%>" class="carousel slide w-100" data-bs-ride="carousel">
             <% if product.photos.attached? %>
               <div class="carousel-inner">
                 <% product.photos.each_with_index do |photo, i| %>
@@ -79,11 +79,11 @@
             <% else  %>
                 <%= image_tag "bike-forest.png", class: "card-img" %>
             <% end %>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls <%=product.id%>" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls <%=product.id%>" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>

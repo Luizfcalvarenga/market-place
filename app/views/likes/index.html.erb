@@ -1,14 +1,14 @@
-<div class="container advertisements mb-5">
+<div class="container advertisements mb-5 row row-cols-1">
   <% if @likes.blank? %>
    <h3 class="text-center my-3">Não favoritou nenhum produto ainda</h3>
   <% else %>
     <h3 class="text-center text-success py-3">Meus favoritos</h3>
-    <div class="d-flex flex-wrap justify-content-around">
+    <div class="">
       <% @likes.each do | like| %>
         <% if like.likeble_type == "Bike" %>
           <%= link_to bike_path(like.likeble_id), class: "" do %>
-            <div class="cards-bikes w-25">
-              <div id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
+            <div class="cards-bikes-likes col-10 col-md-3 mt-3">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <% if like.likeble.photos.attached? %>
                   <div class="carousel-inner">
                     <% like.likeble.photos.each_with_index do |photo, i| %>
@@ -59,28 +59,28 @@
           <% end %>
         <% elsif like.likeble_type ==  "Product" %>
           <%= link_to product_path(like.likeble_id), class: "" do %>
-            <div class="cards-products w-25">
-              <div id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
-              <% if like.likeble.photos.attached? %>
-                <div class="carousel-inner">
-                  <% like.likeble.photos.each_with_index do |photo, i| %>
-                    <div class="show-carousel-item carousel-item <%= i.zero? ? "active" : ""  %>">
-                      <%= cl_image_tag photo.key, crop: :fit, class: 'd-block card-img'  %>
-                    </div>
-                  <% end %>
-                </div>
-              <% else  %>
-                  <%= image_tag "bike-forest.png", class: "card-img" %>
-              <% end %>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
+            <div class="cards-products-likes col-10 col-md-3 mt-3">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <% if like.likeble.photos.attached? %>
+                  <div class="carousel-inner">
+                    <% like.likeble.photos.each_with_index do |photo, i| %>
+                      <div class="show-carousel-item carousel-item <%= i.zero? ? "active" : ""  %>">
+                        <%= cl_image_tag photo.key, crop: :fit, class: 'd-block card-img'  %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% else  %>
+                    <%= image_tag "bike-forest.png", class: "card-img" %>
+                <% end %>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
               <div class="d-flex justify-content-center gap-2 mt-1">
                 <h4 class="card-title text-center"><%= like.likeble.brand %></h4>
                 <h4 class="card-title text-center"><%= like.likeble.model %></h4>
@@ -93,10 +93,9 @@
                 <div class="d-flex justify-content-around">
                   <div class="infos">
                     <p><%= like.likeble.locality %></p>
-                    <p><%= like.likeble.product_type.name %></p>
+                    <p><%= like.likeble.product_type.name_display%></p>
                   </div>
                   <div class="infos">
-                    <%# <p><i class="far fa-heart"></i></p> %>
                     <%= link_to like_path(like), method: :delete, class: "dislike-btn", data: { confirm: "Tem certeza que deseja remover #{like.likeble.model} dos favoritos?"}  do %>
                       <i class="fas fa-heart"></i>
                     <% end %>

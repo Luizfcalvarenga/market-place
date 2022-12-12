@@ -6,7 +6,7 @@
         <%= link_to bike_path(bike), class: "links" do %>
           <li class="d-flex justify-content-between search-list-item mx-3 align-middle">
             <% if bike.photos.attached? %>
-              <%= cl_image_tag bike.photos.first.key class: "search-img my-2" %>
+              <%= cl_image_tag bike.photos.first.key, class: "search-img my-2" %>
             <% else %>
               <%= image_tag "bike-forest.png", class: "search-img my-2" %>
             <% end %>
@@ -40,7 +40,7 @@
         <%= link_to product_path(product), class: "links" do %>
           <li class="d-flex justify-content-between search-list-item mb-3 mx-3 align-middle">
             <% if product.photos.attached? %>
-              <%= cl_image_tag product.photos.first.key class: "search-img mb-3" %>
+              <%= cl_image_tag product.photos.first.key, class: "search-img mb-3" %>
             <% else %>
               <%= image_tag "bike-forest.png", class: "search-img mb-3" %>
             <% end %>

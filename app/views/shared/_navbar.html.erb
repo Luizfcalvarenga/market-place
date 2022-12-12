@@ -134,16 +134,14 @@
       <%= link_to root_path, class: "nav-link" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
-      <%= link_to "#" do %>
-        <i class="fas fa-shopping-cart text-success me-4"></i><span  class="cart-counter mb-3"><%= rand(1..5) %></span></i>
-      <% end %>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="text-success fas fa-bars"></i>
       </button>
     </div>
 
     <div data-controller="search" class="input-group input-group-navbar px-1">
-      <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar" , data: { search_target: 'form' } } do |form| %>
+      <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
         <%= form.text_field :query,
             class: "form-control nav-form",
             placeholder: 'Pesquisar',
