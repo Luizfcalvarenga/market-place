@@ -1,13 +1,16 @@
-<% users.each do |user|%>
-  <% chat_name = get_name(user, current_user) %>
-  <% single_chat =
-    Chat.where(name: chat_name).first ||
-    Chat.create_private_chat([user, current_user], chat_name)%>
-  <% last_message_user = single_chat&.latest_message&.user %>
-  <% sender = current_user.eql?(last_message_user) ? current_user : last_message_user %>
-  <%= render 'users/user',
-    user: user,
-    last_message: single_chat&.latest_message,
-    sender: sender,
-    chat: single_chat %>
+<% if users.present? %>
+
+  <% users.each do |user|%>
+    <% chat_name = get_name(user, current_user) %>
+    <% single_chat =
+      Chat.where(name: chat_name).first ||
+      Chat.create_private_chat([user, current_user], chat_name)%>
+    <% last_message_user = single_chat&.latest_message&.user %>
+    <% sender = current_user.eql?(last_message_user) ? current_user : last_message_user %>
+    <%= render 'users/user',
+      user: user,
+      last_message: single_chat&.latest_message,
+      sender: sender,
+      chat: single_chat %>
+  <% end %>
 <% end %>
