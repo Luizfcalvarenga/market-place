@@ -8,11 +8,10 @@ module Api
 
       def index
         @user = current_user
-        # @products = Advertisement.where(status: "approved").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
-        # NÃO CONSIGO USER WHERE NO FILTRO JÁ QUE PRODUTOS ACIMA NÃO É UMA RELATION
         @product_types = ProductType.all
         @product_type_attributes = ProductTypeAttribute.all
-        @products = Product.where.not(user: @user)
+        @products = Product.joins(:advertisement).where(advertisements: {status: "approved"})
+
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?

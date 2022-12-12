@@ -3,25 +3,11 @@ module Api
     class BikesController < Api::V1::BaseController
       skip_after_action :verify_authorized, except: :index
       skip_after_action :verify_policy_scoped, only: :index
-
       skip_before_action :authenticate_user!
 
       def index
-        
-        @bikes = Bike.joins(:advertisements).where(advertisements: {status: "approved"})
-        @bikes = @bikes.where(category: params[:category]) if params[:category].present?
-        @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?
+        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"})
 
-        if params[:sort_by] == "age_ascending"
-          @bikes = @bikes.order(age: :asc)
-        elsif params[:sort_by] == "age_descending"
-          @bikes = @bikes.order(age: :desc)
-        elsif params[:sort_by] == "size_ascending"
-          @bikes = @bikes.order(size: :asc)
-        elsif params[:sort_by] == "size_descending"
-          @bikes = @bikes.order(size: :desc)
-        end
-        @bikes = Bike.all
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
         @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
         @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
