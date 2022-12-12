@@ -55,31 +55,11 @@ class Advertisement < ApplicationRecord
     }
   end
 
-  def advertisement_price
-    first_announce = 50000
-    second_announce = 250000
-    third_announce = 500000
-    fourth_announce = 1000000
-
-    if first_announce < advertisable.price_in_cents <= second_announce
-      price_in_cents = 5000
-    elsif second_announce < advertisable.price_in_cents <= third_announce
-      price_in_cents = 10000
-    elsif third_announce < advertisable.price_in_cents <= fourth_announce
-      price_in_cents = 15000
-    elsif advertisable.price_in_cents > fourth_announce
-      price_in_cents = 20000
-    end
-  end
-
-
-
   def should_generate_new_invoice?
     invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled"
   end
 
   def check_payment_actions_performed
-    status == "paid" && advertisement.count == advertisable.count
+    status == "paid"
   end
-
 end

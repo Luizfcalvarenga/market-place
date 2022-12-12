@@ -1,14 +1,14 @@
-<div data-search-target="list">
+<div data-search-target="list" class="results-list w-100">
   <ul class="search-list w-100">
     <% if @bikes.present? %>
       <h5 class="text-center mt-2">Bikes</h5>
       <% @bikes.first(5).each do | bike | %>
         <%= link_to bike_path(bike), class: "links" do %>
-          <li class="d-flex justify-content-between search-list-item mx-3 align-middle">
+          <li class="d-flex justify-content-between search-list-item mx-3 my-3 align-middle">
             <% if bike.photos.attached? %>
-              <%= cl_image_tag bike.photos.first.key, class: "search-img my-2" %>
+              <%= cl_image_tag bike.photos.first.key, class: "search-img mb-3" %>
             <% else %>
-              <%= image_tag "bike-forest.png", class: "search-img my-2" %>
+              <%= image_tag "new-announce-banner.jpg", class: "search-img mb-3" %>
             <% end %>
             <div>
               <p><span class="text-success"> Marca:</span> <%= bike.frame_brand %> </p>
@@ -38,11 +38,11 @@
       <h5 class="text-center mt-2">Produtos</h5>
       <% @products.first(5).each do | product | %>
         <%= link_to product_path(product), class: "links" do %>
-          <li class="d-flex justify-content-between search-list-item mb-3 mx-3 align-middle">
+          <li class="d-flex justify-content-between search-list-item my-3 mx-3 align-middle">
             <% if product.photos.attached? %>
               <%= cl_image_tag product.photos.first.key, class: "search-img mb-3" %>
             <% else %>
-              <%= image_tag "bike-forest.png", class: "search-img mb-3" %>
+              <%= image_tag "bike-components.png", class: "search-img mb-3" %>
             <% end %>
             <div>
               <p><span class="text-success"> Marca:</span> <%= product.brand %> </p>
