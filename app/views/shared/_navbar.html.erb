@@ -33,7 +33,7 @@
               <div class="dropdown-content">
                 <div class="drpdw-bike mx-5 margin-right">
                   <h4 class="text-center text-success mt-3">BIKES</h4>
-                  <%= link_to "Speed", "/bikes?modality=speed", class: "text-white" %>
+                  <%= link_to "Speed", {controller: 'bikes', action: 'direct_links', query: @current_filters}, method: 'get', class: "text-white" %>
                   <%= link_to "Gravel", "/bikes?modality=gravel", class: "text-white" %>
                   <%= link_to "Triathlon", "/bikes?modality=triathlon", class: "text-white" %>
                   <%= link_to "E-bike", "/bikes?bike_type=e-bike", class: "text-white" %>
@@ -136,11 +136,9 @@
       <% end %>
 
       <% if current_user.present? %>
-
         <%= link_to user_path(User.find(4)) do %>
           <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
         <% end %>
-
       <% end %>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,7 +163,6 @@
       <div data-search-target="list">
       </div>
     </div>
-
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="flex center around mobile-menu">

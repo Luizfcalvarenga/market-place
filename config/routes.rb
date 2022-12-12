@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get "advertisements/:id/status", to: "advertisements#status", as: "advertisement_status", format: :json
 
   resources :bikes
+  get "/direct_links", to: "bikes#direct_links", as: "direct_links"
+
   # do
   #   resources :likes, only: [ :create ]
 

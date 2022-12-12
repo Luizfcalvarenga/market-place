@@ -87,6 +87,14 @@ class BikesController < ApplicationController
     end
   end
 
+  def direct_links
+    @current_filters = params[:query]
+    @bikes = Bike.all
+    @bikes = @bikes.where(:modality => @current_filters[:modality]) if @current_filters[:modality]
+    # @bikes = @bikes.where(:fuel => @current_filters[:fuel]) if @current_filters[:fuel]
+    #etc
+  end
+
   private
 
 
