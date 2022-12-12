@@ -102,7 +102,7 @@ export function Product(props) {
             </ul>
           </div>
 
-          <div className="col-12 col-md-4 card-product">
+          <div className="col-11 col-md-4 card-product">
             <div className="d-flex justify-content-between">
               <div>
                 <h3 className="card-title mt-3"> {product.brand} {product.model}</h3>

@@ -577,12 +577,12 @@ export function ProductForm(props) {
 
       <div id="first-section">
         <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
-        <div className="d-flex justify-content-between gap-3">
+        <div className="d-flex justify-content-between gap-3 btns-components">
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/><img src={EquipamentImage} alt="" className="icon-card-form"/></button>
         </div>
-        <div className="d-flex justify-content-between py-3 gap-3">
+        <div className="d-flex justify-content-between py-3 gap-3 btns-components">
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/><img src={CasualImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/><img src={MaintenanceImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>

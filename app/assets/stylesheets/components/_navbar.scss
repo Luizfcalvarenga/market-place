@@ -89,6 +89,22 @@ $color-primary: #00c454;
   background: transparent;
 }
 
+.nav-item {
+
+  .fa-heart, .fa-comment-alt {
+    font-size: 25px;
+  }
+
+  .fa-heart:hover {
+    color: #f4f4f9 !important;
+
+  }
+
+  .fa-comment-alt:hover {
+    color: #f4f4f9 !important;
+  }
+}
+
 .search-btn {
   background: white;
   color:#00c454 !important;
@@ -121,9 +137,9 @@ $color-primary: #00c454;
 }
 
 .search-list {
-  background-color: rgba(16, 16, 16, 0.8);
+  background-color: rgba(16, 16, 16, 0.9);
   border: 1px solid $color-primary;
-  border-radius: 0 0 4px 4px;
+  border-radius: 4px;
   z-index: 10000;
 }
 
@@ -146,6 +162,11 @@ $color-primary: #00c454;
 @media (max-width: 768px) {
   .navbar {
     height: 150px !important;
+
+  }
+
+  .search-list {
+    margin-left: 4%;
 
   }
 

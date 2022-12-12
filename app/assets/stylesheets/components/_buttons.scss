@@ -92,6 +92,15 @@
     color: $color-primary;
     font-size: 18px;
   }
+
+
+}
+
+.links-profile:hover {
+  color: white !important;
+  .fa-heart {
+    color: white !important;
+  }
 }
 
 .edit-modal {
@@ -180,5 +189,20 @@
 
     }
   }
+
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: .75em;
+  font-weight: 700;
+  line-height: 1;
+  color: $color-primary;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 2.25rem;
+  background-color: transparent;
 
 }

@@ -389,11 +389,10 @@ export function Bike(props) {
             </ul>
           </div>
 
-          <div className="col-12 col-md-4 card-bike">
+          <div className="col-11 col-md-4 card-bike">
             <div className="d-flex justify-content-between">
               <div>
                 <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
-                {/* <h3 className="card-title mt-3"> {bike.model}</h3> */}
               </div>
               <form action={`/likes`} method="post" className="mt-4 w-10">
                 <input type="hidden" name="[likeble_id]" id="bike-id" value={bike.id}/>
@@ -416,6 +415,8 @@ export function Bike(props) {
               <p className=""><strong className="text-success">Tamanho do quadro:</strong> {bike.frame_size}</p>
               <p className=""><strong className="text-success">Material do quadro:</strong> {bike.frame_material}</p>
               <p className=""><strong className="text-success">Local:</strong> {bike.locality}</p>
+              <p className=""><strong className="text-success">Descrição:</strong> {bike.description}</p>
+
 
             </div>
             <a href={"/user/" + bike.user_id}>

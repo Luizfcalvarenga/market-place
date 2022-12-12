@@ -5,7 +5,7 @@
       <h3 class="text-center text-success my-3">Bikes</h3>
       <% @bikes.each do | bike | %>
         <%= link_to bike_path(bike), class: "col-12 col-md-3" do %>
-          <div class="cards-bikes-likes">
+          <div class="cards-bikes-likes mt-3">
             <div id="carouselExampleControls <%=bike.id%>" class="carousel slide w-100" data-bs-ride="carousel">
               <% if bike.photos.attached? %>
                 <div class="carousel-inner">
@@ -66,8 +66,8 @@
       <h3 class="text-center text-success my-3">Produtos</h3>
       <% @products.each do | product | %>
         <%= link_to product_path(product), class: "col-12 col-md-3" do %>
-          <div class="cards-products-likes">
-            <div id="carouselExampleControls <%=product.id%>" class="carousel slide w-100" data-bs-ride="carousel">
+          <div class="cards-products-likes mt-3">
+            <div id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
             <% if product.photos.attached? %>
               <div class="carousel-inner">
                 <% product.photos.each_with_index do |photo, i| %>
@@ -100,7 +100,7 @@
               <div class="d-flex justify-content-around">
                 <div class="infos">
                   <p><%= product.locality %></p>
-                  <p><%= product.product_type.name %></p>
+                  <p><%= product.product_type.name_display %></p>
                 </div>
                 <div class="infos">
                   <p><i class="far fa-heart"></i></p>
@@ -116,7 +116,6 @@
                     <%= image_tag "tools.png", class: "icon-card-index"%>
                   <% elsif  ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].include?(product.product_type.name) %>
                     <%= image_tag "tshirt.png", class: "icon-card-index"%>
-
                   <% end %>
                 </div>
               </div>

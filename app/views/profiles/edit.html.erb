@@ -24,7 +24,7 @@
       <button type="button" class="links-profile edit-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fas fa-edit me-2"></i>Editar usuário
       </button>
-      <%= link_to advertisements_path, class: "links-profile text-success" do %>
+      <%= link_to advertisements_path, class: " links-profile text-success" do %>
         <i class="fas fa-shopping-bag me-2 "></i>Anúncios
       <% end %>
       <%= link_to my_products_path, class: "links-profile text-success" do %>
@@ -35,6 +35,9 @@
       <% end %>
       <%= link_to chats_path, class: "links-profile text-success" do %>
         <i class="fas fa-envelope-open-text me-2"></i>Chat
+        <span class="badge badge-danger">+ <%= Notification.where(recipient_id: current_user).count %></span>
+        <% if Notification.where(recipient_id: current_user).count > 0 %>
+        <% end %>
       <% end %>
     </div>
 
