@@ -7,9 +7,12 @@ class BikesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @bikes = Bike.all
-    @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+    # @bikes = Bike.all
+    # @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+    @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
 
+    # @current_filters = params[:query]
+    # @bikes = @bikes.where(modality: @current_filters) if @current_filters
   end
 
   def show
@@ -90,7 +93,7 @@ class BikesController < ApplicationController
   def direct_links
     @current_filters = params[:query]
     @bikes = Bike.all
-    @bikes = @bikes.where(:modality => @current_filters[:modality]) if @current_filters[:modality]
+    @bikes = @bikes.where(modality: @current_filters) if @current_filters
     # @bikes = @bikes.where(:fuel => @current_filters[:fuel]) if @current_filters[:fuel]
     #etc
   end

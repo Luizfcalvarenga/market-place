@@ -121,7 +121,7 @@ export function Products(props) {
 
 
   return (
-    <div className="p-5 br-8  index-container">
+    <div className="p-5 br-8 index-container">
       <h2 className="text-center text-success">Produtos</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
@@ -372,11 +372,11 @@ export function Products(props) {
                           <p>{product.product_type.name}</p>
                         </div>
                         <div className="infos">
-                        <form action={`/likes`} method="post" >
-                          <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
-                          <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
-                          <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-                        </form>
+                          <form action={`/likes`} method="post" >
+                            <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
+                            <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
+                            <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
+                          </form>
                           { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
                             <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
                           )}

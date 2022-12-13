@@ -268,7 +268,8 @@ export function Bikes(props) {
       <h2 className="text-center text-success">Bikes</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
-          <h4 className="text-success">Filtros</h4>
+          <p className="text-success">Filtrar</p>
+          <div className="">
             <div className="condition-filter">
               <h5 className="text-success mt-3">tipo</h5>
               <div className="d-flex justify-content-between">
@@ -802,6 +803,7 @@ export function Bikes(props) {
               </div>
              </>
             )}
+          </div>
         </div>
 
         <div className="col-12 col-md-9 d-flex flex-wrap">
