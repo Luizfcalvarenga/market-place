@@ -51,7 +51,7 @@ export function Bikes(props) {
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
     if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
-    if (minYearFilter) url = url + `&min-year=${minYearFilter}`
+    if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (bikeTypeFilter) url = url + `&bike_type=${bikeTypeFilter}`
     if (frameSizeFilter) url = url + `&frame_size=${frameSizeFilter}`

@@ -14,6 +14,7 @@ module Api
         @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', 0, params[:max_price]).order(price_in_cents: :asc) if params[:max_price].present?
         @bikes = @bikes.where(bike_condition: params[:condition]) if params[:condition].present?
         @bikes = @bikes.where('year::integer BETWEEN ? AND ?', params[:min_year], params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
+        @bikes = @bikes.where('year::integer BETWEEN ? AND ?', params[:min_year], Date.today.year).order(year: :asc) if params[:min_year].present?
         @bikes = @bikes.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
         @bikes = @bikes.where(frame_size: params[:frame_size]) if params[:frame_size].present?
