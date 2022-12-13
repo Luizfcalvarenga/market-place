@@ -35,8 +35,8 @@
       <% end %>
       <%= link_to chats_path, class: "links-profile text-success" do %>
         <i class="fas fa-envelope-open-text me-2"></i>Chat
-        <span class="badge badge-danger">+ <%= Notification.where(recipient_id: current_user).count %></span>
-        <% if Notification.where(recipient_id: current_user).count > 0 %>
+        <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
+          <span class="badge badge-danger">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
         <% end %>
       <% end %>
     </div>
