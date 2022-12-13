@@ -22,7 +22,7 @@ class LikesController < ApplicationController
 
 
 
-    if Like.where(user_id: current_user.id, likeble: @likeble).present?
+    if Like.where(user_id: current_user.id, likeble: @likeble).present? || @likeble.user == current_user
       flash[:notice] = "Você já gostou desse produto!!!"
       return
     end

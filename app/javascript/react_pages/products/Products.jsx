@@ -49,11 +49,6 @@ export function Products(props) {
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
 
-
-
-
-    if (sortBy) url = url + `&sort_by=${sortBy}`
-
     const response = await axios.get(url);
     console.log(response)
     setProducts(response.data.products);

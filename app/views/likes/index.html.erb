@@ -8,7 +8,7 @@
         <% if like.likeble_type == "Bike" %>
           <%= link_to bike_path(like.likeble_id), class: "" do %>
             <div class="cards-bikes-likes col-10 col-md-3 mt-3">
-              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div id="carouselExampleControls<%= like.likeble_id.to_s %>" class="carousel slide" data-bs-ride="carousel">
                 <% if like.likeble.photos.attached? %>
                   <div class="carousel-inner">
                     <% like.likeble.photos.each_with_index do |photo, i| %>
@@ -20,11 +20,11 @@
                 <% else  %>
                     <%= image_tag "bike-forest.png", class: "card-img" %>
                 <% end %>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%= like.likeble_id.to_s %>" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%= like.likeble_id.to_s %>" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
@@ -60,7 +60,7 @@
         <% elsif like.likeble_type ==  "Product" %>
           <%= link_to product_path(like.likeble_id), class: "" do %>
             <div class="cards-products-likes col-10 col-md-3 mt-3">
-              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div id="carouselExampleControls<%= like.likeble_id.to_s %>" class="carousel slide" data-bs-ride="carousel">
                 <% if like.likeble.photos.attached? %>
                   <div class="carousel-inner">
                     <% like.likeble.photos.each_with_index do |photo, i| %>
@@ -72,11 +72,11 @@
                 <% else  %>
                     <%= image_tag "bike-forest.png", class: "card-img" %>
                 <% end %>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%= like.likeble_id.to_s %>" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%= like.likeble_id.to_s %>" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
