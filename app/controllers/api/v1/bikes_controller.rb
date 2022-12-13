@@ -8,8 +8,9 @@ module Api
       def index
         @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
 
-        @current_filters = params[:query]
-        @bikes = @bikes.where(modality: @current_filters) if @current_filters
+        # @current_filters = params[:query]
+        @bikes = @bikes.where(category: Category.find_by(name: params[:category_link])) if params[:category_link].present?
+        @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type_link].present?
 
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
         @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
