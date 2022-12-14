@@ -169,6 +169,20 @@
 .like-btn {
   border: none;
   background-color: transparent;
+
+  &:hover {
+    .fa-heart {
+      color: red !important;
+
+    }
+  }
+}
+
+.like-btn-search {
+  border: none;
+  background-color: transparent;
+  z-index: 1000;
+
   &:hover {
     .fa-heart {
       color: red !important;

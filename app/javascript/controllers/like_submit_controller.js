@@ -2,15 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="like-submit"
 export default class extends Controller {
-  static targets = [ "likebleId", "likebleType", "submitBtn" ]
+  static targets = [ "likebleId", "likebleType" ]
 
   connect() {
-    console.log(this.likebleIdTarget.innerHtml);
-    console.log(this.likebleTypeTarget.innerHtml);
-    console.log(this.submitBtnTarget);
+    console.log(this.likebleIdTarget.innerText);
+    console.log(this.likebleTypeTarget.innerText);
   }
 
-  likeSubmit() {
+  likeSubmit(event) {
+    event.preventDefault()
+    console.log(event)
     dataObject.append( "like[likeble_id]", this.likebleIdTarget.value );
     dataObject.append( "like[likeble_type]", "Bike" );
 
