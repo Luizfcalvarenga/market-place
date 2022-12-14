@@ -860,8 +860,8 @@ export function BikeForm(props) {
 
         { frameMaterial === "other"  && (
           <>
-            <label htmlFor="year" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
+            <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={otherFrameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
           </>
         )}
 
@@ -910,8 +910,8 @@ export function BikeForm(props) {
 
         { year === "other"  && (
           <>
-            <label htmlFor="year" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" onChange={(e) => setOtherYear(e.target.value)}/>
+            <label htmlFor="otherYear" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={otherYear} onChange={(e) => setOtherYear(e.target.value)}/>
           </>
         )}
 
@@ -931,7 +931,7 @@ export function BikeForm(props) {
           </div>
           <div className="w-50">
             <label htmlFor="quantity" className="mt-4">quantidade:<span className="requested-information ms-1">*</span></label>
-            <input type="number" className="text-input" value={quantity}onChange={(e) => setQuantity(e.target.value)}/>
+            <input type="number" className="text-input" value={quantity} onChange={(e) => setQuantity(e.target.value)}/>
             { errors && errors.bike && errors.bike.quantity  && (
               <p className="text-danger">{errors.bike.quantity[0]}</p>
             )}
@@ -939,13 +939,13 @@ export function BikeForm(props) {
         </div>
 
         <label htmlFor="locality" className="mt-4">cidade:<span className="requested-information ms-1">*</span></label>
-        <input type="text" className="text-input"  value={locality}onChange={(e) => setLocality(e.target.value)}/>
+        <input type="text" className="text-input"  value={locality} onChange={(e) => setLocality(e.target.value)}/>
         { errors && errors.bike && errors.bike.locality && (
           <p className="text-danger">{errors.bike.locality[0]}</p>
         )}
 
         <label htmlFor="weight" className="mt-4">peso:(opicional)</label>
-        <input type="number" className="text-input" placeholder="Em Kg" value={weight}onChange={(e) => setWeight(e.target.value)}/>
+        <input type="number" className="text-input" placeholder="Em Kg" value={weight} onChange={(e) => setWeight(e.target.value)}/>
 
         <div className="text-center">
           <button className="btn-next-step mt-4" type="button" onClick={(e) => handleFirstStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
@@ -959,7 +959,7 @@ export function BikeForm(props) {
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Transmissão<i class="fas fa-chevron-down ms-2"></i></button>
+        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Transmissão<i className="fas fa-chevron-down ms-2"></i></button>
         <div id="Transmissão" className="transmission d-none mb-3">
             <label htmlFor="numberOfFrontGears" className="mt-3">Marchas dianteiras:</label>
             <select
@@ -1000,8 +1000,8 @@ export function BikeForm(props) {
             <br />
             { frontDerailleurModel === "other"  && (
               <>
-                <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <label htmlFor="otherFrontDerailleurModel" className="mt-4">Qual?</label>
+                <input type="text" className="text-input" value={otherFrontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1019,7 +1019,7 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherRearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
           </>)}
@@ -1039,7 +1039,7 @@ export function BikeForm(props) {
             { frontDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherFrontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
               </>
             )}
 
@@ -1057,13 +1057,13 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text"  className="text-input" onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text"  className="text-input" value={otherRearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
               </>
             )}
           </>)}
 
           <label htmlFor="front_gear" className="mt-4">Pédivela:</label>
-          <input class="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
+          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
 
           <label htmlFor="front_gear" className="mt-4">Corrente:</label>
           <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
@@ -1102,7 +1102,7 @@ export function BikeForm(props) {
 
           {brakeDiscSize === "other" && (<>
             <label htmlFor="other_disc_size" className="mt-4">Qual:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
+            <input className="text-input" type="text" value={otherBrakeDiscSize} placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
           </>)}
 
           {category === "road" && (<>
@@ -1136,7 +1136,7 @@ export function BikeForm(props) {
 
           {brakeModel === "other" && (<>
             <label htmlFor="front_gear" className="mt-4">Qual:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeModel(e.target.value)}/>
+            <input className="text-input" type="text" value={otherBrakeModel} placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeModel(e.target.value)}/>
           </>)}
         </div>
 
@@ -1172,7 +1172,7 @@ export function BikeForm(props) {
             { frontSuspensionTravel === "other"  && (
               <>
                 <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherFrontSuspensionrModel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
               </>
             )}
 
@@ -1191,7 +1191,7 @@ export function BikeForm(props) {
             { rearSuspensionTravel === "other"  && (
               <>
                 <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherRearSuspensionModel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
               </>
             )}
           </>
@@ -1213,7 +1213,7 @@ export function BikeForm(props) {
             { rearSuspensionTravel === "other"  && (
               <>
                 <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
               </>
             )}
           </>
@@ -1235,7 +1235,7 @@ export function BikeForm(props) {
               { frontSuspensionModel === "other"  && (
                 <>
                   <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
-                  <input type="text-input" className="text-input" onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                  <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
                 </>
               )}
 
@@ -1253,7 +1253,7 @@ export function BikeForm(props) {
               { rearSuspensionModel === "other"  && (
                 <>
                   <label htmlFor="otherRearSuspensionModel" className="mt-4">Qual?</label>
-                  <input type="text" className="text-input" onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
+                  <input type="text" className="text-input" value={otherRearSuspensionModel} onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
                 </>
               )}
             </>
@@ -1358,7 +1358,7 @@ export function BikeForm(props) {
             { seatPostTravel === "other" && (
               <>
               <label htmlFor="otherSeatPostTravel" className="mt-4">Qual?</label>
-              <input className="text-input" type="text" onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
+              <input className="text-input" type="text" value={otherSeatPostTravel} onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
             </>
             )}
           </>)}
@@ -1386,7 +1386,7 @@ export function BikeForm(props) {
 
             { battery === "other" && (<>
               <label htmlFor="otherBattery" className="mt-4">Qual?</label>
-              <input type="text"  className="text-input" placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
+              <input type="text"  className="text-input" placeholder="" value={otherBattery} aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
             </>)}
 
             <label htmlFor="motor" className="mt-4">Motor:</label>
@@ -1418,7 +1418,7 @@ export function BikeForm(props) {
 
           { accessories === "Outro" && (<>
             <label htmlFor="otherAccessory" className="mt-4">Qual?</label>
-            <input type="text"  className="text-input" onChange={(e) => setOtherAccessory(e.target.value)}/>
+            <input type="text"  className="text-input" value={otherAccessory} onChange={(e) => setOtherAccessory(e.target.value)}/>
           </>)}
 
           { accessories !== "Não" && (<>
@@ -1439,7 +1439,7 @@ export function BikeForm(props) {
       <div id="third-section" className="card-bike-select mb-5 d-none">
         <div className="mb-3">
           <h4 className="text-center text-success">Informações adicionais</h4>
-          <label for="description" className="mt-3">Descrição:</label>
+          <label htmlFor="description" className="mt-3">Descrição:</label>
           <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
           {bikeCondition === "used" && (<>
@@ -1490,7 +1490,7 @@ export function BikeForm(props) {
         <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createBikePhotos(e)}/>
         <p className="text-center my-3">ESCOLHA AS IMAGENS DA SUA BIKE</p>
         <div className="text-center">
-          <label htmlFor="photo-upload" className="label-upload my-2"><i class="fas fa-file-upload"></i></label>
+          <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
         </div>
         {
           photosPreview?.length > 0 ?
@@ -1515,7 +1515,6 @@ export function BikeForm(props) {
       <div id="fifth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
-        {/* <h5 className="text-success mt-3 text-center">Gerais:</h5> */}
         <div id="Gerais(review)" className=" d-none">
           <div className="d-flex justify-content-between">
             <p><span className="text-success">Tipo:</span> {bikeType}</p>

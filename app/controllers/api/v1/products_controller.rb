@@ -8,19 +8,23 @@ module Api
 
       def index
         @user = current_user
-        # @products = Advertisement.where(status: "approved").where(advertisable_type: "Product").map {|advertisement| advertisement.advertisable }
-        # NÃO CONSIGO USER WHERE NO FILTRO JÁ QUE PRODUTOS ACIMA NÃO É UMA RELATION
         @product_types = ProductType.all
         @product_type_attributes = ProductTypeAttribute.all
-        @products = Product.where.not(user: @user)
+        @products = Product.joins(:advertisement).where(advertisements: {status: "approved"})
+
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
         @products = @products.where(product_type_: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
-        @products = @products.where('price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
-        @products = @products.where('price_in_cents BETWEEN ? AND ?', 0, params[:max_price]).order(price_in_cents: :asc) if params[:max_price].present?
-        @products = @products.where('year BETWEEN ? AND ?', params[:min_year].to_s, params[:max_year].to_s).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
-        @products = @products.where('year BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
+
+        @products = @products.where('products.price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
+        @products = @products.where('products.price_in_cents >= ?', params[:min_price]).order(price_in_cents: :asc) if params[:min_price].present?
+        @products = @products.where('products.price_in_cents BETWEEN ? AND ?', 0, params[:max_price]).order(price_in_cents: :asc) if params[:max_price].present?
+
+        @products = @products.where('year::integer BETWEEN ? AND ?', params[:min_year], params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
+        @products = @products.where('year::integer BETWEEN ? AND ?', params[:min_year], Date.today.year).order(year: :asc) if params[:min_year].present?
+        @products = @products.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
+
         @products = @products.where(product_type_id: params[:product_type_id]).joins(:product_attributes).where(value: params[:product_attribute_value]) if params[:product_attribute_value].present?
         @products = ProductAttribute.where(value: params[:product_attribute_value]).map { |value| value.product } if params[:product_attribute_value].present?
         @products = ProductAttribute.where(value: params[:condition]).map { |value| value.product } if params[:condition].present?

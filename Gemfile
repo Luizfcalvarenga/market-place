@@ -48,6 +48,7 @@ gem 'iugu', git: "https://github.com/iugu/iugu-ruby"
 gem 'active_model_serializers'
 
 gem "turbo-rails"
+gem 'pg_search'
 
 gem "image_processing", "~> 1.2"
 gem 'mini_magick'

@@ -24,17 +24,20 @@
       <button type="button" class="links-profile edit-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fas fa-edit me-2"></i>Editar usuário
       </button>
-      <%= link_to advertisements_path, class: "links-profile text-success" do %>
+      <%= link_to advertisements_path, class: " links-profile text-success" do %>
         <i class="fas fa-shopping-bag me-2 "></i>Anúncios
       <% end %>
       <%= link_to my_products_path, class: "links-profile text-success" do %>
         <i class="fab fa-product-hunt me-2"></i>Produtos
       <% end %>
-      <%= link_to my_products_path, class: "links-profile text-success" do %>
+      <%= link_to likes_path, class: "links-profile text-success" do %>
         <i class="fas fa-heart me-2"></i>Favoritos
       <% end %>
       <%= link_to chats_path, class: "links-profile text-success" do %>
         <i class="fas fa-envelope-open-text me-2"></i>Chat
+        <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
+          <span class="badge badge-danger">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
+        <% end %>
       <% end %>
     </div>
 

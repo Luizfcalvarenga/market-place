@@ -5,7 +5,6 @@ module Admin
     end
 
     def new
-      @partners = Partner.all
       @user = User.new
     end
 
@@ -15,7 +14,6 @@ module Admin
       if @user.save
         flash[:notice] = "Usuário #{@user.email} criado com sucesso"
       else
-        @partners = Partner.all
         render :new and return
       end
 

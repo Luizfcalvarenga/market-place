@@ -1,0 +1,72 @@
+<div data-search-target="list" class="results-list w-100">
+  <ul class="search-list w-100">
+    <% if @bikes.present? %>
+      <h5 class="text-center mt-2">Bikes</h5>
+      <% @bikes.first(5).each do | bike | %>
+        <%= link_to bike_path(bike), class: "links" do %>
+          <li class="d-flex justify-content-between search-list-item mx-3 my-3 align-middle">
+            <% if bike.photos.attached? %>
+              <%= cl_image_tag bike.photos.first.key, class: "search-img mb-3" %>
+            <% else %>
+              <%= image_tag "new-announce-banner.jpg", class: "search-img mb-3" %>
+            <% end %>
+            <div>
+              <p><span class="text-success"> Marca:</span> <%= bike.frame_brand %> </p>
+              <p><span class="text-success"> Modelo:</span> <%= bike.model %> </p>
+            </div>
+            <div>
+              <p><span class="text-success"> Preço:</span> <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".", precision: 2) %> </p>
+              <p><span class="text-success"> Local:</span> <%= bike.locality %> </p>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+      <% if @bikes.count > 5 %>
+        <li class="text-center mt-0">
+          <%= link_to search_path, class: "text-success btn-search-all" do %>
+            Ver mais<i class="fas fa-angle-double-right"></i>
+          <% end %>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="text-center mt-0 w-100">
+        <h5  class="my-2">Não encontramos nada.</h5>
+      </li>
+    <% end %>
+
+    <% if @products.present? %>
+      <h5 class="text-center mt-2">Produtos</h5>
+      <% @products.first(5).each do | product | %>
+        <%= link_to product_path(product), class: "links" do %>
+          <li class="d-flex justify-content-between search-list-item my-3 mx-3 align-middle">
+            <% if product.photos.attached? %>
+              <%= cl_image_tag product.photos.first.key, class: "search-img mb-3" %>
+            <% else %>
+              <%= image_tag "bike-components.png", class: "search-img mb-3" %>
+            <% end %>
+            <div>
+              <p><span class="text-success"> Marca:</span> <%= product.brand %> </p>
+              <p><span class="text-success"> Modelo:</span> <%= product.model %> </p>
+            </div>
+            <div>
+              <p><span class="text-success"> Preço:</span> <%= number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %> </p>
+              <p><span class="text-success"> Local:</span> <%= product.locality %> </p>
+            </div>
+          </li>
+
+        <% end %>
+      <% end %>
+      <% if @products.count > 5 %>
+        <li class="text-center mt-0">
+          <%= link_to search_path, class: "text-success btn-search-all" do %>
+            Ver mais<i class="fas fa-angle-double-right"></i>
+          <% end %>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="text-center mt-0 w-100">
+        <h5 class="my-2">Não encontramos nada.</h5>
+      </li>
+    <% end %>
+  </ul>
+</div>

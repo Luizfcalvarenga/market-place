@@ -6,7 +6,6 @@ import { Controller } from "@hotwired/stimulus";
  */
 export default class extends Controller {
   connect() {
-    console.log("opa")
   }
   /**
    * Creates the preview panel displayed above the message input.

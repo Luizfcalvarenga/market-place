@@ -7,10 +7,23 @@
     </div>
     <div class="f-40  w-100">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-between gap-10">
-        <li id="navbar-form" class="nav-item active form-inline d-none">
-          <div class="input-group input-group-navbar">
-            <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
-            <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
+        <li id="navbar-form" class="nav-item active form-inline d-none w-100">
+          <div data-controller="search" class="input-group input-group-navbar">
+            <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar" , data: { search_target: 'form' } } do |form| %>
+              <%= form.text_field :query,
+                 class: "form-control nav-form",
+                 placeholder: 'Pesquisar',
+                 value: params[:query],
+                 data: {
+                  search_target: 'searchInput',
+                  action: "keyup->search#update"
+                } %>
+              <%= form.button class: "btn search-btn" do %>
+                <i class="fas fa-search form-icon"></i>
+              <% end %>
+            <% end %>
+            <div data-search-target="list">
+            </div>
           </div>
         </li>
         <div id="navbar-links" class="nav-links d-flex">
@@ -20,11 +33,11 @@
               <div class="dropdown-content">
                 <div class="drpdw-bike mx-5 margin-right">
                   <h4 class="text-center text-success mt-3">BIKES</h4>
-                  <%= link_to "Speed", "/bikes?modality=speed", class: "text-white" %>
-                  <%= link_to "Gravel", "/bikes?modality=gravel", class: "text-white" %>
-                  <%= link_to "Triathlon", "/bikes?modality=triathlon", class: "text-white" %>
-                  <%= link_to "E-bike", "/bikes?bike_type=e-bike", class: "text-white" %>
-                  <%= link_to "Ver mais ->", bikes_path, class: "text-white pb-3" %>
+                  <%= link_to "MTB", {:controller => "bikes", :action => "index", :category_link => "mountain_bike"}, class: "text-white" %>
+                  <%= link_to "ROAD", {:controller => "bikes", :action => "index", :category_link => "road"}, class: "text-white" %>
+                  <%= link_to "DIRT", {:controller => "bikes", :action => "index", :category_link => "dirt_street"}, class: "text-white" %>
+                  <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type_link => "e-bike"}, class: "text-white" %>
+                  <%= link_to "Ver mais", bikes_path, class: "text-white pb-3" %>
                 </div>
                 <div class="drpdw-components mx-5">
                   <h4 class="text-center text-success mt-3">COMPONENTES</h4>
@@ -32,15 +45,7 @@
                   <%= link_to "Quadro", "/products?product_type=frame", class: "text-white" %>
                   <%= link_to "Suspensões", "/products?product_type=suspension", class: "text-white" %>
                   <%= link_to "Rodas", "/products?product_type=rim", class: "text-white" %>
-                  <%= link_to "Ver mais ->", products_path, class: "text-white pb-3" %>
-                </div>
-                <div class="drpdw-services mx-5">
-                  <h4 class="text-center text-success mt-3">SERVIÇOS</h4>
-                  <%= link_to "Anuncie", "#", class: "text-white" %>
-                  <%= link_to "Bike-Check", "#", class: "text-white" %>
-                  <%= link_to "Certificação", "#", class: "text-white" %>
-                  <%= link_to "Compra segura", "#", class: "text-white" %>
-                  <%= link_to "Ver mais ->", "#", class: "text-white pb-3" %>
+                  <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
                 </div>
               </div>
             </div>
@@ -76,13 +81,13 @@
         <% if current_user.present? %>
           <li class="nav-item active mt-1" style="color: white;">
             <%= link_to user_path(User.find(4)) do %>
-              <i class="fas fa-comment-alt text-success"> <span  class="cart-counter"></span></i>
+              <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
         <% end %>
         <li class="nav-item active mt-1" style="color: white;">
-          <%= link_to "#" do %>
-            <i class="fa fa-heart text-success"></i>
+          <%= link_to likes_path do %>
+            <i class="fa fa-heart text-success mt-2"></i>
           <% end %>
         </li>
         <% if user_signed_in? %>
@@ -121,31 +126,50 @@
       <%= link_to root_path, class: "nav-link" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
-      <%= link_to "#" do %>
-        <i class="fas fa-shopping-cart text-success me-4"></i><span  class="cart-counter mb-3"><%= rand(1..5) %></span></i>
+
+      <% if current_user.present? %>
+        <%= link_to user_path(User.find(4)) do %>
+          <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
+        <% end %>
       <% end %>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="text-success fas fa-bars"></i>
       </button>
     </div>
-    <div class="input-group input-group-navbar nav-form">
-      <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
-      <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
+
+    <div data-controller="search" class="input-group input-group-navbar px-1">
+      <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
+        <%= form.text_field :query,
+            class: "form-control nav-form",
+            placeholder: 'Pesquisar',
+            value: params[:query],
+            data: {
+            search_target: 'searchInput',
+            action: "keyup->search#update"
+          } %>
+        <%= form.button class: "btn search-btn" do %>
+          <i class="fas fa-search form-icon"></i>
+        <% end %>
+      <% end %>
+      <div data-search-target="list">
+      </div>
     </div>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="flex center around mobile-menu">
         <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
           <li class="nav-item active">
-            <%= link_to "BIKES", root_path, class: "nav-link" %>
+            <%= link_to "BIKES", bikes_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "VENDER", "#", class: "nav-link" %>
+            <%= link_to "PRODUTOS", products_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "COMPONENTES", "#", class: "nav-link" %>
+            <%= link_to "VENDER", new_announce_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "SERVIÇOS", "#", class: "nav-link" %>
+            <%= link_to "PERFIL", edit_profiles_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
             <%= link_to "INSTITUCIONAL", "#", class: "nav-link" %>
@@ -157,9 +181,6 @@
             <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link", target: :_blank %>
           </li>
           <% if user_signed_in? %>
-            <li class="nav-item active">
-              <%= link_to "CARRINHO", "#", class: "text-success nav-link text-decoration-underline" %>
-            </li>
             <li class="nav-item active">
               <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline" %>
             </li>

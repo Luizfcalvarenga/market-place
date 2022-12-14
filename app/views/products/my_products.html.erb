@@ -1,5 +1,5 @@
 <div class="container my-5">
-  <h1 class="mb-3">Meus produtos</h1>
+  <h3 class="text-center text-success py-3">Meus produtos</h3>
   <% if @products.blank? %>
     <h3>Ainda não possui produto cadastrada</h3>
     <%= link_to "Anunciar", new_announce_path, class: "btn btn-outline" %>
@@ -7,7 +7,7 @@
     <% @products.each do |product| %>
       <div class="my-product-card mt-3">
         <div class="d-flex mobile-device">
-          <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
+          <div id="carouselExampleControls<%= product.id.to_s %>" class="carousel slide w-50" data-bs-ride="carousel">
             <% if product.photos.attached? %>
               <div class="carousel-inner">
                 <% product.photos.each_with_index do |photo, i| %>
@@ -19,11 +19,11 @@
             <% else  %>
                 <%= image_tag "bike-forest.png", class: "my-product-img" %>
             <% end %>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%= product.id.to_s %>" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%= product.id.to_s %>" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
@@ -57,7 +57,7 @@
     <% end %>
   <% end %>
 
-  <h1 class="mt-5 mb-3">Minhas Bikes</h1>
+  <h3 class="text-center text-success pb-3 pt-5">Minhas bikes</h3>
   <% if @bikes.blank? %>
     <h3>Ainda não possui bike cadastrada</h3>
     <%= link_to "Anunciar", new_announce_path, class: "btn btn-outline mt-3" %>
@@ -65,7 +65,7 @@
     <% @bikes.each do |bike| %>
       <div class="my-product-card mt-3">
         <div class="d-flex mobile-device">
-          <div id="carouselExampleControls" class="carousel slide w-50" data-bs-ride="carousel">
+          <div id="carouselExampleControls<%= bike.id.to_s %>" class="carousel slide w-50" data-bs-ride="carousel">
             <% if bike.photos.attached? %>
               <div class="carousel-inner">
                 <% bike.photos.each_with_index do |photo, i| %>
@@ -77,11 +77,11 @@
             <% else  %>
                 <%= image_tag "bike-forest.png", class: "my-product-img" %>
             <% end %>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%= bike.id.to_s %>" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%= bike.id.to_s %>" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>

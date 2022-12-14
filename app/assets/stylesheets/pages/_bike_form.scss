@@ -216,3 +216,15 @@
 .payment-methods {
   font-size: 0.675em
 }
+
+@media screen and (max-width: 768px) {
+  .new-bike-react {
+   width: 100% !important;
+
+
+  }
+
+  .progress-bar {
+    display: none;
+  }
+}

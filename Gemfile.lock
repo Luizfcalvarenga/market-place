@@ -178,6 +178,9 @@ GEM
     pagy (5.10.1)
       activesupport
     pg (1.2.3)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -340,6 +343,7 @@ DEPENDENCIES
   noticed (~> 1.6)
   pagy (~> 5.10)
   pg (~> 1.1)
+  pg_search
   pry-byebug
   pry-rails
   puma (~> 5.0)

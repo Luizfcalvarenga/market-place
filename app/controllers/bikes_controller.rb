@@ -1,12 +1,19 @@
 class BikesController < ApplicationController
+
+
   skip_after_action :verify_authorized, except: :index
   skip_after_action :verify_policy_scoped, only: :index
 
   skip_before_action :authenticate_user!
 
   def index
-    @bikes = Bike.all
-    @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+    # @bikes = Bike.all
+    # @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+    # @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
+
+    # # @current_filters = params[:query]
+    # @bikes = @bikes.where(category: Category.find_by(name: params[:category])) if params[:category].present?
+    # @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
 
   end
 
@@ -83,6 +90,14 @@ class BikesController < ApplicationController
         services: @services
       } }
     end
+  end
+
+  def direct_links
+    @current_filters = params[:query]
+    @bikes = Bike.all
+    @bikes = @bikes.where(modality: @current_filters) if @current_filters
+    # @bikes = @bikes.where(:fuel => @current_filters[:fuel]) if @current_filters[:fuel]
+    #etc
   end
 
   private

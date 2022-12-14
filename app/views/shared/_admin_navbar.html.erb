@@ -71,30 +71,15 @@
       <div class="flex center around mobile-menu">
         <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
           <li class="nav-item active">
-            <%= link_to "BIKES", root_path, class: "nav-link" %>
+            <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "VENDER", "#", class: "nav-link" %>
+            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "COMPONENTES", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "SERVIÇOS", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "INSTITUCIONAL", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "EVENTOS", "https://nuflowpass.com.br/", class: "nav-link", target: :_blank %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link", target: :_blank %>
+            <%= link_to "FINANCEIRO", "#", class: "nav-link" %>
           </li>
           <% if user_signed_in? %>
-            <li class="nav-item active">
-              <%= link_to "CARRINHO", "#", class: "text-success nav-link text-decoration-underline" %>
-            </li>
             <li class="nav-item active">
               <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline" %>
             </li>

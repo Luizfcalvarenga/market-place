@@ -227,3 +227,29 @@ a {
   border-radius: 5px;
   border: none;
 }
+
+
+@media (max-width: 768px) {
+  .bike-show {
+    padding: 15px;
+  }
+  .main__menu,.card-bike {
+    margin-left: 4%;
+  }
+
+  .card-bike {
+    margin-top: 10%;
+  }
+
+  .main__menu .list-item .drop-menu .drop-item .list-item {
+    height: auto;
+    font: 235 22px 'Roboto', sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .bike-attrs-parts, .bike-info {
+    font-size: 15px;
+
+  }
+}

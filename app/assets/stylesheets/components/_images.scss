@@ -24,3 +24,17 @@
 
 
 }
+
+
+.search-img {
+  width: 15% !important;
+  border-radius: 4px;
+}
+
+
+@media (max-width: 765px)  {
+  .search-img {
+    display: none
+  }
+
+}

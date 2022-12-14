@@ -27,7 +27,13 @@
     h4 {
       color: inherit !important;
     }
+
+    .card-content {
+      color: inherit !important;
+
+    }
   }
+
 }
 
 .btn-filter {
@@ -94,6 +100,9 @@
   }
 }
 
+#mobile {
+  height: 380px;
+}
 
 .price-filter, .year-filter {
   .text-input {

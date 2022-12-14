@@ -51,7 +51,7 @@ export function Bikes(props) {
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
     if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
-    if (minYearFilter) url = url + `&min-year=${minYearFilter}`
+    if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (bikeTypeFilter) url = url + `&bike_type=${bikeTypeFilter}`
     if (frameSizeFilter) url = url + `&frame_size=${frameSizeFilter}`
@@ -268,7 +268,8 @@ export function Bikes(props) {
       <h2 className="text-center text-success">Bikes</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
-          <h4 className="text-success">Filtros</h4>
+          <p className="text-success">Filtrar</p>
+          <div className="">
             <div className="condition-filter">
               <h5 className="text-success mt-3">tipo</h5>
               <div className="d-flex justify-content-between">
@@ -284,7 +285,7 @@ export function Bikes(props) {
                 <label htmlFor="used" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="normal"
+                    value="bike"
                     name="type"
                     onChange={(e) => handleBikeTypeFilter(e)}
                   />  Normal
@@ -780,7 +781,7 @@ export function Bikes(props) {
                   </h5>
                   </>)}
                 </div>
-                <input type="range" class="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
+                <input type="range" className="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
                 <div className="d-flex justify-content-between">
                   <h6 className="text-success price-filter-text"><small>0</small></h6>
                   <h6 className="text-success price-filter-text"><small>50</small></h6>
@@ -794,7 +795,7 @@ export function Bikes(props) {
                   </h5>
                   </>)}
                 </div>
-                <input type="range" class="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
+                <input type="range" className="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
                 <div className="d-flex justify-content-between">
                   <h6 className="text-success price-filter-text"><small>0</small></h6>
                   <h6 className="text-success price-filter-text"><small>200Km</small></h6>
@@ -802,6 +803,7 @@ export function Bikes(props) {
               </div>
              </>
             )}
+          </div>
         </div>
 
         <div className="col-12 col-md-9 d-flex flex-wrap">
@@ -840,7 +842,7 @@ export function Bikes(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <div className="d-flex justify-content-center gap-2 mt-3">
+                    <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{bike.frame_brand}</h4>
                       <h4 className="card-title text-center">{bike.model}</h4>
                     </div>
@@ -852,18 +854,21 @@ export function Bikes(props) {
                     </h4>
                     <hr className="index-line"/>
                     <div className="card-content mt-2">
-                      <div className="d-flex justify-content-around">
+                      <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{bike.locality}</p>
                           <p>{bike.bike_type}</p>
                         </div>
                         <div className="infos">
-                          <p><i class="far fa-heart"></i></p>
-                          { bike.bike_type === "normal" &&(
-                            <img src={NormalBikeImage} alt="" className="icon-card-index"/>
+                          <form action={`/likes`} method="post" >
+                            <input type="hidden" name="like[likable_id]" id="bike-id" value={bike.id}/>
+                            <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
+                          </form>
+                          { bike.bike_type === "bike" &&(
+                            <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}
                           {  bike.bike_type === "e-bike" &&(
-                            <img src={EBikeImage} alt="" className="icon-card-index"/>
+                            <img src={EBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}
                         </div>
                       </div>

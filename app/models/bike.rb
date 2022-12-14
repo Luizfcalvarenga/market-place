@@ -1,9 +1,20 @@
 class Bike < ApplicationRecord
+  include PgSearch::Model
+  multisearchable against: [:model, :frame_brand]
+  pg_search_scope :global_search,
+  against: [ :model, :frame_brand ],
+  using: {
+    tsearch: { prefix: true }
+  }
+
+
   belongs_to :user
   belongs_to :category
   belongs_to :service, optional: true
 
   has_one :advertisement, as: :advertisable
+  has_many :likes, as: :likeble
+
   has_many :order_items
   has_many :chats
   has_many_attached :photos

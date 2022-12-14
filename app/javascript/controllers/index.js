@@ -7,14 +7,17 @@ import { application } from "./application"
 import MessagePreviewController from "./message_preview_controller"
 application.register("message-preview", MessagePreviewController)
 
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
 import ResetFormController from "./reset_form_controller"
 application.register("reset-form", ResetFormController)
 
 import ScrollController from "./scroll_controller"
 application.register("scroll", ScrollController)
 
+import SearchController from "./search_controller"
+application.register("search", SearchController)
+
 import UserListController from "./user_list_controller"
 application.register("user-list", UserListController)
-
-import NotificationController from "./notification_controller"
-application.register("notification", NotificationController)

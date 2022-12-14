@@ -3,32 +3,28 @@ module Api
     class BikesController < Api::V1::BaseController
       skip_after_action :verify_authorized, except: :index
       skip_after_action :verify_policy_scoped, only: :index
-
       skip_before_action :authenticate_user!
 
       def index
-        
-        @bikes = Bike.joins(:advertisements).where(advertisements: {status: "approved"})
-        @bikes = @bikes.where(category: params[:category]) if params[:category].present?
-        @bikes = @bikes.where("age <= ?", params[:max_age]) if params[:max_age].present?
+        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
 
-        if params[:sort_by] == "age_ascending"
-          @bikes = @bikes.order(age: :asc)
-        elsif params[:sort_by] == "age_descending"
-          @bikes = @bikes.order(age: :desc)
-        elsif params[:sort_by] == "size_ascending"
-          @bikes = @bikes.order(size: :asc)
-        elsif params[:sort_by] == "size_descending"
-          @bikes = @bikes.order(size: :desc)
-        end
-        @bikes = Bike.all
+        # @current_filters = params[:query]
+        @bikes = @bikes.where(category: Category.find_by(name: params[:category_link])) if params[:category_link].present?
+        @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type_link].present?
+
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
         @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
-        @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
-        @bikes = @bikes.where('price_in_cents BETWEEN ? AND ?', 0, params[:max_price]).order(price_in_cents: :asc) if params[:max_price].present?
+
+        @bikes = @bikes.where('bikes.price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
+        @bikes = @bikes.where('bikes.price_in_cents >= ?', params[:min_price]).order(price_in_cents: :asc) if params[:min_price].present?
+        @bikes = @bikes.where('bikes.price_in_cents BETWEEN ? AND ?', 0, params[:max_price]).order(price_in_cents: :asc) if params[:max_price].present?
+
         @bikes = @bikes.where(bike_condition: params[:condition]) if params[:condition].present?
-        @bikes = @bikes.where('year BETWEEN ? AND ?', params[:min_year].to_i, params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
-        @bikes = @bikes.where('year BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
+
+        @bikes = @bikes.where('year::integer BETWEEN ? AND ?', params[:min_year], params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
+        @bikes = @bikes.where('year::integer BETWEEN ? AND ?', params[:min_year], Date.today.year).order(year: :asc) if params[:min_year].present?
+        @bikes = @bikes.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
+
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
         @bikes = @bikes.where(frame_size: params[:frame_size]) if params[:frame_size].present?
         @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?

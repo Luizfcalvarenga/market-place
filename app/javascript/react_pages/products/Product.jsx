@@ -57,9 +57,9 @@ export function Product(props) {
 
 
             <h3 className="text-success mb-4 mt-3">Outras Informações</h3>
-            <ul class="main__menu">
-            <li class="list-item w-100">
-                <div class="kabobs item--js">
+            <ul className="main__menu">
+            <li className="list-item w-100">
+                <div className="kabobs item--js">
                   { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(<>
                     <img src={AccessorieImage} alt="" className="bike-part-card mt-1"/> <br />
                     </>)}
@@ -80,8 +80,8 @@ export function Product(props) {
                     </>)}
                   <span className="text-success mb-3">Ver mais</span>
                 </div>
-                <ul class="drop-menu menu-2">
-                  <li class="drop-item">
+                <ul className="drop-menu menu-2">
+                  <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
                       <p className="bike-info ms-2 align-middle">{product.description}</p>
@@ -89,7 +89,7 @@ export function Product(props) {
                   </li>
                   {product.product_attributes.map((attribute) => {
                     return (
-                      <li class="drop-item">
+                      <li className="drop-item">
                         <div className="text-success item list-item d-flex ms-3">
                           <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong> </p>
                           <p className="bike-info ms-2 align-middle">{attribute.value}</p>
@@ -102,7 +102,7 @@ export function Product(props) {
             </ul>
           </div>
 
-          <div className="col-12 col-md-4 card-product">
+          <div className="col-11 col-md-4 card-product">
             <div className="d-flex justify-content-between">
               <div>
                 <h3 className="card-title mt-3"> {product.brand} {product.model}</h3>
@@ -114,7 +114,7 @@ export function Product(props) {
                 <img src={ComponentImage} alt="" className="icon-card-index mt-4"/>
               )}
               { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                <img src={EquipamentImage} alt="" className="icon-card-index"/>
+                <img src={EquipamentImage} alt="" className="icon-card-index mt-4"/>
               )}
               { ["cap", "glasses"].includes(product.product_type.name) &&(
                 <img src={CasualImage} alt="" className="icon-card-index mt-4"/>
@@ -125,7 +125,11 @@ export function Product(props) {
               { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
                 <img src={ClotheImage} alt="" className="icon-card-index mt-4"/>
               )}
-              <i className="far fa-heart mt-4"></i>
+              <form action={`/likes`} method="post" className="w-10 mt-4" >
+                <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
+                <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
+                <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
+              </form>
             </div>
             <div className="card-content">
               <h4 className="text-success mt-1">
