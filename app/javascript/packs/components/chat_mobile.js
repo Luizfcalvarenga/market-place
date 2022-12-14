@@ -11,7 +11,8 @@ if (screen.width < 768 && userSelected.classList.contains("active")) {
 
 }
 
-backBtn.addEventListener("click", removeDisplayNone);
+if (backBtn) backBtn.addEventListener("click", removeDisplayNone);
+
 function removeDisplayNone() {
   window.location = "http://localhost:3000/chats"
   sidePanel.classList.remove("d-none")
