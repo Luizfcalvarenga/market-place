@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import LikeSubmitController from "./like_submit_controller"
+application.register("like-submit", LikeSubmitController)
+
 import MessagePreviewController from "./message_preview_controller"
 application.register("message-preview", MessagePreviewController)
 
