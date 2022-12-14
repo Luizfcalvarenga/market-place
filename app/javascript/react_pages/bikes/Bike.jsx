@@ -30,9 +30,13 @@ export function Bike(props) {
     .then(function (response) {
       console.log(response);
       if (response.data.success) {
-        swal(" OHH YEAHH!", "Bike adicionada aos favoritos!!!", "success");
+        swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else {
-        swal("OPS", "Algo deu errado!", "error");
+        if (response.data.errors.user) {
+          swal("OPS", "Não pode curtir seu produto", "error");
+        } else if (response.data.errors.like) {
+          swal("OPS", "Você já curtiu esse produto", "error");
+        }
       }
     })
 

@@ -22,8 +22,11 @@ class LikesController < ApplicationController
 
     skip_authorization
 
-    if Like.where(user_id: current_user.id, likeble: @likeble).present? || @likeble.user == current_user
-      flash[:notice] = "Você já gostou desse produto!!!"
+    if Like.where(user_id: current_user.id, likeble: @likeble).present?
+      render json: { success: false, errors: {like: "exists"} }
+      return
+    elsif @likeble.user == current_user
+      render json: { success: false, errors: {user: "own_product"} }
       return
     end
     ActiveRecord::Base.transaction do
