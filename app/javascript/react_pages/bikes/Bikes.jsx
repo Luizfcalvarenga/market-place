@@ -126,6 +126,25 @@ export function Bikes(props) {
   }
 
 
+  const handleLike = (e) => {
+    e.preventDefault()
+
+    const dataObject = new FormData();
+    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_type]", "Bike" );
+
+    console.log(e.nativeEvent.path[1].id)
+    axios.post('/likes',dataObject)
+
+    .then(function (response) {
+      console.log(response);
+      if (response.data.success) {
+        swal(" OHH YEAHH!", "Bike adicionada aos favoritos!!!", "success");
+      } else {
+        swal("OPS, Algo deu errado!", "error");
+      }
+    })
+  }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   const frameBrands = [
@@ -860,10 +879,7 @@ export function Bikes(props) {
                           <p>{bike.bike_type}</p>
                         </div>
                         <div className="infos">
-                          <form action={`/likes`} method="post" >
-                            <input type="hidden" name="like[likable_id]" id="bike-id" value={bike.id}/>
-                            <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-                          </form>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
                           { bike.bike_type === "bike" &&(
                             <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}

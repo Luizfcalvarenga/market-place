@@ -17,6 +17,25 @@ export function Product(props) {
     setProduct(response.data);
   }, [])
 
+  const handleLike = (e) => {
+    e.preventDefault()
+    const dataObject = new FormData();
+    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_type]", "Product" );
+
+    console.log(e.nativeEvent.path[1].id)
+    axios.post('/likes', dataObject)
+
+    .then(function (response) {
+      console.log(response);
+      if (response.data.success) {
+        swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else {
+        swal("OPS", "Algo deu errado!", "error");
+      }
+    })
+
+  }
 
   return (
 
@@ -125,11 +144,7 @@ export function Product(props) {
               { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
                 <img src={ClotheImage} alt="" className="icon-card-index mt-4"/>
               )}
-              <form action={`/likes`} method="post" className="w-10 mt-4" >
-                <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
-                <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
-                <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-              </form>
+              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button>
             </div>
             <div className="card-content">
               <h4 className="text-success mt-1">

@@ -9,9 +9,6 @@ import FrameImage from "../../../assets/images/frame.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
 
-
-
-
 export function Bike(props) {
   const [bike, setBike] = useState()
   let bikeId = window.location.pathname.split("/").pop();
@@ -21,6 +18,25 @@ export function Bike(props) {
     const response = await axios.get(url);
     setBike(response.data);
   }, [])
+
+  const handleLike = (e) => {
+    e.preventDefault()
+    const dataObject = new FormData();
+    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_type]", "Bike" );
+    console.log(e.nativeEvent.path[1].id)
+    axios.post('/likes', dataObject)
+
+    .then(function (response) {
+      console.log(response);
+      if (response.data.success) {
+        swal(" OHH YEAHH!", "Bike adicionada aos favoritos!!!", "success");
+      } else {
+        swal("OPS", "Algo deu errado!", "error");
+      }
+    })
+
+  }
 
 
   return (
@@ -394,11 +410,7 @@ export function Bike(props) {
               <div>
                 <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
               </div>
-              <form action={`/likes`} method="post" className="mt-4 w-10">
-                <input type="hidden" name="[likeble_id]" id="bike-id" value={bike.id}/>
-                <input type="hidden" name="[likeble_type]" id="bike-id" value="Bike"/>
-                <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-              </form>
+              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
             </div>
             <h4 className="card-title mt-1">{bike.modality}</h4>
             <div className="card-content">
@@ -416,8 +428,6 @@ export function Bike(props) {
               <p className=""><strong className="text-success">Material do quadro:</strong> {bike.frame_material}</p>
               <p className=""><strong className="text-success">Local:</strong> {bike.locality}</p>
               <p className=""><strong className="text-success">Descrição:</strong> {bike.description}</p>
-
-
             </div>
             <a href={"/user/" + bike.user_id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>

@@ -261,18 +261,10 @@ export function ProductForm(props) {
             })}
           </select>
 
-
           <div id={attribute.name} class="d-none">
             <label htmlFor="productbrand" className="mt-3">Qual:</label>
             <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
           </div>
-
-          {/* {(attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other" && (
-          <div id={attribute.name} class="d-none">
-            <label htmlFor="productbrand" className="mt-3">Qual:</label>
-            <input type="text" className="text-input" onChange={(e) => setProductModel(e.target.value)}/>
-          </div>
-          )} */}
         </div>
       </div>
     )
@@ -348,7 +340,7 @@ export function ProductForm(props) {
       swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       setErrors(response.data.errors);
-      swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
+      swal("OPS", "Algo deu errado!", "Revise suas informaçoes", "error");
       e.target.classList.remove("d-none")
       document.getElementById("spinner").classList.add("de-none")
     }

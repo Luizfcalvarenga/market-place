@@ -13,17 +13,17 @@ class LikesController < ApplicationController
     if current_user.nil?
       flash[:notice] = "Você deve criar uma conta antes."
     end
-    if params[:likeble_type] == "Bike"
-      @likeble = Bike.find(params[:likeble_id].to_i)
-    elsif params[:likeble_type] == "Product"
-      @likeble = Product.find(params[:likeble_id].to_i)
+
+    if params[:like][:likeble_type] == "Bike"
+      @likeble = Bike.find(params[:like][:likeble_id].to_i)
+    elsif params[:like][:likeble_type] == "Product"
+      @likeble = Product.find(params[:like][:likeble_id].to_i)
     end
+
     skip_authorization
 
-
-
     if Like.where(user_id: current_user.id, likeble: @likeble).present? || @likeble.user == current_user
-      flash[:notice] = "Você já gostou desse produto!!!"
+      # flash[:notice] = "Você já gostou desse produto!!!"
       return
     end
     ActiveRecord::Base.transaction do
@@ -36,10 +36,9 @@ class LikesController < ApplicationController
     end
 
     if @like.save
-      redirect_to likes_path
-      flash[:notice] = "Você gostou do produto"
+      render json: { success: true, like: @like }
     else
-      render :new
+      render json: { success: false, errors: {like: @like.errors, user: user_error} }
     end
   end
 
