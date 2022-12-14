@@ -110,7 +110,7 @@
                   <div data-controller="like-submit" >
                     <p class="d-none" data-like-submit-target="likebleId"><%= product.id %></p>
                     <p class="d-none" data-like-submit-target="likebleType">Product</p>
-                    <button type="button" data-like-submit-action="submitLike -> like-submit" class="like-btn"><i class="far fa-heart"></i></button>
+                    <button type="button" data-like-submit-action="click->like-submit#submitLike" class="like-btn"><i class="far fa-heart"></i></button>
                   </div>
                   <% if  ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].include?(product.product_type.name) %>
                     <%= image_tag "accessories.png", class: "icon-card-index ms-2"%>

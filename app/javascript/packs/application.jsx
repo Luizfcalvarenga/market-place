@@ -25,6 +25,8 @@ import "controllers"
 import "channels"
 
 import "./components/form_navbar";
+import "./components/chat_mobile";
+
 import "./mask";
 import "./payment_pooling";
 
