@@ -243,12 +243,14 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
-    } else {
+    }  else {
       options = attribute.options
     }
 
     return (
       <div attribute={attribute} key={attribute.id} className="">
+
+
         <div id="">
           <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}<span className="requested-information ms-1">*</span></label><br />
           <select
@@ -261,7 +263,7 @@ export function ProductForm(props) {
             })}
           </select>
 
-          <div id={attribute.name} class="d-none">
+          <div id={attribute.name} className="d-none">
             <label htmlFor="productbrand" className="mt-3">Qual:</label>
             <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
           </div>
@@ -310,24 +312,23 @@ export function ProductForm(props) {
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
 
-    const product = {
-      user_id: user,
-      category_id: categoryId,
-      modality: productModality,
-      product_type_id: productTypeId,
-      brand: productBrand,
-      model: productModel,
-      description: productDescription,
-      price_in_cents: productPrice,
-      quantity: productQuantity,
-      locality: productLocality,
-      year: productYear,
+    // const product = {
+    //   user_id: user,
+    //   category_id: categoryId,
+    //   modality: productModality,
+    //   product_type_id: productTypeId,
+    //   brand: productBrand,
+    //   model: productModel,
+    //   description: productDescription,
+    //   price_in_cents: productPrice,
+    //   quantity: productQuantity,
+    //   locality: productLocality,
+    //   year: productYear,
+    //   photos: productPhotos,
+    //   productAttributes,
+    //   service: productServiceId
 
-      photos: productPhotos,
-      productAttributes,
-      service: productServiceId
-
-    }
+    // }
 
     const url = props.productId
     ? `/api/v1/products/${props.productId}`
@@ -802,7 +803,7 @@ export function ProductForm(props) {
           <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createProductPhotos(e)}/>
           <p className="text-center my-3">ESCOLHA AS IMAGENS DO SEU PRODUTO</p>
           <div className="text-center">
-            <label htmlFor="photo-upload" className="label-upload my-2"><i class="fas fa-file-upload"></i></label>
+            <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
           </div>
           {
             photosPreview?.length > 0 ?
