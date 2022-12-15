@@ -6,9 +6,13 @@ const backBtn = document.getElementById("back-to-users")
 
 
 console.log(screen.width)
-if (screen.width < 768 && userSelected.classList.contains("active")) {
-  sidePanel.classList.add("d-none")
+if (userSelected) {
 
+  if (screen.width < 768 && userSelected.classList.contains("active")) {
+    sidePanel.classList.add("d-none")
+    document.getElementById("footer")
+    console.log("cade?")
+  }
 }
 
 if (backBtn) backBtn.addEventListener("click", removeDisplayNone);

@@ -329,10 +329,13 @@
   margin-left: 0;
  }
 
+ #chat_container {
+    height: 100vh;
+  }
+
  .message-video, .message-img {
     width: 100%;
     height: auto;
-
   }
 
  .msg-content {
@@ -347,7 +350,7 @@
  .msg-time {
   display: block !important;
   margin-bottom: 0 !important;
-  margin-left: 88%;
+  margin-left: 82%;
   font-size: 10px;
  }
 
