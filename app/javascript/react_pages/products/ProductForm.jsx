@@ -259,6 +259,8 @@ export function ProductForm(props) {
       options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
     } else if (attribute.name === "rim_material") {
       options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "seat_post_type") {
+      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
     } else {
       options = attribute.options
     }
@@ -663,7 +665,15 @@ export function ProductForm(props) {
           className="select-answer"
           >
             <option value=""></option>
-            {productTypes.map((productType) => {
+            {productTypes.sort(function (a, b) {
+                if (a.prompt < b.prompt) {
+                  return -1;
+                }
+                if (a.prompt > b.prompt) {
+                  return 1;
+                }
+                return 0;
+              }).map((productType) => {
               return (<option key={productType.id} value={productType.id}>{productType.prompt}</option>)
             })}
           </select>

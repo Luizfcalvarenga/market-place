@@ -122,8 +122,12 @@ export function Products(props) {
       options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
     } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
       return
-    }
-    else {
+    } else if (attribute.name === "seat_post_type") {
+      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+    } else if (attribute.options.includes("other") ) {
+      attribute.options.pop()
+      options = attribute.options
+    } else {
       options = attribute.options
     }
 
@@ -142,6 +146,7 @@ export function Products(props) {
               )
             } else {
               return (
+
                 <option key={index} value={option}>{option}</option>
               )
             }
