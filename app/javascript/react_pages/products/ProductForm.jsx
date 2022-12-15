@@ -23,6 +23,8 @@ export function ProductForm(props) {
   const [productModality, setProductModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
+  const [productAttributesDisplay, setProductAttributesDisplay] = useState({});
+
   const [productBrand, setProductBrand] = useState("");
   const [otherProductBrand, setOtherProductBrand] = useState("");
   const [productModel, setProductModel] = useState("");
@@ -191,14 +193,18 @@ export function ProductForm(props) {
   const createProductAttributes = (e, attribute) => {
     const div = document.getElementById(attribute.name);
     const otherAnswer = document.getElementById("other-answer");
-
+    console.log(e.target.selectedOptions[0].innerText)
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
+    const currentProductAttributesDisplay = {...productAttributesDisplay} // criar um hash com valor atual do estado (copiar o valor)
+
     if (e.target.value ===  "other") {
       div?.classList.toggle('d-none')
       // parece pegar as outras respostas, conferir novamente se escolher outra coisa antes do other não troca depois!!!!!
     } else {
       currentProductAttributes[attribute.name] = e.target.value
       setProductAttributes(currentProductAttributes)
+      currentProductAttributesDisplay[attribute.prompt] = e.target.selectedOptions[0].innerText
+      setProductAttributesDisplay(currentProductAttributesDisplay)
     }
 
     if (attribute.name === "frame_brand") {
@@ -207,9 +213,7 @@ export function ProductForm(props) {
     if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value !== "other") {
       setProductModel(e.target.value)
     }
-    if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other") {
-      setProductModel(e.target.value)
-    }
+
   }
 
   const changeAttribute = (e, attribute) => {
@@ -244,7 +248,7 @@ export function ProductForm(props) {
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
     } else if (attribute.name === "suspension_type") {
-      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ], ["hardtail", "Hardtail" ]]
+      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
     } else if (attribute.name === "brake_type") {
       options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
     }  else if (attribute.name === "condition") {
@@ -330,24 +334,6 @@ export function ProductForm(props) {
       console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
-
-    // const product = {
-    //   user_id: user,
-    //   category_id: categoryId,
-    //   modality: productModality,
-    //   product_type_id: productTypeId,
-    //   brand: productBrand,
-    //   model: productModel,
-    //   description: productDescription,
-    //   price_in_cents: productPrice,
-    //   quantity: productQuantity,
-    //   locality: productLocality,
-    //   year: productYear,
-    //   photos: productPhotos,
-    //   productAttributes,
-    //   service: productServiceId
-
-    // }
 
     const url = props.productId
     ? `/api/v1/products/${props.productId}`
@@ -886,19 +872,18 @@ export function ProductForm(props) {
           </div>
 
 
-          {Object.keys(productAttributes).length != 0 && (
+          {Object.keys(productAttributesDisplay).length != 0 && (
             <>
               <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Atributos</button>
               <div id="Atributos" className="d-none">
-
-                {Object.keys(productAttributes).map((key, index) => {
+                {Object.keys(productAttributesDisplay).map((key, index) => {
                   return (
                     <div key={index}>
                       <p >
                         <span className="text-success me-1">
                           {key}:
                         </span>
-                        {productAttributes[key]}
+                        {productAttributesDisplay[key]}
                       </p>
 
                     </div>

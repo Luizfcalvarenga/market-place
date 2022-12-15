@@ -1153,7 +1153,7 @@ export function BikeForm(props) {
             <option value=""></option>
             <option value="no_suspension">Sem Suspensão</option>
             <option value="full_suspension">Full Suspension</option>
-            <option value="hardtail">hardtail</option>
+            <option value="hardtail">Hardtail(Apenas Dinteira)</option>
           </select>
 
           {suspensionType === "full_suspension" && (<>

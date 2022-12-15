@@ -106,24 +106,26 @@ export function Products(props) {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
     } else if (!categoryFilter && attribute.name === "frame_size") {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+    } else if (attribute.name === "frame_brand") {
+      return
     } else {
       options = attribute.options
     }
 
     return (
       <div attribute={attribute} key={attribute.id} className="">
-        <div id="">
-          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
-          <select
-          className="select-answer"
-          onChange={(e) => setProductAttributesFilter(e.target.value)}
-          >
-            <option value=""></option>
-            {options?.map((option, index) => {
-              return (<option key={index} value={option}>{option}</option>)
-            })}
-          </select>
-        </div>
+
+        <h5 class="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
+        <select
+        className="select-answer"
+        onChange={(e) => setProductAttributesFilter(e.target.value)}
+        >
+          <option value=""></option>
+          {options?.map((option, index) => {
+            return (<option key={index} value={option}>{option}</option>)
+          })}
+        </select>
+
       </div>
     )
   }
@@ -161,7 +163,93 @@ export function Products(props) {
   }
 
 
-  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED"].sort()
+  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Alfameq",
+  "Astro",
+  "Audax",
+  "BH",
+  "Bianchi",
+  "BMC",
+  "Caloi",
+  "Cannondale",
+  "Canyon",
+  "Carrera",
+  "Cervelo",
+  "Corratec",
+  "Cube",
+  "Dabomb",
+  "Felt",
+  "First",
+  "Focus",
+  "Fuji",
+  "Giant",
+  "Groove",
+  "GT",
+  "GTS",
+  "Ibis",
+  "Jamis",
+  "Kona",
+  "Lapierre",
+  "Marin",
+  "Merida",
+  "Mosso",
+  "Oggi",
+  "Orbea",
+  "Pinarello",
+  "Raleigh",
+  "Rava",
+  "Ridley",
+  "Santa_cruz",
+  "Schwinn",
+  "Scott",
+  "Sense",
+  "Soul",
+  "Specialized",
+  "Swift Carbon",
+  "Trek",
+  "Tsw",
+  "Wilier",
+  "YT",
+  "Argon 21",
+  "Bliv",
+  "Blue",
+  "Bottecchia",
+  "Cipollini",
+  "Cly",
+  "Cumberland",
+  "De Rosa",
+  "E Moving",
+  "Gary Fisher",
+  "Gioia",
+  "Kaiena",
+  "Kestrel",
+  "Kode",
+  "Kuota",
+  "Lazzaretti",
+  "Lev E-Bike",
+  "Litespeed",
+  "Look",
+  "Lotus",
+  "Mercian",
+  "Miyamura Gravel",
+  "Open",
+  "Quintana Roo",
+  "Redland",
+  "Riva",
+  "Rose",
+  "Sava",
+  "Sundown",
+  "Time",
+  "Trinx",
+  "Trust",
+  "Velorbis",
+  "Vicinitech",
+  "Victory",
+  "Eddy Merckx",
+  "Salsa",
+  "Surly",
+  "Soma",
+  "Diamondback",
+  "Dahon"].sort()
   const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
     "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
     "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
