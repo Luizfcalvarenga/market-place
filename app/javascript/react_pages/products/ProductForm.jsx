@@ -243,14 +243,25 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
-    }  else {
+    } else if (attribute.name === "suspension_type") {
+      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ], ["hardtail", "Hardtail" ]]
+    } else if (attribute.name === "brake_type") {
+      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+    }  else if (attribute.name === "condition") {
+      options = [ ["new", "Novo"], ["used", "Usado" ]]
+    }  else if (attribute.name === "documentation_type") {
+      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+    } else if (attribute.name === "frame_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "rim_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    }
+    else {
       options = attribute.options
     }
 
     return (
       <div attribute={attribute} key={attribute.id} className="">
-
-
         <div id="">
           <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}<span className="requested-information ms-1">*</span></label><br />
           <select
@@ -259,7 +270,15 @@ export function ProductForm(props) {
           >
             <option value=""></option>
             {options?.map((option, index) => {
-              return (<option key={index} value={option}>{option}</option>)
+              if (Array.isArray(option)) {
+                return (
+                  <option key={index} value={option[0]}>{option[1]}</option>
+                )
+              } else {
+                return (
+                  <option key={index} value={option}>{option}</option>
+                )
+              }
             })}
           </select>
 

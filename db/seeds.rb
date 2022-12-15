@@ -242,7 +242,7 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
     road_brake_models = ["105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Apex", "Force", "GRX", "RED", "Rival", "S-Series", "other"]
     mtb_dirt_urban_brake_models = [" SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level", "other"]
     front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
@@ -585,7 +585,7 @@
     frame_questions = [ frame_question_1, frame_question_2, frame_question_3, frame_question_4, frame_question_5, frame_question_6, frame_question_7 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
     road_brake_models = ["105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Apex", "Force", "GRX", "RED", "Rival", "S-Series", "other"]
     mtb_dirt_urban_brake_models = [" SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level", "other"]
 
