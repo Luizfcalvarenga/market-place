@@ -41,6 +41,10 @@ export function Bike(props) {
     })
 
   }
+  const showSellerContact = () => {
+    const userContact = document.getElementById("user-contact")
+    userContact.classList.toggle("d-none")
+  }
 
 
   return (
@@ -433,6 +437,13 @@ export function Bike(props) {
               <p className=""><strong className="text-success">Local:</strong> {bike.locality}</p>
               <p className=""><strong className="text-success">Descrição:</strong> {bike.description}</p>
             </div>
+            {bike.user.show_contact && (<>
+              <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
+              <div id="user-contact" className="d-none">
+                <p className=" text-center"><strong className="text-success">Telefone:</strong>  {bike.user.phone_number}</p>
+                <p className=" text-center"><strong className="text-success">Email:</strong>  {bike.user.email}</p>
+              </div>
+            </>)}
             <a href={"/user/" + bike.user_id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>

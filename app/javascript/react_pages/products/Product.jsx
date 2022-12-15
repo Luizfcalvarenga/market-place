@@ -41,6 +41,11 @@ export function Product(props) {
 
   }
 
+  const showSellerContact = () => {
+    const userContact = document.getElementById("user-contact")
+    userContact.classList.toggle("d-none")
+  }
+
   return (
 
     <div className="product-show index-container" product={product} key={product}>
@@ -163,6 +168,13 @@ export function Product(props) {
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
               <p className=""><strong className="text-success">Local:</strong> {product.locality}</p>
             </div>
+            {product.user.show_contact && (<>
+              <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
+              <div id="user-contact" className="d-none">
+                <p className=" text-center"><strong className="text-success">Telefone:</strong>  {product.user.phone_number}</p>
+                <p className=" text-center"><strong className="text-success">Email:</strong>  {product.user.email}</p>
+              </div>
+            </>)}
             <a href={"/user/" + product.user.id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>

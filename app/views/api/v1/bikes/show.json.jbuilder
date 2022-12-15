@@ -1,5 +1,5 @@
 json.id @bike.id
-json.user_id @bike.user_id
+json.user @bike.user
 json.category @bike.category
 json.modality @bike.modality
 json.bike_type @bike.bike_type

@@ -61,7 +61,9 @@
               </div>
               <%= f.input :cep, input_html: { class: "mask-cep" } %>
               <%= f.input :address %>
+              <%= f.input :show_contact, label: "Permitir informações de contato no anúncio?", as: :boolean, input_html: { class: "mt-3" } %>
               <%= f.input :photo, as: :file, input_html: { class: "mt-3" } %>
+
               <%= f.submit "Editar", class: "btn btn-success mt-3 w-100" %>
             <% end %>
           </div>
@@ -75,6 +77,8 @@
       <h4><span class="text-success">Contato:</span> <%= @profile.phone_number %></h4>
       <h4><span class="text-success">Endereço:</span> <%= @profile.address %></h4>
       <h4><span class="text-success">CEP:</span> <%= @profile.cep %></h4>
+      <h4><span class="text-success">Contato visível:</span> <%= @profile.show_contact? ? 'Sim' : "Não" %></h4>
+
     </div>
 
   </div>
