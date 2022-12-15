@@ -64,8 +64,6 @@ export function Products(props) {
       setFilteredLink(params.product_type_id)
     }
 
-
-
     const response = await axios.get(url);
     console.log(response)
     setProducts(response.data.products);
