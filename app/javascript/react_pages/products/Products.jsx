@@ -52,21 +52,25 @@ export function Products(props) {
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (filteredLink) url = url + `&product_type_id=${filteredLink}`
 
+
+
+    console.log(window.location)
+
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
-    if (params.product_type) {
-      setFilteredLink(params.product_type)
+
+    if (params.product_type_id) {
+      setFilteredLink(params.product_type_id)
     }
 
 
-      console.log(false)
-      const response = await axios.get(url);
-      console.log(response)
-      setProducts(response.data.products);
-      setProductTypes(response.data.product_types)
-      setProductTypeAttributes(response.data.product_type_attributes)
 
+    const response = await axios.get(url);
+    console.log(response)
+    setProducts(response.data.products);
+    setProductTypes(response.data.product_types)
+    setProductTypeAttributes(response.data.product_type_attributes)
 
   }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
 

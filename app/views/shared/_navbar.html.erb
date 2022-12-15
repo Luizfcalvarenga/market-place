@@ -41,10 +41,10 @@
                 </div>
                 <div class="drpdw-components text-center mx-auto">
                   <h4 class="text-center text-success mt-3">COMPONENTES</h4>
-                  <%= link_to "Freios", {:controller => "products", :action => "index", :product_type => 2}, class: "text-white" %>
-                  <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type => 9}, class: "text-white" %>
-                  <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type => 7}, class: "text-white" %>
-                  <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type => 19}, class: "text-white" %>
+                  <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 2}, class: "text-white" %>
+                  <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 9}, class: "text-white" %>
+                  <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type_id => 7}, class: "text-white" %>
+                  <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type_id => 19}, class: "text-white" %>
                   <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
                 </div>
               </div>
