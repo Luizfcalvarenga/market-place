@@ -43,6 +43,8 @@ export function Bikes(props) {
   const [tyreFilter, setTyreFilter] = useState("");
   const [stemFilter, setStemFilter] = useState("");
   const [handlebarFilter, setHandlebarFilter] = useState("");
+  const [filteredLink, setFilteredLink] = useState("");
+
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
@@ -89,11 +91,33 @@ export function Bikes(props) {
     const response = await axios.get(url);
     setBikes(response.data.bikes);
   }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
-      suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
-      rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
-      seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-      handlebarFilter])
+  suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
+  rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
+  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
+  handlebarFilter])
 
+  useEffect(async() => {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    if (params.category) {
+      setFilteredLink(params.category)
+
+    } else if (params.bike_type) {
+
+      setFilteredLink(params.bike_type)
+    }
+    console.log(filteredLink)
+
+    let url = "/api/v1/bikes?";
+
+    if (filteredLink) url = url + `&category=${filteredLink}`
+
+    const response = await axios.get(url);
+    console.log(response.data.bikes)
+    setBikes(response.data.bikes);
+
+  }, [filteredLink])
 
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
@@ -124,6 +148,8 @@ export function Bikes(props) {
       setConditionFilter("")
     }
   }
+
+
 
 
   const handleLike = (e) => {

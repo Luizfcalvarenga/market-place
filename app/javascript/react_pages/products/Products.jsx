@@ -28,6 +28,8 @@ export function Products(props) {
   const [maxYearFilter, setMaxYearFilter] = useState("");
 
   const [localityFilter, setLocalityFilter] = useState("");
+  const [filteredLink, setFilteredLink] = useState("");
+
 
 
 
@@ -48,14 +50,28 @@ export function Products(props) {
     if (localityFilter) url = url + `&locality=${localityFilter}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
+    if (filteredLink) url = url + `&product_type_id=${filteredLink}`
 
-    const response = await axios.get(url);
-    console.log(response)
-    setProducts(response.data.products);
-    setProductTypes(response.data.product_types)
-    setProductTypeAttributes(response.data.product_type_attributes)
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    if (params.product_type) {
+      setFilteredLink(params.product_type)
+    }
 
-  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter])
+
+      console.log(false)
+      const response = await axios.get(url);
+      console.log(response)
+      setProducts(response.data.products);
+      setProductTypes(response.data.product_types)
+      setProductTypeAttributes(response.data.product_type_attributes)
+
+
+  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
+
+
+
 
   const handleProductAtributes = (e) => {
     console.log(e)
@@ -133,6 +149,7 @@ export function Products(props) {
     })
 
   }
+
 
   const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED"].sort()
   const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
