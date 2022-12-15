@@ -47,7 +47,6 @@ Rails.application.routes.draw do
       patch :approve
       patch :reject
       patch :ajust_product_info
-
     end
   end
 

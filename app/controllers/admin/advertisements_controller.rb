@@ -25,6 +25,7 @@ module Admin
       @parms_to_edit  = nil
     end
 
+
     def approve
       @advertisement = Advertisement.find(params[:advertisement_id])
       @advertisements = Advertisement.all
