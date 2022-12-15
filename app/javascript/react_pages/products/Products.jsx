@@ -67,7 +67,15 @@ export function Products(props) {
     const response = await axios.get(url);
     console.log(response)
     setProducts(response.data.products);
-    setProductTypes(response.data.product_types)
+    setProductTypes(response.data.product_types.sort(function (a, b) {
+      if (a.prompt < b.prompt) {
+        return -1;
+      }
+      if (a.prompt > b.prompt) {
+        return 1;
+      }
+      return 0;
+    }))
     setProductTypeAttributes(response.data.product_type_attributes)
 
   }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
@@ -198,7 +206,7 @@ export function Products(props) {
             >
               <option value=""></option>
               {productTypes.map((productType, index) => {
-                return (<option key={index} value={productType.id}>{productType.name}</option>)
+                return (<option key={index} value={productType.id}>{productType.prompt}</option>)
               })}
             </select>
 
@@ -410,7 +418,7 @@ export function Products(props) {
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{product.locality}</p>
-                          <p>{product.product_type.name}</p>
+                          <p>{product.product_type.prompt}</p>
                         </div>
                         <div className="infos">
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button>

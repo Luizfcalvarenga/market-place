@@ -35,6 +35,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:full_name, :document_number, :phone_number, :cep, :address])
   end
 
+  def original_url
+    base_url + original_fullpath
+  end
+  helper_method :current_order
+
+
   def current_order
     cookies[:tracker_code] = SecureRandom.uuid if cookies[:tracker_code].blank?
 

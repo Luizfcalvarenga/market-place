@@ -901,7 +901,7 @@ export function Bikes(props) {
                           <p>{bike.bike_type}</p>
                         </div>
                         <div className="infos">
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button> <br />
                           { bike.bike_type === "bike" &&(
                             <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}

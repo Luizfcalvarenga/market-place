@@ -659,7 +659,7 @@ export function ProductForm(props) {
           >
             <option value=""></option>
             {productTypes.map((productType) => {
-              return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
+              return (<option key={productType.id} value={productType.id}>{productType.prompt}</option>)
             })}
           </select>
           { errors && errors.product && errors.product.product_type && (

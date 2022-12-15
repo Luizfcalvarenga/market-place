@@ -159,7 +159,7 @@ export function Product(props) {
               </h4>
               <p className=""><strong className="text-success">Categoria:</strong> {product.category.name} </p>
               <p className=""><strong className="text-success">Modalidade:</strong> {product.modality}</p>
-              <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.name}</p>
+              <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
               <p className=""><strong className="text-success">Local:</strong> {product.locality}</p>
             </div>

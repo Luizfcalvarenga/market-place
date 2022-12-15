@@ -33,19 +33,23 @@
               <div class="dropdown-content">
                 <div class="drpdw-bike text-center mx-auto">
                   <h4 class="text-center text-success mt-3">BIKES</h4>
-                  <%= link_to "MTB",  {:controller => "bikes", :action => "index", :category => "mountain_bike"}, class: "text-white" %>
-                  <%= link_to "ROAD",  {:controller => "bikes", :action => "index", :category => "road"}, class: "text-white" %>
-                  <%= link_to "DIRT", {:controller => "bikes", :action => "index", :category => "dirt_street"}, class: "text-white" %>
-                  <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type => "dirt_street"}, class: "text-white" %>
-                  <%= link_to "Ver mais", bikes_path, class: "text-white pb-3" %>
+                  <%# <% if current_user %>
+                    <%= link_to "MTB",  {:controller => "bikes", :action => "index", :category => "mountain_bike"}, class: "text-white" %>
+                    <%= link_to "ROAD",  {:controller => "bikes", :action => "index", :category => "road"}, class: "text-white" %>
+                    <%= link_to "DIRT", {:controller => "bikes", :action => "index", :category => "dirt_street"}, class: "text-white" %>
+                    <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type => "dirt_street"}, class: "text-white" %>
+                    <%= link_to "Ver mais", bikes_path, class: "text-white pb-3" %>
+                  <%# <% end %>
                 </div>
                 <div class="drpdw-components text-center mx-auto">
                   <h4 class="text-center text-success mt-3">COMPONENTES</h4>
-                  <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 2}, class: "text-white" %>
-                  <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 9}, class: "text-white" %>
-                  <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type_id => 7}, class: "text-white" %>
-                  <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type_id => 19}, class: "text-white" %>
-                  <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                  <%# <% if current_user %>
+                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 2}, class: "text-white" %>
+                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 9}, class: "text-white" %>
+                    <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type_id => 7}, class: "text-white" %>
+                    <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type_id => 19}, class: "text-white" %>
+                    <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                  <%# <% end %>
                 </div>
               </div>
             </div>
