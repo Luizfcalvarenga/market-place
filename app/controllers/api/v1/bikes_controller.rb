@@ -59,6 +59,12 @@ module Api
         @bike = Bike.find(params[:id])
         skip_authorization
         @category = Category.find_by(id: @bike.category)
+        if user_signed_in?
+          @current_user =  true
+        else
+          @current_user = false
+        end
+
       end
 
       def new

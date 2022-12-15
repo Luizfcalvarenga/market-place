@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   after_action :set_status
-  skip_before_action :authenticate_user!, only: [:new_announce]
+  skip_before_action :authenticate_user!, only: [:home, :new_announce, :search]
 
   def home
   end

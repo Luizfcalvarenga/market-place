@@ -51,3 +51,4 @@ json.rim_size @bike.rim_size
 json.pedals @bike.pedals
 json.battery_cycles @bike.battery_cycles
 json.photos @bike.photos.map(&:url)
+json.current_user @current_user
