@@ -2,6 +2,21 @@ class Advertisement < ApplicationRecord
   belongs_to :user
   belongs_to :advertisable, polymorphic: true
 
+  PRODUCT_TYPE_OPTIONS = {
+    pending: "pending",
+    paid: "paid",
+    waiting_review: "waiting_review",
+    approved: "approved",
+    adjustments_requested: "adjustments_requested",
+    update_request: "update_request",
+
+  }
+
+  def status_display
+   STATUSES_OPTIONS[status.to_sym]
+  end
+
+
   enum status: {
     pending: "pending",
     paid: "paid",
