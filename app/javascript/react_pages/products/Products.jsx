@@ -108,24 +108,45 @@ export function Products(props) {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
     } else if (attribute.name === "frame_brand") {
       return
-    } else {
+    } else if (attribute.name === "suspension_type") {
+      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
+    } else if (attribute.name === "brake_type") {
+      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+    }  else if (attribute.name === "condition") {
+      options = [ ["new", "Novo"], ["used", "Usado" ]]
+    }  else if (attribute.name === "documentation_type") {
+      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+    } else if (attribute.name === "frame_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "rim_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
+      return
+    }
+    else {
       options = attribute.options
     }
 
     return (
-      <div attribute={attribute} key={attribute.id} className="">
-
-        <h5 class="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
+      <div className="attributes-filters">
+        <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
         <select
         className="select-answer"
         onChange={(e) => setProductAttributesFilter(e.target.value)}
         >
           <option value=""></option>
           {options?.map((option, index) => {
-            return (<option key={index} value={option}>{option}</option>)
+             if (Array.isArray(option)) {
+              return (
+                <option key={index} value={option[0]}>{option[1]}</option>
+              )
+            } else {
+              return (
+                <option key={index} value={option}>{option}</option>
+              )
+            }
           })}
         </select>
-
       </div>
     )
   }
@@ -298,6 +319,8 @@ export function Products(props) {
               })}
             </select>
 
+
+
             <h5 className="text-success mt-3">categoria</h5>
             <select
               value={categoryFilter}
@@ -453,6 +476,8 @@ export function Products(props) {
                   return renderProductAttributeSelect(attribute, index)
                 })}
             </>)}
+
+
           </div>
         </div>
         <div className="col-12 col-md-9 d-flex flex-wrap">
@@ -509,7 +534,7 @@ export function Products(props) {
                           <p>{product.product_type.prompt}</p>
                         </div>
                         <div className="infos">
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button> <br />
                           { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
                             <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
                           )}

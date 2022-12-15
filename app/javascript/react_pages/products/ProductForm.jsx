@@ -259,8 +259,7 @@ export function ProductForm(props) {
       options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
     } else if (attribute.name === "rim_material") {
       options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    }
-    else {
+    } else {
       options = attribute.options
     }
 
