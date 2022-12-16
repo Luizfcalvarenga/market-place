@@ -58,7 +58,7 @@ document.addEventListener("turbolinks:load", () => {
       ),
       Bike: (
         <Bike
-          bike={reactContainer.dataset.bike}
+          bikeId={reactContainer.dataset.bikeId}
         />
       ),
       BikeForm: (

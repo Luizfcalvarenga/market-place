@@ -1,6 +1,7 @@
 <div class="container advertisements mb-5">
   <% if @likes.blank? %>
    <h3 class="text-center my-3">Não favoritou nenhum produto ainda</h3>
+   <p><%= %></p>
   <% else %>
     <h3 class="text-center text-success py-3">Meus favoritos</h3>
     <div class="d-flex gap-5 flex-wrap justfy-content-between mx-auto">

@@ -42,10 +42,10 @@ export function Bike(props) {
 
   }
   const showSellerContact = () => {
+    console.log( )
     const userContact = document.getElementById("user-contact")
     userContact.classList.toggle("d-none")
   }
-
 
   return (
 

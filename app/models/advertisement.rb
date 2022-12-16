@@ -32,7 +32,7 @@ class Advertisement < ApplicationRecord
 
 
   def perform_after_payment_confirmation_actions
-    self.update(status: "waiting_review")
+    self.update(status: "paid")
 
     if is_free?
       self.update(

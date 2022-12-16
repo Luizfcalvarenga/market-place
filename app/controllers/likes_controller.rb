@@ -2,7 +2,7 @@ class LikesController < ApplicationController
 
   def index
     @likes = policy_scope(Like).order(created_at: :desc)
-
+    @user = current_user
   end
 
   def new

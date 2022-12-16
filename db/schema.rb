@@ -308,7 +308,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_211615) do
     t.string "address"
     t.string "cep"
     t.string "phone_number"
-    t.integer "status", default: 0
+    t.integer "status"
     t.integer "current_chat"
     t.string "access", default: "user"
     t.boolean "show_contact", default: false
