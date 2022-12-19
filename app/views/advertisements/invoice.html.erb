@@ -1,4 +1,4 @@
-<% if @advertisement.price_in_cents == 0 %>
+<% if @advertisement.is_free? %>
   <div class="payment-confirmed vh-100 success-text flex center around">
     <div class="p-5 flex center column">
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
@@ -21,7 +21,7 @@
       <% end %>
     </div>
   </div>
-  <div id="invoice-container" class="payment-container container" data-advertisement-id="<%= @advertisement.id %>">
+  <div class="payment-container container" data-advertisement-id="<%= @advertisement.id %>">
     <div class="my-5">
       <h1 class="title">Pagamento do pedido</h1>
       <p><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, o anúncio será gerado e pssará por uma revisão, assim que aprovado será publicado.</strong> </p>

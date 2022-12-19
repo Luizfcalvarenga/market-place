@@ -43,7 +43,9 @@ export function Bikes(props) {
   const [tyreFilter, setTyreFilter] = useState("");
   const [stemFilter, setStemFilter] = useState("");
   const [handlebarFilter, setHandlebarFilter] = useState("");
-  const [filteredLink, setFilteredLink] = useState("");
+  const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
+  const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
+
 
 
   useEffect(async () => {
@@ -87,16 +89,18 @@ export function Bikes(props) {
     if (tyreFilter) url = url + `&tyre=${tyreFilter}`
     if (stemFilter) url = url + `&stem=${stemFilter}`
     if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
-    if (filteredLink) url = url + `&category=${filteredLink}`
+    if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
+    if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
+
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
 
     if (params.category) {
-      setFilteredLink(params.category)
+      setFilteredLinkCategory(params.category)
     } else if (params.bike_type) {
-      setFilteredLink(params.bike_type)
+      setFilteredLinkBikeType(params.bike_type)
     }
 
     const response = await axios.get(url);
@@ -107,7 +111,7 @@ export function Bikes(props) {
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLink])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType])
 
 
 

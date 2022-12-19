@@ -49,7 +49,7 @@ class Advertisement < ApplicationRecord
       months: 1,
       items:
         [{
-          description: "Anúncio de: item##{advertisable.id}",
+          description: "Anúncio de: item##{advertisable_type}",
           quantity: 1,
           price_cents: price_in_cents,
         }],

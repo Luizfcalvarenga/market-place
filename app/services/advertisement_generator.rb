@@ -16,9 +16,9 @@ class AdvertisementGenerator
       )
       @advertisement.persisted?
     end
-    if @advertisement.should_generate_new_invoice?
-      ::NovaIugu::InvoiceGenerator.new(@advertisement).call
-    end
+    # if @advertisement.should_generate_new_invoice?
+    #   ::NovaIugu::InvoiceGenerator.new(@advertisement).call
+    # end
     AdvertisementMailer.with(advertisement: @advertisement).advertisement_creation.deliver_now
   end
 

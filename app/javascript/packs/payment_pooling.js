@@ -1,7 +1,5 @@
 document.addEventListener("turbolinks:load", () => {
   const paymentContainer = document.querySelector(".payment-container");
-  const invoiceContainer = document.getElementById("invoice-container");
-  console.log(invoiceContainer);
   console.log(paymentContainer);
 
 

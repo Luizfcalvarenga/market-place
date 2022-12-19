@@ -8,7 +8,7 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import React from "react";
 import ReactDOM from "react-dom";
-import "trix";
+// import "trix";
 import "@rails/actiontext";
 import "@hotwired/turbo-rails"
 import "../stylesheets/application";
