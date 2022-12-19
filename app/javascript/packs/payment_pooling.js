@@ -1,11 +1,14 @@
 document.addEventListener("turbolinks:load", () => {
   const paymentContainer = document.querySelector(".payment-container");
+  console.log(paymentContainer);
+
+
 
   if (!paymentContainer) return;
 
   const advertisementId = paymentContainer.dataset.advertisementId;
   let stopPolling = false;
-
+  console.log(advertisementId);
   if (!advertisementId) return;
 
   const poolFunction = async () => {
@@ -13,6 +16,7 @@ document.addEventListener("turbolinks:load", () => {
     const url = `/advertisements/${advertisementId}/status.json`;
 
     const response = await axios.get(url);
+    console.log(response)
 
     if (response.data.status === "paid") {
       document.querySelector(".payment-confirmed").classList.remove("hide");

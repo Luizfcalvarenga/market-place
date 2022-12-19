@@ -28,6 +28,8 @@ export function Products(props) {
   const [maxYearFilter, setMaxYearFilter] = useState("");
 
   const [localityFilter, setLocalityFilter] = useState("");
+  const [filteredLink, setFilteredLink] = useState("");
+
 
 
 
@@ -48,14 +50,38 @@ export function Products(props) {
     if (localityFilter) url = url + `&locality=${localityFilter}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
+    if (filteredLink) url = url + `&product_type_id=${filteredLink}`
+
+
+
+    console.log(window.location)
+
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    if (params.product_type_id) {
+      setFilteredLink(params.product_type_id)
+    }
 
     const response = await axios.get(url);
     console.log(response)
     setProducts(response.data.products);
-    setProductTypes(response.data.product_types)
+    setProductTypes(response.data.product_types.sort(function (a, b) {
+      if (a.prompt < b.prompt) {
+        return -1;
+      }
+      if (a.prompt > b.prompt) {
+        return 1;
+      }
+      return 0;
+    }))
     setProductTypeAttributes(response.data.product_type_attributes)
 
-  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter])
+  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
+
+
+
 
   const handleProductAtributes = (e) => {
     console.log(e)
@@ -80,24 +106,52 @@ export function Products(props) {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
     } else if (!categoryFilter && attribute.name === "frame_size") {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+    } else if (attribute.name === "frame_brand") {
+      return
+    } else if (attribute.name === "suspension_type") {
+      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
+    } else if (attribute.name === "brake_type") {
+      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+    }  else if (attribute.name === "condition") {
+      options = [ ["new", "Novo"], ["used", "Usado" ]]
+    }  else if (attribute.name === "documentation_type") {
+      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+    } else if (attribute.name === "frame_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "rim_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
+      return
+    } else if (attribute.name === "seat_post_type") {
+      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+    } else if (attribute.options.includes("other") ) {
+      attribute.options.pop()
+      options = attribute.options
     } else {
       options = attribute.options
     }
 
     return (
-      <div attribute={attribute} key={attribute.id} className="">
-        <div id="">
-          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
-          <select
-          className="select-answer"
-          onChange={(e) => setProductAttributesFilter(e.target.value)}
-          >
-            <option value=""></option>
-            {options?.map((option, index) => {
-              return (<option key={index} value={option}>{option}</option>)
-            })}
-          </select>
-        </div>
+      <div className="attributes-filters">
+        <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
+        <select
+        className="select-answer"
+        onChange={(e) => setProductAttributesFilter(e.target.value)}
+        >
+          <option value=""></option>
+          {options?.map((option, index) => {
+             if (Array.isArray(option)) {
+              return (
+                <option key={index} value={option[0]}>{option[1]}</option>
+              )
+            } else {
+              return (
+
+                <option key={index} value={option}>{option}</option>
+              )
+            }
+          })}
+        </select>
       </div>
     )
   }
@@ -111,8 +165,117 @@ export function Products(props) {
     }
   }
 
+  const handleLike = (e) => {
+    e.preventDefault()
+    const dataObject = new FormData();
+    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_type]", "Product" );
+    console.log(e.nativeEvent.path[1].id)
+    axios.post('/likes', dataObject)
 
-  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED"].sort()
+    .then(function (response) {
+      console.log(response);
+      if (response.data.success) {
+        swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else {
+        if (response.data.errors.user) {
+          swal("OPS", "Não pode curtir seu produto", "error");
+        } else if (response.data.errors.like) {
+          swal("OPS", "Você já curtiu esse produto", "error");
+        }
+      }
+    })
+
+  }
+
+
+  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Alfameq",
+  "Astro",
+  "Audax",
+  "BH",
+  "Bianchi",
+  "BMC",
+  "Caloi",
+  "Cannondale",
+  "Canyon",
+  "Carrera",
+  "Cervelo",
+  "Corratec",
+  "Cube",
+  "Dabomb",
+  "Felt",
+  "First",
+  "Focus",
+  "Fuji",
+  "Giant",
+  "Groove",
+  "GT",
+  "GTS",
+  "Ibis",
+  "Jamis",
+  "Kona",
+  "Lapierre",
+  "Marin",
+  "Merida",
+  "Mosso",
+  "Oggi",
+  "Orbea",
+  "Pinarello",
+  "Raleigh",
+  "Rava",
+  "Ridley",
+  "Santa_cruz",
+  "Schwinn",
+  "Scott",
+  "Sense",
+  "Soul",
+  "Specialized",
+  "Swift Carbon",
+  "Trek",
+  "Tsw",
+  "Wilier",
+  "YT",
+  "Argon 21",
+  "Bliv",
+  "Blue",
+  "Bottecchia",
+  "Cipollini",
+  "Cly",
+  "Cumberland",
+  "De Rosa",
+  "E Moving",
+  "Gary Fisher",
+  "Gioia",
+  "Kaiena",
+  "Kestrel",
+  "Kode",
+  "Kuota",
+  "Lazzaretti",
+  "Lev E-Bike",
+  "Litespeed",
+  "Look",
+  "Lotus",
+  "Mercian",
+  "Miyamura Gravel",
+  "Open",
+  "Quintana Roo",
+  "Redland",
+  "Riva",
+  "Rose",
+  "Sava",
+  "Sundown",
+  "Time",
+  "Trinx",
+  "Trust",
+  "Velorbis",
+  "Vicinitech",
+  "Victory",
+  "Eddy Merckx",
+  "Salsa",
+  "Surly",
+  "Soma",
+  "Diamondback",
+  "Dahon"].sort()
   const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
     "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
     "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
@@ -157,9 +320,11 @@ export function Products(props) {
             >
               <option value=""></option>
               {productTypes.map((productType, index) => {
-                return (<option key={index} value={productType.id}>{productType.name}</option>)
+                return (<option key={index} value={productType.id}>{productType.prompt}</option>)
               })}
             </select>
+
+
 
             <h5 className="text-success mt-3">categoria</h5>
             <select
@@ -316,6 +481,8 @@ export function Products(props) {
                   return renderProductAttributeSelect(attribute, index)
                 })}
             </>)}
+
+
           </div>
         </div>
         <div className="col-12 col-md-9 d-flex flex-wrap">
@@ -369,14 +536,10 @@ export function Products(props) {
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{product.locality}</p>
-                          <p>{product.product_type.name}</p>
+                          <p>{product.product_type.prompt}</p>
                         </div>
                         <div className="infos">
-                          <form action={`/likes`} method="post" >
-                            <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
-                            <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
-                            <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-                          </form>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button> <br />
                           { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
                             <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
                           )}

@@ -23,6 +23,8 @@ export function ProductForm(props) {
   const [productModality, setProductModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
+  const [productAttributesDisplay, setProductAttributesDisplay] = useState({});
+
   const [productBrand, setProductBrand] = useState("");
   const [otherProductBrand, setOtherProductBrand] = useState("");
   const [productModel, setProductModel] = useState("");
@@ -191,14 +193,18 @@ export function ProductForm(props) {
   const createProductAttributes = (e, attribute) => {
     const div = document.getElementById(attribute.name);
     const otherAnswer = document.getElementById("other-answer");
-
+    console.log(e.target.selectedOptions[0].innerText)
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
+    const currentProductAttributesDisplay = {...productAttributesDisplay} // criar um hash com valor atual do estado (copiar o valor)
+
     if (e.target.value ===  "other") {
       div?.classList.toggle('d-none')
       // parece pegar as outras respostas, conferir novamente se escolher outra coisa antes do other não troca depois!!!!!
     } else {
       currentProductAttributes[attribute.name] = e.target.value
       setProductAttributes(currentProductAttributes)
+      currentProductAttributesDisplay[attribute.prompt] = e.target.selectedOptions[0].innerText
+      setProductAttributesDisplay(currentProductAttributesDisplay)
     }
 
     if (attribute.name === "frame_brand") {
@@ -207,9 +213,7 @@ export function ProductForm(props) {
     if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value !== "other") {
       setProductModel(e.target.value)
     }
-    if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other") {
-      setProductModel(e.target.value)
-    }
+
   }
 
   const changeAttribute = (e, attribute) => {
@@ -243,6 +247,20 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
+    } else if (attribute.name === "suspension_type") {
+      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
+    } else if (attribute.name === "brake_type") {
+      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+    }  else if (attribute.name === "condition") {
+      options = [ ["new", "Novo"], ["used", "Usado" ]]
+    }  else if (attribute.name === "documentation_type") {
+      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+    } else if (attribute.name === "frame_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "rim_material") {
+      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    } else if (attribute.name === "seat_post_type") {
+      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
     } else {
       options = attribute.options
     }
@@ -257,22 +275,22 @@ export function ProductForm(props) {
           >
             <option value=""></option>
             {options?.map((option, index) => {
-              return (<option key={index} value={option}>{option}</option>)
+              if (Array.isArray(option)) {
+                return (
+                  <option key={index} value={option[0]}>{option[1]}</option>
+                )
+              } else {
+                return (
+                  <option key={index} value={option}>{option}</option>
+                )
+              }
             })}
           </select>
 
-
-          <div id={attribute.name} class="d-none">
+          <div id={attribute.name} className="d-none">
             <label htmlFor="productbrand" className="mt-3">Qual:</label>
             <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
           </div>
-
-          {/* {(attribute.name === "brake_model" || attribute.name === "model") && e.target.value === "other" && (
-          <div id={attribute.name} class="d-none">
-            <label htmlFor="productbrand" className="mt-3">Qual:</label>
-            <input type="text" className="text-input" onChange={(e) => setProductModel(e.target.value)}/>
-          </div>
-          )} */}
         </div>
       </div>
     )
@@ -318,25 +336,6 @@ export function ProductForm(props) {
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
 
-    const product = {
-      user_id: user,
-      category_id: categoryId,
-      modality: productModality,
-      product_type_id: productTypeId,
-      brand: productBrand,
-      model: productModel,
-      description: productDescription,
-      price_in_cents: productPrice,
-      quantity: productQuantity,
-      locality: productLocality,
-      year: productYear,
-
-      photos: productPhotos,
-      productAttributes,
-      service: productServiceId
-
-    }
-
     const url = props.productId
     ? `/api/v1/products/${props.productId}`
     : "/api/v1/products";
@@ -348,7 +347,7 @@ export function ProductForm(props) {
       swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       setErrors(response.data.errors);
-      swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
+      swal("OPS", "Algo deu errado!", "Revise suas informaçoes", "error");
       e.target.classList.remove("d-none")
       document.getElementById("spinner").classList.add("de-none")
     }
@@ -666,8 +665,16 @@ export function ProductForm(props) {
           className="select-answer"
           >
             <option value=""></option>
-            {productTypes.map((productType) => {
-              return (<option key={productType.id} value={productType.id}>{productType.name}</option>)
+            {productTypes.sort(function (a, b) {
+                if (a.prompt < b.prompt) {
+                  return -1;
+                }
+                if (a.prompt > b.prompt) {
+                  return 1;
+                }
+                return 0;
+              }).map((productType) => {
+              return (<option key={productType.id} value={productType.id}>{productType.prompt}</option>)
             })}
           </select>
           { errors && errors.product && errors.product.product_type && (
@@ -810,7 +817,7 @@ export function ProductForm(props) {
           <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createProductPhotos(e)}/>
           <p className="text-center my-3">ESCOLHA AS IMAGENS DO SEU PRODUTO</p>
           <div className="text-center">
-            <label htmlFor="photo-upload" className="label-upload my-2"><i class="fas fa-file-upload"></i></label>
+            <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
           </div>
           {
             photosPreview?.length > 0 ?
@@ -874,19 +881,18 @@ export function ProductForm(props) {
           </div>
 
 
-          {Object.keys(productAttributes).length != 0 && (
+          {Object.keys(productAttributesDisplay).length != 0 && (
             <>
               <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-review-product my-3 w-100 p-2">Atributos</button>
               <div id="Atributos" className="d-none">
-
-                {Object.keys(productAttributes).map((key, index) => {
+                {Object.keys(productAttributesDisplay).map((key, index) => {
                   return (
                     <div key={index}>
                       <p >
                         <span className="text-success me-1">
                           {key}:
                         </span>
-                        {productAttributes[key]}
+                        {productAttributesDisplay[key]}
                       </p>
 
                     </div>

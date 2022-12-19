@@ -40,74 +40,74 @@
 
     bike_types = ["no_engine", "electric_engine"]
 
-    battery = ProductType.create(name: "battery")
-    brake = ProductType.create(name: "brake")
-    brake_levers = ProductType.create(name: "brake_levers")
-    cassete = ProductType.create(name: "cassete")
-    chain = ProductType.create(name: "chain")
-    chainring = ProductType.create(name: "chainring") #coroa
-    crankset = ProductType.create(name: "crankset") # pedivela
-    fender = ProductType.create(name: "fender")
-    frame = ProductType.create(name: "frame")
-    front_derailleur = ProductType.create(name: "front_derailleur") #câmbio dianeriro
-    front_shifter = ProductType.create(name: "front_shifter")
-    front_suspension = ProductType.create(name: "front_suspension")
-    full_wheel = ProductType.create(name: "full_wheel")
-    grips = ProductType.create(name: "grips")
-    handlebar = ProductType.create(name: "handlebar")
-    headset = ProductType.create(name: "headset") #caixa de direção
-    hub = ProductType.create(name: "hub") # cubo
-    pedals = ProductType.create(name: "pedals")
-    rim = ProductType.create(name: "rim")
-    saddle = ProductType.create(name: "saddle")
-    seat_post = ProductType.create(name: "seat_post")
-    spoke = ProductType.create(name: "spoke") # raios
-    rear_derailleur = ProductType.create(name: "rear_derailleur") #câmbio traseiro
-    rear_shifter = ProductType.create(name: "rear_shifter")
-    rear_suspension = ProductType.create(name: "rear_suspension") # shock
-    stem = ProductType.create(name: "stem") # avanço/mesa
-    tyre = ProductType.create(name: "tyre")
+    battery = ProductType.create(name: "battery", prompt: "Bateria")
+    brake = ProductType.create(name: "brake", prompt: "Freio")
+    brake_levers = ProductType.create(name: "brake_levers", prompt: "Manete de Freio")
+    cassete = ProductType.create(name: "cassete", prompt: "Cassete")
+    chain = ProductType.create(name: "chain", prompt: "Corrente")
+    chainring = ProductType.create(name: "chainring", prompt: "Coroa") #coroa
+    crankset = ProductType.create(name: "crankset", prompt: "Pedivela") # pedivela
+    fender = ProductType.create(name: "fender", prompt: "Paralama")
+    frame = ProductType.create(name: "frame", prompt: "Quadro")
+    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Transmissão Dianteira") #câmbio dianeriro
+    front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador Dianteiro")
+    front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira")
+    full_wheel = ProductType.create(name: "full_wheel", prompt: "Roda Completa")
+    grips = ProductType.create(name: "grips", prompt: "Manopla")
+    handlebar = ProductType.create(name: "handlebar", prompt: "Guidão")
+    headset = ProductType.create(name: "headset", prompt: "Caixa de Direção") #caixa de direção
+    hub = ProductType.create(name: "hub", prompt: "Cubo") # cubo
+    pedals = ProductType.create(name: "pedals", prompt: "Pedais")
+    rim = ProductType.create(name: "rim", prompt: "Aro")
+    saddle = ProductType.create(name: "saddle", prompt: "Selim")
+    seat_post = ProductType.create(name: "seat_post", prompt: "Canote")
+    spoke = ProductType.create(name: "spoke", prompt: "Raios") # raios
+    rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Transmissão Traseira") #câmbio traseiro
+    rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador Traseiro")
+    rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Suspensão Traseira") # shock
+    stem = ProductType.create(name: "stem", prompt: "Mesa") # avanço/mesa
+    tyre = ProductType.create(name: "tyre", prompt: "Pneu")
 
     ############################################################### ACCESSORIES
 
-    car_accessories = ProductType.create(name: "car_accessories")
-    bike_accessories = ProductType.create(name: "bike_accessories")
-    training_accessories = ProductType.create(name: "training_accessories")
-    pre_after_pedal_accessories = ProductType.create(name: "pre_after_pedal_accessories")
+    car_accessories = ProductType.create(name: "car_accessories", prompt: "Acessórios para Carros")
+    bike_accessories = ProductType.create(name: "bike_accessories", prompt: "Acesórios para Bikes")
+    training_accessories = ProductType.create(name: "training_accessories", prompt: "Acessórios para Treino")
+    pre_after_pedal_accessories = ProductType.create(name: "pre_after_pedal_accessories", prompt: "Acessórios pré e pós Pedal")
 
    ############################################################### CLOTHING
 
-   bretelle = ProductType.create(name: "bretelle")
-   shorts = ProductType.create(name: "shorts")
-   inner_shorts = ProductType.create(name: "inner_shorts")
-   shirt = ProductType.create(name: "shirt")
-   vest = ProductType.create(name: "vest")
-   windbreaker = ProductType.create(name: "windbreaker")
-   gloves = ProductType.create(name: "gloves")
-   socks = ProductType.create(name: "socks")
-   glasses = ProductType.create(name: "glasses")
-   thermal_clothing = ProductType.create(name: "thermal_clothing")
+   bretelle = ProductType.create(name: "bretelle", prompt: "Bretelle")
+   shorts = ProductType.create(name: "shorts", prompt: "Bermuda")
+   inner_shorts = ProductType.create(name: "inner_shorts", prompt: "Bermuda Interior")
+   shirt = ProductType.create(name: "shirt", prompt: "Camisa")
+   vest = ProductType.create(name: "vest", prompt: "Colete")
+   windbreaker = ProductType.create(name: "windbreaker", prompt: "Corta Vento")
+   gloves = ProductType.create(name: "gloves", prompt: "Luvas")
+   socks = ProductType.create(name: "socks", prompt: "Meias")
+   glasses = ProductType.create(name: "glasses", prompt: "Óculos")
+   thermal_clothing = ProductType.create(name: "thermal_clothing", prompt: "Roupa Térmica")
 
    ############################################################### CASUAL
 
-   cap = ProductType.create(name: "cap")
+   cap = ProductType.create(name: "cap", prompt: "Boné")
 
    ############################################################### EQUIPMENT
 
-   helmet = ProductType.create(name: "helmet")
-   elbow_pad = ProductType.create(name: "elbow_pad")
-   knee_pad = ProductType.create(name: "knee_pad")
-   water_bottle = ProductType.create(name: "water_bottle")
-   bottle_cage = ProductType.create(name: "bottle_cage")
-   hydration_backpack = ProductType.create(name: "hydration_backpack")
-   fanny_pack = ProductType.create(name: "fanny_pack")
-   sneaker = ProductType.create(name: "sneaker")
+   helmet = ProductType.create(name: "helmet", prompt: "Capacete")
+   elbow_pad = ProductType.create(name: "elbow_pad", prompt: "Cotoveleira")
+   knee_pad = ProductType.create(name: "knee_pad", prompt: "Joelheira")
+   water_bottle = ProductType.create(name: "water_bottle", prompt: "Garrafa")
+   bottle_cage = ProductType.create(name: "bottle_cage", prompt: "Suporte para Garrafa")
+   hydration_backpack = ProductType.create(name: "hydration_backpack", prompt: "Mochila de Hidratação")
+   fanny_pack = ProductType.create(name: "fanny_pack", prompt: "Pochete")
+   sneaker = ProductType.create(name: "sneaker", prompt: "Sapatilha")
 
    ############################################################## Maintanence
 
-    air_bomb = ProductType.create(name: "air_bomb")
-    lubricant = ProductType.create(name: "lubricant")
-    sealant = ProductType.create(name: "sealant")
+    air_bomb = ProductType.create(name: "air_bomb", prompt: "Bomba de Ar")
+    lubricant = ProductType.create(name: "lubricant", prompt: "Lubrificante")
+    sealant = ProductType.create(name: "sealant", prompt: "Selante")
 
     products_options = [ battery, brake, brake_levers, cassete, chain, chainring, crankset, fender, frame, front_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, spoke, rear_derailleur, rear_shifter, rear_suspension, stem, tyre, car_accessories, bike_accessories, training_accessories, pre_after_pedal_accessories, bretelle, shorts, inner_shorts, shirt, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, bottle_cage, hydration_backpack, fanny_pack, sneaker, air_bomb, lubricant, sealant ]
 
@@ -242,7 +242,7 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
     road_brake_models = ["105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Apex", "Force", "GRX", "RED", "Rival", "S-Series", "other"]
     mtb_dirt_urban_brake_models = [" SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level", "other"]
     front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
@@ -386,73 +386,74 @@
 
     bike_types = [ "no_engine", "electric_engine"]
 
-    battery = ProductType.create(name: "battery")
-    brake = ProductType.create(name: "brake")
-    brake_levers = ProductType.create(name: "brake_levers")
-    cassete = ProductType.create(name: "cassete")
-    chain = ProductType.create(name: "chain")
-    chainring = ProductType.create(name: "chainring") #coroa
-    crankset = ProductType.create(name: "crankset") # pedivela
-    fender = ProductType.create(name: "fender")
-    frame = ProductType.create(name: "frame")
-    front_derailleur = ProductType.create(name: "front_derailleur") #câmbio dianeriro
-    front_shifter = ProductType.create(name: "front_shifter")
-    front_suspension = ProductType.create(name: "front_suspension")
-    full_wheel = ProductType.create(name: "full_wheel")
-    grips = ProductType.create(name: "grips")
-    handlebar = ProductType.create(name: "handlebar")
-    headset = ProductType.create(name: "headset") #caixa de direção
-    hub = ProductType.create(name: "hub") # cubo
-    pedals = ProductType.create(name: "pedals")
-    rim = ProductType.create(name: "rim")
-    saddle = ProductType.create(name: "saddle")
-    seat_post = ProductType.create(name: "seat_post")
-    spoke = ProductType.create(name: "spoke") # raios
-    rear_derailleur = ProductType.create(name: "rear_derailleur") #câmbio traseiro
-    rear_shifter = ProductType.create(name: "rear_shifter")
-    rear_suspension = ProductType.create(name: "rear_suspension") # shock
-    stem = ProductType.create(name: "stem") # avanço/mesa
-    tyre = ProductType.create(name: "tyre")
-
+    battery = ProductType.create(name: "battery", prompt: "Bateria")
+    brake = ProductType.create(name: "brake", prompt: "Freio")
+    brake_levers = ProductType.create(name: "brake_levers", prompt: "Manete de Freio")
+    cassete = ProductType.create(name: "cassete", prompt: "Cassete")
+    chain = ProductType.create(name: "chain", prompt: "Corrente")
+    chainring = ProductType.create(name: "chainring", prompt: "Coroa") #coroa
+    crankset = ProductType.create(name: "crankset", prompt: "Pedivela") # pedivela
+    fender = ProductType.create(name: "fender", prompt: "Paralama")
+    frame = ProductType.create(name: "frame", prompt: "Quadro")
+    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Transmissão Dianteira") #câmbio dianeriro
+    front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador Dianteiro")
+    front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira")
+    full_wheel = ProductType.create(name: "full_wheel", prompt: "Roda Completa")
+    grips = ProductType.create(name: "grips", prompt: "Manopla")
+    handlebar = ProductType.create(name: "handlebar", prompt: "Guidão")
+    headset = ProductType.create(name: "headset", prompt: "Caixa de Direção") #caixa de direção
+    hub = ProductType.create(name: "hub", prompt: "Cubo") # cubo
+    pedals = ProductType.create(name: "pedals", prompt: "Pedais")
+    rim = ProductType.create(name: "rim", prompt: "Aro")
+    saddle = ProductType.create(name: "saddle", prompt: "Selim")
+    seat_post = ProductType.create(name: "seat_post", prompt: "Canote")
+    spoke = ProductType.create(name: "spoke", prompt: "Raios") # raios
+    rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Transmissão Traseira") #câmbio traseiro
+    rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador Traseiro")
+    rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Suspensão Traseira") # shock
+    stem = ProductType.create(name: "stem", prompt: "Mesa") # avanço/mesa
+    tyre = ProductType.create(name: "tyre", prompt: "Pneu")
 
     ############################################################### ACCESSORIES
-    car_accessories = ProductType.create(name: "car_accessories")
-    bike_accessories = ProductType.create(name: "bike_accessories")
-    training_accessories = ProductType.create(name: "training_accessories")
-    pre_after_pedal_accessories = ProductType.create(name: "pre_after_pedal_accessories")
+
+    car_accessories = ProductType.create(name: "car_accessories", prompt: "Acessórios para Carros")
+    bike_accessories = ProductType.create(name: "bike_accessories", prompt: "Acesórios para Bikes")
+    training_accessories = ProductType.create(name: "training_accessories", prompt: "Acessórios para Treino")
+    pre_after_pedal_accessories = ProductType.create(name: "pre_after_pedal_accessories", prompt: "Acessórios pré e pós Pedal")
 
    ############################################################### CLOTHING
-   bretelle = ProductType.create(name: "bretelle")
-   shorts = ProductType.create(name: "shorts")
-   inner_shorts = ProductType.create(name: "inner_shorts")
-   shirt = ProductType.create(name: "shirt")
-   vest = ProductType.create(name: "vest")
-   windbreaker = ProductType.create(name: "windbreaker")
-   gloves = ProductType.create(name: "gloves")
-   socks = ProductType.create(name: "socks")
-   glasses = ProductType.create(name: "glasses")
-   thermal_clothing = ProductType.create(name: "thermal_clothing")
+
+   bretelle = ProductType.create(name: "bretelle", prompt: "Bretelle")
+   shorts = ProductType.create(name: "shorts", prompt: "Bermuda")
+   inner_shorts = ProductType.create(name: "inner_shorts", prompt: "Bermuda Interior")
+   shirt = ProductType.create(name: "shirt", prompt: "Camisa")
+   vest = ProductType.create(name: "vest", prompt: "Colete")
+   windbreaker = ProductType.create(name: "windbreaker", prompt: "Corta Vento")
+   gloves = ProductType.create(name: "gloves", prompt: "Luvas")
+   socks = ProductType.create(name: "socks", prompt: "Meias")
+   glasses = ProductType.create(name: "glasses", prompt: "Óculos")
+   thermal_clothing = ProductType.create(name: "thermal_clothing", prompt: "Roupa Térmica")
 
    ############################################################### CASUAL
 
-   cap = ProductType.create(name: "cap")
+   cap = ProductType.create(name: "cap", prompt: "Boné")
 
    ############################################################### EQUIPMENT
-   helmet = ProductType.create(name: "helmet")
-   elbow_pad = ProductType.create(name: "elbow_pad")
-   knee_pad = ProductType.create(name: "knee_pad")
-   water_bottle = ProductType.create(name: "water_bottle")
-   bottle_cage = ProductType.create(name: "bottle_cage")
-   hydration_backpack = ProductType.create(name: "hydration_backpack")
-   fanny_pack = ProductType.create(name: "fanny_pack")
-   sneaker = ProductType.create(name: "sneaker")
 
+   helmet = ProductType.create(name: "helmet", prompt: "Capacete")
+   elbow_pad = ProductType.create(name: "elbow_pad", prompt: "Cotoveleira")
+   knee_pad = ProductType.create(name: "knee_pad", prompt: "Joelheira")
+   water_bottle = ProductType.create(name: "water_bottle", prompt: "Garrafa")
+   bottle_cage = ProductType.create(name: "bottle_cage", prompt: "Suporte para Garrafa")
+   hydration_backpack = ProductType.create(name: "hydration_backpack", prompt: "Mochila de Hidratação")
+   fanny_pack = ProductType.create(name: "fanny_pack", prompt: "Pochete")
+   sneaker = ProductType.create(name: "sneaker", prompt: "Sapatilha")
 
+   ############################################################## Maintanence
 
-   ############################################################## MAINTENENCE
-    air_bomb = ProductType.create(name: "air_bomb")
-    lubricant = ProductType.create(name: "lubricant")
-    sealant = ProductType.create(name: "sealant")
+    air_bomb = ProductType.create(name: "air_bomb", prompt: "Bomba de Ar")
+    lubricant = ProductType.create(name: "lubricant", prompt: "Lubrificante")
+    sealant = ProductType.create(name: "sealant", prompt: "Selante")
 
     products_options = [ battery, brake, brake_levers, cassete, chain, chainring, crankset, fender, frame, front_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, pedals, rim, saddle, seat_post, spoke, rear_derailleur, rear_shifter, rear_suspension, stem, tyre, car_accessories, bike_accessories, training_accessories, pre_after_pedal_accessories, bretelle, shorts, inner_shorts, shirt, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, bottle_cage, hydration_backpack, fanny_pack, sneaker, air_bomb, lubricant, sealant ]
 
@@ -584,7 +585,7 @@
     frame_questions = [ frame_question_1, frame_question_2, frame_question_3, frame_question_4, frame_question_5, frame_question_6, frame_question_7 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake", "caliper" ]
+    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
     road_brake_models = ["105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Apex", "Force", "GRX", "RED", "Rival", "S-Series", "other"]
     mtb_dirt_urban_brake_models = [" SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level", "other"]
 

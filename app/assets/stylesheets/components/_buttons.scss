@@ -31,7 +31,7 @@
   display: none;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.95);
-  width: auto;
+  width: 210%;
   border: 1px solid $color-primary;
   border-radius: 8px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -50,6 +50,7 @@
   display: block;
   font-size: 18px;
   font-weight: normal;
+  
 }
 
 .dropdown-content a:hover {
@@ -169,6 +170,7 @@
 .like-btn {
   border: none;
   background-color: transparent;
+
   &:hover {
     .fa-heart {
       color: red !important;
@@ -176,6 +178,7 @@
     }
   }
 }
+
 
 .dislike-btn {
   .fa-heart {

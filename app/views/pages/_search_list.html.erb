@@ -1,7 +1,7 @@
 <div data-search-target="list" class="results-list w-100">
   <ul class="search-list w-100">
     <% if @bikes.present? %>
-      <h5 class="text-center mt-2">Bikes</h5>
+      <h5 class="text-center mt-4">Bikes</h5>
       <% @bikes.first(5).each do | bike | %>
         <%= link_to bike_path(bike), class: "links" do %>
           <li class="d-flex justify-content-between search-list-item mx-3 my-3 align-middle">
@@ -30,12 +30,12 @@
       <% end %>
     <% else %>
       <li class="text-center mt-0 w-100">
-        <h5  class="my-2">Não encontramos nada.</h5>
+        <h5 class="my-3">Não encontramos nada para bikes.</h5>
       </li>
     <% end %>
 
     <% if @products.present? %>
-      <h5 class="text-center mt-2">Produtos</h5>
+      <h5 class="text-center mt-3">Produtos</h5>
       <% @products.first(5).each do | product | %>
         <%= link_to product_path(product), class: "links" do %>
           <li class="d-flex justify-content-between search-list-item my-3 mx-3 align-middle">
@@ -65,7 +65,7 @@
       <% end %>
     <% else %>
       <li class="text-center mt-0 w-100">
-        <h5 class="my-2">Não encontramos nada.</h5>
+        <h5 class="my-3">Não encontramos nada para produtos.</h5>
       </li>
     <% end %>
   </ul>

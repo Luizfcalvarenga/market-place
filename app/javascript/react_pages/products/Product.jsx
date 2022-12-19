@@ -17,6 +17,34 @@ export function Product(props) {
     setProduct(response.data);
   }, [])
 
+  const handleLike = (e) => {
+    e.preventDefault()
+    const dataObject = new FormData();
+    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_type]", "Product" );
+
+    console.log(e.nativeEvent.path[1].id)
+    axios.post('/likes', dataObject)
+
+    .then(function (response) {
+      console.log(response);
+      if (response.data.success) {
+        swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else {
+        if (response.data.errors.user) {
+          swal("OPS", "Não pode curtir seu produto", "error");
+        } else if (response.data.errors.like) {
+          swal("OPS", "Você já curtiu esse produto", "error");
+        }
+      }
+    })
+
+  }
+
+  const showSellerContact = () => {
+    const userContact = document.getElementById("user-contact")
+    userContact.classList.toggle("d-none")
+  }
 
   return (
 
@@ -125,11 +153,7 @@ export function Product(props) {
               { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
                 <img src={ClotheImage} alt="" className="icon-card-index mt-4"/>
               )}
-              <form action={`/likes`} method="post" className="w-10 mt-4" >
-                <input type="hidden" name="[likeble_id]" id="product-id" value={product.id}/>
-                <input type="hidden" name="[likeble_type]" id="type" value="Product"/>
-                <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-              </form>
+              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button>
             </div>
             <div className="card-content">
               <h4 className="text-success mt-1">
@@ -140,10 +164,17 @@ export function Product(props) {
               </h4>
               <p className=""><strong className="text-success">Categoria:</strong> {product.category.name} </p>
               <p className=""><strong className="text-success">Modalidade:</strong> {product.modality}</p>
-              <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.name}</p>
+              <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
               <p className=""><strong className="text-success">Local:</strong> {product.locality}</p>
             </div>
+            {product.user.show_contact && (<>
+              <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
+              <div id="user-contact" className="d-none">
+                <p className=" text-center"><strong className="text-success">Telefone:</strong>  {product.user.phone_number}</p>
+                <p className=" text-center"><strong className="text-success">Email:</strong>  {product.user.email}</p>
+              </div>
+            </>)}
             <a href={"/user/" + product.user.id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>

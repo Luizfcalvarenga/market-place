@@ -31,7 +31,6 @@ class ChatsController < ApplicationController
 
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
-    # @users = User.all_except(current_user)
     set_notifications_to_read
     render 'index'
   end

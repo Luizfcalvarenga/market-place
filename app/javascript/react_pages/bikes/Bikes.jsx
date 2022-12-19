@@ -43,6 +43,10 @@ export function Bikes(props) {
   const [tyreFilter, setTyreFilter] = useState("");
   const [stemFilter, setStemFilter] = useState("");
   const [handlebarFilter, setHandlebarFilter] = useState("");
+  const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
+  const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
+
+
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
@@ -85,14 +89,30 @@ export function Bikes(props) {
     if (tyreFilter) url = url + `&tyre=${tyreFilter}`
     if (stemFilter) url = url + `&stem=${stemFilter}`
     if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
+    if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
+    if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
+
+
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+
+    if (params.category) {
+      setFilteredLinkCategory(params.category)
+    } else if (params.bike_type) {
+      setFilteredLinkBikeType(params.bike_type)
+    }
 
     const response = await axios.get(url);
+    console.log(response)
     setBikes(response.data.bikes);
+
   }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
-      suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
-      rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
-      seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-      handlebarFilter])
+  suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
+  rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
+  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType])
+
 
 
   const handleFilter = (e) => {
@@ -126,6 +146,31 @@ export function Bikes(props) {
   }
 
 
+
+
+  const handleLike = (e) => {
+    e.preventDefault()
+
+    const dataObject = new FormData();
+    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_type]", "Bike" );
+
+    console.log(e.nativeEvent.path[1].id)
+    axios.post('/likes',dataObject)
+
+    .then(function (response) {
+      console.log(response);
+      if (response.data.success) {
+        swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else {
+        if (response.data.errors.user) {
+          swal("OPS", "Não pode curtir seu produto", "error");
+        } else if (response.data.errors.like) {
+          swal("OPS", "Você já curtiu esse produto", "error");
+        }
+      }
+    })
+  }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   const frameBrands = [
@@ -860,10 +905,7 @@ export function Bikes(props) {
                           <p>{bike.bike_type}</p>
                         </div>
                         <div className="infos">
-                          <form action={`/likes`} method="post" >
-                            <input type="hidden" name="like[likable_id]" id="bike-id" value={bike.id}/>
-                            <button type="submit" className="like-btn"><i className="far fa-heart"></i></button>
-                          </form>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button> <br />
                           { bike.bike_type === "bike" &&(
                             <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
                           )}

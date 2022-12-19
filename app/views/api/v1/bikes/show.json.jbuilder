@@ -1,5 +1,5 @@
 json.id @bike.id
-json.user_id @bike.user_id
+json.user @bike.user
 json.category @bike.category
 json.modality @bike.modality
 json.bike_type @bike.bike_type
@@ -51,3 +51,5 @@ json.rim_size @bike.rim_size
 json.pedals @bike.pedals
 json.battery_cycles @bike.battery_cycles
 json.photos @bike.photos.map(&:url)
+json.current_user @current_user
+json.current @current

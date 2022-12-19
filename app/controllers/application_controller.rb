@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 	include Pundit
   before_action :turbo_frame_request_variant
 	before_action :authenticate_user!, unless: :auth_request?
-  before_action :current_order
+  # before_action :current_order
   before_action :set_current_user
 
 	skip_before_action :verify_authenticity_token
@@ -29,22 +29,27 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :document_number, :phone_number, :cep, :address])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :document_number, :phone_number, :cep, :address, :show_contact])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:full_name, :document_number, :phone_number, :cep, :address])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:full_name, :document_number, :phone_number, :cep, :address, :show_contact])
   end
 
-  def current_order
-    cookies[:tracker_code] = SecureRandom.uuid if cookies[:tracker_code].blank?
-
-    if current_user.present?
-      Order.find_or_create_by(user: current_user, status: :pending)
-    else
-      Order.find_or_create_by(tracker_code: cookies[:tracker_code], status: :pending)
-    end
+  def original_url
+    base_url + original_fullpath
   end
-  helper_method :current_order
+
+
+  # def current_order
+  #   cookies[:tracker_code] = SecureRandom.uuid if cookies[:tracker_code].blank?
+
+  #   if current_user.present?
+  #     Order.find_or_create_by(user: current_user, status: :pending)
+  #   else
+  #     Order.find_or_create_by(tracker_code: cookies[:tracker_code], status: :pending)
+  #   end
+  # end
+  # helper_method :current_order
 
 
 	def skip_pundit?

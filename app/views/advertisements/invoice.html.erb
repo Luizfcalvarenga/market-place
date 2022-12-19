@@ -1,4 +1,4 @@
-<% if @advertisement.price_in_cents == 0 %>
+<% if @advertisement.is_free? %>
   <div class="payment-confirmed vh-100 success-text flex center around">
     <div class="p-5 flex center column">
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
@@ -10,7 +10,7 @@
     </div>
   </div>
 <% else %>
-  <div class="payment-confirmed vh-100 success-text d-none flex center around">
+  <div  class="payment-confirmed vh-100 success-text d-none flex center around">
     <div class="p-5 flex center column">
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
       <h3>Pagamento confirmado!</h3>

@@ -47,7 +47,6 @@ Rails.application.routes.draw do
       patch :approve
       patch :reject
       patch :ajust_product_info
-
     end
   end
 
@@ -58,7 +57,7 @@ Rails.application.routes.draw do
   get 'get_product_attributes', to: 'product_attributes#get_product_attributes'
   get 'get_information_for_new_bike', to: 'bikes#get_information_for_new_bike'
 
-
+  # get '/bikes/:category', to: 'bikes#index'
   resources :orders, only: [ :index, :show ]
   get "orders/:id/invoice", to: "orders#invoice", as: "order_invoice"
   get "orders/:id/status", to: "orders#status", as: "order_status", format: :json

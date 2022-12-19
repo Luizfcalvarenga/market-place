@@ -2,11 +2,17 @@ module Admin
   class AdvertisementsController < ApplicationController
     def index
       @reference_date = params[:date].present? && params[:date][:year].present? && params[:date][:month].present? ? Time.new(params[:date][:year].to_i, params[:date][:month].to_i, 1) : Time.current
+
+
       min_date = @reference_date.at_beginning_of_month
       max_date = @reference_date.at_end_of_month.change(hour: 23, min: 59, sec: 59)
 
-      @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).order(:invoice_paid_at).uniq
-      @products = @advertisements.map { |advertisement| advertisement.advertisable}
+      if params[:status] != ""
+        @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).where(status: params[:status]).order(:invoice_paid_at).uniq
+      else
+        @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).order(:invoice_paid_at).uniq
+      end
+        @products = @advertisements.map { |advertisement| advertisement.advertisable}
 
       @net_total_sales = @advertisements.map(&:price_in_cents).compact.sum
     end
@@ -18,6 +24,7 @@ module Admin
       @user = @advertisement.user
       @parms_to_edit  = nil
     end
+
 
     def approve
       @advertisement = Advertisement.find(params[:advertisement_id])

@@ -2,6 +2,21 @@ class Advertisement < ApplicationRecord
   belongs_to :user
   belongs_to :advertisable, polymorphic: true
 
+  PRODUCT_TYPE_OPTIONS = {
+    pending: "pending",
+    paid: "paid",
+    waiting_review: "waiting_review",
+    approved: "approved",
+    adjustments_requested: "adjustments_requested",
+    update_request: "update_request",
+
+  }
+
+  def status_display
+   STATUSES_OPTIONS[status.to_sym]
+  end
+
+
   enum status: {
     pending: "pending",
     paid: "paid",
@@ -17,7 +32,7 @@ class Advertisement < ApplicationRecord
 
 
   def perform_after_payment_confirmation_actions
-    self.update(status: "waiting_review")
+    self.update(status: "paid")
 
     if is_free?
       self.update(
@@ -34,7 +49,7 @@ class Advertisement < ApplicationRecord
       months: 1,
       items:
         [{
-          description: "Anúncio de: item##{advertisable.id}",
+          description: "Anúncio de: item##{advertisable_type}",
           quantity: 1,
           price_cents: price_in_cents,
         }],

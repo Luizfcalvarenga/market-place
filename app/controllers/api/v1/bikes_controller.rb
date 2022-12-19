@@ -8,12 +8,8 @@ module Api
       def index
         @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
 
-        # @current_filters = params[:query]
-        @bikes = @bikes.where(category: Category.find_by(name: params[:category_link])) if params[:category_link].present?
-        @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type_link].present?
-
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
-        @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
+        @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
 
         @bikes = @bikes.where('bikes.price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
         @bikes = @bikes.where('bikes.price_in_cents >= ?', params[:min_price]).order(price_in_cents: :asc) if params[:min_price].present?
@@ -178,6 +174,10 @@ module Api
           :pedals,
           photos: []
         )
+      end
+
+      def user_signed_in
+        current_user.blank?
       end
     end
   end

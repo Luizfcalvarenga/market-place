@@ -166,27 +166,27 @@ export function BikeForm(props) {
     }
   }
 
-  const handleDisplay = (string) => {
+  // const handleDisplay = (string) => {
 
 
-    //split the above string into an array of strings
-    //whenever a blank space is encountered
+  //   //split the above string into an array of strings
+  //   //whenever a blank space is encountered
 
-    const array = string.split(" ");
+  //   const array = string.split(" ");
 
-    //loop through each element of the array and capitalize the first letter.
+  //   //loop through each element of the array and capitalize the first letter.
 
 
-    for (var i = 0; i < array.length; i++) {
-        array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1);
+  //   for (var i = 0; i < array.length; i++) {
+  //       array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1);
 
-    }
+  //   }
 
-    //Join all the elements of the array back into a string
-    //using a blankspace as a separator
-    array.join(" ");
+  //   //Join all the elements of the array back into a string
+  //   //using a blankspace as a separator
+  //   array.join(" ");
 
-  }
+  // }
 
   async function fetchBike() {
     const response = await axios.get(
@@ -1153,7 +1153,7 @@ export function BikeForm(props) {
             <option value=""></option>
             <option value="no_suspension">Sem Suspensão</option>
             <option value="full_suspension">Full Suspension</option>
-            <option value="hardtail">hardtail</option>
+            <option value="hardtail">Hardtail(Apenas Dinteira)</option>
           </select>
 
           {suspensionType === "full_suspension" && (<>

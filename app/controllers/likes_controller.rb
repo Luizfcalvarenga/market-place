@@ -2,7 +2,7 @@ class LikesController < ApplicationController
 
   def index
     @likes = policy_scope(Like).order(created_at: :desc)
-
+    @user = current_user
   end
 
   def new
@@ -13,17 +13,20 @@ class LikesController < ApplicationController
     if current_user.nil?
       flash[:notice] = "Você deve criar uma conta antes."
     end
-    if params[:likeble_type] == "Bike"
-      @likeble = Bike.find(params[:likeble_id].to_i)
-    elsif params[:likeble_type] == "Product"
-      @likeble = Product.find(params[:likeble_id].to_i)
+
+    if params[:like][:likeble_type] == "Bike"
+      @likeble = Bike.find(params[:like][:likeble_id].to_i)
+    elsif params[:like][:likeble_type] == "Product"
+      @likeble = Product.find(params[:like][:likeble_id].to_i)
     end
+
     skip_authorization
 
-
-
-    if Like.where(user_id: current_user.id, likeble: @likeble).present? || @likeble.user == current_user
-      flash[:notice] = "Você já gostou desse produto!!!"
+    if Like.where(user_id: current_user.id, likeble: @likeble).present?
+      render json: { success: false, errors: {like: "exists"} }
+      return
+    elsif @likeble.user == current_user
+      render json: { success: false, errors: {user: "own_product"} }
       return
     end
     ActiveRecord::Base.transaction do
@@ -36,10 +39,9 @@ class LikesController < ApplicationController
     end
 
     if @like.save
-      redirect_to likes_path
-      flash[:notice] = "Você gostou do produto"
+      render json: { success: true, like: @like }
     else
-      render :new
+      render json: { success: false, errors: {like: @like.errors, user: user_error} }
     end
   end
 
