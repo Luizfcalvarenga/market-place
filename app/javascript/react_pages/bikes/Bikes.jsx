@@ -105,7 +105,6 @@ export function Bikes(props) {
     }
 
     const response = await axios.get(url);
-    console.log(response)
     setBikes(response.data.bikes);
 
   }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
@@ -119,13 +118,9 @@ export function Bikes(props) {
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
-
     console.log(sectionFilter);
     sectionFilter.classList.toggle("d-none")
     sectionActive.classList.toggle("selected")
-
-    console.log(e)
-
   }
 
   const handleBikeTypeFilter = (e) => {

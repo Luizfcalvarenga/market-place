@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs";
-import Turbolinks from "turbolinks";
+// import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -14,7 +14,7 @@ import "@hotwired/turbo-rails"
 import "../stylesheets/application";
 
 Rails.start();
-Turbolinks.start();
+Turbo.start();
 ActiveStorage.start();
 
 // External imports

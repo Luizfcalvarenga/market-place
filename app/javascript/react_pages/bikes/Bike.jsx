@@ -47,6 +47,39 @@ export function Bike(props) {
     userContact.classList.toggle("d-none")
   }
 
+  const translateWord = (word) => {
+    const languageMap = {
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+
+
+      "other" : "Outro",
+      "carbon" : "Carbono",
+
+    };
+
+    return languageMap[word]
+  }
+
   return (
 
     <div className="bike-show" bike={bike} key={bike} >
@@ -428,7 +461,7 @@ export function Bike(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p className=""><strong className="text-success">Categoria:</strong> {bike.category.name} </p>
+              <p className=""><strong className="text-success">Categoria:</strong> {translateWord(bike.category.name)} </p>
               <p className=""><strong className="text-success">Modalidade:</strong> {bike.modality}</p>
               <p className=""><strong className="text-success">Tipo da bike:</strong> {bike.bike_type}</p>
               <p className=""><strong className="text-success">Ano:</strong> {bike.year}</p>
