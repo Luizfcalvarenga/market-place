@@ -48,6 +48,7 @@ export function Bikes(props) {
 
 
 
+
   useEffect(async () => {
     let url = "/api/v1/bikes?";
     if (categoryFilter) url = url + `&category=${categoryFilter}`
@@ -144,9 +145,6 @@ export function Bikes(props) {
       setConditionFilter("")
     }
   }
-
-
-
 
   const handleLike = (e) => {
     e.preventDefault()
@@ -852,7 +850,7 @@ export function Bikes(props) {
         </div>
 
         <div className="col-12 col-md-9 d-flex flex-wrap">
-          {bikes.map((bike, idx) => {
+          {bikes && bikes.map((bike, idx) => {
             return (
               <div className="w-25" bike={bike} key={bike.id} id="mobile">
                 <a href={"bikes/" + bike.id} className="remove-link">

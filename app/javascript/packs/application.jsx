@@ -40,10 +40,7 @@ import { Product } from "../react_pages/products/Product";
 import { ProductForm } from "../react_pages/products/ProductForm";
 
 
-
-
-
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("turbo:load", () => {
   const reactContainers = document.querySelectorAll("react");
 
   if (!reactContainers) return;

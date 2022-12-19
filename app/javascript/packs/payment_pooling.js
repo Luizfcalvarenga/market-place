@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("turbo:load", () => {
   const paymentContainer = document.querySelector(".payment-container");
   console.log(paymentContainer);
 
