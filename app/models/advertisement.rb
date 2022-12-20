@@ -22,8 +22,7 @@ class Advertisement < ApplicationRecord
     paid: "paid",
     waiting_review: "waiting_review",
     approved: "approved",
-    adjustments_requested: "adjustments_requested",
-    update_request: "update_request",
+    update_requested: "update_requested",
   }
 
   def is_free?

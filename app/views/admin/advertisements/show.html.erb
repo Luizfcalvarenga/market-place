@@ -1342,7 +1342,7 @@
     <input type="text" class="text-input" name="comments">
 
     <div class="mb-4">
-      <% if @advertisement.waiting_review?  %>
+      <% if @advertisement.waiting_review? || @advertisement.paid? %>
         <div class="action-buttons flex center between mt-5">
           <div class="w-100">
             <%= link_to admin_advertisement_approve_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>

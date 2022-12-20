@@ -28,7 +28,7 @@ document.addEventListener("turbo:load", () => {
 
   window.onscroll = function () {
       "use strict";
-      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100 ) {
+      if (document.body.scrollTop >= 100 || document.documentElement.scrollTop >= 100 ) {
           myNav.classList.add("navbar-scroll");
           myNav.classList.remove("navbar");
           logoNav.classList.add("navbar-brand-scroll");

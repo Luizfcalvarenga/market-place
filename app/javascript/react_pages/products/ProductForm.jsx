@@ -219,6 +219,8 @@ export function ProductForm(props) {
   const changeAttribute = (e, attribute) => {
     productAttributes[attribute.name] = e.target.value
     setProductAttributes(productAttributes)
+    productAttributesDisplay[attribute.prompt] = e.target.value
+    setProductAttributesDisplay(productAttributesDisplay)
     if (attribute.name === "brake_model" || attribute.name === "model") {
       setProductModel(e.target.value)
     }

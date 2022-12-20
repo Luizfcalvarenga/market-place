@@ -13,7 +13,7 @@ class AdvertisementRejecter
   def call
     ActiveRecord::Base.transaction do
       advertisement.update(
-        status: "update_request"
+        status: "update_requested"
       )
       AdvertisementMailer.with(advertisement: @advertisement, attrs_rejected: @attrs_rejected, values_to_review: @values_to_review, comments: @comments).advertisement_rejecter.deliver_now
     end
