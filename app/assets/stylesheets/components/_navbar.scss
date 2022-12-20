@@ -19,7 +19,8 @@ $color-primary: #00c454;
   display: flex;
   height: 100px;
   align-items: center;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   top: 0;
   z-index: 10000;
 }
