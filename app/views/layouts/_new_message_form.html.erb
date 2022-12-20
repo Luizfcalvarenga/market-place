@@ -14,7 +14,7 @@
         <%= f.file_field(:attachments, multiple: true,
           data:{controller: "message-preview", action:"change->message-preview#preview"}) %>
       </div>
-      <%= f.text_field :content, id: "chat-text", clas: "form-control msg-content", autocomplete: "off" %>
+      <%= f.text_field :content, id: "chat-text", class: "form-control msg-content", autocomplete: "off" %>
       <%= f.submit "Enviar", data: {disable_with: false,
         controller: "message-preview",
         action:"click->message-preview#clearPreviews"},

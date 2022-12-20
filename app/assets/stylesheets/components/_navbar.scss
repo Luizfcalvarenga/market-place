@@ -111,6 +111,9 @@ $color-primary: #00c454;
   color:#00c454 !important;
   height: 40px;
   border-radius: 0 20px 20px 0;
+  &:hover {
+    background: transparent !important;
+  }
 }
 
 .btn:focus {
