@@ -6,7 +6,7 @@ module Api
       skip_before_action :authenticate_user!
 
       def index
-        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
+        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user).order(created_at: :desc)
 
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?

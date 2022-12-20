@@ -6,6 +6,9 @@ class LikesController < ApplicationController
   end
 
   def new
+    if current_user.nil?
+      flash[:notice] = "Você deve criar uma conta antes."
+    end
     @like = Like.new
   end
 
@@ -27,6 +30,9 @@ class LikesController < ApplicationController
       return
     elsif @likeble.user == current_user
       render json: { success: false, errors: {user: "own_product"} }
+      return
+    elsif current_user.blank?
+      render json: { success: false, errors: {user: "sign_in request"} }
       return
     end
     ActiveRecord::Base.transaction do

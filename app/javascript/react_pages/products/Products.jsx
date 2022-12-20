@@ -177,6 +177,8 @@ export function Products(props) {
       console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else if (!response.data.errors) {
+        swal("OPS", "Faça login ou cadastre-se antes de continuar!", "error");
       } else {
         if (response.data.errors.user) {
           swal("OPS", "Não pode curtir seu produto", "error");
