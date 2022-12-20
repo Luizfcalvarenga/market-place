@@ -165,6 +165,14 @@ export function Bikes(props) {
     })
   }
 
+  const translateWord = (word) => {
+    const languageMap = {
+      "e-bike" : "E-Bike",
+      "bike" : "Bike",
+    };
+    return languageMap[word]
+  }
+
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   const frameBrands = [
     "Alfameq",
@@ -895,7 +903,7 @@ export function Bikes(props) {
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{bike.locality}</p>
-                          <p>{bike.bike_type}</p>
+                          <p>{translateWord(bike.bike_type)}</p>
                         </div>
                         <div className="infos">
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button> <br />

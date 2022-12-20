@@ -279,7 +279,12 @@ export function ProductForm(props) {
                 return (
                   <option key={index} value={option[0]}>{option[1]}</option>
                 )
-              } else {
+              } else if (option === "other") {
+                return (
+                  <option key={index}  value={option}>{translateWord(option)}</option>
+                )
+              }
+              else {
                 return (
                   <option key={index} value={option}>{option}</option>
                 )
@@ -552,6 +557,57 @@ export function ProductForm(props) {
     const btnAnnounce = document.getElementById("new-announce")
     btnAnnounce.classList.toggle("disable-btn-form")
   }
+
+  const translateWord = (word) => {
+    const languageMap = {
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractle" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "e-bike" : "E-Bike",
+      "bike" : "Bike",
+
+
+    };
+
+    return languageMap[word]
+  }
+
 
   //////////////////////////////////////////////////////////////////////////////////
   const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]

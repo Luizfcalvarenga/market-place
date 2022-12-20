@@ -901,7 +901,13 @@ export function BikeForm(props) {
         >
           <option value=""></option>
           {years.map((year, index)=> {
-            return (<option key={index}>{year}</option>);
+            if (year === "other") {
+              return (<option key={index} value="other">Outro</option>);
+
+            } else {
+
+              return (<option key={index} >{year}</option>);
+            }
           })}
         </select>
         { errors && errors.bike && errors.bike.year && (
@@ -994,7 +1000,14 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {roadFrontDerailleurModels.map((frontDerailleurModel, index)=> {
-                return (<option key={index}>{frontDerailleurModel}</option>);
+                 if (frontDerailleurModel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+
+                } else {
+
+                  return (<option key={index}>{frontDerailleurModel}</option>);
+
+                }
               })}
             </select>
             <br />
@@ -1012,7 +1025,11 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {roadRearDerailleurModels.map((rearDerailleurModel, index)=> {
-                return (<option key={index}>{rearDerailleurModel}</option>);
+                if (rearDerailleurModel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{rearDerailleurModel}</option>);
+                }
               })}
             </select>
             <br />
@@ -1032,7 +1049,11 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {mtbDirtUrbanFrontDerailleurModels.map((frontDerailleurModels, index)=> {
-                return (<option key={index}>{frontDerailleurModels}</option>);
+                if (frontDerailleurModels === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{frontDerailleurModels}</option>);
+                }
               })}
             </select>
 
@@ -1050,7 +1071,11 @@ export function BikeForm(props) {
               >
               <option value=""></option>
               {mtbDirtUrbanRearDerailleurModels.map((rearDerailleurModels, index)=> {
-                return (<option key={index}>{rearDerailleurModels}</option>);
+                 if (rearDerailleurModels === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{rearDerailleurModels}</option>);
+                }
               })}
             </select>
             <br />
@@ -1084,7 +1109,6 @@ export function BikeForm(props) {
             <option value="hydraulic_disc">À Disco - Hidráulico</option>
             <option value="mechanical_disc">À Disco - Mecânico</option>
             <option value="coaster_brake">Contra pedal</option>
-            <option value="caliper">Cantilevers</option>
           </select>
           {(brakeType === "hydraulic_disc" || brakeType === "mechanical_disc") && (<>
             <label htmlFor="disc_size" className="mt-4">Tamanho do disco:</label>
@@ -1095,7 +1119,11 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {discSizes.map((discSize, index)=> {
-                return (<option key={index}>{discSize}</option>);
+                if (discSize === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{discSize}</option>);
+                }
               })}
             </select>
           </>)}
@@ -1127,8 +1155,12 @@ export function BikeForm(props) {
               onChange={(e) => setBrakeModel(e.target.value)}
             >
               <option value=""></option>
-              {roadBrakeModels.map((roadBrakeModel, index)=> {
-                return (<option key={index}>{roadBrakeModel}</option>);
+              {mtbDirtUrbanBrakeModels.map((mtbDirtUrbanBrakeModel, index)=> {
+                if (mtbDirtUrbanBrakeModel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{mtbDirtUrbanBrakeModel}</option>);
+                }
               })}
             </select>
           </>)}
@@ -1165,14 +1197,18 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
-                return (<option key={index}>{frontSuspensionTravel}</option>);
+                if (frontSuspensionTravel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{frontSuspensionTravel}</option>);
+                }
               })}
             </select>
 
             { frontSuspensionTravel === "other"  && (
               <>
                 <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherFrontSuspensionrModel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherFrontSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
               </>
             )}
 
@@ -1184,14 +1220,18 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {rearSuspensionTravels.map((rearSuspensionTravel, index)=> {
-                return (<option key={index}>{rearSuspensionTravel}</option>);
+                if (rearSuspensionTravel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{rearSuspensionTravel}</option>);
+                }
               })}
             </select>
 
             { rearSuspensionTravel === "other"  && (
               <>
                 <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherRearSuspensionModel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
+                <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
               </>
             )}
           </>
@@ -1206,7 +1246,11 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {frontSuspensionTravels.map((rearSuspensionTravel, index)=> {
-                return (<option key={index}>{rearSuspensionTravel}</option>);
+                if (rearSuspensionTravel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{rearSuspensionTravel}</option>);
+                }
               })}
             </select>
 
@@ -1228,7 +1272,11 @@ export function BikeForm(props) {
               >
                 <option value=""></option>
                 {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
-                  return (<option key={index}>{frontSuspensionModels}</option>);
+                  if (frontSuspensionModels === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{frontSuspensionModels}</option>);
+                  }
                 })}
               </select>
               <br />
@@ -1246,7 +1294,11 @@ export function BikeForm(props) {
                 >
                 <option value=""></option>
                 {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModels, index)=> {
-                  return (<option key={index}>{rearSuspensionModels}</option>);
+                  if (rearSuspensionModels === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{rearSuspensionModels}</option>);
+                  }
                 })}
               </select>
               <br />
@@ -1268,7 +1320,11 @@ export function BikeForm(props) {
               >
                 <option value=""></option>
                 {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
-                  return (<option key={index}>{frontSuspensionModels}</option>);
+                  if (frontSuspensionModels === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{frontSuspensionModels}</option>);
+                  }
                 })}
               </select>
               <br />
@@ -1351,7 +1407,11 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {seatPostTravels.map((seatPostTravel, index)=> {
-                return (<option key={index}>{seatPostTravel}</option>);
+                if (seatPostTravel === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{seatPostTravel}</option>);
+                }
               })}
             </select>
 
@@ -1380,7 +1440,12 @@ export function BikeForm(props) {
             >
               <option value=""></option>
               {batteries.map((battery, index)=> {
-                return (<option key={index}>{battery}</option>);
+                if (battery === "other") {
+                  return (<option key={index} value="other">Outra</option>);
+                } else {
+                  return (<option key={index}>{battery}</option>);
+                }
+
               })}
             </select>
 
