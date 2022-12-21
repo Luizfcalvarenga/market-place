@@ -171,6 +171,14 @@ $color-primary: #00c454;
 .results-list  {
   position: absolute;
   top: 100%;
+  // height: 100%;
+  overflow: hidden;
+
+  transition: all 6s ease-in-out;
+  // height: 0;
+}
+.expandable:target {
+  height: 100%;
 }
 
 .search-list-item {

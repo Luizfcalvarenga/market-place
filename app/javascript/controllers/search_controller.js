@@ -8,18 +8,20 @@ export default class extends Controller {
 
   update() {
     const url = `${this.formTarget.action}?query=${this.searchInputTarget.value}`
-    console.log(this.searchInputTarget)
+    console.log(this.searchInputTarget.value === "")
     fetch(url, { headers: { 'Accept': 'text/plain' } })
       .then(response => response.text())
       .then((data) => {
         console.log(data);
+
+
         this.listTarget.outerHTML = data;
+
       })
 
-
-    if (this.searchInputTarget.value === null) {
-      this.listTarget.classList.add("d-none")
-    }
+      if (this.searchInputTarget.value === "") {
+        this.listTarget.classList.add = "d-none";
+      }
 
   }
 
