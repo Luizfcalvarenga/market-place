@@ -61,7 +61,6 @@ export function Products(props) {
     }
 
     const response = await axios.get(url);
-    setProducts(response.data.products);
     setProductTypes(response.data.product_types.sort(function (a, b) {
       if (a.prompt < b.prompt) {
         return -1;
@@ -72,8 +71,9 @@ export function Products(props) {
       return 0;
     }))
     setProductTypeAttributes(response.data.product_type_attributes)
+    setProducts(response.data.products);
 
-  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
+  }, [products, categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
 
 
 
