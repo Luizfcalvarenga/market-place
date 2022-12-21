@@ -4,7 +4,7 @@
       <div class="col-12 mt-2">
         <% if attachment.image? %>
           <div class="message-image-container">
-            <%= cl_image_tag attachment.key, class: "message-img" %>
+            <%= image_tag(message.chat_attachment(index), class: "message-img") %>
           </div>
         <% elsif attachment.video? %>
           <%= video_tag(url_for(attachment), class:'message-video', controls:'') %>

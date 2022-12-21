@@ -12,7 +12,6 @@
             <option value="paid">Pago</option>
             <option value="waiting_review">Aguardando Revisão</option>
             <option value="approved">Aprovado</option>
-            <option value="adjustments_requested">Ajustes Requeridos</option>
             <option value="update_request">Atualização Requerida</option>
           </select>
         </div>
@@ -69,7 +68,7 @@
         <td data-label="Criado em"><%= advertisement.created_at.strftime("%d/%m/%Y - %H:%M")  %></td>
         <td data-label="Ações">
           <div class="d-flex  ms-3">
-            <% if advertisement.status === "waiting_review" %>
+            <% if advertisement.status === "paid" || advertisement.status === "waiting_review"%>
               <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2" do %>
                 <i class="fas fa-search mt-1"></i>
                  <span class="ms-2">Revisar</span>
@@ -82,7 +81,7 @@
               <p><span class="topic-cards-index-media ms-3 text-warning">Aguardando update</p>
             <% else %>
               <i class="fas fa-check mt-1 text-success"></i>
-              <p><span class="topic-cards-index-media ms-3 text-success">Finalizado</p>
+              <p><span class="topic-cards-index-media ms-3 text-success">Publicado</p>
             <% end %>
           </div>
         </td>

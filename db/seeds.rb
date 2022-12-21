@@ -29,7 +29,7 @@
     infant = Category.create!(name: "infant", modalities: ["infant"])
 
     ##### GENERAL #####
-    documentation_type = ["nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
+    documentation_type = ["receipt", "import_document", "foreign_tax_coupon", "no_documentation"]
 
     categories = [mtb, dirt, road, infant, urban ]
 
@@ -38,7 +38,7 @@
     ################################## BIKE COMPONENTS
     bike_oriantations = [ "front", "rear", "both"]
 
-    bike_types = ["no_engine", "electric_engine"]
+    bike_types = ["bike", "e-bike"]
 
     battery = ProductType.create(name: "battery", prompt: "Bateria")
     brake = ProductType.create(name: "brake", prompt: "Freio")
@@ -223,7 +223,7 @@
 
     road_frame_sizes = ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
     mtb_dirt_frame_sizes = [ "<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    frame_materials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
+    frame_materials = ["aluminum", "carbon", "carbon_aluminum_chainstay", "other"]
 
     # front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
     rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
@@ -373,7 +373,8 @@
     infant = Category.create!(name: "infant", modalities: ["infant"])
 
     ##### GENERAL #####
-    documentation_type = ["nota_fiscal", "cupom_fiscal_estrangeiro", "documento_importacao", "sem_documentação"]
+    documentation_type = ["receipt", "import_document", "foreign_tax_coupon", "no_documentation"]
+
 
     categories = [mtb, dirt, road, infant, urban ]
 
@@ -384,7 +385,7 @@
     ################################## BIKE COMPONENTS
     bike_oriantations = [ "front", "rear", "both"]
 
-    bike_types = [ "no_engine", "electric_engine"]
+    bike_types = ["bike", "e-bike"]
 
     battery = ProductType.create(name: "battery", prompt: "Bateria")
     brake = ProductType.create(name: "brake", prompt: "Freio")
@@ -569,7 +570,7 @@
 
     road_frame_sizes = ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
     mtb_dirt_frame_sizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    frame_materials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
+    frame_materials = ["aluminum", "carbon", "carbon_aluminum_chainstay", "other"]
     rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
     shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
 
@@ -770,7 +771,7 @@
         model: ["GTX", "Sense mt-4r", "Predator", "Trilheiro", "Sense", "Backtrak", "F-Race"].sample,
         year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
         frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
-        frame_material:  ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"].sample,
+        frame_material:  ["aluminum", "carbon", "carbon_aluminum_chainstay"].sample,
         rim_size: "19''",
         number_of_front_gears: 1,
         number_of_rear_gears: 16,
@@ -784,7 +785,7 @@
         bike_condition: ["new", "used" ].sample,
         structural_visual_condition: structural_visual_condition.sample,
         operating_condition: opareting_condition.sample,
-        documentation_type: ["Nota fiscal", "Documento de importação", "Cupom Fiscal Estrangeiro"].sample,
+        documentation_type: documentation_type.sample,
         description: "Bicicleta em perfeito estado apenas 1 dono.",
         accessories: "Não"
       )

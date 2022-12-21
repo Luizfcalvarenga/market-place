@@ -10,7 +10,7 @@ module Api
         @user = current_user
         @product_types = ProductType.all
         @product_type_attributes = ProductTypeAttribute.all
-        @products = Product.joins(:advertisement).where(advertisements: {status: "approved"})
+        @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?

@@ -14,7 +14,7 @@ consumer.subscriptions.create("AppearanceChannel", {
 
   disconnected() {
     // Called when the subscription has been terminated by the server
-    console.log("Connected");
+    // console.log("Connected");
     this.uninstall();
   },
   rejected() {
@@ -25,15 +25,15 @@ consumer.subscriptions.create("AppearanceChannel", {
     // Called when there's incoming data on the websocket for this channel
   },
   online() {
-    console.log("online");
+    // console.log("online");
     this.perform("online");
   },
   away() {
-    console.log("away");
+    // console.log("away");
     this.perform("away");
   },
   offline() {
-    console.log("offline");
+    // console.log("offline");
     this.perform("offline");
   },
   uninstall() {

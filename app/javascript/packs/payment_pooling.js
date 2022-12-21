@@ -1,6 +1,5 @@
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("turbo:load", () => {
   const paymentContainer = document.querySelector(".payment-container");
-  console.log(paymentContainer);
 
 
 
@@ -8,7 +7,6 @@ document.addEventListener("turbolinks:load", () => {
 
   const advertisementId = paymentContainer.dataset.advertisementId;
   let stopPolling = false;
-  console.log(advertisementId);
   if (!advertisementId) return;
 
   const poolFunction = async () => {

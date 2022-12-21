@@ -1,11 +1,9 @@
 
 class AdvertisementsController < ApplicationController
   skip_before_action :authenticate_user!
-  # before_action :check_availability_of_order_items_periods, only: [:invoice]
 
   def index
     @advertisements = policy_scope(Advertisement).order(created_at: :desc)
-    # @advertisements = Advertisement.where(user: current_user)
   end
 
   def show

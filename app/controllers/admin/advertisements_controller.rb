@@ -7,12 +7,13 @@ module Admin
       min_date = @reference_date.at_beginning_of_month
       max_date = @reference_date.at_end_of_month.change(hour: 23, min: 59, sec: 59)
 
-      if params[:status] != ""
-        @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).where(status: params[:status]).order(:invoice_paid_at).uniq
+      if params[:status].present?
+        @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).where(status: params[:status]).order(created_at: :desc)
       else
-        @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).order(:invoice_paid_at).uniq
+        @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).order(created_at: :desc)
       end
-        @products = @advertisements.map { |advertisement| advertisement.advertisable}
+  
+      @products = @advertisements.map { |advertisement| advertisement.advertisable}
 
       @net_total_sales = @advertisements.map(&:price_in_cents).compact.sum
     end

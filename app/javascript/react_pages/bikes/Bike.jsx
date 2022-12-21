@@ -31,6 +31,8 @@ export function Bike(props) {
       console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else if (!response.data.errors) {
+        swal("OPS", "Faça login ou cadastre-se antes de continuar!", "error");
       } else {
         if (response.data.errors.user) {
           swal("OPS", "Não pode curtir seu produto", "error");
@@ -45,6 +47,56 @@ export function Bike(props) {
     console.log( )
     const userContact = document.getElementById("user-contact")
     userContact.classList.toggle("d-none")
+  }
+
+  const translateWord = (word) => {
+    const languageMap = {
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractle" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "e-bike" : "E-Bike",
+      "bike" : "Bike",
+
+
+    };
+
+    return languageMap[word]
   }
 
   return (
@@ -107,7 +159,7 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Material:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.frame_material}</p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material)}</p>
                     </div>
                   </li>
                 </ul>
@@ -178,7 +230,7 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.suspension_type}</p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(bike.suspension_type)}</p>
                     </div>
                   </li>
                   <li className="drop-item">
@@ -228,7 +280,7 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.brake_type}</p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(bike.brake_type)}</p>
                     </div>
                   </li>
                   <li className="drop-item">
@@ -337,7 +389,7 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.seat_post_type}</p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(bike.seat_post_type)}</p>
                     </div>
                   </li>
                   <li className="drop-item">
@@ -428,12 +480,12 @@ export function Bike(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p className=""><strong className="text-success">Categoria:</strong> {bike.category.name} </p>
-              <p className=""><strong className="text-success">Modalidade:</strong> {bike.modality}</p>
-              <p className=""><strong className="text-success">Tipo da bike:</strong> {bike.bike_type}</p>
+              <p className=""><strong className="text-success">Categoria:</strong> {translateWord(bike.category.name)} </p>
+              <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(bike.modality)}</p>
+              <p className=""><strong className="text-success">Tipo da bike:</strong> {translateWord(bike.bike_type)}</p>
               <p className=""><strong className="text-success">Ano:</strong> {bike.year}</p>
               <p className=""><strong className="text-success">Tamanho do quadro:</strong> {bike.frame_size}</p>
-              <p className=""><strong className="text-success">Material do quadro:</strong> {bike.frame_material}</p>
+              <p className=""><strong className="text-success">Material do quadro:</strong> {translateWord(bike.frame_material)}</p>
               <p className=""><strong className="text-success">Local:</strong> {bike.locality}</p>
               <p className=""><strong className="text-success">Descrição:</strong> {bike.description}</p>
             </div>

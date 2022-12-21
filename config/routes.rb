@@ -21,20 +21,9 @@ Rails.application.routes.draw do
   get "advertisements/:id/status", to: "advertisements#status", as: "advertisement_status", format: :json
 
   resources :bikes
-  get "/direct_links", to: "bikes#direct_links", as: "direct_links"
-
-  # do
-  #   resources :likes, only: [ :create ]
-
-  # end
-
 
   resources :likes, only: [:index, :create, :destroy ]
-
   resources :products
-  #  do
-  #   resources :likes, only: [ :create ]
-  # end
 
   resource :order_items, only: [ :destroy ], as: :destroy
   resource :bikes, only: [ :destroy ], as: :remove
@@ -58,9 +47,10 @@ Rails.application.routes.draw do
   get 'get_information_for_new_bike', to: 'bikes#get_information_for_new_bike'
 
   # get '/bikes/:category', to: 'bikes#index'
-  resources :orders, only: [ :index, :show ]
-  get "orders/:id/invoice", to: "orders#invoice", as: "order_invoice"
-  get "orders/:id/status", to: "orders#status", as: "order_status", format: :json
+  # resources :orders, only: [ :index, :show ]
+
+  # get "advertisement/:id/invoice", to: "advertisement#invoice", as: "advertisement_invoice"
+  # get "advertisement/:id/status", to: "advertisement#status", as: "advertisement_status", format: :json
 
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
   get 'search', to: 'pages#search', as: "search"

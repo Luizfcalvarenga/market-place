@@ -5,8 +5,8 @@ export default class extends Controller {
   static targets = [ "likebleId", "likebleType" ]
 
   connect() {
-    console.log(this.likebleIdTarget.innerText);
-    console.log(this.likebleTypeTarget.innerText);
+    // console.log(this.likebleIdTarget.innerText);
+    // console.log(this.likebleTypeTarget.innerText);
   }
 
   likeSubmit(event) {

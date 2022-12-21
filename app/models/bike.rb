@@ -28,9 +28,8 @@ class Bike < ApplicationRecord
 
   TYPE_OPTIONS = {
     bike: "Bike",
-    e_bike: "E-Bike"
+    "e-bike": "E-Bike"
   }
-
 
   def type_display
     TYPE_OPTIONS[bike_type.to_sym]

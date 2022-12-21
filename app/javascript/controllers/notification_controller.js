@@ -7,6 +7,6 @@ export default class extends Controller {
 
   ];
   connect() {
-    console.log(this.counterTarget.value)
+    // console.log(this.counterTarget.value)
   }
 }

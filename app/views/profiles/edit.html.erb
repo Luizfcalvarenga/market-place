@@ -21,27 +21,25 @@
 
   <div class="bg-dark br-12 p-5">
     <div class="d-flex justify-content-between flex-wrap">
-      <button type="button" class="links-profile edit-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fas fa-edit me-2"></i>Editar usuário
+      <button type="button" class="profile-links edit-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fas fa-edit me-2"></i>EDITAR USUÁRIO
       </button>
-      <%= link_to advertisements_path, class: " links-profile text-success" do %>
-        <i class="fas fa-shopping-bag me-2 "></i>Anúncios
+      <%= link_to advertisements_path, class: " profile-links text-success" do %>
+        <i class="fas fa-shopping-bag me-2 "></i>ANÚNCIOS
       <% end %>
-      <%= link_to my_products_path, class: "links-profile text-success" do %>
-        <i class="fab fa-product-hunt me-2"></i>Produtos
+      <%= link_to my_products_path, class: "profile-links text-success" do %>
+        <i class="fab fa-product-hunt me-2"></i>PRODUTOS
       <% end %>
-      <%= link_to likes_path, class: "links-profile text-success" do %>
-        <i class="fas fa-heart me-2"></i>Favoritos
+      <%= link_to likes_path, class: "profile-links text-success" do %>
+        <i class="fas fa-heart me-2"></i>FAVORITOS
       <% end %>
-      <%= link_to chats_path, class: "links-profile text-success" do %>
-        <i class="fas fa-envelope-open-text me-2"></i>Chat
+      <%= link_to chats_path, class: "profile-links text-success" do %>
+        <i class="fas fa-envelope-open-text me-2"></i>CHAT
         <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
           <span class="badge badge-danger">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
         <% end %>
       <% end %>
     </div>
-
-    <!-- Button trigger modal -->
 
 
     <!-- Modal -->
@@ -71,16 +69,13 @@
       </div>
     </div>
     <div class="user-infos mt-5">
-      <h4><span class="text-success">Nome:</span> <%= @profile.full_name %></h4>
-      <h4><span class="text-success">Email:</span> <%= @profile.email %></h4>
-      <h4><span class="text-success">CPF:</span> <%= @profile.document_number %></h4>
-      <h4><span class="text-success">Contato:</span> <%= @profile.phone_number %></h4>
-      <h4><span class="text-success">Endereço:</span> <%= @profile.address %></h4>
-      <h4><span class="text-success">CEP:</span> <%= @profile.cep %></h4>
-      <h4><span class="text-success">Contato visível:</span> <%= @profile.show_contact? ? 'Sim' : "Não" %></h4>
-
+      <h4 class="text-secondary"><span class="text-success">Nome:</span> <%= @profile.full_name %></h4>
+      <h4 class="text-secondary" ><span class="text-success">Email:</span> <%= @profile.email %></h4>
+      <h4 class="text-secondary" ><span class="text-success">CPF:</span> <%= @profile.document_number %></h4>
+      <h4 class="text-secondary" ><span class="text-success">Contato:</span> <%= @profile.phone_number %></h4>
+      <h4 class="text-secondary" ><span class="text-success">Endereço:</span> <%= @profile.address %></h4>
+      <h4 class="text-secondary" ><span class="text-success">CEP:</span> <%= @profile.cep %></h4>
+      <h4 class="text-secondary" ><span class="text-success">Contato visível:</span> <%= @profile.show_contact? ? 'Sim' : "Não" %></h4>
     </div>
-
   </div>
-
 </div>

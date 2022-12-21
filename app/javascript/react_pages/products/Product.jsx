@@ -30,6 +30,8 @@ export function Product(props) {
       console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else if (!response.data.errors) {
+        swal("OPS", "Faça login ou cadastre-se antes de continuar!", "error");
       } else {
         if (response.data.errors.user) {
           swal("OPS", "Não pode curtir seu produto", "error");
@@ -45,6 +47,63 @@ export function Product(props) {
     const userContact = document.getElementById("user-contact")
     userContact.classList.toggle("d-none")
   }
+
+  const translateWord = (word) => {
+    const languageMap = {
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractle" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "e-bike" : "E-Bike",
+      "bike" : "Bike",
+
+      "new" : "Novo",
+      "used" : "Usado",
+
+      "receipt" : "Nota Fiscal",
+      "import_document" : "Documento de Importação",
+      "foreign_tax_coupon" : "Cupom Fiscal Estrangeiro",
+      "no_documentation" : "Sem Documento",
+    };
+
+    return languageMap[word]
+  }
+
 
   return (
 
@@ -120,7 +179,7 @@ export function Product(props) {
                       <li className="drop-item">
                         <div className="text-success item list-item d-flex ms-3">
                           <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong> </p>
-                          <p className="bike-info ms-2 align-middle">{attribute.value}</p>
+                          <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
                         </div>
                       </li>
                     )
@@ -162,8 +221,8 @@ export function Product(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p className=""><strong className="text-success">Categoria:</strong> {product.category.name} </p>
-              <p className=""><strong className="text-success">Modalidade:</strong> {product.modality}</p>
+              <p className=""><strong className="text-success">Categoria:</strong> {translateWord(product.category.name)} </p>
+              <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(product.modality)}</p>
               <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
               <p className=""><strong className="text-success">Local:</strong> {product.locality}</p>

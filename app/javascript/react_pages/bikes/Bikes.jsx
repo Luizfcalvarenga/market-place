@@ -48,6 +48,7 @@ export function Bikes(props) {
 
 
 
+
   useEffect(async () => {
     let url = "/api/v1/bikes?";
     if (categoryFilter) url = url + `&category=${categoryFilter}`
@@ -104,7 +105,6 @@ export function Bikes(props) {
     }
 
     const response = await axios.get(url);
-    console.log(response)
     setBikes(response.data.bikes);
 
   }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
@@ -118,13 +118,9 @@ export function Bikes(props) {
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
-
     console.log(sectionFilter);
     sectionFilter.classList.toggle("d-none")
     sectionActive.classList.toggle("selected")
-
-    console.log(e)
-
   }
 
   const handleBikeTypeFilter = (e) => {
@@ -145,9 +141,6 @@ export function Bikes(props) {
     }
   }
 
-
-
-
   const handleLike = (e) => {
     e.preventDefault()
 
@@ -162,6 +155,8 @@ export function Bikes(props) {
       console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
+      } else if (!response.data.errors) {
+        swal("OPS", "Faça login ou cadastre-se antes de continuar!", "error");
       } else {
         if (response.data.errors.user) {
           swal("OPS", "Não pode curtir seu produto", "error");
@@ -170,6 +165,14 @@ export function Bikes(props) {
         }
       }
     })
+  }
+
+  const translateWord = (word) => {
+    const languageMap = {
+      "e-bike" : "E-Bike",
+      "bike" : "Bike",
+    };
+    return languageMap[word]
   }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
@@ -850,9 +853,8 @@ export function Bikes(props) {
             )}
           </div>
         </div>
-
         <div className="col-12 col-md-9 d-flex flex-wrap">
-          {bikes.map((bike, idx) => {
+          {bikes && bikes.map((bike, idx) => {
             return (
               <div className="w-25" bike={bike} key={bike.id} id="mobile">
                 <a href={"bikes/" + bike.id} className="remove-link">
@@ -902,7 +904,7 @@ export function Bikes(props) {
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{bike.locality}</p>
-                          <p>{bike.bike_type}</p>
+                          <p>{translateWord(bike.bike_type)}</p>
                         </div>
                         <div className="infos">
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button> <br />
