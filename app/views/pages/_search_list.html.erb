@@ -11,8 +11,8 @@
               <%= image_tag "new-announce-banner.jpg", class: "search-img my-2" %>
             <% end %>
             <div class="my-auto">
-              <p><span class="text-success my-auto"> Marca:</span> <%= bike.frame_brand %> </p>
-              <p><span class="text-success my-auto"> Modelo:</span> <%= bike.model %> </p>
+              <p><span class="text-success"> Marca:</span> <%= bike.frame_brand %> </p>
+              <p><span class="text-success"> Modelo:</span> <%= bike.model %> </p>
             </div>
             <div class="my-auto">
               <p><span class="text-success"> Preço:</span> <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".", precision: 2) %> </p>

@@ -7,9 +7,10 @@ $color-primary: #00c454;
   display: flex;
   align-items: center;
   position: sticky;
+  width: 100%;
   top: 0;
   z-index: 10000;
-  max-height: 120px !important;
+  height: 100px !important;
 }
 
 .navbar-scroll {
@@ -22,11 +23,11 @@ $color-primary: #00c454;
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 10000;
+  z-index: 10000 !important;
 }
 
 .navbar-brand {
-  height: 100px;
+  height: 70px;
 
   @media screen and (max-width: 768px) {
     height: 70px;
@@ -45,14 +46,28 @@ $color-primary: #00c454;
   color: white;
   font-weight: lighter !important;
   font-size: 22px;
+  padding-bottom: 0 !important;
+  display: inline-block;
 
   &:hover {
     color: $color-primary;
   }
-  @media screen and (max-width: 768px) {
-    padding: 0.25rem;
-    font-size: 20px;
-  }
+
+}
+
+.nav-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color-primary;
+  transition: width .3s;
+}
+
+.nav-link:hover::after {
+  color: $color-primary;
+  width: 100%;
+  //transition: width .3s;
 }
 
 .btn-navbar {
@@ -104,6 +119,8 @@ $color-primary: #00c454;
   .fa-comment-alt:hover {
     color: #f4f4f9 !important;
   }
+
+
 }
 
 .search-btn {
