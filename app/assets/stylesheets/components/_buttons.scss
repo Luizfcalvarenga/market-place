@@ -20,6 +20,9 @@
   font-family: "Bebas Neue", "Helvetica", "sans-serif";
   font-weight: lighter !important;
   font-size: 22px;
+  &:hover {
+    color: $color-primary;
+  }
 }
 
 .dropdown {
@@ -50,7 +53,7 @@
   display: block;
   font-size: 18px;
   font-weight: normal;
-  
+
 }
 
 .dropdown-content a:hover {
