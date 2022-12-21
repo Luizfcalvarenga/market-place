@@ -88,24 +88,54 @@
 
 
 //////////////////////// PROFILE PAGE
+///
+///
+.profile-links {
+  color: white;
+  font-weight: lighter !important;
+  font-size: 18px;
+  padding-bottom: 0 !important;
+  display: inline-block;
 
-.links-profile {
-  text-decoration: none;
-
-  .fa-heart {
+  &:hover {
     color: $color-primary;
-    font-size: 18px;
   }
-
 
 }
 
-.links-profile:hover {
-  color: white !important;
-  .fa-heart {
-    color: white !important;
-  }
+.profile-links::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color-primary;
+  transition: width .3s;
+  color: $color-primary !important;
 }
+
+.profile-links:hover::after {
+  color: $color-primary;
+  width: 100%;
+  //transition: width .3s;
+}
+
+// .links-profile {
+//   text-decoration: none;
+
+//   .fa-heart {
+//     color: $color-primary;
+//     font-size: 18px;
+//   }
+
+
+// }
+
+// .links-profile:hover {
+//   color: white !important;
+//   .fa-heart {
+//     color: white !important;
+//   }
+// }
 
 .edit-modal {
   background-color: transparent;

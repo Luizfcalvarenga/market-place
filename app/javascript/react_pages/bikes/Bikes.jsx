@@ -853,7 +853,6 @@ export function Bikes(props) {
             )}
           </div>
         </div>
-
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {bikes && bikes.map((bike, idx) => {
             return (
