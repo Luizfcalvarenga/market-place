@@ -1,4 +1,4 @@
-<div data-search-target="list" class="results-list w-100 mt-1">
+<div data-search-target="list" class="results-list expandable w-100 mt-1">
   <ul class="search-list w-100">
     <% if @bikes.present? %>
       <h5 class="text-center mt-3">Bikes</h5>
@@ -28,10 +28,6 @@
           <% end %>
         </li>
       <% end %>
-    <% else %>
-      <li class="text-center mt-0 w-100">
-        <h5 class="my-3">Não encontramos nada para bikes.</h5>
-      </li>
     <% end %>
 
     <% if @products.present? %>
@@ -63,10 +59,6 @@
           <% end %>
         </li>
       <% end %>
-    <% else %>
-      <li class="text-center mt-0 w-100">
-        <h5 class="my-3">Não encontramos nada para produtos.</h5>
-      </li>
     <% end %>
   </ul>
 </div>
