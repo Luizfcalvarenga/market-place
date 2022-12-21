@@ -112,7 +112,7 @@ $color-primary: #00c454;
   height: 40px;
   border-radius: 0 20px 20px 0;
   &:hover {
-    background: transparent !important;
+    background: white !important;
   }
 }
 
@@ -196,6 +196,10 @@ $color-primary: #00c454;
       margin-top: 30px;
       margin-bottom: 30px;
     }
+  }
+
+  .search-list-item {
+    margin-top: 10px;
   }
 }
 

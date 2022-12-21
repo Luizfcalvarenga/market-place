@@ -6,9 +6,9 @@
         <%= link_to bike_path(bike), class: "links" do %>
           <li class="d-flex justify-content-around search-list-item">
             <% if bike.photos.attached? %>
-              <%= cl_image_tag bike.photos.first.key, class: "search-img my-3" %>
+              <%= cl_image_tag bike.photos.first.key, class: "search-img my-2" %>
             <% else %>
-              <%= image_tag "new-announce-banner.jpg", class: "search-img my-3" %>
+              <%= image_tag "new-announce-banner.jpg", class: "search-img my-2" %>
             <% end %>
             <div class="my-auto">
               <p><span class="text-success my-auto"> Marca:</span> <%= bike.frame_brand %> </p>
@@ -40,9 +40,9 @@
         <%= link_to product_path(product), class: "links" do %>
           <li class="d-flex justify-content-around search-list-item">
             <% if product.photos.attached? %>
-              <%= cl_image_tag product.photos.first.key, class: "search-img my-3" %>
+              <%= cl_image_tag product.photos.first.key, class: "search-img my-2" %>
             <% else %>
-              <%= image_tag "bike-components.png", class: "search-img my-3" %>
+              <%= image_tag "bike-components.png", class: "search-img my-2" %>
             <% end %>
             <div class="my-auto">
               <p><span class="text-success"> Marca:</span> <%= product.brand %> </p>

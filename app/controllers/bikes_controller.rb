@@ -92,16 +92,7 @@ class BikesController < ApplicationController
     end
   end
 
-  def direct_links
-    @current_filters = params[:query]
-    @bikes = Bike.all
-    @bikes = @bikes.where(modality: @current_filters) if @current_filters
-    # @bikes = @bikes.where(:fuel => @current_filters[:fuel]) if @current_filters[:fuel]
-    #etc
-  end
-
   private
-
 
   def bike_params
     params.require(:bike).permit(

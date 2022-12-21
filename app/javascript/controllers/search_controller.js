@@ -8,7 +8,7 @@ export default class extends Controller {
 
   update() {
     const url = `${this.formTarget.action}?query=${this.searchInputTarget.value}`
-    console.log(this.searchInputTarget.value)
+    console.log(this.searchInputTarget)
     fetch(url, { headers: { 'Accept': 'text/plain' } })
       .then(response => response.text())
       .then((data) => {
@@ -22,6 +22,5 @@ export default class extends Controller {
     }
 
   }
-
 
 }

@@ -52,10 +52,6 @@ export function Products(props) {
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (filteredLink) url = url + `&product_type_id=${filteredLink}`
 
-
-
-    console.log(window.location)
-
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     });
@@ -65,7 +61,6 @@ export function Products(props) {
     }
 
     const response = await axios.get(url);
-    console.log(response)
     setProducts(response.data.products);
     setProductTypes(response.data.product_types.sort(function (a, b) {
       if (a.prompt < b.prompt) {
@@ -84,16 +79,13 @@ export function Products(props) {
 
 
   const handleProductAtributes = (e) => {
-    console.log(e)
     setProductTypeFilter(e.target.value)
     const attrs = productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value))
     setAttributesForProduct(attrs)
 
     if (attrs.length > 1 ) {
       attrs.pop()
-      console.log(attrs)
       attrs.shift()
-      console.log(attrs)
     }
   }
 

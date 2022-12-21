@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
 
   connect() {
-    console.log("aqui")
   }
   initialize() {
     const users = document.getElementById("users");
