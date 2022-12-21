@@ -48,7 +48,7 @@
               <p><span class="text-success"> Marca:</span> <%= product.brand %> </p>
               <p><span class="text-success"> Modelo:</span> <%= product.model %> </p>
             </div>
-            <div class="my-auto">
+            <div class="my-auto mb-3">
               <p><span class="text-success"> Preço:</span> <%= number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %> </p>
               <p><span class="text-success"> Local:</span> <%= product.locality %> </p>
             </div>

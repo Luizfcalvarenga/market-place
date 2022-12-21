@@ -41,8 +41,8 @@
               <div class="card-content my-2">
                 <div class="d-flex justify-content-around">
                   <div class="infos">
-                    <p><%= like.likeble.locality %></p>
-                    <p><%= like.likeble.bike_type %></p>
+                    <p class="text-secondary"><%= like.likeble.locality %></p>
+                    <p class="text-secondary"><%= like.likeble.type_display %></p>
                   </div>
                   <div class="infos">
                     <%= link_to like_path(like), method: :delete, class: "dislike-btn", data: { confirm: "Tem certeza que deseja remover #{like.likeble.model} dos favoritos?"}  do %>
@@ -93,8 +93,8 @@
               <div class="card-content my-2">
                 <div class="d-flex justify-content-around">
                   <div class="infos">
-                    <p><%= like.likeble.locality %></p>
-                    <p><%= like.likeble.product_type.name_display%></p>
+                    <p class="text-secondary"><%= like.likeble.locality %></p>
+                    <p class="text-secondary"><%= like.likeble.product_type.name_display%></p>
                   </div>
                   <div class="infos">
                     <%= link_to like_path(like), method: :delete, class: "dislike-btn", data: { confirm: "Tem certeza que deseja remover #{like.likeble.model} dos favoritos?"}  do %>
