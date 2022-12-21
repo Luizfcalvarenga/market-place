@@ -771,7 +771,7 @@
         model: ["GTX", "Sense mt-4r", "Predator", "Trilheiro", "Sense", "Backtrak", "F-Race"].sample,
         year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,
         frame_size: (road_frame_sizes + mtb_dirt_frame_sizes).sample,
-        frame_material:  ["aluminum", "carbon", "carbon_aluminum_chainstay", "other"].sample,
+        frame_material:  ["aluminum", "carbon", "carbon_aluminum_chainstay"].sample,
         rim_size: "19''",
         number_of_front_gears: 1,
         number_of_rear_gears: 16,

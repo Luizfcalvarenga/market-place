@@ -30,11 +30,6 @@ export function Products(props) {
   const [localityFilter, setLocalityFilter] = useState("");
   const [filteredLink, setFilteredLink] = useState("");
 
-
-
-
-  const [sortBy, setSortBy] = useState("");
-
   useEffect(async () => {
     let url = "/api/v1/products?";
     if (categoryFilter) url = url + `&category=${categoryFilter}`
@@ -73,7 +68,7 @@ export function Products(props) {
     setProductTypeAttributes(response.data.product_type_attributes)
     setProducts(response.data.products);
 
-  }, [categoryFilter, modalityFilter, sortBy, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
+  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
 
 
 
