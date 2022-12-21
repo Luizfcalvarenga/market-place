@@ -238,7 +238,6 @@
     frame_question_6 = ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira")
     frame_question_7 = ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock" )
     frame_question_8 = ProductTypeAttribute.create!(product_type: frame, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
-    frame_questions = [ frame_question_1, frame_question_2, frame_question_3, frame_question_4, frame_question_5, frame_question_7]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
@@ -253,7 +252,6 @@
     brake_question_4 = ProductTypeAttribute.create!(product_type: brake, name: "brake_model", kind: "multiple_choices", options: road_brake_models || mtb_dirt_urban_brake_models, prompt: "Modelo")
     brake_question_5 = ProductTypeAttribute.create!(product_type: brake, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    brake_questions = [ brake_question_1, brake_question_2, brake_question_3, brake_question_4, brake_question_5, brake_question_6]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RIM >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     wheel_sizes = ["16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
@@ -264,7 +262,6 @@
     rim_question_3 = ProductTypeAttribute.create!(product_type: rim, name: "rim_material", kind: "multiple_choice", options: rim_materials, prompt: "Qual material" )
     rim_question_4 = ProductTypeAttribute.create!(product_type: rim, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    rim_questions = [ rim_question_1, rim_question_2, rim_question_3, rim_question_4 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< HANDLEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     handlebar_sizes = ["680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm" "Outro"]
@@ -283,7 +280,6 @@
     front_suspension_question_4 = ProductTypeAttribute.create!(product_type: front_suspension, name: "model", kind: "multiple_choice", options: mtb_dirt_urban_front_suspension_models, prompt: "Modelo" )
     front_suspension_question_5 = ProductTypeAttribute.create!(product_type: front_suspension, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    front_suspension_questions = [ front_suspension_question_1, front_suspension_question_2, front_suspension_question_3, front_suspension_question_4, front_suspension_question_5]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
@@ -296,7 +292,6 @@
     rear_suspension_question_4 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "model", kind: "multiple_choice", options: mtb_dirt_urban_rear_suspension_models, prompt: "modelo" )
     rear_suspension_question_5 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    rear_suspension_questions = [ suspension_question_1, suspension_question_2, suspension_question_3]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FULL_WHEEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     full_wheel_question_1 = ProductTypeAttribute.create!(product_type: full_wheel, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
@@ -317,7 +312,6 @@
     front_derailleur_question_4 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "model", kind: "multiple_choice", options: road_front_derailleur_models ||mtb_dirt_urban_derailleur_models, prompt: "Modelo" )
     front_derailleur_question_5 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    front_derailleur_questions = [ derailleur_question_1, derailleur_question_2, derailleur_question_3, derailleur_question_3, derailleur_question_4, derailleur_question_5 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     road_rear_derailleur_models = ["105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Apex", "Force", "GRX", "RED", "Rival", "S-Series", "other"]
@@ -330,7 +324,6 @@
     rear_derailleur_question_4 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "model", kind: "multiple_choice", options: road_rear_derailleur_models || mtb_dirt_urban_rear_derailleur_models, prompt: "Modelo" )
     rear_derailleur_question_5 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    rear_derailleur_questions = [ derailleur_question_1, derailleur_question_2, derailleur_question_3, derailleur_question_4, derailleur_question_5 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     seat_post_types = ["retractable", "rigid"]
@@ -341,7 +334,6 @@
     seat_post_question_3 = ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_travel", kind: "multiple_choice", options: seat_post_travels, prompt: "Curso do canote" )
     seat_post_question_4 = ProductTypeAttribute.create!(product_type: seat_post, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
-    seat_post_questions = [ seat_post_question_1, seat_post_question_2, seat_post_question_3, seat_post_question_4 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CRANKSET >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     lengths = ["170mm", "172,5mm", "175mm"]
@@ -352,7 +344,6 @@
     crankset_question_3 = ProductTypeAttribute.create!(product_type: crankset, name: "crankset_length", kind: "multiple_choice", options: lengths, prompt: "Comprimento" )
     crankset_question_4 = ProductTypeAttribute.create!(product_type: crankset, name: "condition", kind: "multiple_choice", options: ["new", "used"], prompt: "Condição" )
 
-    crankset_questions = [ crankset_question_1, crankset_question_2, crankset_question_3, crankset_question_4 ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BATTERY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]

@@ -13,8 +13,11 @@ export function ProductForm(props) {
   const [user, setUser] = useState([]);
   const [services, setServices] = useState([]);
   const [productServiceId, setProductServiceId] = useState("");
+
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
+
+
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -38,6 +41,9 @@ export function ProductForm(props) {
 
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
+  const [productOptions, setProductOptions] = useState("");
+
+
   const [photoFile, setPhotoFile] = useState({
     index: null,
   });
@@ -391,7 +397,6 @@ export function ProductForm(props) {
         || product.name === "glasses" || product.name === "thermal_clothing"
       ));
     }
-
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
     firstSection.classList.add("d-none")
@@ -635,14 +640,14 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios <br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes <br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos <br/><img src={EquipamentImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos<br/><img src={EquipamentImage} alt="" className="icon-card-form"/></button>
         </div>
         <div className="d-flex justify-content-between py-3 gap-3 btns-components">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual <br/><img src={CasualImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção <br/><img src={MaintenanceImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário <br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual<br/><img src={CasualImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção<br/><img src={MaintenanceImage} alt="" className="icon-card-form"/></button>
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
       </div>
 
