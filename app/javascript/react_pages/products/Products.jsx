@@ -10,12 +10,18 @@ import MaintenanceImage from "../../../assets/images/tools.png";
 
 
 export function Products(props) {
+
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+
   const [products, setProducts] = useState([])
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
-  const [productTypeFilter, setProductTypeFilter] = useState("");
+  const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
@@ -47,14 +53,6 @@ export function Products(props) {
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (filteredLink) url = url + `&product_type_id=${filteredLink}`
 
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    });
-
-    if (params.product_type_id) {
-      setFilteredLink(params.product_type_id)
-    }
-
     const response = await axios.get(url);
     setProductTypes(response.data.product_types.sort(function (a, b) {
       if (a.prompt < b.prompt) {
@@ -68,10 +66,8 @@ export function Products(props) {
     setProductTypeAttributes(response.data.product_type_attributes)
     setProducts(response.data.products);
 
-  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
-
-
-
+  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter,
+    minYearFilter, maxYearFilter, filteredLink])
 
   const handleProductAtributes = (e) => {
     setProductTypeFilter(e.target.value)
@@ -264,7 +260,7 @@ export function Products(props) {
   "Soma",
   "Diamondback",
   "Dahon"].sort()
-  
+
   const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
     "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
     "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"

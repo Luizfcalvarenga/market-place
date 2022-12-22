@@ -3,15 +3,20 @@ import NormalBikeImage from "../../../assets/images/normal-bike.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
 
 export function Bikes(props) {
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
   const [bikes, setBikes] = useState([])
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState(params.category || "");
+
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
   const [modalityFilter, setModalityFilter] = useState("");
   const [minYearFilter, setMinYearFilter] = useState("");
   const [maxYearFilter, setMaxYearFilter] = useState("");
-  const [bikeTypeFilter, setBikeTypeFilter] = useState("");
+  const [bikeTypeFilter, setBikeTypeFilter] = useState(params.bike_type || "");
   const [frameBrandFilter, setFrameBrandFilter] = useState("");
   const [frameSizeFilter, setFrameSizeFilter] = useState("");
   const [frameMaterialFilter, setFrameMaterialFilter] = useState("");
@@ -93,17 +98,7 @@ export function Bikes(props) {
     if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
     if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
 
-
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    });
-
-    if (params.category) {
-      setFilteredLinkCategory(params.category)
-    } else if (params.bike_type) {
-      setFilteredLinkBikeType(params.bike_type)
-    }
-
+    console.log(url)
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
@@ -336,7 +331,7 @@ export function Bikes(props) {
                     value="bike"
                     name="type"
                     onChange={(e) => handleBikeTypeFilter(e)}
-                  />  Normal
+                  />  Bike
                 </label>
               </div>
             </div>
