@@ -24,11 +24,9 @@ export function Bike(props) {
     const dataObject = new FormData();
     dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
     dataObject.append( "like[likeble_type]", "Bike" );
-    console.log(e.nativeEvent.path[1].id)
     axios.post('/likes', dataObject)
 
     .then(function (response) {
-      console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else if (!response.data.errors) {
@@ -44,7 +42,7 @@ export function Bike(props) {
 
   }
   const showSellerContact = () => {
-    console.log( )
+    // console.log( )
     const userContact = document.getElementById("user-contact")
     userContact.classList.toggle("d-none")
   }

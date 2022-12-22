@@ -367,7 +367,6 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    console.log(e.target.innerHTML);
     let filterProducts = e.target.innerHTML;
     if (filterProducts.includes("Acessórios")) {
       setProductTypes(allProducts.filter(product => product.name === "car_accessories" || product.name === "bike_accessories" || product.name === "training_accessories" || product.name === "pre_after_pedal_accessories"));
