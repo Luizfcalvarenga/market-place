@@ -118,7 +118,7 @@
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link text-decoration-underline nav-login" %>
+            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link-drop text-decoration-underline nav-login" %>
           </li>
         <% end %>
       </ul>
@@ -148,6 +148,7 @@
             class: "form-control nav-form",
             placeholder: 'Pesquisar',
             value: params[:query],
+            input_html: {id: "navbar-input"},
             data: {
             search_target: 'searchInput',
             action: "keyup->search#update"
