@@ -32,7 +32,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'pundit'
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.0'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'stimulus-rails'
 gem 'devise_token_auth'

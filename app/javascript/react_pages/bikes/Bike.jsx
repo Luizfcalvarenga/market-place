@@ -491,7 +491,6 @@ export function Bike(props) {
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
               <div id="user-contact" className="d-none">
                 <p className=" text-center"><strong className="text-success">Telefone:</strong>  {bike.user.phone_number}</p>
-                <p className=" text-center"><strong className="text-success">Email:</strong>  {bike.user.email}</p>
               </div>
             </>)}
             <a href={"/user/" + bike.user_id}>

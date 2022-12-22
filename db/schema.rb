@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_211615) do
     t.bigint "user_id", null: false
     t.string "advertisable_type", null: false
     t.bigint "advertisable_id", null: false
-    t.integer "invoice_id"
+    t.string "invoice_id"
     t.string "invoice_url"
     t.string "invoice_pdf"
     t.integer "net_value"

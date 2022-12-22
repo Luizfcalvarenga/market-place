@@ -242,7 +242,6 @@ module NovaIugu
       @entity.check_payment_actions_performed if @entity.respond_to?(:check_payment_actions_performed)
 
       return true unless @entity.invoice_status == "pending"
-
       begin
         @invoice ||= Iugu::Invoice.fetch(@entity.invoice_id)
       rescue Iugu::ObjectNotFound
