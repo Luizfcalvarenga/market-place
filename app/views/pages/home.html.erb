@@ -48,7 +48,7 @@
         <%= image_tag "mtb-bg.jpg", class: "card-bg" %>
       </div>
     <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
+    <%= link_to :controller => "bikes", :action => "index", :bike_type => "e-bike", class: "col-12 col-md-4 mb-3 btn-remove-link"  do %>
       <div class="card card-products">
         <h3 class="text-center card-title"><span class="flicker">E</span>-BIKE</h3>
         <%= image_tag "e-bike-bg.jpg", class: "card-bg" %>

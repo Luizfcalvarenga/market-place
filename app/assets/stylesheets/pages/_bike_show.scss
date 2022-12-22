@@ -45,12 +45,13 @@
 }
 
 .card-bike {
-  box-shadow: 0px 0px 20px 0px #00c4545e;
+  // box-shadow: 0px 0px 20px 0px #00c4545e;
   border-radius: 3px;
   position: sticky;
   top: 7rem;
   max-height: 100vh;
-  border: 1px solid $color-primary;
+  // border: 1px solid $color-primary;
+  background-color: rgb(20, 20, 20);
   .fa-heart {
     color: $color-primary;
   }

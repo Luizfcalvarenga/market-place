@@ -1,9 +1,11 @@
 .filters {
-  border: 1px solid $color-primary;
+  // border: 1px solid $color-primary;
   border-radius: 5px;
   padding: 20px;
   position: sticky;
   top: 7rem;
+  background-color: rgb(20, 20, 20);
+
 
   h5 {
     margin-bottom: 0 !important;
@@ -13,12 +15,12 @@
 }
 
 .cards-products {
-  border: 1px solid transparent;
+  border: none;
   border-radius: 5px;
   height: 370px;
   margin: 5px;
-  background-color: transparent;
-  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  background-color: rgb(20, 20, 20);
+  // box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
 
   .product-price {
     color: #009d43;
@@ -27,6 +29,8 @@
   &:hover {
     h4 {
       color: inherit;
+
+
     }
     .product-infos-index {
       color: inherit !important;
@@ -39,7 +43,7 @@
 }
 
 .products-index {
-  background-color: #F4F4F9;
+  background-color: rgb(16,16,16);
 }
 
 .product-infos-index {

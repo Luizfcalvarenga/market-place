@@ -311,12 +311,12 @@ export function Bikes(props) {
       <h2 className="text-center text-success">Bikes</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
-          <p className="text-success">Filtrar</p>
+          <p className="">Filtrar</p>
           <div className="">
             <div className="condition-filter">
-              <h5 className="text-success mt-3">tipo</h5>
+              <h5 className=" mt-3">tipo</h5>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 text-success">
+                <label htmlFor="new" className="me-2 ">
                   <input
                     type="checkbox"
                     value="e-bike"
@@ -325,7 +325,7 @@ export function Bikes(props) {
                   />  E-bike
                 </label>
 
-                <label htmlFor="used" className="me-2 text-success">
+                <label htmlFor="used" className="me-2 ">
                   <input
                     type="checkbox"
                     value="bike"
@@ -337,9 +337,9 @@ export function Bikes(props) {
             </div>
 
             <div className="condition-filter">
-              <h5 className="text-success mt-3">condição</h5>
+              <h5 className=" mt-3">condição</h5>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 text-success">
+                <label htmlFor="new" className="me-2 ">
                   <input
                     type="checkbox"
                     value="new"
@@ -348,7 +348,7 @@ export function Bikes(props) {
                   />  Nova
                 </label>
 
-                <label htmlFor="used" className="me-2 text-success">
+                <label htmlFor="used" className="me-2 ">
                 <input
                   type="checkbox"
                   value="used"
@@ -359,7 +359,7 @@ export function Bikes(props) {
               </div>
             </div>
 
-            <h5 className="text-success mt-3">categoria</h5>
+            <h5 className=" mt-3">categoria</h5>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
@@ -374,7 +374,7 @@ export function Bikes(props) {
             </select>
 
             {categoryFilter === "mountain_bike" && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className=" mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -391,7 +391,7 @@ export function Bikes(props) {
             </>)}
 
             {categoryFilter === "dirt_street" && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className=" mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -406,7 +406,7 @@ export function Bikes(props) {
             </>)}
 
             {categoryFilter === "road" && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className=" mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -422,7 +422,7 @@ export function Bikes(props) {
             </>)}
 
             {!categoryFilter && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className=" mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -447,7 +447,7 @@ export function Bikes(props) {
               </select>
             </>)}
 
-            <h5 className="text-success mt-3">marca</h5>
+            <h5 className=" mt-3">marca</h5>
             <select
               className="select-answer"
               value={frameBrandFilter}
@@ -460,18 +460,18 @@ export function Bikes(props) {
             </select>
 
             <div className="model-filter">
-              <h5 className="text-success mt-3">Modelo</h5>
+              <h5 className=" mt-3">Modelo</h5>
               <input type="text" className="text-input" onChange={(e) => setModelFilter(e.target.value)}/>
             </div>
 
             <div className="locality-filter">
-              <h5 className="text-success mt-3">Local</h5>
+              <h5 className=" mt-3">Local</h5>
               <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
             </div>
 
             <div className="price-filter">
               <div className="">
-                <h5 className="text-success mt-3">preço</h5>
+                <h5 className=" mt-3">preço</h5>
                 <div className="d-flex justify-content-between">
                   <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
                   <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
@@ -480,18 +480,18 @@ export function Bikes(props) {
             </div>
 
             <div className="year-filter mb-3">
-              <h5 className="text-success mt-3">ano</h5>
+              <h5 className=" mt-3">ano</h5>
               <div className="d-flex justify-content-between">
                 <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
                 <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
               </div>
             </div>
 
-            <h5 className=" text-success">Componentes</h5>
+            <h5 className=" ">Componentes</h5>
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
               {!categoryFilter && (<>
-                <h5 className="text-success mt-3">tamanho</h5>
+                <h5 className=" mt-3">tamanho</h5>
                 <select
                   className="select-answer"
                   value={frameSizeFilter}
@@ -505,7 +505,7 @@ export function Bikes(props) {
               </>)}
 
               {categoryFilter === "road" && (<>
-                <h5 className="text-success mt-3">tamanho</h5>
+                <h5 className=" mt-3">tamanho</h5>
 
                 <select
                   className="select-answer"
@@ -520,7 +520,7 @@ export function Bikes(props) {
               </>)}
 
               {["dirt_street", "mountain_bike", "infant", "urban"].includes(categoryFilter) && (<>
-                <h5 className="text-success mt-3">tamanho</h5>
+                <h5 className=" mt-3">tamanho</h5>
                 <select
                   className="select-answer"
                   value={frameSizeFilter}
@@ -533,7 +533,7 @@ export function Bikes(props) {
                 </select>
               </>)}
 
-              <h5 className="text-success mt-3">material</h5>
+              <h5 className=" mt-3">material</h5>
               <select
                 className="select-answer"
                 value={frameMaterialFilter}
@@ -548,7 +548,7 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
             <div id="Suspensão" className="suspension-filter d-none">
-              <h5 className="text-success mt-3">tipo</h5>
+              <h5 className=" mt-3">tipo</h5>
               <select
                 className="select-answer"
                 value={suspensionTypeFilter}
@@ -562,7 +562,7 @@ export function Bikes(props) {
 
               {["full_suspension", "hardtail"].includes(suspensionTypeFilter) && (<>
                 <h5 className="mt-3">dianteira</h5>
-                <h5 className="text-success mt-3">curso</h5>
+                <h5 className=" mt-3">curso</h5>
                 <select
                   className="select-answer"
                   value={frontSuspensionTravelFilter}
@@ -574,7 +574,7 @@ export function Bikes(props) {
                   })}
                 </select>
 
-                <h5 className="text-success mt-3">Marca | modelo</h5>
+                <h5 className=" mt-3">Marca | modelo</h5>
                 <select
                   className="select-answer"
                   value={frontSuspensionModelFilter}
@@ -589,7 +589,7 @@ export function Bikes(props) {
 
               {suspensionTypeFilter === "full_suspension" && (<>
                 <h5 className="mt-3">traseira</h5>
-                <h5 className="text-success mt-3">curso</h5>
+                <h5 className=" mt-3">curso</h5>
                 <select
                   className="select-answer"
                   value={rearSuspensionTravelFilter}
@@ -601,7 +601,7 @@ export function Bikes(props) {
                   })}
                 </select>
 
-                <h5 className="text-success mt-3">Marca | modelo</h5>
+                <h5 className=" mt-3">Marca | modelo</h5>
                 <select
                   className="select-answer"
                   value={rearSuspensionModelFilter}
@@ -618,7 +618,7 @@ export function Bikes(props) {
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Transmissão</button>
             <div id="Transmissão" className="suspension-filter d-none">
               <h5 className="mt-3">dianteira</h5>
-              <h5 className="text-success mt-3">n ºmarchas</h5>
+              <h5 className=" mt-3">n ºmarchas</h5>
               <select
                 className="select-answer"
                 value={frontGearsFilter}
@@ -631,7 +631,7 @@ export function Bikes(props) {
                 })}
               </select>
 
-              <h5 className="text-success mt-3">Marca | modelo</h5>
+              <h5 className=" mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={frontDerailleurModelFilter}
@@ -644,7 +644,7 @@ export function Bikes(props) {
               </select>
 
               <h5 className="mt-3">traseira</h5>
-              <h5 className="text-success mt-3">nº marchas</h5>
+              <h5 className=" mt-3">nº marchas</h5>
               <select
                 className="select-answer"
                 value={rearGearsFilter}
@@ -656,7 +656,7 @@ export function Bikes(props) {
                 })}
               </select>
 
-              <h5 className="text-success mt-3">Marca | modelo</h5>
+              <h5 className=" mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={rearDerailleurModelFilter}
@@ -669,19 +669,19 @@ export function Bikes(props) {
               </select>
 
               <div className="crankset-filter">
-                <h5 className="text-success mt-3">Pedivela</h5>
+                <h5 className=" mt-3">Pedivela</h5>
                 <input type="text" className="text-input" onChange={(e) => setCranksetFilter(e.target.value)}/>
               </div>
 
               <div className="chain-filter">
-                <h5 className="text-success mt-3">Corrente</h5>
+                <h5 className=" mt-3">Corrente</h5>
                 <input type="text" className="text-input" onChange={(e) => setChainFilter(e.target.value)}/>
               </div>
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Freios</button>
             <div id="Freios" className="suspension-filter d-none">
-              <h5 className="text-success mt-3">tipo</h5>
+              <h5 className=" mt-3">tipo</h5>
               <select
                 className="select-answer"
                 value={brakeTypeFilter}
@@ -697,7 +697,7 @@ export function Bikes(props) {
               </select>
 
               {(brakeTypeFilter === "hydraulic_disc" || brakeTypeFilter === "mechanical_disc") && (<>
-                <h5 className="text-success mt-3">disco</h5>
+                <h5 className=" mt-3">disco</h5>
                 <select
                   className="select-answer"
                   value={brakeDiscSizeFilter}
@@ -710,7 +710,7 @@ export function Bikes(props) {
                 </select>
                 </>)}
 
-              <h5 className="text-success mt-3">Marca | modelo</h5>
+              <h5 className=" mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={brakeModelFilter}
@@ -725,7 +725,7 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Rodas</button>
             <div id="Rodas" className="suspension-filter d-none">
-              <h5 className="text-success mt-3">tamanho aro</h5>
+              <h5 className=" mt-3">tamanho aro</h5>
               <select
                 className="select-answer"
                 value={rimSizeFilter}
@@ -740,24 +740,24 @@ export function Bikes(props) {
 
 
               <div className="rim-filter">
-                <h5 className="text-success mt-3">Aro</h5>
+                <h5 className=" mt-3">Aro</h5>
                 <input type="text" className="text-input" onChange={(e) => setRimFilter(e.target.value)}/>
               </div>
 
               <div className="hub-filter">
-                <h5 className="text-success mt-3">Cubo</h5>
+                <h5 className=" mt-3">Cubo</h5>
                 <input type="text" className="text-input" onChange={(e) => setHubFilter(e.target.value)}/>
               </div>
 
               <div className="tyre-filter">
-                <h5 className="text-success mt-3">Pneu</h5>
+                <h5 className=" mt-3">Pneu</h5>
                 <input type="text" className="text-input" onChange={(e) => setTyreFilter(e.target.value)}/>
               </div>
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Canote</button>
             <div id="Canote" className="suspension-filter d-none">
-              <h5 className="text-success mt-3">tipo</h5>
+              <h5 className=" mt-3">tipo</h5>
               <select
                 className="select-answer"
                 value={seatPostTypeFilter}
@@ -771,7 +771,7 @@ export function Bikes(props) {
 
               {seatPostTypeFilter === 'retractable' &&(
                 <>
-                <h5 className="text-success mt-3">curso</h5>
+                <h5 className=" mt-3">curso</h5>
                 <select
                   className="select-answer"
                   value={seatPostTravelFilter}
@@ -784,19 +784,19 @@ export function Bikes(props) {
                 </select>
               </>
               )}
-              <h5 className="text-success mt-3">Modelo</h5>
+              <h5 className=" mt-3">Modelo</h5>
               <input type="text" className="text-input" onChange={(e) => setSeatPostModelFilter(e.target.value)}/>
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Cockpit</button>
             <div id="Cockpit" className="cockpit-filter d-none">
               <div className="hub-filter">
-                <h5 className="text-success mt-3">Mesa</h5>
+                <h5 className=" mt-3">Mesa</h5>
                 <input type="text" className="text-input" onChange={(e) => setStemFilter(e.target.value)}/>
               </div>
 
               <div className="handlebar-filter">
-                <h5 className="text-success mt-3">Guidão</h5>
+                <h5 className=" mt-3">Guidão</h5>
                 <input type="text" className="text-input" onChange={(e) => setHandlebarFilter(e.target.value)}/>
               </div>
             </div>
@@ -804,7 +804,7 @@ export function Bikes(props) {
             {bikeTypeFilter === "e-bike" && (<>
               <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Parte Elétrica</button>
               <div id="Parte Elétrica">
-                <h5 className="text-success mt-3">bateria</h5>
+                <h5 className=" mt-3">bateria</h5>
                 <select
                   className="select-answer"
                   value={batteryFilter}
@@ -817,31 +817,31 @@ export function Bikes(props) {
                 </select>
 
                 <div className="d-flex justify-content-between">
-                  <h5 className="text-success mt-3">Ciclos bateria</h5>
+                  <h5 className=" mt-3">Ciclos bateria</h5>
                   {batteryCyclesFilter && (<>
-                    <h5 className="text-success mt-3">
+                    <h5 className=" mt-3">
                     {batteryCyclesFilter}
                   </h5>
                   </>)}
                 </div>
                 <input type="range" className="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
                 <div className="d-flex justify-content-between">
-                  <h6 className="text-success price-filter-text"><small>0</small></h6>
-                  <h6 className="text-success price-filter-text"><small>50</small></h6>
+                  <h6 className=" price-filter-text"><small>0</small></h6>
+                  <h6 className=" price-filter-text"><small>50</small></h6>
                 </div>
 
                 <div className="d-flex justify-content-between">
-                  <h5 className="text-success mt-3">Km</h5>
+                  <h5 className=" mt-3">Km</h5>
                   {mileageFilter && (<>
-                    <h5 className="text-success mt-3">
+                    <h5 className=" mt-3">
                     {mileageFilter} Km
                   </h5>
                   </>)}
                 </div>
                 <input type="range" className="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
                 <div className="d-flex justify-content-between">
-                  <h6 className="text-success price-filter-text"><small>0</small></h6>
-                  <h6 className="text-success price-filter-text"><small>200Km</small></h6>
+                  <h6 className=" price-filter-text"><small>0</small></h6>
+                  <h6 className=" price-filter-text"><small>200Km</small></h6>
                 </div>
               </div>
              </>
@@ -888,7 +888,7 @@ export function Bikes(props) {
                       <h4 className="card-title text-center">{bike.frame_brand}</h4>
                       <h4 className="card-title text-center">{bike.model}</h4>
                     </div>
-                    <h4 className="text-center card-title mt-1">
+                    <h4 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",

@@ -2,6 +2,9 @@ $color-primary: #00c454;
 $color-darker: #101010;
 $white: #fff;
 
+.text-gray {
+  color: rgb(158,158,165);
+}
 @media (max-width: 768px) {
   h1 {
     font-size: 36px !important;

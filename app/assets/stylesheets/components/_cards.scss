@@ -339,11 +339,9 @@
 ///////////////////////////// #MY PRODUCT
 
 .my-product-card {
-  border: 1px solid $color-primary;
   border-radius: 5px;
   height: 300px;
-  box-shadow: 0px 0px 20px 0px #00c4545e;
-
+  background-color: rgb(20, 20, 20);
   .links-profile {
     &:hover {
       color: #eafceb !important;
@@ -352,11 +350,13 @@
 
 }
 
+.card-profile {
+  background-color: rgb(20, 20, 20)
+}
+
 .cards-index-advertisements {
-  border: 1px solid $color-primary;
   border-radius: 3px;
-  background-color: transparent;
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+  background-color: rgb(20, 20, 20);
   margin-top: 2rem;
   padding: 20px;
   width: 49%;
@@ -398,5 +398,5 @@
   .links-profile {
     margin: 5px;
   }
-  
+
 }

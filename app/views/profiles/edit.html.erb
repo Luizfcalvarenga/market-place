@@ -19,7 +19,7 @@
   </div>
 
 
-  <div class="bg-dark br-12 p-5">
+  <div class="card-profile br-12 p-5">
     <div class="d-flex justify-content-between flex-wrap">
       <button type="button" class="profile-links edit-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fas fa-edit me-2"></i>EDITAR USUÁRIO
@@ -69,13 +69,13 @@
       </div>
     </div>
     <div class="user-infos mt-5">
-      <h4 class="text-secondary"><span class="text-success">Nome:</span> <%= @profile.full_name %></h4>
-      <h4 class="text-secondary" ><span class="text-success">Email:</span> <%= @profile.email %></h4>
-      <h4 class="text-secondary" ><span class="text-success">CPF:</span> <%= @profile.document_number %></h4>
-      <h4 class="text-secondary" ><span class="text-success">Contato:</span> <%= @profile.phone_number %></h4>
-      <h4 class="text-secondary" ><span class="text-success">Endereço:</span> <%= @profile.address %></h4>
-      <h4 class="text-secondary" ><span class="text-success">CEP:</span> <%= @profile.cep %></h4>
-      <h4 class="text-secondary" ><span class="text-success">Contato visível:</span> <%= @profile.show_contact? ? 'Sim' : "Não" %></h4>
+      <h4 class="text-white"><span class="text-gray">Nome:</span> <%= @profile.full_name %></h4>
+      <h4 class="text-white" ><span class="text-gray">Email:</span> <%= @profile.email %></h4>
+      <h4 class="text-white" ><span class="text-gray">CPF:</span> <%= @profile.document_number %></h4>
+      <h4 class="text-white" ><span class="text-gray">Contato:</span> <%= @profile.phone_number %></h4>
+      <h4 class="text-white" ><span class="text-gray">Endereço:</span> <%= @profile.address %></h4>
+      <h4 class="text-white" ><span class="text-gray">CEP:</span> <%= @profile.cep %></h4>
+      <h4 class="text-white" ><span class="text-gray">Contato visível:</span> <%= @profile.show_contact? ? 'Sim' : "Não" %></h4>
     </div>
   </div>
 </div>
