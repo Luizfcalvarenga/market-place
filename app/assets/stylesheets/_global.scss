@@ -5,6 +5,12 @@ $white: #fff;
 .text-gray {
   color: rgb(158,158,165);
 }
+
+.bg-card-dark {
+  background-color: rgb(20, 20, 20)
+}
+
+
 @media (max-width: 768px) {
   h1 {
     font-size: 36px !important;
