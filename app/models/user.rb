@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-  validates :cep, :document_number, :phone_number,  presence: true
+  # validates :cep, :document_number, :phone_number,  presence: true
   enum status: %i[offline away online]
 
   enum access: {
