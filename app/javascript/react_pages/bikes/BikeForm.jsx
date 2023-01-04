@@ -1508,13 +1508,14 @@ export function BikeForm(props) {
           <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
           {bikeCondition === "used" && (<>
-            <label htmlFor="structuralVisualCondition" className="mt-4">Condição estrutural/visual?</label>
+            <label htmlFor="structuralVisualCondition" className="mt-4">Condição estrutural/visual:</label>
             <select
               className="select-answer"
               value={structuralVisualCondition}
               onChange={(e) => setStructuralVisualCondition(e.target.value)}
 
             >
+              <option value=""></option>
               <option value="perfect_condition">Condição Perfeita</option>
               <option value="minor_surface_scratches">Pequenos riscos ou arranhões superficiais.</option>
               <option value="spalls_in_paint">Lascas na pintura</option>
@@ -1525,13 +1526,14 @@ export function BikeForm(props) {
               <option value="components_cracks_or_fissures_must_be_repaired">Algum componente possui fissura ou necessita reparo</option>
             </select>
 
-            <label htmlFor="operatingCondition" className="mt-4">Condição estrutural/visual?</label>
+            <label htmlFor="operatingCondition" className="mt-4">Condição operacional:</label>
             <select
               className="select-answer"
               value={operatingCondition}
               onChange={(e) => setOperatingCondition(e.target.value)}
             >
               <option value=""></option>
+              <option value="perfect_condition">Condição Perfeita</option>
               <option value="rears_worn_out_higher_75">Relação desgastada (+75%)</option>
               <option value="shifters_not_working_properly">Troca de marchas não funciona perfeitamente</option>
               <option value="front_suspension_not_working_properly">Suspensão dianteira não funciona perfeitamente</option>

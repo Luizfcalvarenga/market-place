@@ -53,6 +53,7 @@ gem 'pg_search'
 
 gem "image_processing", "~> 1.2"
 gem 'mini_magick'
+gem 'postmark-rails'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

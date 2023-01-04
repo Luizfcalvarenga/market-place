@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_15_211615) do
+ActiveRecord::Schema.define(version: 2023_01_04_114202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -278,6 +278,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_211615) do
     t.datetime "removed_at"
     t.string "locality"
     t.string "year"
+    t.string "name"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
     t.index ["user_id"], name: "index_products_on_user_id"
