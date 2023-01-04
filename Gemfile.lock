@@ -148,6 +148,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.6.1)
     jsonapi-renderer (0.2.2)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -196,6 +197,11 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    postmark (1.22.0)
+      json
+    postmark-rails (0.22.0)
+      actionmailer (>= 3.0.0)
+      postmark (>= 1.21.3, < 2.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -250,8 +256,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.8.0)
-    redis-client (0.11.2)
-      connection_pool
     regexp_parser (2.6.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -280,11 +284,10 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     semantic_range (3.0.0)
-    sidekiq (7.0.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.11.0)
+    sidekiq (6.5.8)
+      connection_pool (>= 2.2.5, < 3)
+      rack (~> 2.0)
+      redis (>= 4.5.0, < 5)
     sidekiq-failures (1.0.4)
       sidekiq (>= 4.0.0)
     simple_form (5.1.0)
@@ -365,6 +368,7 @@ DEPENDENCIES
   pagy (~> 5.10)
   pg (~> 1.1)
   pg_search
+  postmark-rails
   pry-byebug
   pry-rails
   puma (~> 5.0)
@@ -376,7 +380,7 @@ DEPENDENCIES
   rexml
   sass-rails (>= 6)
   selenium-webdriver
-  sidekiq
+  sidekiq (~> 6.0)
   sidekiq-failures (~> 1.0)
   simple_form
   spring

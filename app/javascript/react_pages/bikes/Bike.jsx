@@ -24,11 +24,9 @@ export function Bike(props) {
     const dataObject = new FormData();
     dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
     dataObject.append( "like[likeble_type]", "Bike" );
-    console.log(e.nativeEvent.path[1].id)
     axios.post('/likes', dataObject)
 
     .then(function (response) {
-      console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else if (!response.data.errors) {
@@ -44,7 +42,7 @@ export function Bike(props) {
 
   }
   const showSellerContact = () => {
-    console.log( )
+    // console.log( )
     const userContact = document.getElementById("user-contact")
     userContact.classList.toggle("d-none")
   }
@@ -136,7 +134,7 @@ export function Bike(props) {
               </button>
             </div>
 
-            <h3 className="text-success mb-4 mt-3">Características Técnicas</h3>
+            <h3 className="mb-4 mt-3">Características Técnicas</h3>
             <ul className="main__menu">
               <li className="list-item w-100 mb-4">
                 <div className="kabobs item--js">
@@ -472,28 +470,27 @@ export function Bike(props) {
               </div>
               <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
             </div>
-            <h4 className="card-title mt-1">{bike.modality}</h4>
+
             <div className="card-content">
-              <h4 className="text-success mt-1">
+              <h3 className="mt-1">
                 {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 })}
-              </h4>
-              <p className=""><strong className="text-success">Categoria:</strong> {translateWord(bike.category.name)} </p>
-              <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(bike.modality)}</p>
-              <p className=""><strong className="text-success">Tipo da bike:</strong> {translateWord(bike.bike_type)}</p>
-              <p className=""><strong className="text-success">Ano:</strong> {bike.year}</p>
-              <p className=""><strong className="text-success">Tamanho do quadro:</strong> {bike.frame_size}</p>
-              <p className=""><strong className="text-success">Material do quadro:</strong> {translateWord(bike.frame_material)}</p>
-              <p className=""><strong className="text-success">Local:</strong> {bike.locality}</p>
-              <p className=""><strong className="text-success">Descrição:</strong> {bike.description}</p>
+              </h3>
+              <p className="text-white"><span className="text-gray">Categoria:</span> {translateWord(bike.category.name)} </p>
+              <p className="text-white"><span className="text-gray">Modalidade:</span> {translateWord(bike.modality)}</p>
+              <p className="text-white"><span className="text-gray">Tipo da bike:</span> {translateWord(bike.bike_type)}</p>
+              <p className="text-white"><span className="text-gray">Ano:</span> {bike.year}</p>
+              <p className="text-white"><span className="text-gray">Tamanho do quadro:</span> {bike.frame_size}</p>
+              <p className="text-white"><span className="text-gray">Material do quadro:</span> {translateWord(bike.frame_material)}</p>
+              <p className="text-white"><span className="text-gray">Local:</span> {bike.locality}</p>
+              <p className="text-white"><span className="text-gray">Descrição:</span> {bike.description}</p>
             </div>
             {bike.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
               <div id="user-contact" className="d-none">
                 <p className=" text-center"><strong className="text-success">Telefone:</strong>  {bike.user.phone_number}</p>
-                <p className=" text-center"><strong className="text-success">Email:</strong>  {bike.user.email}</p>
               </div>
             </>)}
             <a href={"/user/" + bike.user_id}>

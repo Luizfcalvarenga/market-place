@@ -3,7 +3,7 @@ class CreateAdvertisements < ActiveRecord::Migration[6.1]
     create_table :advertisements do |t|
       t.belongs_to :user, null: false, foreign_key: true
       t.references :advertisable, polymorphic: true, null: false
-      t.integer :invoice_id
+      t.string :invoice_id
       t.string :invoice_url
       t.string :invoice_pdf
       t.integer :net_value

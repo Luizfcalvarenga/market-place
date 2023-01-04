@@ -10,12 +10,18 @@ import MaintenanceImage from "../../../assets/images/tools.png";
 
 
 export function Products(props) {
+
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+
   const [products, setProducts] = useState([])
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
-  const [productTypeFilter, setProductTypeFilter] = useState("");
+  const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
@@ -47,14 +53,6 @@ export function Products(props) {
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (filteredLink) url = url + `&product_type_id=${filteredLink}`
 
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    });
-
-    if (params.product_type_id) {
-      setFilteredLink(params.product_type_id)
-    }
-
     const response = await axios.get(url);
     setProductTypes(response.data.product_types.sort(function (a, b) {
       if (a.prompt < b.prompt) {
@@ -68,10 +66,8 @@ export function Products(props) {
     setProductTypeAttributes(response.data.product_type_attributes)
     setProducts(response.data.products);
 
-  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter, minYearFilter, maxYearFilter, filteredLink])
-
-
-
+  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter,
+    minYearFilter, maxYearFilter, filteredLink])
 
   const handleProductAtributes = (e) => {
     setProductTypeFilter(e.target.value)
@@ -264,7 +260,7 @@ export function Products(props) {
   "Soma",
   "Diamondback",
   "Dahon"].sort()
-  
+
   const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
     "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
     "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
@@ -277,12 +273,12 @@ export function Products(props) {
       <h2 className="text-center text-success">Produtos</h2>
       <div className="row row-cols-1 mt-5">
         <div className="filters col-12 col-md-3 my-1">
-          <p className="text-success">Filtrar</p>
+          <p className="">Filtrar</p>
           <div className="">
             <div className="condition-filter">
-              <h5 className="text-success mt-3">condição</h5>
+              <h5 className="mt-3">condição</h5>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 text-success">
+                <label htmlFor="new" className="me-2">
                   <input
                     type="checkbox"
                     value="new"
@@ -291,7 +287,7 @@ export function Products(props) {
                   />  Novo
                 </label>
 
-                <label htmlFor="used" className="me-2 text-success">
+                <label htmlFor="used" className=" me-2">
                   <input
                     type="checkbox"
                     value="used"
@@ -301,7 +297,7 @@ export function Products(props) {
                 </label>
               </div>
             </div>
-            <h5 className="text-success mt-3">Produto</h5>
+            <h5 className=" mt-3">Produto</h5>
             <select
               value={productTypeFilter}
               onChange={(e) => handleProductAtributes(e)}
@@ -315,7 +311,7 @@ export function Products(props) {
 
 
 
-            <h5 className="text-success mt-3">categoria</h5>
+            <h5 className=" mt-3">categoria</h5>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
@@ -330,7 +326,7 @@ export function Products(props) {
             </select>
 
             {categoryFilter === "mountain_bike" && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className="mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -347,7 +343,7 @@ export function Products(props) {
             </>)}
 
             {categoryFilter === "dit_street" && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className="mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -363,7 +359,7 @@ export function Products(props) {
             </>)}
 
             {categoryFilter === "road" && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className="mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -379,7 +375,7 @@ export function Products(props) {
             </>)}
 
             {!categoryFilter && (<>
-              <h5 className="text-success mt-3">Modalidade</h5>
+              <h5 className=" mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -405,7 +401,7 @@ export function Products(props) {
             </>)}
 
             <div className="brand-filter">
-              <h5 className="text-success mt-3">Marca</h5>
+              <h5 className=" mt-3">Marca</h5>
               <select
               value={brandFilter ? brandFilter : ""}
               onChange={(e) => setBrandFilter(e.target.value)}
@@ -419,7 +415,7 @@ export function Products(props) {
             </div>
 
             <div className="model-filter">
-              <h5 className="text-success mt-3">Modelo</h5>
+              <h5 className=" mt-3">Modelo</h5>
               <select
               value={modelFilter ? modelFilter : ""}
               onChange={(e) => setModelFilter(e.target.value)}
@@ -433,13 +429,13 @@ export function Products(props) {
             </div>
 
             <div className="locality-filter">
-              <h5 className="text-success mt-3">Local</h5>
+              <h5 className="mt-3">Local</h5>
               <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
             </div>
 
             <div className="price-filter">
               <div className="">
-                <h5 className="text-success mt-3">preço</h5>
+                <h5 className="mt-3">preço</h5>
                 <div className="d-flex justify-content-between">
                   <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
                   <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
@@ -449,7 +445,7 @@ export function Products(props) {
 
             <div className="year-filter">
             <div className="">
-                <h5 className="text-success mt-3">ano</h5>
+                <h5 className="mt-3">ano</h5>
                 <div className="d-flex justify-content-between">
                   <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
                   <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
@@ -458,14 +454,14 @@ export function Products(props) {
             </div>
 
             {productTypeFilter.length > 1 && (<>
-              <h5 className="text-success mt-3">Atributos</h5>
+              <h5 className="mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {
                   return renderProductAttributeSelect(attribute, index)
                 })}
             </>)}
 
             {productTypeFilter.length === 1 && (<>
-              <h5 className="text-success mt-3">Atributos</h5>
+              <h5 className="mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {
                   return renderProductAttributeSelect(attribute, index)
                 })}
@@ -514,7 +510,7 @@ export function Products(props) {
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
                     </div>
-                    <h4 className="text-center card-title mt-1">
+                    <h4 className="text-center mt-1">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",

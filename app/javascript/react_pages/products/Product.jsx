@@ -231,7 +231,6 @@ export function Product(props) {
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
               <div id="user-contact" className="d-none">
                 <p className=" text-center"><strong className="text-success">Telefone:</strong>  {product.user.phone_number}</p>
-                <p className=" text-center"><strong className="text-success">Email:</strong>  {product.user.email}</p>
               </div>
             </>)}
             <a href={"/user/" + product.user.id}>

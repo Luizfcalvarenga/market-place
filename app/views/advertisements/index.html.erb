@@ -12,9 +12,9 @@
               <h6><span class="text-success">Status:</span> <%= advertisement.status %> </h6>
             </div>
 
-            <% if !advertisement.is_free? || advertisement.invoice_paid_at.pblank?%>
+            <% if advertisement.invoice_paid_at.blank? %>
               <div>
-                <a href="<%= advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
+                <%= link_to "Pagar anúncio", advertisement_invoice_path(advertisement), class: "btn-invoice"  %>
               </div>
             <% end %>
           </div>

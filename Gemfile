@@ -32,7 +32,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'pundit'
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.0'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'stimulus-rails'
 gem 'devise_token_auth'
@@ -53,6 +53,7 @@ gem 'pg_search'
 
 gem "image_processing", "~> 1.2"
 gem 'mini_magick'
+gem 'postmark-rails'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

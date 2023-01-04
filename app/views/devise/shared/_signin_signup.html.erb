@@ -10,12 +10,12 @@
     <div id="sign-in" class="col-12 col-md-6 mb-4 <%= 'collapse multi-collapse' if mobile_device? %>">
       <div class="p-5 bg-dark br-12 d-flex flex-column <%= mobile_device? ? "vh-90" : "vh-80 mt-5" %>">
         <h2 class="text-center text-success f-20">Fazer Login</h2>
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "form-signin"}) do |f| %>
           <div class="h-100">
             <div class="h-80">
-              <%= f.input :email, id: "email-signin",
+              <%= f.input :email,
                     required: false,
-                    autofocus: true, input_html: { autocomplete: "email" } %>
+                    autofocus: true, input_html: {id: "email-signin", autocomplete: "email" } %>
               <%= f.input :password,
                           required: false,
                           input_html: { autocomplete: "current-password", id: "password_signin" } %>
@@ -86,9 +86,11 @@
   </div>
 </div>
 
-<script>
-var $myGroup = $('#myGroup');
-$myGroup.on('show.bs.collapse','.collapse', function() {
-    $myGroup.find('.collapse.in').collapse('hide');
-});
-</script>
+<%# <script>
+let $myGroup = document.getElementById('myGroup');
+  $myGroup.on('show.bs.collapse','.collapse', function() {
+      $myGroup.find('.collapse.in').collapse('hide');
+  });
+
+  $myGroup
+</script> %>
