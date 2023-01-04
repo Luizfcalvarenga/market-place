@@ -3,6 +3,7 @@ json.user_id @product.user_id
 json.category_id @product.category_id
 json.modality @product.modality
 json.product_type_id @product.product_type_id
+json.name @product.name
 json.brand @product.brand
 json.model @product.model
 json.description @product.description

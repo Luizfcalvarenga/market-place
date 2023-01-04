@@ -10,6 +10,7 @@ import MaintenanceImage from "../../../assets/images/tools.png";
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
+
   const [user, setUser] = useState([]);
   const [services, setServices] = useState([]);
   const [productServiceId, setProductServiceId] = useState("");
@@ -21,12 +22,14 @@ export function ProductForm(props) {
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
+
   const [productCategory, setProductCategory] = useState("");
   const [modalities, setModalities] = useState([]);
   const [productModality, setProductModality] = useState("");
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
   const [productAttributesDisplay, setProductAttributesDisplay] = useState({});
+  const [productName, setProductName] = useState("");
 
   const [productBrand, setProductBrand] = useState("");
   const [otherProductBrand, setOtherProductBrand] = useState("");
@@ -181,6 +184,8 @@ export function ProductForm(props) {
       setCategoryId(response.data.product.category_id);
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
+      setProductName(response.data.product.name);
+
       setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
@@ -321,6 +326,8 @@ export function ProductForm(props) {
     dataObject.append( "product[category_id]", categoryId );
     dataObject.append( "product[modality]", productModality );
     dataObject.append( "product[product_type_id]", productTypeId );
+    dataObject.append( "product[name]", productName );
+
     dataObject.append( "product[model]", productModel );
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", productPrice );
@@ -667,7 +674,204 @@ export function ProductForm(props) {
 
 
   //////////////////////////////////////////////////////////////////////////////////
-  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]
+  const frameBrands = [
+    "Alfameq",
+    "Astro",
+    "Audax",
+    "BH",
+    "Bianchi",
+    "BMC",
+    "Caloi",
+    "Cannondale",
+    "Canyon",
+    "Carrera",
+    "Cervelo",
+    "Corratec",
+    "Cube",
+    "Dabomb",
+    "Felt",
+    "First",
+    "Focus",
+    "Fuji",
+    "Giant",
+    "Groove",
+    "GT",
+    "GTS",
+    "Ibis",
+    "Jamis",
+    "Kona",
+    "Lapierre",
+    "Marin",
+    "Merida",
+    "Mosso",
+    "Oggi",
+    "Orbea",
+    "Pinarello",
+    "Raleigh",
+    "Rava",
+    "Ridley",
+    "Santa_cruz",
+    "Schwinn",
+    "Scott",
+    "Sense",
+    "Soul",
+    "Specialized",
+    "Swift Carbon",
+    "Trek",
+    "Tsw",
+    "Wilier",
+    "YT",
+    "Argon 21",
+    "Bliv",
+    "Blue",
+    "Bottecchia",
+    "Cipollini",
+    "Cly",
+    "Cumberland",
+    "De Rosa",
+    "E Moving",
+    "Gary Fisher",
+    "Gioia",
+    "Kaiena",
+    "Kestrel",
+    "Kode",
+    "Kuota",
+    "Lazzaretti",
+    "Lev E-Bike",
+    "Litespeed",
+    "Look",
+    "Lotus",
+    "Mercian",
+    "Miyamura Gravel",
+    "Open",
+    "Quintana Roo",
+    "Redland",
+    "Riva",
+    "Rose",
+    "Sava",
+    "Sundown",
+    "Time",
+    "Trinx",
+    "Trust",
+    "Velorbis",
+    "Vicinitech",
+    "Victory",
+    "Eddy Merckx",
+    "Salsa",
+    "Surly",
+    "Soma",
+    "Diamondback",
+    "Dahon"
+  ].sort()
+
+
+  const componentBrands = ["100%",
+    "Absolute",
+    "Abus",
+    "Algoo",
+    "Alligator",
+    "Altmayer",
+    "Arbok",
+    "ASW Racing",
+    "Atrio",
+    "Avva Extreme",
+    "Barbedo",
+    "Bell",
+    "Birzman",
+    "Blackburn",
+    "Bontrager",
+    "Caloi",
+    "Camelbak",
+    "Catrelli",
+    "Catlike",
+    "Ceramicspeed",
+    "Continental",
+    "Cannondale",
+    "CrankBrothers",
+    "Curtlo",
+    "Elite",
+    "Dt Swiss",
+    "DSI Tyres",
+    "Dvorak",
+    "DMT",
+    "ERT Ctcle Sport",
+    "Evoc",
+    "Finish line",
+    "Fi'zi:k",
+    "Free Force",
+    "FDS",
+    "Fulcrim",
+    "Furbo",
+    "Gios BR",
+    "Giro",
+    "Giyo",
+    "GT Bicycles",
+    "Garmin",
+    "Fox",
+    "Flr",
+    "Gantech Gancheiras",
+    "GU",
+    "GTA",
+    "HB",
+    "Ictus",
+    "Kenda",
+    "High One",
+    "Hupi",
+    "Kask",
+    "KMC",
+    "Leatt",
+    "Look",
+    "Maxxis",
+    "Mavic",
+    "Marciomay",
+    "Michelin",
+    "Nomad",
+    "Oggi",
+    "Muc-Off",
+    "Morgan Blue",
+    "Northwave",
+    "Oakley",
+    "Most",
+    "Polar",
+    "Pirelli",
+    "Pinarello",
+    "Orbea",
+    "ParkToolRefactor",
+    "Reynolfds",
+    "Probiotica",
+    "Rock Shox",
+    "Promax",
+    "Prologo",
+    "Scoot Sentec",
+    "Shimano",
+    "Schwalbe",
+    "Saris",
+    "Serfas",
+    "Sidi",
+    "Smoove",
+    "Sram Sunrace",
+    "Sunshine",
+    "Specialized",
+    "Stan's Notures",
+    "Supacaz",
+    "Syncros",
+    "Topeak",
+    "Token",
+    "TSW",
+    "Vision",
+    "Vittori",
+    "Thule",
+    "Tacx",
+    "Uno",
+    "Vzan",
+    "Wellgo",
+    "Woom",
+    "Xplova",
+    "Zipp",
+    "Zoom Precision Components",
+    "Zéfal",
+    "Wahoo"].sort()
+
   const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
   const productsIdsWithSpecificModels = ["2", "10", "12", "23", "25"]
   return (
@@ -790,7 +994,40 @@ export function ProductForm(props) {
             <p className="text-danger">{errors.product.product_type}</p>
           )}
 
-          {!(productTypeId === "9") && (<>
+          <label htmlFor="productModel" className="mt-4">Nome:<span className="requested-information ms-1">*</span></label>
+          <input type="text" className="text-input" value={productName ? productName : ""} onChange={(e) => setProductName(e.target.value)}/>
+          { errors && errors.product && errors.product.name && (
+              <p className="text-danger">{errors.product.name}</p>
+          )}
+
+          {(productTypeId === "18") && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              {frameBrands.map((frameBrand, index) => {
+                return (<option key={index} value={frameBrand}>{frameBrand}</option>)
+              })}
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+          {(productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
