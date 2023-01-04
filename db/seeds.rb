@@ -75,7 +75,7 @@
     spoke = ProductType.create(name: "spoke", prompt: "Raios") # raios
     rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Transmissão Traseira") #câmbio traseiro
     rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador / Passador Traseiro")
-    rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Suspensão Traseira") # shock
+    rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Shock / Suspensão Traseira") # shock
     stem = ProductType.create(name: "stem", prompt: "Mesa") # avanço/mesa
     tube = ProductType.create(name: "tube", prompt: "Câmara")
     tyre = ProductType.create(name: "tyre", prompt: "Pneu")
@@ -117,7 +117,7 @@
     sneaker = ProductType.create(name: "sneaker", prompt: "Sapatilha")
 
 
-    products_options = [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, full_relation, crankset, fender, frame, front_derailleur, rear_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ]
+    products_options = [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, relation_kit_complete_group, crankset, fender, frame, front_derailleur, rear_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CLOTHES SIZES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     clothes_sizes = ["PP", "P", "M", "G", "GG", "XGG"]
@@ -291,13 +291,12 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-    rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+    # rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
     mtb_dirt_urban_rear_suspension_models = ["DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "other"]
 
     rear_suspension_question_1 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Possui documentação" )
     rear_suspension_question_2 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock" )
-    rear_suspension_question_3 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira" )
-    rear_suspension_question_4 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
+    rear_suspension_question_3 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
     # rear_suspension_question_4 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "model", kind: "multiple_choice", options: mtb_dirt_urban_rear_suspension_models, prompt: "modelo" )
 
 
@@ -314,10 +313,10 @@
     front_gears_options= [0, 1, 2, 3 ]
     rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
-    relation_kit_question_1 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
-    relation_kit_question_2 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas velocidades" )
-    relation_kit_question_3 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas velocidades" )
-    relation_kit_question_4 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
+    relation_kit_question_1 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
+    relation_kit_question_2 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Marchas dianteiras" )
+    relation_kit_question_3 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Marchas traseiras" )
+    relation_kit_question_4 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
@@ -326,7 +325,7 @@
     # mtb_dirt_urban_front_derailleur_models = [" SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "TOURNEY", "XT", "XTR", "EX1", "GX", "NX", "SX", "X01", "other"]
 
     front_derailleur_question_1 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
-    front_derailleur_question_2 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas velocidades" )
+    front_derailleur_question_2 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas" )
     front_derailleur_question_3 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação" )
     front_derailleur_question_4 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
     # front_derailleur_question_4 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "model", kind: "multiple_choice", options: road_front_derailleur_models ||mtb_dirt_urban_derailleur_models, prompt: "Modelo" )
@@ -340,7 +339,7 @@
     rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
     rear_derailleur_question_1 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
-    rear_derailleur_question_2 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas velocidades" )
+    rear_derailleur_question_2 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas" )
     rear_derailleur_question_3 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação" )
     rear_derailleur_question_4 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
@@ -398,7 +397,7 @@
 
     battery = ProductType.create(name: "battery", prompt: "Bateria")
 
-    a  adapters = ProductType.create(name: "adapters", prompt: "Adaptadores")
+    adapters = ProductType.create(name: "adapters", prompt: "Adaptadores")
     battery = ProductType.create(name: "battery", prompt: "Bateria")
     blocking = ProductType.create(name: "blocking", prompt: "Blocagem")
     bearing = ProductType.create(name: "bearing", prompt: "Rolamento")
@@ -411,12 +410,12 @@
     chain = ProductType.create(name: "chain", prompt: "Corrente")
     chain_guide = ProductType.create(name: "chain_guide", prompt: "Guia de Corrente")
     chainring = ProductType.create(name: "chainring", prompt: "Coroa") #coroa
-    full_relation = ProductType.create(name: "full_relation", prompt: "Relação Completa")
+    relation_kit_complete_group = ProductType.create(name: "relation_kit_complete_group", prompt: "Kit Relação / Grupo Completo")
     crankset = ProductType.create(name: "crankset", prompt: "Pedivela") # pedivela
     fender = ProductType.create(name: "fender", prompt: "Paralama")
     frame = ProductType.create(name: "frame", prompt: "Quadro")
-    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Transmissão") #transmissão
-    front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador Dianteiro")
+    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Transmissão Dianteira") #transmissão
+    front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador / Passador Dianteiro")
     front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira")
     full_wheel = ProductType.create(name: "full_wheel", prompt: "Roda Completa")
     grips = ProductType.create(name: "grips", prompt: "Manopla")
@@ -432,8 +431,8 @@
     sheave = ProductType.create(name: "sheave", prompt: "Roldana")
     spoke = ProductType.create(name: "spoke", prompt: "Raios") # raios
     rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Transmissão Traseira") #câmbio traseiro
-    rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador Traseiro")
-    rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Suspensão Traseira") # shock
+    rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador / Passador Traseiro")
+    rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Shock / Suspensão Traseira") # shock
     stem = ProductType.create(name: "stem", prompt: "Mesa") # avanço/mesa
     tube = ProductType.create(name: "tube", prompt: "Câmara")
     tyre = ProductType.create(name: "tyre", prompt: "Pneu")
@@ -475,7 +474,7 @@
     sneaker = ProductType.create(name: "sneaker", prompt: "Sapatilha")
 
 
-    products_options = [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, full_relation, crankset, fender, frame, derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ]
+    products_options = [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, relation_kit_complete_group, crankset, fender, frame, front_derailleur, rear_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CLOTHES SIZES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     clothes_sizes = ["PP", "P", "M", "G", "GG", "XGG"]
@@ -649,14 +648,14 @@
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-    rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+    # rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
 
-    mtb_dirt_urban_rear_suspension_models = ["DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "other"]
+    # mtb_dirt_urban_rear_suspension_models = ["DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "other"]
 
     rear_suspension_question_1 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Possui documentação" )
     rear_suspension_question_2 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock" )
-    rear_suspension_question_3 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira" )
-    rear_suspension_question_4 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
+    rear_suspension_question_3 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
+    # rear_suspension_question_3 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira" )
     # rear_suspension_question_4 = ProductTypeAttribute.create!(product_type: rear_suspension, name: "model", kind: "multiple_choice", options: mtb_dirt_urban_rear_suspension_models, prompt: "modelo" )
 
     # rear_suspension_questions = [ rear_suspension_question_1, rear_suspension_question_2, rear_suspension_question_3, rear_suspension_question_4]
@@ -671,6 +670,16 @@
     spoke_question_2 = ProductTypeAttribute.create!(product_type: spoke, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
     spoke_question_3 = ProductTypeAttribute.create!(product_type: spoke, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
 
+    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RELATION KIT / COMPLETE GROUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+    front_gears_options= [0, 1, 2, 3 ]
+    rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
+
+    relation_kit_question_1 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
+    relation_kit_question_2 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "front_derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Marchas dianteiras" )
+    relation_kit_question_3 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Marchas traseiras" )
+    relation_kit_question_4 = ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
+
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
 
@@ -679,7 +688,7 @@
     # mtb_dirt_urban_front_derailleur_models = [" SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "TOURNEY", "XT", "XTR", "EX1", "GX", "NX", "SX", "X01", "other"]
 
     front_derailleur_question_1 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
-    front_derailleur_question_2 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas velocidades" )
+    front_derailleur_question_2 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas" )
     front_derailleur_question_3 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação" )
     front_derailleur_question_4 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
     # front_derailleur_question_4 = ProductTypeAttribute.create!(product_type: front_derailleur, name: "model", kind: "multiple_choice", options: road_front_derailleur_models ||mtb_dirt_urban_derailleur_models, prompt: "Modelo" )
@@ -692,7 +701,7 @@
     rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
     rear_derailleur_question_1 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "documentation_type", kind: "multiple_choice", options: documentation_type, prompt: "Documentação" )
-    rear_derailleur_question_2 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas velocidades" )
+    rear_derailleur_question_2 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas" )
     rear_derailleur_question_3 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação" )
     rear_derailleur_question_4 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "condition", kind: "multiple_choices", options: ["new", "used"], prompt: "Condição")
     # rear_derailleur_question_4 = ProductTypeAttribute.create!(product_type: rear_derailleur, name: "model", kind: "multiple_choice", options: road_rear_derailleur_models || mtb_dirt_urban_rear_derailleur_models, prompt: "Modelo" )
@@ -749,7 +758,7 @@
         name: ["Ultegra", "Ace", "X-Trek", "Gtx", "Force"].sample,
         category: category,
         modality: category.modalities.sample,
-        product_type: [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, full_relation, crankset, fender, frame, derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ].sample,
+        product_type: [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, relation_kit_complete_group, crankset, fender, frame, front_derailleur, rear_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ].sample,
         brand: ["SHIMANO", "FOX", "SRAM", "ROCKSHOX"].sample,
         model: ["Ultegra", "Ace", "X-Trek", "Gtx", "Force"].sample,
         locality: ["Belo Horizonte", "Rio de Janeiro", "São Paulo"].sample,
