@@ -369,7 +369,9 @@ export function ProductForm(props) {
   const handleProductType = (e) => {
     let filterProducts = e.target.innerHTML;
     if (filterProducts.includes("Acessórios")) {
-      setProductTypes(allProducts.filter(product => product.name === "car_accessories" || product.name === "bike_accessories" || product.name === "training_accessories" || product.name === "pre_after_pedal_accessories"));
+      setProductTypes(allProducts.filter(product => product.name === "air_bomb" || product.name === "eletronics" || product.name === "oil_lubricant" || product.name === "stand"
+        || product.name === "tools" || product.name === "car_protector" || product.name === "training_roller" || product.name === "bike_rack"
+      ));
     } else if (filterProducts.includes("Componentes")) {
       setProductTypes(allProducts.filter(product => product.name === "battery" || product.name === "brake" || product.name === "brake_levers" || product.name === "cassete"
         || product.name === "chain" || product.name === "chainring" || product.name === "crankset" || product.name === "fender"
@@ -377,23 +379,17 @@ export function ProductForm(props) {
         || product.name === "full_wheel" || product.name === "grips" || product.name === "handlebar" || product.name === "headset"
         || product.name === "hub" || product.name === "pedals" || product.name === "rim" || product.name === "saddle"
         || product.name === "seat_post" || product.name === "spoke" || product.name === "rear_derailleur" || product.name === "rear_shifter"
-        || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre"
+        || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre" || product.name === "adapters" || product.name === "blocking"
+        || product.name === "bearing" || product.name === "brake_pad" || product.name === "central_movement" || product.name === "chain_guide" || product.name === "relation_kit_complete_group"
+        || product.name === "hanger" || product.name === "power_meter" || product.name === "sheave" || product.name === "tube"
+
       ));
 
-    } else if (filterProducts.includes("Equipamentos")) {
-      setProductTypes(allProducts.filter(product => product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
-        || product.name === "bottle_cage" || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker"
-      ));
-    } else if (filterProducts.includes("Casual")) {
-      setProductTypes(allProducts.filter(product => product.name === "cap" || product.name === "shirt" || product.name === "shorts" || product.name === "glasses"
-      ));
-    } else if (filterProducts.includes("Manutenção")) {
-      setProductTypes(allProducts.filter(product => product.name === "air_bomb" || product.name === "lubricant" || product.name === "sealant"
-      ));
     }  else if (filterProducts.includes("Vestuário")) {
       setProductTypes(allProducts.filter(product => product.name === "bretelle" || product.name === "shorts" || product.name === "inner_shorts" || product.name === "shirt"
         || product.name === "vest" || product.name === "windbreaker" || product.name === "gloves" || product.name === "socks"
-        || product.name === "glasses" || product.name === "thermal_clothing"
+        || product.name === "glasses" || product.name === "thermal_clothing" || product.name === "cap" || product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
+        || product.name === "bottle_cage" || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker"
       ));
     }
     const firstSection = document.getElementById("first-section")
@@ -641,13 +637,9 @@ export function ProductForm(props) {
         <div className="d-flex justify-content-between gap-3 btns-components">
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Equipamentos<br/><img src={EquipamentImage} alt="" className="icon-card-form"/></button>
-        </div>
-        <div className="d-flex justify-content-between py-3 gap-3 btns-components">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Casual<br/><img src={CasualImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Manutenção<br/><img src={MaintenanceImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
+
       </div>
 
 
