@@ -1,5 +1,5 @@
 class AdvertisementMailer < ApplicationMailer
-  default from: "nuflow@shop.com"
+  default from: "NuflowPass <naoresponda@nuflowpass.com.br>"
   def advertisement_creation
     @advertisement = params[:advertisement]
     @client = @advertisement.user
