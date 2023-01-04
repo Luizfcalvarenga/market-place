@@ -400,6 +400,7 @@ export function ProductForm(props) {
     handleFirstStep()
   }
 
+
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
@@ -503,6 +504,60 @@ export function ProductForm(props) {
 
 
   }
+
+  const handleBackToFirst = (e) => {
+    const progressTwo = document.getElementById("progress-2")
+    const secondSection = document.getElementById("second-section")
+    const firstSection = document.getElementById("first-section")
+    progressTwo.classList.remove("section-done")
+    secondSection.classList.add("d-none")
+    firstSection.classList.remove("d-none")
+  }
+
+  const handleBackToSecond = (e) => {
+    const progressTwo = document.getElementById("progress-2")
+    const progressThree = document.getElementById("progress-3")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
+    progressTwo.classList.remove("section-done")
+    secondSection.classList.remove("d-none")
+    progressThree.classList.remove("section-done")
+    thirdSection.classList.add("d-none")
+  }
+
+  const handleBackToThird = () => {
+    const progressThird = document.getElementById("progress-3")
+    const progressFourth = document.getElementById("progress-4")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
+    progressThird.classList.remove("section-done")
+    progressFourth.classList.remove("section-done")
+    thirdSection.classList.remove("d-none")
+    fourthSection.classList.add("d-none")
+  }
+
+  const handleBackToFourth = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const progressFourth = document.getElementById("progress-4")
+    const fourthSection = document.getElementById("fourth-section")
+    const fifthSection = document.getElementById("fifth-section")
+    progressFourth.classList.remove("section-done")
+    progressFifth.classList.remove("section-done")
+    fourthSection.classList.remove("d-none")
+    fifthSection.classList.add("d-none")
+  }
+
+  const handleBackToFifth = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const progressSixth = document.getElementById("progress-6")
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
+    progressFifth.classList.remove("section-done")
+    progressSixth.classList.remove("section-done")
+    fifthSection.classList.remove("d-none")
+    sixthSection.classList.add("d-none")
+  }
+
 
   const handleFirstStep = () => {
     const progressOne = document.querySelector(".progress-1")
@@ -773,7 +828,8 @@ export function ProductForm(props) {
           </>)}
 
 
-          <div className="text-center">
+          <div className="d-flex justify-content-center">
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -785,7 +841,8 @@ export function ProductForm(props) {
               {productTypeAttributes.map((attribute, index) => {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
-              <div className="text-center">
+              <div className="d-flex justify-content-center">
+                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
                 <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span></button>
               </div>
             </div>
@@ -795,7 +852,10 @@ export function ProductForm(props) {
             <div id="third-section" className="card-questions d-none mb-5 text-center">
               <h4 className="text-center text-success">Informações técnicas</h4>
               <p className="mt-5">não há nada para esse produto, vamos em frente!!!</p>
-              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              <div className="d-flex justify-content-center">
+                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              </div>
             </div>
           )}
 
@@ -860,7 +920,8 @@ export function ProductForm(props) {
 
             </div>
 
-            <div className="text-center">
+            <div className="d-flex justify-content-center">
+              <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
               <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
           </div>
@@ -888,7 +949,8 @@ export function ProductForm(props) {
               }
             </div> : null
           }
-          <div className="text-center">
+          <div className="d-flex justify-content-center">
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -967,6 +1029,10 @@ export function ProductForm(props) {
             }
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
+
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+        </div>
 
         {!props.productId && (<>
           {(productPrice < 50000) && (<>
