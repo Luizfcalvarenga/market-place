@@ -1,10 +1,8 @@
 .cards-bikes-likes {
-  border: 1px solid $color-primary;
+  border: none;
   border-radius: 5px;
-  height: auto;
-  // margin: auto;
   background-color: rgb(21,21,21);
-
+  padding-bottom: 10px;
   .card-img {
     height: 275px !important;
     border-radius: 5px 5px 0 0;
@@ -12,8 +10,6 @@
   }
 
   &:hover {
-    box-shadow: 0px 0px 20px 0px #00c4545e;
-
     h4 {
       color: inherit !important;
     }
@@ -21,12 +17,11 @@
 }
 
 .cards-products-likes {
-  border: 1px solid transparent;
+  border: none;
   border-radius: 5px;
-  height: auto;
-  // margin: auto;
-  background-color: #F4F4F9;
-  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  background-color: rgb(21,21,21);
+  padding-bottom: 10px;
+
   .card-img {
     height: 275px !important;
     border-radius: 5px 5px 0 0;
@@ -35,12 +30,9 @@
 
   .product-price {
     color: #009d43;
-
   }
 
   &:hover {
-    box-shadow: 0px 0px 20px 0px #00c4545e;
-
     h4 {
       color: inherit;
     }

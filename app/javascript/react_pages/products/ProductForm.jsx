@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import swal from 'sweetalert';
-import EquipamentImage from "../../../assets/images/helmet.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
-import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import MaintenanceImage from "../../../assets/images/tools.png";
+import IntlCurrencyInput from "react-intl-currency-input"
 
 
 export function ProductForm(props) {
@@ -60,6 +58,35 @@ export function ProductForm(props) {
 
 
 
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const BrlCurrencyComponent = () => {
+    const handleChange = (event, value, maskedValue) => {
+      event.preventDefault();
+
+      console.log(value); // value without mask (ex: 1234.56)
+      console.log(maskedValue); // masked value (ex: R$1234,56)
+    };
+
+    return(
+      <IntlCurrencyInput currency="BRL" config={currencyConfig}
+              onChange={handleChange} />
+    );
+  }
+
+  
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
@@ -916,7 +943,7 @@ export function ProductForm(props) {
       </ul>
 
       <div id="first-section">
-        <h4 className="text-success  text-center mt-4">O que deseja anunciar?</h4>
+        <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
@@ -1061,6 +1088,7 @@ export function ProductForm(props) {
               <option value=""></option>
               <option value="Sram">Sram</option>
               <option value="Shimano">Shimano</option>
+              <option value="Microshift">Microshift</option>
               <option value="Outra">Outra</option>
 
             </select>
@@ -1089,6 +1117,9 @@ export function ProductForm(props) {
               <option value=""></option>
               <option value="Fox">Fox</option>
               <option value="Rockshock">Rockshock</option>
+              <option value="Marzocchi">Marzocchi</option>
+              <option value="Rockshock">Rockshock</option>
+
               <option value="Outra">Outra</option>
 
             </select>
