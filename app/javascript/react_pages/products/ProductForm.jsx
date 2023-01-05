@@ -1146,7 +1146,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1172,7 +1172,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1200,7 +1200,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1226,7 +1226,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1239,7 +1239,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="rear-derailleur-models">
-            {(productTypeId === "19" && productCategory === "road" ) && (<>
+            {(productTypeId === "35" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1254,7 +1254,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1265,7 +1265,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "19") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "35") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1280,7 +1280,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1308,7 +1308,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1336,7 +1336,7 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.model && (
                 <p className="text-danger">{errors.product.model}</p>
               )}
-              { productModel === "Outra"  && (
+              { productModel === "Outro"  && (
                   <>
                     <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
                     <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
@@ -1348,7 +1348,14 @@ export function ProductForm(props) {
             </>)}
           </div>
 
-          
+          {(productTypeId === "37" || productTypeId === "21" )&& (productCategory === "road" ) && (<>
+
+            <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
+            { errors && errors.product && errors.product.model && (
+              <p className="text-danger">{errors.product.model}</p>
+            )}
+          </>)}
 
 
           {productsIdsWithSpecificModels.includes(productTypeId) && (productCategory === "infant" || productCategory === "" ) && (<>
