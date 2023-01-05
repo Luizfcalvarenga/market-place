@@ -57,7 +57,7 @@
     crankset = ProductType.create(name: "crankset", prompt: "Pedivela") # pedivela
     fender = ProductType.create(name: "fender", prompt: "Paralama")
     frame = ProductType.create(name: "frame", prompt: "Quadro")
-    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Transmissão Dianteira") #transmissão
+    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Câmbio Dianteiro") #transmissão
     front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador / Passador Dianteiro")
     front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira")
     full_wheel = ProductType.create(name: "full_wheel", prompt: "Roda Completa")
@@ -73,7 +73,7 @@
     seat_post = ProductType.create(name: "seat_post", prompt: "Canote")
     sheave = ProductType.create(name: "sheave", prompt: "Roldana")
     spoke = ProductType.create(name: "spoke", prompt: "Raios") # raios
-    rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Transmissão Traseira") #câmbio traseiro
+    rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Câmbio Traseiro") #câmbio traseiro
     rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador / Passador Traseiro")
     rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Shock / Suspensão Traseira") # shock
     stem = ProductType.create(name: "stem", prompt: "Mesa") # avanço/mesa
@@ -414,7 +414,7 @@
     crankset = ProductType.create(name: "crankset", prompt: "Pedivela") # pedivela
     fender = ProductType.create(name: "fender", prompt: "Paralama")
     frame = ProductType.create(name: "frame", prompt: "Quadro")
-    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Transmissão Dianteira") #transmissão
+    front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Câmbio Dianteiro") #transmissão
     front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador / Passador Dianteiro")
     front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira")
     full_wheel = ProductType.create(name: "full_wheel", prompt: "Roda Completa")
@@ -430,7 +430,7 @@
     seat_post = ProductType.create(name: "seat_post", prompt: "Canote")
     sheave = ProductType.create(name: "sheave", prompt: "Roldana")
     spoke = ProductType.create(name: "spoke", prompt: "Raios") # raios
-    rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Transmissão Traseira") #câmbio traseiro
+    rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Câmbio Traseiro") #câmbio traseiro
     rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador / Passador Traseiro")
     rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Shock / Suspensão Traseira") # shock
     stem = ProductType.create(name: "stem", prompt: "Mesa") # avanço/mesa
