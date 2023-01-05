@@ -1189,7 +1189,7 @@ export function BikeForm(props) {
             </select>
           </>)}
 
-          {(category === "mountain_bike" || category ===  "dirt_street" || category ===  "urban") && (<>
+          {(category === "mountain_bike" || category ===  "dirt_street" || category ===  "urban" || category ===  "infant") && (<>
             <label htmlFor="brakeModel" className="mt-4">Marca | Modelo</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
@@ -1216,116 +1216,89 @@ export function BikeForm(props) {
 
                                                                         {/*//////////////////SUSPENSÂO///////////////////////*/}
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Suspensões" className="suspension d-none mb-3">
-          <label htmlFor="suspensionType" className="mt-3">Tipo de suspensão:</label>
-          <select
-            className="select-answer" aria-label=".form-select-sm example"
-            value={suspensionType}
-            onChange={(e) => setSuspensionType(e.target.value)}
-          >
-            <option value=""></option>
-            <option value="no_suspension">Sem Suspensão</option>
-            <option value="full_suspension">Full Suspension</option>
-            <option value="hardtail">Hardtail(Apenas Dinteira)</option>
-          </select>
+        {!(category === "road") && (<>
 
-          {suspensionType === "full_suspension" && (<>
-            <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira:</label>
+          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
+          <div id="Suspensões" className="suspension d-none mb-3">
+            <label htmlFor="suspensionType" className="mt-3">Tipo de suspensão:</label>
             <select
               className="select-answer" aria-label=".form-select-sm example"
-              value={frontSuspensionTravel}
-              onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+              value={suspensionType}
+              onChange={(e) => setSuspensionType(e.target.value)}
             >
               <option value=""></option>
-              {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
-                if (frontSuspensionTravel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{frontSuspensionTravel}</option>);
-                }
-              })}
+              <option value="no_suspension">Sem Suspensão</option>
+              <option value="full_suspension">Full Suspension</option>
+              <option value="hardtail">Hardtail(Apenas Dinteira)</option>
             </select>
 
-            { frontSuspensionTravel === "other"  && (
-              <>
-                <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherFrontSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
-              </>
-            )}
+            {suspensionType === "full_suspension" && (<>
+              <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={frontSuspensionTravel}
+                onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+              >
+                <option value=""></option>
+                {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
+                  if (frontSuspensionTravel === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{frontSuspensionTravel}</option>);
+                  }
+                })}
+              </select>
 
-            <label htmlFor="rearSuspensionTravel" className="mt-4">Suspensão traseira:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={rearSuspensionTravel}
-              onChange={(e) => setRearSuspensionTravel(e.target.value)}
-            >
-              <option value=""></option>
-              {rearSuspensionTravels.map((rearSuspensionTravel, index)=> {
-                if (rearSuspensionTravel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{rearSuspensionTravel}</option>);
-                }
-              })}
-            </select>
+              { frontSuspensionTravel === "other"  && (
+                <>
+                  <label htmlFor="year" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherFrontSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
+                </>
+              )}
 
-            { rearSuspensionTravel === "other"  && (
-              <>
-                <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
-              </>
-            )}
-          </>
-          )}
-
-          {suspensionType === "hardtail" && (<>
-            <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={frontSuspensionTravel}
-              onChange={(e) => setFrontSuspensionTravel(e.target.value)}
-            >
-              <option value=""></option>
-              {frontSuspensionTravels.map((rearSuspensionTravel, index)=> {
-                if (rearSuspensionTravel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{rearSuspensionTravel}</option>);
-                }
-              })}
-            </select>
-
-            { rearSuspensionTravel === "other"  && (
-              <>
-                <label htmlFor="year" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
-              </>
-            )}
-          </>
-          )}
-
-          {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && suspensionType === "full_suspension"  &&(
-            <>
-              <label htmlFor="frontSuspensionModel" className="mt-4">Marca | Modelo (dianteira):</label>
+              <label htmlFor="frontSuspensionModel" className="mt-4">Marca | Modelo:</label>
               <select className="select-answer" aria-label=".form-select-sm example"
                 value={frontSuspensionModel}
                 onChange={(e) => setFrontSuspensionModel(e.target.value)}
               >
-                <option value=""></option>
-                {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
-                  if (frontSuspensionModels === "other") {
-                    return (<option key={index} value="other">Outro</option>);
-                  } else {
-                    return (<option key={index}>{frontSuspensionModels}</option>);
-                  }
-                })}
+              <option value=""></option>
+              {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
+                if (frontSuspensionModels === "other") {
+                  return (<option key={index} value="other">Outro</option>);
+                } else {
+                  return (<option key={index}>{frontSuspensionModels}</option>);
+                }
+              })}
               </select>
               <br />
+
               { frontSuspensionModel === "other"  && (
                 <>
                   <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
                   <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                </>
+              )}
+
+              <label htmlFor="rearSuspensionTravel" className="mt-4">Suspensão traseira:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={rearSuspensionTravel}
+                onChange={(e) => setRearSuspensionTravel(e.target.value)}
+              >
+                <option value=""></option>
+                {rearSuspensionTravels.map((rearSuspensionTravel, index)=> {
+                  if (rearSuspensionTravel === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{rearSuspensionTravel}</option>);
+                  }
+                })}
+              </select>
+
+              { rearSuspensionTravel === "other"  && (
+                <>
+                  <label htmlFor="year" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
                 </>
               )}
 
@@ -1351,11 +1324,33 @@ export function BikeForm(props) {
                 </>
               )}
             </>
-          )}
+            )}
 
-          {(category === "mountain_bike" || category === "dirt_street" || category === "urban") && suspensionType === "hardtail" &&(
-            <>
-              <label htmlFor="frontSuspensionModel" className="mt-4">Marca | Modelo (dianteira):</label>
+            {suspensionType === "hardtail" && (<>
+              <label htmlFor="frontSuspensionTravel" className="mt-4">Suspensão dianteira:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={frontSuspensionTravel}
+                onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+              >
+                <option value=""></option>
+                {frontSuspensionTravels.map((rearSuspensionTravel, index)=> {
+                  if (rearSuspensionTravel === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{rearSuspensionTravel}</option>);
+                  }
+                })}
+              </select>
+
+              { rearSuspensionTravel === "other"  && (
+                <>
+                  <label htmlFor="year" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
+                </>
+              )}
+
+              <label htmlFor="frontSuspensionModel" className="mt-4">Marca | Modelo:</label>
               <select className="select-answer" aria-label=".form-select-sm example"
                 value={frontSuspensionModel}
                 onChange={(e) => setFrontSuspensionModel(e.target.value)}
@@ -1373,12 +1368,14 @@ export function BikeForm(props) {
               { frontSuspensionModel === "other"  && (
                 <>
                   <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
-                  <input type="text-input" className="text-input" onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                  <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
                 </>
               )}
             </>
-          )}
-        </div>
+            )}
+          </div>
+        </>)}
+
 
                                                                         {/*//////////////////RODAS///////////////////////*/}
 
