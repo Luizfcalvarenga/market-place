@@ -519,10 +519,14 @@ export function ProductForm(props) {
   }
 
   const handleBackToFirst = (e) => {
+    const progressOne = document.getElementById("progress-1")
     const progressTwo = document.getElementById("progress-2")
+
     const secondSection = document.getElementById("second-section")
     const firstSection = document.getElementById("first-section")
+    progressOne.classList.remove("section-done")
     progressTwo.classList.remove("section-done")
+
     secondSection.classList.add("d-none")
     firstSection.classList.remove("d-none")
   }
@@ -912,9 +916,9 @@ export function ProductForm(props) {
       </ul>
 
       <div id="first-section">
-        <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
-        <div className="d-flex justify-content-between gap-3 btns-components">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
+        <h4 className="text-success  text-center mt-4">O que deseja anunciar?</h4>
+        <div className="d-flex justify-content-between gap-3 btns-components mt-3">
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
