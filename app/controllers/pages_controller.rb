@@ -19,6 +19,7 @@ class PagesController < ApplicationController
       product_sql_query = <<~SQL
         brand @@ :query
         OR model @@ :query
+        OR products.name @@ :query
         OR locality @@ :query
         OR product_types.prompt @@ :query
         OR description @@ :query
