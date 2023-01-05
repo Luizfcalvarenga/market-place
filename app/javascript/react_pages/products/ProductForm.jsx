@@ -3,7 +3,6 @@ import swal from 'sweetalert';
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import IntlCurrencyInput from "react-intl-currency-input"
 
 
 export function ProductForm(props) {
@@ -11,16 +10,11 @@ export function ProductForm(props) {
 
   const [user, setUser] = useState([]);
   const [services, setServices] = useState([]);
-  const [productServiceId, setProductServiceId] = useState("");
-
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-
-
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
-
   const [productCategory, setProductCategory] = useState("");
   const [modalities, setModalities] = useState([]);
   const [productModality, setProductModality] = useState("");
@@ -28,24 +22,19 @@ export function ProductForm(props) {
   const [productAttributes, setProductAttributes] = useState({});
   const [productAttributesDisplay, setProductAttributesDisplay] = useState({});
   const [productName, setProductName] = useState("");
-
   const [productBrand, setProductBrand] = useState("");
   const [otherProductBrand, setOtherProductBrand] = useState("");
   const [productModel, setProductModel] = useState("");
   const [otherProductModel, setOtherProductModel] = useState("");
-
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productLocality, setProductLocality ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
   const [otherProductYear, setOtherProductYear ] = useState(null);
-
-
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [productOptions, setProductOptions] = useState("");
-
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -58,35 +47,16 @@ export function ProductForm(props) {
 
 
 
-  const currencyConfig = {
-    locale: "pt-BR",
-    formats: {
-      number: {
-        BRL: {
-          style: "currency",
-          currency: "BRL",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        },
-      },
-    },
-  };
 
-  const BrlCurrencyComponent = () => {
-    const handleChange = (event, value, maskedValue) => {
-      event.preventDefault();
 
-      console.log(value); // value without mask (ex: 1234.56)
-      console.log(maskedValue); // masked value (ex: R$1234,56)
-    };
 
-    return(
-      <IntlCurrencyInput currency="BRL" config={currencyConfig}
-              onChange={handleChange} />
-    );
+
+
+  const handlePrice = (e) => {
+    console.log(e)
+    // setProductPrice(e.target.value * 100)
   }
 
-  
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
@@ -687,7 +657,6 @@ export function ProductForm(props) {
       "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
       "other" : "Outro",
 
-
       "v_brake" : "V-Brake (frenagem no aro)",
       "hydraulic_disc" : "À Disco - Hidráulico",
       "mechanical_disc" : "À Disco - Mecânico",
@@ -702,8 +671,6 @@ export function ProductForm(props) {
 
       "e-bike" : "E-Bike",
       "bike" : "Bike",
-
-
     };
 
     return languageMap[word]
@@ -956,6 +923,8 @@ export function ProductForm(props) {
       <form id="product-form" className="">
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
+
+
           <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
@@ -1486,10 +1455,9 @@ export function ProductForm(props) {
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
             <div className="d-flex  justify-content-between gap-3">
-
               <div className="w-50">
                 <label htmlFor="productPrice" className="mt-4 w-100">Preço:<span className="requested-information ms-1">*</span></label> <br />
-                <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
+                <input className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => handlePrice(e)}/>
                 { errors && errors.product && errors.product.price_in_cents && (
                   <p className="text-danger">{errors.product.price_in_cents}</p>
                 )}
@@ -1502,7 +1470,6 @@ export function ProductForm(props) {
                   <p className="text-danger">{errors.product.quantity}</p>
                 )}
               </div>
-
             </div>
 
             <div className="d-flex justify-content-center">
