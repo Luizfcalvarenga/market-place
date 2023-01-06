@@ -84,7 +84,7 @@
         </li>
         <% if current_user.present? %>
           <li class="nav-item active mt-1" style="color: white;">
-            <%= link_to user_path(User.find(1)) do %>
+            <%= link_to "#" do %>
               <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
@@ -132,7 +132,7 @@
       <% end %>
 
       <% if current_user.present? %>
-        <%= link_to user_path(User.find(1)) do %>
+        <%= link_to "#" do %>
           <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
         <% end %>
       <% end %>
