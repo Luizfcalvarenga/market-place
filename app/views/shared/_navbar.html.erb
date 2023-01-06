@@ -31,23 +31,43 @@
             <div class="dropdown">
               <%= link_to "CATEGORIAS", "#", class: "drop-btn mx-3" %>
               <div class="dropdown-content">
-                <div class="drpdw-bike text-center mx-auto">
-                  <h4 class="text-center text-success mt-3">BIKES</h4>
+                <div class="drpdw-bike  mx-auto">
+                  <h4 class="text-success mt-3">BIKES</h4>
                   <% unless current_page?(new_user_session_path) %>
                     <%= link_to "MTB",  {:controller => "bikes", :action => "index", :category => "mountain_bike"}, class: "text-white" %>
                     <%= link_to "ROAD",  {:controller => "bikes", :action => "index", :category => "road"}, class: "text-white" %>
-                    <%= link_to "DIRT", {:controller => "bikes", :action => "index", :category => "dirt_street"}, class: "text-white" %>
                     <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type => "e-bike"}, class: "text-white" %>
+                    <%= link_to "DIRT", {:controller => "bikes", :action => "index", :category => "dirt_street"}, class: "text-white" %>
                     <%= link_to "Ver mais", bikes_path, class: "text-white pb-3" %>
                   <% end %>
                 </div>
-                <div class="drpdw-components text-center mx-auto">
-                  <h4 class="text-center text-success mt-3">COMPONENTES</h4>
+                <div class="drpdw-components  mx-auto">
+                  <h4 class=" text-success mt-3">COMPONENTES</h4>
                   <% unless current_page?(new_user_session_path) %>
-                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 6}, class: "text-white" %>
-                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 18}, class: "text-white" %>
-                    <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type_id => 16}, class: "text-white" %>
-                    <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type_id => 22}, class: "text-white" %>
+                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 17}, class: "text-white" %>
+                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 5}, class: "text-white" %>
+                    <%= link_to "Câmbio Traseiro", {:controller => "products", :action => "index", :product_type_id => 34}, class: "text-white" %>
+                    <%= link_to "Suspensão dianteira", {:controller => "products", :action => "index", :product_type_id => 20}, class: "text-white" %>
+                    <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                  <% end%>
+                </div>
+                <div class="drpdw-components  mx-auto">
+                  <h4 class=" text-success mt-3">ACESSÓRIOS</h4>
+                  <% unless current_page?(new_user_session_path) %>
+                    <%= link_to "Eletrônicos", {:controller => "products", :action => "index", :product_type_id => 41}, class: "text-white" %>
+                    <%= link_to "Ferramentas", {:controller => "products", :action => "index", :product_type_id => 44}, class: "text-white" %>
+                    <%= link_to "Rolo de treino", {:controller => "products", :action => "index", :product_type_id => 46}, class: "text-white" %>
+                    <%= link_to "Suporte para carro", {:controller => "products", :action => "index", :product_type_id => 47}, class: "text-white" %>
+                    <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                  <% end%>
+                </div>
+                <div class="drpdw-components  mx-auto">
+                  <h4 class=" text-success mt-3">VESTUÁRIO</h4>
+                  <% unless current_page?(new_user_session_path) %>
+                    <%= link_to "Capacete", {:controller => "products", :action => "index", :product_type_id => 60}, class: "text-white" %>
+                    <%= link_to "Sapatilha", {:controller => "products", :action => "index", :product_type_id => 66}, class: "text-white" %>
+                    <%= link_to "Bermuda", {:controller => "products", :action => "index", :product_type_id => 49}, class: "text-white" %>
+                    <%= link_to "Camisa", {:controller => "products", :action => "index", :product_type_id => 51}, class: "text-white" %>
                     <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
                   <% end%>
                 </div>

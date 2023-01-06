@@ -40,6 +40,8 @@ module Api
         skip_authorization
         @product_attributes =  @product.product_attributes
         @product_type_attributes = ProductTypeAttribute.where(product_type: @product.product_type)
+        @present_ids = Product.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
+
       end
 
       def new

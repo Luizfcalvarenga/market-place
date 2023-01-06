@@ -395,7 +395,7 @@
 
     bike_types = ["bike", "e-bike"]
 
-    battery = ProductType.create(name: "battery", prompt: "Bateria")
+    
 
     adapters = ProductType.create(name: "adapters", prompt: "Adaptadores")
     battery = ProductType.create(name: "battery", prompt: "Bateria")

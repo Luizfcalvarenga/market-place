@@ -399,7 +399,7 @@ export function ProductForm(props) {
         || product.name === "seat_post" || product.name === "spoke" || product.name === "rear_derailleur" || product.name === "rear_shifter"
         || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre" || product.name === "adapters" || product.name === "blocking"
         || product.name === "bearing" || product.name === "brake_pad" || product.name === "central_movement" || product.name === "chain_guide" || product.name === "relation_kit_complete_group"
-        || product.name === "hanger" || product.name === "power_meter" || product.name === "sheave" || product.name === "tube"
+        || product.name === "hanger" || product.name === "power_meter" || product.name === "sheave" || product.name === "tube" || product.name === "bottle_cage"
 
       ));
 
@@ -407,7 +407,7 @@ export function ProductForm(props) {
       setProductTypes(allProducts.filter(product => product.name === "bretelle" || product.name === "shorts" || product.name === "inner_shorts" || product.name === "shirt"
         || product.name === "vest" || product.name === "windbreaker" || product.name === "gloves" || product.name === "socks"
         || product.name === "glasses" || product.name === "thermal_clothing" || product.name === "cap" || product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
-        || product.name === "bottle_cage" || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker"
+        || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker" || product.name === "pants"
       ));
     }
     const firstSection = document.getElementById("first-section")
@@ -874,7 +874,7 @@ export function ProductForm(props) {
     "Wahoo"].sort()
 
   const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
-  const productsIdsWithSpecificModels = ["6", "19", "35", "21", "37"]
+  const productsIdsWithSpecificModels = ["5", "18", "34", "20", "36"]
 
   const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
   const dirtMtbBrakeModels = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]
@@ -1017,7 +1017,7 @@ export function ProductForm(props) {
               <p className="text-danger">{errors.product.name}</p>
           )}
 
-          {(productTypeId === "18") && (<>
+          {(productTypeId === "17") && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1044,7 +1044,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "6" || productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36"  ) && (<>
+          {(productTypeId === "5" || productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35"  ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1073,7 +1073,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "21" || productTypeId === "37" ) && (<>
+          {(productTypeId === "20" || productTypeId === "36" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1104,7 +1104,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {!(productTypeId === "6" || productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36" || productTypeId === "18" || productTypeId === "21" || productTypeId === "37" ) && (<>
+          {!(productTypeId === "5" || productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35" || productTypeId === "17" || productTypeId === "20" || productTypeId === "36" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1132,7 +1132,7 @@ export function ProductForm(props) {
           </>)}
 
           <div className="brake-models">
-            {(productTypeId === "6" && productCategory === "road" ) && (<>
+            {(productTypeId === "5" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1158,7 +1158,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "6") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "5") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1186,7 +1186,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="front-derailleur-models">
-            {(productTypeId === "19" && productCategory === "road" ) && (<>
+            {(productTypeId === "18" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1212,7 +1212,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "19") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "18") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1240,7 +1240,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="rear-derailleur-models">
-            {(productTypeId === "35" && productCategory === "road" ) && (<>
+            {(productTypeId === "34" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1266,7 +1266,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "35") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "34") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1294,7 +1294,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="front-suspension-model">
-            {(productTypeId === "21") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "20") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1322,7 +1322,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="rear-suspension-model">
-            {(productTypeId === "37") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "36") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1349,7 +1349,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
-          {(productTypeId === "37" || productTypeId === "21" )&& (productCategory === "road" ) && (<>
+          {(productTypeId === "36" || productTypeId === "20" ) && (productCategory === "road" ) && (<>
 
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>

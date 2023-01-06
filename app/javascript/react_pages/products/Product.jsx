@@ -8,6 +8,8 @@ import MaintenanceImage from "../../../assets/images/tools.png";
 
 export function Product(props) {
   const [product, setProduct] = useState()
+  const [presentIds, setPresentIds] = useState([])
+
   const [quantity, setQuantity] = useState()
   let productId = window.location.pathname.split("/").pop();
 
@@ -15,6 +17,10 @@ export function Product(props) {
     let url = `/api/v1/products/${productId}`;
     const response = await axios.get(url);
     setProduct(response.data);
+    setPresentIds(response.data.present_ids);
+
+
+    console.log(window.location)
   }, [])
 
   const handleLike = (e) => {
@@ -110,6 +116,14 @@ export function Product(props) {
     <div className="product-show index-container" product={product} key={product}>
       {product && (
         <div className="row row-cols-1">
+          {
+            (presentIds.includes(product.id - 1)) ? <a href={`http://localhost:3000/products/${(product.id - 1)}`}>anterior</a> : <p>-</p>
+          }
+          {
+            (presentIds.includes(product.id + 1)) ? <a href={`http://localhost:3000/products/${(product.id + 1)}`}>próximo</a> : <p>-</p>
+          }
+
+
           <div className="other-infos  col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
@@ -147,24 +161,15 @@ export function Product(props) {
             <ul className="main__menu">
             <li className="list-item w-100">
                 <div className="kabobs item--js">
-                  { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(<>
-                    <img src={AccessorieImage} alt="" className="bike-part-card mt-1"/> <br />
-                    </>)}
-                  { ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].includes(product.product_type.name) &&(<>
-                    <img src={ComponentImage} alt="" className="bike-part-card mt-1"/> <br />
-                    </>)}
-                  { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(<>
-                    <img src={EquipamentImage} alt="" className="bike-part-card mt-1"/> <br />
-                    </>)}
-                  { ["cap", "glasses"].includes(product.product_type.name) &&(<>
-                    <img src={CasualImage} alt="" className="bike-part-card mt-1"/> <br />
-                    </>)}
-                  { ["air_bomb", "lubricant", "sealant"].includes(product.product_type.name) &&(<>
-                    <img src={MaintenanceImage} alt="" className="bike-part-card mt-1"/> <br />
-                    </>)}
-                  { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(<>
-                    <img src={ClotheImage} alt="" className="bike-part-card mt-1"/> <br />
-                    </>)}
+                { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
+                  <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
+                )}
+                { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
+                  <img src={ComponentImage} alt="" className="icon-card-index ms-1"/>
+                )}
+                { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
+                  <img src={ClotheImage} alt="" className="icon-card-index ms-1"/>
+                )}
                   <span className="text-success mb-3">Ver mais</span>
                 </div>
                 <ul className="drop-menu menu-2">
@@ -194,23 +199,14 @@ export function Product(props) {
               <div>
                 <h3 className="card-title mt-3"> {product.brand} {product.model}</h3>
               </div>
-              { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
-                <img src={AccessorieImage} alt="" className="icon-card-index mt-4"/>
+              { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
+                <img src={AccessorieImage} alt="" className="icon-card-index ms-1 mt-4"/>
               )}
-              { ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].includes(product.product_type.name) &&(
-                <img src={ComponentImage} alt="" className="icon-card-index mt-4"/>
+              { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
+                <img src={ComponentImage} alt="" className="icon-card-index ms-1 mt-4"/>
               )}
-              { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                <img src={EquipamentImage} alt="" className="icon-card-index mt-4"/>
-              )}
-              { ["cap", "glasses"].includes(product.product_type.name) &&(
-                <img src={CasualImage} alt="" className="icon-card-index mt-4"/>
-              )}
-              { ["air_bomb", "lubricant", "sealant"].includes(product.product_type.name) &&(
-                <img src={MaintenanceImage} alt="" className="icon-card-index mt-4"/>
-              )}
-              { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
-                <img src={ClotheImage} alt="" className="icon-card-index mt-4"/>
+              { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
+                <img src={ClotheImage} alt="" className="icon-card-index ms-1 mt-4"/>
               )}
               <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button>
             </div>
@@ -221,6 +217,7 @@ export function Product(props) {
                   currency: "BRL",
                 })}
               </h4>
+              <p className=""><strong className="text-success">Nome:</strong> {translateWord(product.name)} </p>
               <p className=""><strong className="text-success">Categoria:</strong> {translateWord(product.category.name)} </p>
               <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(product.modality)}</p>
               <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>

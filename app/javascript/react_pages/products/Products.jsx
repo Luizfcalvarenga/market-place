@@ -532,27 +532,18 @@ export function Products(props) {
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
                           <p>{product.locality}</p>
-                          <p>{product.product_type.prompt}</p>
+                          <p className="mt-2">{product.product_type.prompt}</p>
                         </div>
                         <div className="infos">
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button> <br />
-                          { ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].includes(product.product_type.name) &&(
-                            <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
+                          { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
+                            <img src={AccessorieImage} alt="" className="icon-card-index ms-1 mt-2"/>
                           )}
-                          { ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].includes(product.product_type.name) &&(
-                            <img src={ComponentImage} alt="" className="icon-card-index ms-1"/>
+                          { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
+                            <img src={ComponentImage} alt="" className="icon-card-index ms-1 mt-2"/>
                           )}
-                          { ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                            <img src={EquipamentImage} alt="" className="icon-card-index ms-1"/>
-                          )}
-                          { ["cap", "glasses"].includes(product.product_type.name) &&(
-                            <img src={CasualImage} alt="" className="icon-card-index ms-1"/>
-                          )}
-                          { ["air_bomb", "lubricant", "sealant"].includes(product.product_type.name) &&(
-                            <img src={MaintenanceImage} alt="" className="icon-card-index ms-1"/>
-                          )}
-                          { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].includes(product.product_type.name) &&(
-                            <img src={ClotheImage} alt="" className="icon-card-index ms-1"/>
+                          { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
+                            <img src={ClotheImage} alt="" className="icon-card-index ms-1 mt-2"/>
                           )}
                         </div>
                       </div>
