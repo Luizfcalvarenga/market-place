@@ -23,6 +23,8 @@ export function Products(props) {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
   const [conditionFilter, setConditionFilter] = useState("");
+  const [nameFilter, setNameFilter] = useState("");
+
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
 
@@ -40,6 +42,8 @@ export function Products(props) {
     let url = "/api/v1/products?";
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
+    if (nameFilter) url = url + `&name=${nameFilter}`
+
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
@@ -52,6 +56,7 @@ export function Products(props) {
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (filteredLink) url = url + `&product_type_id=${filteredLink}`
+
 
     const response = await axios.get(url);
     setProductTypes(response.data.product_types.sort(function (a, b) {
@@ -67,7 +72,7 @@ export function Products(props) {
     setProducts(response.data.products);
 
   }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter,
-    minYearFilter, maxYearFilter, filteredLink])
+    minYearFilter, maxYearFilter, filteredLink, nameFilter])
 
   const handleProductAtributes = (e) => {
     setProductTypeFilter(e.target.value)
@@ -297,6 +302,12 @@ export function Products(props) {
                 </label>
               </div>
             </div>
+
+            <div className="name-filter">
+              <h5 className="mt-3">Nome</h5>
+              <input type="text" className="text-input" onChange={(e) => setNameFilter(e.target.value)}/>
+            </div>
+
             <h5 className=" mt-3">Produto</h5>
             <select
               value={productTypeFilter}

@@ -44,10 +44,10 @@
                 <div class="drpdw-components text-center mx-auto">
                   <h4 class="text-center text-success mt-3">COMPONENTES</h4>
                   <% unless current_page?(new_user_session_path) %>
-                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 2}, class: "text-white" %>
-                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 9}, class: "text-white" %>
-                    <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type_id => 7}, class: "text-white" %>
-                    <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type_id => 19}, class: "text-white" %>
+                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_type_id => 6}, class: "text-white" %>
+                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_type_id => 18}, class: "text-white" %>
+                    <%= link_to "Pedivela", {:controller => "products", :action => "index", :product_type_id => 16}, class: "text-white" %>
+                    <%= link_to "Rodas", {:controller => "products", :action => "index", :product_type_id => 22}, class: "text-white" %>
                     <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
                   <% end%>
                 </div>
@@ -84,7 +84,7 @@
         </li>
         <% if current_user.present? %>
           <li class="nav-item active mt-1" style="color: white;">
-            <%= link_to "#" do %>
+            <%= link_to user_path(User.find(1)) do %>
               <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
@@ -132,7 +132,7 @@
       <% end %>
 
       <% if current_user.present? %>
-        <%= link_to "#" do %>
+        <%= link_to user_path(User.find(1)) do %>
           <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
         <% end %>
       <% end %>

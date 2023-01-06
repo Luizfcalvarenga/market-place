@@ -6366,6 +6366,11 @@
     "prop-types" "^15.5.8"
     "react-modal" "^1.4.0"
 
+"react-intl-currency-input@^0.2.6":
+  "integrity" "sha512-As8Kg3m9BKwD4liefx/gxG6Dge/8GjdZQBDVlwUUxrgtqWUkRNvRj9Iy4pNx4+o1xpXaEt+gfjtzO6r8uTNBlg=="
+  "resolved" "https://registry.npmjs.org/react-intl-currency-input/-/react-intl-currency-input-0.2.6.tgz"
+  "version" "0.2.6"
+
 "react-is@^16.13.1", "react-is@^16.7.0", "react-is@>= 16.8.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"

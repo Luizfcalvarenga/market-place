@@ -4,6 +4,7 @@ json.products @products do |product|
   json.category product.category
   json.modality product.modality
   json.product_type product.product_type
+  json.name product.name
   json.brand product.brand
   json.model product.model
   json.description product.description

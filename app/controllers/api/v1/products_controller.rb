@@ -31,6 +31,8 @@ module Api
         @products = @products.where(brand: params[:brand]) if params[:brand].present?
         @products = @products.where(model: params[:model]) if params[:model].present?
         @products = @products.where('locality @@ ?', params[:locality]) if params[:locality].present?
+        @products = @products.where('products.name @@ ?', params[:name]) if params[:name].present?
+
       end
 
       def show

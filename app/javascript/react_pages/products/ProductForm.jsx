@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import swal from 'sweetalert';
-import EquipamentImage from "../../../assets/images/helmet.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
-import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import MaintenanceImage from "../../../assets/images/tools.png";
-
+import IntlCurrencyInput from "react-intl-currency-input"
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
+
   const [user, setUser] = useState([]);
   const [services, setServices] = useState([]);
-  const [productServiceId, setProductServiceId] = useState("");
-
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-
-
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -27,22 +21,20 @@ export function ProductForm(props) {
   const [productTypeAttributes, setProductTypeAttributes] = useState([]);
   const [productAttributes, setProductAttributes] = useState({});
   const [productAttributesDisplay, setProductAttributesDisplay] = useState({});
-
+  const [productName, setProductName] = useState("");
   const [productBrand, setProductBrand] = useState("");
   const [otherProductBrand, setOtherProductBrand] = useState("");
   const [productModel, setProductModel] = useState("");
+  const [otherProductModel, setOtherProductModel] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productLocality, setProductLocality ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
   const [otherProductYear, setOtherProductYear ] = useState(null);
-
-
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [productOptions, setProductOptions] = useState("");
-
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -54,6 +46,32 @@ export function ProductForm(props) {
   });
 
 
+
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const BrlCurrencyComponent = () => {
+    const handleChange = (event, value, maskedValue) => {
+      event.preventDefault();
+      setProductPrice(value)
+    };
+
+    return(
+      <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={productPrice}   onChange={handleChange} />
+    );
+  }
 
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
@@ -68,7 +86,6 @@ export function ProductForm(props) {
       fetchProduct();
       setProductId(props.productId);
       setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
-      //jeito por enquanto pra setar modalidades, todas de uma vez
     }
   }, []);
 
@@ -78,8 +95,6 @@ export function ProductForm(props) {
       setCategoryId(categories.find(element => element.name === productCategory).id);
     }
   });
-
-
 
   useEffect(() => {
     if (productCategory === "urban") {
@@ -113,7 +128,6 @@ export function ProductForm(props) {
         setPhotosPreview(undefined)
         return
     }
-
     const photoFile = []
     const objectUrls = []
     for (let i = 0; i < productPhotos.length; i++) {
@@ -162,9 +176,7 @@ export function ProductForm(props) {
   }
 
   const handleReviewSection = (e) => {
-    console.log(e.target.innerText)
     const section = document.getElementById(e.target.innerText)
-    console.log(section)
     section.classList.toggle("d-none")
   }
 
@@ -181,6 +193,8 @@ export function ProductForm(props) {
       setCategoryId(response.data.product.category_id);
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
+      setProductName(response.data.product.name);
+
       setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
@@ -199,7 +213,6 @@ export function ProductForm(props) {
   const createProductAttributes = (e, attribute) => {
     const div = document.getElementById(attribute.name);
     const otherAnswer = document.getElementById("other-answer");
-    console.log(e.target.selectedOptions[0].innerText)
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
     const currentProductAttributesDisplay = {...productAttributesDisplay} // criar um hash com valor atual do estado (copiar o valor)
 
@@ -311,7 +324,6 @@ export function ProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(e)
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
     spinner.classList.remove("d-none")
@@ -321,11 +333,17 @@ export function ProductForm(props) {
     dataObject.append( "product[category_id]", categoryId );
     dataObject.append( "product[modality]", productModality );
     dataObject.append( "product[product_type_id]", productTypeId );
-    dataObject.append( "product[model]", productModel );
+    dataObject.append( "product[name]", productName );
     dataObject.append( "product[description]", productDescription );
-    dataObject.append( "product[price_in_cents]", productPrice );
+    dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
     dataObject.append( "product[locality]", productLocality );
+
+    if (productModel === "Outro") {
+      dataObject.append( "product[model]", otherProductModel );
+    } else {
+      dataObject.append( "product[model]", productModel );
+    }
 
     if (productBrand === "Outra") {
       dataObject.append( "product[brand]", otherProductBrand );
@@ -396,9 +414,9 @@ export function ProductForm(props) {
     const secondSection = document.getElementById("second-section")
     firstSection.classList.add("d-none")
     secondSection.classList.remove("d-none")
-
     handleFirstStep()
   }
+
 
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
@@ -500,8 +518,61 @@ export function ProductForm(props) {
       progressFive.classList.add("section-done")
       progressSix.classList.remove("section-done")
     }
+  }
 
+  const handleBackToFirst = (e) => {
+    const progressOne = document.getElementById("progress-1")
+    const progressTwo = document.getElementById("progress-2")
+    const secondSection = document.getElementById("second-section")
+    const firstSection = document.getElementById("first-section")
+    progressOne.classList.remove("section-done")
+    progressTwo.classList.remove("section-done")
+    secondSection.classList.add("d-none")
+    firstSection.classList.remove("d-none")
+  }
 
+  const handleBackToSecond = (e) => {
+    const progressTwo = document.getElementById("progress-2")
+    const progressThree = document.getElementById("progress-3")
+    const secondSection = document.getElementById("second-section")
+    const thirdSection = document.getElementById("third-section")
+    progressTwo.classList.remove("section-done")
+    secondSection.classList.remove("d-none")
+    progressThree.classList.remove("section-done")
+    thirdSection.classList.add("d-none")
+  }
+
+  const handleBackToThird = () => {
+    const progressThird = document.getElementById("progress-3")
+    const progressFourth = document.getElementById("progress-4")
+    const thirdSection = document.getElementById("third-section")
+    const fourthSection = document.getElementById("fourth-section")
+    progressThird.classList.remove("section-done")
+    progressFourth.classList.remove("section-done")
+    thirdSection.classList.remove("d-none")
+    fourthSection.classList.add("d-none")
+  }
+
+  const handleBackToFourth = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const progressFourth = document.getElementById("progress-4")
+    const fourthSection = document.getElementById("fourth-section")
+    const fifthSection = document.getElementById("fifth-section")
+    progressFourth.classList.remove("section-done")
+    progressFifth.classList.remove("section-done")
+    fourthSection.classList.remove("d-none")
+    fifthSection.classList.add("d-none")
+  }
+
+  const handleBackToFifth = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const progressSixth = document.getElementById("progress-6")
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
+    progressFifth.classList.remove("section-done")
+    progressSixth.classList.remove("section-done")
+    fifthSection.classList.remove("d-none")
+    sixthSection.classList.add("d-none")
   }
 
   const handleFirstStep = () => {
@@ -515,10 +586,8 @@ export function ProductForm(props) {
     const progressTwo = document.getElementById("progress-2")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-
     progressTwo.classList.add("section-done")
     secondSection.classList.add("d-none")
-
     thirdSection.classList.remove("d-none")
 
   }
@@ -537,18 +606,15 @@ export function ProductForm(props) {
     const progressFourth = document.getElementById("progress-4")
     const fourthSection = document.getElementById("fourth-section")
     const fifthSection = document.getElementById("fifth-section")
-
     progressFourth.classList.add("section-done")
     fourthSection.classList.add("d-none")
     fifthSection.classList.remove("d-none")
   }
 
-
   const handleFifthStep = () => {
     const progressFifth = document.getElementById("progress-5")
     const fifthSection = document.getElementById("fifth-section")
     const sixthSection = document.getElementById("sixth-section")
-
     progressFifth.classList.add("section-done")
     fifthSection.classList.add("d-none")
     sixthSection.classList.remove("d-none")
@@ -588,7 +654,6 @@ export function ProductForm(props) {
       "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
       "other" : "Outro",
 
-
       "v_brake" : "V-Brake (frenagem no aro)",
       "hydraulic_disc" : "À Disco - Hidráulico",
       "mechanical_disc" : "À Disco - Mecânico",
@@ -603,8 +668,6 @@ export function ProductForm(props) {
 
       "e-bike" : "E-Bike",
       "bike" : "Bike",
-
-
     };
 
     return languageMap[word]
@@ -612,9 +675,220 @@ export function ProductForm(props) {
 
 
   //////////////////////////////////////////////////////////////////////////////////
-  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Outra"]
+  const frameBrands = [
+    "Alfameq",
+    "Astro",
+    "Audax",
+    "BH",
+    "Bianchi",
+    "BMC",
+    "Caloi",
+    "Cannondale",
+    "Canyon",
+    "Carrera",
+    "Cervelo",
+    "Corratec",
+    "Cube",
+    "Dabomb",
+    "Felt",
+    "First",
+    "Focus",
+    "Fuji",
+    "Giant",
+    "Groove",
+    "GT",
+    "GTS",
+    "Ibis",
+    "Jamis",
+    "Kona",
+    "Lapierre",
+    "Marin",
+    "Merida",
+    "Mosso",
+    "Oggi",
+    "Orbea",
+    "Pinarello",
+    "Raleigh",
+    "Rava",
+    "Ridley",
+    "Santa_cruz",
+    "Schwinn",
+    "Scott",
+    "Sense",
+    "Soul",
+    "Specialized",
+    "Swift Carbon",
+    "Trek",
+    "Tsw",
+    "Wilier",
+    "YT",
+    "Argon 21",
+    "Bliv",
+    "Blue",
+    "Bottecchia",
+    "Cipollini",
+    "Cly",
+    "Cumberland",
+    "De Rosa",
+    "E Moving",
+    "Gary Fisher",
+    "Gioia",
+    "Kaiena",
+    "Kestrel",
+    "Kode",
+    "Kuota",
+    "Lazzaretti",
+    "Lev E-Bike",
+    "Litespeed",
+    "Look",
+    "Lotus",
+    "Mercian",
+    "Miyamura Gravel",
+    "Open",
+    "Quintana Roo",
+    "Redland",
+    "Riva",
+    "Rose",
+    "Sava",
+    "Sundown",
+    "Time",
+    "Trinx",
+    "Trust",
+    "Velorbis",
+    "Vicinitech",
+    "Victory",
+    "Eddy Merckx",
+    "Salsa",
+    "Surly",
+    "Soma",
+    "Diamondback",
+    "Dahon"
+  ].sort()
+
+
+  const componentBrands = ["100%",
+    "Absolute",
+    "Abus",
+    "Algoo",
+    "Alligator",
+    "Altmayer",
+    "Arbok",
+    "ASW Racing",
+    "Atrio",
+    "Avva Extreme",
+    "Barbedo",
+    "Bell",
+    "Birzman",
+    "Blackburn",
+    "Bontrager",
+    "Caloi",
+    "Camelbak",
+    "Catrelli",
+    "Catlike",
+    "Ceramicspeed",
+    "Continental",
+    "Cannondale",
+    "CrankBrothers",
+    "Curtlo",
+    "Elite",
+    "Dt Swiss",
+    "DSI Tyres",
+    "Dvorak",
+    "DMT",
+    "ERT Ctcle Sport",
+    "Evoc",
+    "Finish line",
+    "Fi'zi:k",
+    "Free Force",
+    "FDS",
+    "Fulcrim",
+    "Furbo",
+    "Gios BR",
+    "Giro",
+    "Giyo",
+    "GT Bicycles",
+    "Garmin",
+    "Fox",
+    "Flr",
+    "Gantech Gancheiras",
+    "GU",
+    "GTA",
+    "HB",
+    "Ictus",
+    "Kenda",
+    "High One",
+    "Hupi",
+    "Kask",
+    "KMC",
+    "Leatt",
+    "Look",
+    "Maxxis",
+    "Mavic",
+    "Marciomay",
+    "Michelin",
+    "Nomad",
+    "Oggi",
+    "Muc-Off",
+    "Morgan Blue",
+    "Northwave",
+    "Oakley",
+    "Most",
+    "Polar",
+    "Pirelli",
+    "Pinarello",
+    "Orbea",
+    "ParkToolRefactor",
+    "Reynolfds",
+    "Probiotica",
+    "Rock Shox",
+    "Promax",
+    "Prologo",
+    "Scoot Sentec",
+    "Shimano",
+    "Schwalbe",
+    "Saris",
+    "Serfas",
+    "Sidi",
+    "Smoove",
+    "Sram Sunrace",
+    "Sunshine",
+    "Specialized",
+    "Stan's Notures",
+    "Supacaz",
+    "Syncros",
+    "Topeak",
+    "Token",
+    "TSW",
+    "Vision",
+    "Vittori",
+    "Thule",
+    "Tacx",
+    "Uno",
+    "Vzan",
+    "Wellgo",
+    "Woom",
+    "Xplova",
+    "Zipp",
+    "Zoom Precision Components",
+    "Zéfal",
+    "Wahoo"].sort()
+
   const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
-  const productsIdsWithSpecificModels = ["2", "10", "12", "23", "25"]
+  const productsIdsWithSpecificModels = ["6", "19", "35", "21", "37"]
+
+  const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
+  const dirtMtbBrakeModels = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]
+
+  const roadFrontDerailleurModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "Outro"]
+  const dirtMtbFrontDerailleurModels = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SRAM XT", "SRAM XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "Outro"]
+
+  const roadRearDerailleurModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
+  const dirtMtbRearDerailleurModels = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SRAM XT", "SRAM XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
+
+
+  const dirtMtbFrontSuspensionModels = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "FOX 30", "FOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "Outro"]
+  const dirtMtbRearSuspensionModels = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "ROCKSHOX VIVID", "Outro"]
+
   return (
     <div className="w-60 new-product-react py-5">
       <h1 className="text-success  text-center">Vamos lá...</h1>
@@ -633,9 +907,9 @@ export function ProductForm(props) {
       </ul>
 
       <div id="first-section">
-        <h4 className="text-success  text-center mt-3">O que deseja anunciar?</h4>
-        <div className="d-flex justify-content-between gap-3 btns-components">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form"/></button>
+        <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
+        <div className="d-flex justify-content-between gap-3 btns-components mt-3">
+          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
           <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
@@ -646,6 +920,8 @@ export function ProductForm(props) {
       <form id="product-form" className="">
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
+
+
           <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
@@ -735,7 +1011,100 @@ export function ProductForm(props) {
             <p className="text-danger">{errors.product.product_type}</p>
           )}
 
-          {!(productTypeId === "9") && (<>
+          <label htmlFor="productModel" className="mt-4">Nome:<span className="requested-information ms-1">*</span></label>
+          <input type="text" className="text-input" value={productName ? productName : ""} onChange={(e) => setProductName(e.target.value)}/>
+          { errors && errors.product && errors.product.name && (
+              <p className="text-danger">{errors.product.name}</p>
+          )}
+
+          {(productTypeId === "18") && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              {frameBrands.map((frameBrand, index) => {
+                return (<option key={index} value={frameBrand}>{frameBrand}</option>)
+              })}
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+          {(productTypeId === "6" || productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36"  ) && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              <option value="Sram">Sram</option>
+              <option value="Shimano">Shimano</option>
+              <option value="Microshift">Microshift</option>
+              <option value="Outra">Outra</option>
+
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+          {(productTypeId === "21" || productTypeId === "37" ) && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              <option value="Fox">Fox</option>
+              <option value="Rockshock">Rockshock</option>
+              <option value="Marzocchi">Marzocchi</option>
+              <option value="Rockshock">Rockshock</option>
+
+              <option value="Outra">Outra</option>
+
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+          {!(productTypeId === "6" || productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36" || productTypeId === "18" || productTypeId === "21" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -762,6 +1131,243 @@ export function ProductForm(props) {
               )}
           </>)}
 
+          <div className="brake-models">
+            {(productTypeId === "6" && productCategory === "road" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {roadBrakeModels.map((roadBrakeModel, index) => {
+                  return (<option key={index} value={roadBrakeModel}>{roadBrakeModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+
+            {(productTypeId === "6") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {dirtMtbBrakeModels.map((dirtMtbBrakeModel, index) => {
+                  return (<option key={index} value={dirtMtbBrakeModel}>{dirtMtbBrakeModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+          </div>
+
+          <div className="front-derailleur-models">
+            {(productTypeId === "19" && productCategory === "road" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {roadFrontDerailleurModels.map((roadFrontDerailleurModel, index) => {
+                  return (<option key={index} value={roadFrontDerailleurModel}>{roadFrontDerailleurModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+
+            {(productTypeId === "19") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {dirtMtbFrontDerailleurModels.map((dirtMtbFrontDerailleurModel, index) => {
+                  return (<option key={index} value={dirtMtbFrontDerailleurModel}>{dirtMtbFrontDerailleurModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+          </div>
+
+          <div className="rear-derailleur-models">
+            {(productTypeId === "35" && productCategory === "road" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {roadRearDerailleurModels.map((roadRearDerailleurModel, index) => {
+                  return (<option key={index} value={roadRearDerailleurModel}>{roadRearDerailleurModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+
+            {(productTypeId === "35") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {dirtMtbRearDerailleurModels.map((dirtMtbRearDerailleurModel, index) => {
+                  return (<option key={index} value={dirtMtbRearDerailleurModel}>{dirtMtbRearDerailleurModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+          </div>
+
+          <div className="front-suspension-model">
+            {(productTypeId === "21") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {dirtMtbFrontSuspensionModels.map((dirtMtbFrontSuspensionModel, index) => {
+                  return (<option key={index} value={dirtMtbFrontSuspensionModel}>{dirtMtbFrontSuspensionModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+          </div>
+
+          <div className="rear-suspension-model">
+            {(productTypeId === "37") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+              <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
+              <select
+              value={productModel ? productModel : ""}
+              onChange={(e) => setProductModel(e.target.value)}
+              className="select-answer"
+              >
+                <option value=""></option>
+                {dirtMtbRearSuspensionModels.map((dirtMtbRearSuspensionModel, index) => {
+                  return (<option key={index} value={dirtMtbRearSuspensionModel}>{dirtMtbRearSuspensionModel}</option>)
+                })}
+              </select>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger">{errors.product.model}</p>
+              )}
+              { productModel === "Outro"  && (
+                  <>
+                    <label htmlFor="otherProductModel" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                    <input type="text" className="text-input" onChange={(e) => setOtherProductModel(e.target.value)}/>
+                    { errors && errors.product && errors.product.model && (
+                      <p className="text-danger">{errors.product.model}</p>
+                    )}
+                  </>
+                )}
+            </>)}
+          </div>
+
+          {(productTypeId === "37" || productTypeId === "21" )&& (productCategory === "road" ) && (<>
+
+            <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
+            { errors && errors.product && errors.product.model && (
+              <p className="text-danger">{errors.product.model}</p>
+            )}
+          </>)}
+
+
+          {productsIdsWithSpecificModels.includes(productTypeId) && (productCategory === "infant" || productCategory === "" ) && (<>
+
+            <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
+            { errors && errors.product && errors.product.model && (
+              <p className="text-danger">{errors.product.model}</p>
+            )}
+          </>)}
+
 
           {!productsIdsWithSpecificModels.includes(productTypeId) && (<>
 
@@ -773,7 +1379,8 @@ export function ProductForm(props) {
           </>)}
 
 
-          <div className="text-center">
+          <div className="d-flex justify-content-center">
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -785,7 +1392,8 @@ export function ProductForm(props) {
               {productTypeAttributes.map((attribute, index) => {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
-              <div className="text-center">
+              <div className="d-flex justify-content-center">
+                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
                 <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span></button>
               </div>
             </div>
@@ -795,7 +1403,10 @@ export function ProductForm(props) {
             <div id="third-section" className="card-questions d-none mb-5 text-center">
               <h4 className="text-center text-success">Informações técnicas</h4>
               <p className="mt-5">não há nada para esse produto, vamos em frente!!!</p>
-              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              <div className="d-flex justify-content-center">
+                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              </div>
             </div>
           )}
 
@@ -841,10 +1452,9 @@ export function ProductForm(props) {
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
             <div className="d-flex  justify-content-between gap-3">
-
               <div className="w-50">
                 <label htmlFor="productPrice" className="mt-4 w-100">Preço:<span className="requested-information ms-1">*</span></label> <br />
-                <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => setProductPrice(e.target.value)}/>
+                {BrlCurrencyComponent()}
                 { errors && errors.product && errors.product.price_in_cents && (
                   <p className="text-danger">{errors.product.price_in_cents}</p>
                 )}
@@ -857,10 +1467,10 @@ export function ProductForm(props) {
                   <p className="text-danger">{errors.product.quantity}</p>
                 )}
               </div>
-
             </div>
 
-            <div className="text-center">
+            <div className="d-flex justify-content-center">
+              <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
               <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
           </div>
@@ -888,7 +1498,8 @@ export function ProductForm(props) {
               }
             </div> : null
           }
-          <div className="text-center">
+          <div className="d-flex justify-content-center">
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -910,7 +1521,7 @@ export function ProductForm(props) {
             <p><span className="text-success">Modalidade:</span> {productModality}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             <p><span className="text-success">Local:</span> {productLocality}</p>
-            <p><span className="text-success">Preço:</span>  {(productPrice / 100).toLocaleString("pt-BR", {
+            <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
@@ -968,8 +1579,12 @@ export function ProductForm(props) {
           </div> : <p className="text-center">Nenhuma imagem adicionada</p>
         }
 
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+        </div>
+
         {!props.productId && (<>
-          {(productPrice < 50000) && (<>
+          {((productPrice * 100) < 50000) && (<>
             <div className="text-center mt-3 mb-3">
               <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
               {!props.productId && (<>
@@ -981,7 +1596,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          { (productPrice >= 50000) && (productPrice < 250000) && (<>
+          { ((productPrice * 100) >= 50000) && ((productPrice * 100) < 250000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
@@ -997,7 +1612,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          {(productPrice >= 250000) && (productPrice < 500000) && (<>
+          {((productPrice * 100) >= 250000) && ((productPrice * 100) < 500000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
@@ -1013,7 +1628,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          {(productPrice >= 500000) && (productPrice <= 1000000) &&(<>
+          {((productPrice * 100) >= 500000) && ((productPrice * 100) <= 1000000) &&(<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
@@ -1026,7 +1641,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          {(productPrice > 1000000) && (<>
+          {((productPrice * 100) > 1000000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
