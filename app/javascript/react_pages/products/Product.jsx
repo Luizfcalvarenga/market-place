@@ -110,21 +110,44 @@ export function Product(props) {
     return languageMap[word]
   }
 
+  const handleNextPrevious = () => {
+    const nextId = presentIds.filter(element => element > productId ).shift()
+    const previousId = presentIds.filter(element => element < productId ).pop()
+    if (nextId && previousId) {
+      return (
+        <div className="d-flex justify-content-between my-3">
+          <a href={`http://localhost:3000/products/${(previousId)}`} className="btn-back-step "> <i className="fas fa-angle-double-left mt-1 me-2"></i>anterior</a>
+          <a href={`http://localhost:3000/products/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
+        </div>
+      )
+    } else if (nextId && !previousId) {
+      return (
+        <div className="d-flex justify-content-end my-3">
+          <a href={`http://localhost:3000/products/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
+        </div>
+      )
+    } else if (previousId && !nextId) {
+      return (
+        <div className="d-flex justify-content-between my-3">
+          <a href={`http://localhost:3000/products/${(previousId)}`} className="btn-back-step "><i className="fas fa-angle-double-left mt-1 me-2"></i> anterior</a>
+        </div>
+      )
+    } else if (!previousId && !nextId) {
+      return (
+        <div className="d-flex justify-content-between my-3">
+        </div>
+      )
+    }
+  }
+
 
   return (
 
     <div className="product-show index-container" product={product} key={product}>
       {product && (
         <div className="row row-cols-1">
-          {
-            (presentIds.includes(product.id - 1)) ? <a href={`http://localhost:3000/products/${(product.id - 1)}`}>anterior</a> : <p>-</p>
-          }
-          {
-            (presentIds.includes(product.id + 1)) ? <a href={`http://localhost:3000/products/${(product.id + 1)}`}>próximo</a> : <p>-</p>
-          }
-
-
-          <div className="other-infos  col-12 col-md-8">
+          {handleNextPrevious()}
+          <div className="other-infos col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
                 {product.photos.map((photo, index) => {

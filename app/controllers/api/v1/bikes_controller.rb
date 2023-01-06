@@ -59,6 +59,8 @@ module Api
         @bike = Bike.find(params[:id])
         skip_authorization
         @category = Category.find_by(id: @bike.category)
+        @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
+
       end
 
       def new

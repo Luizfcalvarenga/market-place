@@ -12,11 +12,15 @@ import EBikeImage from "../../../assets/images/e-bike.png";
 export function Bike(props) {
   const [bike, setBike] = useState()
   let bikeId = window.location.pathname.split("/").pop();
+  const [presentIds, setPresentIds] = useState([])
+
 
   useEffect(async () => {
     let url = `/api/v1/bikes/${bikeId}`;
     const response = await axios.get(url);
     setBike(response.data);
+    setPresentIds(response.data.present_ids);
+
   }, [])
 
   const handleLike = (e) => {
@@ -97,11 +101,43 @@ export function Bike(props) {
     return languageMap[word]
   }
 
+  const handleNextPrevious = () => {
+    const nextId = presentIds.filter(element => element > bikeId ).shift()
+    const previousId = presentIds.filter(element => element < bikeId ).pop()
+    if (nextId && previousId) {
+      return (
+        <div className="d-flex justify-content-between my-3">
+          <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "> <i className="fas fa-angle-double-left mt-1 me-2"></i>anterior</a>
+          <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
+        </div>
+      )
+    } else if (nextId && !previousId) {
+      return (
+        <div className="d-flex justify-content-end my-3">
+          <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
+        </div>
+      )
+    } else if (previousId && !nextId) {
+      return (
+        <div className="d-flex justify-content-between my-3">
+          <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "><i className="fas fa-angle-double-left mt-1 me-2"></i> anterior</a>
+        </div>
+      )
+    } else if (!previousId && !nextId) {
+      return (
+        <div className="d-flex justify-content-between my-3">
+
+        </div>
+      )
+    }
+  }
+
   return (
 
     <div className="bike-show" bike={bike} key={bike} >
       {bike && (
         <div className="row row-cols-1">
+          {handleNextPrevious()}
           <div className="other-infos  col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
