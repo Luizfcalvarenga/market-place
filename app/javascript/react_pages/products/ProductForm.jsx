@@ -3,7 +3,7 @@ import swal from 'sweetalert';
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-
+import IntlCurrencyInput from "react-intl-currency-input"
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
@@ -47,14 +47,30 @@ export function ProductForm(props) {
 
 
 
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
 
+  const BrlCurrencyComponent = () => {
+    const handleChange = (event, value, maskedValue) => {
+      event.preventDefault();
+      setProductPrice(value)
+    };
 
-
-
-
-  const handlePrice = (e) => {
-    console.log(e)
-    // setProductPrice(e.target.value * 100)
+    return(
+      <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={productPrice}   onChange={handleChange} />
+    );
   }
 
   useEffect(() => {
@@ -70,7 +86,6 @@ export function ProductForm(props) {
       fetchProduct();
       setProductId(props.productId);
       setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
-      //jeito por enquanto pra setar modalidades, todas de uma vez
     }
   }, []);
 
@@ -80,8 +95,6 @@ export function ProductForm(props) {
       setCategoryId(categories.find(element => element.name === productCategory).id);
     }
   });
-
-
 
   useEffect(() => {
     if (productCategory === "urban") {
@@ -115,7 +128,6 @@ export function ProductForm(props) {
         setPhotosPreview(undefined)
         return
     }
-
     const photoFile = []
     const objectUrls = []
     for (let i = 0; i < productPhotos.length; i++) {
@@ -164,9 +176,7 @@ export function ProductForm(props) {
   }
 
   const handleReviewSection = (e) => {
-    console.log(e.target.innerText)
     const section = document.getElementById(e.target.innerText)
-    console.log(section)
     section.classList.toggle("d-none")
   }
 
@@ -203,7 +213,6 @@ export function ProductForm(props) {
   const createProductAttributes = (e, attribute) => {
     const div = document.getElementById(attribute.name);
     const otherAnswer = document.getElementById("other-answer");
-    console.log(e.target.selectedOptions[0].innerText)
     const currentProductAttributes = {...productAttributes} // criar um hash com valor atual do estado (copiar o valor)
     const currentProductAttributesDisplay = {...productAttributesDisplay} // criar um hash com valor atual do estado (copiar o valor)
 
@@ -315,7 +324,6 @@ export function ProductForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(e)
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
     spinner.classList.remove("d-none")
@@ -327,7 +335,7 @@ export function ProductForm(props) {
     dataObject.append( "product[product_type_id]", productTypeId );
     dataObject.append( "product[name]", productName );
     dataObject.append( "product[description]", productDescription );
-    dataObject.append( "product[price_in_cents]", productPrice );
+    dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
     dataObject.append( "product[locality]", productLocality );
 
@@ -406,7 +414,6 @@ export function ProductForm(props) {
     const secondSection = document.getElementById("second-section")
     firstSection.classList.add("d-none")
     secondSection.classList.remove("d-none")
-
     handleFirstStep()
   }
 
@@ -511,19 +518,15 @@ export function ProductForm(props) {
       progressFive.classList.add("section-done")
       progressSix.classList.remove("section-done")
     }
-
-
   }
 
   const handleBackToFirst = (e) => {
     const progressOne = document.getElementById("progress-1")
     const progressTwo = document.getElementById("progress-2")
-
     const secondSection = document.getElementById("second-section")
     const firstSection = document.getElementById("first-section")
     progressOne.classList.remove("section-done")
     progressTwo.classList.remove("section-done")
-
     secondSection.classList.add("d-none")
     firstSection.classList.remove("d-none")
   }
@@ -572,7 +575,6 @@ export function ProductForm(props) {
     sixthSection.classList.add("d-none")
   }
 
-
   const handleFirstStep = () => {
     const progressOne = document.querySelector(".progress-1")
     if (productTypes) {
@@ -584,10 +586,8 @@ export function ProductForm(props) {
     const progressTwo = document.getElementById("progress-2")
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-
     progressTwo.classList.add("section-done")
     secondSection.classList.add("d-none")
-
     thirdSection.classList.remove("d-none")
 
   }
@@ -606,18 +606,15 @@ export function ProductForm(props) {
     const progressFourth = document.getElementById("progress-4")
     const fourthSection = document.getElementById("fourth-section")
     const fifthSection = document.getElementById("fifth-section")
-
     progressFourth.classList.add("section-done")
     fourthSection.classList.add("d-none")
     fifthSection.classList.remove("d-none")
   }
 
-
   const handleFifthStep = () => {
     const progressFifth = document.getElementById("progress-5")
     const fifthSection = document.getElementById("fifth-section")
     const sixthSection = document.getElementById("sixth-section")
-
     progressFifth.classList.add("section-done")
     fifthSection.classList.add("d-none")
     sixthSection.classList.remove("d-none")
@@ -1296,7 +1293,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
-          <div class="front-suspension-model">
+          <div className="front-suspension-model">
             {(productTypeId === "21") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
@@ -1324,7 +1321,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
-          <div class="rear-suspension-model">
+          <div className="rear-suspension-model">
             {(productTypeId === "37") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
@@ -1383,7 +1380,7 @@ export function ProductForm(props) {
 
 
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -1396,7 +1393,7 @@ export function ProductForm(props) {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
               <div className="d-flex justify-content-center">
-                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
                 <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span></button>
               </div>
             </div>
@@ -1407,7 +1404,7 @@ export function ProductForm(props) {
               <h4 className="text-center text-success">Informações técnicas</h4>
               <p className="mt-5">não há nada para esse produto, vamos em frente!!!</p>
               <div className="d-flex justify-content-center">
-                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
                 <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
               </div>
             </div>
@@ -1457,7 +1454,7 @@ export function ProductForm(props) {
             <div className="d-flex  justify-content-between gap-3">
               <div className="w-50">
                 <label htmlFor="productPrice" className="mt-4 w-100">Preço:<span className="requested-information ms-1">*</span></label> <br />
-                <input className="text-input" placeholder="Reais e centavos sem virgula" value={productPrice ? productPrice : ""} onChange={(e) => handlePrice(e)}/>
+                {BrlCurrencyComponent()}
                 { errors && errors.product && errors.product.price_in_cents && (
                   <p className="text-danger">{errors.product.price_in_cents}</p>
                 )}
@@ -1473,7 +1470,7 @@ export function ProductForm(props) {
             </div>
 
             <div className="d-flex justify-content-center">
-              <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+              <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
               <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
           </div>
@@ -1502,7 +1499,7 @@ export function ProductForm(props) {
             </div> : null
           }
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -1524,7 +1521,7 @@ export function ProductForm(props) {
             <p><span className="text-success">Modalidade:</span> {productModality}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             <p><span className="text-success">Local:</span> {productLocality}</p>
-            <p><span className="text-success">Preço:</span>  {(productPrice / 100).toLocaleString("pt-BR", {
+            <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
@@ -1583,11 +1580,11 @@ export function ProductForm(props) {
         }
 
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
         </div>
 
         {!props.productId && (<>
-          {(productPrice < 50000) && (<>
+          {((productPrice * 100) < 50000) && (<>
             <div className="text-center mt-3 mb-3">
               <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
               {!props.productId && (<>
@@ -1599,7 +1596,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          { (productPrice >= 50000) && (productPrice < 250000) && (<>
+          { ((productPrice * 100) >= 50000) && ((productPrice * 100) < 250000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
@@ -1615,7 +1612,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          {(productPrice >= 250000) && (productPrice < 500000) && (<>
+          {((productPrice * 100) >= 250000) && ((productPrice * 100) < 500000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
@@ -1631,7 +1628,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          {(productPrice >= 500000) && (productPrice <= 1000000) &&(<>
+          {((productPrice * 100) >= 500000) && ((productPrice * 100) <= 1000000) &&(<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
@@ -1644,7 +1641,7 @@ export function ProductForm(props) {
             </div>
           </>)}
 
-          {(productPrice > 1000000) && (<>
+          {((productPrice * 100) > 1000000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>

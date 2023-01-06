@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import swal from 'sweetalert';
+import IntlCurrencyInput from "react-intl-currency-input"
+
 
 export function BikeForm(props) {
   const [bikeId, setBikeId] = useState([]);
@@ -79,6 +81,32 @@ export function BikeForm(props) {
     bike: {},
   });
 
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const BrlCurrencyComponent = () => {
+    const handleChange = (event, value, maskedValue) => {
+      event.preventDefault();
+      setPriceInCents(value)
+    };
+
+    return(
+      <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={priceInCents}   onChange={handleChange} />
+    );
+  }
+
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
      .then((response) => response.json())
@@ -99,7 +127,6 @@ export function BikeForm(props) {
 
   useEffect(() => {
     if (category && !props.bikeId) {
-      console.log(categories)
       setModalities(categories.find(element => element.name === category).modalities)
       setCategoryId(categories.find(element => element.name === category).id);
     }
@@ -151,8 +178,6 @@ export function BikeForm(props) {
   }
 
   const removePhoto = (e) => {
-    console.log(e)
-    console.log(e.nativeEvent.path[1].childNodes[0].src)
     if (e.nativeEvent.path[1].childNodes[0].src) {
       const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
       setPhotosPreview(newPhotosPreview);
@@ -165,28 +190,6 @@ export function BikeForm(props) {
       setPhotos(removeObjectWithId(photos, photoToRemove))
     }
   }
-
-  // const handleDisplay = (string) => {
-
-
-  //   //split the above string into an array of strings
-  //   //whenever a blank space is encountered
-
-  //   const array = string.split(" ");
-
-  //   //loop through each element of the array and capitalize the first letter.
-
-
-  //   for (var i = 0; i < array.length; i++) {
-  //       array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1);
-
-  //   }
-
-  //   //Join all the elements of the array back into a string
-  //   //using a blankspace as a separator
-  //   array.join(" ");
-
-  // }
 
   async function fetchBike() {
     const response = await axios.get(
@@ -249,7 +252,6 @@ export function BikeForm(props) {
     }
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     e.target.classList.add("d-none")
@@ -261,7 +263,7 @@ export function BikeForm(props) {
     dataObject.append( "bike[category_id]", categoryId );
     dataObject.append( "bike[modality]", modality );
     dataObject.append( "bike[bike_type]", bikeType );
-    dataObject.append( "bike[price_in_cents]", priceInCents );
+    dataObject.append( "bike[price_in_cents]", (priceInCents * 100) );
     dataObject.append( "bike[quantity]", quantity );
     dataObject.append( "bike[frame_brand]", frameBrand );
     dataObject.append( "bike[frame_size]", frameSize );
@@ -972,7 +974,8 @@ export function BikeForm(props) {
         <div className="d-flex justify-content-between gap-3">
           <div className="w-50">
             <label htmlFor="priceInCentes" className="mt-4">Preço:<span className="requested-information ms-1">*</span></label>
-            <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents} onChange={(e) => setPriceInCents(e.target.value)}/>
+            {BrlCurrencyComponent()}
+            {/* <input type="number" className="text-input" placeholder="Reais e centavos sem virgula" value={priceInCents} onChange={(e) => setPriceInCents(e.target.value)}/> */}
             { errors && errors.bike && errors.bike.price_in_cents  && (
               <p className="text-danger">{errors.bike.price_in_cents[0]}</p>
             )}
@@ -1639,7 +1642,7 @@ export function BikeForm(props) {
 
           <div className="d-flex justify-content-between">
             <p><span className="text-success">Modelo:</span> {model}</p>
-            <p><span className="text-success">Preço:</span>  {(priceInCents / 100).toLocaleString("pt-BR", {
+            <p><span className="text-success">Preço:</span>  {priceInCents?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
@@ -1741,7 +1744,7 @@ export function BikeForm(props) {
           <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
         </div>
         {!props.bikeId && (<>
-          {(priceInCents < 50000) && (<>
+          {((priceInCents * 100) < 50000) && (<>
             <div className="text-center mt-3 mb-3">
               <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
               {!props.bikeId && (<>
@@ -1754,7 +1757,7 @@ export function BikeForm(props) {
             </div>
           </>)}
 
-          { (priceInCents >= 50000) && (priceInCents < 250000) && (<>
+          { ((priceInCents * 100) >= 50000) && ((priceInCents * 100) < 250000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
@@ -1770,7 +1773,7 @@ export function BikeForm(props) {
             </div>
           </>)}
 
-          {(priceInCents >= 250000) && (priceInCents < 500000) && (<>
+          {((priceInCents * 100) >= 250000) && ((priceInCents * 100) < 500000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
@@ -1786,7 +1789,7 @@ export function BikeForm(props) {
             </div>
           </>)}
 
-          {(priceInCents >= 500000) && (priceInCents <= 1000000) &&(<>
+          {((priceInCents * 100) >= 500000) && ((priceInCents * 100) <= 1000000) &&(<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
@@ -1802,7 +1805,7 @@ export function BikeForm(props) {
             </div>
           </>)}
 
-          {(priceInCents > 1000000) && (<>
+          {((priceInCents * 100) > 1000000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
