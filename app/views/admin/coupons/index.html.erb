@@ -14,6 +14,7 @@
         <th>Tipo</th>
         <th>Data de expiração</th>
         <th>Quantidade</th>
+        <th>Utilizados</th>
         <th>Editar</th>
       </thead>
       <tbody>
@@ -37,6 +38,9 @@
             </td>
             <td class="cell">
               <p class="fs-24 fw-700 mr-3"><%= coupon.redemption_limit %></p>
+            </td>
+            <td class="cell">
+              <p class="fs-24 fw-700 mr-3"><%= coupon.advertisements.count %></p>
             </td>
             <td class="cell">
               <%= link_to edit_admin_coupon_path(coupon) do %>

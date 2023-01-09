@@ -36,6 +36,11 @@ export function ProductForm(props) {
   const [photosPreview, setPhotosPreview] = useState([]);
   const [productOptions, setProductOptions] = useState("");
   const [discountCoupon, setDiscountCoupon] = useState("");
+  const [acessoriesProducts, setAcessoriesProducts] = useState([]);
+  const [componentsProducts, setComponentsProducts] = useState([]);
+  const [clothesProducts, setClothesProducts] = useState([]);
+
+
 
 
   const [photoFile, setPhotoFile] = useState({

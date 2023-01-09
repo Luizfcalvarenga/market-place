@@ -1,11 +1,12 @@
 module ApplicationHelper
+  include ActionView::Helpers::NumberHelper
 
 
   def display_price_in_cents(value)
     number_to_currency(value/100, :unit => "R$ ", :separator => ",", :delimiter => ".")
   end
 
-  
+
   def mobile_device?
     if session[:mobile_param]
       session[:mobile_param] == "1"

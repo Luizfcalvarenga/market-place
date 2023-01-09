@@ -14,7 +14,7 @@
       </h4>
     <% else %>
       <h4>
-        <span class="text-success">Desconto:</span> R$ <%= @advertisement.coupon.discount %>
+        <span class="text-success">Desconto:</span> <%=number_to_currency(@advertisement.coupon.discount / 100, unit: "R$", separator: ",", delimiter: ".") %>
       </h4>
     <% end %>
     <h4>
