@@ -71,9 +71,7 @@ module Api
           if params[:advertisement].present?
             @coupon = Coupon.find_by(code: params[:advertisement][:discount_coupon])
           end
-
           AdvertisementGenerator.new(@product).call(@coupon)
-
           if @coupon.present?
             CouponValidator.new(@coupon.code).call(@product.advertisement)
           end
@@ -128,7 +126,7 @@ module Api
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :year, :locality, photos: [])
+        params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :year, :locality, :documentation_type, :condition, photos: [])
       end
 
       def product_attribute_params

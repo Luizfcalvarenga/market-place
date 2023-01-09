@@ -13,7 +13,7 @@ class AdvertisementGenerator
         advertisable: @advertisable,
         price_in_cents: advertisement_price,
         status: "pending",
-        coupon_id: coupon.present? ? Coupon.find_by(code: coupon).id : nil
+        coupon_id: coupon.present? ? coupon.id : nil
       )
       @advertisement.persisted?
     end

@@ -14,6 +14,10 @@ class AdvertisementsController < ApplicationController
     elsif @advertisement.advertisable_type == "Bike"
       @item = Bike.find_by(id: @advertisement.advertisable.id)
     end
+
+    if @advertisement.coupon.present?
+      CouponValidator.new(@advertisement.coupon.code).call(@advertisement)
+    end
   end
 
   def invoice

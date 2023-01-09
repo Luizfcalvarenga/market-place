@@ -31,17 +31,13 @@ export function ProductForm(props) {
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productLocality, setProductLocality ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
+  const [productDocumentationType, setProductDocumentationType] = useState("");
+  const [productCondition, setProductCondition] = useState("");
   const [otherProductYear, setOtherProductYear ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [productOptions, setProductOptions] = useState("");
   const [discountCoupon, setDiscountCoupon] = useState("");
-  const [acessoriesProducts, setAcessoriesProducts] = useState([]);
-  const [componentsProducts, setComponentsProducts] = useState([]);
-  const [clothesProducts, setClothesProducts] = useState([]);
-
-
-
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -51,8 +47,6 @@ export function ProductForm(props) {
     product: {},
     product_attributes: {},
   });
-
-
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -95,6 +89,7 @@ export function ProductForm(props) {
       setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
     }
   }, []);
+
 
   useEffect(() => {
     if (productCategory && !props.productId) {
@@ -208,6 +203,9 @@ export function ProductForm(props) {
       setProductQuantity(response.data.product.quantity);
       setProductLocality(response.data.product.locality);
       setProductYear(response.data.product.year);
+      setProductDocumentationType(response.data.product.documentation_type);
+      setProductCondition(response.data.product.condition);
+
 
       if (response.data.product_attributes) {
         setProductAttributes(
@@ -274,6 +272,10 @@ export function ProductForm(props) {
     } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["brake_type"])) {
       return
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
+      return
+    } else if (attribute.name === "documentation_type") {
+      return
+    } else if (attribute.name === "condition") {
       return
     } else if (attribute.name === "suspension_type") {
       options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
@@ -345,7 +347,8 @@ export function ProductForm(props) {
     dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
     dataObject.append( "product[locality]", productLocality );
-
+    dataObject.append( "product[documentation_type]", productDocumentationType );
+    dataObject.append( "product[condition]", productCondition );
 
     if (productModel === "Outro") {
       dataObject.append( "product[model]", otherProductModel );
@@ -398,30 +401,28 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    let filterProducts = e.target.innerHTML;
-    if (filterProducts.includes("Acessórios")) {
-      setProductTypes(allProducts.filter(product => product.name === "air_bomb" || product.name === "eletronics" || product.name === "oil_lubricant" || product.name === "stand"
-        || product.name === "tools" || product.name === "car_protector" || product.name === "training_roller" || product.name === "bike_rack"
-      ));
-    } else if (filterProducts.includes("Componentes")) {
-      setProductTypes(allProducts.filter(product => product.name === "battery" || product.name === "brake" || product.name === "brake_levers" || product.name === "cassete"
-        || product.name === "chain" || product.name === "chainring" || product.name === "crankset" || product.name === "fender"
-        || product.name === "frame" || product.name === "front_derailleur" || product.name === "front_shifter" || product.name === "front_suspension"
-        || product.name === "full_wheel" || product.name === "grips" || product.name === "handlebar" || product.name === "headset"
-        || product.name === "hub" || product.name === "pedals" || product.name === "rim" || product.name === "saddle"
-        || product.name === "seat_post" || product.name === "spoke" || product.name === "rear_derailleur" || product.name === "rear_shifter"
-        || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre" || product.name === "adapters" || product.name === "blocking"
-        || product.name === "bearing" || product.name === "brake_pad" || product.name === "central_movement" || product.name === "chain_guide" || product.name === "relation_kit_complete_group"
-        || product.name === "hanger" || product.name === "power_meter" || product.name === "sheave" || product.name === "tube" || product.name === "bottle_cage"
+    if (e.target.localName === "img") {
+      let filter = e.nativeEvent.path[1].id;
+      console.log(filter)
+      if (filter === "acessories") {
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
+      } else if (filter === "components") {
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+      }  else if (filter === "clothes") {
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+      }
 
-      ));
+    } else {
+      let filter = e.target.id;
+      console.log(filter)
+      if (filter === "acessories") {
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
+      } else if (filter === "components") {
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+      }  else if (filter === "clothes") {
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+      }
 
-    }  else if (filterProducts.includes("Vestuário")) {
-      setProductTypes(allProducts.filter(product => product.name === "bretelle" || product.name === "shorts" || product.name === "inner_shorts" || product.name === "shirt"
-        || product.name === "vest" || product.name === "windbreaker" || product.name === "gloves" || product.name === "socks"
-        || product.name === "glasses" || product.name === "thermal_clothing" || product.name === "cap" || product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
-        || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker" || product.name === "pants"
-      ));
     }
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
@@ -679,8 +680,14 @@ export function ProductForm(props) {
       "retractle" : "Retrátil",
       "rigid" : "Rigido",
 
-      "e-bike" : "E-Bike",
-      "bike" : "Bike",
+      "new": "Novo",
+      "used": "Usado",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento"
+
     };
 
     return languageMap[word]
@@ -922,9 +929,9 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
+          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
+          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
+          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
 
       </div>
@@ -1435,6 +1442,30 @@ export function ProductForm(props) {
             )}
 
 
+            <label htmlFor="documentationType" className="mt-4">Documentação:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={productDocumentationType}
+              onChange={(e) => setProductDocumentationType(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="receipt">Nota Fiscal</option>
+              <option value="import_document">Documento de Importação</option>
+              <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
+              <option value="no_documentation">Sem Documento</option>
+
+            </select>
+
+            <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={productCondition}
+              onChange={(e) => setProductCondition(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="new">Novo</option>
+              <option value="used">Usado</option>
+            </select>
             <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
             <select
               className="select-answer"
@@ -1530,10 +1561,13 @@ export function ProductForm(props) {
             {/* {productId && (<>
               <p><span className="text-success">Produto:</span> { allProducts.find(element => element.id === productId).name }</p>
             </>)} */}
-            <p><span className="text-success">Categoria:</span> {productCategory}</p>
-            <p><span className="text-success">Modalidade:</span> {productModality}</p>
+            <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
+            <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             <p><span className="text-success">Local:</span> {productLocality}</p>
+            <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
+            <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+
             <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
