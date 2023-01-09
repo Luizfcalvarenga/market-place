@@ -53,3 +53,4 @@ json.battery_cycles @bike.battery_cycles
 json.photos @bike.photos.map(&:url)
 json.current_user @current_user
 json.current @current
+json.present_ids @present_ids

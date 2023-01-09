@@ -6,14 +6,12 @@ class ProductsController < ApplicationController
 
 
   def index
-
     @products = policy_scope(Product).order(created_at: :desc)
     @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
-
-
   end
 
   def show
+
     @product = Product.find(params[:id])
     skip_authorization
   end
