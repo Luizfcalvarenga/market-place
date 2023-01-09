@@ -7,6 +7,20 @@
   <h4>
     <span class="text-success">Valor:</span> <%= number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
   </h4>
+  <% if @advertisement.coupon.present? %>
+    <% if  @advertisement.coupon.kind == "percentage" %>
+      <h4>
+        <span class="text-success">Desconto:</span> <%= @advertisement.coupon.discount %>%
+      </h4>
+    <% else %>
+      <h4>
+        <span class="text-success">Desconto:</span> R$ <%= @advertisement.coupon.discount %>
+      </h4>
+    <% end %>
+    <h4>
+      <span class="text-success">Valor com cupom:</span> <%= number_to_currency(@advertisement.final_price_with_coupon_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
+    </h4>
+  <% end %>
   <h4>
     <span class="text-success">Item:</span> <%= @advertisement.advertisable_type %>
   </h4>

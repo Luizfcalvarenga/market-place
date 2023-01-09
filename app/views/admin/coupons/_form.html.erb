@@ -1,0 +1,17 @@
+<div class="p-5 w-50 mx-auto">
+  <% if @coupon.new_record? %>
+    <h1 class="fw-700">Criar novo cupom</h1>
+  <% else %>
+    <h1 class="fw-700">Editar cupom <%= @coupon.code %></h1>
+  <% end %>
+  <p class="info-text p-3 br-8"><i class="fas fa-info-circle px-3"></i>Para um desconto fixo, utilize o tipo "fixed" e escolha um desconto em centavos.</p>
+  <p class="info-text p-3 br-8"><i class="fas fa-info-circle px-3"></i>Para um desconto percentual, utilize o tipo "percentage" e escolha um valor inteiro que é a porcentagem de desconto.</p>
+  <%= simple_form_for [:admin, @coupon] do |f| %>
+    <%= f.input :code, label: "Código" %>
+    <%= f.input :redemption_limit, label: "Número máximo:" %>
+    <%= f.input :valid_until, as: :date, html5: true, label: "Validade"%>
+    <%= f.input :kind, :collection => %w[percentage fixed], label: "Tipo do desconto:" %>
+    <%= f.input :discount, label: "Desconto" %>
+    <%= f.submit 'Salvar', class: 'btn btn-primary my-3' %>
+  <% end %>
+</div>

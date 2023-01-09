@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_04_114202) do
+ActiveRecord::Schema.define(version: 2023_01_09_170214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,9 @@ ActiveRecord::Schema.define(version: 2023_01_04_114202) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "invoice_status"
+    t.bigint "coupon_id"
     t.index ["advertisable_type", "advertisable_id"], name: "index_advertisements_on_advertisable"
+    t.index ["coupon_id"], name: "index_advertisements_on_coupon_id"
     t.index ["user_id"], name: "index_advertisements_on_user_id"
   end
 
@@ -150,6 +152,16 @@ ActiveRecord::Schema.define(version: 2023_01_04_114202) do
     t.datetime "last_message_at"
     t.index ["bike_id"], name: "index_chats_on_bike_id"
     t.index ["product_id"], name: "index_chats_on_product_id"
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.integer "redemption_limit"
+    t.datetime "valid_until"
+    t.string "code"
+    t.string "kind"
+    t.integer "discount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -319,6 +331,7 @@ ActiveRecord::Schema.define(version: 2023_01_04_114202) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "advertisements", "coupons"
   add_foreign_key "advertisements", "users"
   add_foreign_key "bikes", "categories"
   add_foreign_key "bikes", "services"

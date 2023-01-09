@@ -35,6 +35,8 @@ export function ProductForm(props) {
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [productOptions, setProductOptions] = useState("");
+  const [discountCoupon, setDiscountCoupon] = useState("");
+
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -339,6 +341,7 @@ export function ProductForm(props) {
     dataObject.append( "product[quantity]", productQuantity );
     dataObject.append( "product[locality]", productLocality );
 
+
     if (productModel === "Outro") {
       dataObject.append( "product[model]", otherProductModel );
     } else {
@@ -365,6 +368,11 @@ export function ProductForm(props) {
     for (const [key, value] of Object.entries(productAttributes)) {
       console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
+    }
+
+    if (discountCoupon) {
+      dataObject.append( "advertisement[discount_coupon]", discountCoupon );
+
     }
 
     const url = props.productId
@@ -1602,6 +1610,8 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
@@ -1618,6 +1628,8 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
@@ -1634,6 +1646,8 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
@@ -1647,6 +1661,8 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>

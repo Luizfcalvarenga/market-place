@@ -5,14 +5,15 @@ class AdvertisementGenerator
     @advertisable = advertisable
   end
 
-  def call
+  def call(coupon)
     # return if @advertisable.advertisement.exits?
     ActiveRecord::Base.transaction do
       @advertisement = Advertisement.create(
         user: @advertisable.user,
         advertisable: @advertisable,
         price_in_cents: advertisement_price,
-        status: "pending"
+        status: "pending",
+        coupon_id: Coupon.find_by(code: coupon).id
       )
       @advertisement.persisted?
     end

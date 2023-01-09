@@ -12,10 +12,13 @@
             <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
+            <%= link_to "Cupons", admin_coupons_path, class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
             <%= link_to "Financeiro", "#", class: "nav-link mx-3" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
           </li>
         </div>
         <% if user_signed_in? %>

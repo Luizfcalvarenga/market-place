@@ -1,5 +1,6 @@
 class Advertisement < ApplicationRecord
   belongs_to :user
+  belongs_to :coupon, optional: true
   belongs_to :advertisable, polymorphic: true
 
   PRODUCT_TYPE_OPTIONS = {
@@ -42,6 +43,17 @@ class Advertisement < ApplicationRecord
     end
   end
 
+  def final_price_with_coupon_in_cents
+
+    return price_in_cents if coupon.blank?
+
+    if coupon.kind_percentage?
+      (price_in_cents * (1 - coupon.discount.to_f/100)).to_i
+    else
+      price_in_cents >= coupon.discount ? price_in_cents - coupon.discount : 0
+    end
+  end
+
   def nova_iugu_charge_params_hash
     {
       email: user.email,
@@ -50,7 +62,7 @@ class Advertisement < ApplicationRecord
         [{
           description: "Anúncio de: item##{advertisable_type}",
           quantity: 1,
-          price_cents: price_in_cents,
+          price_cents: final_price_with_coupon_in_cents,
         }],
 
 

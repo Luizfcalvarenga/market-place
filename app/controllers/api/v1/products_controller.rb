@@ -56,7 +56,6 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
@@ -68,7 +67,14 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-          AdvertisementGenerator.new(@product).call
+          if params[:advertisement][:discount_coupon].present?
+            @coupon = params[:advertisement][:discount_coupon]
+          end
+
+          AdvertisementGenerator.new(@product).call(@coupon)
+
+
+          CouponValidator.new(@coupon).call(@product.advertisement)
 
           if @product.advertisement.present? || @product.photos.attach ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
             render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
