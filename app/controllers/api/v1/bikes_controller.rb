@@ -79,7 +79,15 @@ module Api
               @bike.photos.attach(photo)
             end
           end
-          AdvertisementGenerator.new(@bike).call
+
+          if params[:advertisement].present?
+            @coupon = Coupon.find_by(code: params[:advertisement][:discount_coupon])
+          end
+          AdvertisementGenerator.new(@bike).call(@coupon)
+
+          if @coupon.present?
+            CouponValidator.new(@coupon.code).call(@bike.advertisement)
+          end
 
           if @bike.advertisement.present? || @bike.photos.attach
             render json: { success: true, bike: @bike, photos: @photos, redirect_url: advertisement_path(@bike.advertisement) }

@@ -1649,7 +1649,7 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
             <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
@@ -1667,7 +1667,7 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
             <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
@@ -1685,7 +1685,7 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
             <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>
@@ -1700,7 +1700,7 @@ export function ProductForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:<span className="requested-information ms-1">*</span></label>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
             <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.productId && (<>

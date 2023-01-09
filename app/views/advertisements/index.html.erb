@@ -7,7 +7,7 @@
           <div class="d-flex justify-content-between">
             <div>
               <h6><span class="text-success">Anúncio</span> #<%= advertisement.id %></h6>
-              <h6><span class="text-success">Total:</span> <%=number_to_currency(advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%> </h6>
+              <h6><span class="text-success">Total:</span> <%=number_to_currency(advertisement.final_price_with_coupon_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%> </h6>
               <h6><span class="text-success">Criado em</span> <%= advertisement.created_at.strftime("%d/%m/%Y")  %></h6>
               <h6><span class="text-success">Status:</span> <%= advertisement.status %> </h6>
             </div>

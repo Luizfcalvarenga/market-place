@@ -72,6 +72,7 @@ module Api
             @coupon = Coupon.find_by(code: params[:advertisement][:discount_coupon])
           end
           AdvertisementGenerator.new(@product).call(@coupon)
+          
           if @coupon.present?
             CouponValidator.new(@coupon.code).call(@product.advertisement)
           end

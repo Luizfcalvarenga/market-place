@@ -73,6 +73,8 @@ export function BikeForm(props) {
   const [photosPreview, setPhotosPreview] = useState([]);
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
+  const [discountCoupon, setDiscountCoupon] = useState("");
+
   const [photos, setPhotos ] = useState(null);
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -382,6 +384,8 @@ export function BikeForm(props) {
     } else {
       dataObject.append( "bike[accessories]", accessories );
     }
+
+    dataObject.append( "advertisement[discount_coupon]", discountCoupon );
 
     const url = props.bikeId
     ? `/api/v1/bikes/${props.bikeId}`
@@ -1763,6 +1767,8 @@ export function BikeForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
@@ -1779,6 +1785,8 @@ export function BikeForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
@@ -1795,6 +1803,8 @@ export function BikeForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
             {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
@@ -1811,6 +1821,8 @@ export function BikeForm(props) {
               <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
+            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
