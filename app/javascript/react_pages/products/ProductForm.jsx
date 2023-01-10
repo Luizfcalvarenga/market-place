@@ -396,7 +396,7 @@ export function ProductForm(props) {
       setErrors(response.data.errors);
       swal("OPS", "Algo deu errado!", "Revise suas informaçoes", "error");
       e.target.classList.remove("d-none")
-      document.getElementById("spinner").classList.add("de-none")
+      document.getElementById("spinner").classList.add("d-none")
     }
   }
 
@@ -1614,113 +1614,146 @@ export function ProductForm(props) {
             </>
           )}
 
-        <h4 className="text-success mt-3 text-center">Imagens</h4>
-        {
-          photosPreview?.length > 0 ?
-          <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
-            {
-              photosPreview.map((photoPreview, idx) => {
-                return <img src={photoPreview} alt="" className="image-review" />
-              })
-            }
-          </div> : <p className="text-center">Nenhuma imagem adicionada</p>
-        }
+          <h4 className="text-success mt-3 text-center">Imagens</h4>
+          {
+            photosPreview?.length > 0 ?
+            <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
+              {
+                photosPreview.map((photoPreview, idx) => {
+                  return <img src={photoPreview} alt="" className="image-review" />
+                })
+              }
+            </div> : <p className="text-center">Nenhuma imagem adicionada</p>
+          }
 
-        <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-        </div>
 
-        {!props.productId && (<>
-          {((productPrice * 100) < 50000) && (<>
-            <div className="text-center mt-3 mb-3">
-              <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
+
+          {!props.productId && (<>
+            {((productPrice * 100) <= 100000) && (<>
+              <div className="text-center mt-3 mb-3">
+                <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            { ((productPrice * 100) > 100000) && ((productPrice * 100) <= 500000) && (<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 39,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 500000) && ((productPrice * 100) <= 1000000) && (<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 59,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none  mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 1000000) && ((productPrice * 100) <= 2000000) &&(<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 89,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 2000000) && ((productPrice * 100) <= 3000000) &&(<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 129,00</h6>
+              </div>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 3000000) && (<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 159,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
           </>)}
 
-          { ((productPrice * 100) >= 50000) && ((productPrice * 100) < 250000) && (<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
-            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
-          </>)}
+          <div className="text-center">
+            {props.productId && (<>
+              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
+              <div id="spinner" className="spinner-border text-success d-none" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            </>)}
+          </div>
 
-          {((productPrice * 100) >= 250000) && ((productPrice * 100) < 500000) && (<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
-            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
-          </>)}
-
-          {((productPrice * 100) >= 500000) && ((productPrice * 100) <= 1000000) &&(<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
-            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              </>)}
-            </div>
-          </>)}
-
-          {((productPrice * 100) > 1000000) && (<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <label htmlFor="otherProductBrand" className="mt-4">Cupom de disconto:</label>
-            <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
-          </>)}
-        </>)}
-
-        <div className="text-center">
-          {props.productId && (<>
-            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
-            <div id="spinner" className="spinner-border text-success d-none" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </>)}
-        </div>
+          <div className="text-center">
+            <button className="btn-back-step mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          </div>
         </div>
       </form>
     </div>

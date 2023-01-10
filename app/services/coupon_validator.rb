@@ -5,7 +5,7 @@ class CouponValidator
     @coupon_code = coupon_code
   end
 
-  def call(advertisement)
+  def call()
     @coupon = Coupon.find_by(code: @coupon_code)
 
     return { result: false, error: 'Inválido' } unless @coupon

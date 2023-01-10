@@ -70,14 +70,17 @@ module Api
 
           if params[:advertisement].present?
             @coupon = Coupon.find_by(code: params[:advertisement][:discount_coupon])
-          end
-          AdvertisementGenerator.new(@product).call(@coupon)
-          
-          if @coupon.present?
-            CouponValidator.new(@coupon.code).call(@product.advertisement)
+            render json: {success: false, errors: "Coupon inválido"} if !@coupon
           end
 
-          if @product.advertisement.present? || @product.photos.attach ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
+          service = AdvertisementGenerator.new(@product, @coupon)
+          service.call()
+
+          if service.errors.present?
+            render json: {success: false, errors: service.errors} and return
+          end
+
+          if @product.advertisement.present? || @product.photos.attached? ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
             render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
             render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}
