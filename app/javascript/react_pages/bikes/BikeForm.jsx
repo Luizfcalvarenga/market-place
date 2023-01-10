@@ -81,6 +81,7 @@ export function BikeForm(props) {
   });
   const [errors, setErrors] = useState({
     bike: {},
+    coupon: ""
   });
 
   const currencyConfig = {
@@ -1762,12 +1763,15 @@ export function BikeForm(props) {
           { ((priceInCents * 100) > 100000) && ((priceInCents * 100) <= 500000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 39,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
               <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
               <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              { errors && errors.coupon && (
+                <p className="text-danger">{errors.coupon}</p>
+              )}
             </div>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (<>
@@ -1782,12 +1786,15 @@ export function BikeForm(props) {
           {((priceInCents * 100) > 500000) && ((priceInCents * 100) <= 1000000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 59,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
               <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
               <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              { errors && errors.coupon && (
+                <p className="text-danger">{errors.coupon}</p>
+              )}
             </div>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (<>
@@ -1802,12 +1809,15 @@ export function BikeForm(props) {
           {((priceInCents * 100) > 1000000) && ((priceInCents * 100) <= 2000000) &&(<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 89,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
               <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
               <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              { errors && errors.coupon && (
+                <p className="text-danger">{errors.coupon}</p>
+              )}
             </div>
             <div className="text-center mt-3 mb-3">
             {!props.bikeId && (<>
@@ -1822,12 +1832,15 @@ export function BikeForm(props) {
           {((priceInCents * 100) > 2000000) && ((priceInCents * 100) <= 3000000) &&(<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 129,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
               <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
               <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              { errors && errors.coupon && (
+                <p className="text-danger">{errors.coupon}</p>
+              )}
             </div>
             <div className="text-center mt-3 mb-3">
             {!props.bikeId && (<>
@@ -1842,12 +1855,15 @@ export function BikeForm(props) {
           {((priceInCents * 100) > 3000000) && (<>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
+              <h6 className="announce-terms">Entendo que o anúncio custará R$ 159,00</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
               <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
               <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              { errors && errors.coupon && (
+                <p className="text-danger">{errors.coupon}</p>
+              )}
             </div>
             <div className="text-center mt-3 mb-3">
               {!props.bikeId && (<>

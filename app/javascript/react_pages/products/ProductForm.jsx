@@ -46,6 +46,7 @@ export function ProductForm(props) {
   const [errors, setErrors] = useState({
     product: {},
     product_attributes: {},
+    coupon: ""
   });
 
   const currencyConfig = {
@@ -394,7 +395,7 @@ export function ProductForm(props) {
       swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       setErrors(response.data.errors);
-      swal("OPS", "Algo deu errado!", "Revise suas informaçoes", "error");
+      swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       e.target.classList.remove("d-none")
       document.getElementById("spinner").classList.add("d-none")
     }
@@ -1649,7 +1650,10 @@ export function ProductForm(props) {
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
                 <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
               </div>
               <div className="text-center mt-3 mb-3">
                 {!props.productId && (<>
@@ -1669,7 +1673,10 @@ export function ProductForm(props) {
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
                 <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
               </div>
               <div className="text-center mt-3 mb-3">
                 {!props.productId && (<>
@@ -1689,7 +1696,10 @@ export function ProductForm(props) {
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
                 <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
               </div>
               <div className="text-center mt-3 mb-3">
                 {!props.productId && (<>
@@ -1708,9 +1718,11 @@ export function ProductForm(props) {
               </div>
               <div className="d-flex mt-3">
                 <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
               </div>
-              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
               <div className="text-center mt-3 mb-3">
                 {!props.productId && (<>
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
@@ -1729,7 +1741,10 @@ export function ProductForm(props) {
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
                 <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
               </div>
               <div className="text-center mt-3 mb-3">
                 {!props.productId && (<>

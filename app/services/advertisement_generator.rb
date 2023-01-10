@@ -1,22 +1,19 @@
 class AdvertisementGenerator
   attr_reader :advertisable, :errors
 
-  def initialize(advertisable, coupon)
+  def initialize(advertisable, coupon_code = nil)
     @advertisable = advertisable
-    @coupon = coupon
+    @coupon_code = coupon_code
     @errors = []
   end
 
   def call()
-    # return if @advertisable.advertisement.exits?
-    coupon_response = CouponValidator.new(@coupon.code).call() if @coupon.present?
-    if coupon_response == nil
-      @errors = "Cupom inválido"
-      return
-    end
-    if coupon_response[:result] == false
+    coupon_response = CouponValidator.new(@coupon_code).call() if @coupon_code.present?
+    if coupon_response && coupon_response[:result] == false
       @errors = coupon_response[:error]
       return
+    elsif coupon_response && coupon_response[:result] == true
+      @coupon = Coupon.find_by(code: @coupon_code)
     end
 
     ActiveRecord::Base.transaction do
