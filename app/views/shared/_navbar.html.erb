@@ -115,24 +115,26 @@
           <% end %>
         </li>
         <% if user_signed_in? %>
-          <li class="dropdown">
-            <% if current_user.photo.attached? %>
-              <button class="btn" type="button" class="dropbtn">
-                <%= cl_image_tag current_user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-              </button>
-            <% else %>
-              <button class="btn" type="button" class="dropbtn">
-                <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
-              </button>
-            <% end %>
-            <div class="dropdown-content dropdown-content-user">
-              <div class="drpdw-bike">
-                <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
-                <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
-                <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
-                <%= link_to "Conta", edit_profiles_path, class: "text-white ms-2" %>
-                <hr>
-                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link-drop ms-2 mt-1" %>
+          <li class="nav-item">
+            <div class="dropdown">
+              <% if current_user.photo.attached? %>
+                <button class="btn" type="button" class="dropbtn">
+                  <%= cl_image_tag current_user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                </button>
+              <% else %>
+                <button class="btn" type="button" class="dropbtn">
+                  <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
+                </button>
+              <% end %>
+              <div class="dropdown-content dropdown-content-user">
+                <div class="drpdw-user">
+                  <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
+                  <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
+                  <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
+                  <%= link_to "Conta", edit_profiles_path, class: "text-white ms-2" %>
+                  <hr>
+                  <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link-drop ms-2 mt-1" %>
+                </div>
               </div>
             </div>
           </li>
