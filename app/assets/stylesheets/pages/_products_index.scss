@@ -18,10 +18,8 @@
   border: none;
   border-radius: 5px;
   height: 380px;
-  // padding-bottom: 15px;
   margin: 5px;
   background-color: rgb(20, 20, 20);
-  // box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
 
   .product-price {
     color: #009d43;
@@ -30,8 +28,6 @@
   &:hover {
     h4 {
       color: inherit;
-
-
     }
     .product-infos-index {
       color: inherit !important;
