@@ -126,14 +126,15 @@
                   <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
                 </button>
               <% end %>
-              <div class="dropdown-content dropdown-content-user">
+              <div class="dropdown-content-user me-3">
                 <div class="drpdw-user">
-                  <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
-                  <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
-                  <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
-                  <%= link_to "Conta", edit_profiles_path, class: "text-white ms-2" %>
-                  <hr>
-                  <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link-drop ms-2 mt-1" %>
+                  <h4 class="text-success mt-2 text-center ms-2">PERFIL</h4>
+                  <hr class="menu-line">
+                  <%= link_to "Nuflow pass", "#", class: "text-white" %>
+                  <%= link_to "Nuflow bike", "#", class: "text-white" %>
+                  <%= link_to "Conta", edit_profiles_path, class: "text-white" %>
+                  <hr class="menu-line">
+                  <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-danger nav-link-drop" %>
                 </div>
               </div>
             </div>

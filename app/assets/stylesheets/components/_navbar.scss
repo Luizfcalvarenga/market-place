@@ -151,6 +151,11 @@ $color-primary: #00c454;
   transition-duration: 1000ms;
 }
 
+.menu-line {
+  border: 1px solid grey;
+  width: 115%;
+}
+
 #search-btn, #close-btn {
   background: transparent;
   border: none;
