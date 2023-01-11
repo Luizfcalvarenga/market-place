@@ -88,7 +88,7 @@ module Api
           @service.call()
 
           if @bike.advertisement.present? &&  @service.errors.blank?
-            render json: { success: true, bike: @bike, photos: @photos, redirect_url: advertisement_path(@bike.advertisement) }
+            render json: { success: true, bike: @bike, photos: @photos, advertisement: @bike.advertisement, redirect_url: advertisement_path(@bike.advertisement) }
           else
             render json: { success: false, errors: {bike: @bike.errors, coupon: @service.errors}}
           end

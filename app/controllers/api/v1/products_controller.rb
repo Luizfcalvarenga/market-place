@@ -67,15 +67,13 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-
           if params[:advertisement].present?
             @coupon_code = params[:advertisement][:discount_coupon]
           end
-
           @service = AdvertisementGenerator.new(@product, @coupon_code)
           @service.call()
-          if @product.advertisement.present?  && @service.errors.blank?  &&  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.count))
-            render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
+          if @product.advertisement.present?  && @service.errors.blank?  &&  (params[:product][:productAttributes].present? && ProductAttribute.where(product: @product).present?)
+            render json: { success: true, product: @product, product_attributes: @product_attributes, advertisement: @product.advertisement, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
             render json: { success: false, errors: {product: @product.errors, coupon: @service.errors}}
           end

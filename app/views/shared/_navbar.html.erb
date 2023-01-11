@@ -29,7 +29,7 @@
         <div id="navbar-links" class=" d-flex">
           <li class="nav-item active nav-link-drop ">
             <div class="dropdown">
-              <%= link_to "CATEGORIAS", "#", class: "drop-btn mx-3" %>
+              <h3 class="drop-btn mx-3">componentes</h3>
               <div class="dropdown-content">
                 <div class="drpdw-bike  mx-auto">
                   <h4 class="text-success mt-3">BIKES</h4>
@@ -118,9 +118,9 @@
           <li class="nav-item">
             <div class="dropdown">
               <% if current_user.photo.attached? %>
-                <button class="btn" type="button" class="dropbtn">
+                <%= link_to edit_profiles_path class: "dropbtn" do %>
                   <%= cl_image_tag current_user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-                </button>
+                <% end %>
               <% else %>
                 <button class="btn" type="button" class="dropbtn">
                   <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
