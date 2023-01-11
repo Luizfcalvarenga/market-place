@@ -60,7 +60,7 @@ module Api
         skip_authorization
         @category = Category.find_by(id: @bike.category)
         @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
-        @current_user = current_user.present?
+        @current_user = user_signed_in
       end
 
       def new
@@ -183,7 +183,7 @@ module Api
       end
 
       def user_signed_in
-        current_user.blank?
+        current_user.present?
       end
     end
   end

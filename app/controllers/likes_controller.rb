@@ -58,9 +58,7 @@ class LikesController < ApplicationController
     @like.destroy
     redirect_to likes_path
     flash[:notice] = "Unliked"
-
   end
-
 
   private
 
@@ -69,7 +67,6 @@ class LikesController < ApplicationController
   end
 
   def already_liked?
-    Like.where(user_id: current_user.id, likeble_id:
-    params[:likeble_id]).exists?
+    Like.where(user_id: current_user.id, likeble_id: params[:likeble_id]).exists?
   end
 end

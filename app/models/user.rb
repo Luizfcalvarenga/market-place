@@ -48,10 +48,9 @@ class User < ApplicationRecord
     end
   end
 
-
-	def admin?
-		true
-	end
+	# def admin?
+	# 	true
+	# end
 
   def cpf_must_be_valid
     if !cpf_valid?(document_number) || !cnpj_valid?(document_number)
@@ -67,7 +66,6 @@ class User < ApplicationRecord
 
   def cpf_valid?(cpf)
     return false if cpf.nil?
-
     nulos = %w{12345678909 11111111111 22222222222 33333333333 44444444444 55555555555 66666666666 77777777777 88888888888 99999999999 00000000000 12345678909}
     valor = cpf.scan /[0-9]/
     if valor.length == 11
@@ -89,7 +87,6 @@ class User < ApplicationRecord
 
   def cnpj_valid?(cnpj)
     return false if cnpj.nil?
-
     nulos = %w{11111111111111 22222222222222 33333333333333 44444444444444 55555555555555 66666666666666 77777777777777 88888888888888 99999999999999 00000000000000}
     valor = cnpj.scan /[0-9]/
     if valor.length == 14
