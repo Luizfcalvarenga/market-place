@@ -14,7 +14,7 @@
         <%= current_user.full_name || current_user.email %>
       </div>
     </li>
-    <%= link_to "Conversas", chats_path, class: "ms-3 mt-2 nav-link" %>
+    <%= link_to "Conversas", chats_path, class: "ms-3 mt-2 nav-link-drop" %>
     <div class="search-user mx-3">
       <%= form_with url: @users_path, method: :get, class: "d-flex mb-3" do %>
         <%= text_field_tag :query,
@@ -30,7 +30,6 @@
       <%= render "users/users", users: @users %>
     </div>
     <%= turbo_stream_from "chats" %>
-
   </div>
 
   <div id="chat_container"

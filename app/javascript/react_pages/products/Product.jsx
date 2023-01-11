@@ -235,7 +235,7 @@ export function Product(props) {
                   currency: "BRL",
                 })}
               </h4>
-              <p className=""><strong className="text-success">Nome:</strong> {translateWord(product.name)} </p>
+              <p className=""><strong className="text-success">Nome:</strong> {product.name} </p>
               <p className=""><strong className="text-success">Categoria:</strong> {translateWord(product.category.name)} </p>
               <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(product.modality)}</p>
               <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
@@ -244,8 +244,6 @@ export function Product(props) {
               <p className=""><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
               <p className=""><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
               <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
-
-
             </div>
             {product.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
