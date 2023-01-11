@@ -3,18 +3,30 @@ class Advertisement < ApplicationRecord
   belongs_to :coupon, optional: true
   belongs_to :advertisable, polymorphic: true
 
-  PRODUCT_TYPE_OPTIONS = {
-    pending: "pending",
-    paid: "paid",
-    waiting_review: "waiting_review",
-    approved: "approved",
-    adjustments_requested: "adjustments_requested",
-    update_request: "update_request",
+  STATUSES_OPTIONS = {
+    pending: "Pendente",
+    paid: "Pago",
+    waiting_review: "Aguardando Revisão",
+    approved: "Publicado",
+    update_requested: "Edição Solicitada",
+
 
   }
 
   def status_display
    STATUSES_OPTIONS[status.to_sym]
+  end
+
+  ADVERTISABLE_OPTIONS = {
+    "Product": "Produto",
+    "Bike": "Bike",
+
+
+
+  }
+
+  def advertisable_display
+   ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
 

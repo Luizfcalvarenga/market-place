@@ -18,7 +18,7 @@
       </h4>
     <% end %>
     <h4>
-      <span class="text-success">Valor com cupom:</span> <%= number_to_currency(@advertisement.final_price_with_coupon_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
+      <span class="text-success">Valor com cupom:</span> <%= number_to_currency(@advertisement.final_price_with_coupon_in_cents.to_f / 100, unit: "R$", separator: ",", delimiter: ".") %>
     </h4>
   <% end %>
   <h4>

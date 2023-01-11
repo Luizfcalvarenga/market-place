@@ -1,6 +1,6 @@
 <div class="p-5">
-  <div class="flex center between mb-3">
-    <h1 class="fw-700">Cupons</h1>
+  <div class="flex center between">
+    <h1 class="title">Cupons</h1>
     <%= link_to new_admin_coupon_path do %>
       <i class="fa fa-plus mr-3"></i> Adicionar novo cupom
     <% end %>
@@ -19,30 +19,30 @@
       </thead>
       <tbody>
         <% @coupons.each do |coupon| %>
-          <tr class="table-row">
-            <td class="cell">
-              <p class="fs-24 fw-700 mr-3"><%= coupon.code %></p>
+          <tr >
+            <td class="align-middle">
+              <%= coupon.code %>
             </td>
-            <td class="cell">
+            <td class="align-middle">
               <% if coupon.kind == 'percentage' %>
-                <p class="fs-24 fw-700 mr-3"><%= coupon.discount %>%</p>
+                <%= coupon.discount %>%
               <% else %>
-                <p class="fs-24 fw-700 mr-3"><%= display_price_in_cents(coupon.discount.to_f) %></p>
+                <%= display_price_in_cents(coupon.discount.to_f) %>
               <% end %>
             </td>
-            <td class="cell">
-              <p class="fs-24 fw-700 mr-3"><%= coupon.kind %></p>
+            <td class="align-middle">
+              <%= coupon.kind %>
             </td>
-            <td class="cell">
-              <p class="fs-24 fw-700 mr-3"><%= coupon.valid_until.strftime("%d/%m/%Y") %></p>
+            <td class="align-middle">
+              <%= coupon.valid_until.strftime("%d/%m/%Y") %>
             </td>
-            <td class="cell">
-              <p class="fs-24 fw-700 mr-3"><%= coupon.redemption_limit %></p>
+            <td class="align-middle">
+              <%= coupon.redemption_limit %>
             </td>
-            <td class="cell">
-              <p class="fs-24 fw-700 mr-3"><%= coupon.advertisements.count %></p>
+            <td class="align-middle">
+              <%= coupon.advertisements.count %>
             </td>
-            <td class="cell">
+            <td class="align-middle">
               <%= link_to edit_admin_coupon_path(coupon) do %>
                 <i class="fas fa-edit"></i>Editar
               <% end %>

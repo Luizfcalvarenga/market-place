@@ -201,11 +201,24 @@
     color: white !important;
     .fa-search {
       color: white !important;
-
-
     }
   }
 }
+
+.view-btn {
+  color: $color-primary;
+  .fa-check {
+    color: $color-primary;
+  }
+  &:hover {
+    color: white !important;
+    .fa-check {
+      color: white !important;
+    }
+  }
+}
+
+
 
 .like-btn {
   border: none;

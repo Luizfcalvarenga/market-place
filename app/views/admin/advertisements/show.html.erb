@@ -14,7 +14,7 @@
       <div class="table-row">
         <div class="d-flex">
           <h4 class="m-0 text-success">Status do anúncio:</h4>
-          <p class="m-0 field-value"><%= @advertisement.status %></p>
+          <p class="m-0 field-value"><%= @advertisement.status_display %></p>
         </div>
       </div>
       <div class="table-row">
@@ -40,10 +40,10 @@
       <div class="table-row">
         <div class="d-flex">
           <h4 class="m-0 text-success">O que foi anunciado:</h4>
+          <p class="m-0 field-value"><%= @advertisement.advertisable_display %></p>
           <% if @advertisement.advertisable_type == "Product" %>
-            <p class="m-0 field-value"><%= @product.product_type.name_display %></p>
+            <p class="m-0 field-value">(<%= @product.product_type.prompt %>)</p>
           <% end %>
-          <p class="m-0 field-value"><%= @advertisement.advertisable_type %></p>
         </div>
       </div>
       <div class="table-row">
