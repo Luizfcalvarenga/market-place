@@ -31,10 +31,13 @@ export function ProductForm(props) {
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productLocality, setProductLocality ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
+  const [productDocumentationType, setProductDocumentationType] = useState("");
+  const [productCondition, setProductCondition] = useState("");
   const [otherProductYear, setOtherProductYear ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [productOptions, setProductOptions] = useState("");
+  const [discountCoupon, setDiscountCoupon] = useState("");
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -43,9 +46,8 @@ export function ProductForm(props) {
   const [errors, setErrors] = useState({
     product: {},
     product_attributes: {},
+    coupon: ""
   });
-
-
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -88,6 +90,7 @@ export function ProductForm(props) {
       setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
     }
   }, []);
+
 
   useEffect(() => {
     if (productCategory && !props.productId) {
@@ -201,6 +204,9 @@ export function ProductForm(props) {
       setProductQuantity(response.data.product.quantity);
       setProductLocality(response.data.product.locality);
       setProductYear(response.data.product.year);
+      setProductDocumentationType(response.data.product.documentation_type);
+      setProductCondition(response.data.product.condition);
+
 
       if (response.data.product_attributes) {
         setProductAttributes(
@@ -267,6 +273,10 @@ export function ProductForm(props) {
     } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["brake_type"])) {
       return
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
+      return
+    } else if (attribute.name === "documentation_type") {
+      return
+    } else if (attribute.name === "condition") {
       return
     } else if (attribute.name === "suspension_type") {
       options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
@@ -338,6 +348,8 @@ export function ProductForm(props) {
     dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
     dataObject.append( "product[locality]", productLocality );
+    dataObject.append( "product[documentation_type]", productDocumentationType );
+    dataObject.append( "product[condition]", productCondition );
 
     if (productModel === "Outro") {
       dataObject.append( "product[model]", otherProductModel );
@@ -367,6 +379,11 @@ export function ProductForm(props) {
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
 
+    if (discountCoupon) {
+      dataObject.append( "advertisement[discount_coupon]", discountCoupon );
+
+    }
+
     const url = props.productId
     ? `/api/v1/products/${props.productId}`
     : "/api/v1/products";
@@ -378,37 +395,35 @@ export function ProductForm(props) {
       swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
       setErrors(response.data.errors);
-      swal("OPS", "Algo deu errado!", "Revise suas informaçoes", "error");
+      swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       e.target.classList.remove("d-none")
-      document.getElementById("spinner").classList.add("de-none")
+      document.getElementById("spinner").classList.add("d-none")
     }
   }
 
   const handleProductType = (e) => {
-    let filterProducts = e.target.innerHTML;
-    if (filterProducts.includes("Acessórios")) {
-      setProductTypes(allProducts.filter(product => product.name === "air_bomb" || product.name === "eletronics" || product.name === "oil_lubricant" || product.name === "stand"
-        || product.name === "tools" || product.name === "car_protector" || product.name === "training_roller" || product.name === "bike_rack"
-      ));
-    } else if (filterProducts.includes("Componentes")) {
-      setProductTypes(allProducts.filter(product => product.name === "battery" || product.name === "brake" || product.name === "brake_levers" || product.name === "cassete"
-        || product.name === "chain" || product.name === "chainring" || product.name === "crankset" || product.name === "fender"
-        || product.name === "frame" || product.name === "front_derailleur" || product.name === "front_shifter" || product.name === "front_suspension"
-        || product.name === "full_wheel" || product.name === "grips" || product.name === "handlebar" || product.name === "headset"
-        || product.name === "hub" || product.name === "pedals" || product.name === "rim" || product.name === "saddle"
-        || product.name === "seat_post" || product.name === "spoke" || product.name === "rear_derailleur" || product.name === "rear_shifter"
-        || product.name === "rear_suspension" || product.name === "stem" || product.name === "tyre" || product.name === "adapters" || product.name === "blocking"
-        || product.name === "bearing" || product.name === "brake_pad" || product.name === "central_movement" || product.name === "chain_guide" || product.name === "relation_kit_complete_group"
-        || product.name === "hanger" || product.name === "power_meter" || product.name === "sheave" || product.name === "tube" || product.name === "bottle_cage"
+    if (e.target.localName === "img") {
+      let filter = e.nativeEvent.path[1].id;
+      console.log(filter)
+      if (filter === "acessories") {
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
+      } else if (filter === "components") {
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+      }  else if (filter === "clothes") {
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+      }
 
-      ));
+    } else {
+      let filter = e.target.id;
+      console.log(filter)
+      if (filter === "acessories") {
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
+      } else if (filter === "components") {
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+      }  else if (filter === "clothes") {
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+      }
 
-    }  else if (filterProducts.includes("Vestuário")) {
-      setProductTypes(allProducts.filter(product => product.name === "bretelle" || product.name === "shorts" || product.name === "inner_shorts" || product.name === "shirt"
-        || product.name === "vest" || product.name === "windbreaker" || product.name === "gloves" || product.name === "socks"
-        || product.name === "glasses" || product.name === "thermal_clothing" || product.name === "cap" || product.name === "helmet" || product.name === "elbow_pad" || product.name === "knee_pad" || product.name === "water_bottle"
-        || product.name === "hydration_backpack" || product.name === "fanny_pack" || product.name === "sneaker" || product.name === "pants"
-      ));
     }
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
@@ -666,8 +681,14 @@ export function ProductForm(props) {
       "retractle" : "Retrátil",
       "rigid" : "Rigido",
 
-      "e-bike" : "E-Bike",
-      "bike" : "Bike",
+      "new": "Novo",
+      "used": "Usado",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento"
+
     };
 
     return languageMap[word]
@@ -909,9 +930,9 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
-          <button className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
+          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
+          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
+          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
         </div>
 
       </div>
@@ -1422,6 +1443,30 @@ export function ProductForm(props) {
             )}
 
 
+            <label htmlFor="documentationType" className="mt-4">Documentação:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={productDocumentationType}
+              onChange={(e) => setProductDocumentationType(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="receipt">Nota Fiscal</option>
+              <option value="import_document">Documento de Importação</option>
+              <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
+              <option value="no_documentation">Sem Documento</option>
+
+            </select>
+
+            <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={productCondition}
+              onChange={(e) => setProductCondition(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="new">Novo</option>
+              <option value="used">Usado</option>
+            </select>
             <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
             <select
               className="select-answer"
@@ -1517,10 +1562,13 @@ export function ProductForm(props) {
             {/* {productId && (<>
               <p><span className="text-success">Produto:</span> { allProducts.find(element => element.id === productId).name }</p>
             </>)} */}
-            <p><span className="text-success">Categoria:</span> {productCategory}</p>
-            <p><span className="text-success">Modalidade:</span> {productModality}</p>
+            <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
+            <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             <p><span className="text-success">Local:</span> {productLocality}</p>
+            <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
+            <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+
             <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
@@ -1567,105 +1615,160 @@ export function ProductForm(props) {
             </>
           )}
 
-        <h4 className="text-success mt-3 text-center">Imagens</h4>
-        {
-          photosPreview?.length > 0 ?
-          <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
-            {
-              photosPreview.map((photoPreview, idx) => {
-                return <img src={photoPreview} alt="" className="image-review" />
-              })
-            }
-          </div> : <p className="text-center">Nenhuma imagem adicionada</p>
-        }
+          <h4 className="text-success mt-3 text-center">Imagens</h4>
+          {
+            photosPreview?.length > 0 ?
+            <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
+              {
+                photosPreview.map((photoPreview, idx) => {
+                  return <img src={photoPreview} alt="" className="image-review" />
+                })
+              }
+            </div> : <p className="text-center">Nenhuma imagem adicionada</p>
+          }
 
-        <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-        </div>
 
-        {!props.productId && (<>
-          {((productPrice * 100) < 50000) && (<>
-            <div className="text-center mt-3 mb-3">
-              <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
+
+          {!props.productId && (<>
+            {((productPrice * 100) <= 100000) && (<>
+              <div className="text-center mt-3 mb-3">
+                <h6 className="announce-terms">Seu anúncio não será cobrado</h6>
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            { ((productPrice * 100) > 100000) && ((productPrice * 100) <= 500000) && (<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 39,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 500000) && ((productPrice * 100) <= 1000000) && (<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 59,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none  mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 1000000) && ((productPrice * 100) <= 2000000) &&(<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 89,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 2000000) && ((productPrice * 100) <= 3000000) &&(<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 129,00</h6>
+              </div>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
+
+            {((productPrice * 100) > 3000000) && (<>
+              <div className="d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h6 className="announce-terms">Entendo que o anúncio custará R$ 159,00</h6>
+              </div>
+              <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
+              <div className="d-flex mt-3">
+                <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
+                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+                { errors && errors.coupon && (
+                  <p className="text-danger">{errors.coupon}</p>
+                )}
+              </div>
+              <div className="text-center mt-3 mb-3">
+                {!props.productId && (<>
+                  <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
+                  <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </>)}
+              </div>
+            </>)}
           </>)}
 
-          { ((productPrice * 100) >= 50000) && ((productPrice * 100) < 250000) && (<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 50,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
-          </>)}
+          <div className="text-center">
+            {props.productId && (<>
+              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
+              <div id="spinner" className="spinner-border text-success d-none" role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+            </>)}
+          </div>
 
-          {((productPrice * 100) >= 250000) && ((productPrice * 100) < 500000) && (<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 100,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
-          </>)}
-
-          {((productPrice * 100) >= 500000) && ((productPrice * 100) <= 1000000) &&(<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 150,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-              </>)}
-            </div>
-          </>)}
-
-          {((productPrice * 100) > 1000000) && (<>
-            <div className="d-flex justify-content-center gap-2">
-              <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 200,00</h6>
-            </div>
-            <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="text-center mt-3 mb-3">
-              {!props.productId && (<>
-                <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
-                <div id="spinner" className="spinner-border text-success d-none" role="status">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              </>)}
-            </div>
-          </>)}
-        </>)}
-
-        <div className="text-center">
-          {props.productId && (<>
-            <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
-            <div id="spinner" className="spinner-border text-success d-none" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </>)}
-        </div>
+          <div className="text-center">
+            <button className="btn-back-step mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          </div>
         </div>
       </form>
     </div>

@@ -1,0 +1,55 @@
+<div class="p-5">
+  <div class="flex center between">
+    <h1 class="title">Cupons</h1>
+    <%= link_to new_admin_coupon_path do %>
+      <i class="fa fa-plus mr-3"></i> Adicionar novo cupom
+    <% end %>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead>
+        <th>Código</th>
+        <th>Valor</th>
+        <th>Tipo</th>
+        <th>Data de expiração</th>
+        <th>Quantidade</th>
+        <th>Utilizados</th>
+        <th>Editar</th>
+      </thead>
+      <tbody>
+        <% @coupons.each do |coupon| %>
+          <tr >
+            <td class="align-middle">
+              <%= coupon.code %>
+            </td>
+            <td class="align-middle">
+              <% if coupon.kind == 'percentage' %>
+                <%= coupon.discount %>%
+              <% else %>
+                <%= display_price_in_cents(coupon.discount.to_f) %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= coupon.kind %>
+            </td>
+            <td class="align-middle">
+              <%= coupon.valid_until.strftime("%d/%m/%Y") %>
+            </td>
+            <td class="align-middle">
+              <%= coupon.redemption_limit %>
+            </td>
+            <td class="align-middle">
+              <%= coupon.advertisements.count %>
+            </td>
+            <td class="align-middle">
+              <%= link_to edit_admin_coupon_path(coupon) do %>
+                <i class="fas fa-edit"></i>Editar
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

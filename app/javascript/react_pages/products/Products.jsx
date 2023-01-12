@@ -477,14 +477,12 @@ export function Products(props) {
                   return renderProductAttributeSelect(attribute, index)
                 })}
             </>)}
-
-
           </div>
         </div>
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {products.map((product, idx) => {
             return (
-              <div className="w-25" product={product} key={product.id} id="mobile">
+              <div className="w-25  my-2" product={product} key={product.id} id="mobile">
                 <a href={"products/" + product.id} className="remove-link">
                   <div className="cards-products">
                     <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">

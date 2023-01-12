@@ -14,7 +14,11 @@
             <%= render "users/status", user: user %>
           </div>
         </div>
-        <%= link_to user.full_name || user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+        <% if user.full_name.present? %>
+          <%= link_to user.full_name, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+        <% else %>
+          <%= link_to user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
+        <% end %>
         <%= render 'users/notifications', chat: chat %>
       </div>
     </div>

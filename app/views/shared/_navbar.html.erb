@@ -29,7 +29,7 @@
         <div id="navbar-links" class=" d-flex">
           <li class="nav-item active nav-link-drop ">
             <div class="dropdown">
-              <%= link_to "CATEGORIAS", "#", class: "drop-btn mx-3" %>
+              <h3 class="drop-btn mx-3">categorias</h3>
               <div class="dropdown-content">
                 <div class="drpdw-bike  mx-auto">
                   <h4 class="text-success mt-3">BIKES</h4>
@@ -115,24 +115,27 @@
           <% end %>
         </li>
         <% if user_signed_in? %>
-          <li class="dropdown">
-            <% if current_user.photo.attached? %>
-              <button class="btn" type="button" class="dropbtn">
-                <%= cl_image_tag current_user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-              </button>
-            <% else %>
-              <button class="btn" type="button" class="dropbtn">
-                <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
-              </button>
-            <% end %>
-            <div class="dropdown-content dropdown-content-user">
-              <div class="drpdw-bike">
-                <h4 class="text-center text-success mt-3 ms-3">CONTAS</h4>
-                <%= link_to "Nuflow pass", "#", class: "text-white ms-2" %>
-                <%= link_to "Nuflow bike", "#", class: "text-white ms-2" %>
-                <%= link_to "Conta", edit_profiles_path, class: "text-white ms-2" %>
-                <hr>
-                <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link-drop ms-2 mt-1" %>
+          <li class="nav-item">
+            <div class="dropdown">
+              <% if current_user.photo.attached? %>
+                <%= link_to edit_profiles_path class: "dropbtn" do %>
+                  <%= cl_image_tag current_user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                <% end %>
+              <% else %>
+                <button class="btn" type="button" class="dropbtn">
+                  <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
+                </button>
+              <% end %>
+              <div class="dropdown-content-user me-3">
+                <div class="drpdw-user">
+                  <h4 class="text-success mt-2 text-center ms-2">PERFIL</h4>
+                  <hr class="menu-line">
+                  <%= link_to "Nuflow pass", "#", class: "text-white" %>
+                  <%= link_to "Nuflow bike", "#", class: "text-white" %>
+                  <%= link_to "Conta", edit_profiles_path, class: "text-white" %>
+                  <hr class="menu-line">
+                  <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-danger nav-link-drop" %>
+                </div>
               </div>
             </div>
           </li>
@@ -144,77 +147,103 @@
       </ul>
     </div>
   </div>
-
   <% if mobile_device? %>
-    <div class="flex center between w-100 px-5">
-      <%= link_to root_path, class: "nav-link" do %>
+    <div class="flex center between w-100">
+      <%= link_to root_path, class: "nav-link-drop" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
-
-      <% if current_user.present? %>
-        <%= link_to "#" do %>
-          <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
-        <% end %>
-      <% end %>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="text-success fas fa-bars"></i>
-      </button>
-    </div>
-
-    <div data-controller="search" class="input-group input-group-navbar px-1">
-      <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
-        <%= form.text_field :query,
-            class: "form-control nav-form",
-            placeholder: 'Pesquisar',
-            value: params[:query],
-            input_html: {id: "navbar-input"},
-            data: {
-            search_target: 'searchInput',
-            action: "keyup->search#update"
-          } %>
-        <%= form.button class: "btn search-btn" do %>
-          <i class="fas fa-search form-icon"></i>
-        <% end %>
-      <% end %>
-      <div data-search-target="list">
-      </div>
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="flex center around mobile-menu">
-        <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
-          <li class="nav-item active">
-            <%= link_to "BIKES", bikes_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "PRODUTOS", products_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "VENDER", new_announce_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "PERFIL", edit_profiles_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "INSTITUCIONAL", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "EVENTOS", "https://nuflowpass.com.br/", class: "nav-link", target: :_blank %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link", target: :_blank %>
-          </li>
-          <% if user_signed_in? %>
-            <li class="nav-item active">
-              <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline" %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to "LOGIN", new_user_session_path, class: "text-success nav-link text-decoration-underline" %>
-            </li>
+      <div id="navbar-form-mobile" data-controller="search" class="input-group input-group-navbar mt-3 px-1 d-none">
+        <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
+          <%= form.text_field :query,
+              class: "form-control nav-form",
+              placeholder: 'Pesquisar',
+              value: params[:query],
+              input_html: {id: "navbar-input"},
+              data: {
+              search_target: 'searchInput',
+              action: "keyup->search#update"
+            } %>
+          <%= form.button class: "btn search-btn" do %>
+            <i class="fas fa-search form-icon"></i>
           <% end %>
-        </ul>
+        <% end %>
+        <div data-search-target="list">
+        </div>
+      </div>
+      <div class="icons d-flex gap-3">
+        <button id="search-btn-mobile" class="nav-link-drop mt-3">
+          <i class="fas fa-search  text-success" id="search-icon"></i>
+        </button>
+        <button id="close-btn-mobile" class="nav-link-drop mt-3 d-none">
+          <i class="fas fa-times text-success" id="close-icon"></i>
+        </button>
+        <div id="navbar-links-mobile" class="mt-3">
+          <%= link_to likes_path, class: "nav-link-drop me-3 text-success" do %>
+            <i class="fas fa-heart"></i>
+          <% end %>
+          <% if user_signed_in? %>
+            <%= link_to edit_profiles_path, class: "nav-link-drop" do %>
+              <%= cl_image_tag current_user.photo.key, crop: :fit, class: "avatar-profile-mobile-navbar" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-navbar">
+      <%= link_to bikes_path, class: "block-item" do %>
+        <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
+      <% end %>
+      <%= link_to products_path, class: "block-item" do %>
+        <i class="fab fa-product-hunt nav-bottom-icon"></i><br><span class="nav-bottom-link">Produtos</span>
+      <% end %>
+      <%= link_to new_announce_path, class: "block-item" do %>
+        <i class="far fa-edit nav-bottom-icon"></i> <br><span class="nav-bottom-link">Anunciar</span>
+      <% end %>
+      <%= link_to chats_path, class: "block-item" do %>
+        <i class="far fa-comment-alt  nav-bottom-icon"></i> <br><span class="nav-bottom-link">Chat</span>
+        <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
+          <span class="badge badge-danger mobile-notification">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
+        <% end %>
+      <% end %>
+      <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-ellipsis-h nav-bottom-icon mb-2"></i><br> <span class="nav-bottom-link">Mais</span>
+      </button>
+      <div class="dropdown-menu dropup">
+        <div class="d-flex justify-content-between mt-3">
+          <% if user_signed_in? %>
+            <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-user-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Perfil</span>
+            <% end %>
+            <%= link_to  advertisements_path, class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-shopping-bag nav-bottom-icon"></i><br><span class="nav-bottom-link">Meus Anúncios</span>
+            <% end %>
+            <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-question-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Dúvidas</span>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-between my-3">
+          <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+            <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Institucional</span>
+          <% end %>
+          <%= link_to "https://nuflowpass.com.br/", class: "dropup-link d-block text-center", target: :_blank do %>
+            <i class="fas fa-calendar-alt nav-bottom-icon"></i><br><span class="nav-bottom-link">Eventos</span>
+          <% end %>
+          <%= link_to "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center", target: :_blank do %>
+            <i class="fas fa-blog nav-bottom-icon"></i><br><span class="nav-bottom-link">Dicas</span>
+          <% end %>
+        </div>
+        <% if user_signed_in? %>
+          <%= link_to destroy_user_session_path, method: :delete, class: "text-danger dropup-link d-block text-center" do %>
+            <i class="fas fa-sign-out-alt nav-bottom-ico"></i> <span class="nav-bottom-link">Sair</span>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class: "text-success dropup-link d-block text-center" do %>
+            <i class="fas fa-sign-in-alt nav-bottom-ico"></i> <span class="nav-bottom-link">Entrar</span>
+          <% end %>
+        <% end %>
       </div>
     </div>
   <% end %>

@@ -27,14 +27,14 @@ class Product < ApplicationRecord
 
 
   default_scope { where(removed_at: nil) }
-  # WORDS_OPTIONS = {
-  #   other: "Outra",
+  WORDS_OPTIONS = {
+    "Product": "Produto",
 
-  # }
+  }
 
-  # def word_display()
-  #   WORDS_OPTIONS[name.to_sym]
-  # end
+  def word_display()
+    WORDS_OPTIONS[name.to_sym]
+  end
 
 
 

@@ -53,4 +53,3 @@ json.bikes @bikes do |bike|
   json.battery_cycles bike.battery_cycles
   json.photos bike.photos.first(2).map(&:url)
 end
-json.current_user @current_user

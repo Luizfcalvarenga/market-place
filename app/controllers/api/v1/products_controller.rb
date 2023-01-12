@@ -56,7 +56,6 @@ module Api
         skip_authorization
         @product_types = ProductType.all
         @categories = Category.all
-
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
@@ -68,12 +67,15 @@ module Api
               ProductAttribute.create(product: @product, product_type_attribute: ProductTypeAttribute.find_by(name: key, product_type: @product.product_type), value: value)
             end
           end
-          AdvertisementGenerator.new(@product).call
-
-          if @product.advertisement.present? || @product.photos.attach ||  (params[:product][:productAttributes].present? && (ProductAttribute.where(product: @product).count == params[:product][:productAttributes].keys.coun))
-            render json: { success: true, product: @product, product_attributes: @product_attributes, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
+          if params[:advertisement].present?
+            @coupon_code = params[:advertisement][:discount_coupon]
+          end
+          @service = AdvertisementGenerator.new(@product, @coupon_code)
+          @service.call()
+          if @product.advertisement.present?  && @service.errors.blank?  &&  (params[:product][:productAttributes].present? && ProductAttribute.where(product: @product).present?)
+            render json: { success: true, product: @product, product_attributes: @product_attributes, advertisement: @product.advertisement, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
-            render json: { success: false, errors: {product: @product.errors, product_attributes: @product_attributes.errors}}
+            render json: { success: false, errors: {product: @product.errors, coupon: @service.errors}}
           end
         else
           render json: { success: false, errors: {product: @product.errors} }
@@ -120,7 +122,7 @@ module Api
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :year, :locality, photos: [])
+        params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :year, :locality, :documentation_type, :condition, photos: [])
       end
 
       def product_attribute_params

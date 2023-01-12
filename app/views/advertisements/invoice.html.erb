@@ -26,7 +26,7 @@
       <h1 class="title">Pagamento do pedido</h1>
       <p><strong>Ao realizar o pagamento da fatura abaixo utilizando PIX, Boleto ou Cartão de Crédito, o anúncio será gerado e pssará por uma revisão, assim que aprovado será publicado.</strong> </p>
       <h3>1 anúncio para: <%= @advertisement.advertisable_type %></h3>
-      <h3>Valor total do pedido: <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></h3>
+      <h3>Valor total do pedido: <%= number_to_currency(@advertisement.final_price_with_coupon_in_cents.to_f / 100, unit: "R$", separator: ",", delimiter: ".") %></h3>
       <p class="m-0 bg-primary text-white p-4 br-8 mb-3">
         <i class="fa fa-info-circle my-3 pe-2"></i>Para pagar com PIX, clique em "Pix Copia e Cola", pague no aplicativo do seu banco, e retorne aqui para acessar seus passes.
       </p>

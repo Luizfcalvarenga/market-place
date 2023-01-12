@@ -4,8 +4,6 @@
 }
 
 .card-questions {
-  // box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
-  // border: 1px solid $color-primary;
   transition: .5s ease;
   border-radius: 4px;
   padding: 20px;
@@ -26,8 +24,6 @@
     color: $color-primary !important;
   }
 
-
-
   .text-input:focus {
     outline:none !important;
     box-shadow: none !important;
@@ -40,9 +36,6 @@
 
 
 .select-answer {
-  // A reset of styles, including removing the default dropdown arrow
-
-  // Additional resets for further consistency
   background-color: transparent;
   border: 1px solid $color-primary;
   border-radius: 4px;
@@ -60,8 +53,6 @@
   option {
     background-color: #f4f4f9;
     color: #00c454;
-    // border-color: $color-primary;
-    // border-radius: 3px;
   }
 }
 .select-answer:focus {
@@ -72,7 +63,6 @@
 }
 
 option {
-
   border: none !important;
 }
 
@@ -110,13 +100,11 @@ option {
   width: 30px;
   height: 30px;
   filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-
 }
 
 .progress-bar {
   margin: auto;
   list-style-type: none;
-
 }
 
 .progress-1 {

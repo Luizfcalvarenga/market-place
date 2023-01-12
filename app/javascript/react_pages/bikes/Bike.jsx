@@ -45,10 +45,14 @@ export function Bike(props) {
     })
 
   }
+
   const showSellerContact = () => {
-    // console.log( )
     const userContact = document.getElementById("user-contact")
-    userContact.classList.toggle("d-none")
+    if (props.userPresent === "true") {
+      userContact.classList.toggle("d-none")
+    } else {
+      swal("OPS", "Você deve fazer login para ver o contato!!", "error");
+    }
   }
 
   const translateWord = (word) => {
@@ -208,13 +212,13 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
+                      <p className="bike-info ms-2 align-middle">{bike.cranckset}</p>
                     </div>
                   </li>
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Corrente:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
+                      <p className="bike-info ms-2 align-middle">{bike.chain}</p>
                     </div>
                   </li>
                   <li className="drop-item">
@@ -529,7 +533,7 @@ export function Bike(props) {
                 <p className=" text-center"><strong className="text-success">Telefone:</strong>  {bike.user.phone_number}</p>
               </div>
             </>)}
-            <a href={"/user/" + bike.user_id}>
+            <a href={"/user/" + bike.user.id}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>
           </div>

@@ -1,19 +1,32 @@
 class Advertisement < ApplicationRecord
   belongs_to :user
+  belongs_to :coupon, optional: true
   belongs_to :advertisable, polymorphic: true
 
-  PRODUCT_TYPE_OPTIONS = {
-    pending: "pending",
-    paid: "paid",
-    waiting_review: "waiting_review",
-    approved: "approved",
-    adjustments_requested: "adjustments_requested",
-    update_request: "update_request",
+  STATUSES_OPTIONS = {
+    pending: "Pendente",
+    paid: "Pago",
+    waiting_review: "Aguardando Revisão",
+    approved: "Publicado",
+    update_requested: "Edição Solicitada",
+
 
   }
 
   def status_display
    STATUSES_OPTIONS[status.to_sym]
+  end
+
+  ADVERTISABLE_OPTIONS = {
+    "Product": "Produto",
+    "Bike": "Bike",
+
+
+
+  }
+
+  def advertisable_display
+   ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
 
@@ -42,6 +55,17 @@ class Advertisement < ApplicationRecord
     end
   end
 
+  def final_price_with_coupon_in_cents
+
+    return price_in_cents if coupon.blank?
+
+    if coupon.kind_percentage?
+      (price_in_cents * (1 - coupon.discount.to_f/100)).to_i
+    else
+      price_in_cents >= coupon.discount ? price_in_cents - coupon.discount : 0
+    end
+  end
+
   def nova_iugu_charge_params_hash
     {
       email: user.email,
@@ -50,7 +74,7 @@ class Advertisement < ApplicationRecord
         [{
           description: "Anúncio de: item##{advertisable_type}",
           quantity: 1,
-          price_cents: price_in_cents,
+          price_cents: final_price_with_coupon_in_cents,
         }],
 
 

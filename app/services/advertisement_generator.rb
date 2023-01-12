@@ -1,18 +1,28 @@
 class AdvertisementGenerator
-  attr_reader :advertisable
+  attr_reader :advertisable, :errors
 
-  def initialize(advertisable)
+  def initialize(advertisable, coupon_code = nil)
     @advertisable = advertisable
+    @coupon_code = coupon_code
+    @errors = []
   end
 
-  def call
-    # return if @advertisable.advertisement.exits?
+  def call()
+    coupon_response = CouponValidator.new(@coupon_code).call() if @coupon_code.present?
+    if coupon_response && coupon_response[:result] == false
+      @errors = coupon_response[:error]
+      return
+    elsif coupon_response && coupon_response[:result] == true
+      @coupon = Coupon.find_by(code: @coupon_code)
+    end
+
     ActiveRecord::Base.transaction do
       @advertisement = Advertisement.create(
         user: @advertisable.user,
         advertisable: @advertisable,
         price_in_cents: advertisement_price,
-        status: "pending"
+        status: "pending",
+        coupon_id: @coupon.present? ? @coupon.id : nil
       )
       @advertisement.persisted?
     end
@@ -28,16 +38,18 @@ class AdvertisementGenerator
     product_price = @advertisable.price_in_cents
 
     case product_price
-    when 0..50000
+    when 0..100000
       price_in_cents = 0
-    when 50100..250000
-      price_in_cents = 5000
-    when 250100..500000
-      price_in_cents = 10000
-    when 500100..1000000
-      price_in_cents = 15000
+    when 100001..500000
+      price_in_cents = 3900
+    when 500001..1000000
+      price_in_cents = 5900
+    when 1000001..2000000
+      price_in_cents = 8900
+    when 2000001..3000000
+      price_in_cents = 12900
     else
-      price_in_cents = 20000
+      price_in_cents = 15900
     end
     price_in_cents
   end
@@ -45,6 +57,6 @@ class AdvertisementGenerator
   private
 
   def advertisement_params
-    params.require(:advertisement).permit(:advertisable, :user, :price_in_cents, :status)
+    params.require(:advertisement).permit(:advertisable, :user, :price_in_cents, :status, :coupon_id)
   end
 end

@@ -1,8 +1,8 @@
-
 .img-card-index {
   height: 200px;
   border-radius: 5px 5px 0 0;
   border: none;
+  object-fit: cover;
 }
 
 .card-title {
@@ -13,23 +13,19 @@
   color: $color-primary;
 }
 
-
 .cards-bikes {
   border-radius: 5px;
-  // height: 370px;
   padding-bottom: 15px;
   margin: 5px;
   background-color: rgb(20,20,20);
 
   &:hover {
-
     h4 {
       color: inherit !important;
     }
 
     .card-content {
       color: inherit !important;
-
     }
   }
 
@@ -72,10 +68,8 @@
 }
 
 .index-line {
-
   border: 1px solid grey;
   width: 100%;
-
 }
 
 .bike-infos-index {

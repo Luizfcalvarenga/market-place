@@ -11,10 +11,14 @@
         </div>
       </div>
       <div class='ms-2 me-auto username'>
-        <%= current_user.full_name || current_user.email %>
+        <% if current_user.full_name.present? %>
+          <h4 class="text-center mt-2"> <%= current_user.full_name %> </h4>
+        <% else %>
+          <h4 class="text-center mt-2"> <%= current_user.email %> </h4>
+        <% end %>
       </div>
     </li>
-    <%= link_to "Conversas", chats_path, class: "ms-3 mt-2 nav-link" %>
+    <%= link_to "Conversas", chats_path, class: "ms-3 mt-2 nav-link-drop" %>
     <div class="search-user mx-3">
       <%= form_with url: @users_path, method: :get, class: "d-flex mb-3" do %>
         <%= text_field_tag :query,
@@ -30,7 +34,6 @@
       <%= render "users/users", users: @users %>
     </div>
     <%= turbo_stream_from "chats" %>
-
   </div>
 
   <div id="chat_container"
@@ -40,7 +43,11 @@
         <div class="d-flex justify-content-around py-2 user-conversation-info mb-1">
           <button id="back-to-users"><i class="fas fa-arrow-left me-5 mt-2 text-success"></i></button>
           <%= cl_image_tag(@user.photo.key, class: 'chat_pfp') %>
-          <h4 class="text-center mt-2"> <%= @user&.full_name || @user&.email || @single_chat.name || @chat.name %> </h4>
+          <% if @user.full_name.present? %>
+            <h4 class="text-center mt-2"> <%= @user.full_name %> </h4>
+          <% else %>
+            <h4 class="text-center mt-2"> <%= @user.email %> </h4>
+          <% end %>
         </div>
         <%= turbo_stream_from @single_chat %>
         <div id="messages" data-controller="scroll">

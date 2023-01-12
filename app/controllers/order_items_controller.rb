@@ -10,10 +10,7 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new(order_item_params)
     @order_item.order = current_order
     authorize @order_item
-    # @product = Product.find(params[:id])
-    # @order_item.product_id = params[:product_id]
-    # @order_item.quantity = params[:quantity]
-    # @order_item.price_in_cent = params[:price_in_cent]
+
 
 
     if @order_item.save

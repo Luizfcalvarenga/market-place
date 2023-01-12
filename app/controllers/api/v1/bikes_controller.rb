@@ -60,7 +60,7 @@ module Api
         skip_authorization
         @category = Category.find_by(id: @bike.category)
         @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
-
+        @current_user = user_signed_in
       end
 
       def new
@@ -79,12 +79,18 @@ module Api
               @bike.photos.attach(photo)
             end
           end
-          AdvertisementGenerator.new(@bike).call
 
-          if @bike.advertisement.present? || @bike.photos.attach
-            render json: { success: true, bike: @bike, photos: @photos, redirect_url: advertisement_path(@bike.advertisement) }
+          if params[:advertisement].present?
+            @coupon_code = params[:advertisement][:discount_coupon]
+          end
+
+          @service = AdvertisementGenerator.new(@bike, @coupon_code)
+          @service.call()
+
+          if @bike.advertisement.present? &&  @service.errors.blank?
+            render json: { success: true, bike: @bike, photos: @photos, advertisement: @bike.advertisement, redirect_url: advertisement_path(@bike.advertisement) }
           else
-            render json: { success: false, errors: {bike: @bike.errors}}
+            render json: { success: false, errors: {bike: @bike.errors, coupon: @service.errors}}
           end
         else
           render json: { success: false, errors: {bike: @bike.errors}}
@@ -177,7 +183,7 @@ module Api
       end
 
       def user_signed_in
-        current_user.blank?
+        current_user.present?
       end
     end
   end

@@ -22,6 +22,7 @@
   font-size: 22px;
   &:hover {
     color: $color-primary;
+    cursor: pointer;
   }
 }
 
@@ -43,7 +44,13 @@
 }
 
 .dropdown-content-user {
-  width: 120px !important;
+  width: 250%;
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.95);
+  border: 1px solid $color-primary;
+  border-radius: 8px;
+  z-index: 1;
 }
 
 
@@ -62,7 +69,25 @@
   color: $color-primary !important;
 }
 
+.dropdown-content-user a {
+  color: black;
+  padding: 6px 8px;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  font-weight: normal;
+
+}
+
+
+.dropdown-content-user a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: $color-primary !important;
+}
+
 .dropdown:hover .dropdown-content {display: flex;}
+.dropdown:hover .dropdown-content-user {display: flex;}
+
 
 
 
@@ -177,11 +202,24 @@
     color: white !important;
     .fa-search {
       color: white !important;
-
-
     }
   }
 }
+
+.view-btn {
+  color: $color-primary;
+  .fa-check {
+    color: $color-primary;
+  }
+  &:hover {
+    color: white !important;
+    .fa-check {
+      color: white !important;
+    }
+  }
+}
+
+
 
 .like-btn {
   border: none;

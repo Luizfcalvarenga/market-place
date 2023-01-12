@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :coupons
     resources :advertisements do
       patch :approve
       patch :reject
