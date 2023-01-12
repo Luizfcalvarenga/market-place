@@ -390,4 +390,14 @@
   .links-profile {
     margin: 5px;
   }
+
+  .mobile-profile {
+    flex-direction: column;
+    gap: 10px;
+
+    .edit-modal {
+      align-self: start;
+      margin: 0 !important;
+    }
+  }
 }
