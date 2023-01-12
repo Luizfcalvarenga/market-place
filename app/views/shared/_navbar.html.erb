@@ -181,8 +181,10 @@
           <%= link_to likes_path, class: "nav-link-drop me-3 text-success" do %>
             <i class="fas fa-heart"></i>
           <% end %>
-          <%= link_to edit_profiles_path, class: "nav-link-drop" do %>
-            <%= cl_image_tag current_user.photo.key, crop: :fit, class: "avatar-profile-mobile-navbar" %>
+          <% if user_signed_in? %>
+            <%= link_to edit_profiles_path, class: "nav-link-drop" do %>
+              <%= cl_image_tag current_user.photo.key, crop: :fit, class: "avatar-profile-mobile-navbar" %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -210,31 +212,27 @@
       </button>
       <div class="dropdown-menu dropup">
         <div class="d-flex justify-content-between mt-3">
-          <%= link_to  "#", class: "dropup-link d-block text-center" do %>
-            <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Institucional</span>
-          <% end %>
-          <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center" do %>
-            <i class="fas fa-user-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Perfil</span>
-          <% end %>
-          <%= link_to  "#", class: "dropup-link d-block text-center" do %>
-            <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Outro</span>
+          <% if user_signed_in? %>
+            <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-user-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Perfil</span>
+            <% end %>
+            <%= link_to  advertisements_path, class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-shopping-bag nav-bottom-icon"></i><br><span class="nav-bottom-link">Meus Anúncios</span>
+            <% end %>
+            <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-question-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Dúvidas</span>
+            <% end %>
           <% end %>
         </div>
         <div class="d-flex justify-content-between my-3">
+          <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+            <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Institucional</span>
+          <% end %>
           <%= link_to "https://nuflowpass.com.br/", class: "dropup-link d-block text-center", target: :_blank do %>
             <i class="fas fa-calendar-alt nav-bottom-icon"></i><br><span class="nav-bottom-link">Eventos</span>
           <% end %>
           <%= link_to "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center", target: :_blank do %>
             <i class="fas fa-blog nav-bottom-icon"></i><br><span class="nav-bottom-link">Dicas</span>
-          <% end %>
-          <% if user_signed_in? %>
-            <%= link_to  "#", class: "dropup-link d-block text-center" do %>
-              <i class="fas fa-question-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Dúvidas</span>
-            <% end %>
-          <% else %>
-            <%= link_to  "#", class: "dropup-link d-block text-center" do %>
-              <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Desmanjo</span>
-            <% end %>
           <% end %>
         </div>
         <% if user_signed_in? %>
