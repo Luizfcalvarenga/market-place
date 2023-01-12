@@ -212,7 +212,7 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.cranckset}</p>
+                      <p className="bike-info ms-2 align-middle">{bike.crankset}</p>
                     </div>
                   </li>
                   <li className="drop-item">
