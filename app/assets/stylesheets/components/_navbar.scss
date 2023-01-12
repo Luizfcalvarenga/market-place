@@ -24,8 +24,6 @@ $color-primary: #00c454;
   width: 100%;
   top: 0;
   z-index: 10000 !important;
-
-
 }
 
 .dropup {
@@ -33,6 +31,10 @@ $color-primary: #00c454;
   background: rgba(0, 0, 0, 0.95) !important;
   position: fixed;
   bottom: 65px;
+}
+
+.dropup-link {
+  width: 100%;
 
 }
 

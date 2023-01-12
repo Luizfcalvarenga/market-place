@@ -195,16 +195,42 @@
         <i class="fas fa-ellipsis-h nav-bottom-icon mb-2"></i><br> <span class="nav-bottom-link">Mais</span>
       </button>
       <div class="dropdown-menu dropup">
-        <%= link_to "INSTITUCIONAL", "#", class: "dropup-link d-block text-center" %>
-        <%= link_to "PERFIL", edit_profiles_path, class: "dropup-link d-block text-center" %>
-        <%= link_to "INSTITUCIONAL", "#", class: "dropup-link d-block text-center" %>
-        <%= link_to "EVENTOS", "https://nuflowpass.com.br/", class: "dropup-link d-block text-center", target: :_blank %>
-        <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center", target: :_blank %>
+        <div class="d-flex justify-content-between mt-3">
+          <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+            <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Institucional</span>
+          <% end %>
+          <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center" do %>
+            <i class="fas fa-user-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Perfil</span>
+          <% end %>
+          <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+            <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Outro</span>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-between my-3">
+          <%= link_to "https://nuflowpass.com.br/", class: "dropup-link d-block text-center", target: :_blank do %>
+            <i class="fas fa-calendar-alt nav-bottom-icon"></i><br><span class="nav-bottom-link">Eventos</span>
+          <% end %>
+          <%= link_to "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center", target: :_blank do %>
+            <i class="fas fa-blog nav-bottom-icon"></i><br><span class="nav-bottom-link">Dicas</span>
+          <% end %>
+          <% if user_signed_in? %>
+            <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-question-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Dúvidas</span>
+            <% end %>
+          <% else %>
+            <%= link_to  "#", class: "dropup-link d-block text-center" do %>
+              <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Desmanjo</span>
+            <% end %>
+          <% end %>
+        </div>
         <% if user_signed_in? %>
-          <%= link_to "CONVERSE COM A GENTE", "#", class: "dropup-link d-block text-center" %>
-          <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success dropup-link d-block text-center text-decoration-underline" %>
+          <%= link_to destroy_user_session_path, method: :delete, class: "text-danger dropup-link d-block text-center" do %>
+            <i class="fas fa-sign-out-alt nav-bottom-ico"></i> <span class="nav-bottom-link">Sair</span>
+          <% end %>
         <% else %>
-          <%= link_to "LOGIN", new_user_session_path, class: "text-success dropup-link d-block text-center text-decoration-underline" %>
+          <%= link_to new_user_session_path, class: "text-success dropup-link d-block text-center" do %>
+            <i class="fas fa-sign-in-alt nav-bottom-ico"></i> <span class="nav-bottom-link">Entrar</span>
+          <% end %>
         <% end %>
       </div>
     </div>
