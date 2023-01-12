@@ -7,7 +7,7 @@
   border-radius: 3px;
   position: sticky;
   top: 7rem;
-  max-height: 90vh;
+  max-height: 200vh;
   background-color: rgb(20, 20, 20);
   .fa-heart {
     color: $color-primary;
@@ -91,6 +91,9 @@
 
   .card-product {
     margin-top: 10%;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 100%;
   }
 
   .main__menu .list-item .drop-menu .drop-item .list-item {

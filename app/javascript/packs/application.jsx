@@ -26,6 +26,8 @@ import "channels"
 
 import "./components/form_navbar";
 import "./components/chat_mobile";
+import "./components/mobile_search";
+
 
 import "./mask";
 import "./payment_pooling";
@@ -56,6 +58,7 @@ document.addEventListener("turbo:load", () => {
       Bike: (
         <Bike
           bikeId={reactContainer.dataset.bikeId}
+          userPresent={reactContainer.dataset.userPresent}
         />
       ),
       BikeForm: (
@@ -72,6 +75,7 @@ document.addEventListener("turbo:load", () => {
         <Product
           productId={reactContainer.dataset.productId}
           productAttributes={reactContainer.dataset.productAttributes}
+          userPresent={reactContainer.dataset.userPresent}
         />
       ),
       ProductForm: (

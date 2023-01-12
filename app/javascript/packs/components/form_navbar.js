@@ -5,6 +5,7 @@ document.addEventListener("turbo:load", () => {
     const closeBTN = document.getElementById('close-btn');
     const searchBTN = document.getElementById('search-btn');
     const form = document.getElementById('navbar-form');
+    console.log(searchBTN)
 
     navLinks.classList.toggle('d-none');
     closeBTN.classList.toggle('d-none');

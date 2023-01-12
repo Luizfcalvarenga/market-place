@@ -51,8 +51,13 @@ export function Product(props) {
 
   const showSellerContact = () => {
     const userContact = document.getElementById("user-contact")
-    userContact.classList.toggle("d-none")
+    if (props.userPresent === "true") {
+      userContact.classList.toggle("d-none")
+    } else {
+      swal("OPS", "Você deve fazer login para ver o contato!!", "error");
+    }
   }
+
 
   const translateWord = (word) => {
     const languageMap = {
@@ -248,7 +253,7 @@ export function Product(props) {
             {product.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
               <div id="user-contact" className="d-none">
-                <p className=" text-center"><strong className="text-success">Telefone:</strong>  {product.user.phone_number}</p>
+                <p className=" text-center"><strong className="text-success mask-phone">Telefone:</strong>  {product.user.phone_number}</p>
               </div>
             </>)}
             <a href={"/user/" + product.user.id}>

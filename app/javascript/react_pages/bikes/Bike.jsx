@@ -45,10 +45,14 @@ export function Bike(props) {
     })
 
   }
+
   const showSellerContact = () => {
-    // console.log( )
     const userContact = document.getElementById("user-contact")
-    userContact.classList.toggle("d-none")
+    if (props.userPresent === "true") {
+      userContact.classList.toggle("d-none")
+    } else {
+      swal("OPS", "Você deve fazer login para ver o contato!!", "error");
+    }
   }
 
   const translateWord = (word) => {

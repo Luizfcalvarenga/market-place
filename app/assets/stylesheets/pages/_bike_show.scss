@@ -23,13 +23,6 @@
   color: rgb(0,195,54);
 }
 
-// .img-show-bike {
-//   height: 100%;
-//   border-radius: 3px;
-//   border: 1px solid $color-primary;
-
-// }
-
 
 .conditions-details-bike {
   box-shadow: 0px 0px 20px 0px #00c4545e;
@@ -48,7 +41,7 @@
   border-radius: 3px;
   position: sticky;
   top: 7rem;
-  max-height: 100vh;
+  max-height: 200vh;
   background-color: rgb(20, 20, 20);
   .fa-heart {
     color: $color-primary;
@@ -239,6 +232,9 @@ a {
 
   .card-bike {
     margin-top: 10%;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 100%;
   }
 
   .main__menu .list-item .drop-menu .drop-item .list-item {

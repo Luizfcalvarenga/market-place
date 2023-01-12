@@ -9,6 +9,7 @@ class ChatsController < ApplicationController
     # @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
     if Chat.where(is_private: true).present?
       @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
+      @conversations.compact()
     else
       @users = []
     end
@@ -16,6 +17,7 @@ class ChatsController < ApplicationController
       sql_query = "full_name ILIKE :query OR email ILIKE :query"
       @users = User.where(sql_query, query: "%#{params[:query]}%")
     else
+      @conversations = @conversations.compact()
       @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])} if @conversations.present?
     end
     current_user.update(current_chat: nil)
