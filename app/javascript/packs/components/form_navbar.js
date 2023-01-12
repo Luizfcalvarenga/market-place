@@ -23,18 +23,22 @@ document.addEventListener("turbo:load", () => {
   let myNav = document.getElementById('navbar');
   let sticky = myNav.offsetTop;
 
+
+
   function setNavbar() {
-    if (window.pageYOffset > sticky) {
+
+    if (window.pageYOffset > sticky && window.screen.width > 768) {
       myNav.classList.add("navbar-scroll");
       myNav.classList.remove("navbar");
       logoNav.classList.add("navbar-brand-scroll");
       logoNav.classList.remove("navbar-brand");
 
-    } else if (window.pageYOffset === sticky) {
+    } else if (window.pageYOffset === sticky && window.screen.width > 768) {
       myNav.classList.add("navbar");
       myNav.classList.remove("navbar-scroll");
       logoNav.classList.add("navbar-brand");
       logoNav.classList.remove("navbar-brand-scroll");
     }
   }
+
 })

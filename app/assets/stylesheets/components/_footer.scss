@@ -18,7 +18,7 @@ hr {
 
 footer {
   opacity: 0.8;
-  
+
 }
 
 .link-white {
@@ -35,5 +35,15 @@ footer {
 .fa-envelope, .fa-whatsapp, .fa-facebook-f, .fa-instagram {
   &:hover {
     color: $color-primary !important;
+  }
+}
+
+.footer-brand {
+  height: 70px;
+
+  @media screen and (max-width: 768px) {
+    // height: 42px;
+    // margin-left: 335%;
+    // margin-bottom: 2%;
   }
 }

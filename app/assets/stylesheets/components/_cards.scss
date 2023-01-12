@@ -255,7 +255,6 @@
     height: 36px !important;
     margin-top: 24%;
     margin-left: 41%;
-
   }
 }
 
@@ -265,14 +264,12 @@
   background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("youtube-background.jpg");
   background-position: center;
   background-size: cover;
-
 }
 
 .instagram {
   background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), image-url("instagram-background.jpg");
   background-position: center;
   background-size: cover;
-
   .social-instagram:hover {
     color: white !important;
   }
@@ -293,7 +290,6 @@
   width: 50%;
   margin-left: 25%;
   background-color: rgb(21,21,21);
-
   .blog-img {
     height: 200px;
     width: 100%;
@@ -310,7 +306,6 @@
   margin-left: 13.5%;
   padding: 10px;
   background-color: rgb(21,21,21);
-
   .fa-star {
     color: yellow;
   }
@@ -322,7 +317,6 @@
   height: 250px;
   padding: 20px;
   margin: 50px;
-
   h3, p {
     text-shadow: 2px 2px rgb(16, 16, 16);
   }
@@ -335,7 +329,6 @@
   background-position: center;
 }
 
-
 ///////////////////////////// #MY PRODUCT
 
 .my-product-card {
@@ -347,10 +340,7 @@
       color: #eafceb !important;
     }
   }
-
 }
-
-
 
 .cards-index-advertisements {
   border-radius: 3px;
@@ -366,7 +356,6 @@
     border: 1px solid grey;
     width: 100%;
   }
-
 }
 
 .cards-infos-home {
@@ -375,19 +364,19 @@
 }
 
 @media (max-width: 765px) {
+  .card {
+    width: 100%;
+  }
   .cards-index-advertisements {
     width: 100%;
   }
   .my-product-card {
     .carousel{
       display: none;
-
     }
-
-
-      .topic-cards-index-media {
-        margin-right: 5px;
-      }
+    .topic-cards-index-media {
+      margin-right: 5px;
+    }
   }
   .cards-grid {
     display: block;
@@ -401,5 +390,4 @@
   .links-profile {
     margin: 5px;
   }
-
 }
