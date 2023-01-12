@@ -34,7 +34,7 @@
         <i class="fas fa-heart me-2"></i>FAVORITOS
       <% end %>
       <%= link_to chats_path, class: "profile-links text-success" do %>
-        <i class="fas fa-envelope-open-text me-2"></i>CHAT
+        <i class="far fa-comment-alt me-2"></i>CHAT
         <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
           <span class="badge badge-danger">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
         <% end %>

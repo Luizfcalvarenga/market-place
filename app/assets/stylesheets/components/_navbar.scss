@@ -24,13 +24,79 @@ $color-primary: #00c454;
   width: 100%;
   top: 0;
   z-index: 10000 !important;
+
+
+}
+
+.dropup {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.95) !important;
+  position: fixed;
+  bottom: 65px;
+
+}
+
+
+.bottom-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.95) !important;
+  .nav-bottom-link {
+    font-size: 12px;
+    font-weight: normal !important;
+  }
+  .nav-bottom-icon {
+    font-size: 16px;
+  }
+
+  .block-item {
+    line-height: 10px;
+    text-align: center;
+    margin: auto;
+    color: $color-primary;
+  }
+
+  .dropdown-toggle {
+    border: none !important;
+    appearance: none !important;
+    outline: none;
+    font-size: 12px;
+    color: $color-primary;
+
+    line-height: 10px;
+    margin: auto;
+
+  }
+
+  .dropdown-toggle::-ms-expand {
+    display: none;
+  }
+  .dropdown-toggle:focus {
+    outline:none !important;
+    box-shadow: none !important;
+  }
+
+}
+.mobile-notification {
+  font-size: 10px !important;
+  position: fixed;
+  bottom: 40px;
+  left: 69%;
+  color: rgb(170, 170, 170) !important;
 }
 
 .navbar-brand {
   height: 70px;
 
   @media screen and (max-width: 768px) {
-    height: 70px;
+    height: 40px;
+    margin-left: 44.5%;
+    margin-bottom: 2%;
   }
 }
 
@@ -38,7 +104,10 @@ $color-primary: #00c454;
   height: 60px;
 
   @media screen and (max-width: 768px) {
-    height: 70px;
+    height: 40px;
+    margin-left: 44.5%;
+    margin-bottom: 2%;
+
   }
 }
 .nav-link-drop {
@@ -71,7 +140,6 @@ $color-primary: #00c454;
 .nav-link:hover::after {
   color: $color-primary;
   width: 100%;
-  //transition: width .3s;
 }
 
 .btn-navbar {
@@ -176,11 +244,9 @@ $color-primary: #00c454;
 .results-list  {
   position: absolute;
   top: 100%;
-  // height: 100%;
   overflow: hidden;
 
   transition: all 6s ease-in-out;
-  // height: 0;
 }
 .expandable:target {
   height: 100%;
@@ -188,7 +254,6 @@ $color-primary: #00c454;
 
 .search-list-item {
   border-bottom: 1px solid $color-primary;
-  // align-items: center;
   p {
     font-size: 15px;
     margin-bottom: 0 !important;
@@ -204,22 +269,42 @@ $color-primary: #00c454;
 }
 @media (max-width: 768px) {
   .navbar {
-    height: 150px !important;
-
-  }
-
-  .navbar-scroll {
-    height: 150px;
-    display: block;
-
+    height: 95px !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    padding: 10px;
     .nav-form {
       width: 75% !important;
-      margin-left: 8%;
-      margin-top: 10px;
+      height: 25px !important;
     }
 
     .search-btn {
-      margin-top: 10px;
+      height: 25px !important;
+      margin-bottom: 0.25rem !important;
+      --bs-btn-padding-x: -1rem  !important;
+
+    }
+
+    .form-icon {
+      font-size: 18px;
+    }
+  }
+
+  .navbar-scroll {
+    height: 95px;
+    display: block;
+    padding: 10px;
+    .nav-form {
+      width: 75% !important;
+      height: 25px !important;
+    }
+
+    .search-btn {
+      height: 25px !important;
+      margin-bottom: 0.25rem !important;
+      --bs-btn-padding-x: -1rem  !important;
+    }
+    .form-icon {
+      font-size: 18px;
     }
   }
 
@@ -241,7 +326,22 @@ $color-primary: #00c454;
 
 @media (max-width: 425px) {
   .navbar {
-    height: 150px !important;
+    height: 95px !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    padding: 10px;
+    .nav-form {
+      width: 75% !important;
+    }
+
+    .search-btn {
+      height: 25px !important;
+      margin-bottom: 0.25rem !important;
+      --bs-btn-padding-x: -1rem !important;
+    }
+
+    .form-icon {
+      font-size: 18px;
+    }
 
   }
 
@@ -250,17 +350,22 @@ $color-primary: #00c454;
   }
 
   .navbar-scroll {
-    height: 150px;
+    height: 95px;
     display: block;
-
+    padding: 10px;
     .nav-form {
       width: 75% !important;
-      margin-left: 5%;
-      margin-top: 10px;
     }
 
     .search-btn {
-      margin-top: 10px;
+      height: 25px !important;
+      --bs-btn-padding-x: -1rem !important;
+
+      margin-bottom: 0.25rem !important;
+    }
+
+    .form-icon {
+      font-size: 18px;
     }
   }
 

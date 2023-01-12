@@ -147,77 +147,65 @@
       </ul>
     </div>
   </div>
-
   <% if mobile_device? %>
-    <div class="flex center between w-100 px-5">
-      <%= link_to root_path, class: "nav-link" do %>
+      <%= link_to root_path, class: "nav-link-drop text-center" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
-
-      <% if current_user.present? %>
-        <%= link_to "#" do %>
-          <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
-        <% end %>
+    <div class="flex center between w-100">
+      <%= link_to likes_path, class: "nav-link" do %>
+        <i class="fas fa-heart"></i>
       <% end %>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="text-success fas fa-bars"></i>
-      </button>
-    </div>
-
-    <div data-controller="search" class="input-group input-group-navbar px-1">
-      <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
-        <%= form.text_field :query,
-            class: "form-control nav-form",
-            placeholder: 'Pesquisar',
-            value: params[:query],
-            input_html: {id: "navbar-input"},
-            data: {
-            search_target: 'searchInput',
-            action: "keyup->search#update"
-          } %>
-        <%= form.button class: "btn search-btn" do %>
-          <i class="fas fa-search form-icon"></i>
+      <div data-controller="search" class="input-group input-group-navbar px-1">
+        <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
+          <%= form.text_field :query,
+              class: "form-control nav-form",
+              placeholder: 'Pesquisar',
+              value: params[:query],
+              input_html: {id: "navbar-input"},
+              data: {
+              search_target: 'searchInput',
+              action: "keyup->search#update"
+            } %>
+          <%= form.button class: "btn search-btn" do %>
+            <i class="fas fa-search form-icon"></i>
+          <% end %>
         <% end %>
-      <% end %>
-      <div data-search-target="list">
+        <div data-search-target="list">
+        </div>
       </div>
     </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="flex center around mobile-menu">
-        <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
-          <li class="nav-item active">
-            <%= link_to "BIKES", bikes_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "PRODUTOS", products_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "VENDER", new_announce_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "PERFIL", edit_profiles_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "INSTITUCIONAL", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "EVENTOS", "https://nuflowpass.com.br/", class: "nav-link", target: :_blank %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link", target: :_blank %>
-          </li>
-          <% if user_signed_in? %>
-            <li class="nav-item active">
-              <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline" %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to "LOGIN", new_user_session_path, class: "text-success nav-link text-decoration-underline" %>
-            </li>
-          <% end %>
-        </ul>
+    <div class="bottom-navbar">
+      <%= link_to bikes_path, class: "block-item" do %>
+        <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
+      <% end %>
+      <%= link_to products_path, class: "block-item" do %>
+        <i class="fab fa-product-hunt nav-bottom-icon"></i><br><span class="nav-bottom-link">Produtos</span>
+      <% end %>
+      <%= link_to new_announce_path, class: "block-item" do %>
+        <i class="far fa-edit nav-bottom-icon"></i> <br><span class="nav-bottom-link">Anunciar</span>
+      <% end %>
+      <%= link_to chats_path, class: "block-item" do %>
+        <i class="far fa-comment-alt  nav-bottom-icon"></i> <br><span class="nav-bottom-link">Chat</span>
+        <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
+          <span class="badge badge-danger mobile-notification">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
+        <% end %>
+      <% end %>
+      <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-ellipsis-h nav-bottom-icon mb-2"></i><br> <span class="nav-bottom-link">Mais</span>
+      </button>
+      <div class="dropdown-menu dropup">
+        <%= link_to "INSTITUCIONAL", "#", class: "dropup-link d-block text-center" %>
+        <%= link_to "PERFIL", edit_profiles_path, class: "dropup-link d-block text-center" %>
+        <%= link_to "INSTITUCIONAL", "#", class: "dropup-link d-block text-center" %>
+        <%= link_to "EVENTOS", "https://nuflowpass.com.br/", class: "dropup-link d-block text-center", target: :_blank %>
+        <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center", target: :_blank %>
+        <% if user_signed_in? %>
+          <%= link_to "CONVERSE COM A GENTE", "#", class: "dropup-link d-block text-center" %>
+          <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success dropup-link d-block text-center text-decoration-underline" %>
+        <% else %>
+          <%= link_to "LOGIN", new_user_session_path, class: "text-success dropup-link d-block text-center text-decoration-underline" %>
+        <% end %>
       </div>
     </div>
   <% end %>
