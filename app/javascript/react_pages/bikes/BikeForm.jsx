@@ -910,7 +910,7 @@ export function BikeForm(props) {
         { frameMaterial === "other"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" value={otherFrameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
+            <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setFrameMaterial(e.target.value)}/>
           </>
         )}
 
@@ -1132,7 +1132,7 @@ export function BikeForm(props) {
             { rearDerailleurModel === "other"  && (
               <>
                 <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text"  className="text-input" value={otherRearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                <input type="text"  className="text-input" value={rearDerailleurModel} onChange={(e) => setRearDerailleurModel(e.target.value)}/>
               </>
             )}
           </>)}
