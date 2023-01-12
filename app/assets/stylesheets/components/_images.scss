@@ -34,14 +34,20 @@
 }
 
 .search-img {
-  width: 20% !important;
+  width: 15% !important;
+  max-height: 50px;
   border-radius: 4px;
+  object-fit: cover;
 }
 
 
 @media (max-width: 765px)  {
   .search-img {
-    display: none
+    display: none;
+    // width: 10% !important;
+    // max-height: 30px;
+    // border-radius: 4px;
+    // object-fit: cover;
   }
 
 }

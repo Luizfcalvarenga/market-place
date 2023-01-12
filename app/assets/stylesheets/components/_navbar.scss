@@ -240,7 +240,7 @@ $color-primary: #00c454;
 }
 
 .search-list {
-  background-color: rgba(16, 16, 16, 0.9);
+  background-color: rgba(16, 16, 16, 1);
   border: 1px solid $color-primary;
   border-radius: 4px;
   z-index: 10000;
@@ -251,6 +251,16 @@ $color-primary: #00c454;
   top: 100%;
   overflow: hidden;
   transition: all 6s ease-in-out;
+
+  .search-title {
+    margin-bottom: 0 !important;
+    font-weight: lighter;
+  }
+  .search-list-details {
+    font-size: 15px;
+    font-weight: normal;
+
+  }
 }
 
 .expandable:target {
@@ -261,7 +271,7 @@ $color-primary: #00c454;
   border-bottom: 1px solid $color-primary;
   p {
     font-size: 15px;
-    margin-bottom: 0 !important;
+    // margin-bottom: 0 !important;
   }
 }
 .btn-search-all {
@@ -302,10 +312,12 @@ $color-primary: #00c454;
       margin-bottom: 30px;
     }
   }
+  .search-list-details {
+    font-size: 10px !important;
+    font-weight: normal;
 
-  .search-list-item {
-    margin-top: 10px;
   }
+
 }
 
 //////////////////////// RESPONSIVE 425px
@@ -342,5 +354,10 @@ $color-primary: #00c454;
       margin-top: 30px;
       margin-bottom: 30px;
     }
+  }
+  .search-list-details {
+    font-size: 10px !important;
+    font-weight: normal;
+
   }
 }
