@@ -687,8 +687,8 @@ export function ProductForm(props) {
       "receipt": "Nota Fiscal",
       "import_document": "Documento de Importação",
       "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
-      "no_documentation": "Sem Documento"
-
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação"
     };
 
     return languageMap[word]
@@ -1066,7 +1066,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "5" || productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35"  ) && (<>
+          {(productTypeId === "5") && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1074,11 +1074,41 @@ export function ProductForm(props) {
             className="select-answer"
             >
               <option value=""></option>
-              <option value="Sram">Sram</option>
+              <option value="Hope">Hope</option>
+              <option value="Magura">Magura</option>
               <option value="Shimano">Shimano</option>
-              <option value="Microshift">Microshift</option>
+              <option value="Sram">Sram</option>
+              <option value="TRP">TRP</option>
               <option value="Outra">Outra</option>
 
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+          {(productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35"  ) && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand ? productBrand : ""}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              <option value="Microshift">Microshift</option>
+              <option value="Shimano">Shimano</option>
+              <option value="Sram">Sram</option>
+              <option value="Outra">Outra</option>
             </select>
             { errors && errors.product && errors.product.brand && (
               <p className="text-danger">{errors.product.brand}</p>
@@ -1104,10 +1134,10 @@ export function ProductForm(props) {
             >
               <option value=""></option>
               <option value="Fox">Fox</option>
-              <option value="Rockshock">Rockshock</option>
+              <option value="Manitou">Manitou</option>
               <option value="Marzocchi">Marzocchi</option>
+              <option value="Ohlins">Ohlins</option>
               <option value="Rockshock">Rockshock</option>
-
               <option value="Outra">Outra</option>
 
             </select>
@@ -1454,6 +1484,7 @@ export function ProductForm(props) {
               <option value="receipt">Nota Fiscal</option>
               <option value="import_document">Documento de Importação</option>
               <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
+              <option value="foreign_tax_coupon_and_import_document">Cupom Fiscal Estrangeiro + Documento de Importação</option>
               <option value="no_documentation">Sem Documento</option>
 
             </select>

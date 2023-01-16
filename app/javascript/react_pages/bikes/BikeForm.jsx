@@ -15,6 +15,7 @@ export function BikeForm(props) {
   const [priceInCents, setPriceInCents] = useState(null);
   const [quantity, setQuantity ] = useState(null);
   const [frameBrand, setFrameBrand] = useState("");
+  const [otherFrameBrand, setOtherFrameBrand] = useState("");
   const [frameSize, setFrameSize] = useState("");
   const [frameMaterial, setFrameMaterial] = useState("");
   const [otherFrameMaterial, setOtherFrameMaterial] = useState("");
@@ -268,7 +269,7 @@ export function BikeForm(props) {
     dataObject.append( "bike[bike_type]", bikeType );
     dataObject.append( "bike[price_in_cents]", (priceInCents * 100) );
     dataObject.append( "bike[quantity]", quantity );
-    dataObject.append( "bike[frame_brand]", frameBrand );
+    // dataObject.append( "bike[frame_brand]", frameBrand );
     dataObject.append( "bike[frame_size]", frameSize );
     dataObject.append( "bike[model]", model );
     dataObject.append( "bike[rim_size]", rimSize );
@@ -306,6 +307,12 @@ export function BikeForm(props) {
       photos.map((photo) => {
         dataObject.append( "bike[photos][]", photo );
       })
+    }
+
+    if (frameBrand === "Outra") {
+      dataObject.append( "bike[frame_material]", otherFrameBrand );
+    } else {
+      dataObject.append( "bike[frame_material]", frameBrand );
     }
 
     if (frameMaterial === "other") {
@@ -692,11 +699,12 @@ export function BikeForm(props) {
     "Soma",
     "Diamondback",
     "Dahon",
-    "Yeti"
+    "Yeti",
+    "Outra"
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
   const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
   //////////////////////////////////////////////// suspensions
@@ -741,6 +749,79 @@ export function BikeForm(props) {
 
   //////////////////////////////////////////////ACCESSORIES
  const accessoryOptions = ["Não", "Pedal", "Ciclocomputador", "Lanterna Traseira", "Farol", , "Bolsa de Acessórios", "Suporte de garrafinha"]
+
+  const translateWord = (word) => {
+    const languageMap = {
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractle" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "new": "Novo",
+      "used": "Usado",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "perfect_condition": "Condição Perfeita",
+      "minor_surface_scratches": "Pequenos riscos ou arranhões superficiais",
+      "spalls_in_paint": "Lascas na pintura",
+      "painted_frame": "Quadro foi pintado",
+      "frame_welded_repaired": "Quadro foi soldado ou reparado",
+      "frame_cracks_or_fissures_must_be_repaired": "Quadro possui trincas ou fissuras",
+      "components_welded_repaired": "Algum Componento já foi soldado ou reparado",
+      "components_cracks_or_fissures_must_be_repaired": "Algum componente possui fissura ou necessita reparo",
+      "perfect_condition": "Condição Perfeita",
+      "rears_worn_out_higher_75": "Relação desgastada (+75%)",
+      "shifters_not_working_properly": "Troca de marchas não funciona perfeitamente",
+      "front_suspension_not_working_properly": "Suspensão dianteira não funciona perfeitamente",
+      "rear_suspension_not_working_properly": "Suspensão traseira não funciona perfeitamente",
+      "suspensions_lock_not_working_properly": "Travas da suspensão não funcionam perfeitamente",
+      "brake_not_working_properly": "Freio não funciona perfeitamente",
+      "retractable_seat_post_not_working_properly": "Canote retrátil não funciona perfeitamente",
+      "creaking_when_pedaling": "Apresenta rangidos ao pedalar",
+      "wheels_bent": "Rodas empenadas",
+      "tyres_worn_out_minus_50": "Pneus desgatados (+50%)"
+    };
+
+    return languageMap[word]
+  }
 
   return (
     <div className="w-60 new-bike-react py-5">
@@ -893,6 +974,13 @@ export function BikeForm(props) {
           <p className="text-danger">{errors.bike.frame_brand[0]}</p>
         )}
 
+        { frameBrand === "Outra"  && (
+          <>
+            <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+            <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setOtherFrameBrand(e.target.value)}/>
+          </>
+        )}
+
         <label htmlFor="frameMaterial" className="mt-4">Material do quadro:<span className="requested-information ms-1">*</span></label>
         <select
           className="select-answer"
@@ -911,7 +999,7 @@ export function BikeForm(props) {
         { frameMaterial === "other"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setFrameMaterial(e.target.value)}/>
+            <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
           </>
         )}
 
@@ -925,6 +1013,7 @@ export function BikeForm(props) {
           <option value="receipt">Nota Fiscal</option>
           <option value="import_document">Documento de Importação</option>
           <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
+          <option value="foreign_tax_coupon_and_import_document">Cupom Fiscal Estrangeiro + Documento de Importação</option>
           <option value="no_documentation">Sem Documento</option>
 
         </select>
@@ -1635,9 +1724,9 @@ export function BikeForm(props) {
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         <div id="Gerais(review)" className=" d-none">
           <div className="d-flex justify-content-between">
-            <p><span className="text-success">Tipo:</span> {bikeType}</p>
-            <p><span className="text-success">Categoria:</span> {category}</p>
-            <p><span className="text-success">Modalidade:</span> {modality}</p>
+            <p><span className="text-success">Tipo:</span> {translateWord(bikeType)}</p>
+            <p><span className="text-success">Categoria:</span> {translateWord(category)}</p>
+            <p><span className="text-success">Modalidade:</span> {translateWord(modality)}</p>
           </div>
 
           <div className="d-flex justify-content-between">
@@ -1654,10 +1743,10 @@ export function BikeForm(props) {
                   })}</p>
             <p><span className="text-success">Cidade:</span> {locality}</p>
           </div>
-          <p><span className="text-success">Documentação:</span> {documentationType}</p>
-          <p><span className="text-success">Condição:</span> {bikeCondition}</p>
-          <p><span className="text-success">Condição operacional:</span> {operatingCondition}</p>
-          <p><span className="text-success">Condição estrutural/visual:</span> {structuralVisualCondition}</p>
+          <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
+          <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
+          <p><span className="text-success">Condição operacional:</span> {translateWord(operatingCondition)}</p>
+          <p><span className="text-success">Condição estrutural/visual:</span> {translateWord(structuralVisualCondition)}</p>
           <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
 

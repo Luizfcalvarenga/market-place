@@ -388,7 +388,7 @@
 
     puts "Starting deliting what don't need..."
 
-    
+
     ################################################################ PRODUCTS #########################################################
     puts "Products types and theis attributtes..."
 
@@ -739,6 +739,50 @@
     battery_question_2 = ProductTypeAttribute.create!(product_type: battery, name: "battery_capacity", kind: "multiple_choice", options: capacities, prompt: "Capacidade" )
     battery_question_3 = ProductTypeAttribute.create!(product_type: battery, name: "condition", kind: "multiple_choice", options: ["new", "used"], prompt: "Condição" )
 
+
+    # REVISÂOS DO DOCUMENTO NOVO > 16/01/2023<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<REVISAR REUIÃO TERÇA <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    materials = ["aluminum", "carbon", "carbono_alumínio_chainstay", "other"]
+    brake_disc = ProductType.create(name: "brake_disc", prompt: "Disco de Freio")
+
+
+    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+    front_shifter_question = ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_diameter", kind: "text", options: "", prompt: "Diâmetro" )
+
+
+    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+    front_gears_options= [0, 1, 2, 3 ]
+    front_shifter_question = ProductTypeAttribute.create!(product_type: front_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas" )
+
+
+    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+    rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
+
+    rear_shifter_question = ProductTypeAttribute.create!(product_type: rear_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas" )
+
+
+     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CASSETTE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+     rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
+
+     rear_shifter_question = ProductTypeAttribute.create!(product_type: cassete, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas" )
+
+
+    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE DISC >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+    disc_sizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ]
+
+    brake_disc_question = ProductTypeAttribute.create!(product_type: brake_disc, name: "disc_size", kind: "multiple_choice", options: disc_sizes, prompt: "Tamanho do disco" )
+
+    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< MATERIALS (GUIDÃO / GARFO* / RODA / CANOTE(RÍGIDO)/ PEDIVELA) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+    handlebar_question = ProductTypeAttribute.create!(product_type: handlebar, name: "material", kind: "multiple_choice", options: materials, prompt: "Material" )
+    # garfo = ???
+    full_wheel_question = ProductTypeAttribute.create!(product_type: full_wheel, name: "material", kind: "multiple_choice", options: materials, prompt: "Material" )
+    seat_post_question = ProductTypeAttribute.create!(product_type: seat_post, name: "material", kind: "multiple_choice", options: materials, prompt: "Material" )
+    crankset_question = ProductTypeAttribute.create!(product_type: crankset, name: "material", kind: "multiple_choice", options: materials, prompt: "Material" )
+
+
+
+
     ################################################################ USERS ################################################################
     buyer = User.create!(email: "user@app.com", password: "123456" )
     seller = User.create!(email: "test@app.com", password: "123456" )
@@ -746,7 +790,6 @@
     admin = User.create!(email: "admin@app.com", password: "123456", access: "admin" )
 
 
-    #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
