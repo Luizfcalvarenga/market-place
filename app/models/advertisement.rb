@@ -20,9 +20,6 @@ class Advertisement < ApplicationRecord
   ADVERTISABLE_OPTIONS = {
     "Product": "Produto",
     "Bike": "Bike",
-
-
-
   }
 
   def advertisable_display

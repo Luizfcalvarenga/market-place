@@ -105,6 +105,19 @@ class ProductsController < ApplicationController
     @products = @products.where(:product_type_id => @current_filters[:product_type_id]) if @current_filters[:product_type_id]
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    authorize @product
+    @product.touch(:removed_at)
+    if @product.removed_at.present?
+      flash[:alert] = "Produto #{@product.name} removido "
+      redirect_to advertisements_path
+    else
+      flash[:alert] = "Algo deu errado ao remover produto #{@product.name} "
+      redirect_to advertisements_path
+    end
+  end
+
   private
 
   def product_params
