@@ -783,7 +783,8 @@ export function ProductForm(props) {
     "Surly",
     "Soma",
     "Diamondback",
-    "Dahon"
+    "Dahon",
+    "Yeti"
   ].sort()
 
 

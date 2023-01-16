@@ -386,7 +386,9 @@
 
     categories = [mtb, dirt, road, infant, urban ]
 
+    puts "Starting deliting what don't need..."
 
+    
     ################################################################ PRODUCTS #########################################################
     puts "Products types and theis attributtes..."
 
@@ -395,7 +397,7 @@
 
     bike_types = ["bike", "e-bike"]
 
-    
+
 
     adapters = ProductType.create(name: "adapters", prompt: "Adaptadores")
     battery = ProductType.create(name: "battery", prompt: "Bateria")

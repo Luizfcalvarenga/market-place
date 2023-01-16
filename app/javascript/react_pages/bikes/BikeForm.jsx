@@ -691,7 +691,8 @@ export function BikeForm(props) {
     "Surly",
     "Soma",
     "Diamondback",
-    "Dahon"
+    "Dahon",
+    "Yeti"
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
@@ -1476,7 +1477,7 @@ export function BikeForm(props) {
 
                                                                         {/*//////////////////BATERIA///////////////////////*/}
 
-        { bikeType === "electric" && (<>
+        { bikeType === "e-bike" && (<>
           <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
           <div id="Parte elétrica" className="rims d-none mb-3">
             <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
