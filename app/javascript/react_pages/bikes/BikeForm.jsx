@@ -64,7 +64,7 @@ export function BikeForm(props) {
   const [stem, setStem] = useState("");
   const [crankset, setCrankset] = useState("");
   const [chain, setChain] = useState("");
-  const [accessories, setAccessories] = useState("");
+  const [accessories, setAccessories] = useState([]);
   const [accessoriesDescription, setAccessoriesDescription] = useState("");
   const [otherAccessory, setOtherAccessory] = useState("");
   const [pedals, setPedals] = useState("");
@@ -605,10 +605,21 @@ export function BikeForm(props) {
     console.log(section)
     section.classList.toggle("d-none")
     sectionActive.classList.toggle("review-selected")
-
-
   }
 
+
+  const createAccessories = (e) => {
+    const accessories = []
+    let accessorie = e.target.value
+    if (!accessories.includes(accessorie)) {
+
+      accessories.push(accessorie)
+    }
+    console.log(accessories)
+
+    setAccessories(accessories)
+
+  }
   //////////////////////////////////////////////// frames
 
   const frameBrands = [
@@ -1610,7 +1621,8 @@ export function BikeForm(props) {
           <select
             className="select-answer" aria-label=".form-select-sm example"
             value={accessories}
-            onChange={(e) => setAccessories(e.target.value)}
+            onChange={(e) => createAccessories(e)}
+            multiple
           >
             <option value=""></option>
             {accessoryOptions.map((accessorieOption, index)=> {
