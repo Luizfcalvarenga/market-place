@@ -981,6 +981,8 @@ export function BikeForm(props) {
             return (<option key={index}>{frameBrand}</option>);
           })}
         </select>
+        <option value="Outra">Outra</option>
+
         { errors && errors.bike && errors.bike.frame_brand && (
           <p className="text-danger">{errors.bike.frame_brand[0]}</p>
         )}
@@ -1002,12 +1004,14 @@ export function BikeForm(props) {
           <option value="carbon">Carbono</option>
           <option value="aluminum">Aluminio</option>
           <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
+          <option value="Outro">Outro</option>
+
         </select>
         { errors && errors.bike && errors.bike.frame_material && (
           <p className="text-danger">{errors.bike.frame_material[0]}</p>
         )}
 
-        { frameMaterial === "other"  && (
+        { frameMaterial === "Outro"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
