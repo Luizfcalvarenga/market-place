@@ -315,7 +315,7 @@ export function BikeForm(props) {
       dataObject.append( "bike[frame_material]", frameBrand );
     }
 
-    if (frameMaterial === "other") {
+    if (frameMaterial === "Outra") {
       dataObject.append( "bike[frame_material]", otherFrameMaterial );
     } else {
       dataObject.append( "bike[frame_material]", frameMaterial );
@@ -716,7 +716,6 @@ export function BikeForm(props) {
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
   const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const frameMaterials = ["aluminum ", "carbon", "carbon_aluminum_chainstay", "other"]
 
   //////////////////////////////////////////////// suspensions
 
