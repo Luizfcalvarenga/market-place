@@ -17,6 +17,7 @@ export function BikeForm(props) {
   const [frameBrand, setFrameBrand] = useState("");
   const [otherFrameBrand, setOtherFrameBrand] = useState("");
   const [frameSize, setFrameSize] = useState("");
+  const [otherFrameSize, setOtherFrameSize] = useState("");
   const [frameMaterial, setFrameMaterial] = useState("");
   const [otherFrameMaterial, setOtherFrameMaterial] = useState("");
   const [model, setModel] = useState("");
@@ -270,7 +271,7 @@ export function BikeForm(props) {
     dataObject.append( "bike[price_in_cents]", (priceInCents * 100) );
     dataObject.append( "bike[quantity]", quantity );
     // dataObject.append( "bike[frame_brand]", frameBrand );
-    dataObject.append( "bike[frame_size]", frameSize );
+    // dataObject.append( "bike[frame_size]", frameSize );
     dataObject.append( "bike[model]", model );
     dataObject.append( "bike[rim_size]", rimSize );
     dataObject.append( "bike[number_of_front_gears]", numberOfFrontGears );
@@ -310,10 +311,17 @@ export function BikeForm(props) {
     }
 
     if (frameBrand === "Outra") {
-      dataObject.append( "bike[frame_material]", otherFrameBrand );
+      dataObject.append( "bike[frame_brand]", otherFrameBrand );
     } else {
-      dataObject.append( "bike[frame_material]", frameBrand );
+      dataObject.append( "bike[frame_brand]", frameBrand );
     }
+
+    if (frameSize === "Outro") {
+      dataObject.append( "bike[frame_size]", otherFrameSize );
+    } else {
+      dataObject.append( "bike[frame_size]", frameSize );
+    }
+
 
     if (frameMaterial === "Outra") {
       dataObject.append( "bike[frame_material]", otherFrameMaterial );
@@ -714,8 +722,8 @@ export function BikeForm(props) {
     "Outra"
   ].sort()
 
-  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL", "Outro"]
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "Outro" ]
 
   //////////////////////////////////////////////// suspensions
 
@@ -932,9 +940,6 @@ export function BikeForm(props) {
           </select>
         </>)}
 
-
-
-
         {category === "road" && (<>
           <label htmlFor="frameSize" className="mt-4">tamanho do quadro:<span className="requested-information ms-1">*</span></label>
           <select
@@ -950,6 +955,14 @@ export function BikeForm(props) {
           { errors && errors.bike && errors.bike.frame_size && (
             <p className="text-danger">{errors.bike.frame_size[0]}</p>
           )}
+
+          { frameSize === "Outro"  && (
+            <>
+              <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+              <input type="text" className="text-input" value={otherFrameSize} onChange={(e) => setOtherFrameSize(e.target.value)}/>
+            </>
+          )}
+
         </>)}
 
         {["dirt_street", "mountain_bike", "infant", "urban"].includes(category) && (<>
@@ -967,6 +980,13 @@ export function BikeForm(props) {
           { errors && errors.bike && errors.bike.frame_size && (
             <p className="text-danger">{errors.bike.frame_size[0]}</p>
           )}
+
+          { frameSize === "Outro"  && (
+            <>
+              <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+              <input type="text" className="text-input" value={otherFrameSize} onChange={(e) => setOtherFrameSize(e.target.value)}/>
+            </>
+          )}
         </>)}
 
         <label htmlFor="frameBrand" className="mt-4 text-start">Marca do quadro:<span className="requested-information ms-1">*</span></label>
@@ -979,8 +999,8 @@ export function BikeForm(props) {
           {frameBrands.map((frameBrand, index) => {
             return (<option key={index}>{frameBrand}</option>);
           })}
+          <option value="Outra">Outra</option>
         </select>
-        <option value="Outra">Outra</option>
 
         { errors && errors.bike && errors.bike.frame_brand && (
           <p className="text-danger">{errors.bike.frame_brand[0]}</p>
@@ -989,7 +1009,7 @@ export function BikeForm(props) {
         { frameBrand === "Outra"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setOtherFrameBrand(e.target.value)}/>
+            <input type="text" className="text-input" value={otherFrameBrand} onChange={(e) => setOtherFrameBrand(e.target.value)}/>
           </>
         )}
 
@@ -1013,7 +1033,7 @@ export function BikeForm(props) {
         { frameMaterial === "Outro"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input" value={frameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
+            <input type="text" className="text-input" value={otherFrameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
           </>
         )}
 

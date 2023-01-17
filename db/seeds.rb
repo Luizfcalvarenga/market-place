@@ -889,16 +889,16 @@
 
 
 
-  
+
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< NOVO SEED >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
   adapters = ProductType.create(name: "adapters", prompt: "Adaptadores") .
   battery = ProductType.create(name: "battery", prompt: "Bateria") .
   blocking = ProductType.create(name: "blocking", prompt: "Blocagem") .
   bearing = ProductType.create(name: "bearing", prompt: "Rolamento") .
-  brake = ProductType.create(name: "brake", prompt: "Freios") .
+  brake = ProductType.create(name: "brake", prompt: "Freio") .
   brake_disc = ProductType.create(name: "brake_disc", prompt: "Disco de Freio") .
-  brake_levers = ProductType.create(name: "brake_levers", prompt: "Manetes de Freio") .
+  brake_levers = ProductType.create(name: "brake_levers", prompt: "Manete de Freio") .
   brake_pad = ProductType.create(name: "brake_pad", prompt: "Pastilha de Freio") .
   bottle_cage = ProductType.create(name: "bottle_cage", prompt: "Suporte para Garrafa") .
   cassette = ProductType.create(name: "cassette", prompt: "Cassete") .
@@ -906,44 +906,45 @@
   chain = ProductType.create(name: "chain", prompt: "Corrente") .
   chain_guide = ProductType.create(name: "chain_guide", prompt: "Guia de Corrente") .
   chainring = ProductType.create(name: "chainring", prompt: "Coroa") .
-  relation_kit_complete_group = ProductType.create(name: "relation_kit_complete_group", prompt: "Kit Relação/Grupo Completo") . # SEPARAR EM 2 PRODUCTOS KIT E GRUPO ???
+  relation_kit_complete_group = ProductType.create(name: "relation_kit_complete_group", prompt: "Kit Relação/Grupo Completo") .
   crankset = ProductType.create(name: "crankset", prompt: "Pedivela") .
-  fender = ProductType.create(name: "fender", prompt: "Paralamas") .
+  fender = ProductType.create(name: "fender", prompt: "Para-lama") .
   frame = ProductType.create(name: "frame", prompt: "Quadro") .
   front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Câmbio Dianteiro") .
   front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador/Passador Dianteiro") .
   front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira") .
-  full_wheel = ProductType.create(name: "full_wheel", prompt: "Roda Completa") . # OU RODA SOMENTE?
+  wheel = ProductType.create(name: "wheel", prompt: "Roda") .
   grips = ProductType.create(name: "grips", prompt: "Punho/Manopla") .
-  handlebar = ProductType.create(name: "handlebar", prompt: "Guidão") . # GUIDON???????
+  handlebar = ProductType.create(name: "handlebar", prompt: "Guidão") .
   headset = ProductType.create(name: "headset", prompt: "Caixa de Direção") .
-  hub = ProductType.create(name: "hub", prompt: "Cubos") .
+  hub = ProductType.create(name: "hub", prompt: "Cubo") .
   hanger = ProductType.create(name: "hanger", prompt: "Gancheira") .
-  pedals = ProductType.create(name: "pedals", prompt: "Pedais") .
+  pedal = ProductType.create(name: "pedal", prompt: "Pedal") .
   power_meter = ProductType.create(name: "power_meter", prompt: "Medidor de Potência") .
   rim = ProductType.create(name: "rim", prompt: "Aro") .
   saddle = ProductType.create(name: "saddle", prompt: "Selim/Banco") .
   seat_post = ProductType.create(name: "seat_post", prompt: "Canote") .
   sheave = ProductType.create(name: "sheave", prompt: "Roldana") .
-  spoke = ProductType.create(name: "spoke", prompt: "Raios") .
+  spoke = ProductType.create(name: "spoke", prompt: "Raio") .
   rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Câmbio Traseiro") .
   rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador/Passador Traseiro") .
   rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Shock/Suspensão Traseira") .
   stem = ProductType.create(name: "stem", prompt: "Avanço/Mesa") .
   tube = ProductType.create(name: "tube", prompt: "Câmara") .
-  tyre = ProductType.create(name: "tyre", prompt: "Pneus") .
+  tyre = ProductType.create(name: "tyre", prompt: "Pneu") .
 
 
   ############################################################### ACCESSORIES
 
   air_bomb = ProductType.create(name: "air_bomb", prompt: "Bomba de Ar") .
   eletronics = ProductType.create(name: "eletronics", prompt: "Eletrônicos") .
-  oil_lubricant = ProductType.create(name: "oil_lubricant", prompt: "Óleos e Lubrificante") .
+  oil_lubricant = ProductType.create(name: "oil_lubricant", prompt: "Óleos e Lubrificantes") .
   stand = ProductType.create(name: "stand", prompt: "Cavaletes") .
   tools = ProductType.create(name: "tools", prompt: "Ferramentas") .
   car_protectors = ProductType.create(name: "car_protectors", prompt: "Protetores para Carros") .
   training_roller = ProductType.create(name: "training_roller", prompt: "Rolo de Treino") .
-  bike_rack = ProductType.create(name: "bike_rack", prompt: "Suporte para Carro") .
+  bike_rack = ProductType.create(name: "bike_rack", prompt: "Suportes para Carro") .
+  water_bottle = ProductType.create(name: "water_bottle", prompt: "Garrafa") .
 
 
   ############################################################### CLOTHING
@@ -964,7 +965,6 @@
   helmet = ProductType.create(name: "helmet", prompt: "Capacete") .
   elbow_pad = ProductType.create(name: "elbow_pad", prompt: "Cotoveleira") .
   knee_pad = ProductType.create(name: "knee_pad", prompt: "Joelheira") .
-  water_bottle = ProductType.create(name: "water_bottle", prompt: "Garrafa") .
   hydration_pack = ProductType.create(name: "hydration_pack", prompt: "Mochila de Hidratação")  .
   fanny_pack = ProductType.create(name: "fanny_pack", prompt: "Pochete") .
   sneaker = ProductType.create(name: "sneaker", prompt: "Sapatilha") .
@@ -987,12 +987,19 @@
   helmet_sizes = ProductTypeAttribute.create!(product_type: helmet, name: "helmet_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
   vest_sizes = ProductTypeAttribute.create!(product_type: vest, name: "vest_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
   elbow_pad_sizes = ProductTypeAttribute.create!(product_type: elbow_pad, name: "elbow_pad_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
+  knee_pad_sizes = ProductTypeAttribute.create!(product_type: knee_pad, name: "knee_pad_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
   coat_sizes = ProductTypeAttribute.create!(product_type: coat, name: "coat_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
+  hydration_pack_sizes = ProductTypeAttribute.create!(product_type: hydration_pack, name: "hydration_pack_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
+  glasses_sizes = ProductTypeAttribute.create!(product_type: glasses, name: "glasses_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
+  fanny_pack_sizes = ProductTypeAttribute.create!(product_type: fanny_pack, name: "fanny_pack_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
+
+
 
   shoes_sizes = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, "other"]
 
   socks_sizes = ProductTypeAttribute.create!(product_type: socks, name: "socks_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho")
   sneaker_sizes = ProductTypeAttribute.create!(product_type: sneaker, name: "sneaker_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho")
+
 
 
   materials = ["aluminum", "carbon", "carbon_aluminum_chainstay", "other"]
@@ -1003,7 +1010,7 @@
   ].sort_by { |frame_brands| frame_brands }
 
   road_frame_sizes = ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  mtb_dirt_frame_sizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  mtb_dirt_frame_sizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
   rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
   shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
   battery_capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
@@ -1015,10 +1022,11 @@
   ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira")
   ProductTypeAttribute.create!(product_type: frame, name: "bike_type", kind: "multiple_choice", options: ["Bike", "E-Bike"], prompt: "Tipo de bike")
   ProductTypeAttribute.create!(product_type: frame, name: "battery_capacity", kind: "multiple_choice", options: battery_capacities, prompt: "Bateria")
-  ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock")
+  ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock") # caso possam ser opcionais os atributos
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
 
   # road_brake_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
   # mtb_dirt_urban_brake_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]

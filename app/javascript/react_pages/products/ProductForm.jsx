@@ -254,10 +254,10 @@ export function ProductForm(props) {
   const renderProductTypeAttributeSelect = (attribute, index) => {
     // VERIFICAR RETORNO DO ESCOLHA DE TIPO DE SUSPENSÃO PARA COMPONENTO QUADROAPARENTEMENTE PRA QUADRO E HARDTAIL NÃO PERGUNTA CURSO DE NENHUMA SUSPANSÃO(CONFERIR)
     let options = []
-    if (["mountain_bike", "dirt_street"].includes(productCategory) && attribute.name === "frame_size") {
-      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+    if (["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory) && attribute.name === "frame_size") {
+      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
     } else if (productCategory === "road" && attribute.name === "frame_size") {
-      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "other" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
      } else if (attribute.name === "rear_suspension_travel" && ["road"].includes(productCategory)) {
@@ -895,7 +895,7 @@ export function ProductForm(props) {
     "Zéfal",
     "Wahoo"].sort()
 
-  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
+  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other" ];
   const productsIdsWithSpecificModels = ["5", "18", "34", "20", "36"]
 
   const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
