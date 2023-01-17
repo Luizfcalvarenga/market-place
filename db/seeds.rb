@@ -1019,43 +1019,52 @@
   ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: materials, prompt: "Material do quadro" )
   ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro")
   ProductTypeAttribute.create!(product_type: frame, name: "suspension_type", kind: "multiple_choices", options: ["no_suspension", "hardtail", "full_suspension"], prompt: "Tipo de suspensão")
-  ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso suspensão traseira")
+  ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da suspensão traseira")
   ProductTypeAttribute.create!(product_type: frame, name: "bike_type", kind: "multiple_choice", options: ["Bike", "E-Bike"], prompt: "Tipo de bike")
-  ProductTypeAttribute.create!(product_type: frame, name: "battery_capacity", kind: "multiple_choice", options: battery_capacities, prompt: "Bateria")
-  ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Tamanho shock") # caso possam ser opcionais os atributos
+  ProductTypeAttribute.create!(product_type: frame, name: "battery_capacity", kind: "multiple_choice", options: battery_capacities, prompt: "Capacidade da bateria") # se for e-bike
+  ProductTypeAttribute.create!(product_type: frame, name: "battery_cycles", kind: "text", options: nil, prompt: "Ciclos da bateria") # se for e-bike ?? option nil ?
+  ProductTypeAttribute.create!(product_type: frame, name: "motor_mileage", kind: "text", options: "", prompt: "KM do motor") # se for e-bike ???? option "" ?
+  ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do shock") # caso possam ser opcionais os atributos
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-
 
   # road_brake_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
   # mtb_dirt_urban_brake_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]
   brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
 
   ProductTypeAttribute.create!(product_type: brake, name: "brake_type", kind: "multiple_choice", options: brake_types, prompt: "Tipo de freio" )
-  ProductTypeAttribute.create!(product_type: brake, name: "brake_disc_size", kind: "multiple_choice", options: ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ], prompt: "Tamanho do disco" )
+  ProductTypeAttribute.create!(product_type: brake, name: "disc_include", kind: "multiple_choice", options: ["Sim", "Não"], prompt: "Acompanha Disco?") # se for hidraulico ou mecanico à disco
+  ProductTypeAttribute.create!(product_type: brake, name: "brake_disc_size", kind: "multiple_choice", options: ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ], prompt: "Tamanho do disco")  # se acompanhar disco
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RIM >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   wheel_sizes = ["16''", "20''", "24''", "26''", "27,5''", "27,5'' Plus", "29''", "29'' Plus", "650B", "700C", "Fatbike"]
 
-  ProductTypeAttribute.create!(product_type: rim, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
-  ProductTypeAttribute.create!(product_type: rim, name: "rim_material", kind: "multiple_choice", options: materials, prompt: "Qual material" )
+  ProductTypeAttribute.create!(product_type: rim, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda")
+  ProductTypeAttribute.create!(product_type: rim, name: "rim_material", kind: "multiple_choice", options: materials, prompt: "Material")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< HANDLEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  handlebar_sizes = ["680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "Outro"]
+  handlebar_sizes_mtb_dirt_urban_infant = ["660 mm","680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "other"]
+  handlebar_sizes_road = ["360 mm", "380 mm", "400 mm", "420 mm", "440 mm", "460 mm", "other"]
+  handlebar_diameters = ["25,4 mm", "31,8 mm", "other"]
+  handlebar_drops = ["130 mm", "140 mm", "150mm", "160mm", "other"]
 
-  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho" )
+  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho" ) # opçõs de acordo com categoria #???
+  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_diameter", kind: "multiple_choice", options: handlebar_diameters, prompt: "Diâmetro") #???
+  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_drop", kind: "multiple_choice", options: handlebar_drops, prompt: "Drop") #???
+  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_material", kind: "multiple_choice", options: materials, prompt: "Material") #???
+
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  front_suspension_travels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
+  front_suspension_travels = ["80mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm", "other"]
   # mtb_dirt_urban_front_suspension_models = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "FOX 30", "FOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "other"]
 
-  ProductTypeAttribute.create!(product_type: front_suspension, name: "front_suspension_travel", kind: "multiple_choice", options: front_suspension_travels, prompt: "Suspensão dianteira")
-  ProductTypeAttribute.create!(product_type: front_suspension, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
+  ProductTypeAttribute.create!(product_type: front_suspension, name: "front_suspension_travel", kind: "multiple_choice", options: front_suspension_travels, prompt: "Curso da suspensão dianteira")
+  ProductTypeAttribute.create!(product_type: front_suspension, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -1064,13 +1073,13 @@
   rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
   # mtb_dirt_urban_rear_suspension_models = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "ROCKSHOX VIVID", "other"]
 
-  ProductTypeAttribute.create!(product_type: rear_suspension, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do Shock" )
-  ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da Supensão Traseira" )
+  ProductTypeAttribute.create!(product_type: rear_suspension, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do Shock")
+  ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da supensão traseira" )
 
-  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FULL_WHEEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WHEEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  ProductTypeAttribute.create!(product_type: full_wheel, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
-  ProductTypeAttribute.create!(product_type: full_wheel, name: "wheel_material", kind: "multiple_choice", options: materials, prompt: "Tamanho da roda" )
+  ProductTypeAttribute.create!(product_type: wheel, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
+  ProductTypeAttribute.create!(product_type: wheel, name: "wheel_material", kind: "multiple_choice", options: materials, prompt: "Material da roda" )
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SPOKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -1092,8 +1101,8 @@
   # mtb_dirt_urban_front_derailleur_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SRAM XT", "SRAM XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
   front_gears_options= [0, 1, 2, 3 ]
 
-  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas" )
-  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação" )
+  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas")
+  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação")
 
 
   # #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -1101,8 +1110,8 @@
   # mtb_dirt_urban_rear_derailleur_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SRAM XT", "SRAM XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
   rear_gears_options = [0, 1, 7, 8, 9, 10, 11, 12 ]
 
-  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas Marchas" )
-  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação" )
+  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas Marchas")
+  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -1110,12 +1119,10 @@
   seat_post_types = ["retractable", "rigid"]
   seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
 
-  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_type", kind: "multiple_choice", options: seat_post_types, prompt: "Tipo do Canote" )
-  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_travel", kind: "multiple_choice", options: seat_post_travels, prompt: "Curso do Canote" )
-  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_material", kind: "multiple_choice", options: materials, prompt: "Material" )
-  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_diameter", kind: "text", options: "", prompt: "Diâmetro" )
-
-
+  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_type", kind: "multiple_choice", options: seat_post_types, prompt: "Tipo do Canote")
+  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_travel", kind: "multiple_choice", options: seat_post_travels, prompt: "Curso do Canote")
+  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_material", kind: "multiple_choice", options: materials, prompt: "Material")
+  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_diameter", kind: "text", options: "", prompt: "Diâmetro")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CRANKSET >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -1124,7 +1131,7 @@
   # crowns = ["30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28" ]
   # ProductTypeAttribute.create!(product_type: crankset, name: "crankset_crowns", kind: "multiple_choice", options: crowns, prompt: "Coroas" )
   # ProductTypeAttribute.create!(product_type: crankset, name: "crankset_length", kind: "multiple_choice", options: lengths, prompt: "Comprimento" )
-  ProductTypeAttribute.create!(product_type: crankset, name: "crankset_material", kind: "multiple_choice", options: materials, prompt: "Material" )
+  ProductTypeAttribute.create!(product_type: crankset, name: "crankset_material", kind: "multiple_choice", options: materials, prompt: "Material")
 
 
 
@@ -1132,32 +1139,29 @@
 
   capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
 
-  ProductTypeAttribute.create!(product_type: battery, name: "battery_capacity", kind: "multiple_choice", options: capacities, prompt: "Capacidade" )
+  ProductTypeAttribute.create!(product_type: battery, name: "battery_capacity", kind: "multiple_choice", options: capacities, prompt: "Capacidade")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
   front_gears_options= [0, 1, 2, 3 ]
-  front_shifter_question = ProductTypeAttribute.create!(product_type: front_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas" )
+  front_shifter_question = ProductTypeAttribute.create!(product_type: front_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
   rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
-  rear_shifter_question = ProductTypeAttribute.create!(product_type: rear_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas" )
+  rear_shifter_question = ProductTypeAttribute.create!(product_type: rear_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas")
 
 
-   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CASSETTE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CASSETTE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-   rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
+  rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
-   rear_shifter_question = ProductTypeAttribute.create!(product_type: cassete, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas" )
+  rear_shifter_question = ProductTypeAttribute.create!(product_type: cassete, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE DISC >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   disc_sizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ]
 
-  brake_disc_question = ProductTypeAttribute.create!(product_type: brake_disc, name: "disc_size", kind: "multiple_choice", options: disc_sizes, prompt: "Tamanho do disco" )
-
-
-  # garfo = ???
+  brake_disc_question = ProductTypeAttribute.create!(product_type: brake_disc, name: "disc_size", kind: "multiple_choice", options: disc_sizes, prompt: "Tamanho do disco")
