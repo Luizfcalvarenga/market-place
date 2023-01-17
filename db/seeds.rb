@@ -913,6 +913,7 @@
   front_derailleur = ProductType.create(name: "front_derailleur", prompt: "Câmbio Dianteiro") .
   front_shifter = ProductType.create(name: "front_shifter", prompt: "Trocador/Passador Dianteiro") .
   front_suspension = ProductType.create(name: "front_suspension", prompt: "Suspensão Dianteira") .
+  fork = ProductType.create(name: "fork", prompt: "Garfo") .
   wheel = ProductType.create(name: "wheel", prompt: "Roda") .
   grips = ProductType.create(name: "grips", prompt: "Punho/Manopla") .
   handlebar = ProductType.create(name: "handlebar", prompt: "Guidão") .
@@ -925,7 +926,7 @@
   saddle = ProductType.create(name: "saddle", prompt: "Selim/Banco") .
   seat_post = ProductType.create(name: "seat_post", prompt: "Canote") .
   sheave = ProductType.create(name: "sheave", prompt: "Roldana") .
-  spoke = ProductType.create(name: "spoke", prompt: "Raio") .
+  # spoke = ProductType.create(name: "spoke", prompt: "Raio") . #???? TIRAR?????
   rear_derailleur = ProductType.create(name: "rear_derailleur", prompt: "Câmbio Traseiro") .
   rear_shifter = ProductType.create(name: "rear_shifter", prompt: "Trocador/Passador Traseiro") .
   rear_suspension = ProductType.create(name: "rear_suspension", prompt: "Shock/Suspensão Traseira") .
@@ -1054,7 +1055,7 @@
 
   ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho" ) # opçõs de acordo com categoria #???
   ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_diameter", kind: "multiple_choice", options: handlebar_diameters, prompt: "Diâmetro") #???
-  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_drop", kind: "multiple_choice", options: handlebar_drops, prompt: "Drop") #???
+  ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_drop", kind: "multiple_choice", options: handlebar_drops, prompt: "Drop") #??? perguntar se for categoria road
   ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_material", kind: "multiple_choice", options: materials, prompt: "Material") #???
 
 
@@ -1070,69 +1071,71 @@
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_SUSPENSION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
-  rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
+  # rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
   # mtb_dirt_urban_rear_suspension_models = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "ROCKSHOX VIVID", "other"]
 
   ProductTypeAttribute.create!(product_type: rear_suspension, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do Shock")
-  ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da supensão traseira" )
+  # ProductTypeAttribute.create!(product_type: rear_suspension, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da supensão traseira" )
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WHEEL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  ProductTypeAttribute.create!(product_type: wheel, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
-  ProductTypeAttribute.create!(product_type: wheel, name: "wheel_material", kind: "multiple_choice", options: materials, prompt: "Material da roda" )
+  ProductTypeAttribute.create!(product_type: wheel, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda")
+  ProductTypeAttribute.create!(product_type: wheel, name: "wheel_material", kind: "multiple_choice", options: materials, prompt: "Material da roda")
 
 
-  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SPOKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-
-  # spoke_question_2 = ProductTypeAttribute.create!(product_type: spoke, name: "wheel_size", kind: "multiple_choice", options: wheel_sizes, prompt: "Tamanho da roda" )
-
-  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RELATION KIT / COMPLETE GROUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RELATION KIT/COMPLETE GROUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   front_gears_options= [0, 1, 2, 3 ]
   rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
 
-  ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "front_derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Marchas dianteiras" )
-  ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Marchas traseiras" )
+  ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_or_front_and_rear_derailleur", kind: "multiple_choice", options: ["front_and_rear", "rear"], prompt: "Tipo de relação")
+  ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "front_derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Número de coroas (dianteiro)") #condicionada ao tipo
+  ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Número de velocidades (traseiro)")  #condicionada ao tipo
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-
 
   # road_front_derailleur_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "other"]
   # mtb_dirt_urban_front_derailleur_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO TOURNEY", "SRAM XT", "SRAM XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "other"]
   front_gears_options= [0, 1, 2, 3 ]
 
-  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas")
-  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação")
+  ProductTypeAttribute.create!(product_type: front_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Número de coroas")
 
 
   # #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR_DERAILLEUR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
   # road_rear_derailleur_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "other"]
   # mtb_dirt_urban_rear_derailleur_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SRAM XT", "SRAM XTR", "SRAM EX1", "SRAM GX", "SRAM NX", "SRAM SX", "SRAM X01", "SRAM XX1", "other"]
   rear_gears_options = [0, 1, 7, 8, 9, 10, 11, 12 ]
 
-  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas Marchas")
-  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_teeth", kind: "multiple_choice", options: (1..12).to_a, prompt: "Relação")
+  ProductTypeAttribute.create!(product_type: rear_derailleur, name: "derailleur_velocities", kind: "multiple_choice", options: (1..12).to_a, prompt: "Número de velocidades")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   seat_post_types = ["retractable", "rigid"]
   seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
+  seat_post_diameter = ["25.4mm", "27.2 mm", "30.9mm", "31.6mm", "34.9mm", "other" ]
+
 
   ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_type", kind: "multiple_choice", options: seat_post_types, prompt: "Tipo do Canote")
   ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_travel", kind: "multiple_choice", options: seat_post_travels, prompt: "Curso do Canote")
-  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_material", kind: "multiple_choice", options: materials, prompt: "Material")
-  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_diameter", kind: "text", options: "", prompt: "Diâmetro")
+  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_material", kind: "multiple_choice", options: materials, prompt: "Material") # só rígido
+  ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_diameter", kind: "multiple_choice", options: seat_post_diameter, prompt: "Diâmetro")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CRANKSET >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  # lengths = ["170mm", "172,5mm", "175mm"]
-  # crowns = ["30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28" ]
-  # ProductTypeAttribute.create!(product_type: crankset, name: "crankset_crowns", kind: "multiple_choice", options: crowns, prompt: "Coroas" )
-  # ProductTypeAttribute.create!(product_type: crankset, name: "crankset_length", kind: "multiple_choice", options: lengths, prompt: "Comprimento" )
+  lengths = ["170mm", "172,5mm", "175mm", "other"]
+  crowns = ["30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28", "other" ]
+  ProductTypeAttribute.create!(product_type: crankset, name: "crankset_crowns", kind: "multiple_choice", options: crowns, prompt: "Tamanho das coroas" )
+  ProductTypeAttribute.create!(product_type: crankset, name: "crankset_length", kind: "multiple_choice", options: lengths, prompt: "Comprimento")
   ProductTypeAttribute.create!(product_type: crankset, name: "crankset_material", kind: "multiple_choice", options: materials, prompt: "Material")
 
+
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CHAINRING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+  crowns = ["30", "32", "34", "36-22", "36-24", "36-26", "38-24", "38-26", "38-28", "39-26", "40-30-22", "42-32-22", "42-34-24", "44-32-22", "46-33", "48-35", "50-34", "50-37", "52-36", "53-39", "34-50", "28-28-48", "48-38-28", "other" ]
+  ProductTypeAttribute.create!(product_type: chainring, name: "chainring_crowns", kind: "multiple_choice", options: crowns, prompt: "Tamanho das coroas" )
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BATTERY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -1140,28 +1143,35 @@
   capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
 
   ProductTypeAttribute.create!(product_type: battery, name: "battery_capacity", kind: "multiple_choice", options: capacities, prompt: "Capacidade")
+  ProductTypeAttribute.create!(product_type: battery, name: "battery_cycles", kind: "text", options: nil, prompt: "Ciclos da bateria")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
   front_gears_options= [0, 1, 2, 3 ]
-  front_shifter_question = ProductTypeAttribute.create!(product_type: front_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Quantas marchas")
+  ProductTypeAttribute.create!(product_type: front_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Número de coroas")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REAR SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-  rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
+  rear_gears_options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
 
-  rear_shifter_question = ProductTypeAttribute.create!(product_type: rear_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas")
+  ProductTypeAttribute.create!(product_type: rear_shifter, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Número de valocidades")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CASSETTE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
-  rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
+  rear_gears_options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
 
-  rear_shifter_question = ProductTypeAttribute.create!(product_type: cassete, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Quantas marchas")
+  ProductTypeAttribute.create!(product_type: cassete, name: "derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Número de velocidades")
 
 
   #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE DISC >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
 
   disc_sizes = ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ]
 
-  brake_disc_question = ProductTypeAttribute.create!(product_type: brake_disc, name: "disc_size", kind: "multiple_choice", options: disc_sizes, prompt: "Tamanho do disco")
+  ProductTypeAttribute.create!(product_type: brake_disc, name: "disc_size", kind: "multiple_choice", options: disc_sizes, prompt: "Tamanho do disco")
+
+
+  #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FORK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
+
+
+  ProductTypeAttribute.create!(product_type: fork, name: "fork_material", kind: "multiple_choice", options: materials, prompt: "Material")

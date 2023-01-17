@@ -30,6 +30,24 @@
     border-color: $color-primary !important;
     border-radius: 4px;
   }
+
+
+  .text-input-description {
+    width: 100% !important;
+    height: 37px !important;
+    border: 1px solid $color-primary !important;
+    border-radius: 4px !important;
+    background-color: transparent !important;
+    color: $color-primary !important;
+    height: 120px !important;
+  }
+
+  .text-input-description:focus {
+    outline:none !important;
+    box-shadow: none !important;
+    border-color: $color-primary !important;
+    border-radius: 4px;
+  }
 }
 
 
@@ -52,7 +70,9 @@
 
   option {
     background-color: #f4f4f9;
-    color: #00c454;
+    // color: #00c454;
+    color: gray;
+
   }
 }
 .select-answer:focus {

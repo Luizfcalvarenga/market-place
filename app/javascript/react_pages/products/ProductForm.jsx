@@ -599,18 +599,33 @@ export function ProductForm(props) {
 
   const handleSecondStep = (e) => {
     const progressTwo = document.getElementById("progress-2")
+    const progressThird = document.getElementById("progress-3")
+
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-    progressTwo.classList.add("section-done")
-    secondSection.classList.add("d-none")
-    thirdSection.classList.remove("d-none")
+    const fourthSection = document.getElementById("fourth-section")
 
+
+    if (productTypeAttributes.length === 0) {
+      progressTwo.classList.add("section-done")
+      progressThird.classList.add("section-done")
+
+      secondSection.classList.add("d-none")
+      fourthSection.classList.remove("d-none")
+    } else {
+
+      progressTwo.classList.add("section-done")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.remove("d-none")
+    }
   }
 
   const handleThirdStep = () => {
     const progressThird = document.getElementById("progress-3")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
+
+
 
     progressThird.classList.add("section-done")
     thirdSection.classList.add("d-none")
@@ -1530,10 +1545,6 @@ export function ProductForm(props) {
               </>
             )}
 
-
-            <label htmlFor="productDescription" className="mt-4">Descrição:</label>
-            <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
-
             <div className="d-flex  justify-content-between gap-3">
               <div className="w-50">
                 <label htmlFor="productPrice" className="mt-4 w-100">Preço:<span className="requested-information ms-1">*</span></label> <br />
@@ -1551,6 +1562,9 @@ export function ProductForm(props) {
                 )}
               </div>
             </div>
+
+            <label htmlFor="productDescription" className="mt-4">Descrição:</label>
+            <textarea className="text-input-description"  id="exampleFormControlTextarea1" rows="3" value={productDescription} onChange={(e) => setProductDescription(e.target.value)}></textarea>
 
             <div className="d-flex justify-content-center">
               <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
@@ -1629,6 +1643,8 @@ export function ProductForm(props) {
               <p><span className="text-success">Marca:</span> {productBrand}</p>
             )}
             <p><span className="text-success">Modelo:</span> {productModel}</p>
+            <p><span className="text-success">Descrição:</span> {productDescription}</p>
+
           </div>
 
 

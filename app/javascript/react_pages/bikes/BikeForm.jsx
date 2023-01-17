@@ -1813,7 +1813,10 @@ export function BikeForm(props) {
         <div id="Suspensões(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {suspensionType}</p>
           <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
+          <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel}</p>
           <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
+          <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel }</p>
+
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas</button>
