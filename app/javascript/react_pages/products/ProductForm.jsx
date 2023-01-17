@@ -408,7 +408,7 @@ export function ProductForm(props) {
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
         setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
       }
@@ -784,7 +784,7 @@ export function ProductForm(props) {
     "Soma",
     "Diamondback",
     "Dahon",
-    "Yeti"
+    "Yeti",
   ].sort()
 
 
@@ -1048,8 +1048,11 @@ export function ProductForm(props) {
             >
               <option value=""></option>
               {frameBrands.map((frameBrand, index) => {
-                return (<option key={index} value={frameBrand}>{frameBrand}</option>)
+                return (
+                  <option key={index} value={frameBrand}>{frameBrand}</option>
+                )
               })}
+              <option value="Outra">Outra</option>
             </select>
             { errors && errors.product && errors.product.brand && (
               <p className="text-danger">{errors.product.brand}</p>
@@ -1165,8 +1168,11 @@ export function ProductForm(props) {
             >
               <option value=""></option>
               {componentBrands.map((componentBrand, index) => {
-                return (<option key={index} value={componentBrand}>{componentBrand}</option>)
+                return (<>
+                  <option key={index} value={componentBrand}>{componentBrand}</option>
+                </>)
               })}
+              <option value="Outra">Outra</option>
             </select>
             { errors && errors.product && errors.product.brand && (
               <p className="text-danger">{errors.product.brand}</p>
