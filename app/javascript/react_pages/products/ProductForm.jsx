@@ -1620,7 +1620,9 @@ export function ProductForm(props) {
             <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
-            <p><span className="text-success">Local:</span> {productLocality}</p>
+            {productCity && productState && (<>
+              <p><span className="text-success">Local</span>{cities.find((element) => element === productCity).name} - {states.find((element) => element === productState).acronym}</p>
+            </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
 
