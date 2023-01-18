@@ -12,7 +12,8 @@ json.quantity @product.quantity
 json.product_attributes @product_attributes
 json.product_type_attributes @product_type_attributes
 json.photos @product.photos
-json.locality @product.locality
+json.state @product.state
+json.city @product.city
 json.year @product.year
 json.documentation_type @product.documentation_type
 json.condition @product.condition

@@ -29,15 +29,19 @@ export function ProductForm(props) {
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
-  const [productLocality, setProductLocality ] = useState(null);
+  const [productCity, setProductCity ] = useState(null);
+  const [productState, setProductState ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
   const [productDocumentationType, setProductDocumentationType] = useState("");
   const [productCondition, setProductCondition] = useState("");
   const [otherProductYear, setOtherProductYear ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
-  const [productOptions, setProductOptions] = useState("");
+  const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
   const [discountCoupon, setDiscountCoupon] = useState("");
+
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -82,7 +86,10 @@ export function ProductForm(props) {
       setAllProducts(data.types_of_product)
       setCategories(data.categories)
       setUser(data.user.id)
-      setServices(data.services)
+      // setServices(data.services)
+      setStates(data.states)
+      setCities(data.cities)
+
      })
     if (props.productId) {
       fetchProduct();
@@ -347,7 +354,8 @@ export function ProductForm(props) {
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
-    dataObject.append( "product[locality]", productLocality );
+    dataObject.append( "product[city_id]", productCity );
+    dataObject.append( "product[state_id]", productState );
     dataObject.append( "product[documentation_type]", productDocumentationType );
     dataObject.append( "product[condition]", productCondition );
 
@@ -430,6 +438,12 @@ export function ProductForm(props) {
     firstSection.classList.add("d-none")
     secondSection.classList.remove("d-none")
     handleFirstStep()
+  }
+
+  const handleLocality = (e) => {
+    console.log(e)
+    setProductState(e.trget.value)
+    setMapedCitiesForState(cities.filter(element => element.state_id === productState))
   }
 
 
@@ -1436,11 +1450,52 @@ export function ProductForm(props) {
           <div id="fourth-section" className="card-questions mb-5 d-none">
             <h4 className="text-center text-success">Informações adicionais</h4>
 
-            <label htmlFor="productLocality" className="mt-3">Local:<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input"  value={productLocality ? productLocality : ""} onChange={(e) => setProductLocality(e.target.value)}/>
-            { errors && errors.product && errors.product.locality && (
-              <p className="text-danger">{errors.product.locality[0]}</p>
-            )}
+            <div className="row">
+              <div className="col-md-3">
+                <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
+                <select
+                  className="select-answer"
+                  value={productState}
+                  onChange={(e) => handleLocality(e)}
+
+                >
+                  {states.map((state, index)=> {
+                    return (<option key={index} value={state.id}>{state.acronym}</option>);
+                  })}
+                </select>
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="productLocality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
+                {productState && (<>
+                  <select
+                    className="select-answer"
+                    value={productState}
+                    onChange={(e) => setProductCity(e.target.value)}
+
+                  >
+                    {mapedCitiesForState.map((city, index)=> {
+                      return (<option key={index} value={city.id}>{city.name}</option>);
+                    })}
+                  </select>
+                </>)}
+                {!productState && (<>
+                  <select
+                    className="select-answer"
+                    value={productState}
+                    onChange={(e) => setProductCity(e.target.value)}
+
+                  >
+                    {mapedCitiesForState.map((city, index)=> {
+                      return (<option key={index} value={city.id}>{city.name}</option>);
+                    })}
+                  </select>
+                </>)}
+              </div>
+            </div>
+
+
+
+
 
 
             <label htmlFor="documentationType" className="mt-4">Documentação:<span className="requested-information ms-1">*</span></label>
