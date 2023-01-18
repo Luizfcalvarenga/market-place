@@ -10,7 +10,9 @@ class Bike < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
-  belongs_to :service, optional: true
+  belongs_to :city, optional: true
+
+  belongs_to :state, optional: true
 
   has_one :advertisement, as: :advertisable
   has_many :likes, as: :likeble
