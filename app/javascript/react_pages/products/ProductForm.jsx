@@ -466,7 +466,7 @@ export function ProductForm(props) {
     if (productState ) {
       setMapedCitiesForState(cities.filter(element => element.state_id === Number(productState)))
     }
-  });
+  }, []);
 
 
   const handleShowSection = (e) => {
