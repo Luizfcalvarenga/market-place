@@ -57,8 +57,8 @@ export function BikeForm(props) {
   const [weight, setWeight] = useState("");
   const [locality, setLocality] = useState("");
   const [bikeCondition, setBikeCondition] = useState("");
-  const [structuralVisualCondition, setStructuralVisualCondition] = useState("");
-  const [operatingCondition, setOperatingCondition] = useState("");
+  const [bikeConditionStatus, setBikeConditionStatus] = useState("");
+  const [bikeConditionDescription, setBikeConditionDescription] = useState("");
   const [documentationType, setDocumentationType] = useState("");
   const [description, setDescription] = useState("");
   const [handlebar, setHandlebar] = useState("");
@@ -226,8 +226,8 @@ export function BikeForm(props) {
       setWeight(response.data.bike.weight);
       setLocality(response.data.bike.locality);
       setBikeCondition(response.data.bike.bike_condition);
-      setStructuralVisualCondition(response.data.bike.structural_visual_condition);
-      setOperatingCondition(response.data.bike.operating_condition);
+      setStructuralVisualCondition(response.data.bike.bike_condition_status);
+      setOperatingCondition(response.data.bike.bike_condition_description);
       setDocumentationType(response.data.bike.documentation_type);
       setDescription(response.data.bike.description);
       setAccessories(response.data.bike.accessories);
@@ -817,25 +817,11 @@ export function BikeForm(props) {
       "no_documentation": "Sem Documento",
       "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
 
-      "perfect_condition": "Condição Perfeita",
-      "minor_surface_scratches": "Pequenos riscos ou arranhões superficiais",
-      "spalls_in_paint": "Lascas na pintura",
-      "painted_frame": "Quadro foi pintado",
-      "frame_welded_repaired": "Quadro foi soldado ou reparado",
-      "frame_cracks_or_fissures_must_be_repaired": "Quadro possui trincas ou fissuras",
-      "components_welded_repaired": "Algum Componento já foi soldado ou reparado",
-      "components_cracks_or_fissures_must_be_repaired": "Algum componente possui fissura ou necessita reparo",
-      "perfect_condition": "Condição Perfeita",
-      "rears_worn_out_higher_75": "Relação desgastada (+75%)",
-      "shifters_not_working_properly": "Troca de marchas não funciona perfeitamente",
-      "front_suspension_not_working_properly": "Suspensão dianteira não funciona perfeitamente",
-      "rear_suspension_not_working_properly": "Suspensão traseira não funciona perfeitamente",
-      "suspensions_lock_not_working_properly": "Travas da suspensão não funcionam perfeitamente",
-      "brake_not_working_properly": "Freio não funciona perfeitamente",
-      "retractable_seat_post_not_working_properly": "Canote retrátil não funciona perfeitamente",
-      "creaking_when_pedaling": "Apresenta rangidos ao pedalar",
-      "wheels_bent": "Rodas empenadas",
-      "tyres_worn_out_minus_50": "Pneus desgatados (+50%)"
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
+
     };
 
     return languageMap[word]
@@ -1686,43 +1672,24 @@ export function BikeForm(props) {
           <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
           {bikeCondition === "used" && (<>
-            <label htmlFor="structuralVisualCondition" className="mt-4">Condição estrutural/visual:</label>
+            <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da sua bike:</label>
             <select
               className="select-answer"
-              value={structuralVisualCondition}
-              onChange={(e) => setStructuralVisualCondition(e.target.value)}
-
+              value={bikeConditionStatus}
+              onChange={(e) => setBikeConditionStatus(e.target.value)}
             >
               <option value=""></option>
-              <option value="perfect_condition">Condição Perfeita</option>
-              <option value="minor_surface_scratches">Pequenos riscos ou arranhões superficiais.</option>
-              <option value="spalls_in_paint">Lascas na pintura</option>
-              <option value="painted_frame">Quadro foi pintado</option>
-              <option value="frame_welded_repaired">Quadro foi soldado ou reparado</option>
-              <option value="frame_cracks_or_fissures_must_be_repaired">Quadro possui trincas ou fissuras</option>
-              <option value="components_welded_repaired">Algum Componento já foi soldado ou reparado</option>
-              <option value="components_cracks_or_fissures_must_be_repaired">Algum componente possui fissura ou necessita reparo</option>
+              <option value="bad">Ruim</option>
+              <option value="reasonable">Razoável</option>
+              <option value="good">Bom</option>
+              <option value="excellent">Ótimo</option>
             </select>
 
-            <label htmlFor="operatingCondition" className="mt-4">Condição operacional:</label>
-            <select
-              className="select-answer"
-              value={operatingCondition}
-              onChange={(e) => setOperatingCondition(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="perfect_condition">Condição Perfeita</option>
-              <option value="rears_worn_out_higher_75">Relação desgastada (+75%)</option>
-              <option value="shifters_not_working_properly">Troca de marchas não funciona perfeitamente</option>
-              <option value="front_suspension_not_working_properly">Suspensão dianteira não funciona perfeitamente</option>
-              <option value="rear_suspension_not_working_properly">Suspensão traseira não funciona perfeitamente</option>
-              <option value="suspensions_lock_not_working_properly">Travas da suspensão não funcionam perfeitamente</option>
-              <option value="brake_not_working_properly">Freio não funciona perfeitamente</option>
-              <option value="retractable_seat_post_not_working_properly">Canote retrátil não funciona perfeitamente</option>
-              <option value="creaking_when_pedaling">Apresenta rangidos ao pedalar</option>
-              <option value="wheels_bent">Rodas empenadas</option>
-              <option value="tyres_worn_out_minus_50">Pneus desgatados (+50%)</option>
-            </select>
+
+            { bikeConditionStatus === "bad" || bikeConditionStatus === "reasonable" && (<>
+              <label htmlFor="description" className="mt-3">Descreva:</label>
+              <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
+            </>)}
           </>)}
         </div>
         <div className="d-flex justify-content-center">
@@ -1785,8 +1752,8 @@ export function BikeForm(props) {
           </div>
           <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
           <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
-          <p><span className="text-success">Condição operacional:</span> {translateWord(operatingCondition)}</p>
-          <p><span className="text-success">Condição estrutural/visual:</span> {translateWord(structuralVisualCondition)}</p>
+          <p><span className="text-success">Estado:</span> {translateWord(bikeConditionStatus)}</p>
+          <p><span className="text-success">Estado da bike:</span> {bikeConditionDescription}</p>
           <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
 

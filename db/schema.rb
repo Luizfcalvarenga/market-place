@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_211540) do
+ActiveRecord::Schema.define(version: 2023_01_18_161750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 2023_01_16_211540) do
     t.string "seat_post_travel"
     t.float "weight"
     t.string "bike_condition"
-    t.string "structural_visual_condition"
-    t.string "operating_condition"
+    t.string "bike_condition_status"
+    t.string "bike_condition_description"
     t.string "documentation_type"
     t.string "accessories", default: [], array: true
     t.string "battery"
