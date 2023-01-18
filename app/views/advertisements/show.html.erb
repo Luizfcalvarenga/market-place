@@ -32,7 +32,7 @@
         <p><span class="text-success me-2">Categoria:</span><%= @item.category.name_display %></p>
         <p><span class="text-success me-2">Modalidade:</span><%= @item.modality %></p>
         <p><span class="text-success me-2">Descrição:</span><%= @item.description %></p>
-        <p><span class="text-success me-2">Local:</span><%= @item.locality %></p>
+        <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
 
       </div>
       <div>

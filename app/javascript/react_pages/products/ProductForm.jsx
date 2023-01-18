@@ -209,7 +209,9 @@ export function ProductForm(props) {
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
-      setProductLocality(response.data.product.locality);
+      setProductCity(response.data.product.city_id);
+      setProductState(response.data.product.state_id);
+
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
@@ -410,8 +412,9 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
+    console.log(e)
     if (e.target.localName === "img") {
-      let filter = e.nativeEvent.path[1].id;
+      let filter = e.target.alt;
       console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
@@ -442,8 +445,19 @@ export function ProductForm(props) {
 
   const handleLocality = (e) => {
     console.log(e)
-    setProductState(e.trget.value)
-    setMapedCitiesForState(cities.filter(element => element.state_id === productState))
+    // fetch(`/cities?&state_id=${productState}`)
+    //  .then((response) => response.json())
+    //  .then((data) => {
+    //   setAllProducts(data.types_of_product)
+    //   setCategories(data.categories)
+    //   setUser(data.user.id)
+    //   // setServices(data.services)
+    //   setStates(data.states)
+    //   setCities(data.cities)
+
+    //  })
+    setProductState(e.target.value)
+    setMapedCitiesForState(cities.filter(element => element.state_id === Number(productState)))
   }
 
 
@@ -944,9 +958,9 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
-          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
-          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
+          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
+          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
+          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
         </div>
 
       </div>
@@ -1459,33 +1473,37 @@ export function ProductForm(props) {
                   onChange={(e) => handleLocality(e)}
 
                 >
+                  <option value=""></option>
                   {states.map((state, index)=> {
                     return (<option key={index} value={state.id}>{state.acronym}</option>);
                   })}
                 </select>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-9">
                 <label htmlFor="productLocality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
                 {productState && (<>
                   <select
                     className="select-answer"
-                    value={productState}
+                    value={productCity}
                     onChange={(e) => setProductCity(e.target.value)}
 
                   >
+                    <option value=""></option>
                     {mapedCitiesForState.map((city, index)=> {
                       return (<option key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
                 </>)}
+
                 {!productState && (<>
                   <select
                     className="select-answer"
-                    value={productState}
+                    value={productCity}
                     onChange={(e) => setProductCity(e.target.value)}
 
                   >
-                    {mapedCitiesForState.map((city, index)=> {
+                    <option value=""></option>
+                    {cities.map((city, index)=> {
                       return (<option key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
@@ -1621,7 +1639,7 @@ export function ProductForm(props) {
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             {productCity && productState && (<>
-              <p><span className="text-success">Local</span>{cities.find((element) => element === productCity).name} - {states.find((element) => element === productState).acronym}</p>
+              <p><span className="text-success">Local</span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
