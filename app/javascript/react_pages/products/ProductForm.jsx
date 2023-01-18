@@ -445,6 +445,8 @@ export function ProductForm(props) {
 
   const handleLocality = (e) => {
     console.log(e)
+    console.log(e.target.value)
+
     // fetch(`/cities?&state_id=${productState}`)
     //  .then((response) => response.json())
     //  .then((data) => {
@@ -459,6 +461,12 @@ export function ProductForm(props) {
     setProductState(e.target.value)
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(productState)))
   }
+
+  useEffect(() => {
+    if (productState ) {
+      setMapedCitiesForState(cities.filter(element => element.state_id === Number(productState)))
+    }
+  });
 
 
   const handleShowSection = (e) => {
@@ -1470,7 +1478,7 @@ export function ProductForm(props) {
                 <select
                   className="select-answer"
                   value={productState}
-                  onChange={(e) => handleLocality(e)}
+                  onChange={(e) => setProductState(e.target.value)}
 
                 >
                   <option value=""></option>
