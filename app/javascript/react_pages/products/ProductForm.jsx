@@ -204,14 +204,12 @@ export function ProductForm(props) {
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
       setProductName(response.data.product.name);
-
       setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
       setProductCity(response.data.product.city_id);
       setProductState(response.data.product.state_id);
-
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
@@ -446,27 +444,15 @@ export function ProductForm(props) {
   const handleLocality = (e) => {
     console.log(e)
     console.log(e.target.value)
-
-    // fetch(`/cities?&state_id=${productState}`)
-    //  .then((response) => response.json())
-    //  .then((data) => {
-    //   setAllProducts(data.types_of_product)
-    //   setCategories(data.categories)
-    //   setUser(data.user.id)
-    //   // setServices(data.services)
-    //   setStates(data.states)
-    //   setCities(data.cities)
-
-    //  })
     setProductState(e.target.value)
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
-  useEffect(() => {
-    if (productState ) {
-      setMapedCitiesForState(cities.filter(element => element.state_id === productState))
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (productState ) {
+  //     setMapedCitiesForState(cities.filter(element => element.state_id === productState))
+  //   }
+  // }, []);
 
 
   const handleShowSection = (e) => {
@@ -1627,16 +1613,11 @@ export function ProductForm(props) {
 
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
-
-            {/* <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p> */}
-            {/* {productId && (<>
-              <p><span className="text-success">Produto:</span> { allProducts.find(element => element.id === productId).name }</p>
-            </>)} */}
             <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             {productCity && productState && (<>
-              <p><span className="text-success">Local</span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
+              <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
