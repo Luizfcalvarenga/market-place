@@ -490,7 +490,7 @@ export function Bikes(props) {
             </div>
 
             <div className="locality-filter">
-              <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
+              <h5 className=" mt-3">Estado</h5>
               <select
                 className="select-answer"
                 value={stateFilter}
@@ -501,7 +501,7 @@ export function Bikes(props) {
                   return (<option key={index} value={state.name}>{state.acronym}</option>);
                 })}
               </select>
-              <label htmlFor="Locality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
+              <h5 className=" mt-3">Cidade</h5>
               {stateFilter && (<>
                 <select
                   className="select-answer"

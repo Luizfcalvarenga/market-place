@@ -13,6 +13,8 @@ module Api
         @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
         @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
+        @products = @products.where(state:  State.where(name: params[:state])) if params[:state].present?
+        @products = @products.where(city:  City.where(name: params[:city])) if params[:city].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
         @products = @products.where(product_type_: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
@@ -30,7 +32,6 @@ module Api
         @products = ProductAttribute.where(value: params[:condition]).map { |value| value.product } if params[:condition].present?
         @products = @products.where(brand: params[:brand]) if params[:brand].present?
         @products = @products.where(model: params[:model]) if params[:model].present?
-        @products = @products.where('locality @@ ?', params[:locality]) if params[:locality].present?
         @products = @products.where('products.name @@ ?', params[:name]) if params[:name].present?
 
       end

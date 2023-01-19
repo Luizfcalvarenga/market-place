@@ -34,9 +34,24 @@ export function Products(props) {
   const [modelFilter, setModelFilter] = useState("");
   const [minYearFilter, setMinYearFilter] = useState("");
   const [maxYearFilter, setMaxYearFilter] = useState("");
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
 
-  const [localityFilter, setLocalityFilter] = useState("");
+  const [stateFilter, setStateFilter] = useState("");
+  const [cityFilter, setCityFilter] = useState("");
   const [filteredLink, setFilteredLink] = useState("");
+
+  useEffect(() => {
+    fetch(`/get_information_for_new_product`)
+     .then((response) => response.json())
+     .then((data) => {
+      setStates(data.states)
+      setCities(data.cities)
+
+     })
+
+  }, []);
 
   useEffect(async () => {
     let url = "/api/v1/products?";
@@ -52,7 +67,8 @@ export function Products(props) {
     if (productAttributesFilter) url = url + `&product_attribute_value=${productAttributesFilter}`
     if (brandFilter) url = url + `&brand=${brandFilter}`
     if (modelFilter) url = url + `&model=${modelFilter}`
-    if (localityFilter) url = url + `&locality=${localityFilter}`
+    if (stateFilter) url = url + `&state=${stateFilter}`
+    if (cityFilter) url = url + `&city=${cityFilter}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (filteredLink) url = url + `&product_type_id=${filteredLink}`
@@ -71,7 +87,7 @@ export function Products(props) {
     setProductTypeAttributes(response.data.product_type_attributes)
     setProducts(response.data.products);
 
-  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, localityFilter,
+  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
     minYearFilter, maxYearFilter, filteredLink, nameFilter])
 
   const handleProductAtributes = (e) => {
@@ -177,6 +193,14 @@ export function Products(props) {
 
   }
 
+  const handleLocality = (e) => {
+    console.log(e)
+    console.log(e.target.value)
+    setStateFilter(e.target.value)
+    let stateId = states.find(state => state.name === e.target.value).id
+    console.log(stateId)
+    setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+  }
 
   const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Alfameq",
   "Astro",
@@ -440,8 +464,43 @@ export function Products(props) {
             </div>
 
             <div className="locality-filter">
-              <h5 className="mt-3">Local</h5>
-              <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
+              <h5 className=" mt-3">Estado</h5>
+              <select
+                className="select-answer"
+                value={stateFilter}
+                onChange={(e) => handleLocality(e)}
+              >
+                <option value=""></option>
+                {states.map((state, index)=> {
+                  return (<option key={index} value={state.name}>{state.acronym}</option>);
+                })}
+              </select>
+              <h5 className=" mt-3">Cidade</h5>
+              {stateFilter && (<>
+                <select
+                  className="select-answer"
+                  value={cityFilter}
+                  onChange={(e) => setCityFilter(e.target.value)}
+                >
+                  <option value=""></option>
+                  {mapedCitiesForState.map((city, index)=> {
+                    return (<option key={index} value={city.name}>{city.name}</option>);
+                  })}
+                </select>
+              </>)}
+
+              {!stateFilter && (<>
+                <select
+                  className="select-answer"
+                  value={cityFilter}
+                  onChange={(e) => setCityFilter(e.target.value)}
+                >
+                  <option value=""></option>
+                  {cities.map((city, index)=> {
+                    return (<option key={index} value={city.name}>{city.name}</option>);
+                  })}
+                </select>
+              </>)}
             </div>
 
             <div className="price-filter">

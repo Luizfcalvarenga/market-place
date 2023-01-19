@@ -234,8 +234,8 @@ export function BikeForm(props) {
       setStateId(response.data.bike.state_id);
       setCityId(response.data.bike.city_id);
       setBikeCondition(response.data.bike.bike_condition);
-      setStructuralVisualCondition(response.data.bike.bike_condition_status);
-      setOperatingCondition(response.data.bike.bike_condition_description);
+      setBikeConditionStatus(response.data.bike.bike_condition_status);
+      setBikeConditionDescription(response.data.bike.bike_condition_description);
       setDocumentationType(response.data.bike.documentation_type);
       setDescription(response.data.bike.description);
       setAccessories(response.data.bike.accessories);
@@ -293,8 +293,8 @@ export function BikeForm(props) {
     dataObject.append( "bike[state_id]", stateId );
     dataObject.append( "bike[city_id]", cityId );
     dataObject.append( "bike[bike_condition]", bikeCondition );
-    dataObject.append( "bike[bike_condition_status]", structuralVisualCondition );
-    dataObject.append( "bike[bike_condition_description]", operatingCondition );
+    dataObject.append( "bike[bike_condition_status]", bikeConditionStatus );
+    dataObject.append( "bike[bike_condition_description]", bikeConditionDescription );
     dataObject.append( "bike[documentation_type]", documentationType );
     dataObject.append( "bike[description]", description );
     dataObject.append( "bike[accessories]", accessories );
@@ -637,7 +637,7 @@ export function BikeForm(props) {
     setAccessories(accessories)
 
   }
-  
+
   const handleLocality = (e) => {
     console.log(e)
     console.log(e.target.value)
