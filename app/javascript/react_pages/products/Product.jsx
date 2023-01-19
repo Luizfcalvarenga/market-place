@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import EquipamentImage from "../../../assets/images/helmet.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
-import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import MaintenanceImage from "../../../assets/images/tools.png";
 
 export function Product(props) {
   const [product, setProduct] = useState()

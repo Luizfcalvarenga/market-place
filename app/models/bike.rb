@@ -10,7 +10,9 @@ class Bike < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
-  belongs_to :service, optional: true
+  belongs_to :city, optional: true
+
+  belongs_to :state, optional: true
 
   has_one :advertisement, as: :advertisable
   has_many :likes, as: :likeble
@@ -21,7 +23,7 @@ class Bike < ApplicationRecord
 
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
-  validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type, :locality,  presence: true
+  validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type,  presence: true
 
   default_scope { where(removed_at: nil) }
 

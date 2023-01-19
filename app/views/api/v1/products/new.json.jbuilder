@@ -10,7 +10,9 @@ json.description @product.description
 json.price_in_cents @product.price_in_cents
 json.quantity @product.quantity
 json.photos @product.photos
-json.locality @product.locality
+json.state_id @product.state_id
+json.city_id @product.city_id
+
 json.year @product.year
 json.documentation_type @product.documentation_type
 json.condition @product.condition

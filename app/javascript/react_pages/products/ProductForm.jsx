@@ -29,15 +29,19 @@ export function ProductForm(props) {
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
-  const [productLocality, setProductLocality ] = useState(null);
+  const [productCity, setProductCity ] = useState(null);
+  const [productState, setProductState ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
   const [productDocumentationType, setProductDocumentationType] = useState("");
   const [productCondition, setProductCondition] = useState("");
   const [otherProductYear, setOtherProductYear ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
-  const [productOptions, setProductOptions] = useState("");
+  const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
   const [discountCoupon, setDiscountCoupon] = useState("");
+
 
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -82,7 +86,10 @@ export function ProductForm(props) {
       setAllProducts(data.types_of_product)
       setCategories(data.categories)
       setUser(data.user.id)
-      setServices(data.services)
+      // setServices(data.services)
+      setStates(data.states)
+      setCities(data.cities)
+
      })
     if (props.productId) {
       fetchProduct();
@@ -197,12 +204,12 @@ export function ProductForm(props) {
       setProductModality(response.data.product.modality);
       setProductBrand(response.data.product.brand);
       setProductName(response.data.product.name);
-
       setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
-      setProductLocality(response.data.product.locality);
+      setProductCity(response.data.product.city_id);
+      setProductState(response.data.product.state_id);
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
@@ -347,7 +354,8 @@ export function ProductForm(props) {
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
-    dataObject.append( "product[locality]", productLocality );
+    dataObject.append( "product[city_id]", productCity );
+    dataObject.append( "product[state_id]", productState );
     dataObject.append( "product[documentation_type]", productDocumentationType );
     dataObject.append( "product[condition]", productCondition );
 
@@ -402,8 +410,9 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
+    console.log(e)
     if (e.target.localName === "img") {
-      let filter = e.nativeEvent.path[1].id;
+      let filter = e.target.alt;
       console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
@@ -431,6 +440,19 @@ export function ProductForm(props) {
     secondSection.classList.remove("d-none")
     handleFirstStep()
   }
+
+  const handleLocality = (e) => {
+    console.log(e)
+    console.log(e.target.value)
+    setProductState(e.target.value)
+    setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+  }
+
+  // useEffect(() => {
+  //   if (productState ) {
+  //     setMapedCitiesForState(cities.filter(element => element.state_id === productState))
+  //   }
+  // }, []);
 
 
   const handleShowSection = (e) => {
@@ -930,9 +952,9 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="" className="icon-card-form mt-1"/></button>
-          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="" className="icon-card-form"/></button>
-          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="" className="icon-card-form"/></button>
+          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
+          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
+          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
         </div>
 
       </div>
@@ -1436,12 +1458,50 @@ export function ProductForm(props) {
           <div id="fourth-section" className="card-questions mb-5 d-none">
             <h4 className="text-center text-success">Informações adicionais</h4>
 
-            <label htmlFor="productLocality" className="mt-3">Local:<span className="requested-information ms-1">*</span></label>
-            <input type="text" className="text-input"  value={productLocality ? productLocality : ""} onChange={(e) => setProductLocality(e.target.value)}/>
-            { errors && errors.product && errors.product.locality && (
-              <p className="text-danger">{errors.product.locality[0]}</p>
-            )}
+            <div className="row">
+              <div className="col-md-3">
+                <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
+                <select
+                  className="select-answer"
+                  value={productState}
+                  onChange={(e) => handleLocality(e)}
+                >
+                  <option value=""></option>
+                  {states.map((state, index)=> {
+                    return (<option key={index} value={state.id}>{state.acronym}</option>);
+                  })}
+                </select>
+              </div>
 
+              <div className="col-md-9">
+                <label htmlFor="productLocality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
+                {productState && (<>
+                  <select
+                    className="select-answer"
+                    value={productCity}
+                    onChange={(e) => setProductCity(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {mapedCitiesForState.map((city, index)=> {
+                      return (<option key={index} value={city.id}>{city.name}</option>);
+                    })}
+                  </select>
+                </>)}
+
+                {!productState && (<>
+                  <select
+                    className="select-answer"
+                    value={productCity}
+                    onChange={(e) => setProductCity(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {cities.map((city, index)=> {
+                      return (<option key={index} value={city.id}>{city.name}</option>);
+                    })}
+                  </select>
+                </>)}
+              </div>
+            </div>
 
             <label htmlFor="documentationType" className="mt-4">Documentação:<span className="requested-information ms-1">*</span></label>
             <select
@@ -1454,7 +1514,6 @@ export function ProductForm(props) {
               <option value="import_document">Documento de Importação</option>
               <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
               <option value="no_documentation">Sem Documento</option>
-
             </select>
 
             <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
@@ -1472,7 +1531,6 @@ export function ProductForm(props) {
               className="select-answer"
               value={productYear}
               onChange={(e) => setProductYear(e.target.value)}
-
             >
               {years.map((year, index)=> {
                 return (<option key={index}>{year}</option>);
@@ -1481,7 +1539,6 @@ export function ProductForm(props) {
             { errors && errors.product && errors.product.year && (
               <p className="text-danger">{errors.product.year[0]}</p>
             )}
-
             { productYear === "other"  && (
               <>
                 <label htmlFor="otherProductYear" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
@@ -1491,7 +1548,6 @@ export function ProductForm(props) {
                 )}
               </>
             )}
-
 
             <label htmlFor="productDescription" className="mt-4">Descrição:</label>
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
@@ -1557,15 +1613,12 @@ export function ProductForm(props) {
 
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
-
-            {/* <p><span className="text-success">Produto:</span> {productTypeId ? productTypes.find((e) => e.id === Number(productTypeId)).name : ""}</p> */}
-            {/* {productId && (<>
-              <p><span className="text-success">Produto:</span> { allProducts.find(element => element.id === productId).name }</p>
-            </>)} */}
             <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
-            <p><span className="text-success">Local:</span> {productLocality}</p>
+            {productCity && productState && (<>
+              <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
+            </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
 

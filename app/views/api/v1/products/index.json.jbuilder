@@ -10,7 +10,8 @@ json.products @products do |product|
   json.description product.description
   json.price_in_cents product.price_in_cents
   json.quantity product.quantity
-  json.locality product.locality
+  json.state @product.state
+  json.city @product.city
   json.year product.year
   json.photos product.photos.first(2).map(&:url)
 end

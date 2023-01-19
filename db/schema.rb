@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_09_204828) do
+ActiveRecord::Schema.define(version: 2023_01_18_171952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
     t.string "bike_type"
     t.integer "price_in_cents"
     t.integer "quantity"
-    t.string "locality"
     t.string "frame_brand"
     t.string "model"
     t.string "year"
@@ -101,10 +100,10 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
     t.string "seat_post_travel"
     t.float "weight"
     t.string "bike_condition"
-    t.string "structural_visual_condition"
-    t.string "operating_condition"
+    t.string "bike_condition_status"
+    t.string "bike_condition_description"
     t.string "documentation_type"
-    t.string "accessories"
+    t.string "accessories", default: [], array: true
     t.string "battery"
     t.text "description"
     t.datetime "removed_at"
@@ -130,8 +129,12 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
     t.text "accessories_description"
     t.string "pedals"
     t.string "seat_post_model"
+    t.bigint "city_id"
+    t.bigint "state_id"
     t.index ["category_id"], name: "index_bikes_on_category_id"
+    t.index ["city_id"], name: "index_bikes_on_city_id"
     t.index ["service_id"], name: "index_bikes_on_service_id"
+    t.index ["state_id"], name: "index_bikes_on_state_id"
     t.index ["user_id"], name: "index_bikes_on_user_id"
   end
 
@@ -152,6 +155,14 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
     t.datetime "last_message_at"
     t.index ["bike_id"], name: "index_chats_on_bike_id"
     t.index ["product_id"], name: "index_chats_on_product_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "state_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
   create_table "coupons", force: :cascade do |t|
@@ -288,13 +299,16 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "brand"
     t.datetime "removed_at"
-    t.string "locality"
     t.string "year"
     t.string "name"
     t.string "documentation_type"
     t.string "condition"
+    t.bigint "city_id"
+    t.bigint "state_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["city_id"], name: "index_products_on_city_id"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
+    t.index ["state_id"], name: "index_products_on_state_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -302,6 +316,13 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
     t.string "name"
     t.text "description"
     t.integer "price_in_cents"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "acronym"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -336,10 +357,13 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
   add_foreign_key "advertisements", "coupons"
   add_foreign_key "advertisements", "users"
   add_foreign_key "bikes", "categories"
+  add_foreign_key "bikes", "cities"
   add_foreign_key "bikes", "services"
+  add_foreign_key "bikes", "states"
   add_foreign_key "bikes", "users"
   add_foreign_key "chats", "bikes"
   add_foreign_key "chats", "products"
+  add_foreign_key "cities", "states"
   add_foreign_key "likes", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
@@ -354,6 +378,8 @@ ActiveRecord::Schema.define(version: 2023_01_09_204828) do
   add_foreign_key "product_attributes", "products"
   add_foreign_key "product_type_attributes", "product_types"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "cities"
   add_foreign_key "products", "product_types"
+  add_foreign_key "products", "states"
   add_foreign_key "products", "users"
 end
