@@ -459,12 +459,12 @@ export function ProductForm(props) {
 
     //  })
     setProductState(e.target.value)
-    setMapedCitiesForState(cities.filter(element => element.state_id === Number(productState)))
+    setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
   useEffect(() => {
     if (productState ) {
-      setMapedCitiesForState(cities.filter(element => element.state_id === Number(productState)))
+      setMapedCitiesForState(cities.filter(element => element.state_id === productState))
     }
   }, []);
 
@@ -1478,8 +1478,7 @@ export function ProductForm(props) {
                 <select
                   className="select-answer"
                   value={productState}
-                  onChange={(e) => setProductState(e.target.value)}
-
+                  onChange={(e) => handleLocality(e)}
                 >
                   <option value=""></option>
                   {states.map((state, index)=> {
@@ -1487,6 +1486,7 @@ export function ProductForm(props) {
                   })}
                 </select>
               </div>
+
               <div className="col-md-9">
                 <label htmlFor="productLocality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
                 {productState && (<>
@@ -1494,7 +1494,6 @@ export function ProductForm(props) {
                     className="select-answer"
                     value={productCity}
                     onChange={(e) => setProductCity(e.target.value)}
-
                   >
                     <option value=""></option>
                     {mapedCitiesForState.map((city, index)=> {
@@ -1508,7 +1507,6 @@ export function ProductForm(props) {
                     className="select-answer"
                     value={productCity}
                     onChange={(e) => setProductCity(e.target.value)}
-
                   >
                     <option value=""></option>
                     {cities.map((city, index)=> {
@@ -1518,11 +1516,6 @@ export function ProductForm(props) {
                 </>)}
               </div>
             </div>
-
-
-
-
-
 
             <label htmlFor="documentationType" className="mt-4">Documentação:<span className="requested-information ms-1">*</span></label>
             <select
@@ -1535,7 +1528,6 @@ export function ProductForm(props) {
               <option value="import_document">Documento de Importação</option>
               <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
               <option value="no_documentation">Sem Documento</option>
-
             </select>
 
             <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
@@ -1553,7 +1545,6 @@ export function ProductForm(props) {
               className="select-answer"
               value={productYear}
               onChange={(e) => setProductYear(e.target.value)}
-
             >
               {years.map((year, index)=> {
                 return (<option key={index}>{year}</option>);
@@ -1562,7 +1553,6 @@ export function ProductForm(props) {
             { errors && errors.product && errors.product.year && (
               <p className="text-danger">{errors.product.year[0]}</p>
             )}
-
             { productYear === "other"  && (
               <>
                 <label htmlFor="otherProductYear" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
@@ -1572,7 +1562,6 @@ export function ProductForm(props) {
                 )}
               </>
             )}
-
 
             <label htmlFor="productDescription" className="mt-4">Descrição:</label>
             <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
