@@ -65,7 +65,7 @@
                   <p><span class="text-success">Produto </span> #<%= advertisement.advertisable.id %> </p>
                   <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
                   <p><span class="text-success">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
-                  <p><span class="text-success">Local:</span> <%= advertisement.advertisable.locality %></p>
+                  <p><span class="text-success">Local:</span><%= advertisement.advertisable.city.name %> - <%= advertisement.advertisable.state.acronym %></p>
                   <p><span class="text-success">Ano:</span>  <%= advertisement.advertisable.year %></p>
                   <p><span class="text-success">Produto:</span> <%= advertisement.advertisable.product_type.prompt %></p>
                   <%= link_to edit_product_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
@@ -109,7 +109,7 @@
                   <p><span class="text-success">Bike </span>#<%= advertisement.advertisable.id %> </p>
                   <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
                   <p><span class="text-success">Quantidade:</span> <%= advertisement.advertisable.quantity  %></p>
-                  <p><span class="text-success">Local:</span><%= advertisement.advertisable.locality %></p>
+                  <p><span class="text-success">Local:</span><%= advertisement.advertisable.city.name %> - <%= advertisement.advertisable.state.acronym %></p>
                   <p><span class="text-success">Ano:</span> <%= advertisement.advertisable.year %></p>
                   <p><span class="text-success">Tipo:</span> <%= advertisement.advertisable.type_display %></p>
                   <%= link_to edit_bike_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>

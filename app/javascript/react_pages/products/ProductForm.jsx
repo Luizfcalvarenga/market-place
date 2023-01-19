@@ -981,7 +981,7 @@ export function ProductForm(props) {
           <h4 className="text-center text-success">Informações gerais</h4>
 
 
-          <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
+          <label htmlFor="category" className="mt-3 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
           onChange={(e) =>  setProductCategory(e.target.value) }

@@ -39,7 +39,8 @@ export function Bikes(props) {
   const [batteryFilter, setBatteryFilter] = useState("");
   const [batteryCyclesFilter, setBatteryCyclesFilter] = useState("");
   const [mileageFilter, setMileageFilter] = useState("");
-  const [localityFilter, setLocalityFilter] = useState("");
+  const [stateFilter, setStateFilter] = useState("");
+  const [cityFilter, setCityFilter] = useState("");
   const [modelFilter, setModelFilter] = useState("");
   const [cranksetFilter, setCranksetFilter] = useState("");
   const [chainFilter, setChainFilter] = useState("");
@@ -48,6 +49,11 @@ export function Bikes(props) {
   const [tyreFilter, setTyreFilter] = useState("");
   const [stemFilter, setStemFilter] = useState("");
   const [handlebarFilter, setHandlebarFilter] = useState("");
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
+
+
   const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
 
@@ -86,7 +92,8 @@ export function Bikes(props) {
     if (batteryFilter) url = url + `&battery=${batteryFilter}`
     if (batteryCyclesFilter) url = url + `&battery_cycles=${batteryCyclesFilter}`
     if (mileageFilter) url = url + `&mileage=${mileageFilter}`
-    if (localityFilter) url = url + `&locality=${localityFilter}`
+    if (stateFilter) url = url + `&state=${stateFilter}`
+    if (cityFilter) url = url + `&city=${cityFilter}`
     if (modelFilter) url = url + `&model=${modelFilter}`
     if (cranksetFilter) url = url + `&crankset=${cranksetFilter}`
     if (chainFilter) url = url + `&chain=${chainFilter}`
@@ -105,10 +112,19 @@ export function Bikes(props) {
   }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
-  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
+  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
   handlebarFilter, filteredLinkCategory, filteredLinkBikeType])
 
+  useEffect(() => {
+    fetch(`/get_information_for_new_bike`)
+     .then((response) => response.json())
+     .then((data) => {
+      setStates(data.states)
+      setCities(data.cities)
 
+     })
+
+  }, []);
 
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
@@ -168,6 +184,15 @@ export function Bikes(props) {
       "bike" : "Bike",
     };
     return languageMap[word]
+  }
+
+  const handleLocality = (e) => {
+    console.log(e)
+    console.log(e.target.value)
+    setStateFilter(e.target.value)
+    let stateId = states.find(state => state.name === e.target.value).id
+    console.log(stateId)
+    setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
   }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
@@ -465,8 +490,43 @@ export function Bikes(props) {
             </div>
 
             <div className="locality-filter">
-              <h5 className=" mt-3">Local</h5>
-              <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
+              <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
+              <select
+                className="select-answer"
+                value={stateFilter}
+                onChange={(e) => handleLocality(e)}
+              >
+                <option value=""></option>
+                {states.map((state, index)=> {
+                  return (<option key={index} value={state.name}>{state.acronym}</option>);
+                })}
+              </select>
+              <label htmlFor="Locality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
+              {stateFilter && (<>
+                <select
+                  className="select-answer"
+                  value={cityFilter}
+                  onChange={(e) => setCityFilter(e.target.value)}
+                >
+                  <option value=""></option>
+                  {mapedCitiesForState.map((city, index)=> {
+                    return (<option key={index} value={city.name}>{city.name}</option>);
+                  })}
+                </select>
+              </>)}
+
+              {!stateFilter && (<>
+                <select
+                  className="select-answer"
+                  value={cityFilter}
+                  onChange={(e) => setCityFilter(e.target.value)}
+                >
+                  <option value=""></option>
+                  {cities.map((city, index)=> {
+                    return (<option key={index} value={city.name}>{city.name}</option>);
+                  })}
+                </select>
+              </>)}
             </div>
 
             <div className="price-filter">
