@@ -76,7 +76,8 @@ class BikesController < ApplicationController
 
   def get_information_for_new_bike
     @categories = Category.all
-    @services = Service.all
+    @states = State.all
+    @cities = City.all
     if current_user.present?
       @user = current_user
     end
@@ -87,7 +88,8 @@ class BikesController < ApplicationController
       format.json { render json: {
         categories: @categories,
         user: @user,
-        services: @services
+        states: @states,
+        cities: @cities
       } }
     end
   end
@@ -98,8 +100,9 @@ class BikesController < ApplicationController
     params.require(:bike).permit(
       :user_id,
       :category_id,
+      :state_id,
+      :city_id,
       :modality,
-      :locality,
       :bike_type,
       :model,
       :description,

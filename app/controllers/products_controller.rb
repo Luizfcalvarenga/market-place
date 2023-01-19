@@ -84,6 +84,8 @@ class ProductsController < ApplicationController
   def get_information_for_new_product
     @product_types = ProductType.all
     @categories = Category.all
+    @states = State.all
+    @cities = City.all
     if current_user.present?
       @user = current_user
     end
@@ -94,7 +96,10 @@ class ProductsController < ApplicationController
       format.json { render json: {
         types_of_product: @product_types,
         categories: @categories,
-        user: @user
+        user: @user,
+        states: @states,
+        cities: @cities
+
       } }
     end
   end
@@ -121,6 +126,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :locality, :year, :documentation_type, :condition, photos: [])
+    params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :city_id, :state_id, :year, :documentation_type, :condition, photos: [])
   end
 end

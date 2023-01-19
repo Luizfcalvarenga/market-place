@@ -14,6 +14,8 @@ export function BikeForm(props) {
   const [bikeType, setBikeType] = useState("");
   const [priceInCents, setPriceInCents] = useState(null);
   const [quantity, setQuantity ] = useState(null);
+  const [cityId, setCityId ] = useState(null);
+  const [stateId, setStateId ] = useState(null);
   const [frameBrand, setFrameBrand] = useState("");
   const [otherFrameBrand, setOtherFrameBrand] = useState("");
   const [frameSize, setFrameSize] = useState("");
@@ -76,6 +78,9 @@ export function BikeForm(props) {
   const [battery, setBattery] = useState("");
   const [otherBattery, setOtherBattery] = useState("");
   const [discountCoupon, setDiscountCoupon] = useState("");
+  const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
 
   const [photos, setPhotos ] = useState(null);
   const [photoFile, setPhotoFile] = useState({
@@ -119,6 +124,8 @@ export function BikeForm(props) {
       setCategories(data.categories)
       if (data.user) {
         setUser(data.user.id)
+        setStates(data.states)
+        setCities(data.cities)
       }
      })
     if (props.bikeId) {
@@ -224,7 +231,8 @@ export function BikeForm(props) {
       setSeatPostType(response.data.bike.seat_post_type);
       setSeatPostTravel(response.data.bike.seat_post_travel);
       setWeight(response.data.bike.weight);
-      setLocality(response.data.bike.locality);
+      setStateId(response.data.bike.state_id);
+      setCityId(response.data.bike.city_id);
       setBikeCondition(response.data.bike.bike_condition);
       setStructuralVisualCondition(response.data.bike.bike_condition_status);
       setOperatingCondition(response.data.bike.bike_condition_description);
@@ -282,10 +290,11 @@ export function BikeForm(props) {
     dataObject.append( "bike[seat_post_travel]", seatPostTravel );
     dataObject.append( "bike[seat_post_model]", seatPostModel );
     dataObject.append( "bike[weight]", weight );
-    dataObject.append( "bike[locality]", locality );
+    dataObject.append( "bike[state_id]", stateId );
+    dataObject.append( "bike[city_id]", cityId );
     dataObject.append( "bike[bike_condition]", bikeCondition );
-    dataObject.append( "bike[structural_visual_condition]", structuralVisualCondition );
-    dataObject.append( "bike[operating_condition]", operatingCondition );
+    dataObject.append( "bike[bike_condition_status]", structuralVisualCondition );
+    dataObject.append( "bike[bike_condition_description]", operatingCondition );
     dataObject.append( "bike[documentation_type]", documentationType );
     dataObject.append( "bike[description]", description );
     dataObject.append( "bike[accessories]", accessories );
@@ -628,6 +637,14 @@ export function BikeForm(props) {
     setAccessories(accessories)
 
   }
+  
+  const handleLocality = (e) => {
+    console.log(e)
+    console.log(e.target.value)
+    setStateId(e.target.value)
+    setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+  }
+
   //////////////////////////////////////////////// frames
 
   const frameBrands = [
@@ -1110,11 +1127,55 @@ export function BikeForm(props) {
           </div>
         </div>
 
-        <label htmlFor="locality" className="mt-4">cidade:<span className="requested-information ms-1">*</span></label>
+        <div className="row">
+          <div className="col-md-3">
+            <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
+            <select
+              className="select-answer"
+              value={stateId}
+              onChange={(e) => handleLocality(e)}
+            >
+              <option value=""></option>
+              {states.map((state, index)=> {
+                return (<option key={index} value={state.id}>{state.acronym}</option>);
+              })}
+            </select>
+          </div>
+
+          <div className="col-md-9">
+            <label htmlFor="Locality" className="mt-3">cidade:<span className="requested-information ms-1">*</span></label>
+            {stateId && (<>
+              <select
+                className="select-answer"
+                value={cityId}
+                onChange={(e) => setCityId(e.target.value)}
+              >
+                <option value=""></option>
+                {mapedCitiesForState.map((city, index)=> {
+                  return (<option key={index} value={city.id}>{city.name}</option>);
+                })}
+              </select>
+            </>)}
+
+            {!stateId && (<>
+              <select
+                className="select-answer"
+                value={cityId}
+                onChange={(e) => setCityId(e.target.value)}
+              >
+                <option value=""></option>
+                {cities.map((city, index)=> {
+                  return (<option key={index} value={city.id}>{city.name}</option>);
+                })}
+              </select>
+            </>)}
+          </div>
+        </div>
+        {/* <label htmlFor="locality" className="mt-4">cidade:<span className="requested-information ms-1">*</span></label>
         <input type="text" className="text-input"  value={locality} onChange={(e) => setLocality(e.target.value)}/>
         { errors && errors.bike && errors.bike.locality && (
           <p className="text-danger">{errors.bike.locality[0]}</p>
-        )}
+        )} */}
 
         <label htmlFor="weight" className="mt-4">peso:(opicional)</label>
         <input type="number" className="text-input" placeholder="Em Kg" value={weight} onChange={(e) => setWeight(e.target.value)}/>
@@ -1748,7 +1809,9 @@ export function BikeForm(props) {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
-            <p><span className="text-success">Cidade:</span> {locality}</p>
+            {cityId && stateId && (<>
+              <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(cityId)).name} - {states.find((element) => element.id === Number(stateId)).acronym}</p>
+            </>)}
           </div>
           <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
           <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>

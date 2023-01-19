@@ -32,7 +32,7 @@
         <p><span class="text-success me-2">Categoria:</span><%= @item.category.name_display %></p>
         <p><span class="text-success me-2">Modalidade:</span><%= @item.modality %></p>
         <p><span class="text-success me-2">Descrição:</span><%= @item.description %></p>
-        <p><span class="text-success me-2">Local:</span><%= @item.locality %></p>
+        <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
 
       </div>
       <div>
@@ -59,7 +59,7 @@
         <p><span class="text-success me-2">Condição:</span><%= @item.bike_condition %></p>
       </div>
       <div>
-        <p><span class="text-success me-2">Local:</span><%= @item.locality %></p>
+        <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
         <p><span class="text-success me-2">Ano:</span><%= @item.year %></p>
         <p><span class="text-success me-2">Quantidade:</span><%= @item.quantity %></p>
         <p><span class="text-success me-2">Preço:</span><%= number_to_currency(@item.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>

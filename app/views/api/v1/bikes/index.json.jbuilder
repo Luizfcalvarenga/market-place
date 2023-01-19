@@ -6,7 +6,8 @@ json.bikes @bikes do |bike|
   json.bike_type bike.bike_type
   json.price_in_cents bike.price_in_cents
   json.quantity bike.quantity
-  json.locality bike.locality
+  json.state_id bike.state_id
+  json.city_id bike.city_id
   json.frame_brand bike.frame_brand
   json.frame_size bike.frame_size
   json.frame_material bike.frame_material

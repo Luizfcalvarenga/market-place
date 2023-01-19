@@ -13,12 +13,19 @@
 
 
   require 'json'
+  require Rails.root.join('db/seeds/states_and_cities_populate')
+
 
   case Rails.env
 
   when "production"
 
     puts "Starting seed..."
+
+
+    puts "Criando lista de estados e cidades..."
+    StatesAndCitiesPopulate.populate!
+    puts "-- OK!"
     ################################################################ CATEGORIES ################################################################
     ##### BIKES #####
 
@@ -372,6 +379,10 @@
 
   when "development"
     puts "Starting seed..."
+
+    puts "Criando lista de estados e cidades..."
+    StatesAndCitiesPopulate.populate!
+    puts "-- OK!"
     ################################################################ CATEGORIES ################################################################
     ##### BIKES #####
     mtb = Category.create!(name: "mountain_bike", modalities: ["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country"])
