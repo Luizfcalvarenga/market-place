@@ -606,15 +606,16 @@ export function BikeForm(props) {
   }
 
   const handleTechnicalSection = (e) => {
+    console.log(e)
     const technicalSection = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
     technicalSection.classList.toggle("d-none")
     sectionActive.classList.toggle("btn-selected")
-    console.log(e)
   }
 
 
   const handleReviewSection = (e) => {
+
     console.log(`${e.target.innerText}(reviews)`)
     const section = document.getElementById(e.target.innerText + "(review)")
     const sectionActive = e.target;
@@ -643,6 +644,26 @@ export function BikeForm(props) {
     console.log(e.target.value)
     setStateId(e.target.value)
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+  }
+
+  const handleSwitchSection = (e) => {
+    const principalInfos = document.getElementById("principal-infos")
+    const additionalInfos = document.getElementById("additional-infos")
+    const principal = document.getElementById("principal")
+    const additional = document.getElementById("additional")
+
+    console.log(e.target.checked)
+    if (e.target.checked === true) {
+      additionalInfos.classList.remove("d-none")
+      principalInfos.classList.add("d-none")
+      additional.classList.add("text-success")
+      principal.classList.remove("text-success")
+    } else {
+      additionalInfos.classList.add("d-none")
+      principalInfos.classList.remove("d-none")
+      additional.classList.remove("text-success")
+      principal.classList.add("text-success")
+    }
   }
 
   //////////////////////////////////////////////// frames
@@ -1171,14 +1192,57 @@ export function BikeForm(props) {
             </>)}
           </div>
         </div>
-        {/* <label htmlFor="locality" className="mt-4">cidade:<span className="requested-information ms-1">*</span></label>
-        <input type="text" className="text-input"  value={locality} onChange={(e) => setLocality(e.target.value)}/>
-        { errors && errors.bike && errors.bike.locality && (
-          <p className="text-danger">{errors.bike.locality[0]}</p>
-        )} */}
 
         <label htmlFor="weight" className="mt-4">peso:(opicional)</label>
         <input type="number" className="text-input" placeholder="Em Kg" value={weight} onChange={(e) => setWeight(e.target.value)}/>
+
+        { bikeType === "e-bike" && (<>
+          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
+          <div id="Parte elétrica" className="rims d-none mb-3">
+            <div className="d-flex">
+              <div className="w-40 me-3">
+                <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
+                <select
+                  className="select-answer" aria-label=".form-select-sm example"
+                  value={battery}
+                  onChange={(e) => setBattery(e.target.value)}
+                >
+                  <option value=""></option>
+                  {batteries.map((battery, index)=> {
+                    if (battery === "other") {
+                      return (<option key={index} value="other">Outra</option>);
+                    } else {
+                      return (<option key={index}>{battery}</option>);
+                    }
+
+                  })}
+                </select>
+
+                { battery === "other" && (<>
+                  <label htmlFor="otherBattery" className="">Qual?</label>
+                  <input type="text"  className="text-input" placeholder="" value={otherBattery} aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
+                </>)}
+              </div>
+              <div className="">
+                <label htmlFor="batteryCyle" className="mt-3">Ciclos da bateria:</label>
+                <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={batteryCycles} onChange={(e) => setBatteryCycles(e.target.value)}/>
+              </div>
+            </div>
+
+            <div className="d-flex">
+              <div className="w-40 me-3">
+                <label htmlFor="mileage" className="mt-4">KM:</label>
+                <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={mileage} onChange={(e) => setMileage(e.target.value)}/>
+              </div>
+              <div className="">
+                <label htmlFor="motor" className="mt-4">Potência do motor:</label>
+                <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={motor} onChange={(e) => setMotor(e.target.value)}/>
+              </div>
+            </div>
+
+          </div>
+        </>)}
+
 
         <div className="text-center">
           <button className="btn-next-step mt-4" type="button" onClick={(e) => handleFirstStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
@@ -1189,357 +1253,271 @@ export function BikeForm(props) {
 
       <div id="second-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Informações técnicas</h4>
+        <div className="d-flex justify-content-center">
+          <p id="principal" className="me-2 text-success" >PRINCIPAIS</p>
+          <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={(e) => handleSwitchSection(e)}/>
+          </div>
+          <p id="additional" className="" >ADICIONAIS</p>
+        </div>
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Câmbio<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Transmissão" className="transmission d-none mb-3">
-            <label htmlFor="numberOfFrontGears" className="mt-3">Número de coroas (dianteira):</label>
-            <select
-              className="select-answer"
-              value={numberOfFrontGears}
-              onChange={(e) => setNumberOfFrontGears(e.target.value)}
-            >
-              <option value=""></option>
-              {frontGears.map((frontGear, index)=> {
-                return (<option key={index}>{frontGear}</option>);
-              })}
-            </select>
-
-            <label htmlFor="numberOfRearGears" className="mt-4">Número de valocidades (traseira):</label>
-            <select
-              className="select-answer"
-              value={numberOfRearGears}
-              onChange={(e) => setNumberOfRearGears(e.target.value)}
-            >
-              <option value=""></option>
-              {rearGears.map((rearGear, index)=> {
-                return (<option key={index}>{rearGear}</option>);
-              })}
-            </select>
-
-
-          {category === "road" && (<>
-            <label htmlFor="front_gear" className="mt-4">Câmbio dianteiro:</label>
-            <select className="select-answer" aria-label=".form-select-sm example"
-              value={frontDerailleurModel}
-              onChange={(e) => setFrontDerailleurModel(e.target.value)}
-            >
-              <option value=""></option>
-              {roadFrontDerailleurModels.map((frontDerailleurModel, index)=> {
-                 if (frontDerailleurModel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-
-                } else {
-
-                  return (<option key={index}>{frontDerailleurModel}</option>);
-
-                }
-              })}
-            </select>
-            <br />
-            { frontDerailleurModel === "other"  && (
-              <>
-                <label htmlFor="otherFrontDerailleurModel" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherFrontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
-              </>
-            )}
-
-            <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
-            <select className="select-answer" aria-label=".form-select-sm example"
-              value={rearDerailleurModel}
-              onChange={(e) => setRearDerailleurModel(e.target.value)}
-            >
-              <option value=""></option>
-              {roadRearDerailleurModels.map((rearDerailleurModel, index)=> {
-                if (rearDerailleurModel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{rearDerailleurModel}</option>);
-                }
-              })}
-            </select>
-            <br />
-            { rearDerailleurModel === "other"  && (
-              <>
-                <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherRearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
-              </>
-            )}
-          </>)}
-
-          {["mountain_bike", "dirt_street", "urban", "infant"].includes(category) && (<>
-            <label htmlFor="front_gear" className="mt-3">Câmbio dianteiro:</label>
-            <select className="select-answer" aria-label=".form-select-sm example"
-              value={frontDerailleurModel}
-              onChange={(e) => setFrontDerailleurModel(e.target.value)}
-            >
-              <option value=""></option>
-              {mtbDirtUrbanFrontDerailleurModels.map((frontDerailleurModels, index)=> {
-                if (frontDerailleurModels === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{frontDerailleurModels}</option>);
-                }
-              })}
-            </select>
-
-            { frontDerailleurModel === "other"  && (
-              <>
-                <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text" className="text-input" value={otherFrontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
-              </>
-            )}
-
-            <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
-            <select className="select-answer" aria-label=".form-select-sm example"
-              value={rearDerailleurModel}
-              onChange={(e) => setRearDerailleurModel(e.target.value)}
-              >
-              <option value=""></option>
-              {mtbDirtUrbanRearDerailleurModels.map((rearDerailleurModels, index)=> {
-                 if (rearDerailleurModels === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{rearDerailleurModels}</option>);
-                }
-              })}
-            </select>
-            <br />
-            { rearDerailleurModel === "other"  && (
-              <>
-                <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                <input type="text"  className="text-input" value={rearDerailleurModel} onChange={(e) => setRearDerailleurModel(e.target.value)}/>
-              </>
-            )}
-          </>)}
-
-          <label htmlFor="front_gear" className="mt-4">Pedivela:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
-
-          <label htmlFor="front_gear" className="mt-4">Corrente:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
-        </div>
-
-                                                                       {/*//////////////////FREIOS///////////////////////*/}
-
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Freios<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Freios" className="brake d-none mb-3">
-          <label htmlFor="brakeType" className="mt-3">Tipo de freio:</label>
-          <select
-            className="select-answer" aria-label=".form-select-sm example"
-            value={brakeType}
-            onChange={(e) => setBrakeType(e.target.value)}
-          >
-            <option value=""></option>
-            <option value="v_brake">V-Brake (frenagem no aro)</option>
-            <option value="hydraulic_disc">À Disco - Hidráulico</option>
-            <option value="mechanical_disc">À Disco - Mecânico</option>
-            <option value="coaster_brake">Contra pedal</option>
-          </select>
-          {(brakeType === "hydraulic_disc" || brakeType === "mechanical_disc") && (<>
-            <label htmlFor="disc_size" className="mt-4">Tamanho do disco:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={brakeDiscSize}
-              onChange={(e) => setBrakeDiscSize(e.target.value)}
-            >
-              <option value=""></option>
-              {discSizes.map((discSize, index)=> {
-                if (discSize === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{discSize}</option>);
-                }
-              })}
-            </select>
-          </>)}
-
-          {brakeDiscSize === "other" && (<>
-            <label htmlFor="other_disc_size" className="mt-4">Qual:</label>
-            <input className="text-input" type="text" value={otherBrakeDiscSize} placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
-          </>)}
-
-          {category === "road" && (<>
-            <label htmlFor="brakeModel" className="mt-4">Marca e modelo do freio:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={brakeModel}
-              onChange={(e) => setBrakeModel(e.target.value)}
-            >
-              <option value=""></option>
-              {roadBrakeModels.map((roadBrakeModel, index)=> {
-                return (<option key={index}>{roadBrakeModel}</option>);
-              })}
-            </select>
-          </>)}
-
-          {(category === "mountain_bike" || category ===  "dirt_street" || category ===  "urban" || category ===  "infant") && (<>
-            <label htmlFor="brakeModel" className="mt-4">Marca e modelo do freio</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={brakeModel}
-              onChange={(e) => setBrakeModel(e.target.value)}
-            >
-              <option value=""></option>
-              {mtbDirtUrbanBrakeModels.map((mtbDirtUrbanBrakeModel, index)=> {
-                if (mtbDirtUrbanBrakeModel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{mtbDirtUrbanBrakeModel}</option>);
-                }
-              })}
-            </select>
-          </>)}
-          <br />
-
-          {brakeModel === "other" && (<>
-            <label htmlFor="front_gear" className="mt-4">Qual:</label>
-            <input className="text-input" type="text" value={otherBrakeModel} placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeModel(e.target.value)}/>
-          </>)}
-        </div>
-
-                                                                        {/*//////////////////SUSPENSÂO///////////////////////*/}
-
-        {!(category === "road") && (<>
-
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
-          <div id="Suspensões" className="suspension d-none mb-3">
-            <label htmlFor="suspensionType" className="mt-3">Tipo de suspensão:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={suspensionType}
-              onChange={(e) => setSuspensionType(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="no_suspension">Sem Suspensão</option>
-              <option value="full_suspension">Full Suspension</option>
-              <option value="hardtail">Hardtail(Apenas Dinteira)</option>
-            </select>
-
-            {suspensionType === "full_suspension" && (<>
-              <label htmlFor="frontSuspensionTravel" className="mt-4">Curso da suspensão dianteira:</label>
+        <div id="principal-infos" className="principal-infos">
+          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Câmbio<i className="fas fa-chevron-down ms-2"></i></button>
+          <div id="Câmbio" className="transmission d-none mb-3">
+              <label htmlFor="numberOfFrontGears" className="mt-3">Número de coroas (dianteira):</label>
               <select
-                className="select-answer" aria-label=".form-select-sm example"
-                value={frontSuspensionTravel}
-                onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+                className="select-answer"
+                value={numberOfFrontGears}
+                onChange={(e) => setNumberOfFrontGears(e.target.value)}
               >
                 <option value=""></option>
-                {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
-                  if (frontSuspensionTravel === "other") {
-                    return (<option key={index} value="other">Outro</option>);
-                  } else {
-                    return (<option key={index}>{frontSuspensionTravel}</option>);
-                  }
+                {frontGears.map((frontGear, index)=> {
+                  return (<option key={index}>{frontGear}</option>);
                 })}
               </select>
 
-              { frontSuspensionTravel === "other"  && (
-                <>
-                  <label htmlFor="year" className="mt-4">Qual?</label>
-                  <input type="text" className="text-input" value={otherFrontSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
-                </>
-              )}
-
-              <label htmlFor="frontSuspensionModel" className="mt-4">Suspensão dianteira:</label>
-              <select className="select-answer" aria-label=".form-select-sm example"
-                value={frontSuspensionModel}
-                onChange={(e) => setFrontSuspensionModel(e.target.value)}
+              <label htmlFor="numberOfRearGears" className="mt-4">Número de valocidades (traseira):</label>
+              <select
+                className="select-answer"
+                value={numberOfRearGears}
+                onChange={(e) => setNumberOfRearGears(e.target.value)}
               >
-              <option value=""></option>
-              {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
-                if (frontSuspensionModels === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{frontSuspensionModels}</option>);
-                }
-              })}
+                <option value=""></option>
+                {rearGears.map((rearGear, index)=> {
+                  return (<option key={index}>{rearGear}</option>);
+                })}
+              </select>
+
+
+            {category === "road" && (<>
+              <label htmlFor="front_gear" className="mt-4">Câmbio dianteiro:</label>
+              <select className="select-answer" aria-label=".form-select-sm example"
+                value={frontDerailleurModel}
+                onChange={(e) => setFrontDerailleurModel(e.target.value)}
+              >
+                <option value=""></option>
+                {roadFrontDerailleurModels.map((frontDerailleurModel, index)=> {
+                  if (frontDerailleurModel === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+
+                  } else {
+
+                    return (<option key={index}>{frontDerailleurModel}</option>);
+
+                  }
+                })}
               </select>
               <br />
-
-              { frontSuspensionModel === "other"  && (
+              { frontDerailleurModel === "other"  && (
                 <>
-                  <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
-                  <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                  <label htmlFor="otherFrontDerailleurModel" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherFrontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
                 </>
               )}
 
-              <label htmlFor="rearSuspensionTravel" className="mt-4">Curso da suspensão traseira:</label>
-              <select
-                className="select-answer" aria-label=".form-select-sm example"
-                value={rearSuspensionTravel}
-                onChange={(e) => setRearSuspensionTravel(e.target.value)}
+              <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
+              <select className="select-answer" aria-label=".form-select-sm example"
+                value={rearDerailleurModel}
+                onChange={(e) => setRearDerailleurModel(e.target.value)}
               >
                 <option value=""></option>
-                {rearSuspensionTravels.map((rearSuspensionTravel, index)=> {
-                  if (rearSuspensionTravel === "other") {
+                {roadRearDerailleurModels.map((rearDerailleurModel, index)=> {
+                  if (rearDerailleurModel === "other") {
                     return (<option key={index} value="other">Outro</option>);
                   } else {
-                    return (<option key={index}>{rearSuspensionTravel}</option>);
+                    return (<option key={index}>{rearDerailleurModel}</option>);
+                  }
+                })}
+              </select>
+              <br />
+              { rearDerailleurModel === "other"  && (
+                <>
+                  <label htmlFor="front_gear" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherRearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
+                </>
+              )}
+            </>)}
+
+            {["mountain_bike", "dirt_street", "urban", "infant"].includes(category) && (<>
+              <label htmlFor="front_gear" className="mt-3">Câmbio dianteiro:</label>
+              <select className="select-answer" aria-label=".form-select-sm example"
+                value={frontDerailleurModel}
+                onChange={(e) => setFrontDerailleurModel(e.target.value)}
+              >
+                <option value=""></option>
+                {mtbDirtUrbanFrontDerailleurModels.map((frontDerailleurModels, index)=> {
+                  if (frontDerailleurModels === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{frontDerailleurModels}</option>);
                   }
                 })}
               </select>
 
-              { rearSuspensionTravel === "other"  && (
+              { frontDerailleurModel === "other"  && (
                 <>
-                  <label htmlFor="year" className="mt-4">Qual?</label>
-                  <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
+                  <label htmlFor="front_gear" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherFrontDerailleurModel} onChange={(e) => setOtherFrontDerailleurModel(e.target.value)}/>
                 </>
               )}
 
-              <label htmlFor="RearSuspensionModel" className="mt-4">Suspensão traseira:</label>
+              <label htmlFor="rear_gear" className="mt-4">Câmbio traseiro:</label>
               <select className="select-answer" aria-label=".form-select-sm example"
-                value={rearSuspensionModel}
-                onChange={(e) => setRearSuspensionModel(e.target.value)}
+                value={rearDerailleurModel}
+                onChange={(e) => setRearDerailleurModel(e.target.value)}
                 >
                 <option value=""></option>
-                {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModels, index)=> {
-                  if (rearSuspensionModels === "other") {
+                {mtbDirtUrbanRearDerailleurModels.map((rearDerailleurModels, index)=> {
+                  if (rearDerailleurModels === "other") {
                     return (<option key={index} value="other">Outro</option>);
                   } else {
-                    return (<option key={index}>{rearSuspensionModels}</option>);
+                    return (<option key={index}>{rearDerailleurModels}</option>);
                   }
                 })}
               </select>
               <br />
-              { rearSuspensionModel === "other"  && (
+              { rearDerailleurModel === "other"  && (
                 <>
-                  <label htmlFor="otherRearSuspensionModel" className="mt-4">Qual?</label>
-                  <input type="text" className="text-input" value={otherRearSuspensionModel} onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
+                  <label htmlFor="front_gear" className="mt-4">Qual?</label>
+                  <input type="text"  className="text-input" value={rearDerailleurModel} onChange={(e) => setRearDerailleurModel(e.target.value)}/>
                 </>
               )}
-            </>
-            )}
+            </>)}
 
-            {suspensionType === "hardtail" && (<>
-              <label htmlFor="frontSuspensionTravel" className="mt-4">Curso da suspensão dianteira:</label>
+            <label htmlFor="front_gear" className="mt-4">Pedivela:</label>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
+
+            <label htmlFor="front_gear" className="mt-4">Corrente:</label>
+            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={chain} onChange={(e) => setChain(e.target.value)}/>
+          </div>
+
+                                                                        {/*//////////////////FREIOS///////////////////////*/}
+
+          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Freios<i className="fas fa-chevron-down ms-2"></i></button>
+          <div id="Freios" className="brake d-none mb-3">
+            <label htmlFor="brakeType" className="mt-3">Tipo de freio:</label>
+            <select
+              className="select-answer" aria-label=".form-select-sm example"
+              value={brakeType}
+              onChange={(e) => setBrakeType(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="v_brake">V-Brake (frenagem no aro)</option>
+              <option value="hydraulic_disc">À Disco - Hidráulico</option>
+              <option value="mechanical_disc">À Disco - Mecânico</option>
+              <option value="coaster_brake">Contra pedal</option>
+            </select>
+            {(brakeType === "hydraulic_disc" || brakeType === "mechanical_disc") && (<>
+              <label htmlFor="disc_size" className="mt-4">Tamanho do disco:</label>
               <select
                 className="select-answer" aria-label=".form-select-sm example"
-                value={frontSuspensionTravel}
-                onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+                value={brakeDiscSize}
+                onChange={(e) => setBrakeDiscSize(e.target.value)}
               >
                 <option value=""></option>
-                {frontSuspensionTravels.map((rearSuspensionTravel, index)=> {
-                  if (rearSuspensionTravel === "other") {
+                {discSizes.map((discSize, index)=> {
+                  if (discSize === "other") {
                     return (<option key={index} value="other">Outro</option>);
                   } else {
-                    return (<option key={index}>{rearSuspensionTravel}</option>);
+                    return (<option key={index}>{discSize}</option>);
                   }
                 })}
               </select>
+            </>)}
 
-              { rearSuspensionTravel === "other"  && (
-                <>
-                  <label htmlFor="year" className="mt-4">Qual?</label>
-                  <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
-                </>
-              )}
+            {brakeDiscSize === "other" && (<>
+              <label htmlFor="other_disc_size" className="mt-4">Qual:</label>
+              <input className="text-input" type="text" value={otherBrakeDiscSize} placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeDiscSize(e.target.value)}/>
+            </>)}
 
-              <label htmlFor="frontSuspensionModel" className="mt-4">Suspensão dianteira:</label>
-              <select className="select-answer" aria-label=".form-select-sm example"
-                value={frontSuspensionModel}
-                onChange={(e) => setFrontSuspensionModel(e.target.value)}
+            {category === "road" && (<>
+              <label htmlFor="brakeModel" className="mt-4">Marca e modelo do freio:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={brakeModel}
+                onChange={(e) => setBrakeModel(e.target.value)}
               >
+                <option value=""></option>
+                {roadBrakeModels.map((roadBrakeModel, index)=> {
+                  return (<option key={index}>{roadBrakeModel}</option>);
+                })}
+              </select>
+            </>)}
+
+            {(category === "mountain_bike" || category ===  "dirt_street" || category ===  "urban" || category ===  "infant") && (<>
+              <label htmlFor="brakeModel" className="mt-4">Marca e modelo do freio</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={brakeModel}
+                onChange={(e) => setBrakeModel(e.target.value)}
+              >
+                <option value=""></option>
+                {mtbDirtUrbanBrakeModels.map((mtbDirtUrbanBrakeModel, index)=> {
+                  if (mtbDirtUrbanBrakeModel === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{mtbDirtUrbanBrakeModel}</option>);
+                  }
+                })}
+              </select>
+            </>)}
+            <br />
+
+            {brakeModel === "other" && (<>
+              <label htmlFor="front_gear" className="mt-4">Qual:</label>
+              <input className="text-input" type="text" value={otherBrakeModel} placeholder="" aria-label=".form-control-sm example" onChange={(e) => setOtherBrakeModel(e.target.value)}/>
+            </>)}
+          </div>
+
+                                                                          {/*//////////////////SUSPENSÂO///////////////////////*/}
+
+          {!(category === "road") && (<>
+
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Suspensões<i className="fas fa-chevron-down ms-2"></i></button>
+            <div id="Suspensões" className="suspension d-none mb-3">
+              <label htmlFor="suspensionType" className="mt-3">Tipo de suspensão:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={suspensionType}
+                onChange={(e) => setSuspensionType(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="no_suspension">Sem Suspensão</option>
+                <option value="full_suspension">Full Suspension</option>
+                <option value="hardtail">Hardtail(Apenas Dinteira)</option>
+              </select>
+
+              {suspensionType === "full_suspension" && (<>
+                <label htmlFor="frontSuspensionTravel" className="mt-4">Curso da suspensão dianteira:</label>
+                <select
+                  className="select-answer" aria-label=".form-select-sm example"
+                  value={frontSuspensionTravel}
+                  onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+                >
+                  <option value=""></option>
+                  {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
+                    if (frontSuspensionTravel === "other") {
+                      return (<option key={index} value="other">Outro</option>);
+                    } else {
+                      return (<option key={index}>{frontSuspensionTravel}</option>);
+                    }
+                  })}
+                </select>
+
+                { frontSuspensionTravel === "other"  && (
+                  <>
+                    <label htmlFor="year" className="mt-4">Qual?</label>
+                    <input type="text" className="text-input" value={otherFrontSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
+                  </>
+                )}
+
+                <label htmlFor="frontSuspensionModel" className="mt-4">Suspensão dianteira:</label>
+                <select className="select-answer" aria-label=".form-select-sm example"
+                  value={frontSuspensionModel}
+                  onChange={(e) => setFrontSuspensionModel(e.target.value)}
+                >
                 <option value=""></option>
                 {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
                   if (frontSuspensionModels === "other") {
@@ -1548,181 +1526,247 @@ export function BikeForm(props) {
                     return (<option key={index}>{frontSuspensionModels}</option>);
                   }
                 })}
-              </select>
-              <br />
-              { frontSuspensionModel === "other"  && (
-                <>
-                  <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
-                  <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
-                </>
+                </select>
+                <br />
+
+                { frontSuspensionModel === "other"  && (
+                  <>
+                    <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
+                    <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                  </>
+                )}
+
+                <label htmlFor="rearSuspensionTravel" className="mt-4">Curso da suspensão traseira:</label>
+                <select
+                  className="select-answer" aria-label=".form-select-sm example"
+                  value={rearSuspensionTravel}
+                  onChange={(e) => setRearSuspensionTravel(e.target.value)}
+                >
+                  <option value=""></option>
+                  {rearSuspensionTravels.map((rearSuspensionTravel, index)=> {
+                    if (rearSuspensionTravel === "other") {
+                      return (<option key={index} value="other">Outro</option>);
+                    } else {
+                      return (<option key={index}>{rearSuspensionTravel}</option>);
+                    }
+                  })}
+                </select>
+
+                { rearSuspensionTravel === "other"  && (
+                  <>
+                    <label htmlFor="year" className="mt-4">Qual?</label>
+                    <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherRearSuspensionTravel(e.target.value)}/>
+                  </>
+                )}
+
+                <label htmlFor="RearSuspensionModel" className="mt-4">Suspensão traseira:</label>
+                <select className="select-answer" aria-label=".form-select-sm example"
+                  value={rearSuspensionModel}
+                  onChange={(e) => setRearSuspensionModel(e.target.value)}
+                  >
+                  <option value=""></option>
+                  {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModels, index)=> {
+                    if (rearSuspensionModels === "other") {
+                      return (<option key={index} value="other">Outro</option>);
+                    } else {
+                      return (<option key={index}>{rearSuspensionModels}</option>);
+                    }
+                  })}
+                </select>
+                <br />
+                { rearSuspensionModel === "other"  && (
+                  <>
+                    <label htmlFor="otherRearSuspensionModel" className="mt-4">Qual?</label>
+                    <input type="text" className="text-input" value={otherRearSuspensionModel} onChange={(e) => setOtherRearSuspensionModel(e.target.value)}/>
+                  </>
+                )}
+              </>
               )}
-            </>
-            )}
+
+              {suspensionType === "hardtail" && (<>
+                <label htmlFor="frontSuspensionTravel" className="mt-4">Curso da suspensão dianteira:</label>
+                <select
+                  className="select-answer" aria-label=".form-select-sm example"
+                  value={frontSuspensionTravel}
+                  onChange={(e) => setFrontSuspensionTravel(e.target.value)}
+                >
+                  <option value=""></option>
+                  {frontSuspensionTravels.map((rearSuspensionTravel, index)=> {
+                    if (rearSuspensionTravel === "other") {
+                      return (<option key={index} value="other">Outro</option>);
+                    } else {
+                      return (<option key={index}>{rearSuspensionTravel}</option>);
+                    }
+                  })}
+                </select>
+
+                { rearSuspensionTravel === "other"  && (
+                  <>
+                    <label htmlFor="year" className="mt-4">Qual?</label>
+                    <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>
+                  </>
+                )}
+
+                <label htmlFor="frontSuspensionModel" className="mt-4">Suspensão dianteira:</label>
+                <select className="select-answer" aria-label=".form-select-sm example"
+                  value={frontSuspensionModel}
+                  onChange={(e) => setFrontSuspensionModel(e.target.value)}
+                >
+                  <option value=""></option>
+                  {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModels, index)=> {
+                    if (frontSuspensionModels === "other") {
+                      return (<option key={index} value="other">Outro</option>);
+                    } else {
+                      return (<option key={index}>{frontSuspensionModels}</option>);
+                    }
+                  })}
+                </select>
+                <br />
+                { frontSuspensionModel === "other"  && (
+                  <>
+                    <label htmlFor="otherFrontSuspensionModel" className="mt-4">Qual?</label>
+                    <input type="text-input" className="text-input" value={otherFrontSuspensionModel} onChange={(e) => setOtherFrontSuspensionModel(e.target.value)}/>
+                  </>
+                )}
+              </>
+              )}
+            </div>
+          </>)}
+          <div className="d-flex justify-content-center">
+            <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
-        </>)}
+        </div>
 
                                                                         {/*//////////////////RODAS///////////////////////*/}
+        <div id="additional-infos" className="additional-infos d-none">
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Rodas<i className="fas fa-chevron-down ms-2"></i></button>
+            <div id="Rodas" className="rims d-none mb-3">
+              <label htmlFor="bikeCondition" className="mt-4">Tamanho da roda:</label>
+              <select
+                className="select-answer"
+                value={rimSize}
+                onChange={(e) => setRimSize(e.target.value)}
+              >
+                <option value=""></option>
+                {rimSizes.map((rimSize, index)=> {
+                    return (<option key={index}>{rimSize}</option>);
+                  })}
+              </select>
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Rodas<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Rodas" className="rims d-none mb-3">
-          <label htmlFor="bikeCondition" className="mt-4">Tamanho da roda:</label>
-          <select
-            className="select-answer"
-            value={rimSize}
-            onChange={(e) => setRimSize(e.target.value)}
-          >
-            <option value=""></option>
-            {rimSizes.map((rimSize, index)=> {
-                return (<option key={index}>{rimSize}</option>);
-              })}
-          </select>
+              <label htmlFor="frontRimModel" className="mt-4">Aro dianteiro:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontRimModel} onChange={(e) => setFrontRimModel(e.target.value)}/>
 
-          <label htmlFor="frontRimModel" className="mt-4">Aro dianteiro:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontRimModel} onChange={(e) => setFrontRimModel(e.target.value)}/>
+              <label htmlFor="rearRimModel" className="mt-4">Aro traseiro:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={rearRimModel} onChange={(e) => setRearRimModel(e.target.value)}/>
 
-          <label htmlFor="rearRimModel" className="mt-4">Aro traseiro:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={rearRimModel} onChange={(e) => setRearRimModel(e.target.value)}/>
+              <label htmlFor="frontHub" className="mt-4">Cubo dianteiro:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontHub} onChange={(e) => setFrontHub(e.target.value)}/>
 
-          <label htmlFor="frontHub" className="mt-4">Cubo dianteiro:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontHub} onChange={(e) => setFrontHub(e.target.value)}/>
+              <label htmlFor="rearHub" className="mt-4">Cubo traseiro:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={rearHub} onChange={(e) => setRearHub(e.target.value)}/>
 
-          <label htmlFor="rearHub" className="mt-4">Cubo traseiro:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={rearHub} onChange={(e) => setRearHub(e.target.value)}/>
+              <label htmlFor="frontTyre" className="mt-4">Pneu dianteiro:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontTyre} onChange={(e) => setFrontTyre(e.target.value)}/>
 
-          <label htmlFor="frontTyre" className="mt-4">Pneu dianteiro:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontTyre} onChange={(e) => setFrontTyre(e.target.value)}/>
+              <label htmlFor="rearTyre" className="mt-4">Pneu traseiro:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={rearTyre} onChange={(e) => setRearTyre(e.target.value)}/>
+            </div>
 
-          <label htmlFor="rearTyre" className="mt-4">Pneu traseiro:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={rearTyre} onChange={(e) => setRearTyre(e.target.value)}/>
-        </div>
+                                                                            {/*//////////////////COCKPIT///////////////////////*/}
 
-                                                                        {/*//////////////////COCKPIT///////////////////////*/}
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Cockpit<i className="fas fa-chevron-down ms-2"></i></button>
+            <div id="Cockpit" className="cockpit d-none mb-3">
+              <label htmlFor="handlebar" className="mt-3">Guidão:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={handlebar} onChange={(e) => setHandlebar(e.target.value)}/>
+              <label htmlFor="stem" className="mt-4">Mesa/Avanço:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={stem} onChange={(e) => setStem(e.target.value)}/>
+            </div>
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Cockpit<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Cockpit" className="cockpit d-none mb-3">
-          <label htmlFor="handlebar" className="mt-3">Guidão:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={handlebar} onChange={(e) => setHandlebar(e.target.value)}/>
-          <label htmlFor="stem" className="mt-4">Mesa/Avanço:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={stem} onChange={(e) => setStem(e.target.value)}/>
-        </div>
+                                                                            {/*//////////////////CANOTE///////////////////////*/}
 
-                                                                        {/*//////////////////CANOTE///////////////////////*/}
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Canote<i className="fas fa-chevron-down ms-2"></i></button>
+            <div id="Canote" className="seat-post d-none mb-3">
+              <label htmlFor="seatPostType" className="mt-3">Tipo de canote:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={seatPostType}
+                onChange={(e) => setSeatPostType(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="retractable">Retrátil</option>
+                <option value="rigid">Rigido</option>
+              </select>
 
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Canote<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Canote" className="seat-post d-none mb-3">
-          <label htmlFor="seatPostType" className="mt-3">Tipo de canote:</label>
-          <select
-            className="select-answer" aria-label=".form-select-sm example"
-            value={seatPostType}
-            onChange={(e) => setSeatPostType(e.target.value)}
-          >
-            <option value=""></option>
-            <option value="retractable">Retrátil</option>
-            <option value="rigid">Rigido</option>
-          </select>
+              {seatPostType === "retractable" && (<>
+                <label htmlFor="seatPostTravel" className="mt-4">Curso do canote:</label>
+                <select
+                  className="select-answer" aria-label=".form-select-sm example"
+                  value={seatPostTravel}
+                  onChange={(e) => setSeatPostTravel(e.target.value)}
+                >
+                  <option value=""></option>
+                  {seatPostTravels.map((seatPostTravel, index)=> {
+                    if (seatPostTravel === "other") {
+                      return (<option key={index} value="other">Outro</option>);
+                    } else {
+                      return (<option key={index}>{seatPostTravel}</option>);
+                    }
+                  })}
+                </select>
 
-          {seatPostType === "retractable" && (<>
-            <label htmlFor="seatPostTravel" className="mt-4">Curso do canote:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={seatPostTravel}
-              onChange={(e) => setSeatPostTravel(e.target.value)}
-            >
-              <option value=""></option>
-              {seatPostTravels.map((seatPostTravel, index)=> {
-                if (seatPostTravel === "other") {
-                  return (<option key={index} value="other">Outro</option>);
-                } else {
-                  return (<option key={index}>{seatPostTravel}</option>);
-                }
-              })}
-            </select>
+                { seatPostTravel === "other" && (
+                  <>
+                  <label htmlFor="otherSeatPostTravel" className="mt-4">Qual?</label>
+                  <input className="text-input" type="text" value={otherSeatPostTravel} onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
+                </>
+                )}
+              </>)}
 
-            { seatPostTravel === "other" && (
-              <>
-              <label htmlFor="otherSeatPostTravel" className="mt-4">Qual?</label>
-              <input className="text-input" type="text" value={otherSeatPostTravel} onChange={(e) => setOtherSeatPostTravel(e.target.value)}/>
-            </>
-            )}
-          </>)}
+              <label htmlFor="seatPostModel" className="mt-4">Marca e modelo do canote:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example"  value={seatPostModel} onChange={(e) => setSeatPostModel(e.target.value)}/>
+            </div>
 
-          <label htmlFor="seatPostModel" className="mt-4">Marca e modelo do canote:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example"  value={seatPostModel} onChange={(e) => setSeatPostModel(e.target.value)}/>
-        </div>
+                                                                            {/*//////////////////BATERIA///////////////////////*/}
 
-                                                                        {/*//////////////////BATERIA///////////////////////*/}
 
-        { bikeType === "e-bike" && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
-          <div id="Parte elétrica" className="rims d-none mb-3">
-            <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
-            <select
-              className="select-answer" aria-label=".form-select-sm example"
-              value={battery}
-              onChange={(e) => setBattery(e.target.value)}
-            >
-              <option value=""></option>
-              {batteries.map((battery, index)=> {
-                if (battery === "other") {
-                  return (<option key={index} value="other">Outra</option>);
-                } else {
-                  return (<option key={index}>{battery}</option>);
-                }
+                                                                            {/*//////////////////Accessories///////////////////////*/}
 
-              })}
-            </select>
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
+            <div id="Acessórios" className="accessories d-none mb-3">
+              <label htmlFor="" className="mt-3">Acessório:</label>
+              <select
+                className="select-answer" aria-label=".form-select-sm example"
+                value={accessories}
+                onChange={(e) => createAccessories(e)}
+                multiple
+              >
+                <option value=""></option>
+                {accessoryOptions.map((accessorieOption, index)=> {
+                  return (<option key={index}>{accessorieOption}</option>);
+                })}
+              </select>
 
-            { battery === "other" && (<>
-              <label htmlFor="otherBattery" className="mt-4">Qual?</label>
-              <input type="text"  className="text-input" placeholder="" value={otherBattery} aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
-            </>)}
+              { accessories === "Outro" && (<>
+                <label htmlFor="otherAccessory" className="mt-4">Qual?</label>
+                <input type="text"  className="text-input" value={otherAccessory} onChange={(e) => setOtherAccessory(e.target.value)}/>
+              </>)}
 
-            <label htmlFor="motor" className="mt-4">Potência do motor:</label>
-            <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={motor} onChange={(e) => setMotor(e.target.value)}/>
+              { accessories !== "Não" && (<>
+                <label htmlFor="accessories-description" className="mt-4">Descrição:</label>
+                <input className="text-input" type="text" placeholder="" value={accessoriesDescription} aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
+              </>)}
 
-            <label htmlFor="mileage" className="mt-4">KM:</label>
-            <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={mileage} onChange={(e) => setMileage(e.target.value)}/>
-
-            <label htmlFor="batteryCyle" className="mt-4">Ciclos da bateria:</label>
-            <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={batteryCycles} onChange={(e) => setBatteryCycles(e.target.value)}/>
+              <label htmlFor="batteryCyle" className="mt-4">Pedal:</label>
+              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={pedals} onChange={(e) => setPedals(e.target.value)}/>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+              <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            </div>
           </div>
-        </>)}
-
-                                                                        {/*//////////////////Accessories///////////////////////*/}
-
-        <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
-        <div id="Acessórios" className="accessories d-none mb-3">
-          <label htmlFor="" className="mt-3">Acessório:</label>
-          <select
-            className="select-answer" aria-label=".form-select-sm example"
-            value={accessories}
-            onChange={(e) => createAccessories(e)}
-            multiple
-          >
-            <option value=""></option>
-            {accessoryOptions.map((accessorieOption, index)=> {
-              return (<option key={index}>{accessorieOption}</option>);
-            })}
-          </select>
-
-          { accessories === "Outro" && (<>
-            <label htmlFor="otherAccessory" className="mt-4">Qual?</label>
-            <input type="text"  className="text-input" value={otherAccessory} onChange={(e) => setOtherAccessory(e.target.value)}/>
-          </>)}
-
-          { accessories !== "Não" && (<>
-            <label htmlFor="accessories-description" className="mt-4">Descrição:</label>
-            <input className="text-input" type="text" placeholder="" value={accessoriesDescription} aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
-          </>)}
-
-          <label htmlFor="batteryCyle" className="mt-4">Pedal:</label>
-          <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={pedals} onChange={(e) => setPedals(e.target.value)}/>
         </div>
-        <div className="d-flex justify-content-center">
-          <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-        </div>
-      </div>
+
 
                         {/* ////////////////////////////////////////////////////////////////////// 3ª SECTION //////////////////////////////////////////////////////////*/}
 

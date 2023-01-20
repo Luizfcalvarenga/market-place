@@ -3,6 +3,10 @@
   background-color: rgb(16,16,16);
 }
 
+.color-primary {
+  color: $color-primary !important;
+}
+
 .card-questions {
   transition: .5s ease;
   border-radius: 4px;
@@ -29,6 +33,22 @@
     box-shadow: none !important;
     border-color: $color-primary !important;
     border-radius: 4px;
+  }
+
+
+  .form-check-input:checked {
+    background-color: transparent !important;
+    border-color: $color-primary !important;
+  }
+
+  .form-check-input:focus {
+    box-shadow: none !important;
+  }
+
+  .form-check-input:focus {
+    border-color: $color-primary;
+    outline: 0;
+    box-shadow: none;
   }
 
 
