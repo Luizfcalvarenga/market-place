@@ -86,7 +86,6 @@ export function ProductForm(props) {
       setAllProducts(data.types_of_product)
       setCategories(data.categories)
       setUser(data.user.id)
-      // setServices(data.services)
       setStates(data.states)
       setCities(data.cities)
 
@@ -1602,8 +1601,6 @@ export function ProductForm(props) {
               </>
             )}
 
-            <label htmlFor="productDescription" className="mt-4">Descrição:</label>
-            <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
             <div className="d-flex  justify-content-between gap-3">
               <div className="w-50">
@@ -1664,15 +1661,13 @@ export function ProductForm(props) {
 
 
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
-
           <h4 className="text-center text-success">Revise as informações</h4>
-
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
             <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
-            {productCity && productState && (<>
+            {productCity && productState && !props.productId (<>
               <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>

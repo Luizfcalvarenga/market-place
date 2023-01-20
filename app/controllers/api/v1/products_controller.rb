@@ -73,7 +73,7 @@ module Api
           end
           @service = AdvertisementGenerator.new(@product, @coupon_code)
           @service.call()
-          if @product.advertisement.present?  && @service.errors.blank?  &&  (params[:product][:productAttributes].present? && ProductAttribute.where(product: @product).present?)
+          if @product.advertisement.present?  && @service.errors.blank? 
             render json: { success: true, product: @product, product_attributes: @product_attributes, advertisement: @product.advertisement, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
             render json: { success: false, errors: {product: @product.errors, coupon: @service.errors}}
