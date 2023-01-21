@@ -139,17 +139,22 @@ export function Bikes(props) {
   }
 
   const handleBikeTypeFilter = (e) => {
-    console.log(e.target.checked)
-    if (e.target.checked) {
+    const tagFilter = e.target
+    tagFilter.classList.toggle("selected-tag")
+
+    if (e.target.classList.contains("selected-tag")) {
       setBikeTypeFilter(e.target.value)
     } else {
       setBikeTypeFilter("")
     }
+
   }
 
   const handleConditionFilter = (e) => {
-    console.log(e.target.checked)
-    if (e.target.checked) {
+    const tagFilter = e.target
+    tagFilter.classList.toggle("selected-tag")
+
+    if (e.target.classList.contains("selected-tag")) {
       setConditionFilter(e.target.value)
     } else {
       setConditionFilter("")
@@ -361,7 +366,9 @@ export function Bikes(props) {
             <div className="condition-filter">
               <h5 className=" mt-3">tipo</h5>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 ">
+                <button type="button" value="e-bike" className="filter-tag" onClick={(e) => handleBikeTypeFilter(e)}>E-Bike</button>
+                <button type="button" value="bike" className="filter-tag" onClick={(e) => handleBikeTypeFilter(e)}>Bike</button>
+                {/* <label htmlFor="new" className="me-2 ">
                   <input
                     type="checkbox"
                     value="e-bike"
@@ -377,36 +384,21 @@ export function Bikes(props) {
                     name="type"
                     onChange={(e) => handleBikeTypeFilter(e)}
                   />  Bike
-                </label>
+                </label> */}
               </div>
             </div>
 
 
             <div className="condition-filter">
-              <h5 className=" mt-3">condição</h5>
+              <h6 className=" mt-3">condição</h6>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 ">
-                  <input
-                    type="checkbox"
-                    value="new"
-                    name="condition"
-                    onChange={(e) => handleConditionFilter(e)}
-                  />  Nova
-                </label>
-
-                <label htmlFor="used" className="me-2 ">
-                <input
-                  type="checkbox"
-                  value="used"
-                  name="condition"
-                  onChange={(e) => handleConditionFilter(e)}
-                />  Usada
-                </label>
+                <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Nova</button>
+                <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usada</button>
               </div>
             </div>
 
 
-            <h5 className=" mt-3">categoria</h5>
+            <h6 className=" mt-3">categoria</h6>
             <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
               <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFilters(e)}>Mountain Bike</button>
               <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Dirt</button>
