@@ -52,6 +52,8 @@ export function Bikes(props) {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
+  const [optionsToFilter, setOptionsToFilter] = useState([]);
+
 
 
   const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
@@ -104,6 +106,8 @@ export function Bikes(props) {
     if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
     if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
     if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
+    if (optionsToFilter) url = url + `&categories=${optionsToFilter}`
+
 
     console.log(url)
     const response = await axios.get(url);
@@ -113,7 +117,7 @@ export function Bikes(props) {
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, optionsToFilter])
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -193,6 +197,22 @@ export function Bikes(props) {
     let stateId = states.find(state => state.name === e.target.value).id
     console.log(stateId)
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+  }
+
+  const handleMultipleFilters = (e) => {
+    // console.log(e)
+    const currentOptionsToFilter = [...optionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
@@ -361,6 +381,7 @@ export function Bikes(props) {
               </div>
             </div>
 
+
             <div className="condition-filter">
               <h5 className=" mt-3">condição</h5>
               <div className="d-flex justify-content-between">
@@ -384,7 +405,16 @@ export function Bikes(props) {
               </div>
             </div>
 
+
             <h5 className=" mt-3">categoria</h5>
+            <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
+              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFilters(e)}>Mountain Bike</button>
+              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Dirt</button>
+              <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Road</button>
+              <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Infantil</button>
+              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Urbana</button>
+            </div>
+            {/* <h5 className=" mt-3">categoria</h5>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
@@ -396,7 +426,7 @@ export function Bikes(props) {
               <option value="road">Road</option>
               <option value="infant">Infantil</option>
               <option value="urban">Urbano</option>
-            </select>
+            </select> */}
 
             {categoryFilter === "mountain_bike" && (<>
               <h5 className=" mt-3">Modalidade</h5>

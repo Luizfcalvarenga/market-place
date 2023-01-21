@@ -447,13 +447,6 @@ export function ProductForm(props) {
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
-  // useEffect(() => {
-  //   if (productState ) {
-  //     setMapedCitiesForState(cities.filter(element => element.state_id === productState))
-  //   }
-  // }, []);
-
-
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")

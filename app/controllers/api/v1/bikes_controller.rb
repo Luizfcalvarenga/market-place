@@ -6,9 +6,11 @@ module Api
       skip_before_action :authenticate_user!
 
       def index
-        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user).order(created_at: :desc)
+        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
         @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
+        @bikes = @bikes.where(category:  Category.where(name: params[:categories].split(","))) if params[:categories].present?
+
         @bikes = @bikes.where(state:  State.where(name: params[:state])) if params[:state].present?
         @bikes = @bikes.where(city:  City.where(name: params[:city])) if params[:city].present?
 
