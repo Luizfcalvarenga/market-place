@@ -12,12 +12,20 @@ module Api
         @product_type_attributes = ProductTypeAttribute.all
         @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
-        @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
+
+        # @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
+        @products = @products.where(category:  Category.where(name: params[:categories].split(","))) if params[:categories].present?
+
         @products = @products.where(state:  State.where(name: params[:state])) if params[:state].present?
         @products = @products.where(city:  City.where(name: params[:city])) if params[:city].present?
         @products = @products.where(modality: params[:modality]) if params[:modality].present?
+
+        @products = @products.where(modality: params[:modalities].split(",")) if params[:modalities].present?
+
+
         @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
-        @products = @products.where(product_type_: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
+        @products = @products.where(product_type_id: ProductType.where(prompt: params[:product_types].split(","))) if params[:product_types].present?
+        @products = @products.where(product_type_id:  (40..47)) if params[:products_clothes].present?
 
         @products = @products.where('products.price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
         @products = @products.where('products.price_in_cents >= ?', params[:min_price]).order(price_in_cents: :asc) if params[:min_price].present?
@@ -73,7 +81,7 @@ module Api
           end
           @service = AdvertisementGenerator.new(@product, @coupon_code)
           @service.call()
-          if @product.advertisement.present?  && @service.errors.blank? 
+          if @product.advertisement.present?  && @service.errors.blank?
             render json: { success: true, product: @product, product_attributes: @product_attributes, advertisement: @product.advertisement, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
             render json: { success: false, errors: {product: @product.errors, coupon: @service.errors}}

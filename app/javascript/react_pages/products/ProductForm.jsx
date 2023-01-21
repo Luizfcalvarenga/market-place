@@ -427,7 +427,7 @@ export function ProductForm(props) {
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
         setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
       }
