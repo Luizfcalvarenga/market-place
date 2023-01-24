@@ -32,6 +32,8 @@ module Api
 
         # @products = @products.joins(:product_attributes).where(value: params[:clothe_sizes].split(",")) if params[:clothe_sizes].present?
         @products = ProductAttribute.where(value: params[:clothe_sizes].split(",")).map { |value| value.product } if params[:clothe_sizes].present?
+        @products = ProductAttribute.where(value: params[:components_attributes_values].split(",")).map { |value| value.product } if params[:components_attributes_values].present?
+
 
 
 
