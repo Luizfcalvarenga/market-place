@@ -1570,13 +1570,24 @@ export function ProductForm(props) {
 
             <div className="condition">
               <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-              <div className="d-flex justify-content-start mt-3">
+              <div className="d-flex justify-content-start gap-3 mt-3">
                 <button type="button" id="new" value="new" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Novo</button>
                 <button type="button" id="used" value="used" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Usado</button>
               </div>
 
               {productCondition === "used" && (<>
                 <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da seu produto:</label>
+                <div id="debt-amount-slider">
+                  <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
+                  <label for="1" data-debt-amount="Ruim"></label>
+                  <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
+                  <label for="2" data-debt-amount="$Razoável"></label>
+                  <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
+                  <label for="3" data-debt-amount="Bom"></label>
+                  <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
+                  <label for="4" data-debt-amount="Ótimo"></label>
+                  <div id="debt-amount-pos"></div>
+                </div>
                 <select
                   className="select-answer"
                   value={productConditionStatus}
