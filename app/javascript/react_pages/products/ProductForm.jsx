@@ -274,11 +274,19 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"])) {
       return
-    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
+    } else if ((attribute.name === "disc_include" || attribute.name === "brake_disc_size") && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
+      return
+    } else if (attribute.name === "brake_disc_size" && productAttributes?.disc_include === "Não") {
+      return
+    } else if (attribute.name === "handlebar_size" && ["road"].includes(productCategory)) {
+      options = ["360 mm", "380 mm", "400 mm", "420 mm", "440 mm", "460 mm", "other"]
+    } else if (attribute.name === "handlebar_size" && ["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory)) {
+      options = ["660 mm","680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "other"]
+    }  else if (attribute.name === "handlebar_drop" && ["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory)) {
       return
     } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["seat_post_type"])) {
       return
-    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
+    } else if (attribute.name === "seat_post_material" && ["retractable", ""].includes(productAttributes["seat_post_type"])) {
       return
     } else if (attribute.name === "front_derailleur_velocities" && productAttributes?.rear_or_front_and_rear_derailleur === "rear") {
       return
@@ -286,24 +294,7 @@ export function ProductForm(props) {
       return
     } else if (["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"]) && attribute.name === "shock_size") {
       return
-    }
-     else if (attribute.name === "suspension_type") {
-      options = [ ["no_suspension", "Sem Suspensão"], ["hardtail", "Hardtail" ], ["full_suspension", "Full Suspension" ]]
-    }
-     else if (attribute.name === "brake_type") {
-      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-    }
-
-    // else if (attribute.name === "frame_material") {
-    //   options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    // } else if (attribute.name === "rim_material") {
-    //   options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    // } else if (attribute.name === "seat_post_type") {
-    //   options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-    // } else if (attribute.name === "rear_or_front_and_rear_derailleur") {
-    //   options = [ ["front_and_rear", "Dianeira e Traseira"], ["rear", "Traseira" ]]
-    // }
-     else {
+    } else {
       options = attribute.options
     }
 
@@ -425,7 +416,7 @@ export function ProductForm(props) {
       } else if (filter === "components") {
         setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
       }
 
     } else {
@@ -436,7 +427,7 @@ export function ProductForm(props) {
       } else if (filter === "components") {
         setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
       }
 
     }

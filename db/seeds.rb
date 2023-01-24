@@ -500,7 +500,6 @@
     cap_sizes = ProductTypeAttribute.create!(product_type: cap, name: "cap_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
     pants_sizes = ProductTypeAttribute.create!(product_type: pants, name: "pants_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
     helmet_sizes = ProductTypeAttribute.create!(product_type: helmet, name: "helmet_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
-    vest_sizes = ProductTypeAttribute.create!(product_type: vest, name: "vest_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
     elbow_pad_sizes = ProductTypeAttribute.create!(product_type: elbow_pad, name: "elbow_pad_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
     knee_pad_sizes = ProductTypeAttribute.create!(product_type: knee_pad, name: "knee_pad_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
     coat_sizes = ProductTypeAttribute.create!(product_type: coat, name: "coat_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
@@ -523,7 +522,6 @@
     rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
     shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
     battery_capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
-    ProductTypeAttribute.create!(product_type: frame, name: "frame_brand", kind: "multiple_choices", options: frame_brands, prompt: "Marca do quadro" )
     ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: materials, prompt: "Material do quadro" )
     ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro")
     ProductTypeAttribute.create!(product_type: frame, name: "suspension_type", kind: "multiple_choices", options: [["no_suspension", "Sem Suspensão"], ["hardtail", "Hardtail" ], ["full_suspension", "Full Suspension" ]], prompt: "Tipo de suspensão")
