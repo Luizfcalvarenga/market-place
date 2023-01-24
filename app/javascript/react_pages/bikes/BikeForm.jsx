@@ -1959,8 +1959,6 @@ export function BikeForm(props) {
               <option value="good">Bom</option>
               <option value="excellent">Ótimo</option>
             </select>
-
-
             { bikeConditionStatus === "bad" || bikeConditionStatus === "reasonable" && (<>
               <label htmlFor="description" className="mt-3">Descreva:</label>
               <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
