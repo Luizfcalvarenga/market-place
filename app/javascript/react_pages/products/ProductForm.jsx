@@ -1560,6 +1560,9 @@ export function ProductForm(props) {
             </select>
 
             <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
+            <button type="button" value="new" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Novo</button>
+            <button type="button" value="used" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Usado</button>
+
             <select
               className="select-answer"
               value={productCondition}
