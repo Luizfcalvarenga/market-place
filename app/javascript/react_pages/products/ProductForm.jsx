@@ -1588,7 +1588,7 @@ export function ProductForm(props) {
                   <label for="4" data-debt-amount="Ótimo"></label>
                   <div id="debt-amount-pos"></div>
                 </div>
-                <select
+                {/* <select
                   className="select-answer"
                   value={productConditionStatus}
                   onChange={(e) => setProductConditionStatus(e.target.value)}
@@ -1598,7 +1598,7 @@ export function ProductForm(props) {
                   <option value="reasonable">Razoável</option>
                   <option value="good">Bom</option>
                   <option value="excellent">Ótimo</option>
-                </select>
+                </select> */}
 
                 { productConditionStatus === "bad" || productConditionStatus === "reasonable" && (<>
                   <label htmlFor="description" className="mt-3">Descreva:</label>
