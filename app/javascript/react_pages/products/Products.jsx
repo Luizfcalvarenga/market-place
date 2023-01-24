@@ -49,6 +49,8 @@ export function Products(props) {
   const [productTypeOptionsToFilter, setProductTypeOptionsToFilter] = useState([]);
   const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([]);
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
+  const [attributeOptionsToFilter, setAttributeOptionsToFilter] = useState([]);
+
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
 
   const [filteredLink, setFilteredLink] = useState("");
@@ -99,7 +101,6 @@ export function Products(props) {
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
     if (clotheSizeOptionsToFilter) url = url + `&clothe_sizes=${clotheSizeOptionsToFilter}`
 
-
     const response = await axios.get(url);
     setProductTypes(response.data.product_types.sort(function (a, b) {
       if (a.prompt < b.prompt) {
@@ -132,21 +133,36 @@ export function Products(props) {
     // }
     console.log(e.target.value)
     const currentOptionsToFilter = [...productTypeOptionsToFilter]
+    const currentAttributeOptionsToFilter = [...attributeOptionsToFilter]
+
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.innerHTML)) {
       setProductTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
+      setAttributeOptionsToFilter(currentAttributeOptionsToFilter.filter(element => element != e.target.value));
       console.log(currentOptionsToFilter)
+      console.log(currentAttributeOptionsToFilter)
+
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.innerHTML)
+      currentAttributeOptionsToFilter.push(e.target.value)
       setProductTypeOptionsToFilter(currentOptionsToFilter)
+      setAttributeOptionsToFilter(currentAttributeOptionsToFilter)
       console.log(currentOptionsToFilter)
+      console.log(currentAttributeOptionsToFilter)
       tagFilter.classList.add("selected-tag")
-      const attrs = productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value))
-      setAttributesForProduct(attrs)
+
+      let atributes_array = productTypeAttributes.filter(function(element) {
+        return attributeOptionsToFilter.includes(element.id)
+      });
+
+      setAttributesForProduct(atributes_array)
       console.log(attributesForProduct)
     }
 
+    // const attrs = productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value))
+    // setAttributesForProduct(attrs)
+    // console.log(attributesForProduct)
 
     // if (attrs.length > 1 ) {
     //   attrs.pop()
@@ -329,10 +345,12 @@ export function Products(props) {
 
   const handleLike = (e) => {
     e.preventDefault()
+    console.log(e)
+    console.log(e.target.id)
     const dataObject = new FormData();
-    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Product" );
-    console.log(e.nativeEvent.path[1].id)
+    console.log(e.target.id)
     axios.post('/likes', dataObject)
 
     .then(function (response) {
@@ -863,7 +881,7 @@ export function Products(props) {
                           <p className="mt-2">{product.product_type.prompt}</p>
                         </div>
                         <div className="infos">
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button> <br />
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i id={product.id} className="far fa-heart"></i></button> <br />
                           { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
                             <img src={AccessorieImage} alt="" className="icon-card-index ms-1 mt-2"/>
                           )}
