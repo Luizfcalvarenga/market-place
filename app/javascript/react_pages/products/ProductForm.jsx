@@ -133,8 +133,6 @@ export function ProductForm(props) {
     }
   }, [productTypeId]);
 
-
-
   useEffect(() => {
     if (!productPhotos) {
         setPhotosPreview(undefined)
@@ -191,7 +189,6 @@ export function ProductForm(props) {
     const section = document.getElementById(e.target.innerText)
     section.classList.toggle("d-none")
   }
-
 
   async function fetchProduct() {
     const response = await axios.get(
@@ -445,6 +442,17 @@ export function ProductForm(props) {
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
+
+  const handleProductCondition = (e) => {
+    e.target.classList.toggle("active")
+    setProductCondition(e.target.value)
+    if (e.target.classList.contains("active")) {
+      e.target.classList.add("selected-tag")
+    } else {
+      e.target.classList.remove("selected-tag")
+    }
+  }
+  
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
