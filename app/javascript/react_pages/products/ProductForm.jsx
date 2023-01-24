@@ -30,7 +30,6 @@ export function ProductForm(props) {
   const [productCondition, setProductCondition] = useState("");
   const [productConditionStatus, setProductConditionStatus] = useState("");
   const [productConditionDescription, setProductConditionDescription] = useState("");
-
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productCity, setProductCity ] = useState(null);
@@ -44,12 +43,9 @@ export function ProductForm(props) {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [discountCoupon, setDiscountCoupon] = useState("");
-
-
   const [photoFile, setPhotoFile] = useState({
     index: null,
   });
-
   const [errors, setErrors] = useState({
     product: {},
     product_attributes: {},
@@ -442,17 +438,22 @@ export function ProductForm(props) {
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
-
   const handleProductCondition = (e) => {
+    console.log(e.target.value)
     e.target.classList.toggle("active")
-    setProductCondition(e.target.value)
-    if (e.target.classList.contains("active")) {
-      e.target.classList.add("selected-tag")
-    } else {
-      e.target.classList.remove("selected-tag")
+    const newBtn = document.getElementById("new")
+    const usedBtn = document.getElementById("used")
+    if (e.target.id === "new") {
+      usedBtn.classList.remove("selected-tag")
+      newBtn.classList.add("selected-tag")
+      setProductCondition(e.target.value)
+    } else if (e.target.id === "used") {
+      usedBtn.classList.add("selected-tag")
+      newBtn.classList.remove("selected-tag")
+      setProductCondition(e.target.value)
     }
   }
-  
+
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
@@ -1567,39 +1568,32 @@ export function ProductForm(props) {
               <option value="no_documentation">Sem Documento</option>
             </select>
 
-            <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-            <button type="button" value="new" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Novo</button>
-            <button type="button" value="used" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Usado</button>
+            <div className="condition">
+              <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
+              <button type="button" id="new" value="new" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Novo</button>
+              <button type="button" id="used" value="used" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Usado</button>
 
-            <select
-              className="select-answer"
-              value={productCondition}
-              onChange={(e) => setProductCondition(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="new">Novo</option>
-              <option value="used">Usado</option>
-            </select>
-            {productCondition === "used" && (<>
-            <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da seu produto:</label>
-            <select
-              className="select-answer"
-              value={productConditionStatus}
-              onChange={(e) => setProductConditionStatus(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="bad">Ruim</option>
-              <option value="reasonable">Razoável</option>
-              <option value="good">Bom</option>
-              <option value="excellent">Ótimo</option>
-            </select>
+              {productCondition === "used" && (<>
+                <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da seu produto:</label>
+                <select
+                  className="select-answer"
+                  value={productConditionStatus}
+                  onChange={(e) => setProductConditionStatus(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="bad">Ruim</option>
+                  <option value="reasonable">Razoável</option>
+                  <option value="good">Bom</option>
+                  <option value="excellent">Ótimo</option>
+                </select>
+                
+                { productConditionStatus === "bad" || productConditionStatus === "reasonable" && (<>
+                  <label htmlFor="description" className="mt-3">Descreva:</label>
+                  <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
+                </>)}
+              </>)}
+            </div>
 
-
-            { productConditionStatus === "bad" || productConditionStatus === "reasonable" && (<>
-              <label htmlFor="description" className="mt-3">Descreva:</label>
-              <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
-            </>)}
-          </>)}
             <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
             <select
               className="select-answer"
