@@ -1570,8 +1570,10 @@ export function ProductForm(props) {
 
             <div className="condition">
               <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-              <button type="button" id="new" value="new" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Novo</button>
-              <button type="button" id="used" value="used" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Usado</button>
+              <div className="d-flex">
+                <button type="button" id="new" value="new" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Novo</button>
+                <button type="button" id="used" value="used" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Usado</button>
+              </div>
 
               {productCondition === "used" && (<>
                 <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da seu produto:</label>
@@ -1586,7 +1588,7 @@ export function ProductForm(props) {
                   <option value="good">Bom</option>
                   <option value="excellent">Ótimo</option>
                 </select>
-                
+
                 { productConditionStatus === "bad" || productConditionStatus === "reasonable" && (<>
                   <label htmlFor="description" className="mt-3">Descreva:</label>
                   <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
