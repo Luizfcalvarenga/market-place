@@ -212,8 +212,6 @@ export function ProductForm(props) {
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
-
-
       if (response.data.product_attributes) {
         setProductAttributes(
           response.data.product_attributes
@@ -1660,7 +1658,7 @@ export function ProductForm(props) {
             <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
-            {productCity && productState (<>
+            {productCity && productState && (<>
               <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>

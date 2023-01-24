@@ -49,12 +49,7 @@ export function Products(props) {
   const [productTypeOptionsToFilter, setProductTypeOptionsToFilter] = useState([]);
   const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([]);
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
-
-
-
-
-
-
+  const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
 
   const [filteredLink, setFilteredLink] = useState("");
 
@@ -102,9 +97,7 @@ export function Products(props) {
     if (productTypeOptionsToFilter) url = url + `&product_types=${productTypeOptionsToFilter}`
     if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
-
-
-
+    if (clotheSizeOptionsToFilter) url = url + `&clothe_sizes=${clotheSizeOptionsToFilter}`
 
 
     const response = await axios.get(url);
@@ -125,7 +118,7 @@ export function Products(props) {
 
 
   }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
-    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter])
+    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter])
 
 
   const handleProductAtributes = (e) => {
@@ -137,7 +130,7 @@ export function Products(props) {
     //   setProductTypeFilter("")
     //   e.target.classList.remove("selected-tag")
     // }
-
+    console.log(e.target.value)
     const currentOptionsToFilter = [...productTypeOptionsToFilter]
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.innerHTML)) {
@@ -149,15 +142,16 @@ export function Products(props) {
       setProductTypeOptionsToFilter(currentOptionsToFilter)
       console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
+      const attrs = productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value))
+      setAttributesForProduct(attrs)
+      console.log(attributesForProduct)
     }
 
-    const attrs = productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value))
-    setAttributesForProduct(attrs)
 
-    if (attrs.length > 1 ) {
-      attrs.pop()
-      attrs.shift()
-    }
+    // if (attrs.length > 1 ) {
+    //   attrs.pop()
+    //   attrs.shift()
+    // }
   }
 
   const renderProductAttributeSelect = (attribute, index) => {
@@ -219,8 +213,6 @@ export function Products(props) {
   }
 
   const hendleAccessoriesFiltes = (e) => {
-    // setAccessoriesProducts(Array.from({length: 39}, (_, i) => i + 1))
-    console.log(e)
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       document.getElementById("products-accessories").classList.remove("d-none")
@@ -253,12 +245,30 @@ export function Products(props) {
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       document.getElementById("products-clothes").classList.remove("d-none")
+      document.getElementById("clothes-sizes-filter").classList.remove("d-none")
       e.target.classList.add("selected-tag")
 
     } else {
       document.getElementById("products-clothes").classList.add("d-none")
+      document.getElementById("clothes-sizes-filter").classList.add("d-none")
       e.target.classList.remove("selected-tag")
 
+    }
+  }
+
+  const handleMultipleFiltersClotheSizes = (e) => {
+    console.log(e.target.value)
+    const currentOptionsToFilter = [...clotheSizeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.innerHTML)) {
+      setClotheSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.innerHTML)
+      setClotheSizeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
     }
   }
 
@@ -482,7 +492,7 @@ export function Products(props) {
                 </label>
               </div>
             </div> */}
-            <h6 className=" mt-3">Produts</h6>
+            <h6 className=" mt-3">Produtos</h6>
             <div className="d-flex justify-content-between">
               <button type="button" value="" className="filter-tag" onClick={(e) => hendleAccessoriesFiltes(e)}>Acessórios</button>
               <button type="button" value="" className="filter-tag" onClick={(e) => hendleComponentsFiltes(e)}>Componentes</button>
@@ -652,6 +662,8 @@ export function Products(props) {
               </div>
 
 
+
+
               {/* <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
@@ -675,6 +687,19 @@ export function Products(props) {
                 <option value="dirt_jump">Dirt Jump</option>
               </select> */}
             </>)}
+
+            <div id="clothes-sizes-filter" className="d-none">
+              <h6 className=" mt-3">tamanhos</h6>
+              <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
+                <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFiltersClotheSizes(e)}>PP</button>
+                <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersClotheSizes(e)}>P</button>
+                <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFiltersClotheSizes(e)}>M</button>
+                <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFiltersClotheSizes(e)}>G</button>
+                <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersClotheSizes(e)}>GG</button>
+                <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersClotheSizes(e)}>XGG</button>
+              </div>
+            </div>
+
 
             <div className="name-filter">
               <h5 className="mt-3">Nome</h5>
