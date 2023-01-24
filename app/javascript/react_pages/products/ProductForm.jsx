@@ -27,13 +27,16 @@ export function ProductForm(props) {
   const [productModel, setProductModel] = useState("");
   const [otherProductModel, setOtherProductModel] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  const [productCondition, setProductCondition] = useState("");
+  const [productConditionStatus, setProductConditionStatus] = useState("");
+  const [productConditionDescription, setProductConditionDescription] = useState("");
+
   const [productPrice, setProductPrice] = useState(null);
   const [productQuantity, setProductQuantity ] = useState(null);
   const [productCity, setProductCity ] = useState(null);
   const [productState, setProductState ] = useState(null);
   const [productYear, setProductYear ] = useState(null);
   const [productDocumentationType, setProductDocumentationType] = useState("");
-  const [productCondition, setProductCondition] = useState("");
   const [otherProductYear, setOtherProductYear ] = useState(null);
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
@@ -296,6 +299,8 @@ export function ProductForm(props) {
       options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
     } else if (attribute.name === "seat_post_type") {
       options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+    } else if (attribute.name === "rear_or_front_and_rear_derailleur") {
+      options = [ ["front_and_rear", "Dianeira e Traseira"], ["rear", "Traseira" ]]
     } else {
       options = attribute.options
     }
@@ -326,7 +331,6 @@ export function ProductForm(props) {
               }
             })}
           </select>
-
           <div id={attribute.name} className="d-none">
             <label htmlFor="productbrand" className="mt-3">Qual:</label>
             <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
@@ -355,6 +359,9 @@ export function ProductForm(props) {
     dataObject.append( "product[state_id]", productState );
     dataObject.append( "product[documentation_type]", productDocumentationType );
     dataObject.append( "product[condition]", productCondition );
+    dataObject.append( "product[product_condition_status]", productConditionStatus );
+    dataObject.append( "product[product_condition_description]", productConditionDescription );
+
 
     if (productModel === "Outro") {
       dataObject.append( "product[model]", otherProductModel );
@@ -923,7 +930,7 @@ export function ProductForm(props) {
     "Wahoo"].sort()
 
   const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other" ];
-  const productsIdsWithSpecificModels = ["5", "18", "34", "20", "36"]
+  const productsIdsWithSpecificModels = ["5", "19", "21", "35", "37"]
 
   const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
   const dirtMtbBrakeModels = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]
@@ -1066,7 +1073,7 @@ export function ProductForm(props) {
               <p className="text-danger">{errors.product.name}</p>
           )}
 
-          {(productTypeId === "17") && (<>
+          {(productTypeId === "18") && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1127,7 +1134,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35"  ) && (<>
+          {(productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36"  ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1155,7 +1162,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "20" || productTypeId === "36" ) && (<>
+          {(productTypeId === "21" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1186,7 +1193,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {!(productTypeId === "5" || productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35" || productTypeId === "17" || productTypeId === "20" || productTypeId === "36" ) && (<>
+          {!(productTypeId === "5" || productTypeId === "15" || productTypeId === "18" || productTypeId === "19" || productTypeId === "20" || productTypeId === "21" || productTypeId === "35" || productTypeId === "36" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1271,7 +1278,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="front-derailleur-models">
-            {(productTypeId === "18" && productCategory === "road" ) && (<>
+            {(productTypeId === "19" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1297,7 +1304,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "18") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "19") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1325,7 +1332,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="rear-derailleur-models">
-            {(productTypeId === "34" && productCategory === "road" ) && (<>
+            {(productTypeId === "35" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1351,7 +1358,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "34") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "35") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1379,7 +1386,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="front-suspension-model">
-            {(productTypeId === "20") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "21") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1407,7 +1414,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="rear-suspension-model">
-            {(productTypeId === "36") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "37") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1434,7 +1441,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
-          {(productTypeId === "36" || productTypeId === "20" ) && (productCategory === "road" ) && (<>
+          {(productTypeId === "21" || productTypeId === "37" ) && (productCategory === "road" ) && (<>
 
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
@@ -1569,6 +1576,26 @@ export function ProductForm(props) {
               <option value="new">Novo</option>
               <option value="used">Usado</option>
             </select>
+            {productCondition === "used" && (<>
+            <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da seu produto:</label>
+            <select
+              className="select-answer"
+              value={productConditionStatus}
+              onChange={(e) => setProductConditionStatus(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="bad">Ruim</option>
+              <option value="reasonable">Razoável</option>
+              <option value="good">Bom</option>
+              <option value="excellent">Ótimo</option>
+            </select>
+
+
+            { productConditionStatus === "bad" || productConditionStatus === "reasonable" && (<>
+              <label htmlFor="description" className="mt-3">Descreva:</label>
+              <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
+            </>)}
+          </>)}
             <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
             <select
               className="select-answer"

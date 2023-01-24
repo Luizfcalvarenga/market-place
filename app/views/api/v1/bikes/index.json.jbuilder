@@ -51,6 +51,11 @@ json.bikes @bikes do |bike|
   json.mileage bike.mileage
   json.rim_size bike.rim_size
   json.pedals bike.pedals
+  json.fork_material bike.fork_material
+  json.crankset_material bike.crankset_material
+  json.handlebar_material bike.handlebar_material
+  json.wheel_material bike.wheel_material
+  json.seat_post_material bike.seat_post_material
   json.battery_cycles bike.battery_cycles
   json.photos bike.photos.first(2).map(&:url)
 end

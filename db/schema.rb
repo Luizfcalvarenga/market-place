@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_18_171952) do
+ActiveRecord::Schema.define(version: 2023_01_24_171252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 2023_01_18_171952) do
     t.string "rear_tyre"
     t.string "handlebar"
     t.string "stem"
-    t.string "motor"
     t.integer "battery_cycles"
     t.integer "mileage"
     t.string "brake_disc_size"
@@ -131,6 +130,11 @@ ActiveRecord::Schema.define(version: 2023_01_18_171952) do
     t.string "seat_post_model"
     t.bigint "city_id"
     t.bigint "state_id"
+    t.string "crankset_material"
+    t.string "fork_material"
+    t.string "handlebar_material"
+    t.string "wheel_material"
+    t.string "seat_post_material"
     t.index ["category_id"], name: "index_bikes_on_category_id"
     t.index ["city_id"], name: "index_bikes_on_city_id"
     t.index ["service_id"], name: "index_bikes_on_service_id"
@@ -305,6 +309,8 @@ ActiveRecord::Schema.define(version: 2023_01_18_171952) do
     t.string "condition"
     t.bigint "city_id"
     t.bigint "state_id"
+    t.string "product_condition_status"
+    t.string "product_condition_description"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["city_id"], name: "index_products_on_city_id"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"

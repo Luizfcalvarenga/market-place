@@ -44,6 +44,17 @@ export function BikeForm(props) {
   const [brakeModel, setBrakeModel] = useState("");
   const [otherBrakeModel, setOtherBrakeModel] = useState("");
   const [suspensionType, setSuspensionType] = useState("");
+  const [forkMaterial, setForkMaterial] = useState("");
+
+  const [otherForkMaterial, setOtherForkMaterial] = useState("");
+  const [cranksetMaterial, setCranksetMaterial] = useState("");
+  const [otherCranksetMaterial, setOtherCranksetMaterial] = useState("");
+  const [handlebarMaterial, setHandlebarMaterial] = useState("");
+  const [otherHandlebarMaterial, setOtherHandlebarMaterial] = useState("");
+  const [wheelMaterial, setWheelMaterial] = useState("");
+  const [otherWheelMaterial, setOtherWheelMaterial] = useState("");
+  const [seatPostMaterial, setSeatPostMaterial] = useState("");
+  const [otherSeatPostMaterial, setOtherSeatPostMaterial] = useState("");
   const [frontSuspensionTravel, setFrontSuspensionTravel] = useState("");
   const [otherFrontSuspensionTravel, setOtherFrontSuspensionTravel] = useState("");
   const [frontSuspensionModel, setFrontSuspensionModel] = useState("");
@@ -278,8 +289,6 @@ export function BikeForm(props) {
     dataObject.append( "bike[bike_type]", bikeType );
     dataObject.append( "bike[price_in_cents]", (priceInCents * 100) );
     dataObject.append( "bike[quantity]", quantity );
-    // dataObject.append( "bike[frame_brand]", frameBrand );
-    // dataObject.append( "bike[frame_size]", frameSize );
     dataObject.append( "bike[model]", model );
     dataObject.append( "bike[rim_size]", rimSize );
     dataObject.append( "bike[number_of_front_gears]", numberOfFrontGears );
@@ -337,6 +346,37 @@ export function BikeForm(props) {
     } else {
       dataObject.append( "bike[frame_material]", frameMaterial );
     }
+
+    if (forkMaterial === "Outro") {
+      dataObject.append( "bike[fork_material]", otherForkMaterial );
+    } else {
+      dataObject.append( "bike[fork_material]", forkMaterial );
+    }
+
+    if (cranksetMaterial === "Outro") {
+      dataObject.append( "bike[crankset_material]", otherCranksetMaterial );
+    } else {
+      dataObject.append( "bike[crankset_material]", cranksetMaterial );
+    }
+
+    if (handlebarMaterial === "Outro") {
+      dataObject.append( "bike[handlebar_material]", otherHandlebarMaterial );
+    } else {
+      dataObject.append( "bike[handlebar_material]", handlebarMaterial );
+    }
+
+    if (wheelMaterial === "Outro") {
+      dataObject.append( "bike[wheel_material]", otherWheelMaterial );
+    } else {
+      dataObject.append( "bike[wheel_material]", wheelMaterial );
+    }
+
+    if (seatPostMaterial === "Outro") {
+      dataObject.append( "bike[seat_post_material]", otherSeatPostMaterial );
+    } else {
+      dataObject.append( "bike[seat_post_material]", seatPostMaterial );
+    }
+
 
     if (frontSuspensionTravel === "other") {
       dataObject.append( "bike[front_suspension_travel]", otherFrontSuspensionTravel );
@@ -625,18 +665,39 @@ export function BikeForm(props) {
     sectionActive.classList.toggle("review-selected")
   }
 
-
-  const createAccessories = (e) => {
-    const accessories = []
-    let accessorie = e.target.value
-    if (!accessories.includes(accessorie)) {
-
-      accessories.push(accessorie)
+  const handleNoAccessoriesToSelect = (e) => {
+    e.target.classList.toggle("active")
+    if (e.target.classList.contains("active")) {
+      e.target.classList.add("selected-tag")
+    } else {
+      e.target.classList.remove("selected-tag")
     }
-    console.log(accessories)
+  }
 
-    setAccessories(accessories)
+  const handleAccessoriesToSelect = (e) => {
+    e.target.classList.toggle("active")
+    if (e.target.classList.contains("active")) {
+      document.getElementById("accessories-options").classList.remove("d-none")
+      e.target.classList.add("selected-tag")
+    } else {
+      document.getElementById("accessories-options").classList.add("d-none")
+      e.target.classList.remove("selected-tag")
+    }
+  }
 
+  const includeAccessory = (e) => {
+    const currentAccessories = [...accessories]
+    const tagFilter = e.target
+    if (currentAccessories.includes(e.target.value)) {
+      setAccessories(currentAccessories.filter(element => element != e.target.value));
+      console.log(currentAccessories)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentAccessories.push(e.target.value)
+      setAccessories(currentAccessories)
+      console.log(currentAccessories)
+      tagFilter.classList.add("selected-tag")
+    }
   }
 
   const handleLocality = (e) => {
@@ -1386,6 +1447,28 @@ export function BikeForm(props) {
               )}
             </>)}
 
+
+            <label htmlFor="frameMaterial" className="mt-4">Material do pedivela:</label>
+            <select
+              className="select-answer"
+              value={cranksetMaterial}
+              onChange={(e) => setCranksetMaterial(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="carbon">Carbono</option>
+              <option value="aluminum">Aluminio</option>
+              <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
+              <option value="Outro">Outro</option>
+
+            </select>
+            { cranksetMaterial === "Outro"  && (
+              <>
+                <label htmlFor="otherCranksetMaterial" className="mt-4">Qual?</label>
+                <input type="text" className="text-input" value={otherCranksetMaterial} onChange={(e) => setOtherCranksetMaterial(e.target.value)}/>
+              </>
+            )}
+
+
             <label htmlFor="front_gear" className="mt-4">Pedivela:</label>
             <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={crankset} onChange={(e) => setCrankset(e.target.value)}/>
 
@@ -1472,6 +1555,33 @@ export function BikeForm(props) {
           </div>
 
                                                                           {/*//////////////////SUSPENSÂO///////////////////////*/}
+
+          {category === "road" && (<>
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Garfo<i className="fas fa-chevron-down ms-2"></i></button>
+
+            <div id="Garfo" className="fork d-none mb-3">
+              <label htmlFor="frameMaterial" className="mt-4">Material do garfo:</label>
+              <select
+                className="select-answer"
+                value={forkMaterial}
+                onChange={(e) => setForkMaterial(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="carbon">Carbono</option>
+                <option value="aluminum">Aluminio</option>
+                <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
+                <option value="Outro">Outro</option>
+
+              </select>
+              { forkMaterial === "Outro"  && (
+                <>
+                  <label htmlFor="otherForkMaterial" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherForkMaterial} onChange={(e) => setOtherForkMaterial(e.target.value)}/>
+                </>
+              )}
+            </div>
+            </>
+          )}
 
           {!(category === "road") && (<>
 
@@ -1654,6 +1764,28 @@ export function BikeForm(props) {
                   })}
               </select>
 
+
+            <label htmlFor="frameMaterial" className="mt-4">Material da roda:</label>
+            <select
+              className="select-answer"
+              value={wheelMaterial}
+              onChange={(e) => setWheelMaterial(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="carbon">Carbono</option>
+              <option value="aluminum">Aluminio</option>
+              <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
+              <option value="Outro">Outro</option>
+
+            </select>
+            { wheelMaterial === "Outro"  && (
+              <>
+                <label htmlFor="otherWheelMaterial" className="mt-4">Qual?</label>
+                <input type="text" className="text-input" value={otherWheelMaterial} onChange={(e) => setOtherWheelMaterial(e.target.value)}/>
+              </>
+            )}
+
+
               <label htmlFor="frontRimModel" className="mt-4">Aro dianteiro:</label>
               <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={frontRimModel} onChange={(e) => setFrontRimModel(e.target.value)}/>
 
@@ -1677,6 +1809,25 @@ export function BikeForm(props) {
 
             <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Cockpit<i className="fas fa-chevron-down ms-2"></i></button>
             <div id="Cockpit" className="cockpit d-none mb-3">
+              <label htmlFor="frameMaterial" className="mt-4">Material da guidão:</label>
+              <select
+                className="select-answer"
+                value={handlebarMaterial}
+                onChange={(e) => setHandlebarMaterial(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="carbon">Carbono</option>
+                <option value="aluminum">Aluminio</option>
+                <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
+                <option value="Outro">Outro</option>
+
+              </select>
+              { handlebarMaterial === "Outro"  && (
+                <>
+                  <label htmlFor="otherhandlebarMaterial" className="mt-4">Qual?</label>
+                  <input type="text" className="text-input" value={otherhandlebarMaterial} onChange={(e) => setOtherhandlebarMaterial(e.target.value)}/>
+                </>
+              )}
               <label htmlFor="handlebar" className="mt-3">Guidão:</label>
               <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={handlebar} onChange={(e) => setHandlebar(e.target.value)}/>
               <label htmlFor="stem" className="mt-4">Mesa/Avanço:</label>
@@ -1697,6 +1848,30 @@ export function BikeForm(props) {
                 <option value="retractable">Retrátil</option>
                 <option value="rigid">Rigido</option>
               </select>
+
+              {seatPostType === "rigid" && (
+                <>
+                <label htmlFor="frameMaterial" className="mt-4">Material da canote:</label>
+                <select
+                  className="select-answer"
+                  value={seatPostMaterial}
+                  onChange={(e) => setSeatPostMaterial(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="carbon">Carbono</option>
+                  <option value="aluminum">Aluminio</option>
+                  <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
+                  <option value="Outro">Outro</option>
+
+                </select>
+                { seatPostMaterial === "Outro"  && (
+                  <>
+                    <label htmlFor="otherSeatPostMaterial" className="mt-4">Qual?</label>
+                    <input type="text" className="text-input" value={otherSeatPostMaterial} onChange={(e) => setOtherSeatPostMaterial(e.target.value)}/>
+                  </>
+                )}
+                </>
+              )}
 
               {seatPostType === "retractable" && (<>
                 <label htmlFor="seatPostTravel" className="mt-4">Curso do canote:</label>
@@ -1734,31 +1909,26 @@ export function BikeForm(props) {
 
             <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
             <div id="Acessórios" className="accessories d-none mb-3">
-              <label htmlFor="" className="mt-3">Acessório:</label>
-              <select
-                className="select-answer" aria-label=".form-select-sm example"
-                value={accessories}
-                onChange={(e) => createAccessories(e)}
-                multiple
-              >
-                <option value=""></option>
-                {accessoryOptions.map((accessorieOption, index)=> {
-                  return (<option key={index}>{accessorieOption}</option>);
-                })}
-              </select>
-
-              { accessories === "Outro" && (<>
-                <label htmlFor="otherAccessory" className="mt-4">Qual?</label>
-                <input type="text"  className="text-input" value={otherAccessory} onChange={(e) => setOtherAccessory(e.target.value)}/>
-              </>)}
-
-              { accessories !== "Não" && (<>
+              <label htmlFor="" className="mt-3 me-3">Acessório:</label>
+              <button type="button" value="Não" className="filter-tag mx-2" onClick={(e) => handleNoAccessoriesToSelect(e)}>Não</button>
+              <button type="button" value="Sim" className="filter-tag mx-2" onClick={(e) => handleAccessoriesToSelect(e)}>Sim</button>
+              <div id="accessories-options" className="accessories-options d-flex gap-3 flex-wrap justify-content-center d-none mt-3">
+                <button type="button" value="Pedal" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Pedal</button>
+                <button type="button" value="Ciclocomputador" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Ciclocomputador</button>
+                <button type="button" value="Lanterna Traseira" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Lanterna Traseira</button>
+                <button type="button" value="Farol" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Farol</button>
+                <button type="button" value="Bolsa de Acessórios" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bolsa de Acessórios</button>
+                <button type="button" value="Suporte de Garrafinha" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Suporte de Garrafinha</button>
+                <button type="button" value="Bateria Extra" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bateria Extra</button>
+              </div>
+              {accessories.length > 0  && (<>
                 <label htmlFor="accessories-description" className="mt-4">Descrição:</label>
                 <input className="text-input" type="text" placeholder="" value={accessoriesDescription} aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
               </>)}
-
-              <label htmlFor="batteryCyle" className="mt-4">Pedal:</label>
-              <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={pedals} onChange={(e) => setPedals(e.target.value)}/>
+              {accessories.includes("Pedal") && (<>
+                <label htmlFor="batteryCyle" className="mt-4">Pedal:</label>
+                <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example" value={pedals} onChange={(e) => setPedals(e.target.value)}/>
+              </>)}
             </div>
             <div className="d-flex justify-content-center">
               <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>

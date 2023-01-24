@@ -146,9 +146,13 @@ class BikesController < ApplicationController
       :rear_tyre,
       :handlebar,
       :stem,
-      :motor,
       :mileage,
       :battery_cycle,
+      :fork_material,
+      :crankset_material,
+      :handlebar_material,
+      :wheel_material,
+      :seat_post_material,
       photos: []
     )
   end

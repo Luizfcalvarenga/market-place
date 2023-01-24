@@ -180,10 +180,10 @@ module Api
           :rear_tyre,
           :handlebar,
           :stem,
-          :motor,
           :mileage,
           :battery_cycles,
           :pedals,
+          
           photos: []
         )
       end

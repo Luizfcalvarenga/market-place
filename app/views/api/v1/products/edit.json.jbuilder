@@ -14,3 +14,5 @@ json.product_photos @product.photos
 json.state @product.state
 json.city @product.city
 json.year @product.year
+json.product_condition_status @product.product_condition_status
+json.product_condition_description @product.product_condition_description

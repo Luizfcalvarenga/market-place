@@ -136,7 +136,26 @@ module Api
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :year, :city_id, :state_id, :documentation_type, :condition, photos: [])
+        params.require(:product).permit(
+          :user_id,
+          :category_id,
+          :name,
+          :modality,
+          :product_type_id,
+          :brand,
+          :model,
+          :description,
+          :price_in_cents,
+          :quantity,
+          :year,
+          :city_id,
+          :state_id,
+          :documentation_type,
+          :condition,
+          :product_condition_status,
+          :product_condition_description,
+          photos: []
+        )
       end
 
       def product_attribute_params
