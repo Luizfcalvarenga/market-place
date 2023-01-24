@@ -512,10 +512,10 @@
     sneaker_sizes = ProductTypeAttribute.create!(product_type: sneaker, name: "sneaker_size", kind: "multiple_choices", options: shoes_sizes, prompt: "Tamanho")
 
 
-    materials = ["aluminum", "carbon", "carbon_aluminum_chainstay", "other"]
+    materials = [ ["aluminum", "Alumínio" ], ["carbon", "Carbono"], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRAME >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-    frame_brands = [ "Alfameq", "Astro", "Audax", "BH", "Bianchi", "BMC", "Caloi", "Cannondale", "Canyon", "Carrera", "Cervelo", "Corratec", "Cube", "dabomb", "Felt", "First", "Focus", "Fuji", "Giant", "Groove", "GT", "GTS", "Ibis", "Jamis", "Kona", "Lapierre", "Marin", "Merida", "Mosso", "Oggi", "Orbea", "Pinarello", "Raleigh", "Rava", "Ridley", "Santa_cruz", "Schwinn", "Scott", "Sense", "Soul", "Specialized", "Swift Carbon", "Trek", "Tsw", "Wilier", "YT", "Argon 21", "Bliv", "Blue", "Bottecchia", "Cipollini", "Cly", "Cumberland", "De Rosa", "E Moving", "Gary Fisher", "Gioia", "Kaiena", "Kestrel", "Kode", "Kuota", "Lazzaretti", "L E-Bike", "Litespeed", "Look", "Lotus", "Mercian", "Miyamura Gravel", "Open", "Quintana Roo", "Redland", "Riva", "Rose", "Sava", "Sundown", "Time", "Trinx", "Trust", "Velorbis", "Vicinitech", "Victory", "Eddy Merckx", "Salsa", "Surly", "Soma", "Diamondback", "Dahon", "Yeti"
+    frame_brands = [ "Alfameq", "Astro", "Audax", "BH", "Bianchi", "BMC", "Caloi", "Cannondale", "Canyon", "Carrera", "Cervelo", "Corratec", "Cube", "dabomb", "Felt", "First", "Focus", "Fuji", "Giant", "Groove", "GT", "GTS", "Ibis", "Jamis", "Kona", "Lapierre", "Marin", "Merida", "Mosso", "Oggi", "Orbea", "Pinarello", "Raleigh", "Rava", "Ridley", "Santa_cruz", "Schwinn", "Scott", "Sense", "Soul", "Specialized", "Swift Carbon", "Trek", "Tsw", "Wilier", "YT", "Argon 21", "Bliv", "Blue", "Bottecchia", "Cipollini", "Cly", "Cumberland", "De Rosa", "E Moving", "Gary Fisher", "Gioia", "Kaiena", "Kestrel", "Kode", "Kuota", "Lazzaretti", "L E-Bike", "Litespeed", "Look", "Lotus", "Mercian", "Miyamura Gravel", "Open", "Quintana Roo", "Redland", "Riva", "Rose", "Sava", "Sundown", "Time", "Trinx", "Trust", "Velorbis", "Vicinitech", "Victory", "Eddy Merckx", "Salsa", "Surly", "Soma", "Diamondback", "Dahon", "Yeti", "other"
     ].sort_by { |frame_brands| frame_brands }
 
     road_frame_sizes = ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
@@ -526,19 +526,19 @@
     ProductTypeAttribute.create!(product_type: frame, name: "frame_brand", kind: "multiple_choices", options: frame_brands, prompt: "Marca do quadro" )
     ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: materials, prompt: "Material do quadro" )
     ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro")
-    ProductTypeAttribute.create!(product_type: frame, name: "suspension_type", kind: "multiple_choices", options: ["no_suspension", "hardtail", "full_suspension"], prompt: "Tipo de suspensão")
+    ProductTypeAttribute.create!(product_type: frame, name: "suspension_type", kind: "multiple_choices", options: [["no_suspension", "Sem Suspensão"], ["hardtail", "Hardtail" ], ["full_suspension", "Full Suspension" ]], prompt: "Tipo de suspensão")
     ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da suspensão traseira")
+    ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do shock") # caso possam ser opcionais os atributos
     ProductTypeAttribute.create!(product_type: frame, name: "bike_type", kind: "multiple_choice", options: ["Bike", "E-Bike"], prompt: "Tipo de bike")
     ProductTypeAttribute.create!(product_type: frame, name: "battery_capacity", kind: "multiple_choice", options: battery_capacities, prompt: "Capacidade da bateria") # se for e-bike
     ProductTypeAttribute.create!(product_type: frame, name: "battery_cycles", kind: "text", options: nil, prompt: "Ciclos da bateria") # se for e-bike ?? option nil ?
     ProductTypeAttribute.create!(product_type: frame, name: "motor_mileage", kind: "text", options: "", prompt: "KM do motor") # se for e-bike ???? option "" ?
-    ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do shock") # caso possam ser opcionais os atributos
 
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     # road_brake_models = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
     # mtb_dirt_urban_brake_models = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]
-    brake_types = ["v_brake", "hydraulic_disc", "mechanical_disc", "coaster_brake" ]
+    brake_types = [["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
     ProductTypeAttribute.create!(product_type: brake, name: "brake_type", kind: "multiple_choice", options: brake_types, prompt: "Tipo de freio" )
     ProductTypeAttribute.create!(product_type: brake, name: "disc_include", kind: "multiple_choice", options: ["Sim", "Não"], prompt: "Acompanha Disco?") # se for hidraulico ou mecanico à disco
     ProductTypeAttribute.create!(product_type: brake, name: "brake_disc_size", kind: "multiple_choice", options: ["140mm", "160mm", "180mm", "200mm", "203mm", "other" ], prompt: "Tamanho do disco")  # se acompanhar disco
@@ -582,7 +582,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RELATION KIT/COMPLETE GROUP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     front_gears_options= [0, 1, 2, 3 ]
     rear_gears_options= [0, 1, 7, 8, 9, 10, 11, 12 ]
-    ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_or_front_and_rear_derailleur", kind: "multiple_choice", options: ["front_and_rear", "rear"], prompt: "Tipo de relação")
+    ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_or_front_and_rear_derailleur", kind: "multiple_choice", options: [["front_and_rear", "Dianteira e Traseira"], ["rear", "Traseira"]], prompt: "Tipo de relação")
     ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "front_derailleur_velocities", kind: "multiple_choice", options: front_gears_options, prompt: "Número de coroas (dianteiro)") #condicionada ao tipo
     ProductTypeAttribute.create!(product_type: relation_kit_complete_group, name: "rear_derailleur_velocities", kind: "multiple_choice", options: rear_gears_options, prompt: "Número de velocidades (traseiro)")  #condicionada ao tipo
 
@@ -601,7 +601,7 @@
 
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< SEAT_POST >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
-    seat_post_types = ["retractable", "rigid"]
+    seat_post_types = [["retractable", "Retrátil"], ["rigid", "Rígido"]]
     seat_post_travels = ["50 mm", "70 mm", "75 mm","100 mm","125 mm","150 mm","175 mm","200 mm", "other" ]
     seat_post_diameter = ["25.4mm", "27.2 mm", "30.9mm", "31.6mm", "34.9mm", "other" ]
     ProductTypeAttribute.create!(product_type: seat_post, name: "seat_post_type", kind: "multiple_choice", options: seat_post_types, prompt: "Tipo do Canote")

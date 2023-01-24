@@ -24,7 +24,7 @@ class Product < ApplicationRecord
 
   has_many_attached :photos
 
-  validates :name, :category, :modality, :brand, :model, :year,  presence: true
+  # validates :name, :category, :modality, :brand, :model, :year,  presence: true
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
 

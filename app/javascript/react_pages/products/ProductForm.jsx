@@ -276,33 +276,34 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
       return
-    } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["brake_type"])) {
+    } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["seat_post_type"])) {
       return
     } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
       return
-    } else if (attribute.name === "documentation_type") {
-      return
-    } else if (attribute.name === "condition") {
-      return
     } else if (attribute.name === "front_derailleur_velocities" && productAttributes?.rear_or_front_and_rear_derailleur === "rear") {
       return
-    } else if (attribute.name === "suspension_type") {
-      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-    } else if (attribute.name === "brake_type") {
+    } else if ((attribute.name === "battery_capacity" || attribute.name === "battery_cycles" || attribute.name === "motor_mileage") && productAttributes?.bike_type === "Bike") {
+      return
+    } else if (["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"]) && attribute.name === "shock_size") {
+      return
+    }
+     else if (attribute.name === "suspension_type") {
+      options = [ ["no_suspension", "Sem Suspensão"], ["hardtail", "Hardtail" ], ["full_suspension", "Full Suspension" ]]
+    }
+     else if (attribute.name === "brake_type") {
       options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-    }  else if (attribute.name === "condition") {
-      options = [ ["new", "Novo"], ["used", "Usado" ]]
-    }  else if (attribute.name === "documentation_type") {
-      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-    } else if (attribute.name === "frame_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "rim_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "seat_post_type") {
-      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-    } else if (attribute.name === "rear_or_front_and_rear_derailleur") {
-      options = [ ["front_and_rear", "Dianeira e Traseira"], ["rear", "Traseira" ]]
-    } else {
+    }
+
+    // else if (attribute.name === "frame_material") {
+    //   options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    // } else if (attribute.name === "rim_material") {
+    //   options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+    // } else if (attribute.name === "seat_post_type") {
+    //   options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+    // } else if (attribute.name === "rear_or_front_and_rear_derailleur") {
+    //   options = [ ["front_and_rear", "Dianeira e Traseira"], ["rear", "Traseira" ]]
+    // }
+     else {
       options = attribute.options
     }
 
