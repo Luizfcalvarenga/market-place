@@ -1570,9 +1570,9 @@ export function ProductForm(props) {
 
             <div className="condition">
               <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-              <div className="d-flex">
-                <button type="button" id="new" value="new" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Novo</button>
-                <button type="button" id="used" value="used" className="filter-tag mx-2" onClick={(e) => handleProductCondition(e)}>Usado</button>
+              <div className="d-flex justify-content-start mt-3">
+                <button type="button" id="new" value="new" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Novo</button>
+                <button type="button" id="used" value="used" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Usado</button>
               </div>
 
               {productCondition === "used" && (<>
