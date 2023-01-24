@@ -285,6 +285,8 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "condition") {
       return
+    } else if (attribute.name === "front_derailleur_velocities" && productAttributes?.rear_or_front_and_rear_derailleur === "rear") {
+      return
     } else if (attribute.name === "suspension_type") {
       options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
     } else if (attribute.name === "brake_type") {
