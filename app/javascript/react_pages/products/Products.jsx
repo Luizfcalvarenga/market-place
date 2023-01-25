@@ -11,12 +11,9 @@ import IntlCurrencyInput from "react-intl-currency-input"
 
 
 export function Products(props) {
-
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
-
-
   const [products, setProducts] = useState([])
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
@@ -25,10 +22,8 @@ export function Products(props) {
   const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
   const [conditionFilter, setConditionFilter] = useState("");
   const [nameFilter, setNameFilter] = useState("");
-
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
-
   const [modalityFilter, setModalityFilter] = useState("");
   const [productAttributesFilter, setProductAttributesFilter] = useState("");
   const [brandFilter, setBrandFilter] = useState("");
@@ -38,7 +33,6 @@ export function Products(props) {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
-
   const [stateFilter, setStateFilter] = useState("");
   const [cityFilter, setCityFilter] = useState("");
   const [accessories, setAccessories] = useState([]);
@@ -51,10 +45,14 @@ export function Products(props) {
   const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([]);
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
   const [attributeOptionsToFilter, setAttributeOptionsToFilter] = useState([]);
-
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
   const [componentsAttributesOptionsToFilter, setComponentsAttributesOptionsToFilter] = useState([]);
   const [filteredLink, setFilteredLink] = useState("");
+  const [onlyAccessories, setOnlyAccessories] = useState("");
+  const [onlyClothes, setOnlyClothes] = useState("");
+  const [onlyComponents, setOnlyComponents] = useState("");
+
+
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -137,7 +135,11 @@ export function Products(props) {
     if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
     if (clotheSizeOptionsToFilter) url = url + `&clothe_sizes=${clotheSizeOptionsToFilter}`
+    if (onlyAccessories) url = url + `&only_clothes=${onlyAccessories}`
+    if (onlyComponents) url = url + `&only_clothes=${onlyComponents}`
+    if (onlyClothes) url = url + `&only_clothes=${onlyClothes}`
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
+
 
 
     const response = await axios.get(url);
@@ -158,7 +160,7 @@ export function Products(props) {
 
 
   }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
-    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter, componentsAttributesOptionsToFilter])
+    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter, onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter])
 
 
   const handleProductAtributes = (e) => {
@@ -313,9 +315,12 @@ export function Products(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById("products-accessories").classList.remove("d-none")
       e.target.classList.add("selected-tag")
+      setOnlyAccessories("only_accessories")
+
     } else {
       document.getElementById("products-accessories").classList.add("d-none")
       e.target.classList.remove("selected-tag")
+      setOnlyAccessories("only_accessories")
 
     }
   }
@@ -327,28 +332,29 @@ export function Products(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById("products-components").classList.remove("d-none")
       e.target.classList.add("selected-tag")
+      setOnlyComponents("only_components")
 
     } else {
       document.getElementById("products-components").classList.add("d-none")
       e.target.classList.remove("selected-tag")
+      setOnlyComponents("only_components")
 
     }
   }
 
   const hendleClothesFiltes = (e) => {
-    // setAccessoriesProducts(Array.from({length: 39}, (_, i) => i + 1))
     console.log(e)
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       document.getElementById("products-clothes").classList.remove("d-none")
       document.getElementById("clothes-sizes-filter").classList.remove("d-none")
       e.target.classList.add("selected-tag")
-
+      setOnlyClothes("only_clothes")
     } else {
       document.getElementById("products-clothes").classList.add("d-none")
       document.getElementById("clothes-sizes-filter").classList.add("d-none")
       e.target.classList.remove("selected-tag")
-
+      setOnlyClothes("")
     }
   }
 
