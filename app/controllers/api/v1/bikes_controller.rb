@@ -8,8 +8,9 @@ module Api
       def index
         @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
-        @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
+        # @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
         @bikes = @bikes.where(category:  Category.where(name: params[:categories].split(","))) if params[:categories].present?
+        @bikes = @bikes.where(modality: params[:modalities].split(",")) if params[:modalities].present?
 
         @bikes = @bikes.where(state:  State.where(name: params[:state])) if params[:state].present?
         @bikes = @bikes.where(city:  City.where(name: params[:city])) if params[:city].present?
@@ -49,7 +50,6 @@ module Api
         @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
         @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
         @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
-        @bikes = @bikes.where('locality @@ ?', params[:locality]) if params[:locality].present?
         @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
         @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
         @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
@@ -183,7 +183,7 @@ module Api
           :mileage,
           :battery_cycles,
           :pedals,
-          
+
           photos: []
         )
       end
