@@ -55,6 +55,10 @@ export function Bikes(props) {
   const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
   const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([]);
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
+  const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
+  const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
+
+
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
 
 
@@ -142,8 +146,8 @@ export function Bikes(props) {
     if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
     if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
-
-
+    if (frameSizeOptionsToFilter) url = url + `&frame_sizes=${frameSizeOptionsToFilter}`
+    if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
 
     console.log(url)
     const response = await axios.get(url);
@@ -153,7 +157,7 @@ export function Bikes(props) {
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter])
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -282,6 +286,36 @@ export function Bikes(props) {
       document.getElementById(e.target.value).classList.add("d-none")
       e.target.classList.remove("selected-tag")
 
+    }
+  }
+
+  const handleMultipleFiltersFrameSize = (e) => {
+    const currentOptionsToFilter = [...frameSizeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrameSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrameSizeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersFrameMaterial = (e) => {
+    const currentOptionsToFilter = [...frameMaterialOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrameMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrameMaterialOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
     }
   }
 
@@ -771,6 +805,14 @@ export function Bikes(props) {
             <div id="Quadro" className="frame-filter d-none">
               {!categoryFilter && (<>
                 <h5 className=" mt-3">tamanho</h5>
+
+                {allFrameSizes.map((frameSize, index)=> {
+                  return (
+                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                  );
+                })}
+
+                {/* <h5 className=" mt-3">tamanho</h5>
                 <select
                   className="select-answer"
                   value={frameSizeFilter}
@@ -780,40 +822,33 @@ export function Bikes(props) {
                   {allFrameSizes.map((frameSize, index)=> {
                     return (<option key={index}>{frameSize}</option>);
                   })}
-                </select>
+                </select> */}
               </>)}
 
               {categoryFilter === "road" && (<>
                 <h5 className=" mt-3">tamanho</h5>
-
-                <select
-                  className="select-answer"
-                  value={frameSizeFilter}
-                  onChange={(e) => setFrameSizeFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {roadFrameSizes.map((frameSize, index)=> {
-                    return (<option key={index}>{frameSize}</option>);
-                  })}
-                </select>
+                {roadFrameSizes.map((frameSize, index)=> {
+                  return (
+                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                  );
+                })}
               </>)}
 
               {["dirt_street", "mountain_bike", "infant", "urban"].includes(categoryFilter) && (<>
                 <h5 className=" mt-3">tamanho</h5>
-                <select
-                  className="select-answer"
-                  value={frameSizeFilter}
-                  onChange={(e) => setFrameSizeFilter(e.target.value)}
-                >
-                  <option value=""></option>
                   {dirtMtbFrameSizes.map((frameSize, index)=> {
-                    return (<option key={index}>{frameSize}</option>);
-                  })}
-                </select>
+                  return (
+                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                  );
+                })}
               </>)}
 
               <h5 className=" mt-3">material</h5>
-              <select
+              <button type="button" value="carbon" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono</button>
+              <button type="button" value="aluminum" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Aluminio</button>
+              <button type="button" value="carbon_aluminum_chainstay" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono/Aumínio (Chainstay)</button>
+
+              {/* <select
                 className="select-answer"
                 value={frameMaterialFilter}
                 onChange={(e) => setFrameMaterialFilter(e.target.value)}
@@ -822,7 +857,7 @@ export function Bikes(props) {
                 <option value="carbon">Carbono</option>
                 <option value="aluminum">Aluminio</option>
                 <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-              </select>
+              </select> */}
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
