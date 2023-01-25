@@ -447,10 +447,36 @@ export function ProductForm(props) {
       usedBtn.classList.remove("selected-tag")
       newBtn.classList.add("selected-tag")
       setProductCondition(e.target.value)
+      setProductConditionStatus("")
     } else if (e.target.id === "used") {
       usedBtn.classList.add("selected-tag")
       newBtn.classList.remove("selected-tag")
       setProductCondition(e.target.value)
+    }
+  }
+
+  const handleProductConditionStatus = (e) => {
+    setProductConditionStatus(e.target.value)
+    if (e.target.value === "bad") {
+      document.getElementById("label-bad").classList.add("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "reasonable") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.add("text-warning")
+      document.getElementById("label-good").classList.ramove("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "good") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.add("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    }else if (e.target.value === "excellent") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-primary")
+      document.getElementById("label-excellent").classList.add("text-success")
     }
   }
 
@@ -730,30 +756,7 @@ export function ProductForm(props) {
     return languageMap[word]
   }
 
-  const handleProductConditionStatus = (e) => {
-    setProductConditionStatus(e.target.value)
-    if (e.target.value === "bad") {
-      document.getElementById("label-bad").classList.add("color-bad")
-      document.getElementById("label-reasonable").classList.remove("text-warning")
-      document.getElementById("label-good").classList.remove("text-info")
-      document.getElementById("label-excellent").classList.remove("text-success")
-    } else if (e.target.value === "reasonable") {
-      document.getElementById("label-bad").classList.remove("color-bad")
-      document.getElementById("label-reasonable").classList.add("text-warning")
-      document.getElementById("label-good").classList.ramove("text-info")
-      document.getElementById("label-excellent").classList.remove("text-success")
-    } else if (e.target.value === "good") {
-      document.getElementById("label-bad").classList.remove("color-bad")
-      document.getElementById("label-reasonable").classList.remove("text-warning")
-      document.getElementById("label-good").classList.add("text-info")
-      document.getElementById("label-excellent").classList.remove("text-success")
-    }else if (e.target.value === "excellent") {
-      document.getElementById("label-bad").classList.remove("color-bad")
-      document.getElementById("label-reasonable").classList.remove("text-warning")
-      document.getElementById("label-good").classList.remove("text-info")
-      document.getElementById("label-excellent").classList.add("text-success")
-    }
-  }
+
   //////////////////////////////////////////////////////////////////////////////////
   const frameBrands = [
     "Alfameq",
@@ -1615,7 +1618,7 @@ export function ProductForm(props) {
 
               {productCondition === "used" && (<>
                 <label htmlFor="productConditionStatus" className="mt-4">Qual estado da seu produto:</label>
-                <div className="my-3">
+                <div className="mb-5 mt-3">
                   <div id="debt-amount-slider">
                     <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleProductConditionStatus(e)}/>
                     <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
@@ -1628,6 +1631,32 @@ export function ProductForm(props) {
                     <div id="debt-amount-pos"></div>
                   </div>
                 </div>
+                {productConditionStatus === "bad" && (
+                  <div className="bad-text my-3">
+                    Funcinamento interrompido, requer reparo operacional ou estrutural!
+                  </div>
+                )}
+
+                {productConditionStatus === "reasonable" && (
+                  <div className="reasonable-text  my-3">
+                    Funcinamento comprometido, requer reparo operacional ou estrutural!
+                  </div>
+
+                )}
+
+                {productConditionStatus === "good" && (
+                  <div className="good-text  my-3">
+                    Bom funcionamento, algum ou outro reparo visual!
+                  </div>
+                )}
+
+                {productConditionStatus === "excellent" && (
+                  <div className="excellent-text  my-3">
+                    Condição perfeita, não apresenta nenhuma observação!
+                  </div>
+
+                )}
+
                 {/* <select
                   className="select-answer"
                   value={productConditionStatus}
@@ -1641,7 +1670,7 @@ export function ProductForm(props) {
                 </select> */}
 
                 {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (<>
-                  <label htmlFor="description" className="mt-4">Descreva:</label>
+                  <label htmlFor="description" className="mt-2">Descreva:</label>
                   <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
                 </>)}
               </>)}
@@ -1741,6 +1770,12 @@ export function ProductForm(props) {
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+            {productCondition === "used" && (
+              <p><span className="text-success">Estado:</span>{productConditionStatus}</p>
+            )}
+            {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (
+              <p><span className="text-success">descrição:</span>{productConditionDescription}</p>
+            )}
 
             <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",

@@ -727,6 +727,33 @@ export function BikeForm(props) {
     }
   }
 
+
+
+  const handleBikeConditionStatus = (e) => {
+    setBikeConditionStatus(e.target.value)
+    if (e.target.value === "bad") {
+      document.getElementById("label-bad").classList.add("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "reasonable") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.add("text-warning")
+      document.getElementById("label-good").classList.ramove("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "good") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.add("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    }else if (e.target.value === "excellent") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-primary")
+      document.getElementById("label-excellent").classList.add("text-success")
+    }
+  }
+
   //////////////////////////////////////////////// frames
 
   const frameBrands = [
@@ -1103,8 +1130,6 @@ export function BikeForm(props) {
             </>
           )}
         </>)}
-
-
 
         <label htmlFor="frameMaterial" className="mt-4">Material do quadro:<span className="requested-information ms-1">*</span></label>
         <select
@@ -1946,7 +1971,67 @@ export function BikeForm(props) {
           <label htmlFor="description" className="mt-3">Descrição:</label>
           <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
 
+
           {bikeCondition === "used" && (<>
+            <label htmlFor="bikeConditionStatus" className="mt-4">Qual estado da sua bike:</label>
+            <div className="mb-5 mt-3">
+              <div id="debt-amount-slider">
+                <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleBikeConditionStatus(e)}/>
+                <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
+                <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => handleBikeConditionStatus(e)}/>
+                <label id="label-reasonable" for="2" data-debt-amount="Razoável"></label>
+                <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => handleBikeConditionStatus(e)}/>
+                <label id="label-good" for="3" data-debt-amount="Bom"></label>
+                <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => handleBikeConditionStatus(e)}/>
+                <label id="label-excellent" for="4" data-debt-amount="Ótimo"></label>
+                <div id="debt-amount-pos"></div>
+              </div>
+            </div>
+            {bikeConditionStatus === "bad" && (
+              <div className="bad-text my-3">
+                Funcinamento interrompido, requer reparo operacional ou estrutural!
+              </div>
+            )}
+
+            {bikeConditionStatus === "reasonable" && (
+              <div className="reasonable-text  my-3">
+                Funcinamento comprometido, requer reparo operacional ou estrutural!
+              </div>
+
+            )}
+
+            {bikeConditionStatus === "good" && (
+              <div className="good-text  my-3">
+                Bom funcionamento, algum ou outro reparo visual!
+              </div>
+            )}
+
+            {bikeConditionStatus === "excellent" && (
+              <div className="excellent-text  my-3">
+                Condição perfeita, não apresenta nenhuma observação!
+              </div>
+
+            )}
+
+            {/* <select
+              className="select-answer"
+              value={productConditionStatus}
+              onChange={(e) => setProductConditionStatus(e.target.value)}
+            >
+              <option value=""></option>
+              <option value="bad">Ruim</option>
+              <option value="reasonable">Razoável</option>
+              <option value="good">Bom</option>
+              <option value="excellent">Ótimo</option>
+            </select> */}
+
+            {(bikeConditionStatus === "bad" || bikeConditionStatus === "reasonable") && (<>
+              <label htmlFor="description" className="mt-2">Descreva:</label>
+              <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
+            </>)}
+          </>)}
+
+          {/* {bikeCondition === "used" && (<>
             <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da sua bike:</label>
             <select
               className="select-answer"
@@ -1963,7 +2048,7 @@ export function BikeForm(props) {
               <label htmlFor="description" className="mt-3">Descreva:</label>
               <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
             </>)}
-          </>)}
+          </>)} */}
         </div>
         <div className="d-flex justify-content-center">
           <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>

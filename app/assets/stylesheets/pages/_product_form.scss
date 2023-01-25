@@ -501,8 +501,36 @@ option {
 
 }
 
-.color-bad {
-  color: red !important;
+.bad-text {
+  background-color: #f8d7da;
+  padding: 10px;
+  border-radius: 3px;
+  color: #883032;
+  font-weight: 100;
+}
+.reasonable-text {
+  background-color: #fff3cd;
+  padding: 10px;
+  border-radius: 3px;
+  color: #c29538;
+  font-weight: 100;
+
+}
+.good-text {
+  background-color: #d1ecf1;
+  padding: 10px;
+  border-radius: 3px;
+  color: #2b7f9d;
+  font-weight: 100;
+
+}
+.excellent-text {
+  background-color: #d4edda;
+  padding: 10px;
+  border-radius: 3px;
+  color: $color-primary;
+  font-weight: 100;
+
 }
 
 @media (max-width: 768px) {
