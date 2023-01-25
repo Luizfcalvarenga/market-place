@@ -730,7 +730,30 @@ export function ProductForm(props) {
     return languageMap[word]
   }
 
-
+  const handleProductConditionStatus = (e) => {
+    setProductConditionStatus(e.target.value)
+    if (e.target.value === "bad") {
+      document.getElementById("label-bad").classList.add("color-bad")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-info")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "reasonable") {
+      document.getElementById("label-bad").classList.remove("color-bad")
+      document.getElementById("label-reasonable").classList.add("text-warning")
+      document.getElementById("label-good").classList.ramove("text-info")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "good") {
+      document.getElementById("label-bad").classList.remove("color-bad")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.add("text-info")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    }else if (e.target.value === "excellent") {
+      document.getElementById("label-bad").classList.remove("color-bad")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-info")
+      document.getElementById("label-excellent").classList.add("text-success")
+    }
+  }
   //////////////////////////////////////////////////////////////////////////////////
   const frameBrands = [
     "Alfameq",
@@ -1075,7 +1098,7 @@ export function ProductForm(props) {
               <p className="text-danger">{errors.product.name}</p>
           )}
 
-          {(productTypeId === "18") && (<>
+          {(productTypeId === "18") && (<> {/* PARA PRODUTO QUADRO QUE POSSUI MARCAS PRÓPRIAS  */}
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
             value={productBrand ? productBrand : ""}
@@ -1105,6 +1128,7 @@ export function ProductForm(props) {
               )}
           </>)}
 
+          {/* PARA PRODUTO FREIO QUE POSSUI MARCAS PRÓPRIAS  */}
           {(productTypeId === "5") && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
@@ -1136,6 +1160,8 @@ export function ProductForm(props) {
               )}
           </>)}
 
+          {/* PARA PRODUTO KIT RELAÇÃO/CÂMBIO DIANTEIRO/ PASSADOR DIANTEIRO/ CAMBIO TRASEIRO/ PASSADOR TRASEIO QUE POSSUI MARCAS PRÓPRIAS  */}
+
           {(productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36"  ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
@@ -1163,6 +1189,8 @@ export function ProductForm(props) {
                 </>
               )}
           </>)}
+
+          {/* PARA PRODUTOS SUSPENSÕES DIANTEIRA E TRASEIRA QUE POSSUI MARCAS PRÓPRIAS  */}
 
           {(productTypeId === "21" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
@@ -1195,6 +1223,9 @@ export function ProductForm(props) {
               )}
           </>)}
 
+
+          {/* PARA DEMAIS PRODUTOS QUE NÃO POSSUEM MARCA PRÓPRIA  */}
+
           {!(productTypeId === "5" || productTypeId === "15" || productTypeId === "18" || productTypeId === "19" || productTypeId === "20" || productTypeId === "21" || productTypeId === "35" || productTypeId === "36" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
@@ -1225,6 +1256,8 @@ export function ProductForm(props) {
               )}
           </>)}
 
+          {/* PARA PRODUTO FREIO QUE POSSUI MODELOS PRÓPRIAS  CATEGORIA*/}
+
           <div className="brake-models">
             {(productTypeId === "5" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
@@ -1252,6 +1285,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
+            {/* PARA PRODUTO FREIO QUE POSSUI MODELOS PRÓPRIAS  CATEGORIA*/}
             {(productTypeId === "5") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
@@ -1279,6 +1313,8 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+
+          {/* PARA PRODUTO CAMBIO DANTEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="front-derailleur-models">
             {(productTypeId === "19" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
@@ -1306,6 +1342,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
+            {/* PARA PRODUTO CAMBIO DANTEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
             {(productTypeId === "19") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
@@ -1333,6 +1370,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO CAMBIO TRASEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="rear-derailleur-models">
             {(productTypeId === "35" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
@@ -1360,6 +1398,8 @@ export function ProductForm(props) {
                 )}
             </>)}
 
+
+            {/* PARA PRODUTO CAMBIO TRASEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
             {(productTypeId === "35") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
@@ -1387,6 +1427,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO SUPENSÃO DIANTEIRA QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="front-suspension-model">
             {(productTypeId === "21") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
@@ -1415,6 +1456,7 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO SUPENSÃO TRASEIRA QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="rear-suspension-model">
             {(productTypeId === "37") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
@@ -1443,8 +1485,8 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO SUPENSÃO DIANTEIRA QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           {(productTypeId === "21" || productTypeId === "37" ) && (productCategory === "road" ) && (<>
-
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.model && (
@@ -1452,26 +1494,22 @@ export function ProductForm(props) {
             )}
           </>)}
 
-
+          {/* PARA PRODUTOS QUE NÃO POSSUEM MODELOS PRÓPRIOS - CATEGORIA*/}
           {productsIdsWithSpecificModels.includes(productTypeId) && (productCategory === "infant" || productCategory === "" ) && (<>
-
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.model && (
               <p className="text-danger">{errors.product.model}</p>
             )}
           </>)}
-
 
           {!productsIdsWithSpecificModels.includes(productTypeId) && (<>
-
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.model && (
               <p className="text-danger">{errors.product.model}</p>
             )}
           </>)}
-
 
           <div className="d-flex justify-content-center">
             <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
@@ -1576,17 +1614,19 @@ export function ProductForm(props) {
               </div>
 
               {productCondition === "used" && (<>
-                <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da seu produto:</label>
-                <div id="debt-amount-slider">
-                  <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
-                  <label for="1" data-debt-amount="Ruim"></label>
-                  <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
-                  <label for="2" data-debt-amount="$Razoável"></label>
-                  <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
-                  <label for="3" data-debt-amount="Bom"></label>
-                  <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => setProductConditionStatus(e.target.value)}/>
-                  <label for="4" data-debt-amount="Ótimo"></label>
-                  <div id="debt-amount-pos"></div>
+                <label htmlFor="productConditionStatus" className="mt-4">Qual estado da seu produto:</label>
+                <div className="my-3">
+                  <div id="debt-amount-slider">
+                    <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
+                    <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-reasonable" for="2" data-debt-amount="Razoável"></label>
+                    <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-good" for="3" data-debt-amount="Bom"></label>
+                    <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-excellent" for="4" data-debt-amount="Ótimo"></label>
+                    <div id="debt-amount-pos"></div>
+                  </div>
                 </div>
                 {/* <select
                   className="select-answer"
@@ -1600,8 +1640,8 @@ export function ProductForm(props) {
                   <option value="excellent">Ótimo</option>
                 </select> */}
 
-                { productConditionStatus === "bad" || productConditionStatus === "reasonable" && (<>
-                  <label htmlFor="description" className="mt-3">Descreva:</label>
+                {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (<>
+                  <label htmlFor="description" className="mt-4">Descreva:</label>
                   <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
                 </>)}
               </>)}

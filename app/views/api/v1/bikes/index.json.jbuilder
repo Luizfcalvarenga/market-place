@@ -47,7 +47,6 @@ json.bikes @bikes do |bike|
   json.rear_tyre bike.rear_tyre
   json.handlebar bike.handlebar
   json.stem bike.stem
-  json.motor bike.motor
   json.mileage bike.mileage
   json.rim_size bike.rim_size
   json.pedals bike.pedals

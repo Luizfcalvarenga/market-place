@@ -17,7 +17,7 @@ $number-of-options: 4;
   label {
     text-align: start !important;
     text-transform: uppercase !important;
-    color: #828f8a !important;
+    color: #828f8a;
   }
 
   .text-input {
@@ -396,11 +396,11 @@ option {
     position: absolute;
     height: 2px;
     width: 100%;
-    width: calc(100% * (#{$number-of-options - 1} / #{$number-of-options}));
+    width: calc(100% * (4/6));
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: $color-primary
+    background: transparent
   }
   input, label {
     box-sizing: border-box;
@@ -464,7 +464,7 @@ option {
       }
       @for $i from 1 through $number-of-options {
         &:nth-child(#{$i * 2 - 1}) ~ #debt-amount-pos {
-          left: #{($i * 25%) - 10%};
+          left: #{($i * 25%) - 12.5%};
         }
       }
     }
@@ -499,6 +499,10 @@ option {
     margin-right: 12px;
   }
 
+}
+
+.color-bad {
+  color: red !important;
 }
 
 @media (max-width: 768px) {
