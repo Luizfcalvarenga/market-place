@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NormalBikeImage from "../../../assets/images/normal-bike.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
+import IntlCurrencyInput from "react-intl-currency-input"
 
 export function Bikes(props) {
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -53,12 +54,44 @@ export function Bikes(props) {
   const [cities, setCities] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
   const [optionsToFilter, setOptionsToFilter] = useState([]);
-
-
-
   const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
 
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const BrlCurrencyComponent = () => {
+    const handleMinPriceFIlter = (event, value, maskedValue) => {
+      // console.log(value)
+      event.preventDefault();
+      setMinPriceFilter(value)
+    };
+    const handlemaxPriceFIlter = (event, value, maskedValue) => {
+      // console.log(value)
+      event.preventDefault();
+      setMaxPriceFilter(value)
+    };
+
+    return(
+      <>
+        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={minPriceFilter}   onChange={handleMinPriceFIlter} />
+        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={maxPriceFilter}   onChange={handlemaxPriceFIlter} />
+      </>
+    );
+  }
 
 
 
@@ -67,8 +100,8 @@ export function Bikes(props) {
     if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
-    if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
-    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
+    if (minPriceFilter) url = url + `&min_price=${minPriceFilter * 100}`
+    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter * 100}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (bikeTypeFilter) url = url + `&bike_type=${bikeTypeFilter}`
@@ -555,8 +588,9 @@ export function Bikes(props) {
               <div className="">
                 <h5 className=" mt-3">preço</h5>
                 <div className="d-flex justify-content-between">
-                  <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
-                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
+                  {BrlCurrencyComponent()}
+                  {/* <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
+                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/> */}
                 </div>
               </div>
             </div>

@@ -5,6 +5,7 @@ import ComponentImage from "../../../assets/images/frame.png";
 import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
 import MaintenanceImage from "../../../assets/images/tools.png";
+import IntlCurrencyInput from "react-intl-currency-input"
 
 
 
@@ -53,9 +54,43 @@ export function Products(props) {
 
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
   const [componentsAttributesOptionsToFilter, setComponentsAttributesOptionsToFilter] = useState([]);
-
-
   const [filteredLink, setFilteredLink] = useState("");
+
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const BrlCurrencyComponent = () => {
+    const handleMinPriceFIlter = (event, value, maskedValue) => {
+      // console.log(value)
+      event.preventDefault();
+      setMinPriceFilter(value)
+    };
+    const handlemaxPriceFIlter = (event, value, maskedValue) => {
+      // console.log(value)
+      event.preventDefault();
+      setMaxPriceFilter(value)
+    };
+
+    return(
+      <>
+        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={minPriceFilter}   onChange={handleMinPriceFIlter} />
+        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={maxPriceFilter}   onChange={handlemaxPriceFIlter} />
+      </>
+    );
+  }
 
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
@@ -86,8 +121,8 @@ export function Products(props) {
 
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
-    if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
-    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
+    if (minPriceFilter) url = url + `&min_price=${(minPriceFilter * 100)}`
+    if (maxPriceFilter) url = url + `&max_price=${(maxPriceFilter * 100)}`
 
     if (productAttributesFilter) url = url + `&product_attribute_value=${productAttributesFilter}`
     if (brandFilter) url = url + `&brand=${brandFilter}`
@@ -857,8 +892,9 @@ export function Products(props) {
               <div className="">
                 <h5 className="mt-3">preço</h5>
                 <div className="d-flex justify-content-between">
-                  <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
-                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
+                  {BrlCurrencyComponent()}
+                  {/* <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/> */}
+                  {/* <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/> */}
                 </div>
               </div>
             </div>
@@ -881,7 +917,7 @@ export function Products(props) {
                 })}
             </>)}
 
-{/* 
+{/*
             {productTypeFilter.length > 1 && (<>
               <h5 className="mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {

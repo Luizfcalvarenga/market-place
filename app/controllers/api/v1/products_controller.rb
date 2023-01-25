@@ -28,9 +28,9 @@ module Api
 
         @products = @products.where('year::integer BETWEEN ? AND ?', params[:min_year], params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
         @products = @products.where('year::integer BETWEEN ? AND ?', params[:min_year], Date.today.year).order(year: :asc) if params[:min_year].present?
-        @products = @products.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
+        # @products = @products.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
 
-        # @products = @products.joins(:product_attributes).where(value: params[:clothe_sizes].split(",")) if params[:clothe_sizes].present?
+        @products = @products.joins(:product_attributes).where(value: params[:clothe_sizes].split(",")) if params[:clothe_sizes].present?
         @products = ProductAttribute.where(value: params[:clothe_sizes].split(",")).map { |value| value.product } if params[:clothe_sizes].present?
         @products = ProductAttribute.where(value: params[:components_attributes_values].split(",")).map { |value| value.product } if params[:components_attributes_values].present?
 
