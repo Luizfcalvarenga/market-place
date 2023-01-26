@@ -1212,17 +1212,19 @@ export function Bikes(props) {
                     <div className="card-content mt-2">
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
-                          <p>{bike.locality}</p>
                           <p>{translateWord(bike.bike_type)}</p>
+                          <p>{bike.city.name} - {bike.state.acronym}</p>
                         </div>
                         <div className="infos">
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button> <br />
-                          { bike.bike_type === "bike" &&(
-                            <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
+                          {bike.bike_type === "bike" &&(<>
+                            <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/> <br />
+                          </>
                           )}
-                          {  bike.bike_type === "e-bike" &&(
-                            <img src={EBikeImage} alt="" className="icon-card-index ms-1"/>
+                          {bike.bike_type === "e-bike" &&(<>
+                            <img src={EBikeImage} alt="" className="icon-card-index ms-1"/> <br />
+                          </>
                           )}
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
                         </div>
                       </div>
                     </div>

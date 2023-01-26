@@ -14,7 +14,7 @@ class PagesController < ApplicationController
         brand @@ :query
         OR model @@ :query
         OR products.name @@ :query
-        OR locality @@ :query
+        OR cities.name @@ :query
         OR product_types.prompt @@ :query
         OR description @@ :query
       SQL
@@ -24,7 +24,7 @@ class PagesController < ApplicationController
         frame_brand @@ :query
         OR bike_type @@ :query
         OR model @@ :query
-        OR locality @@ :query
+        OR cities.name @@ :query
         OR description @@ :query
       SQL
       @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where(bike_sql_query, query: "%#{params[:query]}%")

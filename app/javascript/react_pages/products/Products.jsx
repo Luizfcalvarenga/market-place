@@ -989,20 +989,20 @@ export function Products(props) {
                     <div className="card-content mt-2">
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
-                          <p>{product.locality}</p>
-                          <p className="mt-2">{product.product_type.prompt}</p>
+                          <p>{product.product_type.prompt}</p>
+                          <p className="mt-2">{product.city.name} - {product.state.acronym}</p>
                         </div>
                         <div className="infos">
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i id={product.id} className="far fa-heart"></i></button> <br />
-                          { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
-                            <img src={AccessorieImage} alt="" className="icon-card-index ms-1 mt-2"/>
-                          )}
-                          { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
-                            <img src={ComponentImage} alt="" className="icon-card-index ms-1 mt-2"/>
-                          )}
-                          { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                            <img src={ClotheImage} alt="" className="icon-card-index ms-1 mt-2"/>
-                          )}
+                          { ["air_bomb", "bottle_cage", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
+                              <><img src={AccessorieImage} alt="" className="icon-card-index ms-1"/><br /></>
+                            )}
+                          { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "front_fork", "brake_disc"].includes(product.product_type.name) &&(
+                              <><img src={ComponentImage} alt="" className="icon-card-index ms-1"/><br /></>
+                            )}
+                          { ["bretelle", "coat", "pants", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
+                              <><img src={ClotheImage} alt="" className="icon-card-index ms-1"/><br /></>
+                            )}
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn mt-2" id={product.id}><i id={product.id} className="far fa-heart"></i></button>
                         </div>
                       </div>
                     </div>
