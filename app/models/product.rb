@@ -31,8 +31,27 @@ class Product < ApplicationRecord
   WORDS_OPTIONS = {
     "Product": "Produto",
   }
-
   def word_display()
     WORDS_OPTIONS[name.to_sym]
+  end
+
+  MODALITY_OPTIONS = {
+    downhill: "Downhill",
+    enduro: "Enduro",
+    gravel: "Gravel",
+    speed: "Speed",
+    trail: "Trail",
+    xc_cross_country: "XC Cross Country",
+    street_bmx: "Street BMX",
+    race_bmx: "Race BMX",
+    big_wheel_bmx: "Big Wheel BMX",
+    dirt_jump: "Dirt Jump",
+    speed_performance: "Speed Performance",
+    triathlon: "Triathlon",
+    ciclocross: "Ciclocross",
+    cicloviagem: "Cicloviagem",
+  }
+  def modality_display
+    MODALITY_OPTIONS[modality.to_sym]
   end
 end

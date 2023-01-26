@@ -53,7 +53,7 @@ class Bike < ApplicationRecord
     ciclocross: "Ciclocross",
     cicloviagem: "Cicloviagem",
   }
-  def modality_diplay
+  def modality_display
     MODALITY_OPTIONS[modality.to_sym]
   end
 

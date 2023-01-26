@@ -19,7 +19,9 @@ export function Products(props) {
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
-  const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
+  // const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
+  const [productTypeFilter, setProductTypeFilter] = useState("");
+
   const [conditionFilter, setConditionFilter] = useState("");
   const [nameFilter, setNameFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
@@ -41,7 +43,7 @@ export function Products(props) {
   const [accessoriesProducts, setAccessoriesProducts] = useState([]);
   const [clothesProducts, setClothesProducts] = useState([]);
   const [componentsProducts, setComponentsProducts] = useState([]);
-  const [productTypeOptionsToFilter, setProductTypeOptionsToFilter] = useState([]);
+  const [productTypeOptionsToFilter, setProductTypeOptionsToFilter] = useState([params.product_types] || []);
   const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([]);
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
   const [attributeOptionsToFilter, setAttributeOptionsToFilter] = useState([]);
@@ -258,9 +260,9 @@ export function Products(props) {
     attributes?.map((attribute, index) => {
       let options = []
       if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
-        options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+        options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
       } else if (categoryFilter === "road" && attribute.name === "frame_size") {
-        options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+        options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
       } else if (!categoryFilter && attribute.name === "frame_size") {
         options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
       } else if (attribute.name === "frame_brand") {

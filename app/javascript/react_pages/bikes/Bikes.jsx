@@ -9,7 +9,7 @@ export function Bikes(props) {
   });
 
   const [bikes, setBikes] = useState([])
-  const [categoryFilter, setCategoryFilter] = useState(params.category || "");
+  // const [categoryFilter, setCategoryFilter] = useState([params.categories] || "");
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
@@ -53,7 +53,7 @@ export function Bikes(props) {
   const [cities, setCities] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
   const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
-  const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([]);
+  const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([params.categories] || []);
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
   const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
   const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
@@ -99,10 +99,9 @@ export function Bikes(props) {
   }
 
 
-
   useEffect(async () => {
     let url = "/api/v1/bikes?";
-    if (categoryFilter) url = url + `&category=${categoryFilter}`
+    // if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${minPriceFilter * 100}`
@@ -150,10 +149,11 @@ export function Bikes(props) {
     if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
 
     console.log(url)
+    console.log(categoryOptionsToFilter.includes(null))
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
-  }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
+  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
@@ -411,8 +411,8 @@ export function Bikes(props) {
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
 
   /////////////////////////////////////////////////////////////////////////////////////SUSPENSÃO////////////////////////////////////////////////////////////////////////////
 
@@ -519,7 +519,7 @@ export function Bikes(props) {
               <option value="urban">Urbano</option>
             </select> */}
 
-{categoryOptionsToFilter.includes("mountain_bike") && (<>
+            {categoryOptionsToFilter.includes("mountain_bike") && (<>
               {/* <h5 className="mt-3">Modalidade</h5>
                */}
               <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
@@ -803,7 +803,7 @@ export function Bikes(props) {
             <h5 className=" ">Componentes</h5>
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
-              {!categoryFilter && (<>
+              {categoryOptionsToFilter.length <= 1 && (<>
                 <h5 className=" mt-3">tamanho</h5>
 
                 {allFrameSizes.map((frameSize, index)=> {
@@ -825,7 +825,7 @@ export function Bikes(props) {
                 </select> */}
               </>)}
 
-              {categoryFilter === "road" && (<>
+              {categoryOptionsToFilter.includes("road") && (<>
                 <h5 className=" mt-3">tamanho</h5>
                 {roadFrameSizes.map((frameSize, index)=> {
                   return (
@@ -834,7 +834,7 @@ export function Bikes(props) {
                 })}
               </>)}
 
-              {["dirt_street", "mountain_bike", "infant", "urban"].includes(categoryFilter) && (<>
+              {(categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("infant") || categoryOptionsToFilter.includes("urban")) && (<>
                 <h5 className=" mt-3">tamanho</h5>
                   {dirtMtbFrameSizes.map((frameSize, index)=> {
                   return (
