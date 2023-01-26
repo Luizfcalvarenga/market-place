@@ -203,17 +203,6 @@ export function BikeForm(props) {
     setPhotosPreview(newPhotosPreview);
     const photoToRemove = photoFile.find(element => element.url === e.target.id).name
     setPhotos(removeObjectWithId(photos, photoToRemove))
-    // if (e.nativeEvent.path[1].childNodes[0].src) {
-    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-    //   setPhotosPreview(newPhotosPreview);
-    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-    //   setPhotos(removeObjectWithId(photos, photoToRemove))
-    // } else if (e.nativeEvent.path[2].childNodes[0].src) {
-    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-    //   setPhotosPreview(newPhotosPreview);
-    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-    //   setPhotos(removeObjectWithId(photos, photoToRemove))
-    // }
   }
 
   async function fetchBike() {
