@@ -1,6 +1,4 @@
 document.addEventListener("turbo:load", () => {
-  console.log("aqui")
-
   function hideLinksShowForm() {
     const navLinks = document.getElementById('navbar-links-mobile');
     const closeBTN = document.getElementById('close-btn-mobile');
