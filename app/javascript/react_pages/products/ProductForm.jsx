@@ -30,13 +30,13 @@ export function ProductForm(props) {
   const [productCondition, setProductCondition] = useState("");
   const [productConditionStatus, setProductConditionStatus] = useState("");
   const [productConditionDescription, setProductConditionDescription] = useState("");
-  const [productPrice, setProductPrice] = useState(null);
-  const [productQuantity, setProductQuantity ] = useState(null);
-  const [productCity, setProductCity ] = useState(null);
-  const [productState, setProductState ] = useState(null);
-  const [productYear, setProductYear ] = useState(null);
+  const [productPrice, setProductPrice] = useState("");
+  const [productQuantity, setProductQuantity ] = useState("");
+  const [productCity, setProductCity ] = useState("");
+  const [productState, setProductState ] = useState("");
+  const [productYear, setProductYear ] = useState("");
   const [productDocumentationType, setProductDocumentationType] = useState("");
-  const [otherProductYear, setOtherProductYear ] = useState(null);
+  const [otherProductYear, setOtherProductYear ] = useState("");
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
@@ -173,19 +173,23 @@ export function ProductForm(props) {
 
   const removePhoto = (e) => {
     console.log(e)
-    console.log(e.nativeEvent.path[1].childNodes[0].src)
-    if (e.nativeEvent.path[1].childNodes[0].src) {
+    console.log(e.target.id)
+    const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
+    setPhotosPreview(newPhotosPreview);
+    const photoToRemove = photoFile.find(element => element.url === e.target.id).name
+    setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    // if (e.nativeEvent.path[1].childNodes[0].src) {
 
-      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-      setPhotosPreview(newPhotosPreview);
-      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-      setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    } else if (e.nativeEvent.path[2].childNodes[0].src) {
-      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-      setPhotosPreview(newPhotosPreview);
-      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-      setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    }
+    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+    //   setPhotosPreview(newPhotosPreview);
+    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    // } else if (e.nativeEvent.path[2].childNodes[0].src) {
+    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+    //   setPhotosPreview(newPhotosPreview);
+    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    // }
   }
 
   const handleReviewSection = (e) => {
@@ -451,22 +455,22 @@ export function ProductForm(props) {
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
-  const handleProductCondition = (e) => {
-    console.log(e.target.value)
-    e.target.classList.toggle("active")
-    const newBtn = document.getElementById("new")
-    const usedBtn = document.getElementById("used")
-    if (e.target.id === "new") {
-      usedBtn.classList.remove("selected-tag")
-      newBtn.classList.add("selected-tag")
-      setProductCondition(e.target.value)
-      setProductConditionStatus("")
-    } else if (e.target.id === "used") {
-      usedBtn.classList.add("selected-tag")
-      newBtn.classList.remove("selected-tag")
-      setProductCondition(e.target.value)
-    }
-  }
+  // const handleProductCondition = (e) => {
+  //   console.log(e.target.value)
+  //   e.target.classList.toggle("active")
+  //   const newBtn = document.getElementById("new")
+  //   const usedBtn = document.getElementById("used")
+  //   if (e.target.id === "new") {
+  //     usedBtn.classList.remove("selected-tag")
+  //     newBtn.classList.add("selected-tag")
+  //     setProductCondition(e.target.value)
+  //     setProductConditionStatus("")
+  //   } else if (e.target.id === "used") {
+  //     usedBtn.classList.add("selected-tag")
+  //     newBtn.classList.remove("selected-tag")
+  //     setProductCondition(e.target.value)
+  //   }
+  // }
 
   const handleProductConditionStatus = (e) => {
     setProductConditionStatus(e.target.value)
@@ -1769,8 +1773,8 @@ export function ProductForm(props) {
                 photosPreview.map((photoPreview, idx) => {
                   return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
                       <img src={photoPreview} alt="" className="image-preview-form mt-1" />
-                      <div className="middle">
-                        <div className="text">Remover</div>
+                      <div id={photoPreview} className="middle">
+                        <div id={photoPreview} className="text">Remover</div>
                       </div>
                     </button></>)
                 })

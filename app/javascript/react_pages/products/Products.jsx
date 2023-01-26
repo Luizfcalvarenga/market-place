@@ -623,21 +623,21 @@ export function Products(props) {
 
             <div id="products-accessories" className="d-flex flex-wrap justify-content-between gap-1 mt-3 d-none">
               {accessories.map((accessory, index) => {
-                return (<button type="button" value={accessory.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{accessory.prompt}</button>
+                return (<button type="button" key={index} value={accessory.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{accessory.prompt}</button>
                 )
               })}
             </div>
 
             <div id="products-components" className="d-flex flex-wrap justify-content-between gap-1 mt-3 d-none">
               {components.map((component, index) => {
-                return (<button type="button" value={component.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{component.prompt}</button>
+                return (<button type="button" key={index} value={component.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{component.prompt}</button>
                 )
               })}
             </div>
 
             <div id="products-clothes" className="d-flex flex-wrap justify-content-between mt-3 gap-1 d-none">
               {clothes.map((clothe, index) => {
-                return (<button type="button" value={clothe.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{clothe.prompt}</button>
+                return (<button type="button" key={index} value={clothe.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{clothe.prompt}</button>
                 )
               })}
             </div>

@@ -12,10 +12,10 @@ export function BikeForm(props) {
   const [modalities, setModalities] = useState([]);
   const [modality, setModality] = useState("");
   const [bikeType, setBikeType] = useState("");
-  const [priceInCents, setPriceInCents] = useState(null);
-  const [quantity, setQuantity ] = useState(null);
-  const [cityId, setCityId ] = useState(null);
-  const [stateId, setStateId ] = useState(null);
+  const [priceInCents, setPriceInCents] = useState("");
+  const [quantity, setQuantity ] = useState("");
+  const [cityId, setCityId ] = useState("");
+  const [stateId, setStateId ] = useState("");
   const [frameBrand, setFrameBrand] = useState("");
   const [otherFrameBrand, setOtherFrameBrand] = useState("");
   const [frameSize, setFrameSize] = useState("");
@@ -45,7 +45,6 @@ export function BikeForm(props) {
   const [otherBrakeModel, setOtherBrakeModel] = useState("");
   const [suspensionType, setSuspensionType] = useState("");
   const [forkMaterial, setForkMaterial] = useState("");
-
   const [otherForkMaterial, setOtherForkMaterial] = useState("");
   const [cranksetMaterial, setCranksetMaterial] = useState("");
   const [otherCranksetMaterial, setOtherCranksetMaterial] = useState("");
@@ -68,7 +67,6 @@ export function BikeForm(props) {
   const [seatPostTravel, setSeatPostTravel] = useState("");
   const [otherSeatPostTravel, setOtherSeatPostTravel] = useState("");
   const [weight, setWeight] = useState("");
-  const [locality, setLocality] = useState("");
   const [bikeCondition, setBikeCondition] = useState("");
   const [bikeConditionStatus, setBikeConditionStatus] = useState("");
   const [bikeConditionDescription, setBikeConditionDescription] = useState("");
@@ -92,7 +90,6 @@ export function BikeForm(props) {
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-
   const [photos, setPhotos ] = useState(null);
   const [photoFile, setPhotoFile] = useState({
     index: null,
@@ -201,17 +198,22 @@ export function BikeForm(props) {
   }
 
   const removePhoto = (e) => {
-    if (e.nativeEvent.path[1].childNodes[0].src) {
-      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-      setPhotosPreview(newPhotosPreview);
-      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-      setPhotos(removeObjectWithId(photos, photoToRemove))
-    } else if (e.nativeEvent.path[2].childNodes[0].src) {
-      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-      setPhotosPreview(newPhotosPreview);
-      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-      setPhotos(removeObjectWithId(photos, photoToRemove))
-    }
+    console.log(e.target.id)
+    const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
+    setPhotosPreview(newPhotosPreview);
+    const photoToRemove = photoFile.find(element => element.url === e.target.id).name
+    setPhotos(removeObjectWithId(photos, photoToRemove))
+    // if (e.nativeEvent.path[1].childNodes[0].src) {
+    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+    //   setPhotosPreview(newPhotosPreview);
+    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+    //   setPhotos(removeObjectWithId(photos, photoToRemove))
+    // } else if (e.nativeEvent.path[2].childNodes[0].src) {
+    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+    //   setPhotosPreview(newPhotosPreview);
+    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+    //   setPhotos(removeObjectWithId(photos, photoToRemove))
+    // }
   }
 
   async function fetchBike() {
@@ -1768,7 +1770,7 @@ export function BikeForm(props) {
             </div>
           </>)}
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
@@ -1956,7 +1958,7 @@ export function BikeForm(props) {
               </>)}
             </div>
             <div className="d-flex justify-content-center">
-              <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+              <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
               <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
           </div>
@@ -2051,7 +2053,7 @@ export function BikeForm(props) {
           </>)} */}
         </div>
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
           <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
@@ -2070,8 +2072,8 @@ export function BikeForm(props) {
               photosPreview.map((photoPreview, idx) => {
                 return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
                     <img src={photoPreview} alt="" className="image-preview-form" />
-                    <div className="middle">
-                      <div className="text">Remover</div>
+                    <div id={photoPreview} className="middle">
+                      <div id={photoPreview} className="text">Remover</div>
                     </div>
                   </button></>)
               })
@@ -2079,7 +2081,7 @@ export function BikeForm(props) {
           </div> : null
         }
          <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
           <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
@@ -2346,7 +2348,7 @@ export function BikeForm(props) {
         </div>
 
         <div className="text-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i class="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
         </div>
       </div>
     </div>
