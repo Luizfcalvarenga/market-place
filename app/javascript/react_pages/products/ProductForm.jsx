@@ -153,6 +153,13 @@ export function ProductForm(props) {
     return () => URL.revokeObjectURL(objectUrls)
   }, [productPhotos])
 
+
+  useEffect(() => {
+    if (productCondition === "new") {
+      setProductConditionStatus("")
+    }
+  })
+
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
     setProductPhotos(photos)
@@ -295,32 +302,38 @@ export function ProductForm(props) {
       <div attribute={attribute} key={attribute.id} className="">
         <div id="">
           <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}<span className="requested-information ms-1">*</span></label><br />
-          <select
-          className="select-answer"
-          onChange={(e) => createProductAttributes(e, attribute)}
-          >
-            <option value=""></option>
-            {options?.map((option, index) => {
-              if (Array.isArray(option)) {
-                return (
-                  <option key={index} value={option[0]}>{option[1]}</option>
-                )
-              } else if (option === "other") {
-                return (
-                  <option key={index}  value={option}>{translateWord(option)}</option>
-                )
-              }
-              else {
-                return (
-                  <option key={index} value={option}>{option}</option>
-                )
-              }
-            })}
-          </select>
-          <div id={attribute.name} className="d-none">
-            <label htmlFor="productbrand" className="mt-3">Qual:</label>
-            <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
-          </div>
+          {attribute.kind === "text" && (
+            <input type="text" className="text-input" onChange={(e) => createProductAttributes(e, attribute)}/>
+
+          )}
+          {attribute.kind === "multiple_choice" && (<>
+            <select
+            className="select-answer"
+            onChange={(e) => createProductAttributes(e, attribute)}
+            >
+              <option value=""></option>
+              {options?.map((option, index) => {
+                if (Array.isArray(option)) {
+                  return (
+                    <option key={index} value={option[0]}>{option[1]}</option>
+                  )
+                } else if (option === "other") {
+                  return (
+                    <option key={index}  value={option}>{translateWord(option)}</option>
+                  )
+                }
+                else {
+                  return (
+                    <option key={index} value={option}>{option}</option>
+                  )
+                }
+              })}
+            </select>
+            <div id={attribute.name} className="d-none">
+              <label htmlFor="productbrand" className="mt-3">Qual:</label>
+              <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
+            </div>
+          </>)}
         </div>
       </div>
     )
@@ -457,6 +470,7 @@ export function ProductForm(props) {
 
   const handleProductConditionStatus = (e) => {
     setProductConditionStatus(e.target.value)
+
     if (e.target.value === "bad") {
       document.getElementById("label-bad").classList.add("text-danger")
       document.getElementById("label-reasonable").classList.remove("text-warning")
@@ -1610,11 +1624,24 @@ export function ProductForm(props) {
             </select>
 
             <div className="condition">
-              <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-              <div className="d-flex justify-content-start gap-3 mt-3">
+              <label htmlFor="´rpductCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
+
+              <select
+                className="select-answer"
+                value={productCondition}
+                onChange={(e) => setProductCondition(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="new">Novo</option>
+                <option value="used">Usado</option>
+              </select>
+              { errors && errors.product && errors.product.condition && (
+                <p className="text-danger">{errors.product.condition[0]}</p>
+              )}
+              {/* <div className="d-flex justify-content-start gap-3 mt-3">
                 <button type="button" id="new" value="new" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Novo</button>
                 <button type="button" id="used" value="used" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Usado</button>
-              </div>
+              </div> */}
 
               {productCondition === "used" && (<>
                 <label htmlFor="productConditionStatus" className="mt-4">Qual estado da seu produto:</label>

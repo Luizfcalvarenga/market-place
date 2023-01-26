@@ -522,9 +522,9 @@
     rear_suspension_travels = ["80mm", "100mm", "110mm", "120mm", "130mm", "140mm", "150mm", "170mm", "180mm", "160mm", "200mm", "other"]
     shock_sizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "other" ]
     battery_capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
-    ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choices", options: materials, prompt: "Material do quadro" )
-    ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choices", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro")
-    ProductTypeAttribute.create!(product_type: frame, name: "suspension_type", kind: "multiple_choices", options: [["no_suspension", "Sem Suspensão"], ["hardtail", "Hardtail" ], ["full_suspension", "Full Suspension" ]], prompt: "Tipo de suspensão")
+    ProductTypeAttribute.create!(product_type: frame, name: "frame_material", kind: "multiple_choice", options: materials, prompt: "Material do quadro" )
+    ProductTypeAttribute.create!(product_type: frame, name: "frame_size", kind: "multiple_choice", options: road_frame_sizes || mtb_dirt_frame_sizes, prompt: "Tamanho do quadro")
+    ProductTypeAttribute.create!(product_type: frame, name: "suspension_type", kind: "multiple_choice", options: [["no_suspension", "Sem Suspensão"], ["hardtail", "Hardtail" ], ["full_suspension", "Full Suspension" ]], prompt: "Tipo de suspensão")
     ProductTypeAttribute.create!(product_type: frame, name: "rear_suspension_travel", kind: "multiple_choice", options: rear_suspension_travels, prompt: "Curso da suspensão traseira")
     ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do shock") # caso possam ser opcionais os atributos
     ProductTypeAttribute.create!(product_type: frame, name: "bike_type", kind: "multiple_choice", options: ["Bike", "E-Bike"], prompt: "Tipo de bike")
