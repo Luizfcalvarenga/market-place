@@ -135,9 +135,9 @@ export function Products(props) {
     if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
     if (clotheSizeOptionsToFilter) url = url + `&clothe_sizes=${clotheSizeOptionsToFilter}`
-    if (onlyAccessories) url = url + `&only_clothes=${onlyAccessories}`
-    if (onlyComponents) url = url + `&only_clothes=${onlyComponents}`
-    if (onlyClothes) url = url + `&only_clothes=${onlyClothes}`
+    if (onlyAccessories) url = url + `&products_accessories=${onlyAccessories}`
+    if (onlyComponents) url = url + `&products_components=${onlyComponents}`
+    if (onlyClothes) url = url + `&products_clothes=${onlyClothes}`
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
 
 
@@ -315,12 +315,12 @@ export function Products(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById("products-accessories").classList.remove("d-none")
       e.target.classList.add("selected-tag")
-      setOnlyAccessories("only_accessories")
+      setOnlyAccessories("products_accessories")
 
     } else {
       document.getElementById("products-accessories").classList.add("d-none")
       e.target.classList.remove("selected-tag")
-      setOnlyAccessories("only_accessories")
+      setOnlyAccessories("")
 
     }
   }
@@ -332,12 +332,12 @@ export function Products(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById("products-components").classList.remove("d-none")
       e.target.classList.add("selected-tag")
-      setOnlyComponents("only_components")
+      setOnlyComponents("products_components")
 
     } else {
       document.getElementById("products-components").classList.add("d-none")
       e.target.classList.remove("selected-tag")
-      setOnlyComponents("only_components")
+      setOnlyComponents("")
 
     }
   }
@@ -349,7 +349,7 @@ export function Products(props) {
       document.getElementById("products-clothes").classList.remove("d-none")
       document.getElementById("clothes-sizes-filter").classList.remove("d-none")
       e.target.classList.add("selected-tag")
-      setOnlyClothes("only_clothes")
+      setOnlyClothes("products_clothes")
     } else {
       document.getElementById("products-clothes").classList.add("d-none")
       document.getElementById("clothes-sizes-filter").classList.add("d-none")
@@ -619,21 +619,21 @@ export function Products(props) {
               <button type="button" value="" className="filter-tag" onClick={(e) => hendleClothesFiltes(e)}>Vestuário</button>
             </div>
 
-            <div id="products-accessories" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+            <div id="products-accessories" className="d-flex flex-wrap justify-content-between gap-1 mt-3 d-none">
               {accessories.map((accessory, index) => {
                 return (<button type="button" value={accessory.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{accessory.prompt}</button>
                 )
               })}
             </div>
 
-            <div id="products-components" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+            <div id="products-components" className="d-flex flex-wrap justify-content-between gap-1 mt-3 d-none">
               {components.map((component, index) => {
                 return (<button type="button" value={component.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{component.prompt}</button>
                 )
               })}
             </div>
 
-            <div id="products-clothes" className="d-flex flex-wrap justify-content-between mt-3  d-none">
+            <div id="products-clothes" className="d-flex flex-wrap justify-content-between mt-3 gap-1 d-none">
               {clothes.map((clothe, index) => {
                 return (<button type="button" value={clothe.id} className="filter-tag" onClick={(e) => handleProductAtributes(e)}>{clothe.prompt}</button>
                 )
