@@ -283,9 +283,9 @@ export function Products(props) {
         return
       } else if (attribute.name === "seat_post_type") {
         options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-      } else if (attribute.options.includes("other") ) {
+      } else if (attribute.options.includes("other") && !Array.isArray(attribute.options) ) {
         attribute.options.pop()
-        options = attribute.options
+        options = attribute.options.pop()
       } else {
         options = attribute.options
       }
