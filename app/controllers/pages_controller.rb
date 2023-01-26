@@ -7,6 +7,8 @@ class PagesController < ApplicationController
 
   def new_announce
   end
+        # OR product.city.name @@ :query
+        # OR product.city.name @@ :query
 
   def search
     if params[:query].present?
@@ -14,7 +16,6 @@ class PagesController < ApplicationController
         brand @@ :query
         OR model @@ :query
         OR products.name @@ :query
-        OR cities.name @@ :query
         OR product_types.prompt @@ :query
         OR description @@ :query
       SQL
@@ -24,7 +25,6 @@ class PagesController < ApplicationController
         frame_brand @@ :query
         OR bike_type @@ :query
         OR model @@ :query
-        OR cities.name @@ :query
         OR description @@ :query
       SQL
       @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where(bike_sql_query, query: "%#{params[:query]}%")

@@ -23,7 +23,7 @@ class Bike < ApplicationRecord
 
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
-  # validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type,  presence: true
+  validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type,  presence: true
 
   default_scope { where(removed_at: nil) }
 
@@ -35,6 +35,26 @@ class Bike < ApplicationRecord
 
   def type_display
     TYPE_OPTIONS[bike_type.to_sym]
+  end
+
+  MODALITY_OPTIONS = {
+    downhill: "Downhill",
+    enduro: "Enduro",
+    gravel: "Gravel",
+    speed: "Speed",
+    trail: "Trail",
+    xc_cross_country: "XC Cross Country",
+    street_bmx: "Street BMX",
+    race_bmx: "Race BMX",
+    big_wheel_bmx: "Big Wheel BMX",
+    dirt_jump: "Dirt Jump",
+    speed_performance: "Speed Performance",
+    triathlon: "Triathlon",
+    ciclocross: "Ciclocross",
+    cicloviagem: "Cicloviagem",
+  }
+  def modality_diplay
+    MODALITY_OPTIONS[modality.to_sym]
   end
 
 end

@@ -38,8 +38,8 @@
             <div class="card-content my-2">
               <div class="d-flex justify-content-around">
                 <div class="infos">
-                  <p><%= bike.locality %></p>
-                  <p><%= bike.bike_type %></p>
+                  <p><%= bike.city.name %> - <%= bike.state.acronym %></p>
+                  <p><%= bike.type_display %></p>
                 </div>
                 <div class="infos">
                   <form action="likes" method="post" class="w-10" >
@@ -103,8 +103,8 @@
             <div class="card-content my-2">
               <div class="d-flex justify-content-around">
                 <div class="infos">
-                  <p><%= product.locality %></p>
-                  <p><%= product.product_type.name_display %></p>
+                  <p><%= product.city.name %> - <%= product.state.acronym %></p>
+                  <p><%= product.product_type.prompt %></p>
                 </div>
                 <div class="infos">
                   <div data-controller="like-submit" >
@@ -112,17 +112,11 @@
                     <p class="d-none" data-like-submit-target="likebleType">Product</p>
                     <button type="button" data-like-submit-action="click->like-submit#submitLike" class="like-btn"><i class="far fa-heart"></i></button>
                   </div>
-                  <% if  ["car_accessories", "bike_accessories", "training_accessories", "pre_after_pedal_accessories"].include?(product.product_type.name) %>
+                  <% if  ["air_bomb", "bottle_cage", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].include?(product.product_type.name) %>
                     <%= image_tag "accessories.png", class: "icon-card-index ms-2"%>
-                  <% elsif  ["battery", "brake", "brake_levers", "cassete","chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre"].include?(product.product_type.name) %>
+                  <% elsif  ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "front_fork", "brake_disc"].include?(product.product_type.name) %>
                     <%= image_tag "frame.png", class: "icon-card-index ms-2"%>
-                  <% elsif  ["helmet", "elbow_pad", "knee_pad", "water_bottle", "bottle_cage", "hydration_backpack", "fanny_pack", "sneaker"].include?(product.product_type.name) %>
-                    <%= image_tag "helmet.png", class: "icon-card-index ms-2"%>
-                  <% elsif  ["cap", "glasses"].include?(product.product_type.name) %>
-                    <%= image_tag "cap.png", class: "icon-card-index ms-2"%>
-                  <% elsif  ["air_bomb", "lubricant", "sealant"].include?(product.product_type.name) %>
-                    <%= image_tag "tools.png", class: "icon-card-index ms-2"%>
-                  <% elsif  ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing"].include?(product.product_type.name) %>
+                  <% elsif  ["bretelle", "coat", "pants", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].include?(product.product_type.name) %>
                     <%= image_tag "tshirt.png", class: "icon-card-index ms-2"%>
                   <% end %>
                 </div>
