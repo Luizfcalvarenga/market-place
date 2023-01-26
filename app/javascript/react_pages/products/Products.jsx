@@ -283,10 +283,12 @@ export function Products(props) {
         return
       } else if (attribute.name === "seat_post_type") {
         options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-      } else if (attribute.options.includes("other") && !Array.isArray(attribute.options) ) {
-        attribute.options.pop()
-        options = attribute.options.pop()
-      } else {
+      }
+      // else if (!Array.isArray(attribute.options) && attribute.options.includes("other")) {
+      //   attribute.options.pop()
+      //   options = attribute.options.pop()
+      // }
+      else {
         options = attribute.options
       }
 
