@@ -318,50 +318,50 @@ export function BikeForm(props) {
       })
     }
 
-    if (frameBrand === "Outra") {
+    if (frameBrand === "other") {
       dataObject.append( "bike[frame_brand]", otherFrameBrand );
     } else {
       dataObject.append( "bike[frame_brand]", frameBrand );
     }
 
-    if (frameSize === "Outro") {
+    if (frameSize === "other") {
       dataObject.append( "bike[frame_size]", otherFrameSize );
     } else {
       dataObject.append( "bike[frame_size]", frameSize );
     }
 
 
-    if (frameMaterial === "Outra") {
+    if (frameMaterial === "other") {
       dataObject.append( "bike[frame_material]", otherFrameMaterial );
     } else {
       dataObject.append( "bike[frame_material]", frameMaterial );
     }
 
-    if (forkMaterial === "Outro") {
+    if (forkMaterial === "other") {
       dataObject.append( "bike[fork_material]", otherForkMaterial );
     } else {
       dataObject.append( "bike[fork_material]", forkMaterial );
     }
 
-    if (cranksetMaterial === "Outro") {
+    if (cranksetMaterial === "other") {
       dataObject.append( "bike[crankset_material]", otherCranksetMaterial );
     } else {
       dataObject.append( "bike[crankset_material]", cranksetMaterial );
     }
 
-    if (handlebarMaterial === "Outro") {
+    if (handlebarMaterial === "other") {
       dataObject.append( "bike[handlebar_material]", otherHandlebarMaterial );
     } else {
       dataObject.append( "bike[handlebar_material]", handlebarMaterial );
     }
 
-    if (wheelMaterial === "Outro") {
+    if (wheelMaterial === "other") {
       dataObject.append( "bike[wheel_material]", otherWheelMaterial );
     } else {
       dataObject.append( "bike[wheel_material]", wheelMaterial );
     }
 
-    if (seatPostMaterial === "Outro") {
+    if (seatPostMaterial === "other") {
       dataObject.append( "bike[seat_post_material]", otherSeatPostMaterial );
     } else {
       dataObject.append( "bike[seat_post_material]", seatPostMaterial );
@@ -659,8 +659,16 @@ export function BikeForm(props) {
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       e.target.classList.add("selected-tag")
+      setAccessories(["Não"])
+      document.getElementById("include-accessory").classList.remove("selected-tag")
+      document.getElementById("accessories-options").classList.add("d-none")
+      document.getElementById("accessory-option").classList.remove("selected-tag")
+
+
     } else {
       e.target.classList.remove("selected-tag")
+      setAccessories([])
+
     }
   }
 
@@ -669,6 +677,8 @@ export function BikeForm(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById("accessories-options").classList.remove("d-none")
       e.target.classList.add("selected-tag")
+      document.getElementById("no-accessory").classList.remove("selected-tag")
+      setAccessories([])
     } else {
       document.getElementById("accessories-options").classList.add("d-none")
       e.target.classList.remove("selected-tag")
@@ -838,8 +848,8 @@ export function BikeForm(props) {
     "Outra"
   ].sort()
 
-  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL", "Outro"]
-  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "Outro" ]
+  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other"]
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "other" ]
 
   //////////////////////////////////////////////// suspensions
 
@@ -1091,14 +1101,14 @@ export function BikeForm(props) {
           {frameBrands.map((frameBrand, index) => {
             return (<option key={index}>{frameBrand}</option>);
           })}
-          <option value="Outra">Outra</option>
+          <option value="other">Outra</option>
         </select>
 
         { errors && errors.bike && errors.bike.frame_brand && (
           <p className="text-danger">{errors.bike.frame_brand[0]}</p>
         )}
 
-        { frameBrand === "Outra"  && (
+        { frameBrand === "other"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={otherFrameBrand} onChange={(e) => setOtherFrameBrand(e.target.value)}/>
@@ -1120,14 +1130,19 @@ export function BikeForm(props) {
           >
             <option value=""></option>
             {roadFrameSizes.map((frameSize, index)=> {
-              return (<option key={index}>{frameSize}</option>);
+              if (frameSize === "other") {
+                return (<option key={index} value="other">Outro</option>);
+              } else {
+                return (<option key={index}>{frameSize}</option>);
+              }
+              // return (<option key={index}>{frameSize}</option>);
             })}
           </select>
           { errors && errors.bike && errors.bike.frame_size && (
             <p className="text-danger">{errors.bike.frame_size[0]}</p>
           )}
 
-          { frameSize === "Outro"  && (
+          { frameSize === "other"  && (
             <>
               <label htmlFor="otherFrameMaterial" className="mt-4">Qual<span className="requested-information ms-1">*</span></label>
               <input type="text" className="text-input" value={otherFrameSize} onChange={(e) => setOtherFrameSize(e.target.value)}/>
@@ -1145,14 +1160,18 @@ export function BikeForm(props) {
           >
             <option value=""></option>
             {dirtMtbFrameSizes.map((frameSize, index)=> {
-              return (<option key={index}>{frameSize}</option>);
+              if (frameSize === "other") {
+                return (<option key={index} value="other">Outro</option>);
+              } else {
+                return (<option key={index}>{frameSize}</option>);
+              }
             })}
           </select>
           { errors && errors.bike && errors.bike.frame_size && (
             <p className="text-danger">{errors.bike.frame_size[0]}</p>
           )}
 
-          { frameSize === "Outro"  && (
+          { frameSize === "other"  && (
             <>
               <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
               <input type="text" className="text-input" value={otherFrameSize} onChange={(e) => setOtherFrameSize(e.target.value)}/>
@@ -1170,14 +1189,14 @@ export function BikeForm(props) {
           <option value="carbon">Carbono</option>
           <option value="aluminum">Aluminio</option>
           <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-          <option value="Outro">Outro</option>
+          <option value="other">Outro</option>
 
         </select>
         { errors && errors.bike && errors.bike.frame_material && (
           <p className="text-danger">{errors.bike.frame_material[0]}</p>
         )}
 
-        { frameMaterial === "Outro"  && (
+        { frameMaterial === "other"  && (
           <>
             <label htmlFor="otherFrameMaterial" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={otherFrameMaterial} onChange={(e) => setOtherFrameMaterial(e.target.value)}/>
@@ -1467,10 +1486,10 @@ export function BikeForm(props) {
               <option value="carbon">Carbono</option>
               <option value="aluminum">Aluminio</option>
               <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-              <option value="Outro">Outro</option>
+              <option value="other">Outro</option>
 
             </select>
-            { cranksetMaterial === "Outro"  && (
+            { cranksetMaterial === "other"  && (
               <>
                 <label htmlFor="otherCranksetMaterial" className="mt-4">Qual?</label>
                 <input type="text" className="text-input" value={otherCranksetMaterial} onChange={(e) => setOtherCranksetMaterial(e.target.value)}/>
@@ -1579,10 +1598,10 @@ export function BikeForm(props) {
                 <option value="carbon">Carbono</option>
                 <option value="aluminum">Aluminio</option>
                 <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-                <option value="Outro">Outro</option>
+                <option value="other">Outro</option>
 
               </select>
-              { forkMaterial === "Outro"  && (
+              { forkMaterial === "other"  && (
                 <>
                   <label htmlFor="otherForkMaterial" className="mt-4">Qual?</label>
                   <input type="text" className="text-input" value={otherForkMaterial} onChange={(e) => setOtherForkMaterial(e.target.value)}/>
@@ -1784,10 +1803,10 @@ export function BikeForm(props) {
               <option value="carbon">Carbono</option>
               <option value="aluminum">Aluminio</option>
               <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-              <option value="Outro">Outro</option>
+              <option value="other">Outro</option>
 
             </select>
-            { wheelMaterial === "Outro"  && (
+            { wheelMaterial === "other"  && (
               <>
                 <label htmlFor="otherWheelMaterial" className="mt-4">Qual?</label>
                 <input type="text" className="text-input" value={otherWheelMaterial} onChange={(e) => setOtherWheelMaterial(e.target.value)}/>
@@ -1828,13 +1847,13 @@ export function BikeForm(props) {
                 <option value="carbon">Carbono</option>
                 <option value="aluminum">Aluminio</option>
                 <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-                <option value="Outro">Outro</option>
+                <option value="other">Outro</option>
 
               </select>
-              { handlebarMaterial === "Outro"  && (
+              { handlebarMaterial === "other"  && (
                 <>
                   <label htmlFor="otherhandlebarMaterial" className="mt-4">Qual?</label>
-                  <input type="text" className="text-input" value={otherhandlebarMaterial} onChange={(e) => setOtherhandlebarMaterial(e.target.value)}/>
+                  <input type="text" className="text-input" value={otherHandlebarMaterial} onChange={(e) => setOtherHandlebarMaterial(e.target.value)}/>
                 </>
               )}
               <label htmlFor="handlebar" className="mt-3">Guidão:</label>
@@ -1870,10 +1889,10 @@ export function BikeForm(props) {
                   <option value="carbon">Carbono</option>
                   <option value="aluminum">Aluminio</option>
                   <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-                  <option value="Outro">Outro</option>
+                  <option value="other">Outro</option>
 
                 </select>
-                { seatPostMaterial === "Outro"  && (
+                { seatPostMaterial === "other"  && (
                   <>
                     <label htmlFor="otherSeatPostMaterial" className="mt-4">Qual?</label>
                     <input type="text" className="text-input" value={otherSeatPostMaterial} onChange={(e) => setOtherSeatPostMaterial(e.target.value)}/>
@@ -1919,18 +1938,18 @@ export function BikeForm(props) {
             <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
             <div id="Acessórios" className="accessories d-none mb-3">
               <label htmlFor="" className="mt-3 me-3">Acessório:</label>
-              <button type="button" value="Não" className="filter-tag mx-2" onClick={(e) => handleNoAccessoriesToSelect(e)}>Não</button>
-              <button type="button" value="Sim" className="filter-tag mx-2" onClick={(e) => handleAccessoriesToSelect(e)}>Sim</button>
+              <button type="button" id="no-accessory" value="Não" className="filter-tag mx-2" onClick={(e) => handleNoAccessoriesToSelect(e)}>Não</button>
+              <button type="button" id="include-accessory" value="Sim" className="filter-tag mx-2" onClick={(e) => handleAccessoriesToSelect(e)}>Sim</button>
               <div id="accessories-options" className="accessories-options d-flex gap-3 flex-wrap justify-content-center d-none mt-3">
-                <button type="button" value="Pedal" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Pedal</button>
-                <button type="button" value="Ciclocomputador" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Ciclocomputador</button>
-                <button type="button" value="Lanterna Traseira" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Lanterna Traseira</button>
-                <button type="button" value="Farol" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Farol</button>
-                <button type="button" value="Bolsa de Acessórios" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bolsa de Acessórios</button>
-                <button type="button" value="Suporte de Garrafinha" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Suporte de Garrafinha</button>
-                <button type="button" value="Bateria Extra" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bateria Extra</button>
+                <button type="button" id="accessory-option" value="Pedal" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Pedal</button>
+                <button type="button" id="accessory-option" value="Ciclocomputador" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Ciclocomputador</button>
+                <button type="button" id="accessory-option" value="Lanterna Traseira" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Lanterna Traseira</button>
+                <button type="button" id="accessory-option" value="Farol" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Farol</button>
+                <button type="button" id="accessory-option" value="Bolsa de Acessórios" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bolsa de Acessórios</button>
+                <button type="button" id="accessory-option" value="Suporte de Garrafinha" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Suporte de Garrafinha</button>
+                <button type="button" id="accessory-option" value="Bateria Extra" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bateria Extra</button>
               </div>
-              {accessories.length > 0  && (<>
+              {(!accessories.includes("Não") && accessories.lenght > 0) && (<>
                 <label htmlFor="accessories-description" className="mt-4">Descrição:</label>
                 <input className="text-input" type="text" placeholder="" value={accessoriesDescription} aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
               </>)}
@@ -2086,12 +2105,12 @@ export function BikeForm(props) {
 
           <div className="d-flex justify-content-between">
             <p><span className="text-success">Modelo:</span> {model}</p>
-            <p><span className="text-success">Preço:</span>  {priceInCents?.toLocaleString("pt-BR", {
+            <p><span className="text-success">Preço:</span> {priceInCents?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
             {cityId && stateId && (<>
-              <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(cityId)).name} - {states.find((element) => element.id === Number(stateId)).acronym}</p>
+              <p><span className="text-success">Local:</span> {cities.find((element) => element.id === Number(cityId)).name} - {states.find((element) => element.id === Number(stateId)).acronym}</p>
             </>)}
           </div>
           <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
@@ -2105,9 +2124,9 @@ export function BikeForm(props) {
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
         <div id="Quadro(review)" className="d-none">
-          <p><span className="text-success">Marca:</span>{frameBrand}</p>
-          <p><span className="text-success">Material:</span>{frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
-          <p><span className="text-success">Tamanho:</span>{frameSize}</p>
+          <p><span className="text-success">Marca:</span> {frameBrand === "other" ? otherFrameBrand : frameBrand}</p>
+          <p><span className="text-success">Material:</span> {frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
+          <p><span className="text-success">Tamanho:</span> {frameSize === "other" ? otherFrameSize : frameSize}</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão</button>
@@ -2124,7 +2143,7 @@ export function BikeForm(props) {
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Freios</button>
         <div id="Freios(review)" className="d-none">
-          <p><span className="text-success">Tipo:</span> {brakeType}</p>
+          <p><span className="text-success">Tipo:</span> {translateWord(brakeType)}</p>
           <p><span className="text-success">Tamanho do disco:</span> {brakeDiscSize === "other" ? otherBrakeDiscSize : brakeDiscSize }</p>
           <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
@@ -2145,8 +2164,8 @@ export function BikeForm(props) {
         {category === "road" && (
           <>
             <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Garfo</button>
-            <div id="Garfor(review)" className="d-none">
-              <p><span className="text-success">Material:</span>{forkMaterial === "other" ? otherForkMaterial : translateWord(forkMaterial) }</p>
+            <div id="Garfo(review)" className="d-none">
+              <p><span className="text-success">Material:</span> {forkMaterial === "other" ? otherForkMaterial : translateWord(forkMaterial) }</p>
             </div>
           </>
         )}
@@ -2155,7 +2174,7 @@ export function BikeForm(props) {
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas</button>
         <div id="Rodas(review)" className="d-none">
           <p><span className="text-success">Tamanho:</span> {rimSize}</p>
-          <p><span className="text-success">Material da Roda:</span>{wheelMaterial === "other" ? otherWheelMaterial : translateWord(wheelMaterial) }</p>
+          <p><span className="text-success">Material da Roda:</span> {wheelMaterial === "other" ? otherWheelMaterial : translateWord(wheelMaterial) }</p>
           <p><span className="text-success">Aro dianteiro:</span> {frontRimModel}</p>
           <p><span className="text-success">Aro traseiro:</span> {rearRimModel }</p>
           <p><span className="text-success">Cudo dianteiro:</span> {frontHub}</p>
@@ -2167,30 +2186,44 @@ export function BikeForm(props) {
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Cockpit</button>
         <div id="Cockpit(review)" className="d-none">
           <p><span className="text-success">Guidão:</span> {handlebar}</p>
-          <p><span className="text-success">Material do Guidão:</span>{handlebarMaterial === "other" ? otherHandlebarMaterial : translateWord(handlebarMaterial) }</p>
+          <p><span className="text-success">Material do Guidão:</span> {handlebarMaterial === "other" ? otherHandlebarMaterial : translateWord(handlebarMaterial) }</p>
           <p><span className="text-success">Mesa:</span> {stem}</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Canote</button>
         <div id="Canote(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {seatPostType}</p>
-          <p><span className="text-success">Curso:</span> {seatPostTravel}</p>
-          <p><span className="text-success">Material:</span>{seatPostMaterial === "other" ? otherSeatPostMaterial : translateWord(seatPostMaterial) }</p>
+          {seatPostTravel && (<>
+            <p><span className="text-success">Curso:</span> {seatPostTravel === "other" ? otherSeatPostTravel : translateWord(seatPostTravel) }</p>
+          </>)}
+          {seatPostMaterial && (<>
+            <p><span className="text-success">Material:</span> {seatPostMaterial === "other" ? otherSeatPostMaterial : translateWord(seatPostMaterial) }</p>
+          </>)}
           <p><span className="text-success">Modelo:</span> {seatPostModel }</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Acessórios</button>
         <div id="Acessórios(review)" className="d-none">
-          <p><span className="text-success">Acompanha(qual?):</span> {accessories === "other" ? otherAccessory : accessories }</p>
-          <p><span className="text-success">Descrição:</span> {accessoriesDescription}</p>
-          <p><span className="text-success">Pedais:</span> {pedals }</p>
+          {accessories.includes("Não") && (
+            <p><span className="text-success">Acompanha?:</span>Não</p>
+          )}
+          {!accessories.includes("Não") && (<>
+            {accessories.map((accessory) => {
+              <p><span className="text-success">Acessório:</span> {accessory }</p>
+            })}
+            {accessories.includes("Pedal") && (<>
+              <p><span className="text-success">Pedais:</span> {pedals}</p>
+            </>)}
+            <p><span className="text-success">Descrição:</span> {accessoriesDescription}</p>
+          </>)}
+
+
         </div>
 
-        { bikeType === "electric" && (<>
+        { bikeType === "e-bike" && (<>
           <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Parte elétrica</button>
           <div id="Parte elétrica(review)" className="d-none">
             <p><span className="text-success">Capacidade da baterias:</span> {battery === "other" ? otherBattery : battery }</p>
-            <p><span className="text-success">Motor:</span> {motor}</p>
             <p><span className="text-success">Km:</span> {mileage} Km</p>
             <p><span className="text-success">Ciclos da bateria:</span> {batteryCycles}</p>
           </div>
