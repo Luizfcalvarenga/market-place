@@ -1553,7 +1553,12 @@ export function BikeForm(props) {
               >
                 <option value=""></option>
                 {roadBrakeModels.map((roadBrakeModel, index)=> {
-                  return (<option key={index}>{roadBrakeModel}</option>);
+                  // return (<option key={index}>{roadBrakeModel}</option>);
+                  if (roadBrakeModel === "other") {
+                    return (<option key={index} value="other">Outro</option>);
+                  } else {
+                    return (<option key={index}>{roadBrakeModel}</option>);
+                  }
                 })}
               </select>
             </>)}
