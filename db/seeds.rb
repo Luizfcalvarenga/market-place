@@ -195,7 +195,7 @@
     handlebar_sizes_road = ["360 mm", "380 mm", "400 mm", "420 mm", "440 mm", "460 mm", "other"]
     handlebar_diameters = ["25,4 mm", "31,8 mm", "other"]
     handlebar_drops = ["130 mm", "140 mm", "150mm", "160mm", "other"]
-    ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho" ) # opçõs de acordo com categoria #???
+    ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes_mtb_dirt_urban_infant || handlebar_sizes_road, prompt: "Tamanho" ) # opçõs de acordo com categoria #???
     ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_diameter", kind: "multiple_choice", options: handlebar_diameters, prompt: "Diâmetro") #???
     ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_drop", kind: "multiple_choice", options: handlebar_drops, prompt: "Drop") #??? perguntar se for categoria road
     ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_material", kind: "multiple_choice", options: materials, prompt: "Material") #???
@@ -752,7 +752,7 @@
     fanny_pack = ProductType.create(name: "fanny_pack", prompt: "Pochete")
     sneaker = ProductType.create(name: "sneaker", prompt: "Sapatilha")
 
-    products_options = [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, relation_kit_complete_group, crankset, fender, frame, front_derailleur, rear_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ]
+    # products_options = [adapters, battery, blocking, bearing, brake, brake_levers, brake_pad, bottle_cage, cassete, central_movement, chain, chain_guide, chainring, relation_kit_complete_group, crankset, fender, frame, front_derailleur, rear_derailleur, front_shifter, front_suspension, full_wheel, grips, handlebar, headset, hub, hanger, pedals, power_meter, rim, saddle, seat_post, sheave, spoke, rear_shifter, rear_suspension, stem, tube, tyre, air_bomb, eletronics, oil_lubricant, stand, tools, car_protector, training_roller, bike_rack, bretelle, shorts, inner_shorts, shirt, pants, vest, windbreaker, gloves, socks, glasses, thermal_clothing, cap, helmet, elbow_pad, knee_pad, water_bottle, hydration_pack, fanny_pack, sneaker ]
 
     clothes_sizes = ["PP", "P", "M", "G", "GG", "XGG", "Único"]
     bretelle_sizes = ProductTypeAttribute.create!(product_type: bretelle, name: "bretelle_size", kind: "multiple_choices", options: clothes_sizes, prompt: "Tamanho")
@@ -818,7 +818,7 @@
     handlebar_sizes_road = ["360 mm", "380 mm", "400 mm", "420 mm", "440 mm", "460 mm", "other"]
     handlebar_diameters = ["25,4 mm", "31,8 mm", "other"]
     handlebar_drops = ["130 mm", "140 mm", "150mm", "160mm", "other"]
-    ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes, prompt: "Tamanho" ) # opçõs de acordo com categoria #???
+    ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_size", kind: "multiple_choice", options: handlebar_sizes_mtb_dirt_urban_infant || handlebar_sizes_road, prompt: "Tamanho" ) # opçõs de acordo com categoria #???
     ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_diameter", kind: "multiple_choice", options: handlebar_diameters, prompt: "Diâmetro") #???
     ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_drop", kind: "multiple_choice", options: handlebar_drops, prompt: "Drop") #??? perguntar se for categoria road
     ProductTypeAttribute.create!(product_type: handlebar, name: "handlebar_material", kind: "multiple_choice", options: materials, prompt: "Material") #???
