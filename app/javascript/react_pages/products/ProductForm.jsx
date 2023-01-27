@@ -170,8 +170,8 @@ export function ProductForm(props) {
   }
 
   const removePhoto = (e) => {
-    console.log(e)
-    console.log(e.target.id)
+    // console.log(e)
+    // console.log(e.target.id)
     const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
     setPhotosPreview(newPhotosPreview);
     const photoToRemove = photoFile.find(element => element.url === e.target.id).name
@@ -388,7 +388,7 @@ export function ProductForm(props) {
       })
     }
     for (const [key, value] of Object.entries(productAttributes)) {
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
 
@@ -415,10 +415,10 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    console.log(e)
+    // console.log(e)
     if (e.target.localName === "img") {
       let filter = e.target.alt;
-      console.log(filter)
+      // console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
@@ -429,7 +429,7 @@ export function ProductForm(props) {
 
     } else {
       let filter = e.target.id;
-      console.log(filter)
+      // console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
@@ -447,8 +447,8 @@ export function ProductForm(props) {
   }
 
   const handleLocality = (e) => {
-    console.log(e)
-    console.log(e.target.value)
+    // console.log(e)
+    // console.log(e.target.value)
     setProductState(e.target.value)
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
@@ -481,7 +481,7 @@ export function ProductForm(props) {
     } else if (e.target.value === "reasonable") {
       document.getElementById("label-bad").classList.remove("text-danger")
       document.getElementById("label-reasonable").classList.add("text-warning")
-      document.getElementById("label-good").classList.ramove("text-primary")
+      document.getElementById("label-good").classList.remove("text-primary")
       document.getElementById("label-excellent").classList.remove("text-success")
     } else if (e.target.value === "good") {
       document.getElementById("label-bad").classList.remove("text-danger")
@@ -714,7 +714,7 @@ export function ProductForm(props) {
   }
 
   const handleTerms = (e) => {
-    console.log(e.target)
+    // console.log(e.target)
     const btnAnnounce = document.getElementById("new-announce")
     btnAnnounce.classList.toggle("disable-btn-form")
   }

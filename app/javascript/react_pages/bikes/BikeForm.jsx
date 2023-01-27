@@ -187,7 +187,7 @@ export function BikeForm(props) {
   const createBikePhotos = (e) => {
     const photos = Object.values(e.target.files)
     setPhotos(photos)
-    console.log(photos)
+    // console.log(photos)
   }
 
   function removeObjectWithId(arr, name) {
@@ -197,7 +197,7 @@ export function BikeForm(props) {
   }
 
   const removePhoto = (e) => {
-    console.log(e.target.id)
+    // console.log(e.target.id)
     const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
     setPhotosPreview(newPhotosPreview);
     const photoToRemove = photoFile.find(element => element.url === e.target.id).name
@@ -635,7 +635,7 @@ export function BikeForm(props) {
   }
 
   const handleTechnicalSection = (e) => {
-    console.log(e)
+    // console.log(e)
     const technicalSection = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
     technicalSection.classList.toggle("d-none")
@@ -645,11 +645,11 @@ export function BikeForm(props) {
 
   const handleReviewSection = (e) => {
 
-    console.log(`${e.target.innerText}(reviews)`)
+    // console.log(`${e.target.innerText}(reviews)`)
     const section = document.getElementById(e.target.innerText + "(review)")
     const sectionActive = e.target;
 
-    console.log(section)
+    // console.log(section)
     section.classList.toggle("d-none")
     sectionActive.classList.toggle("review-selected")
   }
@@ -662,7 +662,7 @@ export function BikeForm(props) {
       document.getElementById("include-accessory").classList.remove("selected-tag")
       document.getElementById("accessories-options").classList.add("d-none")
       const tags = document.querySelectorAll("#accessory-option")
-      console.log(tags)
+      // console.log(tags)
       tags.forEach(element => element.classList.remove("selected-tag"))
 
 
@@ -691,19 +691,19 @@ export function BikeForm(props) {
     const tagFilter = e.target
     if (currentAccessories.includes(e.target.value)) {
       setAccessories(currentAccessories.filter(element => element != e.target.value));
-      console.log(currentAccessories)
+      // console.log(currentAccessories)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentAccessories.push(e.target.value)
       setAccessories(currentAccessories)
-      console.log(currentAccessories)
+      // console.log(currentAccessories)
       tagFilter.classList.add("selected-tag")
     }
   }
 
   const handleLocality = (e) => {
-    console.log(e)
-    console.log(e.target.value)
+    // console.log(e)
+    // console.log(e.target.value)
     setStateId(e.target.value)
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
@@ -714,7 +714,7 @@ export function BikeForm(props) {
     const principal = document.getElementById("principal")
     const additional = document.getElementById("additional")
 
-    console.log(e.target.checked)
+    // console.log(e.target.checked)
     if (e.target.checked === true) {
       additionalInfos.classList.remove("d-none")
       principalInfos.classList.add("d-none")
