@@ -304,7 +304,6 @@ export function BikeForm(props) {
     dataObject.append( "bike[rear_tyre]", rearTyre );
     dataObject.append( "bike[front_rim_model]", frontRimModel );
     dataObject.append( "bike[rear_rim_model]", rearRimModel );
-    dataObject.append( "bike[motor]", motor );
     dataObject.append( "bike[pedals]", pedals );
     dataObject.append( "bike[mileage]", mileage );
     dataObject.append( "bike[chain]", chain );
@@ -662,7 +661,9 @@ export function BikeForm(props) {
       setAccessories(["Não"])
       document.getElementById("include-accessory").classList.remove("selected-tag")
       document.getElementById("accessories-options").classList.add("d-none")
-      document.getElementById("accessory-option").classList.remove("selected-tag")
+      const tags = document.querySelectorAll("#accessory-option")
+      console.log(tags)
+      tags.forEach(element => element.classList.remove("selected-tag"))
 
 
     } else {
@@ -739,7 +740,7 @@ export function BikeForm(props) {
     } else if (e.target.value === "reasonable") {
       document.getElementById("label-bad").classList.remove("text-danger")
       document.getElementById("label-reasonable").classList.add("text-warning")
-      document.getElementById("label-good").classList.ramove("text-primary")
+      document.getElementById("label-good").classList.remove("text-primary")
       document.getElementById("label-excellent").classList.remove("text-success")
     } else if (e.target.value === "good") {
       document.getElementById("label-bad").classList.remove("text-danger")
@@ -1949,7 +1950,7 @@ export function BikeForm(props) {
                 <button type="button" id="accessory-option" value="Suporte de Garrafinha" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Suporte de Garrafinha</button>
                 <button type="button" id="accessory-option" value="Bateria Extra" className="filter-tag"  onClick={(e) => includeAccessory(e)}>Bateria Extra</button>
               </div>
-              {(!accessories.includes("Não") && accessories.lenght > 0) && (<>
+              {(accessories.includes("Pedal") || accessories.includes("Ciclocomputador") || accessories.includes("Lanterna Traseira") || accessories.includes("Farol") || accessories.includes("Bolsa de Acessórios") || accessories.includes("Suporte de Garrafinha") || accessories.includes("Bateria Extra") )&& (<>
                 <label htmlFor="accessories-description" className="mt-4">Descrição:</label>
                 <input className="text-input" type="text" placeholder="" value={accessoriesDescription} aria-label=".form-control-sm example" onChange={(e) => setAccessoriesDescription(e.target.value)}/>
               </>)}
@@ -2115,9 +2116,9 @@ export function BikeForm(props) {
           </div>
           <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
           <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
-          <p><span className="text-success">Estado:</span> {translateWord(bikeConditionStatus)}</p>
+          <p><span className="text-success">Estado da Bike:</span> {translateWord(bikeConditionStatus)}</p>
           {bikeConditionDescription && (
-          <p><span className="text-success">Estado da bike:</span> {bikeConditionDescription}</p>
+          <p><span className="text-success">Descrição da Condição:</span> {bikeConditionDescription}</p>
           )}
           <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
@@ -2192,7 +2193,7 @@ export function BikeForm(props) {
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Canote</button>
         <div id="Canote(review)" className="d-none">
-          <p><span className="text-success">Tipo:</span> {seatPostType}</p>
+          <p><span className="text-success">Tipo:</span> {translateWord(seatPostType)}</p>
           {seatPostTravel && (<>
             <p><span className="text-success">Curso:</span> {seatPostTravel === "other" ? otherSeatPostTravel : translateWord(seatPostTravel) }</p>
           </>)}
@@ -2205,11 +2206,13 @@ export function BikeForm(props) {
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Acessórios</button>
         <div id="Acessórios(review)" className="d-none">
           {accessories.includes("Não") && (
-            <p><span className="text-success">Acompanha?:</span>Não</p>
+            <p><span className="text-success">Acompanha?:</span >Não</p>
           )}
           {!accessories.includes("Não") && (<>
             {accessories.map((accessory) => {
-              <p><span className="text-success">Acessório:</span> {accessory }</p>
+              return(
+                <p><span className="text-success">Acessório:</span> {accessory}</p>
+              )
             })}
             {accessories.includes("Pedal") && (<>
               <p><span className="text-success">Pedais:</span> {pedals}</p>
