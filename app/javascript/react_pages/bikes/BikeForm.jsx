@@ -257,7 +257,6 @@ export function BikeForm(props) {
       setSeatPostModel(response.data.bike.seat_post_model);
       setHandlebar(response.data.bike.handlebar);
       setStem(response.data.bike.stem);
-      setMotor(response.data.bike.motor);
       setCrankset(response.data.bike.crankset);
       setChain(response.data.bike.chain);
       setMileage(response.data.bike.mileage);
@@ -305,6 +304,7 @@ export function BikeForm(props) {
     dataObject.append( "bike[front_rim_model]", frontRimModel );
     dataObject.append( "bike[rear_rim_model]", rearRimModel );
     dataObject.append( "bike[pedals]", pedals );
+
     dataObject.append( "bike[mileage]", mileage );
     dataObject.append( "bike[chain]", chain );
     dataObject.append( "bike[crankset]", crankset );
@@ -932,7 +932,7 @@ export function BikeForm(props) {
       "hardtail" : "Hardtail",
       "full_suspension" : "Full Suspension",
 
-      "retractle" : "Retrátil",
+      "retractable" : "Retrátil",
       "rigid" : "Rigido",
 
       "new": "Novo",
@@ -2200,7 +2200,7 @@ export function BikeForm(props) {
         <div id="Canote(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {translateWord(seatPostType)}</p>
           {seatPostTravel && (<>
-            <p><span className="text-success">Curso:</span> {seatPostTravel === "other" ? otherSeatPostTravel : translateWord(seatPostTravel) }</p>
+            <p><span className="text-success">Curso:</span> {seatPostTravel === "other" ? otherSeatPostTravel : seatPostTravel }</p>
           </>)}
           {seatPostMaterial && (<>
             <p><span className="text-success">Material:</span> {seatPostMaterial === "other" ? otherSeatPostMaterial : translateWord(seatPostMaterial) }</p>

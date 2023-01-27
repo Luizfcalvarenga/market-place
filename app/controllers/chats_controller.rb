@@ -6,12 +6,13 @@ class ChatsController < ApplicationController
   def index
     @chat = Chat.new
     @chats = policy_scope(Chat)
-    # @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
+    @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first} if Chat.where(is_private: true).present?
     if Chat.where(is_private: true).present?
       @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
       @conversations.compact()
     else
       @users = []
+      @conversations = []
     end
     if params[:query].present?
       sql_query = "full_name ILIKE :query OR email ILIKE :query"

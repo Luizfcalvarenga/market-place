@@ -62,7 +62,7 @@ class Bike < ApplicationRecord
     "new": "Novo",
   }
   def condition_display()
-    CONDITION_OPTIONS[condition.to_sym]
+    CONDITION_OPTIONS[bike_condition.to_sym]
   end
 
 end
