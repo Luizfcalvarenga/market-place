@@ -11,6 +11,12 @@ class Category < ApplicationRecord
     infant: "Infantil"
   }
 
+
+  def name_display
+    CATEGORY_OPTIONS[name.to_sym]
+  end
+
+
   MODALITY_OPTIONS = {
     downhill: "Downhill",
     enduro: "Enduro",
@@ -27,13 +33,8 @@ class Category < ApplicationRecord
     ciclocross: "Ciclocross",
     cicloviagem: "Cicloviagem",
   }
-
-  def name_display
-    CATEGORY_OPTIONS[name.to_sym]
-  end
-
   def modality_diplay
-    MODALITY_OPTIONS[name.to_sym]
+    MODALITY_OPTIONS[modality.to_sym]
   end
 
 end

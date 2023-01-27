@@ -27,18 +27,33 @@ class Product < ApplicationRecord
   validates :name, :category, :modality, :brand, :model, :year,  presence: true
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
-
-
   default_scope { where(removed_at: nil) }
-  WORDS_OPTIONS = {
+  CONDITION_OPTIONS = {
     "Product": "Produto",
-
+    "used": "Usado",
+    "new": "Novo",
   }
-
-  def word_display()
-    WORDS_OPTIONS[name.to_sym]
+  def condition_display()
+    CONDITION_OPTIONS[condition.to_sym]
   end
 
-
-
+  MODALITY_OPTIONS = {
+    downhill: "Downhill",
+    enduro: "Enduro",
+    gravel: "Gravel",
+    speed: "Speed",
+    trail: "Trail",
+    xc_cross_country: "XC Cross Country",
+    street_bmx: "Street BMX",
+    race_bmx: "Race BMX",
+    big_wheel_bmx: "Big Wheel BMX",
+    dirt_jump: "Dirt Jump",
+    speed_performance: "Speed Performance",
+    triathlon: "Triathlon",
+    ciclocross: "Ciclocross",
+    cicloviagem: "Cicloviagem",
+  }
+  def modality_display
+    MODALITY_OPTIONS[modality.to_sym]
+  end
 end

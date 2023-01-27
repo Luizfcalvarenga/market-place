@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NormalBikeImage from "../../../assets/images/normal-bike.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
+import IntlCurrencyInput from "react-intl-currency-input"
 
 export function Bikes(props) {
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -8,8 +9,7 @@ export function Bikes(props) {
   });
 
   const [bikes, setBikes] = useState([])
-  const [categoryFilter, setCategoryFilter] = useState(params.category || "");
-
+  // const [categoryFilter, setCategoryFilter] = useState([params.categories] || "");
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
@@ -39,7 +39,8 @@ export function Bikes(props) {
   const [batteryFilter, setBatteryFilter] = useState("");
   const [batteryCyclesFilter, setBatteryCyclesFilter] = useState("");
   const [mileageFilter, setMileageFilter] = useState("");
-  const [localityFilter, setLocalityFilter] = useState("");
+  const [stateFilter, setStateFilter] = useState("");
+  const [cityFilter, setCityFilter] = useState("");
   const [modelFilter, setModelFilter] = useState("");
   const [cranksetFilter, setCranksetFilter] = useState("");
   const [chainFilter, setChainFilter] = useState("");
@@ -48,19 +49,63 @@ export function Bikes(props) {
   const [tyreFilter, setTyreFilter] = useState("");
   const [stemFilter, setStemFilter] = useState("");
   const [handlebarFilter, setHandlebarFilter] = useState("");
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
   const [filteredLinkCategory, setFilteredLinkCategory] = useState("");
+  const [categoryOptionsToFilter, setCategoryOptionsToFilter] = useState([params.categories] || []);
+  const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
+  const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
+  const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
+
+
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
 
 
+  const currencyConfig = {
+    locale: "pt-BR",
+    formats: {
+      number: {
+        BRL: {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  };
+
+  const BrlCurrencyComponent = () => {
+    const handleMinPriceFIlter = (event, value, maskedValue) => {
+      // console.log(value)
+      event.preventDefault();
+      setMinPriceFilter(value)
+    };
+    const handlemaxPriceFIlter = (event, value, maskedValue) => {
+      // console.log(value)
+      event.preventDefault();
+      setMaxPriceFilter(value)
+    };
+
+    return(
+      <>
+        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={minPriceFilter}   onChange={handleMinPriceFIlter} />
+        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+          className="text-input" value={maxPriceFilter}   onChange={handlemaxPriceFIlter} />
+      </>
+    );
+  }
 
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
-    if (categoryFilter) url = url + `&category=${categoryFilter}`
+    // if (categoryFilter) url = url + `&category=${categoryFilter}`
     if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
-    if (minPriceFilter) url = url + `&min_price=${minPriceFilter}`
-    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter}`
+    if (minPriceFilter) url = url + `&min_price=${minPriceFilter * 100}`
+    if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter * 100}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (bikeTypeFilter) url = url + `&bike_type=${bikeTypeFilter}`
@@ -86,7 +131,8 @@ export function Bikes(props) {
     if (batteryFilter) url = url + `&battery=${batteryFilter}`
     if (batteryCyclesFilter) url = url + `&battery_cycles=${batteryCyclesFilter}`
     if (mileageFilter) url = url + `&mileage=${mileageFilter}`
-    if (localityFilter) url = url + `&locality=${localityFilter}`
+    if (stateFilter) url = url + `&state=${stateFilter}`
+    if (cityFilter) url = url + `&city=${cityFilter}`
     if (modelFilter) url = url + `&model=${modelFilter}`
     if (cranksetFilter) url = url + `&crankset=${cranksetFilter}`
     if (chainFilter) url = url + `&chain=${chainFilter}`
@@ -97,18 +143,32 @@ export function Bikes(props) {
     if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
     if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
     if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
+    if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
+    if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
+    if (frameSizeOptionsToFilter) url = url + `&frame_sizes=${frameSizeOptionsToFilter}`
+    if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
 
     console.log(url)
+    console.log(categoryOptionsToFilter.includes(null))
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
-  }, [categoryFilter, modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
+  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
-  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, localityFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType])
+  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter])
 
+  useEffect(() => {
+    fetch(`/get_information_for_new_bike`)
+     .then((response) => response.json())
+     .then((data) => {
+      setStates(data.states)
+      setCities(data.cities)
 
+     })
+
+  }, []);
 
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
@@ -119,17 +179,22 @@ export function Bikes(props) {
   }
 
   const handleBikeTypeFilter = (e) => {
-    console.log(e.target.checked)
-    if (e.target.checked) {
+    const tagFilter = e.target
+    tagFilter.classList.toggle("selected-tag")
+
+    if (e.target.classList.contains("selected-tag")) {
       setBikeTypeFilter(e.target.value)
     } else {
       setBikeTypeFilter("")
     }
+
   }
 
   const handleConditionFilter = (e) => {
-    console.log(e.target.checked)
-    if (e.target.checked) {
+    const tagFilter = e.target
+    tagFilter.classList.toggle("selected-tag")
+
+    if (e.target.classList.contains("selected-tag")) {
       setConditionFilter(e.target.value)
     } else {
       setConditionFilter("")
@@ -168,6 +233,90 @@ export function Bikes(props) {
       "bike" : "Bike",
     };
     return languageMap[word]
+  }
+
+  const handleLocality = (e) => {
+    console.log(e)
+    console.log(e.target.value)
+    setStateFilter(e.target.value)
+    let stateId = states.find(state => state.name === e.target.value).id
+    console.log(stateId)
+    setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+  }
+
+  const handleMultipleFiltersCategory = (e) => {
+    // console.log(e)
+    const currentOptionsToFilter = [...categoryOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setCategoryOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setCategoryOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersModality = (e) => {
+    const currentOptionsToFilter = [...modalityOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setModalityOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setModalityOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleModalityFilter = (e) => {
+    console.log(e)
+    e.target.classList.toggle("active")
+    if (e.target.classList.contains("active")) {
+      document.getElementById(e.target.value).classList.remove("d-none")
+      e.target.classList.add("selected-tag")
+
+    } else {
+      document.getElementById(e.target.value).classList.add("d-none")
+      e.target.classList.remove("selected-tag")
+
+    }
+  }
+
+  const handleMultipleFiltersFrameSize = (e) => {
+    const currentOptionsToFilter = [...frameSizeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrameSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrameSizeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersFrameMaterial = (e) => {
+    const currentOptionsToFilter = [...frameMaterialOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrameMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrameMaterialOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
@@ -262,8 +411,8 @@ export function Bikes(props) {
   ].sort()
 
   const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
+  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
 
   /////////////////////////////////////////////////////////////////////////////////////SUSPENSÃO////////////////////////////////////////////////////////////////////////////
 
@@ -316,7 +465,9 @@ export function Bikes(props) {
             <div className="condition-filter">
               <h5 className=" mt-3">tipo</h5>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 ">
+                <button type="button" value="e-bike" className="filter-tag" onClick={(e) => handleBikeTypeFilter(e)}>E-Bike</button>
+                <button type="button" value="bike" className="filter-tag" onClick={(e) => handleBikeTypeFilter(e)}>Bike</button>
+                {/* <label htmlFor="new" className="me-2 ">
                   <input
                     type="checkbox"
                     value="e-bike"
@@ -332,34 +483,29 @@ export function Bikes(props) {
                     name="type"
                     onChange={(e) => handleBikeTypeFilter(e)}
                   />  Bike
-                </label>
+                </label> */}
               </div>
             </div>
+
 
             <div className="condition-filter">
-              <h5 className=" mt-3">condição</h5>
+              <h6 className=" mt-3">condição</h6>
               <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2 ">
-                  <input
-                    type="checkbox"
-                    value="new"
-                    name="condition"
-                    onChange={(e) => handleConditionFilter(e)}
-                  />  Nova
-                </label>
-
-                <label htmlFor="used" className="me-2 ">
-                <input
-                  type="checkbox"
-                  value="used"
-                  name="condition"
-                  onChange={(e) => handleConditionFilter(e)}
-                />  Usada
-                </label>
+                <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Nova</button>
+                <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usada</button>
               </div>
             </div>
 
-            <h5 className=" mt-3">categoria</h5>
+
+            <h6 className=" mt-3">categoria</h6>
+            <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
+              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>Mountain Bike</button>
+              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Dirt</button>
+              <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Road</button>
+              <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Infantil</button>
+              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Urbana</button>
+            </div>
+            {/* <h5 className=" mt-3">categoria</h5>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
@@ -371,9 +517,140 @@ export function Bikes(props) {
               <option value="road">Road</option>
               <option value="infant">Infantil</option>
               <option value="urban">Urbano</option>
-            </select>
+            </select> */}
 
-            {categoryFilter === "mountain_bike" && (<>
+            {categoryOptionsToFilter.includes("mountain_bike") && (<>
+              {/* <h5 className="mt-3">Modalidade</h5>
+               */}
+              <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+
+               <div id="mtb-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
+                <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
+                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
+                <button type="button" value="speed" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Speed</button>
+                <button type="button" value="trail" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Trail</button>
+                <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button>
+               </div>
+
+              {/* <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+              >
+                <option value=""></option>
+                <option value="downhill">Downhill</option>
+                <option value="enduro">Enduro</option>
+                <option value="gravel">Gravel</option>
+                <option value="speed">Speed</option>
+                <option value="trail">Trail</option>
+                <option value="xc_cross_country">XC Cross Country</option>
+              </select> */}
+            </>)}
+
+            {categoryOptionsToFilter.includes("dirt_street") && (<>
+              {/* <h5 className="mt-3">Modalidade</h5> */}
+              <button type="button" value="dirt-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+
+              <div id="dirt-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                <button type="button" value="street_bmx" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Street BMX</button>
+                <button type="button" value="race_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Race BMX</button>
+                <button type="button" value="big_wheel_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Big Wheel BMX</button>
+                <button type="button" value="dirt_jump" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Dirt Jump</button>
+              </div>
+
+
+              {/* <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+
+              >
+                <option value=""></option>
+                <option value="street_bmx">Street BMX</option>
+                <option value="race_bmx">Race BMX</option>
+                <option value="big_wheel_bmx">Big Wheel BMX</option>
+                <option value="dirt_jump">Dirt Jump</option>
+              </select> */}
+            </>)}
+
+            {categoryOptionsToFilter.includes("road") &&(<>
+              {/* <h5 className="mt-3">Modalidade</h5> */}
+              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+
+              <div id="road-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
+                <button type="button" value="triathlon" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Triathon</button>
+                <button type="button" value="ciclocross" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Ciclocross</button>
+                <button type="button" value="cicloviagem" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Cicloviagem</button>
+                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
+              </div>
+
+
+              {/* <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+              >
+                <option value=""></option>
+                <option value="speed_performance">Speed Performance</option>
+                <option value="triathlon">Triathon</option>
+                <option value="ciclocross">Ciclocross</option>
+                <option value="cicloviagem">Cicloviagme</option>
+                <option value="gravel">Gravel</option>
+              </select> */}
+            </>)}
+
+            {(categoryOptionsToFilter.length <= 0 || categoryOptionsToFilter.includes("urban", "infant")) && (<>
+              {/* <h5 className=" mt-3">Modalidade</h5> */}
+              <button type="button" value="all-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+
+              <div id="all-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+
+                <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
+                <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
+                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
+                <button type="button" value="speed" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Speed</button>
+                <button type="button" value="trail" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Trail</button>
+                <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button>
+                <button type="button" value="street_bmx" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Street BMX</button>
+                <button type="button" value="race_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Race BMX</button>
+                <button type="button" value="big_wheel_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Big Wheel BMX</button>
+                <button type="button" value="dirt_jump" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Dirt Jump</button>
+                <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
+                <button type="button" value="triathlon" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Triathlon</button>
+                <button type="button" value="ciclocross" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Ciclocross</button>
+                <button type="button" value="cicloviagem" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Cicloviagme</button>
+              </div>
+
+
+
+
+              {/* <select
+                value={modalityFilter}
+                onChange={(e) => setModalityFilter(e.target.value)}
+                className="select-answer"
+
+              >
+                <option value=""></option>
+                <option value="speed_performance">Speed Performance</option>
+                <option value="triathlon">triathon</option>
+                <option value="ciclocross">Ciclocross</option>
+                <option value="cicloviagem">Cicloviagme</option>
+                <option value="gravel">Gravel</option>
+                <option value="downhill">Downhill</option>
+                <option value="enduro">Enduro</option>
+                <option value="speed">Speed</option>
+                <option value="trail">Trail</option>
+                <option value="xc_cross_country">XC Cross Country</option>
+                <option value="street_bmx">Street BMX</option>
+                <option value="race_bmx">Race BMX</option>
+                <option value="big_wheel_bmx">Big Wheel BMX</option>
+                <option value="dirt_jump">Dirt Jump</option>
+              </select> */}
+            </>)}
+
+            {/* {categoryFilter === "mountain_bike" && (<>
               <h5 className=" mt-3">Modalidade</h5>
               <select
                 value={modalityFilter}
@@ -445,7 +722,7 @@ export function Bikes(props) {
                 <option value="big_wheel_bmx">Big Wheel BMX</option>
                 <option value="dirt_jump">Dirt Jump</option>
               </select>
-            </>)}
+            </>)} */}
 
             <h5 className=" mt-3">marca</h5>
             <select
@@ -465,16 +742,52 @@ export function Bikes(props) {
             </div>
 
             <div className="locality-filter">
-              <h5 className=" mt-3">Local</h5>
-              <input type="text" className="text-input" onChange={(e) => setLocalityFilter(e.target.value)}/>
+              <h5 className=" mt-3">Estado</h5>
+              <select
+                className="select-answer"
+                value={stateFilter}
+                onChange={(e) => handleLocality(e)}
+              >
+                <option value=""></option>
+                {states.map((state, index)=> {
+                  return (<option key={index} value={state.name}>{state.acronym}</option>);
+                })}
+              </select>
+              <h5 className=" mt-3">Cidade</h5>
+              {stateFilter && (<>
+                <select
+                  className="select-answer"
+                  value={cityFilter}
+                  onChange={(e) => setCityFilter(e.target.value)}
+                >
+                  <option value=""></option>
+                  {mapedCitiesForState.map((city, index)=> {
+                    return (<option key={index} value={city.name}>{city.name}</option>);
+                  })}
+                </select>
+              </>)}
+
+              {!stateFilter && (<>
+                <select
+                  className="select-answer"
+                  value={cityFilter}
+                  onChange={(e) => setCityFilter(e.target.value)}
+                >
+                  <option value=""></option>
+                  {cities.map((city, index)=> {
+                    return (<option key={index} value={city.name}>{city.name}</option>);
+                  })}
+                </select>
+              </>)}
             </div>
 
             <div className="price-filter">
               <div className="">
                 <h5 className=" mt-3">preço</h5>
                 <div className="d-flex justify-content-between">
-                  <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
-                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/>
+                  {BrlCurrencyComponent()}
+                  {/* <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/>
+                  <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/> */}
                 </div>
               </div>
             </div>
@@ -490,8 +803,16 @@ export function Bikes(props) {
             <h5 className=" ">Componentes</h5>
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
-              {!categoryFilter && (<>
+              {categoryOptionsToFilter.length <= 1 && (<>
                 <h5 className=" mt-3">tamanho</h5>
+
+                {allFrameSizes.map((frameSize, index)=> {
+                  return (
+                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                  );
+                })}
+
+                {/* <h5 className=" mt-3">tamanho</h5>
                 <select
                   className="select-answer"
                   value={frameSizeFilter}
@@ -501,40 +822,33 @@ export function Bikes(props) {
                   {allFrameSizes.map((frameSize, index)=> {
                     return (<option key={index}>{frameSize}</option>);
                   })}
-                </select>
+                </select> */}
               </>)}
 
-              {categoryFilter === "road" && (<>
+              {categoryOptionsToFilter.includes("road") && (<>
                 <h5 className=" mt-3">tamanho</h5>
-
-                <select
-                  className="select-answer"
-                  value={frameSizeFilter}
-                  onChange={(e) => setFrameSizeFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {roadFrameSizes.map((frameSize, index)=> {
-                    return (<option key={index}>{frameSize}</option>);
-                  })}
-                </select>
+                {roadFrameSizes.map((frameSize, index)=> {
+                  return (
+                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                  );
+                })}
               </>)}
 
-              {["dirt_street", "mountain_bike", "infant", "urban"].includes(categoryFilter) && (<>
+              {(categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("infant") || categoryOptionsToFilter.includes("urban")) && (<>
                 <h5 className=" mt-3">tamanho</h5>
-                <select
-                  className="select-answer"
-                  value={frameSizeFilter}
-                  onChange={(e) => setFrameSizeFilter(e.target.value)}
-                >
-                  <option value=""></option>
                   {dirtMtbFrameSizes.map((frameSize, index)=> {
-                    return (<option key={index}>{frameSize}</option>);
-                  })}
-                </select>
+                  return (
+                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                  );
+                })}
               </>)}
 
               <h5 className=" mt-3">material</h5>
-              <select
+              <button type="button" value="carbon" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono</button>
+              <button type="button" value="aluminum" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Aluminio</button>
+              <button type="button" value="carbon_aluminum_chainstay" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono/Aumínio (Chainstay)</button>
+
+              {/* <select
                 className="select-answer"
                 value={frameMaterialFilter}
                 onChange={(e) => setFrameMaterialFilter(e.target.value)}
@@ -543,7 +857,7 @@ export function Bikes(props) {
                 <option value="carbon">Carbono</option>
                 <option value="aluminum">Aluminio</option>
                 <option value="carbon_aluminum_chainstay">Carbono/Aumínio (Chainstay)</option>
-              </select>
+              </select> */}
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
@@ -898,17 +1212,19 @@ export function Bikes(props) {
                     <div className="card-content mt-2">
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
-                          <p>{bike.locality}</p>
                           <p>{translateWord(bike.bike_type)}</p>
+                          <p>{bike.city.name} - {bike.state.acronym}</p>
                         </div>
                         <div className="infos">
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button> <br />
-                          { bike.bike_type === "bike" &&(
-                            <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/>
+                          {bike.bike_type === "bike" &&(<>
+                            <img src={NormalBikeImage} alt="" className="icon-card-index ms-1"/> <br />
+                          </>
                           )}
-                          {  bike.bike_type === "e-bike" &&(
-                            <img src={EBikeImage} alt="" className="icon-card-index ms-1"/>
+                          {bike.bike_type === "e-bike" &&(<>
+                            <img src={EBikeImage} alt="" className="icon-card-index ms-1"/> <br />
+                          </>
                           )}
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
                         </div>
                       </div>
                     </div>

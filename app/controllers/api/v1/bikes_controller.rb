@@ -6,25 +6,26 @@ module Api
       skip_before_action :authenticate_user!
 
       def index
-        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user).order(created_at: :desc)
+        @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
-        @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
+        # @bikes = @bikes.where(category:  Category.where(name: params[:category])) if params[:category].present?
+        @bikes = @bikes.where(category:  Category.where(name: params[:categories].split(","))) if params[:categories].present?
+        @bikes = @bikes.where(modality: params[:modalities].split(",")) if params[:modalities].present?
+        @bikes = @bikes.where(state:  State.where(name: params[:state])) if params[:state].present?
+        @bikes = @bikes.where(city:  City.where(name: params[:city])) if params[:city].present?
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
-
         @bikes = @bikes.where('bikes.price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
         @bikes = @bikes.where('bikes.price_in_cents >= ?', params[:min_price]).order(price_in_cents: :asc) if params[:min_price].present?
         @bikes = @bikes.where('bikes.price_in_cents BETWEEN ? AND ?', 0, params[:max_price]).order(price_in_cents: :asc) if params[:max_price].present?
-
         @bikes = @bikes.where(bike_condition: params[:condition]) if params[:condition].present?
-
         @bikes = @bikes.where('year::integer BETWEEN ? AND ?', params[:min_year], params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
         @bikes = @bikes.where('year::integer BETWEEN ? AND ?', params[:min_year], Date.today.year).order(year: :asc) if params[:min_year].present?
         @bikes = @bikes.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
-
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
-        @bikes = @bikes.where(frame_size: params[:frame_size]) if params[:frame_size].present?
+        @bikes = @bikes.where(frame_size: params[:frame_sizes].split(",")) if params[:frame_sizes].present?
+        @bikes = @bikes.where(frame_material: params[:frame_materials].split(",")) if params[:frame_materials].present?
+
         @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(frame_material: params[:frame_material]) if params[:frame_material].present?
         @bikes = @bikes.where(suspension_type: params[:suspension_type]) if params[:suspension_type].present?
         @bikes = @bikes.where(front_suspension_travel: params[:front_suspension_travel]) if params[:front_suspension_travel].present?
         @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travel]) if params[:rear_suspension_travel].present?
@@ -44,7 +45,6 @@ module Api
         @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
         @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
         @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
-        @bikes = @bikes.where('locality @@ ?', params[:locality]) if params[:locality].present?
         @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
         @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
         @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
@@ -175,10 +175,10 @@ module Api
           :rear_tyre,
           :handlebar,
           :stem,
-          :motor,
           :mileage,
           :battery_cycles,
           :pedals,
+
           photos: []
         )
       end

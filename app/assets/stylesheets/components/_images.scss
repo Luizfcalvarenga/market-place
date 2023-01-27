@@ -11,7 +11,14 @@
   height: 298px !important;
   border-radius: 5px 0 0 5px;
   width: 100%;
-  background-size: fit;
+}
+
+.advertisable-img {
+  height: 298px !important;
+  border-radius: 4px;
+  width: 100%;
+  object-fit: cover;
+  
 }
 
 .review-images-admin {
@@ -28,19 +35,26 @@
 
 .avatar-profile-mobile-navbar {
   width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: $color-primary 1px solid;
 }
 
 .search-img {
-  width: 20% !important;
+  width: 15% !important;
+  max-height: 50px;
   border-radius: 4px;
+  object-fit: cover;
 }
 
 
 @media (max-width: 765px)  {
   .search-img {
-    display: none
+    display: none;
+    // width: 10% !important;
+    // max-height: 30px;
+    // border-radius: 4px;
+    // object-fit: cover;
   }
 
 }

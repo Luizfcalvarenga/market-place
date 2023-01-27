@@ -12,10 +12,15 @@ module Api
         @product_type_attributes = ProductTypeAttribute.all
         @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
 
-        @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
-        @products = @products.where(modality: params[:modality]) if params[:modality].present?
-        @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
-        @products = @products.where(product_type_: ProductType.where(name: params[:product_type_name])) if params[:product_type_name].present?
+
+        # @products = @products.where(category: Category.where(name: params[:category])) if params[:category].present?
+        @products = @products.where(category:  Category.where(name: params[:categories].split(","))) if params[:categories].present?
+        @products = @products.where(state:  State.where(name: params[:state])) if params[:state].present?
+        @products = @products.where(city:  City.where(name: params[:city])) if params[:city].present?
+        # @products = @products.where(modality: params[:modality]) if params[:modality].present?
+        @products = @products.where(modality: params[:modalities].split(",")) if params[:modalities].present?
+        # @products = @products.where(product_type_id: params[:product_type_id]) if params[:product_type_id].present?
+        @products = @products.where(product_type_id: ProductType.where(prompt: params[:product_types].split(","))) if params[:product_types].present?
 
         @products = @products.where('products.price_in_cents BETWEEN ? AND ?', params[:min_price], params[:max_price]).order(price_in_cents: :asc) if params[:min_price].present? && params[:max_price].present?
         @products = @products.where('products.price_in_cents >= ?', params[:min_price]).order(price_in_cents: :asc) if params[:min_price].present?
@@ -24,14 +29,25 @@ module Api
         @products = @products.where('year::integer BETWEEN ? AND ?', params[:min_year], params[:max_year]).order(year: :asc) if params[:min_year].present? && params[:max_year].present?
         @products = @products.where('year::integer BETWEEN ? AND ?', params[:min_year], Date.today.year).order(year: :asc) if params[:min_year].present?
         @products = @products.where('year::integer BETWEEN ? AND ?', 0, params[:max_year]).order(year: :asc) if params[:max_year].present?
+        @products = @products.where(brand: params[:brand]) if params[:brand].present?
+        @products = @products.where(model: params[:model]) if params[:model].present?
+        @products = @products.where('products.name @@ ?', params[:name]) if params[:name].present?
+
+        @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:clothe_sizes].split(",")}) if params[:clothe_sizes].present?
+
+        @products = @products.where(product_type_id: (1..40).to_a) if params[:products_components].present?
+        @products = @products.where(product_type_id: (41..47).to_a) if params[:products_accessories].present?
+        @products = @products.where(product_type_id: (48..68).to_a) if params[:products_clothes].present?
+
+
+
+
+        # @products = ProductAttribute.where(value: params[:components_attributes_values].split(",")).map { |value| value.product } if params[:components_attributes_values].present?
+
 
         @products = @products.where(product_type_id: params[:product_type_id]).joins(:product_attributes).where(value: params[:product_attribute_value]) if params[:product_attribute_value].present?
         @products = ProductAttribute.where(value: params[:product_attribute_value]).map { |value| value.product } if params[:product_attribute_value].present?
         @products = ProductAttribute.where(value: params[:condition]).map { |value| value.product } if params[:condition].present?
-        @products = @products.where(brand: params[:brand]) if params[:brand].present?
-        @products = @products.where(model: params[:model]) if params[:model].present?
-        @products = @products.where('locality @@ ?', params[:locality]) if params[:locality].present?
-        @products = @products.where('products.name @@ ?', params[:name]) if params[:name].present?
 
       end
 
@@ -72,7 +88,7 @@ module Api
           end
           @service = AdvertisementGenerator.new(@product, @coupon_code)
           @service.call()
-          if @product.advertisement.present?  && @service.errors.blank?  &&  (params[:product][:productAttributes].present? && ProductAttribute.where(product: @product).present?)
+          if @product.advertisement.present?  && @service.errors.blank?
             render json: { success: true, product: @product, product_attributes: @product_attributes, advertisement: @product.advertisement, photos: @photos, redirect_url: advertisement_path(@product.advertisement) }
           else
             render json: { success: false, errors: {product: @product.errors, coupon: @service.errors}}
@@ -122,7 +138,26 @@ module Api
       private
 
       def product_params
-        params.require(:product).permit(:user_id, :category_id, :name, :modality, :product_type_id, :brand, :model, :description, :price_in_cents, :quantity, :year, :city_id, :state_id, :documentation_type, :condition, photos: [])
+        params.require(:product).permit(
+          :user_id,
+          :category_id,
+          :name,
+          :modality,
+          :product_type_id,
+          :brand,
+          :model,
+          :description,
+          :price_in_cents,
+          :quantity,
+          :year,
+          :city_id,
+          :state_id,
+          :documentation_type,
+          :condition,
+          :product_condition_status,
+          :product_condition_description,
+          photos: []
+        )
       end
 
       def product_attribute_params

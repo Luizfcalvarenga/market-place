@@ -30,14 +30,16 @@
       <div>
         <p><span class="text-success me-2">Tipo:</span><%= ProductType.find_by(id: @item.product_type_id).prompt %></p>
         <p><span class="text-success me-2">Categoria:</span><%= @item.category.name_display %></p>
-        <p><span class="text-success me-2">Modalidade:</span><%= @item.modality %></p>
-        <p><span class="text-success me-2">Descrição:</span><%= @item.description %></p>
+        <p><span class="text-success me-2">Modalidade:</span><%= @item.modality_display %></p>
         <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
+        <p><span class="text-success me-2">Condição:</span><%= @item.condition_display %></p>
+        <p><span class="text-success me-2">Descrição:</span><%= @item.description %></p>
 
       </div>
       <div>
         <p><span class="text-success me-2">Marca:</span><%= @item.brand %></p>
-        <p><span class="text-success me-2">Nome:</span><%= @item.model %></p>
+        <p><span class="text-success me-2">Modelo:</span><%= @item.model %></p>
+        <p><span class="text-success me-2">Nome:</span><%= @item.name %></p>
         <p><span class="text-success me-2">Ano:</span><%= @item.year %></p>
         <p><span class="text-success me-2">Quantidade:</span><%= @item.quantity %></p>
         <p><span class="text-success me-2">Preço:</span><%= number_to_currency(@item.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
@@ -53,13 +55,18 @@
     <h4>Bike</h4>
     <div class="d-flexjustify-content-around my-3">
       <div>
+        <p><span class="text-success me-2">Tipo:</span><%= @item.type_display %></p>
         <p><span class="text-success me-2">Categoria:</span><%= @item.category.name %></p>
-        <p><span class="text-success me-2">Modalidade:</span><%= @item.modality %></p>
-        <p><span class="text-success me-2">Tipo:</span><%= @item.bike_type %></p>
-        <p><span class="text-success me-2">Condição:</span><%= @item.bike_condition %></p>
+        <p><span class="text-success me-2">Modalidade:</span><%= @item.modality_display %></p>
+        <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
+        <p><span class="text-success me-2">Condição:</span><%= @item.condition_display %></p>
+        <p><span class="text-success me-2">Descrição:</span><%= @item.description %></p>
+
       </div>
       <div>
-        <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
+        <p><span class="text-success me-2">Marca:</span><%= @item.frame_brand %></p>
+        <p><span class="text-success me-2">Modelo:</span><%= @item.model %></p>
+        <p><span class="text-success me-2">Modelo:</span><%= @item.model %></p>
         <p><span class="text-success me-2">Ano:</span><%= @item.year %></p>
         <p><span class="text-success me-2">Quantidade:</span><%= @item.quantity %></p>
         <p><span class="text-success me-2">Preço:</span><%= number_to_currency(@item.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>

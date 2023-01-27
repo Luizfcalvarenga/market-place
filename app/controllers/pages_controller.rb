@@ -7,24 +7,17 @@ class PagesController < ApplicationController
 
   def new_announce
   end
+        # OR product.city.name @@ :query
+        # OR product.city.name @@ :query
 
   def search
-
-
     if params[:query].present?
-      # @bikes = PgSearch.multisearch(params[:query])
-      # @products = PgSearch.multisearch(params[:query])
-
-
       product_sql_query = <<~SQL
         brand @@ :query
         OR model @@ :query
         OR products.name @@ :query
-        OR locality @@ :query
         OR product_types.prompt @@ :query
         OR description @@ :query
-
-
       SQL
       @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).joins(:product_type).where(product_sql_query, query: "%#{params[:query]}%")
 
@@ -32,9 +25,7 @@ class PagesController < ApplicationController
         frame_brand @@ :query
         OR bike_type @@ :query
         OR model @@ :query
-        OR locality @@ :query
         OR description @@ :query
-
       SQL
       @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where(bike_sql_query, query: "%#{params[:query]}%")
     end

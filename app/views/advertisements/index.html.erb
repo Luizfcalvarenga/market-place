@@ -9,7 +9,7 @@
               <h6><span class="text-success">Anúncio</span> #<%= advertisement.id %></h6>
               <h6><span class="text-success">Total:</span> <%=number_to_currency(advertisement.final_price_with_coupon_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%> </h6>
               <h6><span class="text-success">Criado em</span> <%= advertisement.created_at.strftime("%d/%m/%Y")  %></h6>
-              <h6><span class="text-success">Status:</span> <%= advertisement.status %> </h6>
+              <h6><span class="text-success">Status:</span> <%= advertisement.status_display %> </h6>
             </div>
 
             <% if advertisement.invoice_paid_at.blank? %>
@@ -22,11 +22,11 @@
               <% if advertisement.invoice_paid_at.present? %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-handshake mt-1 me-2"></i>Pago em: </span> <%= advertisement.invoice_paid_at.strftime("%d/%m/%Y") %> </p>
               <% else%>
-                <p><span class="topic-cards-index-media text-danger"><i class="fas fa-credit-card mt-1 me-2"></i>Aguardando pagamento</p>
+                <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
               <% end %>
               <% if advertisement.status === "pending" %>
-                <p><span class="topic-cards-index-media text-warning"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
-              <% elsif  advertisement.status === "waiting_review" %>
+                <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
+              <% elsif  advertisement.status === "waiting_review" || advertisement.status === "paid"%>
                 <p><span class="topic-cards-index-media text-primary"><i class="fas fa-clock mt-1 me-2"></i>Aguardando revisão</p>
               <% elsif  advertisement.status === "approved" %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>
@@ -36,17 +36,93 @@
             </div>
           <hr class="index-line">
           <% if advertisement.advertisable_type == "Product" %>
-            <div class="d-flex justify-content-between">
-              <p><span class="text-success">Produto </span> #<%= advertisement.advertisable_id %> </p>
-              <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
-              <p><span class="text-success">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
-            </div>
+            <% if advertisement.advertisable.blank? %>
+              <p>Produto removido</p>
+            <% else %>
+              <div class="d-flex justify-content-between">
+                <div id="carouselExampleControls<%= advertisement.advertisable.id.to_s %>" class="carousel slide w-50" data-bs-ride="carousel">
+                  <% if advertisement.advertisable.photos.attached? %>
+                    <div class="carousel-inner">
+                      <% advertisement.advertisable.photos.each_with_index do |photo, i| %>
+                        <div class="show-carousel-item carousel-item <%= i.zero? ? "active" : ""  %>">
+                          <%= cl_image_tag photo.key, crop: :fit, class: 'd-block advertisable-img'  %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% else  %>
+                      <%= image_tag "bike-forest.png", class: "advertisable-img" %>
+                  <% end %>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%= advertisement.advertisable.id.to_s %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%= advertisement.advertisable.id.to_s %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+                <div class="advertisable-infos">
+                  <p><span class="text-success">Produto </span> #<%= advertisement.advertisable.id %> </p>
+                  <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+                  <p><span class="text-success">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
+                  <p><span class="text-success">Local:</span><%= advertisement.advertisable.city.name %> - <%= advertisement.advertisable.state.acronym %></p>
+                  <p><span class="text-success">Ano:</span>  <%= advertisement.advertisable.year %></p>
+                  <p><span class="text-success">Produto:</span> <%= advertisement.advertisable.product_type.prompt %></p>
+                  <%= link_to edit_product_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
+                    <i class="fas fa-pen"></i>  Editar <br>
+                  <% end %>
+                  <% if policy(advertisement.advertisable).destroy? %>
+                    <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.product_type.prompt}?"}, class: "nav-link fs-18 text-gray" do %>
+                      <i class="fas fa-trash"></i> Remover
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           <% elsif advertisement.advertisable_type == "Bike" %>
-            <div class="d-flex justify-content-between">
-              <p><span class="text-success">Bike </span>#<%= advertisement.advertisable_id %> </p>
-              <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
-              <p><span class="text-success">Quantidade:</span> <%=advertisement.advertisable.quantity  %></p>
-            </div>
+            <% if advertisement.advertisable.blank? %>
+              <p>Bike removida</p>
+            <% else %>
+              <div class="d-flex justify-content-between">
+                <div id="carouselExampleControls<%= advertisement.advertisable.id.to_s %>" class="carousel slide w-50" data-bs-ride="carousel">
+                  <% if advertisement.advertisable.photos.attached? %>
+                    <div class="carousel-inner">
+                      <% advertisement.advertisable.photos.each_with_index do |photo, i| %>
+                        <div class="show-carousel-item carousel-item <%= i.zero? ? "active" : ""  %>">
+                          <%= cl_image_tag photo.key, crop: :fit, class: 'd-block advertisable-img'  %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% else  %>
+                      <%= image_tag "bike-forest.png", class: "advertisable-img" %>
+                  <% end %>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%= advertisement.advertisable.id.to_s %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%= advertisement.advertisable.id.to_s %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+                <div class="advertisable-infos">
+                  <p><span class="text-success">Bike </span>#<%= advertisement.advertisable.id %> </p>
+                  <p><span class="text-success">Preço:</span> <%= number_to_currency(advertisement.advertisable.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")  %></p>
+                  <p><span class="text-success">Quantidade:</span> <%= advertisement.advertisable.quantity  %></p>
+                  <p><span class="text-success">Local:</span><%= advertisement.advertisable.city.name %> - <%= advertisement.advertisable.state.acronym %></p>
+                  <p><span class="text-success">Ano:</span> <%= advertisement.advertisable.year %></p>
+                  <p><span class="text-success">Tipo:</span> <%= advertisement.advertisable.type_display %></p>
+                  <%= link_to edit_bike_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
+                    <i class="fas fa-pen"></i>  Editar <br>
+                  <% end %>
+                  <% if policy(advertisement.advertisable).destroy? %>
+                    <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.model}?"}, class: "nav-link fs-18 text-gray" do %>
+                      <i class="fas fa-trash"></i> Remover
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           <% end%>
         </div>
       </div>

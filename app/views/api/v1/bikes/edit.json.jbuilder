@@ -26,8 +26,8 @@ json.seat_post_type @bike.seat_post_type
 json.seat_post_travel @bike.seat_post_travel
 json.weight @bike.weight
 json.bike_condition @bike.bike_condition
-json.structural_visual_condition @bike.structural_visual_condition
-json.operating_condition @bike.operating_condition
+json.bike_condition_status @bike.bike_condition_status
+json.bike_condition_description @bike.bike_condition_description
 json.documentation_type @bike.documentation_type
 json.description @bike.description
 json.accessories @bike.accessories
@@ -46,9 +46,13 @@ json.front_tyre @bike.front_tyre
 json.rear_tyre @bike.rear_tyre
 json.handlebar @bike.handlebar
 json.stem @bike.stem
-json.motor @bike.motor
 json.mileage @bike.mileage
 json.rim_size @bike.rim_size
 json.pedals @bike.pedals
+json.fork_material @bike.fork_material
+json.crankset_material @bike.crankset_material
+json.handlebar_material @bike.handlebar_material
+json.wheel_material @bike.wheel_material
+json.seat_post_material @bike.seat_post_material
 json.battery_cycles @bike.battery_cycles
 json.photos @bike.photos

@@ -17,7 +17,7 @@
   label {
     text-align: start !important;
     text-transform: uppercase !important;
-    color: #828f8a !important;
+    color: #828f8a ;
   }
 
   .text-input {
@@ -26,7 +26,7 @@
     border: 1px solid $color-primary !important;
     border-radius: 4px !important;
     background-color: transparent !important;
-    color: $color-primary !important;
+    color: gray !important;
   }
 
 
@@ -44,7 +44,7 @@
     border: 1px solid $color-primary !important;
     border-radius: 4px !important;
     background-color: transparent !important;
-    color: $color-primary !important;
+    color: gray !important;
     height: 120px !important;
   }
 
@@ -81,7 +81,7 @@
 
     option {
       background-color: rgb(16,16,16);
-      color: #00c454;
+      color: gray;
       // border-color: $color-primary;
       // border-radius: 3px;
     }
@@ -132,6 +132,7 @@
   border-radius: 3px;
   transition: .5s ease;
   backface-visibility: hidden;
+  object-fit: cover;
 }
 .middle {
   transition: .5s ease;
@@ -205,7 +206,9 @@
 .image-review {
   width: 150px;
   height: 95px;
-  border-radius: 3px
+  border-radius: 3px;
+  object-fit: cover;
+
 }
 
 .announce-terms {

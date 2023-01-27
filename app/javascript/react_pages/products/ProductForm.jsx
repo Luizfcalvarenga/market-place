@@ -7,9 +7,7 @@ import IntlCurrencyInput from "react-intl-currency-input"
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
-
   const [user, setUser] = useState([]);
-  const [services, setServices] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
   const [productTypeId, setProductTypeId] = useState("");
@@ -27,26 +25,25 @@ export function ProductForm(props) {
   const [productModel, setProductModel] = useState("");
   const [otherProductModel, setOtherProductModel] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [productPrice, setProductPrice] = useState(null);
-  const [productQuantity, setProductQuantity ] = useState(null);
-  const [productCity, setProductCity ] = useState(null);
-  const [productState, setProductState ] = useState(null);
-  const [productYear, setProductYear ] = useState(null);
-  const [productDocumentationType, setProductDocumentationType] = useState("");
   const [productCondition, setProductCondition] = useState("");
-  const [otherProductYear, setOtherProductYear ] = useState(null);
+  const [productConditionStatus, setProductConditionStatus] = useState("");
+  const [productConditionDescription, setProductConditionDescription] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productQuantity, setProductQuantity ] = useState("");
+  const [productCity, setProductCity ] = useState("");
+  const [productState, setProductState ] = useState("");
+  const [productYear, setProductYear ] = useState("");
+  const [productDocumentationType, setProductDocumentationType] = useState("");
+  const [otherProductYear, setOtherProductYear ] = useState("");
   const [productPhotos, setProductPhotos ] = useState(null);
   const [photosPreview, setPhotosPreview] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [discountCoupon, setDiscountCoupon] = useState("");
-
-
   const [photoFile, setPhotoFile] = useState({
     index: null,
   });
-
   const [errors, setErrors] = useState({
     product: {},
     product_attributes: {},
@@ -86,7 +83,6 @@ export function ProductForm(props) {
       setAllProducts(data.types_of_product)
       setCategories(data.categories)
       setUser(data.user.id)
-      // setServices(data.services)
       setStates(data.states)
       setCities(data.cities)
 
@@ -131,8 +127,6 @@ export function ProductForm(props) {
     }
   }, [productTypeId]);
 
-
-
   useEffect(() => {
     if (!productPhotos) {
         setPhotosPreview(undefined)
@@ -157,6 +151,13 @@ export function ProductForm(props) {
     return () => URL.revokeObjectURL(objectUrls)
   }, [productPhotos])
 
+
+  useEffect(() => {
+    if (productCondition === "new") {
+      setProductConditionStatus("")
+    }
+  })
+
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
     setProductPhotos(photos)
@@ -170,26 +171,29 @@ export function ProductForm(props) {
 
   const removePhoto = (e) => {
     console.log(e)
-    console.log(e.nativeEvent.path[1].childNodes[0].src)
-    if (e.nativeEvent.path[1].childNodes[0].src) {
+    console.log(e.target.id)
+    const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
+    setPhotosPreview(newPhotosPreview);
+    const photoToRemove = photoFile.find(element => element.url === e.target.id).name
+    setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    // if (e.nativeEvent.path[1].childNodes[0].src) {
 
-      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-      setPhotosPreview(newPhotosPreview);
-      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-      setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    } else if (e.nativeEvent.path[2].childNodes[0].src) {
-      const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-      setPhotosPreview(newPhotosPreview);
-      const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-      setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    }
+    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+    //   setPhotosPreview(newPhotosPreview);
+    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    // } else if (e.nativeEvent.path[2].childNodes[0].src) {
+    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
+    //   setPhotosPreview(newPhotosPreview);
+    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
+    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
+    // }
   }
 
   const handleReviewSection = (e) => {
     const section = document.getElementById(e.target.innerText)
     section.classList.toggle("d-none")
   }
-
 
   async function fetchProduct() {
     const response = await axios.get(
@@ -213,8 +217,6 @@ export function ProductForm(props) {
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
-
-
       if (response.data.product_attributes) {
         setProductAttributes(
           response.data.product_attributes
@@ -245,7 +247,6 @@ export function ProductForm(props) {
     if ((attribute.name === "brake_model" || attribute.name === "model") && e.target.value !== "other") {
       setProductModel(e.target.value)
     }
-
   }
 
   const changeAttribute = (e, attribute) => {
@@ -261,10 +262,10 @@ export function ProductForm(props) {
   const renderProductTypeAttributeSelect = (attribute, index) => {
     // VERIFICAR RETORNO DO ESCOLHA DE TIPO DE SUSPENSÃO PARA COMPONENTO QUADROAPARENTEMENTE PRA QUADRO E HARDTAIL NÃO PERGUNTA CURSO DE NENHUMA SUSPANSÃO(CONFERIR)
     let options = []
-    if (["mountain_bike", "dirt_street"].includes(productCategory) && attribute.name === "frame_size") {
-      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+    if (["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory) && attribute.name === "frame_size") {
+      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
     } else if (productCategory === "road" && attribute.name === "frame_size") {
-      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "other" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
      } else if (attribute.name === "rear_suspension_travel" && ["road"].includes(productCategory)) {
@@ -275,30 +276,26 @@ export function ProductForm(props) {
       return
     } else if (attribute.name === "shock_size" && ["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"])) {
       return
-    } else if (attribute.name === "disc_size" && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
+    } else if ((attribute.name === "disc_include" || attribute.name === "brake_disc_size") && ["v_brake", "coaster_brake", "caliper", ""].includes(productAttributes["brake_type"])) {
       return
-    } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["brake_type"])) {
+    } else if (attribute.name === "brake_disc_size" && productAttributes?.disc_include === "Não") {
       return
-    } else if (attribute.name === "handlebar_size" && ["road", "dirt_street", "urban", "infant", ""].includes(productCategory)) {
+    } else if (attribute.name === "handlebar_size" && ["road"].includes(productCategory)) {
+      options = ["360 mm", "380 mm", "400 mm", "420 mm", "440 mm", "460 mm", "other"]
+    } else if (attribute.name === "handlebar_size" && ["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory)) {
+      options = ["660 mm","680 mm", "690 mm", "700 mm", "710 mm", "720 mm", "730 mm", "740 mm", "750 mm", "760 mm", "770 mm", "780 mm", "790 mm", "800 mm", "810 mm", "820 mm", "other"]
+    }  else if (attribute.name === "handlebar_drop" && ["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory)) {
       return
-    } else if (attribute.name === "documentation_type") {
+    } else if (attribute.name === "seat_post_travel" && ["rigid", ""].includes(productAttributes["seat_post_type"])) {
       return
-    } else if (attribute.name === "condition") {
+    } else if (attribute.name === "seat_post_material" && ["retractable", ""].includes(productAttributes["seat_post_type"])) {
       return
-    } else if (attribute.name === "suspension_type") {
-      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-    } else if (attribute.name === "brake_type") {
-      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-    }  else if (attribute.name === "condition") {
-      options = [ ["new", "Novo"], ["used", "Usado" ]]
-    }  else if (attribute.name === "documentation_type") {
-      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-    } else if (attribute.name === "frame_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "rim_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "seat_post_type") {
-      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+    } else if (attribute.name === "front_derailleur_velocities" && productAttributes?.rear_or_front_and_rear_derailleur === "rear") {
+      return
+    } else if ((attribute.name === "battery_capacity" || attribute.name === "battery_cycles" || attribute.name === "motor_mileage") && productAttributes?.bike_type === "Bike") {
+      return
+    } else if (["no_suspension", "hardtail", ""].includes(productAttributes["suspension_type"]) && attribute.name === "shock_size") {
+      return
     } else {
       options = attribute.options
     }
@@ -306,34 +303,39 @@ export function ProductForm(props) {
     return (
       <div attribute={attribute} key={attribute.id} className="">
         <div id="">
-          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}<span className="requested-information ms-1">*</span></label><br />
-          <select
-          className="select-answer"
-          onChange={(e) => createProductAttributes(e, attribute)}
-          >
-            <option value=""></option>
-            {options?.map((option, index) => {
-              if (Array.isArray(option)) {
-                return (
-                  <option key={index} value={option[0]}>{option[1]}</option>
-                )
-              } else if (option === "other") {
-                return (
-                  <option key={index}  value={option}>{translateWord(option)}</option>
-                )
-              }
-              else {
-                return (
-                  <option key={index} value={option}>{option}</option>
-                )
-              }
-            })}
-          </select>
+          <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
+          {attribute.kind === "text" && (
+            <input type="text" className="text-input" onChange={(e) => createProductAttributes(e, attribute)}/>
 
-          <div id={attribute.name} className="d-none">
-            <label htmlFor="productbrand" className="mt-3">Qual:</label>
-            <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
-          </div>
+          )}
+          {attribute.kind === "multiple_choice" && (<>
+            <select
+            className="select-answer"
+            onChange={(e) => createProductAttributes(e, attribute)}
+            >
+              <option value=""></option>
+              {options?.map((option, index) => {
+                if (Array.isArray(option)) {
+                  return (
+                    <option key={index} value={option[0]}>{option[1]}</option>
+                  )
+                } else if (option === "other") {
+                  return (
+                    <option key={index}  value={option}>{translateWord(option)}</option>
+                  )
+                }
+                else {
+                  return (
+                    <option key={index} value={option}>{option}</option>
+                  )
+                }
+              })}
+            </select>
+            <div id={attribute.name} className="d-none">
+              <label htmlFor="productbrand" className="mt-3">Qual:</label>
+              <input type="text" className="text-input" onChange={(e) => changeAttribute(e, attribute)}/>
+            </div>
+          </>)}
         </div>
       </div>
     )
@@ -358,6 +360,9 @@ export function ProductForm(props) {
     dataObject.append( "product[state_id]", productState );
     dataObject.append( "product[documentation_type]", productDocumentationType );
     dataObject.append( "product[condition]", productCondition );
+    dataObject.append( "product[product_condition_status]", productConditionStatus );
+    dataObject.append( "product[product_condition_description]", productConditionDescription );
+
 
     if (productModel === "Outro") {
       dataObject.append( "product[model]", otherProductModel );
@@ -417,9 +422,9 @@ export function ProductForm(props) {
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
       }
 
     } else {
@@ -428,9 +433,9 @@ export function ProductForm(props) {
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 46));
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 66));
+        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
       }
 
     }
@@ -448,12 +453,48 @@ export function ProductForm(props) {
     setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
   }
 
-  // useEffect(() => {
-  //   if (productState ) {
-  //     setMapedCitiesForState(cities.filter(element => element.state_id === productState))
+  // const handleProductCondition = (e) => {
+  //   console.log(e.target.value)
+  //   e.target.classList.toggle("active")
+  //   const newBtn = document.getElementById("new")
+  //   const usedBtn = document.getElementById("used")
+  //   if (e.target.id === "new") {
+  //     usedBtn.classList.remove("selected-tag")
+  //     newBtn.classList.add("selected-tag")
+  //     setProductCondition(e.target.value)
+  //     setProductConditionStatus("")
+  //   } else if (e.target.id === "used") {
+  //     usedBtn.classList.add("selected-tag")
+  //     newBtn.classList.remove("selected-tag")
+  //     setProductCondition(e.target.value)
   //   }
-  // }, []);
+  // }
 
+  const handleProductConditionStatus = (e) => {
+    setProductConditionStatus(e.target.value)
+
+    if (e.target.value === "bad") {
+      document.getElementById("label-bad").classList.add("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "reasonable") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.add("text-warning")
+      document.getElementById("label-good").classList.ramove("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    } else if (e.target.value === "good") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.add("text-primary")
+      document.getElementById("label-excellent").classList.remove("text-success")
+    }else if (e.target.value === "excellent") {
+      document.getElementById("label-bad").classList.remove("text-danger")
+      document.getElementById("label-reasonable").classList.remove("text-warning")
+      document.getElementById("label-good").classList.remove("text-primary")
+      document.getElementById("label-excellent").classList.add("text-success")
+    }
+  }
 
   const handleShowSection = (e) => {
     const firstSection = document.getElementById("first-section")
@@ -621,18 +662,33 @@ export function ProductForm(props) {
 
   const handleSecondStep = (e) => {
     const progressTwo = document.getElementById("progress-2")
+    const progressThird = document.getElementById("progress-3")
+
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-    progressTwo.classList.add("section-done")
-    secondSection.classList.add("d-none")
-    thirdSection.classList.remove("d-none")
+    const fourthSection = document.getElementById("fourth-section")
 
+
+    if (productTypeAttributes.length === 0) {
+      progressTwo.classList.add("section-done")
+      progressThird.classList.add("section-done")
+
+      secondSection.classList.add("d-none")
+      fourthSection.classList.remove("d-none")
+    } else {
+
+      progressTwo.classList.add("section-done")
+      secondSection.classList.add("d-none")
+      thirdSection.classList.remove("d-none")
+    }
   }
 
   const handleThirdStep = () => {
     const progressThird = document.getElementById("progress-3")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
+
+
 
     progressThird.classList.add("section-done")
     thirdSection.classList.add("d-none")
@@ -709,8 +765,8 @@ export function ProductForm(props) {
       "receipt": "Nota Fiscal",
       "import_document": "Documento de Importação",
       "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
-      "no_documentation": "Sem Documento"
-
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação"
     };
 
     return languageMap[word]
@@ -805,7 +861,8 @@ export function ProductForm(props) {
     "Surly",
     "Soma",
     "Diamondback",
-    "Dahon"
+    "Dahon",
+    "Yeti",
   ].sort()
 
 
@@ -916,8 +973,8 @@ export function ProductForm(props) {
     "Zéfal",
     "Wahoo"].sort()
 
-  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other", ];
-  const productsIdsWithSpecificModels = ["5", "18", "34", "20", "36"]
+  const years = ["", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "other" ];
+  const productsIdsWithSpecificModels = ["5", "19", "21", "35", "37"]
 
   const roadBrakeModels = ["SHIMANO 105", "SHIMANO CLARIS", "SHIMANO DURA-ACE", "SHIMANO SORA", "SHIMANO TIAGRA", "SHIMANO TOURNEY", "SHIMANO ULTEGRA", "SRAM Apex", "SRAM Force", "SRAM GRX", "SRAM RED", "SRAM Rival", "SRAM S-Series", "Outro"]
   const dirtMtbBrakeModels = ["SHIMANO SLX", "SHIMANO ACERA", "SHIMANO ALIVIO", "SHIMANO ALTUS", "SHIMANO DEORE", "SHIMANO SAINT", "SHIMANO TOURNEY", "SHIMANO XT", "SHIMANO XTR", "SHIMANO ZEE", "SRAM Code", "SRAM DB", "SRAM G2", "SRAM GUIDE", "SRAM Level", "Outro"]
@@ -965,7 +1022,7 @@ export function ProductForm(props) {
           <h4 className="text-center text-success">Informações gerais</h4>
 
 
-          <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
+          <label htmlFor="category" className="mt-3 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}
           onChange={(e) =>  setProductCategory(e.target.value) }
@@ -1060,17 +1117,21 @@ export function ProductForm(props) {
               <p className="text-danger">{errors.product.name}</p>
           )}
 
-          {(productTypeId === "17") && (<>
+          {(productTypeId === "18") && (<> {/* PARA PRODUTO QUADRO QUE POSSUI MARCAS PRÓPRIAS  */}
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
+            id="frame-brand-options"
             >
               <option value=""></option>
               {frameBrands.map((frameBrand, index) => {
-                return (<option key={index} value={frameBrand}>{frameBrand}</option>)
+                return (
+                  <option key={index} value={frameBrand}>{frameBrand}</option>
+                )
               })}
+              <option value="Outra">Outra</option>
             </select>
             { errors && errors.product && errors.product.brand && (
               <p className="text-danger">{errors.product.brand}</p>
@@ -1087,17 +1148,20 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "5" || productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35"  ) && (<>
+          {/* PARA PRODUTO FREIO QUE POSSUI MARCAS PRÓPRIAS  */}
+          {(productTypeId === "5") && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >
               <option value=""></option>
-              <option value="Sram">Sram</option>
+              <option value="Hope">Hope</option>
+              <option value="Magura">Magura</option>
               <option value="Shimano">Shimano</option>
-              <option value="Microshift">Microshift</option>
+              <option value="Sram">Sram</option>
+              <option value="TRP">TRP</option>
               <option value="Outra">Outra</option>
 
             </select>
@@ -1116,19 +1180,51 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {(productTypeId === "20" || productTypeId === "36" ) && (<>
+          {/* PARA PRODUTO KIT RELAÇÃO/CÂMBIO DIANTEIRO/ PASSADOR DIANTEIRO/ CAMBIO TRASEIRO/ PASSADOR TRASEIO QUE POSSUI MARCAS PRÓPRIAS  */}
+
+          {(productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36"  ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
+            onChange={(e) => setProductBrand(e.target.value)}
+            className="select-answer"
+            >
+              <option value=""></option>
+              <option value="Microshift">Microshift</option>
+              <option value="Shimano">Shimano</option>
+              <option value="Sram">Sram</option>
+              <option value="Outra">Outra</option>
+            </select>
+            { errors && errors.product && errors.product.brand && (
+              <p className="text-danger">{errors.product.brand}</p>
+            )}
+
+            { productBrand === "Outra"  && (
+                <>
+                  <label htmlFor="otherProductBrand" className="mt-4">Qual?<span className="requested-information ms-1">*</span></label>
+                  <input type="text" className="text-input" onChange={(e) => setOtherProductBrand(e.target.value)}/>
+                  { errors && errors.product && errors.product.brand && (
+                    <p className="text-danger">{errors.product.brand}</p>
+                  )}
+                </>
+              )}
+          </>)}
+
+          {/* PARA PRODUTOS SUSPENSÕES DIANTEIRA E TRASEIRA QUE POSSUI MARCAS PRÓPRIAS  */}
+
+          {(productTypeId === "21" || productTypeId === "37" ) && (<>
+            <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
+            <select
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >
               <option value=""></option>
               <option value="Fox">Fox</option>
-              <option value="Rockshock">Rockshock</option>
+              <option value="Manitou">Manitou</option>
               <option value="Marzocchi">Marzocchi</option>
+              <option value="Ohlins">Ohlins</option>
               <option value="Rockshock">Rockshock</option>
-
               <option value="Outra">Outra</option>
 
             </select>
@@ -1147,17 +1243,23 @@ export function ProductForm(props) {
               )}
           </>)}
 
-          {!(productTypeId === "5" || productTypeId === "14" || productTypeId === "18" || productTypeId === "19" || productTypeId === "34" || productTypeId === "35" || productTypeId === "17" || productTypeId === "20" || productTypeId === "36" ) && (<>
+
+          {/* PARA DEMAIS PRODUTOS QUE NÃO POSSUEM MARCA PRÓPRIA  */}
+
+          {!(productTypeId === "5" || productTypeId === "15" || productTypeId === "18" || productTypeId === "19" || productTypeId === "20" || productTypeId === "21" || productTypeId === "35" || productTypeId === "36" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >
               <option value=""></option>
               {componentBrands.map((componentBrand, index) => {
-                return (<option key={index} value={componentBrand}>{componentBrand}</option>)
+                return (<>
+                  <option key={index} value={componentBrand}>{componentBrand}</option>
+                </>)
               })}
+              <option value="Outra">Outra</option>
             </select>
             { errors && errors.product && errors.product.brand && (
               <p className="text-danger">{errors.product.brand}</p>
@@ -1173,6 +1275,8 @@ export function ProductForm(props) {
                 </>
               )}
           </>)}
+
+          {/* PARA PRODUTO FREIO QUE POSSUI MODELOS PRÓPRIAS  CATEGORIA*/}
 
           <div className="brake-models">
             {(productTypeId === "5" && productCategory === "road" ) && (<>
@@ -1201,6 +1305,7 @@ export function ProductForm(props) {
                 )}
             </>)}
 
+            {/* PARA PRODUTO FREIO QUE POSSUI MODELOS PRÓPRIAS  CATEGORIA*/}
             {(productTypeId === "5") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
@@ -1228,8 +1333,10 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+
+          {/* PARA PRODUTO CAMBIO DANTEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="front-derailleur-models">
-            {(productTypeId === "18" && productCategory === "road" ) && (<>
+            {(productTypeId === "19" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1255,7 +1362,8 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "18") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {/* PARA PRODUTO CAMBIO DANTEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
+            {(productTypeId === "19") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1282,8 +1390,9 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO CAMBIO TRASEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="rear-derailleur-models">
-            {(productTypeId === "34" && productCategory === "road" ) && (<>
+            {(productTypeId === "35" && productCategory === "road" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1309,7 +1418,9 @@ export function ProductForm(props) {
                 )}
             </>)}
 
-            {(productTypeId === "34") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+
+            {/* PARA PRODUTO CAMBIO TRASEIRO QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
+            {(productTypeId === "35") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1336,8 +1447,9 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO SUPENSÃO DIANTEIRA QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="front-suspension-model">
-            {(productTypeId === "20") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "21") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1364,8 +1476,9 @@ export function ProductForm(props) {
             </>)}
           </div>
 
+          {/* PARA PRODUTO SUPENSÃO TRASEIRA QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
           <div className="rear-suspension-model">
-            {(productTypeId === "36") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
+            {(productTypeId === "37") && (productCategory === "dirt_street" || productCategory === "mountain_bike" || productCategory === "urban" ) && (<>
               <label htmlFor="productmodel" className="mt-3">Modelo:<span className="requested-information ms-1">*</span></label>
               <select
               value={productModel ? productModel : ""}
@@ -1392,8 +1505,8 @@ export function ProductForm(props) {
             </>)}
           </div>
 
-          {(productTypeId === "36" || productTypeId === "20" ) && (productCategory === "road" ) && (<>
-
+          {/* PARA PRODUTO SUPENSÃO DIANTEIRA QUE POSSUI MODELOS PRÓPRIAS - CATEGORIA*/}
+          {(productTypeId === "21" || productTypeId === "37" ) && (productCategory === "road" ) && (<>
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.model && (
@@ -1401,26 +1514,22 @@ export function ProductForm(props) {
             )}
           </>)}
 
-
+          {/* PARA PRODUTOS QUE NÃO POSSUEM MODELOS PRÓPRIOS - CATEGORIA*/}
           {productsIdsWithSpecificModels.includes(productTypeId) && (productCategory === "infant" || productCategory === "" ) && (<>
-
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.model && (
               <p className="text-danger">{errors.product.model}</p>
             )}
           </>)}
-
 
           {!productsIdsWithSpecificModels.includes(productTypeId) && (<>
-
             <label htmlFor="productModel" className="mt-4">Modelo:<span className="requested-information ms-1">*</span></label>
             <input type="text" className="text-input" value={productModel ? productModel : ""} onChange={(e) => setProductModel(e.target.value)}/>
             { errors && errors.product && errors.product.model && (
               <p className="text-danger">{errors.product.model}</p>
             )}
           </>)}
-
 
           <div className="d-flex justify-content-center">
             <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
@@ -1513,19 +1622,90 @@ export function ProductForm(props) {
               <option value="receipt">Nota Fiscal</option>
               <option value="import_document">Documento de Importação</option>
               <option value="foreign_tax_coupon">Cupom Fiscal Estrangeiro</option>
+              <option value="foreign_tax_coupon_and_import_document">Cupom Fiscal Estrangeiro + Documento de Importação</option>
               <option value="no_documentation">Sem Documento</option>
             </select>
 
-            <label htmlFor="bikeCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-            <select
-              className="select-answer"
-              value={productCondition}
-              onChange={(e) => setProductCondition(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="new">Novo</option>
-              <option value="used">Usado</option>
-            </select>
+            <div className="condition">
+              <label htmlFor="´rpductCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
+
+              <select
+                className="select-answer"
+                value={productCondition}
+                onChange={(e) => setProductCondition(e.target.value)}
+              >
+                <option value=""></option>
+                <option value="new">Novo</option>
+                <option value="used">Usado</option>
+              </select>
+              { errors && errors.product && errors.product.condition && (
+                <p className="text-danger">{errors.product.condition[0]}</p>
+              )}
+              {/* <div className="d-flex justify-content-start gap-3 mt-3">
+                <button type="button" id="new" value="new" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Novo</button>
+                <button type="button" id="used" value="used" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Usado</button>
+              </div> */}
+
+              {productCondition === "used" && (<>
+                <label htmlFor="productConditionStatus" className="mt-4">Qual estado da seu produto:</label>
+                <div className="mb-5 mt-3">
+                  <div id="debt-amount-slider">
+                    <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
+                    <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-reasonable" for="2" data-debt-amount="Razoável"></label>
+                    <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-good" for="3" data-debt-amount="Bom"></label>
+                    <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => handleProductConditionStatus(e)}/>
+                    <label id="label-excellent" for="4" data-debt-amount="Ótimo"></label>
+                    <div id="debt-amount-pos"></div>
+                  </div>
+                </div>
+                {productConditionStatus === "bad" && (
+                  <div className="bad-text my-3">
+                    Funcinamento interrompido, requer reparo operacional ou estrutural!
+                  </div>
+                )}
+
+                {productConditionStatus === "reasonable" && (
+                  <div className="reasonable-text  my-3">
+                    Funcinamento comprometido, requer reparo operacional ou estrutural!
+                  </div>
+
+                )}
+
+                {productConditionStatus === "good" && (
+                  <div className="good-text  my-3">
+                    Bom funcionamento, algum ou outro reparo visual!
+                  </div>
+                )}
+
+                {productConditionStatus === "excellent" && (
+                  <div className="excellent-text  my-3">
+                    Condição perfeita, não apresenta nenhuma observação!
+                  </div>
+
+                )}
+
+                {/* <select
+                  className="select-answer"
+                  value={productConditionStatus}
+                  onChange={(e) => setProductConditionStatus(e.target.value)}
+                >
+                  <option value=""></option>
+                  <option value="bad">Ruim</option>
+                  <option value="reasonable">Razoável</option>
+                  <option value="good">Bom</option>
+                  <option value="excellent">Ótimo</option>
+                </select> */}
+
+                {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (<>
+                  <label htmlFor="description" className="mt-2">Descreva:</label>
+                  <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
+                </>)}
+              </>)}
+            </div>
+
             <label htmlFor="Year" className="mt-4">Ano:<span className="requested-information ms-1">*</span></label>
             <select
               className="select-answer"
@@ -1549,8 +1729,6 @@ export function ProductForm(props) {
               </>
             )}
 
-            <label htmlFor="productDescription" className="mt-4">Descrição:</label>
-            <input type="text" className="text-input" value={productDescription ? productDescription : ""} onChange={(e) => setProductDescription(e.target.value)}/>
 
             <div className="d-flex  justify-content-between gap-3">
               <div className="w-50">
@@ -1569,6 +1747,9 @@ export function ProductForm(props) {
                 )}
               </div>
             </div>
+
+            <label htmlFor="productDescription" className="mt-4">Descrição:</label>
+            <textarea className="text-input-description"  id="exampleFormControlTextarea1" rows="3" value={productDescription} onChange={(e) => setProductDescription(e.target.value)}></textarea>
 
             <div className="d-flex justify-content-center">
               <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
@@ -1591,8 +1772,8 @@ export function ProductForm(props) {
                 photosPreview.map((photoPreview, idx) => {
                   return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
                       <img src={photoPreview} alt="" className="image-preview-form mt-1" />
-                      <div className="middle">
-                        <div className="text">Remover</div>
+                      <div id={photoPreview} className="middle">
+                        <div id={photoPreview} className="text">Remover</div>
                       </div>
                     </button></>)
                 })
@@ -1608,9 +1789,7 @@ export function ProductForm(props) {
 
 
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
-
           <h4 className="text-center text-success">Revise as informações</h4>
-
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
             <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
@@ -1621,6 +1800,12 @@ export function ProductForm(props) {
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+            {productCondition === "used" && (
+              <p><span className="text-success">Estado:</span>{productConditionStatus}</p>
+            )}
+            {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (
+              <p><span className="text-success">descrição:</span>{productConditionDescription}</p>
+            )}
 
             <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
@@ -1644,6 +1829,8 @@ export function ProductForm(props) {
               <p><span className="text-success">Marca:</span> {productBrand}</p>
             )}
             <p><span className="text-success">Modelo:</span> {productModel}</p>
+            <p><span className="text-success">Descrição:</span> {productDescription}</p>
+
           </div>
 
 

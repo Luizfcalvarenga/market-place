@@ -13,6 +13,7 @@ class UsersController < ApplicationController
       @conversations.compact()
     else
       @users = []
+      @conversations = []
     end
     if params[:query].present?
       sql_query = "email ILIKE :query OR full_name ILIKE :query"
