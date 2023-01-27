@@ -23,7 +23,7 @@ class Bike < ApplicationRecord
 
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
-  # validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type,  presence: true
+  validates :price_in_cents, :quantity, :modality, :model, :bike_type, :category, :frame_brand, :model, :year, :frame_size, :frame_material, :bike_condition, :documentation_type,  presence: true
 
   default_scope { where(removed_at: nil) }
 
@@ -55,6 +55,14 @@ class Bike < ApplicationRecord
   }
   def modality_display
     MODALITY_OPTIONS[modality.to_sym]
+  end
+  CONDITION_OPTIONS = {
+    "Product": "Produto",
+    "used": "Usado",
+    "new": "Novo",
+  }
+  def condition_display()
+    CONDITION_OPTIONS[condition.to_sym]
   end
 
 end

@@ -256,61 +256,80 @@ export function Products(props) {
   }
 
   const renderOptionsToFilterAttributes = (attributes, index) => {
-      attributes.map((attribute, index) => {
-        console.log(attribute)
-        let options = []
-        if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
-          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-        } else if (categoryFilter === "road" && attribute.name === "frame_size") {
-          options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
-        } else if (!categoryFilter && attribute.name === "frame_size") {
-          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-        } else if (attribute.name === "frame_brand") {
-          return
-        } else if (attribute.name === "suspension_type") {
-          options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-        } else if (attribute.name === "brake_type") {
-          options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-        }  else if (attribute.name === "condition") {
-          options = [ ["new", "Novo"], ["used", "Usado" ]]
-        }  else if (attribute.name === "documentation_type") {
-          options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-        } else if (attribute.name === "frame_material") {
-          options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-        } else if (attribute.name === "rim_material") {
-          options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-        } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
-          return
-        } else if (attribute.name === "seat_post_type") {
-          options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-        }
-        // else if (!Array.isArray(attribute.options) && attribute.options.includes("other")) {
-        //   attribute.options.pop()
-        //   options = attribute.options.pop()
-        // }
-        else {
-          options = attribute.options
-        }
+    // return (
+    //   <div className="attributes-filters">
+    //     <h5 className="text-success mt-3" key={index}>{attributes.prompt}</h5> <br />
+    //     {attributes.options.map((option, index) => {
+    //       if (Array.isArray(option)) {
+    //         return (
+    //           <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+    //         )
+    //       } else {
+    //         return (
+    //           <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+    //         )
+    //       }
 
-        return (
-          <div className="attributes-filters">
-            <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-            {options?.map((option, index) => {
-              if (Array.isArray(option)) {
-                return (
-                  <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-                )
-              } else {
-                return (
-                  <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-                )
-              }
+    //     })}
 
-            })}
+    //   </div>
+    // )
 
-          </div>
-        )
-      })
+    attributes.map((attribute, index) => {
+      console.log(attribute)
+      let options = []
+      if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
+        options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+      } else if (categoryFilter === "road" && attribute.name === "frame_size") {
+        options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+      } else if (!categoryFilter && attribute.name === "frame_size") {
+        options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+      } else if (attribute.name === "frame_brand") {
+        return
+      } else if (attribute.name === "suspension_type") {
+        options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
+      } else if (attribute.name === "brake_type") {
+        options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+      }  else if (attribute.name === "condition") {
+        options = [ ["new", "Novo"], ["used", "Usado" ]]
+      }  else if (attribute.name === "documentation_type") {
+        options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+      } else if (attribute.name === "frame_material") {
+        options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+      } else if (attribute.name === "rim_material") {
+        options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+      } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
+        return
+      } else if (attribute.name === "seat_post_type") {
+        options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+      }
+      // else if (!Array.isArray(attribute.options) && attribute.options.includes("other")) {
+      //   attribute.options.pop()
+      //   options = attribute.options.pop()
+      // }
+      else {
+        options = attribute.options
+      }
+
+      return (
+        <div className="attributes-filters">
+          <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
+          {options.map((option, index) => {
+            if (Array.isArray(option)) {
+              return (
+                <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+              )
+            } else {
+              return (
+                <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+              )
+            }
+
+          })}
+
+        </div>
+      )
+    })
 
 
 

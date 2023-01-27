@@ -7,9 +7,7 @@ import IntlCurrencyInput from "react-intl-currency-input"
 
 export function ProductForm(props) {
   const [productId, setProductId] = useState([]);
-
   const [user, setUser] = useState([]);
-  const [services, setServices] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
   const [productTypeId, setProductTypeId] = useState("");
@@ -1122,9 +1120,10 @@ export function ProductForm(props) {
           {(productTypeId === "18") && (<> {/* PARA PRODUTO QUADRO QUE POSSUI MARCAS PRÓPRIAS  */}
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
+            id="frame-brand-options"
             >
               <option value=""></option>
               {frameBrands.map((frameBrand, index) => {
@@ -1153,7 +1152,7 @@ export function ProductForm(props) {
           {(productTypeId === "5") && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >
@@ -1186,7 +1185,7 @@ export function ProductForm(props) {
           {(productTypeId === "15" || productTypeId === "19" || productTypeId === "20" || productTypeId === "35" || productTypeId === "36"  ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >
@@ -1216,7 +1215,7 @@ export function ProductForm(props) {
           {(productTypeId === "21" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >
@@ -1250,7 +1249,7 @@ export function ProductForm(props) {
           {!(productTypeId === "5" || productTypeId === "15" || productTypeId === "18" || productTypeId === "19" || productTypeId === "20" || productTypeId === "21" || productTypeId === "35" || productTypeId === "36" || productTypeId === "37" ) && (<>
             <label htmlFor="productbrand" className="mt-3">Marca:<span className="requested-information ms-1">*</span></label>
             <select
-            value={productBrand ? productBrand : ""}
+            value={productBrand}
             onChange={(e) => setProductBrand(e.target.value)}
             className="select-answer"
             >

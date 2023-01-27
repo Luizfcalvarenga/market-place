@@ -24,15 +24,17 @@ class Product < ApplicationRecord
 
   has_many_attached :photos
 
-  # validates :name, :category, :modality, :brand, :model, :year,  presence: true
+  validates :name, :category, :modality, :brand, :model, :year,  presence: true
   validates :price_in_cents, :quantity, numericality: { greater_than: 0 }
 
   default_scope { where(removed_at: nil) }
-  WORDS_OPTIONS = {
+  CONDITION_OPTIONS = {
     "Product": "Produto",
+    "used": "Usado",
+    "new": "Novo",
   }
-  def word_display()
-    WORDS_OPTIONS[name.to_sym]
+  def condition_display()
+    CONDITION_OPTIONS[condition.to_sym]
   end
 
   MODALITY_OPTIONS = {

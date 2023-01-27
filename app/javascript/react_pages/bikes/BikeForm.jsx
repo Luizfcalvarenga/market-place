@@ -81,7 +81,6 @@ export function BikeForm(props) {
   const [otherAccessory, setOtherAccessory] = useState("");
   const [pedals, setPedals] = useState("");
   const [mileage, setMileage] = useState("");
-  const [motor, setMotor] = useState("");
   const [batteryCycles, setBatteryCycles] = useState("");
   const [photosPreview, setPhotosPreview] = useState([]);
   const [battery, setBattery] = useState("");
@@ -1452,7 +1451,7 @@ export function BikeForm(props) {
               { rearDerailleurModel === "other"  && (
                 <>
                   <label htmlFor="front_gear" className="mt-4">Qual?</label>
-                  <input type="text"  className="text-input" value={rearDerailleurModel} onChange={(e) => setRearDerailleurModel(e.target.value)}/>
+                  <input type="text"  className="text-input" value={otherRearDerailleurModel} onChange={(e) => setOtherRearDerailleurModel(e.target.value)}/>
                 </>
               )}
             </>)}
@@ -2098,14 +2097,16 @@ export function BikeForm(props) {
           <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
           <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
           <p><span className="text-success">Estado:</span> {translateWord(bikeConditionStatus)}</p>
+          {bikeConditionDescription && (
           <p><span className="text-success">Estado da bike:</span> {bikeConditionDescription}</p>
+          )}
           <p><span className="text-success">Descrição:</span> {description}</p>
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
         <div id="Quadro(review)" className="d-none">
           <p><span className="text-success">Marca:</span>{frameBrand}</p>
-          <p><span className="text-success">Material:</span>{frameMaterial}</p>
+          <p><span className="text-success">Material:</span>{frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
           <p><span className="text-success">Tamanho:</span>{frameSize}</p>
         </div>
 
@@ -2116,6 +2117,8 @@ export function BikeForm(props) {
           <p><span className="text-success">Marchas traseiras:</span> {numberOfRearGears}</p>
           <p><span className="text-success">Modelo:</span> {rearDerailleurModel === "other" ? otherRearDerailleurModel : rearDerailleurModel }</p>
           <p><span className="text-success">Pedivela:</span> {crankset}</p>
+          <p><span className="text-success">Material do Pedivela:</span> {cranksetMaterial === "other" ? otherCranksetMaterial : translateWord(cranksetMaterial) } </p>
+
           <p><span className="text-success">Corrente:</span> {chain}</p>
         </div>
 
@@ -2126,19 +2129,33 @@ export function BikeForm(props) {
           <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
-        <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
-        <div id="Suspensões(review)" className="d-none">
-          <p><span className="text-success">Tipo:</span> {suspensionType}</p>
-          <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
-          <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel}</p>
-          <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
-          <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel }</p>
+        {!category === "road" && (
+          <>
+            <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
+            <div id="Suspensões(review)" className="d-none">
+              <p><span className="text-success">Tipo:</span> {suspensionType}</p>
+              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
+              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel}</p>
+              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
+              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel }</p>
+            </div>
+          </>
+        )}
 
-        </div>
+        {category === "road" && (
+          <>
+            <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Garfo</button>
+            <div id="Garfor(review)" className="d-none">
+              <p><span className="text-success">Material:</span>{forkMaterial === "other" ? otherForkMaterial : translateWord(forkMaterial) }</p>
+            </div>
+          </>
+        )}
+
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Rodas</button>
         <div id="Rodas(review)" className="d-none">
           <p><span className="text-success">Tamanho:</span> {rimSize}</p>
+          <p><span className="text-success">Material da Roda:</span>{wheelMaterial === "other" ? otherWheelMaterial : translateWord(wheelMaterial) }</p>
           <p><span className="text-success">Aro dianteiro:</span> {frontRimModel}</p>
           <p><span className="text-success">Aro traseiro:</span> {rearRimModel }</p>
           <p><span className="text-success">Cudo dianteiro:</span> {frontHub}</p>
@@ -2150,6 +2167,7 @@ export function BikeForm(props) {
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Cockpit</button>
         <div id="Cockpit(review)" className="d-none">
           <p><span className="text-success">Guidão:</span> {handlebar}</p>
+          <p><span className="text-success">Material do Guidão:</span>{handlebarMaterial === "other" ? otherHandlebarMaterial : translateWord(handlebarMaterial) }</p>
           <p><span className="text-success">Mesa:</span> {stem}</p>
         </div>
 
@@ -2157,6 +2175,7 @@ export function BikeForm(props) {
         <div id="Canote(review)" className="d-none">
           <p><span className="text-success">Tipo:</span> {seatPostType}</p>
           <p><span className="text-success">Curso:</span> {seatPostTravel}</p>
+          <p><span className="text-success">Material:</span>{seatPostMaterial === "other" ? otherSeatPostMaterial : translateWord(seatPostMaterial) }</p>
           <p><span className="text-success">Modelo:</span> {seatPostModel }</p>
         </div>
 
