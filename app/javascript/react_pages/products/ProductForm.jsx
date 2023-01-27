@@ -1701,7 +1701,7 @@ export function ProductForm(props) {
 
                 {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (<>
                   <label htmlFor="description" className="mt-2">Descreva:</label>
-                  <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
+                  <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={productConditionDescription} onChange={(e) => setProductConditionDescription(e.target.value)}></textarea>
                 </>)}
               </>)}
             </div>
