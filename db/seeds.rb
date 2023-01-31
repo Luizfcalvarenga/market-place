@@ -795,8 +795,8 @@
     ProductTypeAttribute.create!(product_type: frame, name: "shock_size", kind: "multiple_choice", options: shock_sizes, prompt: "Medida do shock") # caso possam ser opcionais os atributos
     ProductTypeAttribute.create!(product_type: frame, name: "bike_type", kind: "multiple_choice", options: ["Bike", "E-Bike"], prompt: "Tipo de bike")
     ProductTypeAttribute.create!(product_type: frame, name: "battery_capacity", kind: "multiple_choice", options: battery_capacities, prompt: "Capacidade da bateria") # se for e-bike
-    ProductTypeAttribute.create!(product_type: frame, name: "battery_cycles", kind: "text", options: nil, prompt: "Ciclos da bateria") # se for e-bike ?? option nil ?
-    ProductTypeAttribute.create!(product_type: frame, name: "motor_mileage", kind: "text", options: "", prompt: "KM do motor") # se for e-bike ???? option "" ?
+    ProductTypeAttribute.create!(product_type: frame, name: "battery_cycles", kind: "text", options: ["", ""], prompt: "Ciclos da bateria") # se for e-bike ?? option nil ?
+    ProductTypeAttribute.create!(product_type: frame, name: "motor_mileage", kind: "text", options: ["", ""], prompt: "KM do motor") # se for e-bike ???? option "" ?
 
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BRAKE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -889,7 +889,7 @@
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< BATTERY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     capacities = ["320 Wh", "500 Wh", "625 Wh", "700 Wh", "other"]
     ProductTypeAttribute.create!(product_type: battery, name: "battery_capacity", kind: "multiple_choice", options: capacities, prompt: "Capacidade")
-    ProductTypeAttribute.create!(product_type: battery, name: "battery_cycles", kind: "text", options: nil, prompt: "Ciclos da bateria")
+    ProductTypeAttribute.create!(product_type: battery, name: "battery_cycles", kind: "text", options: ["", ""], prompt: "Ciclos da bateria")
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< FRONT SHIFTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
     front_gears_options= [0, 1, 2, 3 ]
@@ -945,7 +945,7 @@
 
       advertisement = Advertisement.create!(advertisable: product, user: user, status: ["waiting_review", "pending", "approved"].sample, price_in_cents: 15000)
       product_attributes =  ProductTypeAttribute.where(product_type: product.product_type).each do | product_type_attribute |
-        ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample)
+        ProductAttribute.create!(product: product, product_type_attribute: product_type_attribute, value: product_type_attribute.options.sample )
       end
       puts "next"
     end
