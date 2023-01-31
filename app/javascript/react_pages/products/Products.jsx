@@ -166,25 +166,15 @@ export function Products(props) {
 
 
   const handleProductAtributes = (e) => {
-    // e.target.classList.toggle("active")
-    // if (e.target.classList.contains("active")) {
-    //   setProductTypeFilter(e.target.value)
-    //   e.target.classList.add("selected-tag")
-    // } else {
-    //   setProductTypeFilter("")
-    //   e.target.classList.remove("selected-tag")
-    // }
     console.log(e.target.value)
     const currentOptionsToFilter = [...productTypeOptionsToFilter]
     const currentAttributeOptionsToFilter = [...attributeOptionsToFilter]
-
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.innerHTML)) {
       setProductTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
       setAttributeOptionsToFilter(currentAttributeOptionsToFilter.filter(element => element != e.target.value));
       console.log(currentOptionsToFilter)
       console.log(currentAttributeOptionsToFilter)
-
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.innerHTML)
@@ -257,26 +247,43 @@ export function Products(props) {
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     console.log(attributeOptionsToFilter)
-    // return (
-    //   <div className="attributes-filters">
-    //     <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-    //     {/* {attributes.options.map((option, index) => {
-    //       if (Array.isArray(option)) {
-    //         return (
-    //           <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-    //         )
-    //       } else {
-    //         return (
-    //           <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-    //         )
-    //       }
-
-    //     })} */}
-
-    //   </div>
-    // )
-
-    // x
+    attributeOptionsToFilter.map((attribute, index) => {
+      console.log(attribute)
+      attribute.map((question, index) => {
+        let options = []
+        if ((categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("urban") || categoryOptionsToFilter.includes("infant") )&& attribute.name === "frame_size") {
+          options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+        } else if (categoryOptionsToFilter.includes("road")  && question.name === "frame_size") {
+          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+        } else if (categoryOptionsToFilter.length <= 1 && question.name === "frame_size") {
+          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+        } else if (question.name === "disc_include") {
+          return
+        }  else if (question.options.includes("other") ) {
+          question.options.pop()
+          options = question.options
+        } else {
+          options = question.options
+        }
+        console.log(question.prompt)
+        return (
+            <div className="attributes-filters">
+              <h5 className="text-success mt-3" key={index}>{question.prompt}</h5> <br />
+              {question.options.map((option, index) => {
+                if (Array.isArray(option)) {
+                  return (
+                    <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+                  )
+                } else {
+                  return (
+                    <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+                  )
+                }
+              })}
+            </div>
+          )
+      })
+    })
   }
 
   const hendleAccessoriesFiltes = (e) => {
