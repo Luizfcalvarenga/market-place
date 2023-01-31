@@ -404,10 +404,8 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    // console.log(e)
     if (e.target.localName === "img") {
       let filter = e.target.alt;
-      // console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
@@ -418,7 +416,6 @@ export function ProductForm(props) {
 
     } else {
       let filter = e.target.id;
-      // console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {

@@ -901,7 +901,7 @@ export function BikeForm(props) {
   //////////////////////////////////////////////ACCESSORIES
  const accessoryOptions = ["Não", "Pedal", "Ciclocomputador", "Lanterna Traseira", "Farol", , "Bolsa de Acessórios", "Suporte de garrafinha", "Bateria extra"]
 
-  const translateWord = (word) => {
+  const translateWord = (word) => { 
     const languageMap = {
       "bike": "Bike",
       "e-bike": "E-Bike",

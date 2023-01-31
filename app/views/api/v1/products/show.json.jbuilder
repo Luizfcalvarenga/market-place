@@ -20,4 +20,6 @@ json.condition @product.condition
 json.product_condition_status @product.product_condition_status
 json.product_condition_description @product.product_condition_description
 json.present_ids @present_ids
+json.city @city
+json.state @state
 json.photos @product.photos.map(&:url)
