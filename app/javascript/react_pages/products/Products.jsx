@@ -246,11 +246,25 @@ export function Products(props) {
   }
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
+    let options = []
+    let attributeToFilter = []
+    let key = []
+    const currentOptions = [...options]
+    const currentAttributes = [...attributeToFilter]
+    const currentKeys = [...currentKeys]
+
     console.log(attributeOptionsToFilter)
     attributeOptionsToFilter.map((attribute, index) => {
       console.log(attribute)
       attribute.map((question, index) => {
-        let options = []
+        if (currentAttributes.includes(question.prompt)) {
+
+        } else {
+          
+        }
+        // let options = []
+        attributeToFilter = question.prompt
+        key = question.id
         if ((categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("urban") || categoryOptionsToFilter.includes("infant") )&& attribute.name === "frame_size") {
           options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
         } else if (categoryOptionsToFilter.includes("road")  && question.name === "frame_size") {
@@ -266,24 +280,30 @@ export function Products(props) {
           options = question.options
         }
         console.log(question.prompt)
-        return (
-            <div className="attributes-filters">
-              <h5 className="text-success mt-3" key={index}>{question.prompt}</h5> <br />
-              {question.options.map((option, index) => {
-                if (Array.isArray(option)) {
-                  return (
-                    <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-                  )
-                } else {
-                  return (
-                    <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-                  )
-                }
-              })}
-            </div>
-          )
       })
     })
+    return (
+      <div className="attributes-filters">
+        <h1>Atributos</h1>
+        <h6 className=" mt-3" key={key}>{attributeToFilter}</h6>
+         <br />
+        {options.map((option, index) => {
+          if (Array.isArray(option)) {
+            return (
+              <div className="d-flex gap-2">
+                <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+              </div>
+            )
+          } else {
+            return (
+              <div className="d-flex gap-2">
+                <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+              </div>
+            )
+          }
+        })}
+      </div>
+    )
   }
 
   const hendleAccessoriesFiltes = (e) => {
@@ -886,7 +906,10 @@ export function Products(props) {
 
 
             {attributeOptionsToFilter && (<>
+
               {renderOptionsToFilterAttributes(attributeOptionsToFilter)}
+
+
             </>)}
 
             {/*
