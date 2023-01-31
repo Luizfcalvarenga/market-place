@@ -247,21 +247,16 @@ export function Products(props) {
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     let options = []
-    let attributeToFilter = []
-    let key = []
-    const currentOptions = [...options]
-    const currentAttributes = [...attributeToFilter]
-    const currentKeys = [...currentKeys]
+    let attributeToFilter = null
+    let key = null
+    // const currentOptions = [...options]
+    // const currentAttributes = [...attributeToFilter]
+    // const currentKeys = [...currentKeys]
 
     console.log(attributeOptionsToFilter)
     attributeOptionsToFilter.map((attribute, index) => {
       console.log(attribute)
       attribute.map((question, index) => {
-        if (currentAttributes.includes(question.prompt)) {
-
-        } else {
-          
-        }
         // let options = []
         attributeToFilter = question.prompt
         key = question.id
@@ -282,27 +277,29 @@ export function Products(props) {
         console.log(question.prompt)
       })
     })
+    // MONSTRANDO SOMENTE A ULTIMA OPÇAO DE TODAS AS PERGUNTAS SENDO PARA UM OU MAIS PRODUTOS DO ARRAY E MOSTRANDO O "OUTRO" PARA QUANDO OPTION [[] []]
     return (
       <div className="attributes-filters">
-        <h1>Atributos</h1>
         <h6 className=" mt-3" key={key}>{attributeToFilter}</h6>
-         <br />
-        {options.map((option, index) => {
-          if (Array.isArray(option)) {
-            return (
-              <div className="d-flex gap-2">
+        <br />
+        <div className="d-flex flex-wrap gap-2">
+          {options.map((option, index) => {
+            if (Array.isArray(option)) {
+              return (
+
+
                 <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-              </div>
-            )
-          } else {
-            return (
-              <div className="d-flex gap-2">
+
+
+              )
+            } else {
+              return (
                 <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-              </div>
-            )
-          }
-        })}
-      </div>
+              )
+            }
+          })}
+        </div>
+        </div>
     )
   }
 
