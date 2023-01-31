@@ -105,7 +105,10 @@ export function Bike(props) {
       "e-bike" : "E-Bike",
       "bike" : "Bike",
 
-
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
 
     return languageMap[word]

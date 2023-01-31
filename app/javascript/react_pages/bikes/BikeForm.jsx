@@ -210,7 +210,7 @@ export function BikeForm(props) {
     const response = await axios.get(
       `/api/v1/bikes/${props.bikeId}/edit`
     );
-    alert(JSON.stringify(response.data))
+    // alert(JSON.stringify(response.data))
     if (response.data) {
       setUser(response.data.bike.user_id);
       setCategory(response.data.category);
@@ -452,8 +452,13 @@ export function BikeForm(props) {
 
     const response = await axios[method](url, dataObject);
     if (response.data.success) {
-      window.location = response.data.redirect_url;
-      swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
+      if (props.bikeId) {
+        window.location = response.data.redirect_url;
+        swal("OHH YEAHH", "Anúncio editado com sucesso!!!", "success");
+      } else {
+        window.location = response.data.redirect_url;
+        swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
+      }
     } else {
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       setErrors(response.data.errors);
@@ -901,7 +906,7 @@ export function BikeForm(props) {
   //////////////////////////////////////////////ACCESSORIES
  const accessoryOptions = ["Não", "Pedal", "Ciclocomputador", "Lanterna Traseira", "Farol", , "Bolsa de Acessórios", "Suporte de garrafinha", "Bateria extra"]
 
-  const translateWord = (word) => { 
+  const translateWord = (word) => {
     const languageMap = {
       "bike": "Bike",
       "e-bike": "E-Bike",

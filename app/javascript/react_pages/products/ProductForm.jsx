@@ -187,7 +187,7 @@ export function ProductForm(props) {
     const response = await axios.get(
       `/api/v1/products/${props.productId}/edit`
     );
-    alert(JSON.stringify(response.data))
+    // alert(JSON.stringify(response.data))
     if (response.data) {
       setProductCategory(response.data.category);
       setUser(response.data.product.user_id);
@@ -198,7 +198,7 @@ export function ProductForm(props) {
       setProductName(response.data.product.name);
       setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
-      setProductPrice(response.data.product.price_in_cents);
+      setProductPrice(response.data.product.price_in_cents / 100);
       setProductQuantity(response.data.product.quantity);
       setProductCityId(response.data.product.city_id);
       setProductStateId(response.data.product.state_id);
@@ -207,6 +207,9 @@ export function ProductForm(props) {
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
+      setProductConditionStatus(response.data.product.product_condition_status);
+      setProductConditionDescription(response.data.product.product_condition_description);
+
       if (response.data.product_attributes) {
         setProductAttributes(
           response.data.product_attributes
@@ -760,7 +763,12 @@ export function ProductForm(props) {
       "import_document": "Documento de Importação",
       "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
       "no_documentation": "Sem Documento",
-      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação"
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo"
     };
 
     return languageMap[word]
@@ -1575,6 +1583,9 @@ export function ProductForm(props) {
                     return (<option id="state-input" key={index} value={state.id}>{state.acronym}</option>);
                   })}
                 </select>
+                { errors && errors.product && errors.product.state_id && (
+                  <p className="text-danger ms-2">{errors.product.state_id[0]}</p>
+                )}
               </div>
 
               <div className="col-md-9">
@@ -1591,6 +1602,9 @@ export function ProductForm(props) {
                       return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
+                  { errors && errors.product && errors.product.city_id && (
+                    <p className="text-danger ms-2">{errors.product.city_id[0]}</p>
+                  )}
                 </>)}
 
                 {!productState && (<>
@@ -1605,6 +1619,9 @@ export function ProductForm(props) {
                       return (<option key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
+                  { errors && errors.product && errors.product.city_id && (
+                    <p className="text-danger ms-2">{errors.product.city_id[0]}</p>
+                  )}
                 </>)}
               </div>
             </div>
@@ -1622,6 +1639,9 @@ export function ProductForm(props) {
               <option value="foreign_tax_coupon_and_import_document">Cupom Fiscal Estrangeiro + Documento de Importação</option>
               <option value="no_documentation">Sem Documento</option>
             </select>
+            { errors && errors.product && errors.product.documentation_type && (
+              <p className="text-danger ms-2">{errors.product.documentation_type[0]}</p>
+            )}
 
             <div className="condition">
               <label htmlFor="´rpductCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
@@ -1789,43 +1809,109 @@ export function ProductForm(props) {
           <h4 className="text-center text-success">Revise as informações</h4>
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
-            <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
-            <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
-            <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
-            {productCity && productState && (<>
+            <div className="d-flex">
+              <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
+              { errors && errors.product && errors.product.category && (
+                <p className="text-danger ms-2">{errors.product.category[1]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
+              { errors && errors.product && errors.product.modality && (
+                <p className="text-danger ms-2">{errors.product.modality[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
+              { errors && errors.product && errors.product.quantity && (
+                <p className="text-danger ms-2">{errors.product.quantity[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Nome:</span> {productName}</p>
+              { errors && errors.product && errors.product.name && (
+                <p className="text-danger ms-2">{errors.product.name[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
               <p><span className="text-success">Local: </span>{productCity} - {productState}</p>
-            </>)}
-            <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
-            <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+              { errors && errors.product && errors.product.city_id && (
+                <p className="text-danger ms-2">{errors.product.city_id[0]} (Cidade e Estado)</p>
+              )}
+
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
+              { errors && errors.product && errors.product.documentation_type && (
+                <p className="text-danger ms-2">{errors.product.documentation_type[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+              { errors && errors.product && errors.product.condition && (
+                <p className="text-danger ms-2">{errors.product.condition[0]}</p>
+              )}
+            </div>
             {productCondition === "used" && (
-              <p><span className="text-success">Estado:</span>{productConditionStatus}</p>
+              <p><span className="text-success">Estado:</span> {translateWord(productConditionStatus)}</p>
             )}
             {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (
               <p><span className="text-success">descrição:</span>{productConditionDescription}</p>
             )}
 
-            <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
+            <div className="d-flex">
+              <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
-            {productYear === "other" && (
+              { errors && errors.product && errors.product.price_in_cents && (
+                <p className="text-danger ms-2">{errors.product.price_in_cents[0]}</p>
+              )}
+            </div>
 
-              <p><span className="text-success">Ano:</span> {otherProductYear}</p>
+
+            {productYear === "other" && (
+              <div className="d-flex">
+                <p><span className="text-success">Ano:</span> {otherProductYear}</p>
+
+                { errors && errors.product && errors.product.year && (
+                  <p className="text-danger ms-2">{errors.product.year[0]}</p>
+                )}
+              </div>
             )}
             {productYear !== "other" && (
-
-              <p><span className="text-success">Ano:</span> {productYear}</p>
+              <div className="d-flex">
+                <p><span className="text-success">Ano:</span> {productYear}</p>
+                { errors && errors.product && errors.product.year && (
+                  <p className="text-danger ms-2">{errors.product.year[0]}</p>
+                )}
+              </div>
             )}
 
             {productBrand === "Outra" && (
-
-              <p><span className="text-success">Marca:</span> {otherProductBrand}</p>
+              <div className="d-flex">
+                <p><span className="text-success">Marca:</span> {otherProductBrand}</p>
+                { errors && errors.product && errors.product.brand && (
+                  <p className="text-danger ms-2">{errors.product.brand[0]}</p>
+                )}
+              </div>
             )}
             {productBrand !== "Outra" && (
-
-              <p><span className="text-success">Marca:</span> {productBrand}</p>
+              <div className="d-flex">
+                <p><span className="text-success">Marca:</span> {productBrand}</p>
+                { errors && errors.product && errors.product.brand && (
+                  <p className="text-danger ms-2">{errors.product.brand[0]}</p>
+                )}
+              </div>
             )}
-            <p><span className="text-success">Modelo:</span> {productModel}</p>
+
+            <div className="d-flex">
+              <p><span className="text-success">Modelo:</span> {productModel}</p>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger ms-2">{errors.product.model[0]}</p>
+              )}
+            </div>
+
             <p><span className="text-success">Descrição:</span> {productDescription}</p>
 
           </div>

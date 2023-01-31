@@ -108,10 +108,16 @@ export function Product(props) {
       "new" : "Novo",
       "used" : "Usado",
 
-      "receipt" : "Nota Fiscal",
-      "import_document" : "Documento de Importação",
-      "foreign_tax_coupon" : "Cupom Fiscal Estrangeiro",
-      "no_documentation" : "Sem Documento",
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
 
     return languageMap[word]
