@@ -6,6 +6,8 @@ import ClotheImage from "../../../assets/images/tshirt.png";
 export function Product(props) {
   const [product, setProduct] = useState()
   const [presentIds, setPresentIds] = useState([])
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
 
   const [quantity, setQuantity] = useState()
   let productId = window.location.pathname.split("/").pop();
@@ -15,7 +17,8 @@ export function Product(props) {
     const response = await axios.get(url);
     setProduct(response.data);
     setPresentIds(response.data.present_ids);
-
+    setCity(response.data.city);
+    setState(response.data.state);
 
     console.log(window.location)
   }, [])
@@ -58,6 +61,8 @@ export function Product(props) {
 
   const translateWord = (word) => {
     const languageMap = {
+      "front_and_rear" : "Dianteira e Traseira",
+
       "mountain_bike" : "Mountain Bike",
       "dirt_street" : "Dirt",
       "road" : "Road",
@@ -103,10 +108,16 @@ export function Product(props) {
       "new" : "Novo",
       "used" : "Usado",
 
-      "receipt" : "Nota Fiscal",
-      "import_document" : "Documento de Importação",
-      "foreign_tax_coupon" : "Cupom Fiscal Estrangeiro",
-      "no_documentation" : "Sem Documento",
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
 
     return languageMap[word]
@@ -242,7 +253,7 @@ export function Product(props) {
               <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(product.modality)}</p>
               <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
-              <p className=""><strong className="text-success">Local:</strong> {product.locality}</p>
+              <p className=""><strong className="text-success">Local:</strong> {city} - {state}</p>
               <p className=""><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
               <p className=""><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
               <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>

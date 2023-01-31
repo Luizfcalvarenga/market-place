@@ -59,6 +59,8 @@ module Api
         @bike = Bike.find(params[:id])
         skip_authorization
         @category = Category.find_by(id: @bike.category)
+        @state = @bike.state.acronym
+        @city = @bike.city.name
         @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
         @current_user = user_signed_in
       end
@@ -102,8 +104,9 @@ module Api
         authorize @bike
         @category = @bike.category.name
         @modalities = @bike.category.modalities
-
-        render json: { bike: @bike, category: @category, modalities: @modalities }
+        @state = @bike.state.acronym
+        @city = @bike.city.name
+        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city }
       end
 
       def update

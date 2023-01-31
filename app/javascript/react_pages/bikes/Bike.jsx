@@ -13,6 +13,9 @@ export function Bike(props) {
   const [bike, setBike] = useState()
   let bikeId = window.location.pathname.split("/").pop();
   const [presentIds, setPresentIds] = useState([])
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
+
 
 
   useEffect(async () => {
@@ -20,6 +23,9 @@ export function Bike(props) {
     const response = await axios.get(url);
     setBike(response.data);
     setPresentIds(response.data.present_ids);
+    setCity(response.data.city);
+    setState(response.data.state);
+
 
   }, [])
 
@@ -99,7 +105,10 @@ export function Bike(props) {
       "e-bike" : "E-Bike",
       "bike" : "Bike",
 
-
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
 
     return languageMap[word]
@@ -197,7 +206,7 @@ export function Bike(props) {
                   <li className="drop-item">
                     <div className="text-success item list-item d-flex ms-3">
                       <p className="bike-attrs-parts"><strong>Material:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material)}</p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material) || bike.frame_material}</p>
                     </div>
                   </li>
                 </ul>
@@ -492,11 +501,6 @@ export function Bike(props) {
                         <p className="bike-attrs-parts"><strong>Km:</strong> </p>
                         <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
                       </div>
-                    </li> <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Motor:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.motor}</p>
-                      </div>
                     </li>
                   </ul>
                 </li>
@@ -524,8 +528,8 @@ export function Bike(props) {
               <p className="text-white"><span className="text-gray">Tipo da bike:</span> {translateWord(bike.bike_type)}</p>
               <p className="text-white"><span className="text-gray">Ano:</span> {bike.year}</p>
               <p className="text-white"><span className="text-gray">Tamanho do quadro:</span> {bike.frame_size}</p>
-              <p className="text-white"><span className="text-gray">Material do quadro:</span> {translateWord(bike.frame_material)}</p>
-              <p className="text-white"><span className="text-gray">Local:</span> {bike.locality}</p>
+              <p className="text-white"><span className="text-gray">Material do quadro:</span> {translateWord(bike.frame_material) || bike.frame_material}</p>
+              <p className="text-white"><span className="text-gray">Local:</span> {city} - {state}</p>
               <p className="text-white"><span className="text-gray">Descrição:</span> {bike.description}</p>
             </div>
             {bike.user.show_contact && (<>

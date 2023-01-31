@@ -4,7 +4,7 @@ class Category < ApplicationRecord
 
 
   CATEGORY_OPTIONS = {
-    mountaion_bike: "Mountain Bike",
+    mountain_bike: "Mountain Bike",
     dirt_street: "Dirt Street",
     road: "Road",
     urban: "Urbano",
