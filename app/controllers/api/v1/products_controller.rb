@@ -103,12 +103,14 @@ module Api
         authorize @product
         @product_attributes = {}
         @category = @product.category.name
+        @state = @product.state.acronym
+        @city = @product.city.name
         if @product.product_attributes.present?
           @product.product_attributes.each { |product_attribute|
             @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
           }
         end
-        render json: { product: @product, product_attributes: @product_attributes, category: @category }
+        render json: { product: @product, product_attributes: @product_attributes, category: @category, sate: @sate, city: @city }
       end
 
       def update

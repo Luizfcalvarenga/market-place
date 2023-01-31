@@ -30,6 +30,8 @@ export function ProductForm(props) {
   const [productConditionDescription, setProductConditionDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productQuantity, setProductQuantity ] = useState("");
+  const [productCityId, setProductCityId ] = useState("");
+  const [productStateId, setProductStateId ] = useState("");
   const [productCity, setProductCity ] = useState("");
   const [productState, setProductState ] = useState("");
   const [productYear, setProductYear ] = useState("");
@@ -170,24 +172,10 @@ export function ProductForm(props) {
   }
 
   const removePhoto = (e) => {
-    // console.log(e)
-    // console.log(e.target.id)
     const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
     setPhotosPreview(newPhotosPreview);
     const photoToRemove = photoFile.find(element => element.url === e.target.id).name
     setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    // if (e.nativeEvent.path[1].childNodes[0].src) {
-
-    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-    //   setPhotosPreview(newPhotosPreview);
-    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    // } else if (e.nativeEvent.path[2].childNodes[0].src) {
-    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-    //   setPhotosPreview(newPhotosPreview);
-    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    // }
   }
 
   const handleReviewSection = (e) => {
@@ -212,8 +200,10 @@ export function ProductForm(props) {
       setProductDescription(response.data.product.description);
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
-      setProductCity(response.data.product.city_id);
+      setProductCityId(response.data.product.city_id);
       setProductState(response.data.product.state_id);
+      setProductState(response.data.state);
+      setProductCity(response.data.city);
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
@@ -388,7 +378,6 @@ export function ProductForm(props) {
       })
     }
     for (const [key, value] of Object.entries(productAttributes)) {
-      // console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
 
@@ -447,10 +436,21 @@ export function ProductForm(props) {
   }
 
   const handleLocality = (e) => {
-    // console.log(e)
-    // console.log(e.target.value)
-    setProductState(e.target.value)
-    setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+
+    if (e.target.id === "state-input") {
+      console.log(e.id)
+      console.log(e.target.value)
+      console.log(e.target.innerHTML)
+      setProductStateId(e.target.value)
+      setProductState(e.target.innerHTML)
+      setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+    } else {
+      console.log(e.id)
+      console.log(e.target.value)
+      console.log(e.target.innerHTML)
+      setProductCityId(e.target.value)
+      setProductCity(e.target.innerHTML)
+    }
   }
 
   // const handleProductCondition = (e) => {
@@ -687,9 +687,6 @@ export function ProductForm(props) {
     const progressThird = document.getElementById("progress-3")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
-
-
-
     progressThird.classList.add("section-done")
     thirdSection.classList.add("d-none")
     fourthSection.classList.remove("d-none")
@@ -1577,7 +1574,7 @@ export function ProductForm(props) {
                 >
                   <option value=""></option>
                   {states.map((state, index)=> {
-                    return (<option key={index} value={state.id}>{state.acronym}</option>);
+                    return (<option id="state-input" key={index} value={state.id}>{state.acronym}</option>);
                   })}
                 </select>
               </div>
@@ -1588,11 +1585,11 @@ export function ProductForm(props) {
                   <select
                     className="select-answer"
                     value={productCity}
-                    onChange={(e) => setProductCity(e.target.value)}
+                    onChange={(e) => handleLocality(e)}
                   >
                     <option value=""></option>
                     {mapedCitiesForState.map((city, index)=> {
-                      return (<option key={index} value={city.id}>{city.name}</option>);
+                      return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
                 </>)}
@@ -1796,7 +1793,7 @@ export function ProductForm(props) {
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             {productCity && productState && (<>
-              <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
+              <p><span className="text-success">Local: </span>{productCity - productState}</p>
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
