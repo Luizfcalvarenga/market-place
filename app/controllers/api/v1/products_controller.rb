@@ -110,7 +110,7 @@ module Api
             @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
           }
         end
-        render json: { product: @product, product_attributes: @product_attributes, category: @category, sate: @sate, city: @city }
+        render json: { product: @product, product_attributes: @product_attributes, category: @category, state: @state, city: @city }
       end
 
       def update

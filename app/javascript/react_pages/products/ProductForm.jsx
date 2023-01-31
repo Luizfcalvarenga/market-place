@@ -201,7 +201,7 @@ export function ProductForm(props) {
       setProductPrice(response.data.product.price_in_cents);
       setProductQuantity(response.data.product.quantity);
       setProductCityId(response.data.product.city_id);
-      setProductState(response.data.product.state_id);
+      setProductStateId(response.data.product.state_id);
       setProductState(response.data.state);
       setProductCity(response.data.city);
       setProductYear(response.data.product.year);
@@ -346,8 +346,8 @@ export function ProductForm(props) {
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
-    dataObject.append( "product[city_id]", productCity );
-    dataObject.append( "product[state_id]", productState );
+    dataObject.append( "product[city_id]", productCityId );
+    dataObject.append( "product[state_id]", productStateId );
     dataObject.append( "product[documentation_type]", productDocumentationType );
     dataObject.append( "product[condition]", productCondition );
     dataObject.append( "product[product_condition_status]", productConditionStatus );
@@ -436,20 +436,20 @@ export function ProductForm(props) {
   }
 
   const handleLocality = (e) => {
-
+    console.log(e)
     if (e.target.id === "state-input") {
-      console.log(e.id)
+      console.log(e.target.id)
       console.log(e.target.value)
-      console.log(e.target.innerHTML)
+      console.log(states.find(element => element.id === Number(e.target.value)).acronym)
       setProductStateId(e.target.value)
-      setProductState(e.target.innerHTML)
+      setProductState(states.find(element => element.id === Number(e.target.value)).acronym)
       setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
     } else {
       console.log(e.id)
       console.log(e.target.value)
-      console.log(e.target.innerHTML)
+      console.log(cities.find(element => element.id === Number(e.target.value)).name)
       setProductCityId(e.target.value)
-      setProductCity(e.target.innerHTML)
+      setProductCity(cities.find(element => element.id === Number(e.target.value)).name)
     }
   }
 
@@ -1569,7 +1569,8 @@ export function ProductForm(props) {
                 <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
                 <select
                   className="select-answer"
-                  value={productState}
+                  id="state-input"
+                  value={productStateId}
                   onChange={(e) => handleLocality(e)}
                 >
                   <option value=""></option>
@@ -1584,7 +1585,8 @@ export function ProductForm(props) {
                 {productState && (<>
                   <select
                     className="select-answer"
-                    value={productCity}
+                    id="city-input"
+                    value={productCityId}
                     onChange={(e) => handleLocality(e)}
                   >
                     <option value=""></option>
@@ -1597,8 +1599,9 @@ export function ProductForm(props) {
                 {!productState && (<>
                   <select
                     className="select-answer"
-                    value={productCity}
-                    onChange={(e) => setProductCity(e.target.value)}
+                    id="city-input"
+                    value={productCityId}
+                    onChange={(e) => handleLocality(e)}
                   >
                     <option value=""></option>
                     {cities.map((city, index)=> {
@@ -1793,7 +1796,7 @@ export function ProductForm(props) {
             <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
             <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
             {productCity && productState && (<>
-              <p><span className="text-success">Local: </span>{productCity - productState}</p>
+              <p><span className="text-success">Local: </span>{productCity} - {productState}</p>
             </>)}
             <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
             <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>

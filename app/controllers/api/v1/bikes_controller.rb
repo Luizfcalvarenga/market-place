@@ -102,8 +102,11 @@ module Api
         authorize @bike
         @category = @bike.category.name
         @modalities = @bike.category.modalities
+        @state = @bike.state.acronym
+        @city = @bike.city.name
 
-        render json: { bike: @bike, category: @category, modalities: @modalities }
+
+        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city }
       end
 
       def update
