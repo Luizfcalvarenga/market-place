@@ -219,7 +219,7 @@ export function BikeForm(props) {
       setCategoryId(response.data.bike.category_id);
       setModality(response.data.bike.modality);
       setBikeType(response.data.bike.bike_type);
-      setPriceInCents(response.data.bike.price_in_cents);
+      setPriceInCents(response.data.bike.price_in_cents / 100);
       setQuantity(response.data.bike.quantity);
       setFrameBrand(response.data.bike.frame_brand);
       setFrameSize(response.data.bike.frame_size);
