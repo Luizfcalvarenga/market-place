@@ -1038,7 +1038,7 @@ export function ProductForm(props) {
             <option value="urban">Urbano</option>
           </select>
           { errors && errors.product && errors.product.category && (
-            <p className="text-danger">{errors.product.category[0]}</p>
+            <p className="text-danger">{errors.product.category[1]}</p>
           )}
 
           {productCategory === "mountain_bike" && (<>
@@ -1109,8 +1109,8 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.prompt}</option>)
             })}
           </select>
-          { errors && errors.product && errors.product.product_type && (
-            <p className="text-danger">{errors.product.product_type}</p>
+          { errors && errors.product && errors.product.product_type_id && (
+            <p className="text-danger">{errors.product.product_type_id}</p>
           )}
 
           <label htmlFor="productModel" className="mt-4">Nome:<span className="requested-information ms-1">*</span></label>

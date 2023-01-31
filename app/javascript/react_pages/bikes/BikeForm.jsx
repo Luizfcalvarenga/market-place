@@ -1311,6 +1311,9 @@ export function BikeForm(props) {
                 return (<option id="state-input" key={index} value={state.id}>{state.acronym}</option>);
               })}
             </select>
+            { errors && errors.bike && errors.bike.state_id && (
+              <p className="text-danger">{errors.bike.state_id[0]}</p>
+            )}
           </div>
 
           <div className="col-md-9">
@@ -1327,6 +1330,9 @@ export function BikeForm(props) {
                   return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                 })}
               </select>
+              { errors && errors.bike && errors.bike.city_id && (
+                <p className="text-danger">{errors.bike.city_id[0]}</p>
+              )}
             </>)}
 
             {!stateId && (<>
@@ -1341,6 +1347,9 @@ export function BikeForm(props) {
                   return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                 })}
               </select>
+              { errors && errors.bike && errors.bike.city_id && (
+                <p className="text-danger">{errors.bike.city_id[0]}</p>
+              )}
             </>)}
           </div>
         </div>
@@ -2114,30 +2123,70 @@ export function BikeForm(props) {
         <h4 className="text-center text-success">Revise as informações</h4>
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         <div id="Gerais(review)" className=" d-none">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex">
             <p><span className="text-success">Tipo:</span> {translateWord(bikeType)}</p>
+            { errors && errors.bike && errors.bike.bike_type && (
+              <p className="text-danger ms-2">{errors.bike.bike_type[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
             <p><span className="text-success">Categoria:</span> {translateWord(category)}</p>
+            { errors && errors.bike && errors.bike.category && (
+              <p className="text-danger ms-2">{errors.bike.category[1]}</p>
+            )}
+          </div>
+          <div className="d-flex">
             <p><span className="text-success">Modalidade:</span> {translateWord(modality)}</p>
+            { errors && errors.bike && errors.bike.modality && (
+              <p className="text-danger ms-2">{errors.bike.modality[0]}</p>
+            )}
           </div>
-
-          <div className="d-flex justify-content-between">
+          <div className="d-flex">
             <p><span className="text-success">Ano:</span> {year === "other" ? otherYear : year}</p>
-            <p><span className="text-success">Quantidade:</span> {quantity}</p>
-            <p><span className="text-success">Peso:</span> {weight}Kg</p>
+            { errors && errors.bike && errors.bike.year && (
+              <p className="text-danger ms-2">{errors.bike.year[0]}</p>
+            )}
           </div>
-
-          <div className="d-flex justify-content-between">
+          <div className="d-flex">
+            <p><span className="text-success">Local:</span> {city} - {state}</p>
+            { errors && errors.bike && errors.bike.city_id && (
+              <p className="text-danger ms-2">{errors.bike.city_id[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
             <p><span className="text-success">Modelo:</span> {model}</p>
-            <p><span className="text-success">Preço:</span> {priceInCents?.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}</p>
-            {cityId && stateId && (<>
-              <p><span className="text-success">Local:</span> {city} - {state}</p>
-            </>)}
+            { errors && errors.bike && errors.bike.model && (
+              <p className="text-danger ms-2">{errors.bike.model[0]}</p>
+              )}
           </div>
-          <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
-          <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
+          <div className="d-flex">
+            <p><span className="text-success">Preço:</span> {priceInCents?.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}</p>
+            { errors && errors.bike && errors.bike.price_in_cents && (
+              <p className="text-danger ms-2">{errors.bike.price_in_cents[0]}</p>
+              )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Quantidade:</span> {quantity}</p>
+            { errors && errors.bike && errors.bike.quantity && (
+              <p className="text-danger ms-2">{errors.bike.quantity[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
+            { errors && errors.bike && errors.bike.documentation_type && (
+              <p className="text-danger ms-2">{errors.bike.documentation_type[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
+            { errors && errors.bike && errors.bike.bike_condition && (
+              <p className="text-danger ms-2">{errors.bike.bike_condition[0]}</p>
+            )}
+          </div>
+          <p><span className="text-success">Peso:</span> {weight}Kg</p>
           <p><span className="text-success">Estado da Bike:</span> {translateWord(bikeConditionStatus)}</p>
           {bikeConditionDescription && (
           <p><span className="text-success">Descrição da Condição:</span> {bikeConditionDescription}</p>
@@ -2147,9 +2196,25 @@ export function BikeForm(props) {
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
         <div id="Quadro(review)" className="d-none">
-          <p><span className="text-success">Marca:</span> {frameBrand === "other" ? otherFrameBrand : frameBrand}</p>
-          <p><span className="text-success">Material:</span> {frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
-          <p><span className="text-success">Tamanho:</span> {frameSize === "other" ? otherFrameSize : frameSize}</p>
+          <div className="d-flex">
+            <p><span className="text-success">Marca:</span> {frameBrand === "other" ? otherFrameBrand : frameBrand}</p>
+            { errors && errors.bike && errors.bike.frame_brand && (
+              <p className="text-danger ms-2">{errors.bike.frame_brand[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Material:</span> {frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
+            { errors && errors.bike && errors.bike.frame_material && (
+              <p className="text-danger ms-2">{errors.bike.frame_material[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Tamanho:</span> {frameSize === "other" ? otherFrameSize : frameSize}</p>
+            { errors && errors.bike && errors.bike.frame_size && (
+              <p className="text-danger ms-2">{errors.bike.frame_size[0]}</p>
+            )}
+          </div>
+
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão</button>
