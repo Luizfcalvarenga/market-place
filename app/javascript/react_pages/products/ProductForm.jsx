@@ -1648,13 +1648,13 @@ export function ProductForm(props) {
                 <div className="mb-5 mt-3">
                   <div id="debt-amount-slider">
                     <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
+                    <label id="label-bad" htmlFor="1" data-debt-amount="Ruim"></label>
                     <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-reasonable" for="2" data-debt-amount="Razoável"></label>
+                    <label id="label-reasonable" htmlFor="2" data-debt-amount="Razoável"></label>
                     <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-good" for="3" data-debt-amount="Bom"></label>
+                    <label id="label-good" htmlFor="3" data-debt-amount="Bom"></label>
                     <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-excellent" for="4" data-debt-amount="Ótimo"></label>
+                    <label id="label-excellent" htmlFor="4" data-debt-amount="Ótimo"></label>
                     <div id="debt-amount-pos"></div>
                   </div>
                 </div>

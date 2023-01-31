@@ -61,6 +61,8 @@ export function Product(props) {
 
   const translateWord = (word) => {
     const languageMap = {
+      "front_and_rear" : "Dianteira e Traseira",
+
       "mountain_bike" : "Mountain Bike",
       "dirt_street" : "Dirt",
       "road" : "Road",
