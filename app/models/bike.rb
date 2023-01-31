@@ -38,6 +38,7 @@ class Bike < ApplicationRecord
   end
 
   MODALITY_OPTIONS = {
+    mountain_bike: "Mountain Bike",
     downhill: "Downhill",
     enduro: "Enduro",
     gravel: "Gravel",
@@ -56,6 +57,7 @@ class Bike < ApplicationRecord
   def modality_display
     MODALITY_OPTIONS[modality.to_sym]
   end
+
   CONDITION_OPTIONS = {
     "Product": "Produto",
     "used": "Usado",

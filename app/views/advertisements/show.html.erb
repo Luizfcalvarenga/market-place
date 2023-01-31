@@ -53,10 +53,10 @@
 
   <% elsif @advertisement.advertisable_type === "Bike"  %>
     <h4>Bike</h4>
-    <div class="d-flexjustify-content-around my-3">
+    <div class="d-flex justify-content-around my-3">
       <div>
         <p><span class="text-success me-2">Tipo:</span><%= @item.type_display %></p>
-        <p><span class="text-success me-2">Categoria:</span><%= @item.category.name %></p>
+        <p><span class="text-success me-2">Categoria:</span><%= @item.category.name_display %></p>
         <p><span class="text-success me-2">Modalidade:</span><%= @item.modality_display %></p>
         <p><span class="text-success me-2">Local:</span><%= @item.city.name %> - <%= @item.state.acronym %></p>
         <p><span class="text-success me-2">Condição:</span><%= @item.condition_display %></p>
