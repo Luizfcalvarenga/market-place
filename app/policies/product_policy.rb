@@ -13,15 +13,14 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
-  def edit?
-    record.user == user
-    raise
-  end
+  # def edit?
+  #   record.user == user
+  #   # raise
+  # end
 
   def update?
-    record.user == user
-    # true
-    raise
+    # record.user == user || user_is_admin?
+    true
   end
 
 
@@ -29,9 +28,13 @@ class ProductPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def toggle_medium_activity?
+    user.access == "admin"
+  end
+
 
   private
-  # def user_is_admin?
-  #   user.access == "admin"
-  # end
+  def user_is_admin?
+    user.access == "admin"
+  end
 end
