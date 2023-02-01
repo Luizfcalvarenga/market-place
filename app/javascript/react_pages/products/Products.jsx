@@ -50,9 +50,9 @@ export function Products(props) {
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
   const [componentsAttributesOptionsToFilter, setComponentsAttributesOptionsToFilter] = useState([]);
   const [filteredLink, setFilteredLink] = useState("");
-  const [onlyAccessories, setOnlyAccessories] = useState("");
-  const [onlyClothes, setOnlyClothes] = useState("");
-  const [onlyComponents, setOnlyComponents] = useState("");
+  const [onlyAccessories, setOnlyAccessories] = useState(params.products_accessories || "");
+  const [onlyClothes, setOnlyClothes] = useState(params.products_clothes || "");
+  const [onlyComponents, setOnlyComponents] = useState(params.products_components || "");
 
 
 
@@ -197,63 +197,63 @@ export function Products(props) {
     }
   }
 
-  const renderProductAttributeSelect = (attribute, index) => {
-    let options = []
-    if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
-      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
-    } else if (categoryFilter === "road" && attribute.name === "frame_size") {
-      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    } else if (!categoryFilter && attribute.name === "frame_size") {
-      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-    } else if (attribute.name === "frame_brand") {
-      return
-    } else if (attribute.name === "suspension_type") {
-      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-    } else if (attribute.name === "brake_type") {
-      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-    }  else if (attribute.name === "condition") {
-      options = [ ["new", "Novo"], ["used", "Usado" ]]
-    }  else if (attribute.name === "documentation_type") {
-      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-    } else if (attribute.name === "frame_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "rim_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
-      return
-    } else if (attribute.name === "seat_post_type") {
-      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-    } else if (attribute.options.includes("other") ) {
-      attribute.options.pop()
-      options = attribute.options
-    } else {
-      options = attribute.options
-    }
+  // const renderProductAttributeSelect = (attribute, index) => {
+  //   let options = []
+  //   if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
+  //     options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+  //   } else if (categoryFilter === "road" && attribute.name === "frame_size") {
+  //     options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  //   } else if (!categoryFilter && attribute.name === "frame_size") {
+  //     options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+  //   } else if (attribute.name === "frame_brand") {
+  //     return
+  //   } else if (attribute.name === "suspension_type") {
+  //     options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
+  //   } else if (attribute.name === "brake_type") {
+  //     options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+  //   }  else if (attribute.name === "condition") {
+  //     options = [ ["new", "Novo"], ["used", "Usado" ]]
+  //   }  else if (attribute.name === "documentation_type") {
+  //     options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+  //   } else if (attribute.name === "frame_material") {
+  //     options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+  //   } else if (attribute.name === "rim_material") {
+  //     options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+  //   } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
+  //     return
+  //   } else if (attribute.name === "seat_post_type") {
+  //     options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+  //   } else if (attribute.options.includes("other") ) {
+  //     attribute.options.pop()
+  //     options = attribute.options
+  //   } else {
+  //     options = attribute.options
+  //   }
 
-    return (
-      <div className="attributes-filters">
-        <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-        <select
-        className="select-answer"
-        onChange={(e) => setProductAttributesFilter(e.target.value)}
-        >
-          <option value=""></option>
-          {options?.map((option, index) => {
-             if (Array.isArray(option)) {
-              return (
-                <option key={index} value={option[0]}>{option[1]}</option>
-              )
-            } else {
-              return (
+  //   return (
+  //     <div className="attributes-filters">
+  //       <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
+  //       <select
+  //       className="select-answer"
+  //       onChange={(e) => setProductAttributesFilter(e.target.value)}
+  //       >
+  //         <option value=""></option>
+  //         {options?.map((option, index) => {
+  //            if (Array.isArray(option)) {
+  //             return (
+  //               <option key={index} value={option[0]}>{option[1]}</option>
+  //             )
+  //           } else {
+  //             return (
 
-                <option key={index} value={option}>{option}</option>
-              )
-            }
-          })}
-        </select>
-      </div>
-    )
-  }
+  //               <option key={index} value={option}>{option}</option>
+  //             )
+  //           }
+  //         })}
+  //       </select>
+  //     </div>
+  //   )
+  // }
 
   const renderOptionsToFilterAttributes = (attributes, index) => {
     // return (
@@ -310,7 +310,6 @@ export function Products(props) {
       else {
         options = attribute.options
       }
-
       return (
         <div className="attributes-filters">
           <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
@@ -326,13 +325,9 @@ export function Products(props) {
             }
 
           })}
-
         </div>
       )
     })
-
-
-
   }
 
   const hendleAccessoriesFiltes = (e) => {

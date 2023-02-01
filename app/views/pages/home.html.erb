@@ -25,42 +25,56 @@
     </div>
   </div>
   <div class="row row-cols-1 category-cards mx-5">
-    <%= link_to bikes_path, class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
-      <div class="card card-bikes">
-        <h3 class="text-center card-title">B<span class="flicker">I</span>KES </h3>
-        <%= image_tag "bike-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to products_path, class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
-      <div class="card card-components">
-        <h3 class="text-center card-title">PROD<span class="flicker">U</span>TOS </h3>
-        <%= image_tag "bike-components.png", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
-      <div class="card card-services">
-        <h3 class="text-center card-title">SER<span class="flicker">V</span>IÇOS</h3>
-        <%= image_tag "bike-maintenance.png", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
-      <div class="card card-products">
-        <h3 class="text-center card-title">M<span class="flicker">T</span>B</h3>
-        <%= image_tag "mtb-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link"  do %>
-      <div class="card card-products">
-        <h3 class="text-center card-title"><span class="flicker">E</span>-BIKE</h3>
-        <%= image_tag "e-bike-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
-      <div class="card card-products">
-        <h3 class="text-center card-title">ROA<span class="flicker">D</span></h3>
-        <%= image_tag "road-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "bikes", :action => "index", :categories => "mountain_bike" do %>
+        <div class="card card-bikes mb-5 btn-remove-link">
+          <h3 class="text-center card-title">B<span class="flicker">I</span>KES MTB</h3>
+          <%= image_tag "bike-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "bikes", :action => "index", :categories => "road" do %>
+        <div class="card card-components mb-5 btn-remove-link">
+          <h3 class="text-center card-title">BIKES R<span class="flicker">O</span>AD </h3>
+          <%= image_tag "bike-components.png", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "bikes", :action => "index", :bike_type => "e-bike" do %>
+        <div class="card card-services mb-5 btn-remove-link">
+          <h3 class="text-center card-title"><span class="flicker">E</span>-Bikes</h3>
+          <%= image_tag "bike-maintenance.png", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "products", :action => "index", :products_accessories => "products_accessories" do %>
+        <div class="card card-products mb-5 btn-remove-link">
+          <h3 class="text-center card-title">ACESS<span class="flicker">Ó</span>RIOS</h3>
+          <%= image_tag "mtb-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "products", :action => "index", :products_components => "products_components"  do %>
+        <div class="card card-products mb-5 btn-remove-link">
+          <h3 class="text-center card-title">C<span class="flicker">O</span>MPONENTES</h3>
+          <%= image_tag "e-bike-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "products", :action => "index", :products_clothes => "products_clothes" do %>
+        <div class="card card-products mb-5 btn-remove-link">
+          <h3 class="text-center card-title">VESTUÁR<span class="flicker">I</span>O</h3>
+          <%= image_tag "road-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
