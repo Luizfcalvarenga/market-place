@@ -247,19 +247,26 @@ export function Products(props) {
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     let options = []
-    let attributeToFilter = null
-    let key = null
+    let attributesToFilter = []
+    let ObjectOfAttributes = {}
     // const currentOptions = [...options]
     // const currentAttributes = [...attributeToFilter]
     // const currentKeys = [...currentKeys]
-
-    console.log(attributeOptionsToFilter)
+    // let arrayOfObjecs = [];
+    // console.log(attributeOptionsToFilter)
+    // for( i=0; i< attributeOptionsToFilter.length; i++){
+    //   var obj = {
+    //     for( j=0, j < attributeOptionsToFilter[i].length, j++){
+    //         key[j] = attributeOptionsToFilter[i][j]
+    //     }
+    //   };
+    //   arrayOfObjects.push(obj);
+    // }
     attributeOptionsToFilter.map((attribute, index) => {
       console.log(attribute)
       attribute.map((question, index) => {
         // let options = []
-        attributeToFilter = question.prompt
-        key = question.id
+        // key = question.id
         if ((categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("urban") || categoryOptionsToFilter.includes("infant") )&& attribute.name === "frame_size") {
           options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
         } else if (categoryOptionsToFilter.includes("road")  && question.name === "frame_size") {
@@ -271,36 +278,72 @@ export function Products(props) {
         }  else if (question.options.includes("other") ) {
           question.options.pop()
           options = question.options
-        } else {
+        } else if (question.kind === "text" ) {
+          return
+        } else if (question.name.includes("material")) {
+          return
+        }
+        else {
           options = question.options
         }
         console.log(question.prompt)
+        ObjectOfAttributes[question.prompt] = options
+
+
+
+
       })
     })
-    // MONSTRANDO SOMENTE A ULTIMA OPÇAO DE TODAS AS PERGUNTAS SENDO PARA UM OU MAIS PRODUTOS DO ARRAY E MOSTRANDO O "OUTRO" PARA QUANDO OPTION [[] []]
-    return (
-      <div className="attributes-filters">
-        <h6 className=" mt-3" key={key}>{attributeToFilter}</h6>
-        <br />
-        <div className="d-flex flex-wrap gap-2">
-          {options.map((option, index) => {
-            if (Array.isArray(option)) {
-              return (
 
+    attributesToFilter.push(ObjectOfAttributes)
+    console.log(ObjectOfAttributes)
 
-                <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+    {Object.keys(ObjectOfAttributes).length != 0 && (<>
+      <h5>Atributos</h5>
+      {Object.keys(ObjectOfAttributes).map((key, index) => {
+        // let optionsToDisplay = attributesToFilter[key]
+        console.log(ObjectOfAttributes[key])
 
-
-              )
-            } else {
-              return (
-                <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-              )
-            }
-          })}
-        </div>
-        </div>
-    )
+        return (<>
+          <h5>{key}</h5>
+          <div className="d-flex flex-wrap gap-2">
+            {/* {ObjectOfAttributes[key].map((option, index) => {
+              if (Array.isArray(option)) {
+                return (
+                  <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+                )
+              } else {
+                return (
+                  <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+                )
+              }
+            })} */}
+          </div>
+        </>);
+      })}
+    </>
+    )}
+    // const attributesToDisplay =
+    // MONSTRANDO SOMENTE A ULTIMA OPÇAO DE TODAS AS PERGUNTAS SENDO PARA UM OU MAIS PRODUTOS0+ DO ARRAY E MOSTRANDO O "OUTRO" PARA QUANDO OPTION [[] []]
+    // return (
+    //   <div className="attributes-filters">
+    //     <h6 className=" mt-3" key={key}>{attributeToFilter}</h6>
+    //     <br />
+    //     <div className="d-flex flex-wrap gap-2">
+    //       {options.map((option, index) => {
+    //         if (Array.isArray(option)) {
+    //           return (
+    //             <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+    //           )
+    //         } else {
+    //           return (
+    //             <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+    //           )
+    //         }
+    //       })}
+    //     </div>
+    //     </div>
+    // )
   }
 
   const hendleAccessoriesFiltes = (e) => {
