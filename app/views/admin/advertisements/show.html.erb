@@ -76,7 +76,7 @@
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                   <% @product.photos.each_with_index do |photo, i| %>
-                    <div class="carousel-item <%= i.zero? ? "active" : ""  %>" >
+                    <div class="carousel-item <%= i.zero? ? "verified" : ""  %>" >
                       <%= cl_image_tag photo.key, class: 'img-carousel'  %>
                       <div class="carousel-caption">
                       <p class='carousel-name'>produto#<%= @product.id %></p>
@@ -102,17 +102,17 @@
         </div>
         <hr>
         <% if @advertisement.advertisable_type == "Product" %>
-          <div data-controller="verify" >
-            <div data-verify-target="form">
-              <form action="/toggle_verify" method="patch" data-verify-target="form">
-                <% if @product.verified  %>
-                  <input type="checkbox"data-verify-target="verified" data-action="change->verify#submit"><br><br>
-                  <label >Desativar Verificação</label>
+          <div class="" data-controller="verify" >
+            <div data-verify-target="test">
+              <%= form_with(model: @product, remote: true, data: {controller: "verify", target: "verify.form"}) do |f| %>
+
+                <%# <%= simple_form_for @product, url: toggle_verify_path(@product), remote: true, data: { target: "form" }  do |f| %>
+                <% if @product.verified %>
+                  <%= f.check_box(:verified, label: "Desativar Mídia", :as => :boolean, data: {controller: "verify", target: "verify.verified", action: "change->verify#submit", class: "verified-form"}) %>
                 <% else %>
-                  <input type="checkbox" data-verify-target="verified" data-action="change->verify#submit"><br><br>
-                  <label>Verificar</label>
+                  <%= f.check_box(:verified, label: "Ativar Mídia", :as => :boolean, data: {controller: "verify", target: "verify.verified", action: "change->verify#submit"}) %>
                 <% end %>
-              </form>
+              <% end %>
             </div>
           </div>
           <div class="table">
