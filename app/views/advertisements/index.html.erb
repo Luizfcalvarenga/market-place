@@ -68,8 +68,10 @@
                   <p><span class="text-success">Local:</span><%= advertisement.advertisable.city.name %> - <%= advertisement.advertisable.state.acronym %></p>
                   <p><span class="text-success">Ano:</span>  <%= advertisement.advertisable.year %></p>
                   <p><span class="text-success">Produto:</span> <%= advertisement.advertisable.product_type.prompt %></p>
-                  <%= link_to edit_product_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
-                    <i class="fas fa-pen"></i>  Editar <br>
+                  <% if policy(advertisement.advertisable).edit? %>
+                    <%= link_to edit_product_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
+                      <i class="fas fa-pen"></i>  Editar <br>
+                    <% end %>
                   <% end %>
                   <% if policy(advertisement.advertisable).destroy? %>
                     <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.product_type.prompt}?"}, class: "nav-link fs-18 text-gray" do %>
@@ -112,8 +114,10 @@
                   <p><span class="text-success">Local:</span><%= advertisement.advertisable.city.name %> - <%= advertisement.advertisable.state.acronym %></p>
                   <p><span class="text-success">Ano:</span> <%= advertisement.advertisable.year %></p>
                   <p><span class="text-success">Tipo:</span> <%= advertisement.advertisable.type_display %></p>
-                  <%= link_to edit_bike_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
-                    <i class="fas fa-pen"></i>  Editar <br>
+                  <% if policy(advertisement.advertisable).edit? %>
+                    <%= link_to edit_bike_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
+                      <i class="fas fa-pen"></i>  Editar <br>
+                    <% end %>
                   <% end %>
                   <% if policy(advertisement.advertisable).destroy? %>
                     <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.model}?"}, class: "nav-link fs-18 text-gray" do %>

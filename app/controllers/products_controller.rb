@@ -49,13 +49,14 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
-    skip_authorization
+    authorize @product
+    # raise
   end
 
   def update
     @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
-    skip_authorization
+    authorize @product
 
     if @product.update(product_params)
       render  @product
