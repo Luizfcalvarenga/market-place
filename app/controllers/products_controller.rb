@@ -49,13 +49,14 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
-    skip_authorization
+    authorize @product
+    # raise
   end
 
   def update
     @product = Product.find(params[:id])
     @product_attributes = ProductAttribute.where(product: @product)
-    skip_authorization
+    authorize @product
 
     if @product.update(product_params)
       render  @product
@@ -123,6 +124,24 @@ class ProductsController < ApplicationController
     end
   end
 
+  def toggle_product_verify
+    @product = Product.find(params[:product][:id])
+    @advertisement = Advertisement.where(advertisable: @product).first
+    authorize @product
+    if @product.update(product_params)
+      if @product.verified?
+        redirect_to admin_advertisement_path(@advertisement)
+        flash[:alert] = "Produto #{@product.name} verificado com sucesso"
+      else
+        redirect_to admin_advertisement_path(@advertisement)
+        flash[:alert] = "Produto #{@product.name} removido verificação com sucesso"
+      end
+    else
+      redirect_to admin_advertisement_path(@advertisement)
+      flash[:alert] = "Algo deu errado ao Verificar produto"
+    end
+  end
+
   private
 
   def product_params
@@ -144,6 +163,7 @@ class ProductsController < ApplicationController
       :condition,
       :product_condition_status,
       :product_condition_description,
+      :verified,
       photos: [])
   end
 end
