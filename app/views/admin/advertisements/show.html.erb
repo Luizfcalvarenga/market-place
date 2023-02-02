@@ -1,6 +1,24 @@
 <div class="page-padding px-5">
   <p class="info-text w-100 p-4 br-8 text-center text-uppercase fw-700 mb-5">Revisão do pedido #<%= @advertisement.id %></p>
-
+  <div data-controller="verify">
+    <% if @product.instance_of? Product %>
+      <%= simple_form_for @product, url: toggle_product_verify_path(@product), remote: true, html: {"data-verify-target": "form"} do |f| %>
+        <% if @product.verified  %>
+          <%= f.input :verified, label: "Desativar Verificação", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+        <% else %>
+          <%= f.input :verified, label: "Verificar", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+        <% end %>
+      <% end %>
+    <% elsif @product.instance_of? Bike %>
+      <%= simple_form_for @product, url: toggle_bike_verify_path(@product), remote: true, html: {"data-verify-target": "form"} do |f| %>
+        <% if @product.verified  %>
+          <%= f.input :verified, label: "Desativar Verificação", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+        <% else %>
+          <%= f.input :verified, label: "Verificar", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
   <form action="/admin/advertisements/<%= @advertisement.id %>/reject" method="patch" id="advertisement-review-form" data-advertisement-id="<%= @advertisement.id %>">
     <div class="table m-0">
       <div class="table-row header blue">
@@ -12,9 +30,12 @@
 
     <div class="table">
       <div class="table-row">
-        <div class="d-flex">
-          <h4 class="m-0 text-success">Status do anúncio:</h4>
-          <p class="m-0 field-value"><%= @advertisement.status_display %></p>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <h4 class="m-0 text-success">Status do anúncio:</h4>
+            <p class="m-0 field-value"><%= @advertisement.status_display %></p>
+          </div>
+
         </div>
       </div>
       <div class="table-row">
@@ -102,19 +123,7 @@
         </div>
         <hr>
         <% if @advertisement.advertisable_type == "Product" %>
-          <div class="" data-controller="verify" >
-            <div data-verify-target="test">
-              <%= form_with(model: @product, remote: true, data: {controller: "verify", target: "verify.form"}) do |f| %>
 
-                <%# <%= simple_form_for @product, url: toggle_verify_path(@product), remote: true, data: { target: "form" }  do |f| %>
-                <% if @product.verified %>
-                  <%= f.check_box(:verified, label: "Desativar Mídia", :as => :boolean, data: {controller: "verify", target: "verify.verified", action: "change->verify#submit", class: "verified-form"}) %>
-                <% else %>
-                  <%= f.check_box(:verified, label: "Ativar Mídia", :as => :boolean, data: {controller: "verify", target: "verify.verified", action: "change->verify#submit"}) %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
           <div class="table">
             <div class="d-flex ">
               <div class="w-50" data-column="category">

@@ -130,10 +130,10 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       if @product.verified?
         redirect_to my_media_path
-        flash[:alert] = "Mídia #{@product.display_type.name} habilitada com sucesso"
+        flash[:alert] = "Mídia #{@product.name} habilitada com sucesso"
       else
         redirect_to my_media_path
-        flash[:alert] = "Mídia #{@product.display_type.name} desabilitada com sucesso"
+        flash[:alert] = "Mídia #{@product.name} desabilitada com sucesso"
       end
     else
       redirect_to new_product_order_item_path(@product)
@@ -162,6 +162,7 @@ class ProductsController < ApplicationController
       :condition,
       :product_condition_status,
       :product_condition_description,
+      :verified,
       photos: [])
   end
 end

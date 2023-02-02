@@ -28,8 +28,8 @@ class ProductPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def toggle_medium_activity?
-    user.access == "admin"
+  def toggle_product_verify?
+    user_is_admin?
   end
 
 

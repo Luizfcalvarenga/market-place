@@ -94,6 +94,23 @@ class BikesController < ApplicationController
     end
   end
 
+  def toggle_bike_verify
+    @bike = Bike.find(params[:bike_id])
+    authorize @bike
+    if @bike.update(bike_params)
+      if @bike.verified?
+        redirect_to my_media_path
+        flash[:alert] = "Mídia #{@bike.name} habilitada com sucesso"
+      else
+        redirect_to my_media_path
+        flash[:alert] = "Mídia #{@bike.name} desabilitada com sucesso"
+      end
+    else
+      redirect_to new_bike_order_item_path(@bike)
+      flash[:alert] = "Algo deu errado ao desabilitar sua mídia"
+    end
+  end
+
   private
 
   def bike_params
@@ -153,6 +170,7 @@ class BikesController < ApplicationController
       :handlebar_material,
       :wheel_material,
       :seat_post_material,
+      :verified,
       photos: []
     )
   end

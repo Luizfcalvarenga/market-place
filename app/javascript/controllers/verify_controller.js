@@ -3,12 +3,13 @@ import Rails from "@rails/ujs"
 
 // Connects to data-controller="verify"
 export default class extends Controller {
-  static targets = [ "form", "verified" ]
+  static targets = [ "form", "input" ]
 
   connect() {
-    console.log(this.verifiedTarget)
-
+    console.log("aqui")
+    console.log(this.inputTarget)
     console.log(this.formTarget)
+
   }
   submit(e) {
     e.preventDefault();
