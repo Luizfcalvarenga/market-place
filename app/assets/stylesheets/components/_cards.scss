@@ -211,7 +211,13 @@
   justify-content: center;
 }
 
-
+.card-for-infos {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+}
 
 
 ///////////////////////////// DIFFERENTIAL SECTION #HOME
