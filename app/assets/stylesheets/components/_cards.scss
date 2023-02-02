@@ -211,6 +211,24 @@
   justify-content: center;
 }
 
+.card-nf-services {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+}
+
+.card-how-works {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+  width: 100%;
+}
+
+
 ///////////////////////////// DIFFERENTIAL SECTION #HOME
 
 .cards-differential {
