@@ -264,7 +264,7 @@ export function Product(props) {
                 <p className=" text-center"><strong className="text-success mask-phone">Telefone:</strong>  {product.user.phone_number}</p>
               </div>
             </>)}
-            <a href={"/user/" + product.user.id + "?product_id=" + product.id}>
+            <a href={"/user/" + product.user.id + "?product_id=" + product.id + "&photo=" + product.photos[0]}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>
           </div>

@@ -28,14 +28,13 @@ class UsersController < ApplicationController
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
     set_notifications_to_read
-    if !@messages.where('content  @@ ?', "Olá, gostaria de conversar")
-      @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto:  - #{@product.city.name} - #{@product.state.acronym} -")
+    if !@messages.where('content  @@ ?', "Olá, gostaria de conversar sobre o produto: ##{@product.id}")
+      @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: ##{@product.id} - #{@product.city.name} - #{@product.state.acronym} -")
+      # if @product.photos.attached? && params[:photo].present?
+      #   @message_beggining.attachments.attach(params[:photo])
+      # end
     end
-    # if @product.photos.attached?
-    #   @message_beggining.attachments.attach(
-    #     @product.photos.key.first
-    #   )
-    # end
+    # raise
     render 'chats/index'
   end
 
