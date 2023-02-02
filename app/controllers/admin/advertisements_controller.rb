@@ -24,7 +24,6 @@ module Admin
       @product_type = @advertisement.advertisable_type
       @user = @advertisement.user
       @parms_to_edit  = nil
-      
     end
 
 

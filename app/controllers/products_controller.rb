@@ -125,19 +125,20 @@ class ProductsController < ApplicationController
   end
 
   def toggle_product_verify
-    @product = product.find(params[:product_id])
+    @product = Product.find(params[:product][:id])
+    @advertisement = Advertisement.where(advertisable: @product).first
     authorize @product
     if @product.update(product_params)
       if @product.verified?
-        redirect_to my_media_path
-        flash[:alert] = "Mídia #{@product.name} habilitada com sucesso"
+        redirect_to admin_advertisement_path(@advertisement)
+        flash[:alert] = "Produto #{@product.name} verificado com sucesso"
       else
-        redirect_to my_media_path
-        flash[:alert] = "Mídia #{@product.name} desabilitada com sucesso"
+        redirect_to admin_advertisement_path(@advertisement)
+        flash[:alert] = "Produto #{@product.name} removido verificação com sucesso"
       end
     else
-      redirect_to new_product_order_item_path(@product)
-      flash[:alert] = "Algo deu errado ao desabilitar sua mídia"
+      redirect_to admin_advertisement_path(@advertisement)
+      flash[:alert] = "Algo deu errado ao Verificar produto"
     end
   end
 
