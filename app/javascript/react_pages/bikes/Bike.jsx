@@ -148,6 +148,10 @@ export function Bike(props) {
   const handleShowInfoSection = (e) => {
     console.log(e)
     e.target.classList.toggle("show-section")
+    let elms = document.querySelectorAll("[id='duplicateID']");
+
+    for(var i = 0; i < elms.length; i++)
+      elms[i].style.display='none';
     if (e.target.classList.contains("show-section")) {
       document.getElementById(e.target.innerText).classList.remove("d-none")
     } else {
