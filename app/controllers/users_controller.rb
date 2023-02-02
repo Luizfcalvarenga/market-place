@@ -7,6 +7,8 @@ class UsersController < ApplicationController
     @chat_name = get_name(@user, current_user)
     @single_chat = Chat.where(name: @chat_name).first || Chat.create_private_chat([@user, current_user], @chat_name)
     current_user.update(current_chat: @single_chat)
+    @product = Product.find(params[:product_id]) if params[:product_id].present?
+    @product = Bike.find(params[:bike_id]) if params[:bike_id].present?
     # @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
     if Chat.where(is_private: true).present?
       @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
@@ -23,10 +25,12 @@ class UsersController < ApplicationController
       @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
     end
     authorize @user
+    @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto:  - #{@product.city.name} - #{@product.state.acronym} -")
+
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
     set_notifications_to_read
-
+    # raise
     render 'chats/index'
   end
 
