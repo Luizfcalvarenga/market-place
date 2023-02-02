@@ -25,12 +25,17 @@ class UsersController < ApplicationController
       @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
     end
     authorize @user
-    @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto:  - #{@product.city.name} - #{@product.state.acronym} -")
-
+    if @product.photos.attached?
+      @message_beggining.attachments.attach(
+        @product.photos.key.first
+      )
+    end
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
     set_notifications_to_read
-    # raise
+    if !@messages.where('content  @@ ?', "Olá, gostaria de conversar")
+      @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto:  - #{@product.city.name} - #{@product.state.acronym} -")
+    end
     render 'chats/index'
   end
 
