@@ -16,7 +16,7 @@
 .announce-icons {
   width: 50px;
   height: 50px;
-  filter: invert(99%) sepia(72%) saturate(319%) hue-rotate(252deg) brightness(116%) contrast(100%);
+  filter: invert(86%) sepia(56%) saturate(0%) hue-rotate(288deg) brightness(108%) contrast(101%);
 }
 
 
@@ -28,6 +28,29 @@
   padding: 20px;
 
 }
+
+.card-nf-services {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+}
+
+.card-how-works {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+  width: 100%;
+}
+// .step {
+//   margin-bottom: 0 !important;
+//   font-size: 200px;
+//   position: absolute;
+//   opacity: 0.2;
+// }
 
 .accordion {
   border: 1px solid grey;
