@@ -53,7 +53,7 @@ module Api
         @bikes = (@bikes.where('front_tyre_model @@ ?', params[:tyre])  || @bikes.where('rear_tyre_model @@ ?', params[:tyre]) )if params[:tyre].present?
         @bikes = @bikes.where('stem @@ ?', params[:stem]) if params[:stem].present?
         @bikes = @bikes.where('handlebar @@ ?', params[:handlebar]) if params[:handlebar].present?
-        @bikes = @bikes.where(verified:, params[:verified]) if params[:verified].present?
+        @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
 
       end
 

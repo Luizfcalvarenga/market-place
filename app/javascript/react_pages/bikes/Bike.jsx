@@ -32,7 +32,7 @@ export function Bike(props) {
   const handleLike = (e) => {
     e.preventDefault()
     const dataObject = new FormData();
-    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
     axios.post('/likes', dataObject)
 
@@ -513,7 +513,7 @@ export function Bike(props) {
               <div>
                 <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
               </div>
-              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
+              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i id={bike.id} className="far fa-heart"></i></button>
             </div>
 
             <div className="card-content">

@@ -203,12 +203,14 @@ export function Bikes(props) {
 
   const handleLike = (e) => {
     e.preventDefault()
+    console.log(e.target)
+
 
     const dataObject = new FormData();
-    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
 
-    console.log(e.nativeEvent.path[1].id)
+    // console.log(e.nativeEvent.path[1].id)
     axios.post('/likes',dataObject)
 
     .then(function (response) {
@@ -1224,7 +1226,7 @@ export function Bikes(props) {
                             <img src={EBikeImage} alt="" className="icon-card-index ms-1"/> <br />
                           </>
                           )}
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i id={bike.id} className="far fa-heart"></i></button>
                         </div>
                       </div>
                     </div>
