@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   resource :bikes, only: [ :destroy ], as: :remove
 
   resources :products
+  patch "toggle_product_verify", to: "products#toggle_product_verify", as: "toggle_product_verify"
+  patch "toggle_bike_verify", to: "bikes#toggle_bike_verify", as: "toggle_bike_verify"
 
   namespace :admin do
     resources :users

@@ -4,8 +4,6 @@
 
 import { application } from "./application"
 
-
-
 import LikeSubmitController from "./like_submit_controller"
 application.register("like-submit", LikeSubmitController)
 
@@ -26,3 +24,6 @@ application.register("search", SearchController)
 
 import UserListController from "./user_list_controller"
 application.register("user-list", UserListController)
+
+import VerifyController from "./verify_controller"
+application.register("verify", VerifyController)

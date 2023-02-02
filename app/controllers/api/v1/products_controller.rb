@@ -39,9 +39,6 @@ module Api
         @products = @products.where(product_type_id: (41..47).to_a) if params[:products_accessories].present?
         @products = @products.where(product_type_id: (48..68).to_a) if params[:products_clothes].present?
 
-
-
-
         # @products = ProductAttribute.where(value: params[:components_attributes_values].split(",")).map { |value| value.product } if params[:components_attributes_values].present?
 
 
