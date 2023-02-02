@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	include Pundit
+	include Pundit::Authorization
   before_action :turbo_frame_request_variant
 	before_action :authenticate_user!, unless: :auth_request?
   before_action :configure_permitted_parameters, if: :devise_controller?

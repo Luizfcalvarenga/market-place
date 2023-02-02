@@ -10,11 +10,21 @@ class AdvertisementPolicy < ApplicationPolicy
     user == record.user
   end
 
+  def update?
+    user == record.user || user_is_admin?
+  end
+
   def invoice?
     user == record.user
   end
 
   def status?
     true
+  end
+
+  private
+
+  def user_is_admin?
+    user.access == "admin"
   end
 end

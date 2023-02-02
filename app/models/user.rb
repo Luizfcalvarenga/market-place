@@ -48,9 +48,9 @@ class User < ApplicationRecord
     end
   end
 
-	# def admin?
-	# 	true
-	# end
+	def admin?
+		true
+	end
 
   def cpf_must_be_valid
     if !cpf_valid?(document_number) || !cnpj_valid?(document_number)
