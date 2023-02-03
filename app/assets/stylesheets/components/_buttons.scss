@@ -263,3 +263,39 @@
   background-color: transparent;
 
 }
+
+.btn-info-section {
+  background-color: transparent !important;
+  color: rgb(158,158,165);
+  font-weight: lighter !important;
+  font-size: 18px;
+  padding-bottom: 0 !important;
+  display: inline-block;
+  border: none;
+  &:hover {
+    color: $color-primary;
+  }
+
+}
+
+.btn-info-section::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color-primary;
+  transition: width .3s;
+
+}
+
+.btn-info-section:hover::after {
+  color: $color-primary;
+  width: 100%;
+}
+
+.show-section {
+  color: $color-primary;
+  width: 100%;
+  background-color: rgb(134, 132, 132);
+
+}

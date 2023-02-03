@@ -18,16 +18,20 @@ class PagesController < ApplicationController
         OR products.name @@ :query
         OR product_types.prompt @@ :query
         OR description @@ :query
+        OR cities.name @@ :query
+
       SQL
-      @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).joins(:product_type).where(product_sql_query, query: "%#{params[:query]}%")
+      @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).joins(:product_type).joins(:city).where(product_sql_query, query: "%#{params[:query]}%")
 
       bike_sql_query = <<~SQL
         frame_brand @@ :query
         OR bike_type @@ :query
         OR model @@ :query
         OR description @@ :query
+        OR cities.name @@ :query
+
       SQL
-      @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where(bike_sql_query, query: "%#{params[:query]}%")
+      @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).joins(:city).where(bike_sql_query, query: "%#{params[:query]}%")
     end
 
     respond_to do |format|

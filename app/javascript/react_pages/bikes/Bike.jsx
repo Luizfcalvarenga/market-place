@@ -8,6 +8,8 @@ import MountainBikeImage from "../../../assets/images/mountain-bike.png";
 import FrameImage from "../../../assets/images/frame.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
+import VerifiedImage from "../../../assets/images/badge.png";
+
 
 export function Bike(props) {
   const [bike, setBike] = useState()
@@ -32,7 +34,7 @@ export function Bike(props) {
   const handleLike = (e) => {
     e.preventDefault()
     const dataObject = new FormData();
-    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
     axios.post('/likes', dataObject)
 
@@ -102,6 +104,9 @@ export function Bike(props) {
       "retractable" : "Retrátil",
       "rigid" : "Rigido",
 
+      "used" : "Usada",
+      "new" : "Nova",
+
       "e-bike" : "E-Bike",
       "bike" : "Bike",
 
@@ -109,48 +114,69 @@ export function Bike(props) {
       "reasonable": "Razoável",
       "good": "Bom",
       "excellent": "Ótimo",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
     };
 
     return languageMap[word]
   }
 
-  const handleNextPrevious = () => {
-    const nextId = presentIds.filter(element => element > bikeId ).shift()
-    const previousId = presentIds.filter(element => element < bikeId ).pop()
-    if (nextId && previousId) {
-      return (
-        <div className="d-flex justify-content-between my-3">
-          <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "> <i className="fas fa-angle-double-left mt-1 me-2"></i>anterior</a>
-          <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
-        </div>
-      )
-    } else if (nextId && !previousId) {
-      return (
-        <div className="d-flex justify-content-end my-3">
-          <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
-        </div>
-      )
-    } else if (previousId && !nextId) {
-      return (
-        <div className="d-flex justify-content-between my-3">
-          <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "><i className="fas fa-angle-double-left mt-1 me-2"></i> anterior</a>
-        </div>
-      )
-    } else if (!previousId && !nextId) {
-      return (
-        <div className="d-flex justify-content-between my-3">
+  // const handleNextPrevious = () => {
+  //   const nextId = presentIds.filter(element => element > bikeId ).shift()
+  //   const previousId = presentIds.filter(element => element < bikeId ).pop()
+  //   if (nextId && previousId) {
+  //     return (
+  //       <div className="d-flex justify-content-between my-3">
+  //         <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "> <i className="fas fa-angle-double-left mt-1 me-2"></i>anterior</a>
+  //         <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
+  //       </div>
+  //     )
+  //   } else if (nextId && !previousId) {
+  //     return (
+  //       <div className="d-flex justify-content-end my-3">
+  //         <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
+  //       </div>
+  //     )
+  //   } else if (previousId && !nextId) {
+  //     return (
+  //       <div className="d-flex justify-content-between my-3">
+  //         <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "><i className="fas fa-angle-double-left mt-1 me-2"></i> anterior</a>
+  //       </div>
+  //     )
+  //   } else if (!previousId && !nextId) {
+  //     return (
+  //       <div className="d-flex justify-content-between my-3">
 
-        </div>
-      )
+  //       </div>
+  //     )
+  //   }
+  // }
+
+  const openTab = (e, section) => {
+    e.target.classList.toggle("show-section")
+    const tabcontent = document.getElementsByClassName("tabcontent");
+    let i
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
     }
+    const tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" show-section", "");
+    }
+    document.getElementById(section).style.display = "block";
+    e.currentTarget.className += " show-section";
   }
 
-  return (
 
+  return (
     <div className="bike-show" bike={bike} key={bike} >
       {bike && (
         <div className="row row-cols-1">
-          {handleNextPrevious()}
+          {/* {handleNextPrevious()} */}
           <div className="other-infos  col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
@@ -184,336 +210,292 @@ export function Bike(props) {
             </div>
 
             <h3 className="mb-4 mt-3">Características Técnicas</h3>
-            <ul className="main__menu">
-              <li className="list-item w-100 mb-4">
-                <div className="kabobs item--js">
-                  <img src={FrameImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Quadro</span>
+            <div className="card-for-info">
+              <div className="d-flex justify-content-between">
+                <div className="">
+                  <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Quadro")}>Quadro</button>
                 </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.frame_brand}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.frame_size}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Material:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material) || bike.frame_material}</p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-              <li className="list-item w-100 mb-4">
-                <div className="kabobs item--js">
-                  <img src={CrankImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Transmissão</span>
+                <div className="">
+                  <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Câmbio")}>Câmbio</button>
                 </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.crankset}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Corrente:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.chain}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.number_of_front_gears}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.front_derailleur_model}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.number_of_rear_gears}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
-                    </div>
-                  </li>
-
-                </ul>
-              </li>
-              {bike.category.name !== "road" && (<>
-                <li className="list-item w-100 mb-4">
-                  <div className="kabobs item--js">
-                    <img src={SuspensionImage} alt="" className="bike-part-card mt-1"/> <br />
-                    <span className="text-success mb-3">Suspensão</span>
+                {bike.category.name !== "road" && (
+                  <div className="">
+                    <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Suspensão")}>Suspensão</button>
                   </div>
-                  <ul className="drop-menu menu-2">
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{translateWord(bike.suspension_type)}</p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.front_suspension_travel}</p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.front_suspension_model}</p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.rear_suspension_travel}</p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.rear_suspension_model}</p>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </>)}
-
-
-              <li className="list-item w-100 mb-4">
-                <div className="kabobs item--js">
-                  <img src={BrakesImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Freios</span>
-                </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{translateWord(bike.brake_type)}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Disco:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.brake_disc_size}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Marca | Modeo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.brake_model}</p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-              <li className="list-item w-100 mb-4">
-                <div className="kabobs item--js">
-                  <img src={HandlebarImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Cockpit</span>
-                </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Mesa:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.stem}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Guidão:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.handlebar}</p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-              <li className="list-item w-100 mb-4">
-                <div className="kabobs item--js">
-                  <img src={MountainBikeImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Rodas</span>
-                </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Tamano:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rim_size}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.front_rim_model}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.front_hub}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.front_tyre}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rear_rim_model}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rear_hub}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.rear_tyre}</p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-              <li className="list-item w-100 mb-4">
-                <div className="kabobs item--js">
-                  <img src={SaddleImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Canote</span>
-                </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{translateWord(bike.seat_post_type)}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.seat_post_travel}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.seat_post_model}</p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-
-              <li className="list-item w-100">
-                <div className="kabobs item--js">
-                  <img src={AccessorieImage} alt="" className="bike-part-card mt-1"/> <br />
-                  <span className="text-success mb-3">Acessórios</span>
-                </div>
-                <ul className="drop-menu menu-2">
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.accessories}</p>
-                    </div>
-                  </li>
-                  <li className="drop-item">
-                    <div className="text-success item list-item d-flex ms-3">
-                      <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
-                      <p className="bike-info ms-2 align-middle">{bike.accessories_description}</p>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-
-              { bike.bike_type === "e-bike" && (
-                <li className="list-item w-100 mt-4">
-                  <div className="kabobs item--js">
-                    <img src={EBikeImage} alt="" className="bike-part-card mt-1"/> <br />
-                    <span className="text-success mb-3">Elétrica</span>
+                )}
+                {bike.category.name === "road" && (
+                  <div className="">
+                    <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Garfo")}>Garfo</button>
                   </div>
-                  <ul className="drop-menu menu-2">
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Bateria:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.battery}</p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Ciclos:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.battery_cycles}</p>
-                      </div>
-                    </li>
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>Km:</strong> </p>
-                        <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              )}
-            </ul>
+                )}
+                <div className="">
+                  <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "Freios")}>Freios</button>
+                </div>
+                <div className="">
+                  <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "Cockpit")}>Cockpit</button>
+                </div>
+                <div className="">
+                  <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "Rodas")}>Rodas</button>
+                </div>
+                <div className="">
+                  <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "Canote")}>Canote</button>
+                </div>
+                <div className="">
+                  <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "Acessórios")}>Acessórios</button>
+                </div>
+                {bike.bike_type === "e-bike" && (
+                  <div className="">
+                    <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "Bateria")}>Bateria</button>
+                  </div>
+                )}
+                <div className="">
+                  <button className="btn-info-section tablinks" onClick={(e) => openTab(e, "+")}>+</button>
+                </div>
+              </div>
+              <hr className="index-line"/>
+              <div id="Quadro" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.frame_brand}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.frame_size}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Material:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material) || bike.frame_material}</p>
+                </div>
+              </div>
+              <div id="Câmbio" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.crankset}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Corrente:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.chain}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-orientation"><strong>DIANTEIRO</strong> </p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.number_of_front_gears}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.front_derailleur_model}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-orientation"><strong>TRASEIRO</strong> </p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.number_of_rear_gears}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
+                </div>
+              </div>
+              <div id="Suspensão" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.suspension_type)}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.front_suspension_travel}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.front_suspension_model}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Curso/Tamanho Shock:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rear_suspension_travel}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rear_suspension_model}</p>
+                </div>
+              </div>
+              <div id="Garfo" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Material:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.fork_material}</p>
+                </div>
+              </div>
+              <div id="Freios" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.brake_type)}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Disco:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.brake_disc_size}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca | Modeo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.brake_model}</p>
+                </div>
+              </div>
+              <div id="Cockpit" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Guidão:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.handlebar}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Material do guidão:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.handlebar_material}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Mesa:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.stem}</p>
+                </div>
+              </div>
+              <div id="Rodas" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Tamano:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rim_size}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Material:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.wheel_material}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.front_rim_model}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.front_hub}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.front_tyre}</p>
+                </div>
+                <div className=" item list-item d-flex ms-3">
+                  <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Aro:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rear_rim_model}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Cubo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rear_hub}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.rear_tyre}</p>
+                </div>
+              </div>
+              <div id="Canote" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.seat_post_type)}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Material:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.seat_post_material)}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.seat_post_travel}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.seat_post_model}</p>
+                </div>
+              </div>
+              <div id="Acessórios" className="tabcontent">
+                {bike.accessories.length > 0 && (
+                  <div className="text-success item list-item d-flex ms-3">
+                    <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
+                    {bike.accessories.map((accessory) => {
+                      return (<>
+                        <p className="bike-info ms-2 align-middle">{accessory}</p>
+                      </>)
+                    })}
+                  </div>
+                )}
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.accessories_description}</p>
+                </div>
+                {bike.pedals && (
+                  <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Pedais:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.pedals}</p>
+                </div>
+                )}
+              </div>
+              <div id="Bateria" className="tabcontent">
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Capacidade:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.battery}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Ciclos:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.battery_cycles}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Km:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
+                </div>
+              </div>
+              <div id="+" className="tabcontent">
+                {bike.documentation_type && (
+                  <div className="text-success item list-item d-flex ms-3">
+                    <p className="bike-attrs-parts"><strong>Documentação:</strong> </p>
+                    <p className="bike-info ms-2 align-middle">{translateWord(bike.documentation_type)}</p>
+                  </div>
+                )}
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Condição:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.bike_condition)}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Estado:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.bike_condition_status)}</p>
+                </div>
+                {bike.bike_condition_description && (
+                  <div className="text-success item list-item d-flex ms-3">
+                    <p className="bike-attrs-parts"><strong>Mais informações:</strong> </p>
+                    <p className="bike-info ms-2 align-middle">{bike.bike_condition_description}</p>
+                  </div>
+                )}
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.description}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="col-11 col-md-4 card-bike">
+            {bike.verified && (
+              <div className="d-flex justify-content-between mt-3">
+                <p className="text-verified">BIKE CERTIFICADA</p>
+                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1 me-1"/>
+              </div>
+            )}
             <div className="d-flex justify-content-between">
               <div>
-                <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
+                <h3 className="card-title"> {bike.frame_brand} {bike.model}</h3>
               </div>
-              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
+              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i id={bike.id} className="far fa-heart"></i></button>
             </div>
 
             <div className="card-content">
@@ -530,7 +512,6 @@ export function Bike(props) {
               <p className="text-white"><span className="text-gray">Tamanho do quadro:</span> {bike.frame_size}</p>
               <p className="text-white"><span className="text-gray">Material do quadro:</span> {translateWord(bike.frame_material) || bike.frame_material}</p>
               <p className="text-white"><span className="text-gray">Local:</span> {city} - {state}</p>
-              <p className="text-white"><span className="text-gray">Descrição:</span> {bike.description}</p>
             </div>
             {bike.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>

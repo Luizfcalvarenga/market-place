@@ -2236,15 +2236,15 @@ export function BikeForm(props) {
           <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
-        {!category === "road" && (
+        {category !== "road" && (
           <>
             <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
             <div id="Suspensões(review)" className="d-none">
-              <p><span className="text-success">Tipo:</span> {suspensionType}</p>
-              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
-              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel}</p>
-              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
-              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel }</p>
+              <p><span className="text-success">Tipo:</span> {translateWord(suspensionType)}</p>
+              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel === "other" ? otherFrontSuspensionTravel : frontSuspensionTravel}</p>
+              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel === "other" ? otherFrontSuspensionModel : frontSuspensionModel}</p>
+              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel === "other" ? otherRearSuspensionTravel : rearSuspensionTravel }</p>
+              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel === "other" ? otherRearSuspensionModel : rearSuspensionModel }</p>
             </div>
           </>
         )}
