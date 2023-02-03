@@ -30,6 +30,9 @@
             <div class="d-flex justify-content-center gap-2 mt-1">
               <h4 class="card-title text-center"><%= bike.frame_brand %></h4>
               <h4 class="card-title text-center"><%= bike.model %></h4>
+              <% if bike.verified %>
+                <%= image_tag "badge.png", class: "verified-badge mt-1"%>
+              <% end %>
             </div>
             <h4 class="text-center card-title mt-1">
               <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
@@ -95,6 +98,9 @@
             <div class="d-flex justify-content-center gap-2 mt-1">
               <h4 class="card-title text-center"><%= product.brand %></h4>
               <h4 class="card-title text-center"><%= product.model %></h4>
+              <% if product.verified %>
+                <%= image_tag "badge.png", class: "verified-badge mt-1"%>
+              <% end %>
             </div>
             <h4 class="text-center card-title mt-1">
               <%= number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %>
