@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @messages = @single_chat.messages.order(created_at: :asc)
     set_notifications_to_read
     if (( params[:product_id].present? || params[:bike_id].present?) && !@messages.where('content  @@ ?', "Olá, gostaria de conversar sobre o produto: ##{@product.id}"))
-      @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: ##{@product.id} - #{@product.city.name} - #{@product.state.acronym} -")
+      @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: ##{@product.id} - #{@product.brand || @product.frame_brand} #{@product.model} - #{number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".", precision: 2)} - #{@product.city.name} - #{@product.state.acronym} -")
       # if @product.photos.attached? && params[:photo].present?
       #   @message_beggining.attachments.attach(params[:photo])
       # end
