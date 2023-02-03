@@ -219,22 +219,22 @@ export function Product(props) {
           <div className="col-11 col-md-4 card-product">
             {product.verified && (
               <div className="d-flex justify-content-between mt-3">
-                <p className="text-verified me-2">PRODUTO CERTIFICADO</p>
-                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                <p className="text-verified">PRODUTO CERTIFICADO</p>
+                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1 me-1"/>
               </div>
             )}
             <div className="d-flex justify-content-between">
               <div>
-                <h3 className="card-title mt-3"> {product.brand} {product.model}</h3>
+                <h3 className="card-title"> {product.brand} {product.model}</h3>
               </div>
               { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
-                <img src={AccessorieImage} alt="" className="icon-card-index ms-1 mt-4"/>
+                <img src={AccessorieImage} alt="" className="icon-card-index mt-2"/>
               )}
               { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
-                <img src={ComponentImage} alt="" className="icon-card-index ms-1 mt-4"/>
+                <img src={ComponentImage} alt="" className="icon-card-index mt-2"/>
               )}
               { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                <img src={ClotheImage} alt="" className="icon-card-index ms-1 mt-4"/>
+                <img src={ClotheImage} alt="" className="icon-card-index mt-2"/>
               )}
               <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i id={product.id} className="far fa-heart"></i></button>
             </div>

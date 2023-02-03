@@ -9,7 +9,8 @@ import FrameImage from "../../../assets/images/frame.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
 import VerifiedImage from "../../../assets/images/badge.png";
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 export function Bike(props) {
   const [bike, setBike] = useState()
@@ -156,19 +157,30 @@ export function Bike(props) {
     }
   }
 
-  const handleShowInfoSection = (e) => {
+  const handleShowSection = (e) => {
     console.log(e)
+    // const tabs = document.querySelectorAll('.tab')
+    // const tabContents = document.querySelectorAll('.tabcontent')
+    const opentab =  JSON.parse(localStorage.getItem('jstabs-opentab')) || '3'
+    activateTab(opentab)
     e.target.classList.toggle("show-section")
-    let elms = document.querySelectorAll("[id='duplicateID']");
+    // let elms = document.querySelectorAll("[id='duplicateID']");
 
-    for(var i = 0; i < elms.length; i++)
-      elms[i].style.display='none';
-    if (e.target.classList.contains("show-section")) {
-      document.getElementById(e.target.innerText).classList.remove("d-none")
-    } else {
-      document.getElementById(e.target.innerText).classList.add("d-none")
-    }
+    // for(var i = 0; i < elms.length; i++)
+    //   elms[i].style.display='none';
+    // if (e.target.classList.contains("show-section")) {
+    //   document.getElementById(e.target.innerText).classList.remove("d-none")
+    // } else {
+    //   document.getElementById(e.target.innerText).classList.add("d-none")
+    // }
+
+
+
   }
+
+
+
+
 
   return (
 
@@ -212,47 +224,47 @@ export function Bike(props) {
             <div className="card-for-info">
               <div className="d-flex justify-content-between">
                 <div className="">
-                  <button className="btn-info-section show-section" onClick={(e) => handleShowInfoSection(e)}>Quadro</button>
+                  <button className="btn-info-section show-section"  onChange={(e) => handleShowSection(e)} data-tab="1" >Quadro</button>
                 </div>
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Câmbio</button>
+                  <button className="btn-info-section"  onChange={(e) => handleShowSection(e)} data-tab="2" >Câmbio</button>
                 </div>
                 {bike.category.name !== "road" && (
                   <div className="">
-                    <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Suspensão</button>
+                    <button className="btn-info-section"  onChange={(e) => handleShowSection(e)} data-tab="3" >Suspensão</button>
                   </div>
                 )}
                 {bike.category.name === "road" && (
                   <div id="Garfo" className="">
-                    <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Garfo</button>
+                    <button className="btn-info-section"  onChange={(e) => handleShowSection(e)} data-tab="4" >Garfo</button>
                   </div>
                 )}
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Freios</button>
+                  <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="5" >Freios</button>
                 </div>
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Cockpit</button>
+                  <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="6" >Cockpit</button>
                 </div>
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Rodas</button>
+                  <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="7" >Rodas</button>
                 </div>
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Canote</button>
+                  <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="8" >Canote</button>
                 </div>
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Acessórios</button>
+                  <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="9" >Acessórios</button>
                 </div>
                 {bike.bike_type === "e-bike" && (
                   <div className="">
-                    <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Bateria</button>
+                    <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="10" >Bateria</button>
                   </div>
                 )}
                 <div className="">
-                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>+</button>
+                  <button className="btn-info-section" onChange={(e) => handleShowSection(e)} data-tab="11" >+</button>
                 </div>
               </div>
               <hr className="index-line"/>
-              <div id="Quadro" className="mt-3">
+              <div id="tabcontent1" data-tab="1" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.frame_brand}</p>
@@ -266,7 +278,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material) || bike.frame_material}</p>
                 </div>
               </div>
-              <div id="Câmbio" className="d-none mt-3">
+              <div id="tabcontent2" data-tab="2" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.crankset}</p>
@@ -298,7 +310,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.rear_derailleur_model}</p>
                 </div>
               </div>
-              <div id="Suspensão" className="d-none mt-3">
+              <div id="tabcontent3" data-tab="3" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{translateWord(bike.suspension_type)}</p>
@@ -326,13 +338,13 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.rear_suspension_model}</p>
                 </div>
               </div>
-              <div id="Garfo" className="d-none mt-3">
+              <div id="tabcontent4" data-tab="4" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>material:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.fork_material}</p>
                 </div>
               </div>
-              <div id="Freios" className="d-none mt-3">
+              <div id="tabcontent5" data-tab="5" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{translateWord(bike.brake_type)}</p>
@@ -346,7 +358,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.brake_model}</p>
                 </div>
               </div>
-              <div id="Cockpit" className="d-none mt-3">
+              <div id="tabcontent6" data-tab="6" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Guidão:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.handlebar}</p>
@@ -360,7 +372,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.stem}</p>
                 </div>
               </div>
-              <div id="Rodas" className="d-none mt-3">
+              <div id="tabcontent7" data-tab="7" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Tamano:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.rim_size}</p>
@@ -400,7 +412,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.rear_tyre}</p>
                 </div>
               </div>
-              <div id="Canote" className="d-none mt-3">
+              <div id="tabcontent8" data-tab="8" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Tipo:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{translateWord(bike.seat_post_type)}</p>
@@ -418,7 +430,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.seat_post_model}</p>
                 </div>
               </div>
-              <div id="Acessórios" className="d-none mt-3">
+              <div id="tabcontent9" data-tab="9" className="tabcontent mt-3">
                 {bike.accessories.length > 0 && (
                   <div className="text-success item list-item d-flex ms-3">
                     <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
@@ -440,7 +452,7 @@ export function Bike(props) {
                 </div>
                 )}
               </div>
-              <div id="Bateria" className="d-none mt-3">
+              <div id="tabcontent10" data-tab="10" className="tabcontent mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Capacidade:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.battery}</p>
@@ -454,7 +466,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
                 </div>
               </div>
-              <div id="+" className="d-none mt-3">
+              <div id="tabcontent11" data-tab="11" className="tabcontent mt-3">
                 {bike.documentation_type && (
                   <div className="text-success item list-item d-flex ms-3">
                     <p className="bike-attrs-parts"><strong>Documentação:</strong> </p>
@@ -481,18 +493,32 @@ export function Bike(props) {
                 </div>
               </div>
             </div>
+            <Tabs>
+              <TabList>
+                <Tab>Title 1</Tab>
+                <Tab>Title 2</Tab>
+              </TabList>
+
+              <TabPanel>
+                <h2>Any content 1</h2>
+              </TabPanel>
+              <TabPanel>
+                <h2>Any content 2</h2>
+              </TabPanel>
+            </Tabs>
+
           </div>
 
           <div className="col-11 col-md-4 card-bike">
             {bike.verified && (
               <div className="d-flex justify-content-between mt-3">
-                <p className="text-verified me-2">BIKE CERTIFICADA</p>
-                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                <p className="text-verified">BIKE CERTIFICADA</p>
+                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1 me-1"/>
               </div>
             )}
             <div className="d-flex justify-content-between">
               <div>
-                <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>
+                <h3 className="card-title"> {bike.frame_brand} {bike.model}</h3>
               </div>
               <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i id={bike.id} className="far fa-heart"></i></button>
             </div>
