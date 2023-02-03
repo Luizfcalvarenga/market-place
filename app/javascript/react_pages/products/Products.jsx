@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import EquipamentImage from "../../../assets/images/helmet.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
-import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import MaintenanceImage from "../../../assets/images/tools.png";
 import IntlCurrencyInput from "react-intl-currency-input"
+import VerifiedImage from "../../../assets/images/badge.png";
 
 
 
@@ -1019,6 +1017,9 @@ export function Products(props) {
                     <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
+                      {product.verified && (
+                        <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                      )}
                     </div>
                     <h4 className="text-center mt-1">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
@@ -1046,6 +1047,7 @@ export function Products(props) {
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn mt-2" id={product.id}><i id={product.id} className="far fa-heart"></i></button>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </a>

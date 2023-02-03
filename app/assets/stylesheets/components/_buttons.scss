@@ -266,12 +266,12 @@
 
 .btn-info-section {
   background-color: transparent !important;
-  color: white;
+  color: rgb(158,158,165);
   font-weight: lighter !important;
   font-size: 18px;
   padding-bottom: 0 !important;
   display: inline-block;
-
+  border: none;
   &:hover {
     color: $color-primary;
   }
@@ -285,6 +285,7 @@
   height: 2px;
   background: $color-primary;
   transition: width .3s;
+
 }
 
 .btn-info-section:hover::after {

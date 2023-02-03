@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import NormalBikeImage from "../../../assets/images/normal-bike.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
 import IntlCurrencyInput from "react-intl-currency-input"
+import VerifiedImage from "../../../assets/images/badge.png";
+
 
 export function Bikes(props) {
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -1203,6 +1205,9 @@ export function Bikes(props) {
                     <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{bike.frame_brand}</h4>
                       <h4 className="card-title text-center">{bike.model}</h4>
+                      {bike.verified && (
+                        <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                      )}
                     </div>
                     <h4 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {

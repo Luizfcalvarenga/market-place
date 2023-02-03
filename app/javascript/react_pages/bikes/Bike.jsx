@@ -8,6 +8,8 @@ import MountainBikeImage from "../../../assets/images/mountain-bike.png";
 import FrameImage from "../../../assets/images/frame.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
+import VerifiedImage from "../../../assets/images/badge.png";
+
 
 export function Bike(props) {
   const [bike, setBike] = useState()
@@ -156,7 +158,6 @@ export function Bike(props) {
       document.getElementById(e.target.innerText).classList.remove("d-none")
     } else {
       document.getElementById(e.target.innerText).classList.add("d-none")
-
     }
   }
 
@@ -165,7 +166,7 @@ export function Bike(props) {
     <div className="bike-show" bike={bike} key={bike} >
       {bike && (
         <div className="row row-cols-1">
-          {handleNextPrevious()}
+          {/* {handleNextPrevious()} */}
           <div className="other-infos  col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
@@ -200,7 +201,7 @@ export function Bike(props) {
 
             <h3 className="mb-4 mt-3">Características Técnicas</h3>
             <div className="card-for-info">
-              <div className="d-flex">
+              <div className="d-flex justify-content-between">
                 <div className="">
                   <button className="btn-info-section show-section" onClick={(e) => handleShowInfoSection(e)}>Quadro</button>
                 </div>
@@ -238,6 +239,7 @@ export function Bike(props) {
                   </div>
                 )}
               </div>
+              <hr className="index-line"/>
               <div id="Quadro" className="mt-3">
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
@@ -262,7 +264,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.chain}</p>
                 </div>
                 <div className="text-success item list-item d-flex ms-3">
-                  <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
+                  <p className="bike-orientation"><strong>DIANTEIRO</strong> </p>
                 </div>
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
@@ -273,7 +275,7 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.front_derailleur_model}</p>
                 </div>
                 <div className="text-success item list-item d-flex ms-3">
-                  <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
+                  <p className="bike-orientation"><strong>TRASEIRO</strong> </p>
                 </div>
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
@@ -442,6 +444,12 @@ export function Bike(props) {
           </div>
 
           <div className="col-11 col-md-4 card-bike">
+            {bike.verified && (
+              <div className="d-flex justify-content-end mt-3">
+                <p className="text-verified me-2">BIKE VERIFICADA</p>
+                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+              </div>
+            )}
             <div className="d-flex justify-content-between">
               <div>
                 <h3 className="card-title mt-3"> {bike.frame_brand} {bike.model}</h3>

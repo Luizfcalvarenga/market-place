@@ -211,12 +211,17 @@
   justify-content: center;
 }
 
-.card-for-infos {
+.card-for-info {
   transition: .5s ease;
   border-radius: 4px;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   align-items: center;
   background-color: rgb(21, 21, 21);
+
+  hr {
+    border: 1px solid grey;
+    margin-top: 0 !important;
+  }
 }
 
 
