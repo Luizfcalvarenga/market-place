@@ -194,27 +194,32 @@ export function Product(props) {
               </button>
             </div>
 
-            {product.product_attributes.length > 0 && (<>
-              <h3 className="text-success mb-4 mt-3">Mais Informações</h3>
-              <div className="card-for-info">
+            <h3 className="mb-4 mt-3">Mais Informações</h3>
+            <div className="card-for-info">
+              {product.product_attributes.length > 0 && (<>
                 {product.product_attributes.map((attribute) => {
                   return (
-                    <li className="drop-item">
-                      <div className="text-success item list-item d-flex ms-3">
-                        <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
-                        <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
-                      </div>
-                    </li>
+                    <div className="text-success item list-item d-flex ms-3">
+                      <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
+                    </div>
                   )
                 })}
-              </div>
-            </>)}
+              </>)}
+              <p className=""><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
+              <p className=""><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
+              <p className=""><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
+              {product.product_condition_description && (
+                <p className=""><strong className="text-success">mais informações:</strong> {translateWord(product.product_condition_description)}</p>
+              )}
+              <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
+            </div>
           </div>
 
           <div className="col-11 col-md-4 card-product">
             {product.verified && (
-              <div className="d-flex justify-content-end mt-3">
-                <p className="text-verified me-2">PRODUTO VERIFICADO</p>
+              <div className="d-flex justify-content-between mt-3">
+                <p className="text-verified me-2">PRODUTO CERTIFICADO</p>
                 <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
               </div>
             )}
@@ -246,9 +251,7 @@ export function Product(props) {
               <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
               <p className=""><strong className="text-success">Local:</strong> {city} - {state}</p>
-              <p className=""><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
-              <p className=""><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
-              <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
+
             </div>
             {product.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>

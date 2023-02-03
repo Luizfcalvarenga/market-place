@@ -104,6 +104,9 @@ export function Bike(props) {
       "retractable" : "Retrátil",
       "rigid" : "Rigido",
 
+      "used" : "Usada",
+      "new" : "Nova",
+
       "e-bike" : "E-Bike",
       "bike" : "Bike",
 
@@ -111,6 +114,12 @@ export function Bike(props) {
       "reasonable": "Razoável",
       "good": "Bom",
       "excellent": "Ótimo",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
     };
 
     return languageMap[word]
@@ -238,6 +247,9 @@ export function Bike(props) {
                     <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>Bateria</button>
                   </div>
                 )}
+                <div className="">
+                  <button className="btn-info-section" onClick={(e) => handleShowInfoSection(e)}>+</button>
+                </div>
               </div>
               <hr className="index-line"/>
               <div id="Quadro" className="mt-3">
@@ -372,7 +384,7 @@ export function Bike(props) {
                   <p className="bike-attrs-parts"><strong>Pneu:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.front_tyre}</p>
                 </div>
-                <div className="text-success item list-item d-flex ms-3">
+                <div className=" item list-item d-flex ms-3">
                   <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
                 </div>
                 <div className="text-success item list-item d-flex ms-3">
@@ -407,14 +419,16 @@ export function Bike(props) {
                 </div>
               </div>
               <div id="Acessórios" className="d-none mt-3">
-                <div className="text-success item list-item d-flex ms-3">
-                  <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
-                {bike.accessories.map((accessory) => {
-                  return (<>
-                    <p className="bike-info ms-2 align-middle">{accessory}</p>
-                  </>)
-                })}
-                </div>
+                {bike.accessories.length > 0 && (
+                  <div className="text-success item list-item d-flex ms-3">
+                    <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
+                    {bike.accessories.map((accessory) => {
+                      return (<>
+                        <p className="bike-info ms-2 align-middle">{accessory}</p>
+                      </>)
+                    })}
+                  </div>
+                )}
                 <div className="text-success item list-item d-flex ms-3">
                   <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
                   <p className="bike-info ms-2 align-middle">{bike.accessories_description}</p>
@@ -440,13 +454,39 @@ export function Bike(props) {
                   <p className="bike-info ms-2 align-middle">{bike.mileage}</p>
                 </div>
               </div>
+              <div id="+" className="d-none mt-3">
+                {bike.documentation_type && (
+                  <div className="text-success item list-item d-flex ms-3">
+                    <p className="bike-attrs-parts"><strong>Documentação:</strong> </p>
+                    <p className="bike-info ms-2 align-middle">{translateWord(bike.documentation_type)}</p>
+                  </div>
+                )}
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Condição:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.bike_condition)}</p>
+                </div>
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Estado:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{translateWord(bike.bike_condition_status)}</p>
+                </div>
+                {bike.bike_condition_description && (
+                  <div className="text-success item list-item d-flex ms-3">
+                    <p className="bike-attrs-parts"><strong>Mais informações:</strong> </p>
+                    <p className="bike-info ms-2 align-middle">{bike.bike_condition_description}</p>
+                  </div>
+                )}
+                <div className="text-success item list-item d-flex ms-3">
+                  <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
+                  <p className="bike-info ms-2 align-middle">{bike.description}</p>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="col-11 col-md-4 card-bike">
             {bike.verified && (
-              <div className="d-flex justify-content-end mt-3">
-                <p className="text-verified me-2">BIKE VERIFICADA</p>
+              <div className="d-flex justify-content-between mt-3">
+                <p className="text-verified me-2">BIKE CERTIFICADA</p>
                 <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
               </div>
             )}
@@ -471,7 +511,6 @@ export function Bike(props) {
               <p className="text-white"><span className="text-gray">Tamanho do quadro:</span> {bike.frame_size}</p>
               <p className="text-white"><span className="text-gray">Material do quadro:</span> {translateWord(bike.frame_material) || bike.frame_material}</p>
               <p className="text-white"><span className="text-gray">Local:</span> {city} - {state}</p>
-              <p className="text-white"><span className="text-gray">Descrição:</span> {bike.description}</p>
             </div>
             {bike.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>

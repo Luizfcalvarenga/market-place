@@ -48,6 +48,8 @@ export function Products(props) {
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
   const [componentsAttributesOptionsToFilter, setComponentsAttributesOptionsToFilter] = useState([]);
   const [filteredLink, setFilteredLink] = useState("");
+  const [verifiedProductFilter, setVerifiedProductFilter] = useState([params.verified] || "");
+
   const [onlyAccessories, setOnlyAccessories] = useState(params.products_accessories || "");
   const [onlyClothes, setOnlyClothes] = useState(params.products_clothes || "");
   const [onlyComponents, setOnlyComponents] = useState(params.products_components || "");
@@ -139,6 +141,7 @@ export function Products(props) {
     if (onlyComponents) url = url + `&products_components=${onlyComponents}`
     if (onlyClothes) url = url + `&products_clothes=${onlyClothes}`
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
+    if (verifiedProductFilter) url = url + `&verified=${verifiedProductFilter}`
 
 
 
@@ -160,7 +163,8 @@ export function Products(props) {
 
 
   }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
-    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter, onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter])
+    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter,
+    onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter, verifiedProductFilter])
 
 
   const handleProductAtributes = (e) => {

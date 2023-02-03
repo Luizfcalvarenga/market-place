@@ -59,6 +59,8 @@ export function Bikes(props) {
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
   const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
   const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
+  const [verifiedBikeFilter, setVerifiedBikeFilter] = useState([params.verified] || "");
+
 
 
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
@@ -149,6 +151,8 @@ export function Bikes(props) {
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
     if (frameSizeOptionsToFilter) url = url + `&frame_sizes=${frameSizeOptionsToFilter}`
     if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
+    if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
+
 
     console.log(url)
     console.log(categoryOptionsToFilter.includes(null))
@@ -159,7 +163,7 @@ export function Bikes(props) {
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter])
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
