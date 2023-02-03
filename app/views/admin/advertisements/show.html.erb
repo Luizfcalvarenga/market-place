@@ -2,21 +2,20 @@
   <p class="info-text w-100 p-4 br-8 text-center text-uppercase fw-700 mb-5">Revisão do pedido #<%= @advertisement.id %></p>
   <div data-controller="verify">
     <% if @advertisement.advertisable_type == "Product" %>
-
       <%= simple_form_for Product.find(@product.id), url: toggle_product_verify_path(@product.id), remote: true, html: {"data-verify-target": "form"} do |f| %>
         <% if @product.verified  %>
-          <%= f.input :verified, label: "Desativar Verificação", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+          <%= f.input :verified, label: "Cancelar Certificação", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
         <% else %>
-          <%= f.input :verified, label: "Verificar", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+          <%= f.input :verified, label: "Certificar Produto", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
         <% end %>
         <%= f.input :id, value: @product.id, :as => :hidden %>
       <% end %>
     <% elsif @product.instance_of? Bike %>
       <%= simple_form_for @product, url: toggle_bike_verify_path(@product.id), remote: true, html: {"data-verify-target": "form"} do |f| %>
         <% if @product.verified  %>
-          <%= f.input :verified, label: "Desativar Verificação", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+          <%= f.input :verified, label: "Cancelar Certificação", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
         <% else %>
-          <%= f.input :verified, label: "Verificar", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
+          <%= f.input :verified, label: "Certificar Bike", :as => :boolean, input_html: {"data-verify-target": "input", "data-action": "change->verify#submit"}%>
         <% end %>
         <%= f.input :id, value: @product.id, :as => :hidden %>
       <% end %>

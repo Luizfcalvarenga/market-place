@@ -154,8 +154,6 @@ export function Bikes(props) {
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
 
 
-    console.log(url)
-    console.log(categoryOptionsToFilter.includes(null))
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
@@ -614,7 +612,6 @@ export function Bikes(props) {
               <button type="button" value="all-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
 
               <div id="all-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-
                 <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
                 <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
                 <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
@@ -816,7 +813,7 @@ export function Bikes(props) {
 
                 {allFrameSizes.map((frameSize, index)=> {
                   return (
-                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
                   );
                 })}
 
@@ -837,7 +834,7 @@ export function Bikes(props) {
                 <h5 className=" mt-3">tamanho</h5>
                 {roadFrameSizes.map((frameSize, index)=> {
                   return (
-                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
                   );
                 })}
               </>)}
@@ -846,7 +843,7 @@ export function Bikes(props) {
                 <h5 className=" mt-3">tamanho</h5>
                   {dirtMtbFrameSizes.map((frameSize, index)=> {
                   return (
-                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
                   );
                 })}
               </>)}
@@ -1210,7 +1207,7 @@ export function Bikes(props) {
                       <h4 className="card-title text-center">{bike.frame_brand}</h4>
                       <h4 className="card-title text-center">{bike.model}</h4>
                       {bike.verified && (
-                        <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                        <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
                       )}
                     </div>
                     <h4 className="text-center mt-1">

@@ -488,7 +488,7 @@ export function Bike(props) {
             {bike.verified && (
               <div className="d-flex justify-content-between mt-3">
                 <p className="text-verified">BIKE CERTIFICADA</p>
-                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1 me-1"/>
+                <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1 me-1"/>
               </div>
             )}
             <div className="d-flex justify-content-between">

@@ -168,14 +168,6 @@ export function Products(props) {
 
 
   const handleProductAtributes = (e) => {
-    // e.target.classList.toggle("active")
-    // if (e.target.classList.contains("active")) {
-    //   setProductTypeFilter(e.target.value)
-    //   e.target.classList.add("selected-tag")
-    // } else {
-    //   setProductTypeFilter("")
-    //   e.target.classList.remove("selected-tag")
-    // }
     console.log(e.target.value)
     const currentOptionsToFilter = [...productTypeOptionsToFilter]
     const currentAttributeOptionsToFilter = [...attributeOptionsToFilter]
@@ -258,24 +250,6 @@ export function Products(props) {
   // }
 
   const renderOptionsToFilterAttributes = (attributes, index) => {
-    // return (
-    //   <div className="attributes-filters">
-    //     <h5 className="text-success mt-3" key={index}>{attributes.prompt}</h5> <br />
-    //     {attributes.options.map((option, index) => {
-    //       if (Array.isArray(option)) {
-    //         return (
-    //           <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-    //         )
-    //       } else {
-    //         return (
-    //           <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-    //         )
-    //       }
-
-    //     })}
-
-    //   </div>
-    // )
 
     attributes.map((attribute, index) => {
       console.log(attribute)
@@ -313,16 +287,16 @@ export function Products(props) {
         options = attribute.options
       }
       return (
-        <div className="attributes-filters">
+        <div  key={index} className="attributes-filters">
           <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
           {options.map((option, index) => {
             if (Array.isArray(option)) {
               return (
-                <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+                <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
               )
             } else {
               return (
-                <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+                <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
               )
             }
 
@@ -338,29 +312,24 @@ export function Products(props) {
       document.getElementById("products-accessories").classList.remove("d-none")
       e.target.classList.add("selected-tag")
       setOnlyAccessories("products_accessories")
-
     } else {
       document.getElementById("products-accessories").classList.add("d-none")
       e.target.classList.remove("selected-tag")
       setOnlyAccessories("")
-
     }
   }
 
   const hendleComponentsFiltes = (e) => {
-    // setAccessoriesProducts(Array.from({length: 39}, (_, i) => i + 1))
     console.log(e)
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       document.getElementById("products-components").classList.remove("d-none")
       e.target.classList.add("selected-tag")
       setOnlyComponents("products_components")
-
     } else {
       document.getElementById("products-components").classList.add("d-none")
       e.target.classList.remove("selected-tag")
       setOnlyComponents("")
-
     }
   }
 
@@ -448,18 +417,15 @@ export function Products(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById(e.target.value).classList.remove("d-none")
       e.target.classList.add("selected-tag")
-
     } else {
       document.getElementById(e.target.value).classList.add("d-none")
       e.target.classList.remove("selected-tag")
-
     }
   }
 
   const handleConditionFilter = (e) => {
     const tagFilter = e.target
     tagFilter.classList.toggle("selected-tag")
-
     if (e.target.classList.contains("selected-tag")) {
       setConditionFilter(e.target.value)
     } else {
@@ -1022,7 +988,7 @@ export function Products(props) {
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
                       {product.verified && (
-                        <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                        <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
                       )}
                     </div>
                     <h4 className="text-center mt-1">

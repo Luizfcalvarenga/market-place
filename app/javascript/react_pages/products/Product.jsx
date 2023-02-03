@@ -10,7 +10,6 @@ export function Product(props) {
   const [presentIds, setPresentIds] = useState([])
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
-
   const [quantity, setQuantity] = useState()
   let productId = window.location.pathname.split("/").pop();
 
@@ -21,8 +20,6 @@ export function Product(props) {
     setPresentIds(response.data.present_ids);
     setCity(response.data.city);
     setState(response.data.state);
-
-    console.log(window.location)
   }, [])
 
   const handleLike = (e) => {
@@ -30,12 +27,9 @@ export function Product(props) {
     const dataObject = new FormData();
     dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Product" );
-
-    // console.log(e.target.id)
     axios.post('/likes', dataObject)
 
     .then(function (response) {
-      // console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else if (!response.data.errors) {
@@ -167,7 +161,6 @@ export function Product(props) {
               <div className="carousel-inner">
                 {product.photos.map((photo, index) => {
                   return (
-
                     <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
                       <img src={photo} className="d-block w-100 img-card-show" alt="" />
                     </div>
@@ -199,16 +192,16 @@ export function Product(props) {
               {product.product_attributes.length > 0 && (<>
                 {product.product_attributes.map((attribute) => {
                   return (
-                    <div className="text-success item list-item d-flex ms-3">
+                    <div className="text-success item list-item d-flex">
                       <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
                       <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
                     </div>
                   )
                 })}
               </>)}
-              <p className=""><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
-              <p className=""><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
-              <p className=""><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
+              <p className="bike-attrs-parts"><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
+              <p className="bike-attrs-parts"><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
+              <p className="bike-attrs-parts"><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
               {product.product_condition_description && (
                 <p className=""><strong className="text-success">mais informações:</strong> {translateWord(product.product_condition_description)}</p>
               )}

@@ -253,7 +253,6 @@ export function ProductForm(props) {
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
-    // VERIFICAR RETORNO DO ESCOLHA DE TIPO DE SUSPENSÃO PARA COMPONENTO QUADROAPARENTEMENTE PRA QUADRO E HARDTAIL NÃO PERGUNTA CURSO DE NENHUMA SUSPANSÃO(CONFERIR)
     let options = []
     if (["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory) && attribute.name === "frame_size") {
       options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
@@ -1786,8 +1785,8 @@ export function ProductForm(props) {
             photosPreview?.length > 0 ?
             <div  className="d-flex justify-content-center flex-wrap mt-3">
               {
-                photosPreview.map((photoPreview, idx) => {
-                  return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
+                photosPreview.map((photoPreview, index) => {
+                  return  (<><button key={index} className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
                       <img src={photoPreview} alt="" className="image-preview-form mt-1" />
                       <div id={photoPreview} className="middle">
                         <div id={photoPreview} className="text">Remover</div>
@@ -1943,7 +1942,7 @@ export function ProductForm(props) {
             photosPreview?.length > 0 ?
             <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
               {
-                photosPreview.map((photoPreview, idx) => {
+                photosPreview.map((photoPreview, index) => {
                   return <img src={photoPreview} alt="" className="image-review" />
                 })
               }
