@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   include ChatsHelper
   def show
     @user = User.find(params[:id])
@@ -7,6 +8,8 @@ class UsersController < ApplicationController
     @chat_name = get_name(@user, current_user)
     @single_chat = Chat.where(name: @chat_name).first || Chat.create_private_chat([@user, current_user], @chat_name)
     current_user.update(current_chat: @single_chat)
+    @product = Product.find(params[:product_id]) if params[:product_id].present?
+    @product = Bike.find(params[:bike_id]) if params[:bike_id].present?
     # @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
     if Chat.where(is_private: true).present?
       @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
@@ -26,7 +29,17 @@ class UsersController < ApplicationController
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
     set_notifications_to_read
-
+    if (( params[:product_id].present? || params[:bike_id].present?) && (!@messages.where('content  @@ ?', "Olá, gostaria de conversar sobre - #{@product.city.name}").where(user: current_user).present?))
+      if @product.instance_of? Bike
+        @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre a bike: #{@product.frame_brand} #{@product.model} - #{display_price(@product.price_in_cents)} - #{@product.city.name} - #{@product.state.acronym}")
+      elsif @product.instance_of? Product
+        @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: #{@product.product_type.prompt} - #{@product.name} - #{@product.brand} #{@product.model} - #{display_price(@product.price_in_cents)} - #{@product.city.name} - #{@product.state.acronym}")
+      end
+        # if @product.photos.attached? && params[:photo].present?
+      #   @message_beggining.attachments.attach(params[:photo])
+      # end
+    end
+    # raise
     render 'chats/index'
   end
 
