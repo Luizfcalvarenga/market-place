@@ -2236,15 +2236,15 @@ export function BikeForm(props) {
           <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
-        {!category === "road" && (
+        {category !== "road" && (
           <>
             <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
             <div id="Suspensões(review)" className="d-none">
-              <p><span className="text-success">Tipo:</span> {suspensionType}</p>
-              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
-              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel}</p>
-              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
-              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel }</p>
+              <p><span className="text-success">Tipo:</span> {translateWord(suspensionType)}</p>
+              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel === "other" ? otherFrontSuspensionTravel : frontSuspensionTravel}</p>
+              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel === "other" ? otherFrontSuspensionModel : frontSuspensionModel}</p>
+              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel === "other" ? otherRearSuspensionTravel : rearSuspensionTravel }</p>
+              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel === "other" ? otherRearSuspensionModel : rearSuspensionModel }</p>
             </div>
           </>
         )}
@@ -2348,9 +2348,10 @@ export function BikeForm(props) {
           </>)}
 
           { ((priceInCents * 100) > 100000) && ((priceInCents * 100) <= 500000) && (<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 39,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 39,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2371,9 +2372,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 500000) && ((priceInCents * 100) <= 1000000) && (<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 59,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 59,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2394,9 +2396,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 1000000) && ((priceInCents * 100) <= 2000000) &&(<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 89,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 89,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2417,9 +2420,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 2000000) && ((priceInCents * 100) <= 3000000) &&(<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 129,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 129,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2440,9 +2444,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 3000000) && (<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 159,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 159,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">

@@ -32,6 +32,7 @@ module Api
         @products = @products.where(brand: params[:brand]) if params[:brand].present?
         @products = @products.where(model: params[:model]) if params[:model].present?
         @products = @products.where('products.name @@ ?', params[:name]) if params[:name].present?
+        @products = @products.where(verified: params[:verified]) if params[:verified].present?
 
         @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:clothe_sizes].split(",")}) if params[:clothe_sizes].present?
 

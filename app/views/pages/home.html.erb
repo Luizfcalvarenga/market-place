@@ -25,180 +25,240 @@
     </div>
   </div>
   <div class="row row-cols-1 category-cards mx-5">
-    <%= link_to bikes_path, class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
-      <div class="card card-bikes">
-        <h3 class="text-center card-title">B<span class="flicker">I</span>KES </h3>
-        <%= image_tag "bike-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to products_path, class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
-      <div class="card card-components">
-        <h3 class="text-center card-title">PROD<span class="flicker">U</span>TOS </h3>
-        <%= image_tag "bike-components.png", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-5 btn-remove-link" do %>
-      <div class="card card-services">
-        <h3 class="text-center card-title">SER<span class="flicker">V</span>IÇOS</h3>
-        <%= image_tag "bike-maintenance.png", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
-      <div class="card card-products">
-        <h3 class="text-center card-title">M<span class="flicker">T</span>B</h3>
-        <%= image_tag "mtb-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link"  do %>
-      <div class="card card-products">
-        <h3 class="text-center card-title"><span class="flicker">E</span>-BIKE</h3>
-        <%= image_tag "e-bike-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
-    <%= link_to "#", class: "col-12 col-md-4 mb-3 btn-remove-link" do %>
-      <div class="card card-products">
-        <h3 class="text-center card-title">ROA<span class="flicker">D</span></h3>
-        <%= image_tag "road-bg.jpg", class: "card-bg" %>
-      </div>
-    <% end %>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "bikes", :action => "index", :categories => "mountain_bike" do %>
+        <div class="card card-bikes mb-5 btn-remove-link">
+          <h3 class="text-center card-title">B<span class="flicker">I</span>KES MTB</h3>
+          <%= image_tag "mtb-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "bikes", :action => "index", :categories => "road" do %>
+        <div class="card card-components mb-5 btn-remove-link">
+          <h3 class="text-center card-title">BIKES R<span class="flicker">O</span>AD </h3>
+          <%= image_tag "road-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "bikes", :action => "index", :bike_type => "e-bike" do %>
+        <div class="card card-services mb-5 btn-remove-link">
+          <h3 class="text-center card-title"><span class="flicker">E</span>-Bikes</h3>
+          <%= image_tag "e-bike-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "products", :action => "index", :products_accessories => "products_accessories" do %>
+        <div class="card card-products mb-5 btn-remove-link">
+          <h3 class="text-center card-title">ACESS<span class="flicker">Ó</span>RIOS</h3>
+          <%= image_tag "accessories-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "products", :action => "index", :products_components => "products_components"  do %>
+        <div class="card card-products mb-5 btn-remove-link">
+          <h3 class="text-center card-title">C<span class="flicker">O</span>MPONENTES</h3>
+          <%= image_tag "components-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-4">
+      <%= link_to :controller => "products", :action => "index", :products_clothes => "products_clothes" do %>
+        <div class="card card-products mb-5 btn-remove-link">
+          <h3 class="text-center card-title">VESTUÁR<span class="flicker">I</span>O</h3>
+          <%= image_tag "clothes-bg.jpg", class: "card-bg" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<div class="third-section-home mt-3 mb-5">
-  <h2 class="text-success ms-2 third-section-title text-center">Compre sua bike com a segurança do Bike Check</h2>
-  <p class="mx-5 mb-5 text-center">É normal que uma bicicleta usada apresente marcas de uso e desgaste dos componentes. Por isso, em uma revisão simples, oficinas qualificadas fazem a avaliação das características, componentes e estado estrutural, estético e de funcionamento da bicicleta.</p>
-
-  <div class="v-check-line"></div>
-
-  <div class="d-flex justify-content-center responsive-block">
-    <%= image_tag "bike-check-1.png", class: "bike-check-img me-5"%>
-    <div class="w-40 mt-5 ms-4 check-text">
-      <h3 class="text-success mt-5"><i class="fas fa-spray-can"></i><span class="ms-2">Tudo começa pela lavagem</span></h3>
-      <p class="mt-2 text-white">Lavamos a bicicleta para permitir uma boa inspeção visual e garantir que ela será entregue limpa.</p>
+<div class="third-section-home mt-3 mb-5 px-5">
+  <div class="card-nf-services">
+    <h3 class="text-center">PARA MAIS COMODIDADE E SEGURANÇA, CONTE COM NOSSOS SERVIÇOS</h3>
+    <h3 class="text-center">PRODUTOS <span class="text-success mt-3">CERTIFICADOS</span> NUFLOW</h3>
+    <p class="text-center">Para você não ter nenhuma surpresa</p>
+    <p class=""> <span class="text-success">Inspeção:</span> Oficinas qualifacadas fazem a inspeção do produto e emitem um laudo mecânico.</p>
+    <p class=""> <span class="text-success">Negociação com especialistas:</span> Você conversa diretamente com a oficina que fez a inspeção e conta com a ajuda de quem conhece.</p>
+    <p class=""> <span class="text-success">Compra segura:</span> Todos os produtos certificados já incluem a Compra Segura.</p>
+    <div class="d-flex justify-content-center gap-5">
+      <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link" %>
+      <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link" %>
     </div>
   </div>
 
-  <div class="v-check-line-b"></div>
-  <div class="h-check-line"></div>
-  <div class="v-check-line-left"></div>
 
-
-  <div class="d-flex justify-content-center responsive-block">
-    <div class="w-40 mt-5 me-4 check-text">
-      <h3 class="text-success mt-5"> <i class="fas fa-binoculars"></i><span class="ms-2">É feita uma inspeção minuciosa</span></h3>
-      <p class="mt-2 text-white">Inspeção visual da estética, estrutura da bike e<br>componentes: buscamos identificar lascas maiores  na pintura, trincas e fissuras visuais na estrutura.</p>
-    </div>
-    <%= image_tag "bike-check-2.png", class: "bike-check-img"%>
-  </div>
-
-  <div class="v-check-line-b-left"></div>
-  <div class="h-check-line"></div>
-  <div class="v-check-line-right"></div>
-
-  <div class="d-flex justify-content-center responsive-block">
-    <%= image_tag "bike-check-3.png", class: "bike-check-img  me-5" %>
-    <div class="w-40 ms-4 check-text">
-      <h3 class="text-success mt-5"><i class="fas fa-check-double"></i> <span class="ms-2">Verificamos a mecânica</span></h3>
-      <p class="mt-2 text-white">São verificadas as características da bike e o funcionamento dos componentes: <br>
-        - Medida do quadro e dos aros <br>
-        - Marca e modelo visíveis do quadro, câmbios, suspensões, freios e canote <br>
-        - Teste de funcionamento dos câmbios, freios, suspensões e canote retrátil <br>
-        - Identificação de folgas nas rodas, movimento central (pedivela) e na caixa de direção <br>
-        - Desgaste da corrente e dos pneus
-      </p>
+  <div class="card-nf-services mt-4">
+    <h3 class="text-center text-success">COMPRA SEGURA</h3>
+    <h3 class="text-center">Evite riscos com produtos tão caros e sensiveis</h3>
+    <p class=""> <span class="text-success">Procedência verificada:</span> Verificamos a procedência do vendedor e emitimos um contrato de transferência de posse do produto.</p>
+    <p class=""> <span class="text-success">Pagamento seguro:</span> Você faz o pagamento de forma segura a em até 12 vezes. Retemos seu pagamento até a sua confirmação de recebimento do produto.</p>
+    <p class=""> <span class="text-success">Logística assegurada:</span> Solução única de logística com seguro compatível com o alto valor de bicicletas e componentes de ciclismo.</p>
+    <div class="text-center">
+      <%= link_to "Contratar serviços", "#", class: "nav-link" %>
     </div>
   </div>
 
-  <div class="v-check-line-b3"></div>
-  <div class="h-check-line"></div>
-  <div class="v-check-line-left-4"></div>
+  <div class="card-nf-services mt-4">
+    <h3 class="text-center text-success">FAZ tudo</h3>
+    <h3 class="text-center">O jeito mais fácil de vender sua bicicleta ou componente usado</h3>
+    <p class=""> <span class="text-success">Acessoria:</span> Conte com especialistas para criar seu anúncio..</p>
+    <p class=""> <span class="text-success">Laudo mecânico:</span> Aumente as chances de vender seu produto ao anunciá-lo com a inspeção de uma oficina qualificada. .</p>
+    <p class=""> <span class="text-success">Intemediação:</span> Não se preocupe com o atendimento dos interessados, especialistas farão isso por você.</p>
+    <p class=""> <span class="text-success">Flexibilidade:</span> Ofereça parcelamento em até 12 vezes para o comprador, enquanto você recebe à vista!</p>
+    <p class=""> <span class="text-success">Logística:</span> Envie seu produto para o Brasil inteiro, com seguro compatível com o alto valor de bicicletas e componentes de ciclismo.</p>
 
-  <div class="d-flex justify-content-center responsive-block">
-    <div class="w-40 mt-5 me-4 check-text">
-      <h3 class="text-success mt-5"> <i class="fas fa-tools"></i><span class="ms-2">Ajustamos a bike para que a receba revisada</span></h3>
-      <p class="mt-2 text-white">Fazemos o aperto geral da bicicleta e regulamos os câmbios e freios.</p>
+    <div class="text-center">
+      <%= link_to "Contratar serviços", "#", class: "nav-link" %>
     </div>
-    <%= image_tag "bike-check-4.png", class: "bike-check-img"%>
   </div>
+</div>
 
-  <div class="v-check-line-b-left"></div>
-  <div class="h-check-line"></div>
-  <div class="v-check-line-right-5"></div>
-
-
- <div class="d-flex justify-content-center responsive-block">
-    <%= image_tag "bike-check-5.png", class: "bike-check-img me-5"%>
-    <div class="w-40 mt-5 ms-4 check-text">
-      <h3 class="text-success mt-5"> <i class="fas fa-clipboard-list"></i> <span class="ms-2">Emitimos um laudo mecânico</span></h3>
-      <p class="mt-2 text-white">Você receberá um lado com todas as informações acima, além de fotos da bicicleta e componentes, para que você não tenha nenhuma surpresa.</p>
+<div class="seventh-section-home pb-2 mx-5">
+  <div class="row row-cols-1 mx-5">
+    <div class="col-12 col-md-4 review-icons">
+      <h3 class="text-success text-start mt-5">A Nuflow te ajuda a vender e comprar com mais facilidade</h3>
+      <p class="text-start mt-4"><i class="fas fa-hands-helping me-1"></i> Ajuda na negociação</p>
+      <p class="text-start"><i class="fas fa-check me-2"></i> Verificação da bike</p>
+      <p class="text-start"><i class="far fa-clock me-2"></i> Rapidez na venda</p>
+      <p class="text-start"><i class="fas fa-user-shield me-1"></i> Compra segura</p>
+    </div>
+    <div class="col-12 col-md-8 mt-5 pt-4">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators d-none">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Marcelo Person</h4>
+              <p class="text-center"><small>Comprador</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">A experiencia foi bem legal. O atendimento foi decisivo para a avaliação, ja que a primeira  bike que queria nao foi aprovada no bike check, que por sinal é algo que da bastante seguranca, já que por ser de outro estado nao deu para ver pessoalmente.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Gabriel Parisotto</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">Galera 100% responsável! Vendi minha bike em questão de dias com muita segurança, agilidade e sem incomodo algum.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Edwin van Eijk</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">O pessoal é sério e profissional. A bike fica em uma loja parceira e quando a venda é efetuada tem um contrato tudo certinho. Fizeram o depósito depois dos sete dias combinados da venda. Gostei muito da experiência.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+           <div class="review-card">
+              <h4 class="text-center text-success mt-3">Arthur Guerra</h4>
+              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center"> Empresa de responsa!! já vendi duas bikes com eles, fazem o possível e impossível para dar certo, sucesso para vocês rapaziada! obrigado pela atenção 🤟🏼</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="review-card">
+              <h4 class="text-center text-success mt-3">Flávio Borges</h4>
+              <p class="text-center"><small>Comprador</small></p>
+              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+              <p class="text-center">O excelente atendimento foi um diferencial para fechar negócio. Agradeço ao time Nuflow, bem satisfeito com a aquisição e o serviço de confiança prestado.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="fourth-section-home pb-5 my-3 pt-3">
-  <h2 class="mt-3 text-success text-center">POR QUE A NUFLOW?</h2>
+  <h3 class="mt-3 text-success text-center">POR QUE A NUFLOW?</h3>
   <div class="buyer-section mx-5">
-    <h2 class="text-success my-3">COMPRE COM SEGURANÇA</h2>
+    <h3 class="text-success mt-3">COMPRE COM SEGURANÇA</h3>
     <div class="row row-cols-1">
       <div class="col-12 col-md-4">
         <div class="cards-differential text-center">
           <i class="fas fa-headset text-success mt-4 icon"></i>
-          <h3 class="text-success">ASSESSORIA NA COMPRA</h3>
+          <h4 class="text-success">ASSESSORIA NA COMPRA</h4>
           <p>Conte com a ajuda de especialistas <br> para encontrar a bike ideal para você.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
         <div class="cards-differential text-center">
           <i class="fas fa-credit-card text-success mt-4 icon"></i>
-          <h3 class="text-success">PAGAMENTO FLEXÍVEL E SEGURO</h3>
+          <h4 class="text-success">PAGAMENTO FLEXÍVEL E SEGURO</h4>
           <p>Parcele sua compra em até 12x. <br> Nós retemos seu pagamento até a <br> confirmação de recebimento.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
         <div class="cards-differential text-center">
           <i class="fas fa-clipboard-check text-success mt-4 icon"></i>
-          <h3 class="text-success">LAUDO MECÊNICO</h3>
+          <h4 class="text-success">LAUDO MECÊNICO</h4>
           <p>Com o Bike Check sua bike é verificada e <br> revisada por oficinas qualificadas.</p>
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <%= link_to "#", class: "btn btn-classic mt-5"  do %>
-        <i class="fas fa-bicycle"></i> BIKES
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <%= link_to bikes_path, class: "nav-link text-gray" do %>
+        BIKES<i class="fas fa-bicycle ms-1"></i>
+      <% end %>
+      <%= link_to products_path, class: "nav-link text-gray" do %>
+        PRODUTOS<i class="fab fa-product-hunt ms-1"></i>
       <% end %>
     </div>
   </div>
 
-  <hr>
+  <hr class="index-line w-50">
 
   <div class="seller-section mx-5">
-    <h2 class="text-success text-end me-2 mb-3">VENDA COM GARANTIA</h2>
+    <h3 class="text-success text-end me-2 mb-3">VENDA COM GARANTIA</h3>
     <div class="row row-cols-1 mb-2">
       <div  class="col-12 col-md-4">
         <div class="cards-differential text-center">
           <i class="fas fa-handshake text-success mt-4 icon"></i>
-          <h3 class="text-success">VENDA MAIS RÁPIDO</h3>
+          <h4 class="text-success">VENDA MAIS RÁPIDO</h4>
           <p>Atinja milhares de ciclistas e venda <br> para todo Brasil.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
         <div class="cards-differential text-center">
           <i class="fas fa-hand-holding-usd text-success mt-4 icon"></i>
-          <h3 class="text-success">PARCELE E RECEBA À VISTA</h3>
+          <h4 class="text-success">PARCELE E RECEBA À VISTA</h4>
           <p>Flexibilidade de pagamento para os  <br> interessados em sua bike.</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
         <div class="cards-differential text-center">
           <i class="fas fa-people-arrows text-success mt-4 icon"></i>
-          <h3 class="text-success">ASSISTÊNCIA NA NEGOCIAÇÂO</h3>
+          <h4 class="text-success">ASSISTÊNCIA NA NEGOCIAÇÂO</h4>
           <p>Atendemos os interessados em sua bike, preocupe-se apenas com as propostas.</p>
         </div>
       </div>
     </div>
     <div class="text-center">
-      <%= link_to new_announce_path, class: "btn btn-classic mt-3" do %>
-        <i class="fas fa-bullhorn"></i> ANUNCIE
+      <%= link_to new_announce_path, class: "nav-link mt-3 text-gray" do %>
+        ANUNCIE<i class="fas fa-bullhorn ms-1"></i>
       <% end %>
     </div>
   </div>
@@ -281,79 +341,7 @@
   </div>
 </div>
 
-<div class="seventh-section-home pb-2 mx-5">
-  <div class="row row-cols-1 mx-5">
-    <div class="col-12 col-md-4 review-icons">
-      <h3 class="text-success text-start mt-5">A Nuflow te ajuda a vender e comprar com mais facilidade</h3>
-      <p class="text-start mt-4"><i class="fas fa-hands-helping me-1"></i> Ajuda na negociação</p>
-      <p class="text-start"><i class="fas fa-credit-card me-2"></i>Pagamento Flexível</p>
-      <p class="text-start"><i class="fas fa-check me-2"></i> Verificação da bike</p>
-      <p class="text-start"><i class="far fa-clock me-2"></i> Rapidez na venda</p>
-      <p class="text-start"><i class="fas fa-user-shield me-1"></i> Compra segura</p>
-    </div>
-    <div class="col-12 col-md-8 mt-5 pt-4">
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators d-none">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="review-card">
-              <h4 class="text-center text-success mt-3">Marcelo Person</h4>
-              <p class="text-center"><small>Comprador</small></p>
-              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">A experiencia foi bem legal. O atendimento foi decisivo para a avaliação, ja que a primeira  bike que queria nao foi aprovada no bike check, que por sinal é algo que da bastante seguranca, já que por ser de outro estado nao deu para ver pessoalmente.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="review-card">
-              <h4 class="text-center text-success mt-3">Gabriel Parisotto</h4>
-              <p class="text-center"><small>Vendedor</small></p>
-              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">Galera 100% responsável! Vendi minha bike em questão de dias com muita segurança, agilidade e sem incomodo algum.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="review-card">
-              <h4 class="text-center text-success mt-3">Edwin van Eijk</h4>
-              <p class="text-center"><small>Vendedor</small></p>
-              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">O pessoal é sério e profissional. A bike fica em uma loja parceira e quando a venda é efetuada tem um contrato tudo certinho. Fizeram o depósito depois dos sete dias combinados da venda. Gostei muito da experiência.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-           <div class="review-card">
-              <h4 class="text-center text-success mt-3">Arthur Guerra</h4>
-              <p class="text-center"><small>Vendedor</small></p>
-              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center"> Empresa de responsa!! já vendi duas bikes com eles, fazem o possível e impossível para dar certo, sucesso para vocês rapaziada! obrigado pela atenção 🤟🏼</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="review-card">
-              <h4 class="text-center text-success mt-3">Flávio Borges</h4>
-              <p class="text-center"><small>Comprador</small></p>
-              <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">O excelente atendimento foi um diferencial para fechar negócio. Agradeço ao time Nuflow, bem satisfeito com a aquisição e o serviço de confiança prestado.</p>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="wpp-btn text-success">
   <%= link_to "https://wa.me/553196225074", "data-toggle": "tooltip" , "data-placement": "top", "title": "Fala com um especialista", target: "_blank" do %>

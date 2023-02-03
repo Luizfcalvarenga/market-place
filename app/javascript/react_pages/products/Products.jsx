@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import EquipamentImage from "../../../assets/images/helmet.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
-import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import MaintenanceImage from "../../../assets/images/tools.png";
 import IntlCurrencyInput from "react-intl-currency-input"
+import VerifiedImage from "../../../assets/images/badge.png";
 
 
 
@@ -50,9 +48,11 @@ export function Products(props) {
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
   const [componentsAttributesOptionsToFilter, setComponentsAttributesOptionsToFilter] = useState([]);
   const [filteredLink, setFilteredLink] = useState("");
-  const [onlyAccessories, setOnlyAccessories] = useState("");
-  const [onlyClothes, setOnlyClothes] = useState("");
-  const [onlyComponents, setOnlyComponents] = useState("");
+  const [verifiedProductFilter, setVerifiedProductFilter] = useState([params.verified] || "");
+
+  const [onlyAccessories, setOnlyAccessories] = useState(params.products_accessories || "");
+  const [onlyClothes, setOnlyClothes] = useState(params.products_clothes || "");
+  const [onlyComponents, setOnlyComponents] = useState(params.products_components || "");
 
 
 
@@ -141,6 +141,7 @@ export function Products(props) {
     if (onlyComponents) url = url + `&products_components=${onlyComponents}`
     if (onlyClothes) url = url + `&products_clothes=${onlyClothes}`
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
+    if (verifiedProductFilter) url = url + `&verified=${verifiedProductFilter}`
 
 
 
@@ -162,7 +163,8 @@ export function Products(props) {
 
 
   }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
-    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter, onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter])
+    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter,
+    onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter, verifiedProductFilter])
 
 
   const handleProductAtributes = (e) => {
@@ -421,18 +423,15 @@ export function Products(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById(e.target.value).classList.remove("d-none")
       e.target.classList.add("selected-tag")
-
     } else {
       document.getElementById(e.target.value).classList.add("d-none")
       e.target.classList.remove("selected-tag")
-
     }
   }
 
   const handleConditionFilter = (e) => {
     const tagFilter = e.target
     tagFilter.classList.toggle("selected-tag")
-
     if (e.target.classList.contains("selected-tag")) {
       setConditionFilter(e.target.value)
     } else {
@@ -973,6 +972,9 @@ export function Products(props) {
                     <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
+                      {product.verified && (
+                        <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
+                      )}
                     </div>
                     <h4 className="text-center mt-1">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
@@ -1000,6 +1002,7 @@ export function Products(props) {
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn mt-2" id={product.id}><i id={product.id} className="far fa-heart"></i></button>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </a>
