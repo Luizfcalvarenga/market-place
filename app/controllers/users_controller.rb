@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   include ChatsHelper
   def show
     @user = User.find(params[:id])
@@ -28,9 +29,13 @@ class UsersController < ApplicationController
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
     set_notifications_to_read
-    if (( params[:product_id].present? || params[:bike_id].present?) && !@messages.where('content  @@ ?', "Olá, gostaria de conversar sobre o produto: ##{@product.id}"))
-      @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: ##{@product.id} - #{@product.brand || @product.frame_brand} #{@product.model} - #{number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".", precision: 2)} - #{@product.city.name} - #{@product.state.acronym} -")
-      # if @product.photos.attached? && params[:photo].present?
+    if (( params[:product_id].present? || params[:bike_id].present?) && (!@messages.where('content  @@ ?', "Olá, gostaria de conversar sobre o produto: ##{@product.id}").where(user: current_user).present?))
+      if @product.instance_of? Bike
+        @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre a bike: #{@product.frame_brand} #{@product.model} - #{display_price(@product.price_in_cents)} - #{@product.city.name} - #{@product.state.acronym}")
+      elsif @product.instance_of? Product
+        @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: #{@product.product_type.prompt} - #{@product.name} - #{@product.brand} #{@product.model} - #{display_price(@product.price_in_cents)} - #{@product.city.name} - #{@product.state.acronym}")
+      end
+        # if @product.photos.attached? && params[:photo].present?
       #   @message_beggining.attachments.attach(params[:photo])
       # end
     end
