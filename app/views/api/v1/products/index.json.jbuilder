@@ -15,6 +15,8 @@ json.products @products do |product|
   json.year product.year
   json.product_condition_status product.product_condition_status
   json.product_condition_description product.product_condition_description
+  json.verified product.verified
+
   json.photos product.photos.first(2).map(&:url)
 end
 json.product_types @product_types

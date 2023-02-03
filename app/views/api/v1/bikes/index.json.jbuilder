@@ -56,5 +56,7 @@ json.bikes @bikes do |bike|
   json.wheel_material bike.wheel_material
   json.seat_post_material bike.seat_post_material
   json.battery_cycles bike.battery_cycles
+  json.verified bike.verified
+
   json.photos bike.photos.first(2).map(&:url)
 end

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import EquipamentImage from "../../../assets/images/helmet.png";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
-import CasualImage from "../../../assets/images/cap.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
-import MaintenanceImage from "../../../assets/images/tools.png";
 import IntlCurrencyInput from "react-intl-currency-input"
+import VerifiedImage from "../../../assets/images/badge.png";
 
 
 
@@ -50,9 +48,11 @@ export function Products(props) {
   const [clotheSizeOptionsToFilter, setClotheSizeOptionsToFilter] = useState([]);
   const [componentsAttributesOptionsToFilter, setComponentsAttributesOptionsToFilter] = useState([]);
   const [filteredLink, setFilteredLink] = useState("");
-  const [onlyAccessories, setOnlyAccessories] = useState("");
-  const [onlyClothes, setOnlyClothes] = useState("");
-  const [onlyComponents, setOnlyComponents] = useState("");
+  const [verifiedProductFilter, setVerifiedProductFilter] = useState([params.verified] || "");
+
+  const [onlyAccessories, setOnlyAccessories] = useState(params.products_accessories || "");
+  const [onlyClothes, setOnlyClothes] = useState(params.products_clothes || "");
+  const [onlyComponents, setOnlyComponents] = useState(params.products_components || "");
 
 
 
@@ -141,6 +141,7 @@ export function Products(props) {
     if (onlyComponents) url = url + `&products_components=${onlyComponents}`
     if (onlyClothes) url = url + `&products_clothes=${onlyClothes}`
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
+    if (verifiedProductFilter) url = url + `&verified=${verifiedProductFilter}`
 
 
 
@@ -162,7 +163,8 @@ export function Products(props) {
 
 
   }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
-    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter, onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter])
+    minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter,
+    onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter, verifiedProductFilter])
 
 
   const handleProductAtributes = (e) => {
@@ -197,63 +199,63 @@ export function Products(props) {
     }
   }
 
-  const renderProductAttributeSelect = (attribute, index) => {
-    let options = []
-    if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
-      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
-    } else if (categoryFilter === "road" && attribute.name === "frame_size") {
-      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-    } else if (!categoryFilter && attribute.name === "frame_size") {
-      options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-    } else if (attribute.name === "frame_brand") {
-      return
-    } else if (attribute.name === "suspension_type") {
-      options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-    } else if (attribute.name === "brake_type") {
-      options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-    }  else if (attribute.name === "condition") {
-      options = [ ["new", "Novo"], ["used", "Usado" ]]
-    }  else if (attribute.name === "documentation_type") {
-      options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-    } else if (attribute.name === "frame_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "rim_material") {
-      options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-    } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
-      return
-    } else if (attribute.name === "seat_post_type") {
-      options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-    } else if (attribute.options.includes("other") ) {
-      attribute.options.pop()
-      options = attribute.options
-    } else {
-      options = attribute.options
-    }
+  // const renderProductAttributeSelect = (attribute, index) => {
+  //   let options = []
+  //   if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
+  //     options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+  //   } else if (categoryFilter === "road" && attribute.name === "frame_size") {
+  //     options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  //   } else if (!categoryFilter && attribute.name === "frame_size") {
+  //     options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+  //   } else if (attribute.name === "frame_brand") {
+  //     return
+  //   } else if (attribute.name === "suspension_type") {
+  //     options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
+  //   } else if (attribute.name === "brake_type") {
+  //     options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
+  //   }  else if (attribute.name === "condition") {
+  //     options = [ ["new", "Novo"], ["used", "Usado" ]]
+  //   }  else if (attribute.name === "documentation_type") {
+  //     options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
+  //   } else if (attribute.name === "frame_material") {
+  //     options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+  //   } else if (attribute.name === "rim_material") {
+  //     options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
+  //   } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
+  //     return
+  //   } else if (attribute.name === "seat_post_type") {
+  //     options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
+  //   } else if (attribute.options.includes("other") ) {
+  //     attribute.options.pop()
+  //     options = attribute.options
+  //   } else {
+  //     options = attribute.options
+  //   }
 
-    return (
-      <div className="attributes-filters">
-        <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-        <select
-        className="select-answer"
-        onChange={(e) => setProductAttributesFilter(e.target.value)}
-        >
-          <option value=""></option>
-          {options?.map((option, index) => {
-             if (Array.isArray(option)) {
-              return (
-                <option key={index} value={option[0]}>{option[1]}</option>
-              )
-            } else {
-              return (
+  //   return (
+  //     <div className="attributes-filters">
+  //       <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
+  //       <select
+  //       className="select-answer"
+  //       onChange={(e) => setProductAttributesFilter(e.target.value)}
+  //       >
+  //         <option value=""></option>
+  //         {options?.map((option, index) => {
+  //            if (Array.isArray(option)) {
+  //             return (
+  //               <option key={index} value={option[0]}>{option[1]}</option>
+  //             )
+  //           } else {
+  //             return (
 
-                <option key={index} value={option}>{option}</option>
-              )
-            }
-          })}
-        </select>
-      </div>
-    )
-  }
+  //               <option key={index} value={option}>{option}</option>
+  //             )
+  //           }
+  //         })}
+  //       </select>
+  //     </div>
+  //   )
+  // }
 
   const renderOptionsToFilterAttributes = (attributes, index) => {
     // return (
@@ -310,7 +312,6 @@ export function Products(props) {
       else {
         options = attribute.options
       }
-
       return (
         <div className="attributes-filters">
           <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
@@ -326,13 +327,9 @@ export function Products(props) {
             }
 
           })}
-
         </div>
       )
     })
-
-
-
   }
 
   const hendleAccessoriesFiltes = (e) => {
@@ -1024,6 +1021,9 @@ export function Products(props) {
                     <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
+                      {product.verified && (
+                        <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1"/>
+                      )}
                     </div>
                     <h4 className="text-center mt-1">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
@@ -1051,6 +1051,7 @@ export function Products(props) {
                           <button type="button" onClick={(e) => handleLike(e)} className="like-btn mt-2" id={product.id}><i id={product.id} className="far fa-heart"></i></button>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </a>
