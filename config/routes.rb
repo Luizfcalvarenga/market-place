@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   resources :products
   patch "toggle_product_verify", to: "products#toggle_product_verify", as: "toggle_product_verify"
   patch "toggle_bike_verify", to: "bikes#toggle_bike_verify", as: "toggle_bike_verify"
+  get "get_attributes_that_are_present_for_filter", to: "bikes#get_attributes_that_are_present_for_filter"
+
 
   namespace :admin do
     resources :users

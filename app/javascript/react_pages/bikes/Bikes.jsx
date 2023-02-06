@@ -60,10 +60,8 @@ export function Bikes(props) {
   const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
   const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
   const [verifiedBikeFilter, setVerifiedBikeFilter] = useState([params.verified] || "");
-
-
-
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
+  const [presentCategories, setPresentCategories] = useState([]);
 
 
   const currencyConfig = {
@@ -102,6 +100,7 @@ export function Bikes(props) {
     );
   }
 
+  // const getKey = (array,key) => array.map(a => a[key]);
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
@@ -157,11 +156,25 @@ export function Bikes(props) {
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
+
   }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
+  ])
+
+  useEffect(() => {
+    fetch(`/get_attributes_that_are_present_for_filter`)
+     .then((response) => response.json())
+     .then((data) => {
+      console.log(data.categories)
+
+      setPresentCategories(data.categories)
+      console.log(presentCategories)
+     })
+
+  }, []);
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -185,19 +198,16 @@ export function Bikes(props) {
   const handleBikeTypeFilter = (e) => {
     const tagFilter = e.target
     tagFilter.classList.toggle("selected-tag")
-
     if (e.target.classList.contains("selected-tag")) {
       setBikeTypeFilter(e.target.value)
     } else {
       setBikeTypeFilter("")
     }
-
   }
 
   const handleConditionFilter = (e) => {
     const tagFilter = e.target
     tagFilter.classList.toggle("selected-tag")
-
     if (e.target.classList.contains("selected-tag")) {
       setConditionFilter(e.target.value)
     } else {
@@ -207,14 +217,9 @@ export function Bikes(props) {
 
   const handleLike = (e) => {
     e.preventDefault()
-    console.log(e.target)
-
-
     const dataObject = new FormData();
     dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
-
-    // console.log(e.nativeEvent.path[1].id)
     axios.post('/likes',dataObject)
 
     .then(function (response) {
@@ -235,8 +240,60 @@ export function Bikes(props) {
 
   const translateWord = (word) => {
     const languageMap = {
-      "e-bike" : "E-Bike",
-      "bike" : "Bike",
+      "bike": "Bike",
+      "e-bike": "E-Bike",
+
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractable" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "new": "Novo",
+      "used": "Usado",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
     return languageMap[word]
   }
@@ -505,11 +562,18 @@ export function Bikes(props) {
 
             <h6 className=" mt-3">categoria</h6>
             <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
-              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>Mountain Bike</button>
-              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Dirt</button>
+              {presentCategories.map((category, index) => {
+                return (
+
+                  <button type="button" value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
+                )
+              })
+
+              }
+              {/* <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Dirt</button>
               <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Road</button>
               <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Infantil</button>
-              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Urbana</button>
+              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Urbana</button> */}
             </div>
             {/* <h5 className=" mt-3">categoria</h5>
             <select

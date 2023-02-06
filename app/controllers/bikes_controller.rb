@@ -72,15 +72,27 @@ class BikesController < ApplicationController
     if current_user.present?
       @user = current_user
     end
-
     skip_authorization
-
     respond_to do |format|
       format.json { render json: {
         categories: @categories,
         user: @user,
         states: @states,
         cities: @cities
+      } }
+    end
+  end
+
+  def get_attributes_that_are_present_for_filter
+    @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
+    # Category.where(id: Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:category_id))
+    @categories = Category.where(id: @bikes.pluck(:category_id))
+
+    skip_authorization
+    respond_to do |format|
+      format.json { render json: {
+        categories: @categories,
+
       } }
     end
   end
