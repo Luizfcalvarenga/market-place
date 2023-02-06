@@ -87,11 +87,29 @@ class BikesController < ApplicationController
     @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
     # Category.where(id: Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:category_id))
     @categories = Category.where(id: @bikes.pluck(:category_id))
+    @road_modalities = @bikes.where(category: Category.where(name: "road")).pluck(:modality)
+    @mtb_modalities = @bikes.where(category: Category.where(name: "mountain_bike")).pluck(:modality)
+    @dirt_modalities = @bikes.where(category: Category.where(name: "dirt_street")).pluck(:modality)
+    @frame_brands = @bikes.pluck(:frame_brand)
+    @road_frame_sizes = @bikes.where(category: Category.where(name: "road")).pluck(:frame_size)
+    @mtb_dirt_infant_urban_frame_sizes = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:frame_size)
+
+
+
 
     skip_authorization
     respond_to do |format|
       format.json { render json: {
         categories: @categories,
+        road_modalities: @road_modalities,
+        mtb_modalities: @mtb_modalities,
+        dirt_modalities: @dirt_modalities,
+        frame_brands: @frame_brands,
+        road_frame_sizes: @road_frame_sizes,
+        mtb_dirt_infant_urban_frame_sizes: @mtb_dirt_infant_urban_frame_sizes,
+
+
+
 
       } }
     end

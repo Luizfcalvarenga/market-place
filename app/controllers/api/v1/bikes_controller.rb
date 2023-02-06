@@ -24,8 +24,10 @@ module Api
         @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
         @bikes = @bikes.where(frame_size: params[:frame_sizes].split(",")) if params[:frame_sizes].present?
         @bikes = @bikes.where(frame_material: params[:frame_materials].split(",")) if params[:frame_materials].present?
+        @bikes = @bikes.where(frame_brand: params[:frame_brands].split(",")) if params[:frame_brands].present?
 
-        @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
+
+        # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
         @bikes = @bikes.where(suspension_type: params[:suspension_type]) if params[:suspension_type].present?
         @bikes = @bikes.where(front_suspension_travel: params[:front_suspension_travel]) if params[:front_suspension_travel].present?
         @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travel]) if params[:rear_suspension_travel].present?
