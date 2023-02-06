@@ -95,6 +95,14 @@ class BikesController < ApplicationController
     @mtb_dirt_infant_urban_frame_sizes = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:frame_size).uniq
     @all_frame_sizes = @bikes.pluck(:frame_size).uniq
     @frame_materials = @bikes.pluck(:frame_material).uniq
+    @suspension_types = @bikes.pluck(:suspension_type).uniq
+    @front_suspension_travels = @bikes.pluck(:front_suspension_travel).uniq
+    @rear_suspension_travels = @bikes.pluck(:rear_suspension_travel).uniq
+    @front_suspension_models = @bikes.pluck(:front_suspension_model).uniq
+    @rear_suspension_models = @bikes.pluck(:rear_suspension_model).uniq
+
+
+
 
 
 
@@ -112,6 +120,11 @@ class BikesController < ApplicationController
         mtb_dirt_infant_urban_frame_sizes: @mtb_dirt_infant_urban_frame_sizes,
         all_frame_sizes: @all_frame_sizes,
         frame_materials: @frame_materials,
+        suspension_types: @suspension_types,
+        front_suspension_travels: @front_suspension_travels,
+        rear_suspension_travels: @rear_suspension_travels,
+        front_suspension_models: @front_suspension_models,
+        rear_suspension_models: @rear_suspension_models,
 
 
 

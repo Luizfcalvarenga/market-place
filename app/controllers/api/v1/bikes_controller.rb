@@ -25,14 +25,14 @@ module Api
         @bikes = @bikes.where(frame_size: params[:frame_sizes].split(",")) if params[:frame_sizes].present?
         @bikes = @bikes.where(frame_material: params[:frame_materials].split(",")) if params[:frame_materials].present?
         @bikes = @bikes.where(frame_brand: params[:frame_brands].split(",")) if params[:frame_brands].present?
+        @bikes = @bikes.where(suspension_type: params[:suspension_types].split(",")) if params[:suspension_types].present?
+        @bikes = @bikes.where(front_suspension_travel: params[:front_suspension_travels].split(",")) if params[:front_suspension_travels].present?
+        @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travels].split(",")) if params[:rear_suspension_travels].present?
+        @bikes = @bikes.where(front_suspension_model: params[:front_suspension_models].split(",")) if params[:front_suspension_models].present?
+        @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_models].split(",")) if params[:rear_suspension_models].present?
 
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(suspension_type: params[:suspension_type]) if params[:suspension_type].present?
-        @bikes = @bikes.where(front_suspension_travel: params[:front_suspension_travel]) if params[:front_suspension_travel].present?
-        @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travel]) if params[:rear_suspension_travel].present?
-        @bikes = @bikes.where(front_suspension_model: params[:front_suspension_model]) if params[:front_suspension_model].present?
-        @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_model]) if params[:rear_suspension_model].present?
         @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears]) if params[:number_of_front_gears].present?
         @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears]) if params[:number_of_rear_gears].present?
         @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_model]) if params[:font_derailleur_model].present?
