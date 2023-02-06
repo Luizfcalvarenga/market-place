@@ -69,6 +69,10 @@ export function Bikes(props) {
   const [frameBrandOptionsToFilter, setFrameBrandOptionsToFilter] = useState([]);
   const [presentRoadFrameSizes, setPresentRoadFrameSizes] = useState([]);
   const [presentDirtMtbFrameSizes, setPresentDirtMtbFrameSizes] = useState([]);
+  const [presentFrameSizes, setPresentFrameSizes] = useState([]);
+  const [presentFrameMaterials, setPresentFrameMaterials] = useState([]);
+
+
 
 
 
@@ -185,12 +189,14 @@ export function Bikes(props) {
       setPresentRoadModalities(data.road_modalities)
       setPresentMtbModalities(data.mtb_modalities)
       setPresentDirtModalities(data.dirt_modalities)
-      setPresentFrameBrands(data.frame_brands).sort()
+      setPresentFrameBrands(data.frame_brands.sort())
+      console.log(data.road_frame_sizes)
       setPresentRoadFrameSizes(data.road_frame_sizes)
       setPresentDirtMtbFrameSizes(data.mtb_dirt_infant_urban_frame_sizes)
+      setPresentFrameSizes(data.all_frame_sizes)
+      setPresentFrameMaterials(data.frame_materials)
 
 
-      console.log(presentCategories)
      })
 
   }, []);
@@ -939,9 +945,9 @@ export function Bikes(props) {
               {categoryOptionsToFilter.length <= 1 && (<>
                 <h5 className=" mt-3">tamanho</h5>
 
-                {allFrameSizes.map((frameSize, index)=> {
+                {presentFrameSizes.map((presentFrameSize, index)=> {
                   return (
-                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={presentFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentFrameSize}</button>
                   );
                 })}
 
@@ -977,9 +983,20 @@ export function Bikes(props) {
               </>)}
 
               <h5 className=" mt-3">material</h5>
-              <button type="button" value="carbon" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono</button>
+
+              <div id="road-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                {presentFrameMaterials.map((presentFrameMaterial, index) => {
+                  return (
+
+                    <button type="button" key={index} value={presentFrameMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>{translateWord(presentFrameMaterial)}</button>
+                  )
+                })}
+
+              </div>
+
+              {/* <button type="button" value="carbon" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono</button>
               <button type="button" value="aluminum" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Aluminio</button>
-              <button type="button" value="carbon_aluminum_chainstay" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono/Aumínio (Chainstay)</button>
+              <button type="button" value="carbon_aluminum_chainstay" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono/Aumínio (Chainstay)</button> */}
 
               {/* <select
                 className="select-answer"

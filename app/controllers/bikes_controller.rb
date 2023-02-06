@@ -86,13 +86,16 @@ class BikesController < ApplicationController
   def get_attributes_that_are_present_for_filter
     @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
     # Category.where(id: Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:category_id))
-    @categories = Category.where(id: @bikes.pluck(:category_id))
-    @road_modalities = @bikes.where(category: Category.where(name: "road")).pluck(:modality)
-    @mtb_modalities = @bikes.where(category: Category.where(name: "mountain_bike")).pluck(:modality)
-    @dirt_modalities = @bikes.where(category: Category.where(name: "dirt_street")).pluck(:modality)
-    @frame_brands = @bikes.pluck(:frame_brand)
-    @road_frame_sizes = @bikes.where(category: Category.where(name: "road")).pluck(:frame_size)
-    @mtb_dirt_infant_urban_frame_sizes = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:frame_size)
+    @categories = Category.where(id: @bikes.pluck(:category_id).uniq)
+    @road_modalities = @bikes.where(category: Category.where(name: "road")).pluck(:modality).uniq
+    @mtb_modalities = @bikes.where(category: Category.where(name: "mountain_bike")).pluck(:modality).uniq
+    @dirt_modalities = @bikes.where(category: Category.where(name: "dirt_street")).pluck(:modality).uniq
+    @frame_brands = @bikes.pluck(:frame_brand).uniq
+    @road_frame_sizes = @bikes.where(category: Category.where(name: "road")).pluck(:frame_size).uniq
+    @mtb_dirt_infant_urban_frame_sizes = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:frame_size).uniq
+    @all_frame_sizes = @bikes.pluck(:frame_size).uniq
+    @frame_materials = @bikes.pluck(:frame_material).uniq
+
 
 
 
@@ -107,6 +110,10 @@ class BikesController < ApplicationController
         frame_brands: @frame_brands,
         road_frame_sizes: @road_frame_sizes,
         mtb_dirt_infant_urban_frame_sizes: @mtb_dirt_infant_urban_frame_sizes,
+        all_frame_sizes: @all_frame_sizes,
+        frame_materials: @frame_materials,
+
+
 
 
 
