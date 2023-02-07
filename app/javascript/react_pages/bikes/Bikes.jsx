@@ -86,10 +86,6 @@ export function Bikes(props) {
   const [rearSuspensionModelOptionsToFilter, setRearSuspensionModelOptionsToFilter] = useState([]);
 
 
-
-
-
-
   const currencyConfig = {
     locale: "pt-BR",
     formats: {
@@ -1054,7 +1050,7 @@ export function Bikes(props) {
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
               {categoryOptionsToFilter.length <= 1 && (<>
-                {presentFrameSizes && (<>
+                {presentFrameSizes.length > 0 && (<>
                   <h5 className=" mt-3">tamanho</h5>
                   {presentFrameSizes.map((presentFrameSize, index)=> {
                     return (
@@ -1095,7 +1091,6 @@ export function Bikes(props) {
               </>)}
 
               <h5 className=" mt-3">material</h5>
-
               <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-3">
                 {presentFrameMaterials.map((presentFrameMaterial, index) => {
                   return (
@@ -1124,8 +1119,8 @@ export function Bikes(props) {
 
             {categoryOptionsToFilter.includes("road") && (<>
               <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Garfo</button>
-              <div id="Garfo" className="suspension-filter d-none">
-                {presentRoadForkMaterials && (<>
+              <div id="Garfo" className="fork-filter d-none">
+                {presentRoadForkMaterials.length > 0 && (<>
                   <h5 className=" mt-3">material</h5>
                   <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
                     {presentRoadForkMaterials.map((presentRoadForkMaterial, index) => {
@@ -1141,7 +1136,7 @@ export function Bikes(props) {
             {!categoryOptionsToFilter.includes("road") && (<>
               <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
               <div id="Suspensão" className="suspension-filter d-none">
-                {presentSuspensionTypes && (<>
+                {presentSuspensionTypes.length > 0 && (<>
                   <h5 className=" mt-3">tipo</h5>
                   <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
                     {presentSuspensionTypes.map((presentSuspensionType, index) => {
@@ -1152,7 +1147,7 @@ export function Bikes(props) {
                   </div>
                 </>)}
                 {/* <h5 className="mt-3">dianteira</h5> */}
-                {presentFrontSuspensionTravels && (<>
+                {(presentFrontSuspensionTravels && !suspensionTypeOptionsToFilter.includes("no_suspension")) &&(<>
                   <h5 className=" mt-3">dianteira</h5>
                   <div id="front_suspension_travel" className="d-flex flex-wrap justify-content-between mt-3">
                     {presentFrontSuspensionTravels.map((presentFrontSuspensionTravel, index) => {
@@ -1163,7 +1158,7 @@ export function Bikes(props) {
                   </div>
                 </>)}
 
-                {presentMtbDirtFrontSuspensionModels && (<>
+                {(presentMtbDirtFrontSuspensionModels.length > 0 && !suspensionTypeOptionsToFilter.includes("no_suspension")) && (<>
                   <h5 className=" mt-3">Marca</h5>
                   <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-1">
                     {presentMtbDirtFrontSuspensionModels.map((presentMtbDirtFrontSuspensionModel, index) => {
@@ -1184,7 +1179,7 @@ export function Bikes(props) {
                     </div>
                   </>)}
 
-                {!suspensionTypeOptionsToFilter.includes("hardtail") && (<>
+                {(!suspensionTypeOptionsToFilter.includes("hardtail") && !suspensionTypeOptionsToFilter.includes("no_suspension"))&& (<>
                   {/* <h5 className="mt-3">traseira</h5> */}
                   {presentRearSuspensionTravels && (<>
                     <h5 className=" mt-3">traseira</h5>
@@ -1196,7 +1191,7 @@ export function Bikes(props) {
                       })}
                     </div>
                   </>)}
-                  {presentMtbDirtRearSuspensionModels && (<>
+                  {presentMtbDirtRearSuspensionModels.length > 0 && (<>
                     <h5 className=" mt-3">Marca</h5>
                     <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-1">
                       {presentMtbDirtRearSuspensionModels.map((presentMtbDirtRearSuspensionModel, index) => {

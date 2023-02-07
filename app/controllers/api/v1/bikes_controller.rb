@@ -32,6 +32,7 @@ module Api
         @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_models].split(",")) if params[:rear_suspension_models].present?
 
 
+
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
         @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears]) if params[:number_of_front_gears].present?
         @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears]) if params[:number_of_rear_gears].present?
@@ -85,14 +86,11 @@ module Api
               @bike.photos.attach(photo)
             end
           end
-
           if params[:advertisement].present?
             @coupon_code = params[:advertisement][:discount_coupon]
           end
-
           @service = AdvertisementGenerator.new(@bike, @coupon_code)
           @service.call()
-
           if @bike.advertisement.present? &&  @service.errors.blank?
             render json: { success: true, bike: @bike, photos: @photos, advertisement: @bike.advertisement, redirect_url: advertisement_path(@bike.advertisement) }
           else
