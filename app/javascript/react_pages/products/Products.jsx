@@ -171,14 +171,12 @@ export function Products(props) {
     console.log(e.target.value)
     const currentOptionsToFilter = [...productTypeOptionsToFilter]
     const currentAttributeOptionsToFilter = [...attributeOptionsToFilter]
-
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.innerHTML)) {
       setProductTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
       setAttributeOptionsToFilter(currentAttributeOptionsToFilter.filter(element => element != e.target.value));
       console.log(currentOptionsToFilter)
       console.log(currentAttributeOptionsToFilter)
-
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.innerHTML)
@@ -249,61 +247,85 @@ export function Products(props) {
   //   )
   // }
 
-  const renderOptionsToFilterAttributes = (attributes, index) => {
+  const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
+    let options = []
+    let attributesToFilter = []
+    let ObjectOfAttributes = {}
+    attributeOptionsToFilter.map((attribute, index) => {
+      // console.log(attribute)
+      attribute.map((question, index) => {
 
-    attributes.map((attribute, index) => {
-      console.log(attribute)
-      let options = []
-      if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
-        options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-      } else if (categoryFilter === "road" && attribute.name === "frame_size") {
-        options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
-      } else if (!categoryFilter && attribute.name === "frame_size") {
-        options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-      } else if (attribute.name === "frame_brand") {
-        return
-      } else if (attribute.name === "suspension_type") {
-        options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-      } else if (attribute.name === "brake_type") {
-        options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-      }  else if (attribute.name === "condition") {
-        options = [ ["new", "Novo"], ["used", "Usado" ]]
-      }  else if (attribute.name === "documentation_type") {
-        options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-      } else if (attribute.name === "frame_material") {
-        options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-      } else if (attribute.name === "rim_material") {
-        options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-      } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
-        return
-      } else if (attribute.name === "seat_post_type") {
-        options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-      }
-      // else if (!Array.isArray(attribute.options) && attribute.options.includes("other")) {
-      //   attribute.options.pop()
-      //   options = attribute.options.pop()
-      // }
-      else {
-        options = attribute.options
-      }
-      return (
-        <div  key={index} className="attributes-filters">
-          <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-          {options.map((option, index) => {
-            if (Array.isArray(option)) {
-              return (
-                <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-              )
-            } else {
-              return (
-                <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-              )
-            }
+        if ((categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("urban") || categoryOptionsToFilter.includes("infant") )&& attribute.name === "frame_size") {
+          options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+        } else if (categoryOptionsToFilter.includes("road")  && question.name === "frame_size") {
+          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+        } else if (categoryOptionsToFilter.length <= 1 && question.name === "frame_size") {
+          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+        } else if (question.name === "disc_include") {
+          return
+        }  else if (question.options.includes("other") ) {
+          question.options.pop()
+          options = question.options
+        } else if (question.kind === "text" ) {
+          return
+        } else if (question.name.includes("material")) {
+          return
+        } else {
+          options = question.options
+        }
+        console.log(question.prompt)
 
-          })}
-        </div>
-      )
+        if (question.prompt in ObjectOfAttributes) {
+          console.log("já tem")
+          // delete ObjectOfAttributes[question.prompt];
+        } else {
+          console.log("Adicionar")
+          // ObjectOfAttributes[question.prompt] = options
+        }
+        ObjectOfAttributes[question.prompt] = options
+      })
     })
+    // attributesToFilter.push(ObjectOfAttributes)
+    console.log(ObjectOfAttributes)
+    return (<>
+      {Object.keys(ObjectOfAttributes).length != 0 && (<>
+        <h5 className="text-success">Atributos</h5>
+        {Object.keys(ObjectOfAttributes).map((key, index) => {
+          return (<>
+            <h5 className="text-gray">{key}</h5>
+            <div className="d-flex flex-wrap gap-2">
+              {ObjectOfAttributes[key].map((option, index) => {
+                if (Array.isArray(option)) {
+                  return (
+                    <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+                  )
+                } else {
+                  return (
+                    <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
+                  )
+                }
+              })}
+            </div>
+          </>)
+        })}
+      </>)}
+    </>)
+  }
+
+  const handleMultipleFiltersComponentsAttributes = (e) => {
+    console.log(e.target.value)
+    const currentOptionsToFilter = [...componentsAttributesOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setComponentsAttributesOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setComponentsAttributesOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
 
   const hendleAccessoriesFiltes = (e) => {
@@ -320,7 +342,6 @@ export function Products(props) {
   }
 
   const hendleComponentsFiltes = (e) => {
-    console.log(e)
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       document.getElementById("products-components").classList.remove("d-none")
@@ -334,7 +355,6 @@ export function Products(props) {
   }
 
   const hendleClothesFiltes = (e) => {
-    console.log(e)
     e.target.classList.toggle("active")
     if (e.target.classList.contains("active")) {
       document.getElementById("products-clothes").classList.remove("d-none")
@@ -365,21 +385,7 @@ export function Products(props) {
     }
   }
 
-  const handleMultipleFiltersComponentsAttributes = (e) => {
-    console.log(e.target.value)
-    const currentOptionsToFilter = [...componentsAttributesOptionsToFilter]
-    const tagFilter = e.target
-    if (currentOptionsToFilter.includes(e.target.innerHTML)) {
-      setComponentsAttributesOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
-      console.log(currentOptionsToFilter)
-      tagFilter.classList.remove("selected-tag")
-    } else {
-      currentOptionsToFilter.push(e.target.innerHTML)
-      setComponentsAttributesOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
-      tagFilter.classList.add("selected-tag")
-    }
-  }
+
 
   const handleMultipleFilters = (e) => {
     const currentOptionsToFilter = [...categoryOptionsToFilter]
@@ -905,34 +911,13 @@ export function Products(props) {
 
 
             {attributeOptionsToFilter && (<>
-              <h5 className="mt-3">Atributos</h5>
-                {attributeOptionsToFilter.map((attributes, index) => {
+
+              {renderOptionsToFilterAttributes(attributeOptionsToFilter)}
 
 
-                    return renderOptionsToFilterAttributes(attributes, index)
-                    // return (
-                    //   <div className="attributes-filters">
-                    //     <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-                    //     {attribute.options?.map((option, index) => {
-                    //       if (Array.isArray(option)) {
-                    //         return (
-                    //           <button type="button" value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-                    //         )
-                    //       } else {
-                    //         return (
-                    //           <button type="button" value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-                    //         )
-                    //       }
-
-                    //     })}
-
-                    //   </div>
-                    // )
-
-                })}
             </>)}
 
-{/*
+            {/*
             {productTypeFilter.length > 1 && (<>
               <h5 className="mt-3">Atributos</h5>
                 {attributesForProduct.map((attribute, index) => {

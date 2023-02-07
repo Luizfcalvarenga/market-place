@@ -72,15 +72,67 @@ class BikesController < ApplicationController
     if current_user.present?
       @user = current_user
     end
-
     skip_authorization
-
     respond_to do |format|
       format.json { render json: {
         categories: @categories,
         user: @user,
         states: @states,
         cities: @cities
+      } }
+    end
+  end
+
+  def get_attributes_that_are_present_for_filter
+    @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
+    # Category.where(id: Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:category_id))
+    @categories = Category.where(id: @bikes.pluck(:category_id).uniq)
+    @road_modalities = @bikes.where(category: Category.where(name: "road")).pluck(:modality).uniq
+    @mtb_modalities = @bikes.where(category: Category.where(name: "mountain_bike")).pluck(:modality).uniq
+    @dirt_modalities = @bikes.where(category: Category.where(name: "dirt_street")).pluck(:modality).uniq
+    @frame_brands = @bikes.pluck(:frame_brand).uniq
+    @road_frame_sizes = @bikes.where(category: Category.where(name: "road")).pluck(:frame_size).uniq
+    @mtb_dirt_infant_urban_frame_sizes = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:frame_size).uniq
+    @all_frame_sizes = @bikes.pluck(:frame_size).uniq
+    @frame_materials = @bikes.pluck(:frame_material).uniq
+    @suspension_types = @bikes.pluck(:suspension_type).uniq
+    @front_suspension_travels = @bikes.pluck(:front_suspension_travel).uniq
+    @rear_suspension_travels = @bikes.pluck(:rear_suspension_travel).uniq
+    @front_suspension_models = @bikes.pluck(:front_suspension_model).uniq
+    @road_fork_materials = @bikes.where(category: Category.where(name: "road")).pluck(:fork_material).uniq
+    @mtb_dirt_front_suspension_models = @bikes.where.not(category: Category.where(name:  ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:front_suspension_model).uniq
+    @rear_suspension_models = @bikes.pluck(:rear_suspension_model).uniq
+    @mtb_dirt_rear_suspension_models = @bikes.where.not(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:rear_suspension_model).uniq
+
+
+
+
+
+
+
+
+    skip_authorization
+    respond_to do |format|
+      format.json { render json: {
+        categories: @categories,
+        road_modalities: @road_modalities,
+        mtb_modalities: @mtb_modalities,
+        dirt_modalities: @dirt_modalities,
+        frame_brands: @frame_brands,
+        road_frame_sizes: @road_frame_sizes,
+        mtb_dirt_infant_urban_frame_sizes: @mtb_dirt_infant_urban_frame_sizes,
+        all_frame_sizes: @all_frame_sizes,
+        frame_materials: @frame_materials,
+        suspension_types: @suspension_types,
+        front_suspension_travels: @front_suspension_travels,
+        mtb_dirt_front_suspension_models: @mtb_dirt_front_suspension_models,
+        rear_suspension_travels: @rear_suspension_travels,
+        front_suspension_models: @front_suspension_models,
+        road_fork_materials: @road_fork_materials,
+        mtb_dirt_front_suspension_models: @mtb_dirt_front_suspension_models,
+        rear_suspension_models: @rear_suspension_models,
+        mtb_dirt_rear_suspension_models: @mtb_dirt_rear_suspension_models,
+
       } }
     end
   end

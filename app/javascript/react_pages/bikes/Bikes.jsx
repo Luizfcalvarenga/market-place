@@ -60,10 +60,34 @@ export function Bikes(props) {
   const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
   const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
   const [verifiedBikeFilter, setVerifiedBikeFilter] = useState([params.verified] || "");
-
-
-
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
+  const [presentCategories, setPresentCategories] = useState([]);
+  const [presentRoadModalities, setPresentRoadModalities] = useState([]);
+  const [presentMtbModalities, setPresentMtbModalities] = useState([]);
+  const [presentDirtModalities, setPresentDirtModalities] = useState([]);
+  const [presentFrameBrands, setPresentFrameBrands] = useState([]);
+  const [frameBrandOptionsToFilter, setFrameBrandOptionsToFilter] = useState([]);
+  const [presentRoadFrameSizes, setPresentRoadFrameSizes] = useState([]);
+  const [presentDirtMtbFrameSizes, setPresentDirtMtbFrameSizes] = useState([]);
+  const [presentFrameSizes, setPresentFrameSizes] = useState([]);
+  const [presentFrameMaterials, setPresentFrameMaterials] = useState([]);
+  const [presentSuspensionTypes, setPresentSuspensionTypes] = useState([]);
+  const [suspensionTypeOptionsToFilter, setSuspensionTypeOptionsToFilter] = useState([]);
+  const [presentFrontSuspensionTravels, setPresentFrontSuspensionTravels] = useState([]);
+  const [frontSuspensionTravelOptionsToFilter, setFrontSuspensionTravelOptionsToFilter] = useState([]);
+  const [presentRearSuspensionTravels, setPresentRearSuspensionTravels] = useState([]);
+  const [rearSuspensionTravelOptionsToFilter, setRearSuspensionTravelOptionsToFilter] = useState([]);
+  const [presentFrontSuspensionModels, setPresentFrontSuspensionModels] = useState([]);
+  const [presentRoadForkMaterials, setPresentRoadForkMaterials] = useState([]);
+  const [presentMtbDirtFrontSuspensionModels, setPresentMtbDirtFrontSuspensionModels] = useState([]);
+  const [frontSuspensionModelOptionsToFilter, setFrontSuspensionModelOptionsToFilter] = useState([]);
+  const [presentRearSuspensionModels, setPresentRearSuspensionModels] = useState([]);
+  const [presentMtbDirtRearSuspensionModels, setPresentMtbDirtRearSuspensionModels] = useState([]);
+  const [rearSuspensionModelOptionsToFilter, setRearSuspensionModelOptionsToFilter] = useState([]);
+
+
+
+
 
 
   const currencyConfig = {
@@ -102,21 +126,22 @@ export function Bikes(props) {
     );
   }
 
+  // const getKey = (array,key) => array.map(a => a[key]);
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
     // if (categoryFilter) url = url + `&category=${categoryFilter}`
-    if (modalityFilter) url = url + `&modality=${modalityFilter}`
+    // if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${minPriceFilter * 100}`
     if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter * 100}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
     if (maxYearFilter) url = url + `&max_year=${maxYearFilter}`
     if (bikeTypeFilter) url = url + `&bike_type=${bikeTypeFilter}`
-    if (frameSizeFilter) url = url + `&frame_size=${frameSizeFilter}`
-    if (frameBrandFilter) url = url + `&frame_brand=${frameBrandFilter}`
-    if (frameMaterialFilter) url = url + `&frame_material=${frameMaterialFilter}`
-    if (suspensionTypeFilter) url = url + `&suspension_type=${suspensionTypeFilter}`
+    // if (frameSizeFilter) url = url + `&frame_size=${frameSizeFilter}`
+    // if (frameBrandFilter) url = url + `&frame_brand=${frameBrandFilter}`
+    // if (frameMaterialFilter) url = url + `&frame_material=${frameMaterialFilter}`
+    // if (suspensionTypeFilter) url = url + `&suspension_type=${suspensionTypeFilter}`
     if (frontSuspensionTravelFilter) url = url + `&front_suspension_travel=${frontSuspensionTravelFilter}`
     if (rearSuspensionTravelFilter) url = url + `&rear_suspension_travel=${rearSuspensionTravelFilter}`
     if (frontSuspensionModelFilter) url = url + `&front_suspension_model=${frontSuspensionModelFilter}`
@@ -151,17 +176,65 @@ export function Bikes(props) {
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
     if (frameSizeOptionsToFilter) url = url + `&frame_sizes=${frameSizeOptionsToFilter}`
     if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
+    if (frameBrandOptionsToFilter) url = url + `&frame_brands=${frameBrandOptionsToFilter}`
+    if (suspensionTypeOptionsToFilter) url = url + `&suspension_types=${suspensionTypeOptionsToFilter}`
+    if (frontSuspensionTravelOptionsToFilter) url = url + `&front_suspension_travels=${frontSuspensionTravelOptionsToFilter}`
+    if (rearSuspensionTravelOptionsToFilter) url = url + `&rear_suspension_travels=${rearSuspensionTravelOptionsToFilter}`
+    if (frontSuspensionModelOptionsToFilter) url = url + `&front_suspension_models=${frontSuspensionModelOptionsToFilter}`
+    if (rearSuspensionModelOptionsToFilter) url = url + `&rear_suspension_models=${rearSuspensionModelOptionsToFilter}`
+
+
+
+
+
+
+
+
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
 
 
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
+
   }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, frameSizeFilter, frameBrandFilter, frameMaterialFilter, suspensionTypeFilter,
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
+  frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
+ ])
+
+  useEffect(() => {
+    fetch(`/get_attributes_that_are_present_for_filter`)
+     .then((response) => response.json())
+     .then((data) => {
+      console.log(data)
+      setPresentCategories(data.categories)
+
+      setPresentRoadModalities(data.road_modalities)
+      setPresentMtbModalities(data.mtb_modalities)
+      setPresentDirtModalities(data.dirt_modalities)
+                    // QUADRO
+      setPresentFrameBrands(data.frame_brands.sort())
+      setPresentRoadFrameSizes(data.road_frame_sizes)
+      setPresentDirtMtbFrameSizes(data.mtb_dirt_infant_urban_frame_sizes)
+      setPresentFrameSizes(data.all_frame_sizes)
+      setPresentFrameMaterials(data.frame_materials)
+                // SUSPENSÃO
+      setPresentSuspensionTypes(data.suspension_types)
+      setPresentFrontSuspensionTravels(data.front_suspension_travels)
+      setPresentFrontSuspensionModels(data.front_suspension_models)
+      setPresentRoadForkMaterials(data.road_fork_materials)
+      setPresentMtbDirtFrontSuspensionModels(data.mtb_dirt_front_suspension_models)
+      setPresentRearSuspensionTravels(data.rear_suspension_travels)
+      setPresentRearSuspensionModels(data.rear_suspension_models)
+      setPresentMtbDirtRearSuspensionModels(data.mtb_dirt_rear_suspension_models)
+
+
+     })
+
+  }, []);
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -185,19 +258,16 @@ export function Bikes(props) {
   const handleBikeTypeFilter = (e) => {
     const tagFilter = e.target
     tagFilter.classList.toggle("selected-tag")
-
     if (e.target.classList.contains("selected-tag")) {
       setBikeTypeFilter(e.target.value)
     } else {
       setBikeTypeFilter("")
     }
-
   }
 
   const handleConditionFilter = (e) => {
     const tagFilter = e.target
     tagFilter.classList.toggle("selected-tag")
-
     if (e.target.classList.contains("selected-tag")) {
       setConditionFilter(e.target.value)
     } else {
@@ -207,14 +277,9 @@ export function Bikes(props) {
 
   const handleLike = (e) => {
     e.preventDefault()
-    console.log(e.target)
-
-
     const dataObject = new FormData();
     dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
-
-    // console.log(e.nativeEvent.path[1].id)
     axios.post('/likes',dataObject)
 
     .then(function (response) {
@@ -235,8 +300,60 @@ export function Bikes(props) {
 
   const translateWord = (word) => {
     const languageMap = {
-      "e-bike" : "E-Bike",
-      "bike" : "Bike",
+      "bike": "Bike",
+      "e-bike": "E-Bike",
+
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractable" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "new": "Novo",
+      "used": "Usado",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
     return languageMap[word]
   }
@@ -287,11 +404,35 @@ export function Bikes(props) {
     if (e.target.classList.contains("active")) {
       document.getElementById(e.target.value).classList.remove("d-none")
       e.target.classList.add("selected-tag")
-
     } else {
       document.getElementById(e.target.value).classList.add("d-none")
       e.target.classList.remove("selected-tag")
+    }
+  }
 
+  const handleFrameBrandFilter = (e) => {
+    e.target.classList.toggle("active")
+    if (e.target.classList.contains("active")) {
+      document.getElementById(e.target.value).classList.remove("d-none")
+      e.target.classList.add("selected-tag")
+    } else {
+      document.getElementById(e.target.value).classList.add("d-none")
+      e.target.classList.remove("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersFrameBrand = (e) => {
+    const currentOptionsToFilter = [...frameBrandOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrameBrandOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrameBrandOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
     }
   }
 
@@ -325,106 +466,182 @@ export function Bikes(props) {
     }
   }
 
-  //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
-  const frameBrands = [
-    "Alfameq",
-    "Astro",
-    "Audax",
-    "BH",
-    "Bianchi",
-    "BMC",
-    "Caloi",
-    "Cannondale",
-    "Canyon",
-    "Carrera",
-    "Cervelo",
-    "Corratec",
-    "Cube",
-    "dabomb",
-    "Felt",
-    "First",
-    "Focus",
-    "Fuji",
-    "Giant",
-    "Groove",
-    "GT",
-    "GTS",
-    "Ibis",
-    "Jamis",
-    "Kona",
-    "Lapierre",
-    "Marin",
-    "Merida",
-    "Mosso",
-    "Oggi",
-    "Orbea",
-    "Pinarello",
-    "Raleigh",
-    "Rava",
-    "Ridley",
-    "Santa_cruz",
-    "Schwinn",
-    "Scott",
-    "Sense",
-    "Soul",
-    "Specialized",
-    "Swift Carbon",
-    "Trek",
-    "Tsw",
-    "Wilier",
-    "YT",
-    "Argon 21",
-    "Bliv",
-    "Blue",
-    "Bottecchia",
-    "Cipollini",
-    "Cly",
-    "Cumberland",
-    "De Rosa",
-    "E Moving",
-    "Gary Fisher",
-    "Gioia",
-    "Kaiena",
-    "Kestrel",
-    "Kode",
-    "Kuota",
-    "Lazzaretti",
-    "Lev E-Bike",
-    "Litespeed",
-    "Look",
-    "Lotus",
-    "Mercian",
-    "Miyamura Gravel",
-    "Open",
-    "Quintana Roo",
-    "Redland",
-    "Riva",
-    "Rose",
-    "Sava",
-    "Sundown",
-    "Time",
-    "Trinx",
-    "Trust",
-    "Velorbis",
-    "Vicinitech",
-    "Victory",
-    "Eddy Merckx",
-    "Salsa",
-    "Surly",
-    "Soma",
-    "Diamondback",
-    "Dahon"
-  ].sort()
+ const handleMultipleFiltersSuspensionType = (e) => {
+  const currentOptionsToFilter = [...suspensionTypeOptionsToFilter]
+  const tagFilter = e.target
+  if (currentOptionsToFilter.includes(e.target.value)) {
+    setSuspensionTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.remove("selected-tag")
+  } else {
+    currentOptionsToFilter.push(e.target.value)
+    setSuspensionTypeOptionsToFilter(currentOptionsToFilter)
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.add("selected-tag")
+  }
+ }
 
-  const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
-  const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
+ const handleMultipleFiltersFrontSuspensionTravel = (e) => {
+  const currentOptionsToFilter = [...frontSuspensionTravelOptionsToFilter]
+  const tagFilter = e.target
+  if (currentOptionsToFilter.includes(e.target.value)) {
+    setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.remove("selected-tag")
+  } else {
+    currentOptionsToFilter.push(e.target.value)
+    setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter)
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.add("selected-tag")
+  }
+ }
+
+ const handleMultipleFiltersRearSuspensionTravel = (e) => {
+  const currentOptionsToFilter = [...rearSuspensionTravelOptionsToFilter]
+  const tagFilter = e.target
+  if (currentOptionsToFilter.includes(e.target.value)) {
+    setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.remove("selected-tag")
+  } else {
+    currentOptionsToFilter.push(e.target.value)
+    setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter)
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.add("selected-tag")
+  }
+ }
+
+ const handleMultipleFiltersFrontSuspensionModel = (e) => {
+  const currentOptionsToFilter = [...frontSuspensionModelOptionsToFilter]
+  const tagFilter = e.target
+  if (currentOptionsToFilter.includes(e.target.value)) {
+    setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.remove("selected-tag")
+  } else {
+    currentOptionsToFilter.push(e.target.value)
+    setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter)
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.add("selected-tag")
+  }
+ }
+
+ const handleMultipleFiltersRearSuspensionModel = (e) => {
+  const currentOptionsToFilter = [...rearSuspensionModelOptionsToFilter]
+  const tagFilter = e.target
+  if (currentOptionsToFilter.includes(e.target.value)) {
+    setRearSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.remove("selected-tag")
+  } else {
+    currentOptionsToFilter.push(e.target.value)
+    setRearSuspensionModelOptionsToFilter(currentOptionsToFilter)
+    console.log(currentOptionsToFilter)
+    tagFilter.classList.add("selected-tag")
+  }
+ }
+
+
+  //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
+  // const frameBrands = [
+  //   "Alfameq",
+  //   "Astro",
+  //   "Audax",
+  //   "BH",
+  //   "Bianchi",
+  //   "BMC",
+  //   "Caloi",
+  //   "Cannondale",
+  //   "Canyon",
+  //   "Carrera",
+  //   "Cervelo",
+  //   "Corratec",
+  //   "Cube",
+  //   "dabomb",
+  //   "Felt",
+  //   "First",
+  //   "Focus",
+  //   "Fuji",
+  //   "Giant",
+  //   "Groove",
+  //   "GT",
+  //   "GTS",
+  //   "Ibis",
+  //   "Jamis",
+  //   "Kona",
+  //   "Lapierre",
+  //   "Marin",
+  //   "Merida",
+  //   "Mosso",
+  //   "Oggi",
+  //   "Orbea",
+  //   "Pinarello",
+  //   "Raleigh",
+  //   "Rava",
+  //   "Ridley",
+  //   "Santa_cruz",
+  //   "Schwinn",
+  //   "Scott",
+  //   "Sense",
+  //   "Soul",
+  //   "Specialized",
+  //   "Swift Carbon",
+  //   "Trek",
+  //   "Tsw",
+  //   "Wilier",
+  //   "YT",
+  //   "Argon 21",
+  //   "Bliv",
+  //   "Blue",
+  //   "Bottecchia",
+  //   "Cipollini",
+  //   "Cly",
+  //   "Cumberland",
+  //   "De Rosa",
+  //   "E Moving",
+  //   "Gary Fisher",
+  //   "Gioia",
+  //   "Kaiena",
+  //   "Kestrel",
+  //   "Kode",
+  //   "Kuota",
+  //   "Lazzaretti",
+  //   "Lev E-Bike",
+  //   "Litespeed",
+  //   "Look",
+  //   "Lotus",
+  //   "Mercian",
+  //   "Miyamura Gravel",
+  //   "Open",
+  //   "Quintana Roo",
+  //   "Redland",
+  //   "Riva",
+  //   "Rose",
+  //   "Sava",
+  //   "Sundown",
+  //   "Time",
+  //   "Trinx",
+  //   "Trust",
+  //   "Velorbis",
+  //   "Vicinitech",
+  //   "Victory",
+  //   "Eddy Merckx",
+  //   "Salsa",
+  //   "Surly",
+  //   "Soma",
+  //   "Diamondback",
+  //   "Dahon"
+  // ].sort()
+
+  // const roadFrameSizes =  ["<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL"]
+  // const dirtMtbFrameSizes =   ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+  // const allFrameSizes = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"].sort()
 
   /////////////////////////////////////////////////////////////////////////////////////SUSPENSÃO////////////////////////////////////////////////////////////////////////////
 
 
-  const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
-  const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
+  // const frontSuspensionTravels = ["80 mm", "90 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
+  // const rearSuspensionTravels = ["80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
 
   const shockSizes = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197" ]
   const allRearSuspensionTravel = ["165x38", "170x35", "184x44", "184x48", "190x37.5", "190x42.5", "190x44", "190x45.0", "190x51", "190x63", "197x48", "200x50", "200x51", "200x57", "200x70", "205x50", "205x53", "205x57.5", "205x60", "205x65", "210x50", "210x52.5", "210x55", "215.9x57.1", "216x57", "216x63", "216x64", "222x57", "222x70", "225x70", "225x75", "229x76", "230x57.5", "230x60", "230x65", "235x32.5", "240x75", "240x76", "241x76", "250x70", "250x75m", "257x51", "267x89", "48x197", "80 mm", "100 mm", "110 mm", "120 mm", "130 mm", "140 mm", "150 mm", "160 mm", "170 mm", "180 mm", "200 mm"]
@@ -505,11 +722,12 @@ export function Bikes(props) {
 
             <h6 className=" mt-3">categoria</h6>
             <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
-              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>Mountain Bike</button>
-              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Dirt</button>
-              <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Road</button>
-              <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Infantil</button>
-              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Urbana</button>
+              {presentCategories.map((category, index) => {
+                return (
+
+                  <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
+                )
+              })}
             </div>
             {/* <h5 className=" mt-3">categoria</h5>
             <select
@@ -528,15 +746,22 @@ export function Bikes(props) {
             {categoryOptionsToFilter.includes("mountain_bike") && (<>
               {/* <h5 className="mt-3">Modalidade</h5>
                */}
-              <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+              <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidades MTB</button>
 
                <div id="mtb-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-                <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
-                <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
-                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
-                <button type="button" value="speed" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Speed</button>
-                <button type="button" value="trail" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Trail</button>
-                <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button>
+
+                {presentMtbModalities.map((presentMtbModality, index) => {
+                    return (
+
+                      <button type="button" key={index} value={presentMtbModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentMtbModality)}</button>
+                    )
+                  })}
+                  {/* <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
+                  <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
+                  <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
+                  <button type="button" value="speed" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Speed</button>
+                  <button type="button" value="trail" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Trail</button>
+                  <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button> */}
                </div>
 
               {/* <select
@@ -556,13 +781,18 @@ export function Bikes(props) {
 
             {categoryOptionsToFilter.includes("dirt_street") && (<>
               {/* <h5 className="mt-3">Modalidade</h5> */}
-              <button type="button" value="dirt-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+              <button type="button" value="dirt-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidades Dirt</button>
 
               <div id="dirt-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-                <button type="button" value="street_bmx" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Street BMX</button>
-                <button type="button" value="race_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Race BMX</button>
+                {presentDirtModalities.map((presentDirtModality, index) => {
+                  return (
+
+                    <button type="button" key={index} value={presentDirtModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentDirtModality)}</button>
+                  )
+                })}
+                {/* <button type="button" value="race_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Race BMX</button>
                 <button type="button" value="big_wheel_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Big Wheel BMX</button>
-                <button type="button" value="dirt_jump" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Dirt Jump</button>
+                <button type="button" value="dirt_jump" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Dirt Jump</button> */}
               </div>
 
 
@@ -582,14 +812,20 @@ export function Bikes(props) {
 
             {categoryOptionsToFilter.includes("road") &&(<>
               {/* <h5 className="mt-3">Modalidade</h5> */}
-              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
+              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidades Road</button>
 
               <div id="road-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-                <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
+                {presentRoadModalities.map((presentRoadModality, index) => {
+                  return (
+
+                    <button type="button" key={index} value={presentRoadModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentRoadModality)}</button>
+                  )
+                })}
+                {/* <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
                 <button type="button" value="triathlon" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Triathon</button>
                 <button type="button" value="ciclocross" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Ciclocross</button>
                 <button type="button" value="cicloviagem" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Cicloviagem</button>
-                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
+                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button> */}
               </div>
 
 
@@ -729,8 +965,17 @@ export function Bikes(props) {
               </select>
             </>)} */}
 
-            <h5 className=" mt-3">marca</h5>
-            <select
+            {/* <h5 className=" mt-3">marca</h5> */}
+            <button type="button" value="frame_brands" className="filter-tag" onClick={(e) => handleFrameBrandFilter(e)}>Marca</button>
+            <div id="frame_brands" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+              {presentFrameBrands.map((presentFrameBrand, index) => {
+                return (
+
+                  <button type="button" key={index} value={presentFrameBrand} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameBrand(e)}>{presentFrameBrand}</button>
+                )
+              })}
+            </div>
+            {/* <select
               className="select-answer"
               value={frameBrandFilter}
               onChange={(e) => setFrameBrandFilter(e.target.value)}
@@ -739,7 +984,7 @@ export function Bikes(props) {
               {frameBrands.map((frameBrand, index) => {
                 return (<option key={index}>{frameBrand}</option>);
               })}
-            </select>
+            </select> */}
 
             <div className="model-filter">
               <h5 className=" mt-3">Modelo</h5>
@@ -809,13 +1054,14 @@ export function Bikes(props) {
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Quadro</button>
             <div id="Quadro" className="frame-filter d-none">
               {categoryOptionsToFilter.length <= 1 && (<>
-                <h5 className=" mt-3">tamanho</h5>
-
-                {allFrameSizes.map((frameSize, index)=> {
-                  return (
-                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
-                  );
-                })}
+                {presentFrameSizes && (<>
+                  <h5 className=" mt-3">tamanho</h5>
+                  {presentFrameSizes.map((presentFrameSize, index)=> {
+                    return (
+                      <button type="button" key={index} value={presentFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentFrameSize}</button>
+                    );
+                  })}
+                </>)}
 
                 {/* <h5 className=" mt-3">tamanho</h5>
                 <select
@@ -832,26 +1078,37 @@ export function Bikes(props) {
 
               {categoryOptionsToFilter.includes("road") && (<>
                 <h5 className=" mt-3">tamanho</h5>
-                {roadFrameSizes.map((frameSize, index)=> {
+                {presentRoadFrameSizes.map((presentRoadFrameSize, index)=> {
                   return (
-                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={presentRoadFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentRoadFrameSize}</button>
                   );
                 })}
               </>)}
 
               {(categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("infant") || categoryOptionsToFilter.includes("urban")) && (<>
                 <h5 className=" mt-3">tamanho</h5>
-                  {dirtMtbFrameSizes.map((frameSize, index)=> {
+                  {presentDirtMtbFrameSizes.map((presentDirtMtbFrameSize, index)=> {
                   return (
-                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={presentDirtMtbFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentDirtMtbFrameSize}</button>
                   );
                 })}
               </>)}
 
               <h5 className=" mt-3">material</h5>
-              <button type="button" value="carbon" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono</button>
+
+              <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-3">
+                {presentFrameMaterials.map((presentFrameMaterial, index) => {
+                  return (
+
+                    <button type="button" key={index} value={presentFrameMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>{translateWord(presentFrameMaterial)}</button>
+                  )
+                })}
+
+              </div>
+
+              {/* <button type="button" value="carbon" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono</button>
               <button type="button" value="aluminum" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Aluminio</button>
-              <button type="button" value="carbon_aluminum_chainstay" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono/Aumínio (Chainstay)</button>
+              <button type="button" value="carbon_aluminum_chainstay" className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>Carbono/Aumínio (Chainstay)</button> */}
 
               {/* <select
                 className="select-answer"
@@ -865,74 +1122,103 @@ export function Bikes(props) {
               </select> */}
             </div>
 
-            <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
-            <div id="Suspensão" className="suspension-filter d-none">
-              <h5 className=" mt-3">tipo</h5>
-              <select
-                className="select-answer"
-                value={suspensionTypeFilter}
-                onChange={(e) => setSuspensionTypeFilter(e.target.value)}
-              >
-                <option value=""></option>
-                <option value="no_suspension">Sem Suspensão</option>
-                <option value="full_suspension">Full Suspension</option>
-                <option value="hardtail">hardtail</option>
-              </select>
+            {categoryOptionsToFilter.includes("road") && (<>
+              <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Garfo</button>
+              <div id="Garfo" className="suspension-filter d-none">
+                {presentRoadForkMaterials && (<>
+                  <h5 className=" mt-3">material</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentRoadForkMaterials.map((presentRoadForkMaterial, index) => {
+                      return (
+                        <button type="button" key={index} value={presentRoadForkMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSuspensionType(e)}>{translateWord(presentRoadForkMaterial)}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+              </div>
+            </>)}
 
-              {["full_suspension", "hardtail"].includes(suspensionTypeFilter) && (<>
-                <h5 className="mt-3">dianteira</h5>
-                <h5 className=" mt-3">curso</h5>
-                <select
-                  className="select-answer"
-                  value={frontSuspensionTravelFilter}
-                  onChange={(e) => setFrontSuspensionTravelFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {frontSuspensionTravels.map((frontSuspensionTravel, index)=> {
-                    return (<option key={index}>{frontSuspensionTravel}</option>);
-                  })}
-                </select>
+            {!categoryOptionsToFilter.includes("road") && (<>
+              <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Suspensão</button>
+              <div id="Suspensão" className="suspension-filter d-none">
+                {presentSuspensionTypes && (<>
+                  <h5 className=" mt-3">tipo</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentSuspensionTypes.map((presentSuspensionType, index) => {
+                      return (
+                        <button type="button" key={index} value={presentSuspensionType} className="filter-tag" onClick={(e) => handleMultipleFiltersSuspensionType(e)}>{translateWord(presentSuspensionType)}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+                {/* <h5 className="mt-3">dianteira</h5> */}
+                {presentFrontSuspensionTravels && (<>
+                  <h5 className=" mt-3">dianteira</h5>
+                  <div id="front_suspension_travel" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentFrontSuspensionTravels.map((presentFrontSuspensionTravel, index) => {
+                      return (
+                        <button type="button" key={index} value={presentFrontSuspensionTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionTravel(e)}>{presentFrontSuspensionTravel}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
 
-                <h5 className=" mt-3">Marca | modelo</h5>
-                <select
-                  className="select-answer"
-                  value={frontSuspensionModelFilter}
-                  onChange={(e) => setFrontSuspensionModelFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {mtbDirtUrbanFrontSuspensionModels.map((frontSuspensionModel, index)=> {
-                    return (<option key={index}>{frontSuspensionModel}</option>);
-                  })}
-                </select>
-              </>)}
+                {presentMtbDirtFrontSuspensionModels && (<>
+                  <h5 className=" mt-3">Marca</h5>
+                  <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-1">
+                    {presentMtbDirtFrontSuspensionModels.map((presentMtbDirtFrontSuspensionModel, index) => {
+                      return (
+                        <button type="button" key={index} value={presentMtbDirtFrontSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionModel(e)}>{presentMtbDirtFrontSuspensionModel}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+                {categoryOptionsToFilter.length < 1 && (<>
+                    <h5 className=" mt-3">Marca</h5>
+                    <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-1">
+                      {presentFrontSuspensionModels.map((presentFrontSuspensionModel, index) => {
+                        return (
+                          <button type="button" key={index} value={presentFrontSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionModel(e)}>{presentFrontSuspensionModel}</button>
+                        )
+                      })}
+                    </div>
+                  </>)}
 
-              {suspensionTypeFilter === "full_suspension" && (<>
-                <h5 className="mt-3">traseira</h5>
-                <h5 className=" mt-3">curso</h5>
-                <select
-                  className="select-answer"
-                  value={rearSuspensionTravelFilter}
-                  onChange={(e) => setRearSuspensionTravelFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {allRearSuspensionTravel.map((frameSize, index)=> {
-                    return (<option key={index}>{frameSize}</option>);
-                  })}
-                </select>
-
-                <h5 className=" mt-3">Marca | modelo</h5>
-                <select
-                  className="select-answer"
-                  value={rearSuspensionModelFilter}
-                  onChange={(e) => setRearSuspensionModelFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {mtbDirtUrbanRearSuspensionModels.map((rearSuspensionModel, index)=> {
-                    return (<option key={index}>{rearSuspensionModel}</option>);
-                  })}
-                </select>
-              </>)}
-            </div>
+                {!suspensionTypeOptionsToFilter.includes("hardtail") && (<>
+                  {/* <h5 className="mt-3">traseira</h5> */}
+                  {presentRearSuspensionTravels && (<>
+                    <h5 className=" mt-3">traseira</h5>
+                    <div id="Rear_suspension_travel" className="d-flex flex-wrap justify-content-between mt-1">
+                      {presentRearSuspensionTravels.map((presentRearSuspensionTravel, index) => {
+                        return (
+                          <button type="button" key={index} value={presentRearSuspensionTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionTravel(e)}>{presentRearSuspensionTravel}</button>
+                        )
+                      })}
+                    </div>
+                  </>)}
+                  {presentMtbDirtRearSuspensionModels && (<>
+                    <h5 className=" mt-3">Marca</h5>
+                    <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-1">
+                      {presentMtbDirtRearSuspensionModels.map((presentMtbDirtRearSuspensionModel, index) => {
+                        return (
+                          <button type="button" key={index} value={presentMtbDirtRearSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionModel(e)}>{presentMtbDirtRearSuspensionModel}</button>
+                        )
+                      })}
+                    </div>
+                  </>)}
+                  {categoryOptionsToFilter.length < 1 && (<>
+                    <h5 className=" mt-3">Marca</h5>
+                    <div id="frame_materials" className="d-flex flex-wrap justify-content-between mt-1">
+                      {presentRearSuspensionModels.map((presentRearSuspensionModel, index) => {
+                        return (
+                          <button type="button" key={index} value={presentRearSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionModel(e)}>{presentRearSuspensionModel}</button>
+                        )
+                      })}
+                    </div>
+                  </>)}
+                </>)}
+              </div>
+            </>)}
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Transmissão</button>
             <div id="Transmissão" className="suspension-filter d-none">
