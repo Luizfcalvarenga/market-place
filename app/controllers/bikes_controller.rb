@@ -99,7 +99,10 @@ class BikesController < ApplicationController
     @front_suspension_travels = @bikes.pluck(:front_suspension_travel).uniq
     @rear_suspension_travels = @bikes.pluck(:rear_suspension_travel).uniq
     @front_suspension_models = @bikes.pluck(:front_suspension_model).uniq
+    @road_fork_materials = @bikes.where(category: Category.where(name: "road")).pluck(:fork_material).uniq
+    @mtb_dirt_front_suspension_models = @bikes.where.not(category: Category.where(name:  ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:front_suspension_model).uniq
     @rear_suspension_models = @bikes.pluck(:rear_suspension_model).uniq
+    @mtb_dirt_rear_suspension_models = @bikes.where.not(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).pluck(:rear_suspension_model).uniq
 
 
 
@@ -122,14 +125,14 @@ class BikesController < ApplicationController
         frame_materials: @frame_materials,
         suspension_types: @suspension_types,
         front_suspension_travels: @front_suspension_travels,
+        road_front_suspension_models: @road_front_suspension_models,
+        mtb_dirt_front_suspension_models: @mtb_dirt_front_suspension_models,
         rear_suspension_travels: @rear_suspension_travels,
         front_suspension_models: @front_suspension_models,
+        road_fork_materials: @road_fork_materials,
+        mtb_dirt_front_suspension_models: @mtb_dirt_front_suspension_models,
         rear_suspension_models: @rear_suspension_models,
-
-
-
-
-
+        mtb_dirt_rear_suspension_models: @mtb_dirt_rear_suspension_models,
 
       } }
     end
