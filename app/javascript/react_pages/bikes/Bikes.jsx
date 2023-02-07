@@ -80,7 +80,6 @@ export function Bikes(props) {
   const [presentFrontSuspensionModels, setPresentFrontSuspensionModels] = useState([]);
   const [presentRoadForkMaterials, setPresentRoadForkMaterials] = useState([]);
   const [presentMtbDirtFrontSuspensionModels, setPresentMtbDirtFrontSuspensionModels] = useState([]);
-
   const [frontSuspensionModelOptionsToFilter, setFrontSuspensionModelOptionsToFilter] = useState([]);
   const [presentRearSuspensionModels, setPresentRearSuspensionModels] = useState([]);
   const [presentMtbDirtRearSuspensionModels, setPresentMtbDirtRearSuspensionModels] = useState([]);

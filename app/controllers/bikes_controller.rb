@@ -125,7 +125,6 @@ class BikesController < ApplicationController
         frame_materials: @frame_materials,
         suspension_types: @suspension_types,
         front_suspension_travels: @front_suspension_travels,
-        road_front_suspension_models: @road_front_suspension_models,
         mtb_dirt_front_suspension_models: @mtb_dirt_front_suspension_models,
         rear_suspension_travels: @rear_suspension_travels,
         front_suspension_models: @front_suspension_models,
