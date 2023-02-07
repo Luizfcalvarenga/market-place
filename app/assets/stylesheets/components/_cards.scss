@@ -1,7 +1,7 @@
 ////////////////////////// CARD CATEGORIES ON HOVER FLICKER AND BLINK
 
 .card {
-  background: linear-gradient(rgba(0,0,0,0.9),rgba(0,0,0,0.9)) !important;
+  background: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,1)) !important;
   height: 10rem;
   box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
   transition: .5s ease;
@@ -14,7 +14,7 @@
     top: 0;
     width: 100%;
     height: auto;
-    opacity: 1 !important;
+    opacity: .6 !important;
   }
 
   .flicker {
@@ -23,7 +23,7 @@
 
   .card-title {
     margin: auto;
-    opacity: .6;
+    opacity: .7;
     position: relative;
     z-index: 2;
   }
@@ -200,9 +200,9 @@
       opacity: 1;
     }
   }
-  .card-bg {
-    opacity: .8 !important;
-  }
+  // .card-bg {
+  //   opacity: .8 !important;
+  // }
 }
 
 ///////////////////////////// CATEGORIES SECTION #HOME
@@ -210,6 +210,20 @@
 .category-cards {
   justify-content: center;
 }
+
+.card-for-info {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 5px 20px 20px 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+
+  hr {
+    border: 1px solid grey;
+    margin-top: 0 !important;
+  }
+}
+
 
 ///////////////////////////// DIFFERENTIAL SECTION #HOME
 

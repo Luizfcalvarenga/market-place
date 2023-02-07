@@ -13,18 +13,27 @@
   width: 100%;
 }
 
+.card-bg {
+  object-fit: cover;
+
+}
+
 .advertisable-img {
   height: 298px !important;
   border-radius: 4px;
   width: 100%;
   object-fit: cover;
-  
+
 }
 
 .review-images-admin {
   height: 300px !important;
 }
 
+.verified-badge {
+  height: 20px;
+  width: 20px;
+}
 
 .img-carousel {
   height: 300px !important;

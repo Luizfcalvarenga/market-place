@@ -7,14 +7,6 @@ class BikesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    # @bikes = Bike.all
-    # @bikes = @bikes.where(modality: params[:modality]) if params[:modality].present?
-    # @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).where.not(user: current_user)
-
-    # # @current_filters = params[:query]
-    # @bikes = @bikes.where(category: Category.find_by(name: params[:category])) if params[:category].present?
-    # @bikes = @bikes.where(bike_type: params[:bike_type]) if params[:bike_type].present?
-
   end
 
   def show
@@ -30,7 +22,6 @@ class BikesController < ApplicationController
       redirect_to edit_profiles_path
       flash[:alert] = "você deve preencher seu documento e cep para anunciar."
     end
-
     @bike = Bike.new
     skip_authorization
     @categories = Category.all
@@ -94,6 +85,24 @@ class BikesController < ApplicationController
     end
   end
 
+  def toggle_bike_verify
+    @bike = Bike.find(params[:bike][:id])
+    @advertisement = Advertisement.where(advertisable: @bike).first
+    authorize @bike
+    if @bike.update(bike_params)
+      if @bike.verified?
+        redirect_to admin_advertisement_path(@advertisement)
+        flash[:alert] = "Bike #{@bike.frame_brand} verificado com sucesso"
+      else
+        redirect_to admin_advertisement_path(@advertisement)
+        flash[:alert] = "Bike #{@bike.frame_brand} removido verificação com sucesso"
+      end
+    else
+      redirect_to admin_advertisement_path(@advertisement)
+      flash[:alert] = "Algo deu errado ao Verificar bike"
+    end
+  end
+
   private
 
   def bike_params
@@ -153,6 +162,7 @@ class BikesController < ApplicationController
       :handlebar_material,
       :wheel_material,
       :seat_post_material,
+      :verified,
       photos: []
     )
   end

@@ -14,8 +14,6 @@ class AdvertisementsController < ApplicationController
     elsif @advertisement.advertisable_type == "Bike"
       @item = Bike.find_by(id: @advertisement.advertisable.id)
     end
-
-    
   end
 
   def invoice

@@ -14,6 +14,8 @@ export function BikeForm(props) {
   const [bikeType, setBikeType] = useState("");
   const [priceInCents, setPriceInCents] = useState("");
   const [quantity, setQuantity ] = useState("");
+  const [city, setCity ] = useState("");
+  const [state, setState ] = useState("");
   const [cityId, setCityId ] = useState("");
   const [stateId, setStateId ] = useState("");
   const [frameBrand, setFrameBrand] = useState("");
@@ -208,14 +210,16 @@ export function BikeForm(props) {
     const response = await axios.get(
       `/api/v1/bikes/${props.bikeId}/edit`
     );
-    alert(JSON.stringify(response.data))
+    // alert(JSON.stringify(response.data))
     if (response.data) {
       setUser(response.data.bike.user_id);
       setCategory(response.data.category);
+      setState(response.data.state);
+      setCity(response.data.city);
       setCategoryId(response.data.bike.category_id);
       setModality(response.data.bike.modality);
       setBikeType(response.data.bike.bike_type);
-      setPriceInCents(response.data.bike.price_in_cents);
+      setPriceInCents(response.data.bike.price_in_cents / 100);
       setQuantity(response.data.bike.quantity);
       setFrameBrand(response.data.bike.frame_brand);
       setFrameSize(response.data.bike.frame_size);
@@ -448,8 +452,13 @@ export function BikeForm(props) {
 
     const response = await axios[method](url, dataObject);
     if (response.data.success) {
-      window.location = response.data.redirect_url;
-      swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
+      if (props.bikeId) {
+        window.location = response.data.redirect_url;
+        swal("OHH YEAHH", "Anúncio editado com sucesso!!!", "success");
+      } else {
+        window.location = response.data.redirect_url;
+        swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
+      }
     } else {
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       setErrors(response.data.errors);
@@ -635,7 +644,6 @@ export function BikeForm(props) {
   }
 
   const handleTechnicalSection = (e) => {
-    // console.log(e)
     const technicalSection = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
     technicalSection.classList.toggle("d-none")
@@ -644,12 +652,8 @@ export function BikeForm(props) {
 
 
   const handleReviewSection = (e) => {
-
-    // console.log(`${e.target.innerText}(reviews)`)
     const section = document.getElementById(e.target.innerText + "(review)")
     const sectionActive = e.target;
-
-    // console.log(section)
     section.classList.toggle("d-none")
     sectionActive.classList.toggle("review-selected")
   }
@@ -662,14 +666,10 @@ export function BikeForm(props) {
       document.getElementById("include-accessory").classList.remove("selected-tag")
       document.getElementById("accessories-options").classList.add("d-none")
       const tags = document.querySelectorAll("#accessory-option")
-      // console.log(tags)
       tags.forEach(element => element.classList.remove("selected-tag"))
-
-
     } else {
       e.target.classList.remove("selected-tag")
       setAccessories([])
-
     }
   }
 
@@ -691,21 +691,33 @@ export function BikeForm(props) {
     const tagFilter = e.target
     if (currentAccessories.includes(e.target.value)) {
       setAccessories(currentAccessories.filter(element => element != e.target.value));
-      // console.log(currentAccessories)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentAccessories.push(e.target.value)
       setAccessories(currentAccessories)
-      // console.log(currentAccessories)
       tagFilter.classList.add("selected-tag")
     }
   }
 
   const handleLocality = (e) => {
-    // console.log(e)
-    // console.log(e.target.value)
-    setStateId(e.target.value)
-    setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+    // setStateId(e.target.value)
+    // setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+
+    console.log(e)
+    if (e.target.id === "state-input") {
+      console.log(e.target.id)
+      console.log(e.target.value)
+      console.log(states.find(element => element.id === Number(e.target.value)).acronym)
+      setStateId(e.target.value)
+      setState(states.find(element => element.id === Number(e.target.value)).acronym)
+      setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+    } else {
+      console.log(e.target.id)
+      console.log(e.target.value)
+      console.log(cities.find(element => element.id === Number(e.target.value)).name)
+      setCityId(e.target.value)
+      setCity(cities.find(element => element.id === Number(e.target.value)).name)
+    }
   }
 
   const handleSwitchSection = (e) => {
@@ -714,7 +726,6 @@ export function BikeForm(props) {
     const principal = document.getElementById("principal")
     const additional = document.getElementById("additional")
 
-    // console.log(e.target.checked)
     if (e.target.checked === true) {
       additionalInfos.classList.remove("d-none")
       principalInfos.classList.add("d-none")
@@ -897,6 +908,9 @@ export function BikeForm(props) {
 
   const translateWord = (word) => {
     const languageMap = {
+      "bike": "Bike",
+      "e-bike": "E-Bike",
+
       "mountain_bike" : "Mountain Bike",
       "dirt_street" : "Dirt",
       "road" : "Road",
@@ -1288,14 +1302,18 @@ export function BikeForm(props) {
             <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
             <select
               className="select-answer"
+              id="state-input"
               value={stateId}
               onChange={(e) => handleLocality(e)}
             >
               <option value=""></option>
               {states.map((state, index)=> {
-                return (<option key={index} value={state.id}>{state.acronym}</option>);
+                return (<option id="state-input" key={index} value={state.id}>{state.acronym}</option>);
               })}
             </select>
+            { errors && errors.bike && errors.bike.state_id && (
+              <p className="text-danger">{errors.bike.state_id[0]}</p>
+            )}
           </div>
 
           <div className="col-md-9">
@@ -1303,27 +1321,35 @@ export function BikeForm(props) {
             {stateId && (<>
               <select
                 className="select-answer"
+                id="city-input"
                 value={cityId}
-                onChange={(e) => setCityId(e.target.value)}
+                onChange={(e) => handleLocality(e)}
               >
                 <option value=""></option>
                 {mapedCitiesForState.map((city, index)=> {
-                  return (<option key={index} value={city.id}>{city.name}</option>);
+                  return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                 })}
               </select>
+              { errors && errors.bike && errors.bike.city_id && (
+                <p className="text-danger">{errors.bike.city_id[0]}</p>
+              )}
             </>)}
 
             {!stateId && (<>
               <select
                 className="select-answer"
+                id="city-input"
                 value={cityId}
-                onChange={(e) => setCityId(e.target.value)}
+                onChange={(e) => handleLocality(e)}
               >
                 <option value=""></option>
                 {cities.map((city, index)=> {
-                  return (<option key={index} value={city.id}>{city.name}</option>);
+                  return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                 })}
               </select>
+              { errors && errors.bike && errors.bike.city_id && (
+                <p className="text-danger">{errors.bike.city_id[0]}</p>
+              )}
             </>)}
           </div>
         </div>
@@ -2097,30 +2123,70 @@ export function BikeForm(props) {
         <h4 className="text-center text-success">Revise as informações</h4>
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         <div id="Gerais(review)" className=" d-none">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex">
             <p><span className="text-success">Tipo:</span> {translateWord(bikeType)}</p>
+            { errors && errors.bike && errors.bike.bike_type && (
+              <p className="text-danger ms-2">{errors.bike.bike_type[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
             <p><span className="text-success">Categoria:</span> {translateWord(category)}</p>
+            { errors && errors.bike && errors.bike.category && (
+              <p className="text-danger ms-2">{errors.bike.category[1]}</p>
+            )}
+          </div>
+          <div className="d-flex">
             <p><span className="text-success">Modalidade:</span> {translateWord(modality)}</p>
+            { errors && errors.bike && errors.bike.modality && (
+              <p className="text-danger ms-2">{errors.bike.modality[0]}</p>
+            )}
           </div>
-
-          <div className="d-flex justify-content-between">
+          <div className="d-flex">
             <p><span className="text-success">Ano:</span> {year === "other" ? otherYear : year}</p>
-            <p><span className="text-success">Quantidade:</span> {quantity}</p>
-            <p><span className="text-success">Peso:</span> {weight}Kg</p>
+            { errors && errors.bike && errors.bike.year && (
+              <p className="text-danger ms-2">{errors.bike.year[0]}</p>
+            )}
           </div>
-
-          <div className="d-flex justify-content-between">
+          <div className="d-flex">
+            <p><span className="text-success">Local:</span> {city} - {state}</p>
+            { errors && errors.bike && errors.bike.city_id && (
+              <p className="text-danger ms-2">{errors.bike.city_id[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
             <p><span className="text-success">Modelo:</span> {model}</p>
-            <p><span className="text-success">Preço:</span> {priceInCents?.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}</p>
-            {cityId && stateId && (<>
-              <p><span className="text-success">Local:</span> {cities.find((element) => element.id === Number(cityId)).name} - {states.find((element) => element.id === Number(stateId)).acronym}</p>
-            </>)}
+            { errors && errors.bike && errors.bike.model && (
+              <p className="text-danger ms-2">{errors.bike.model[0]}</p>
+              )}
           </div>
-          <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
-          <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
+          <div className="d-flex">
+            <p><span className="text-success">Preço:</span> {priceInCents?.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}</p>
+            { errors && errors.bike && errors.bike.price_in_cents && (
+              <p className="text-danger ms-2">{errors.bike.price_in_cents[0]}</p>
+              )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Quantidade:</span> {quantity}</p>
+            { errors && errors.bike && errors.bike.quantity && (
+              <p className="text-danger ms-2">{errors.bike.quantity[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Documentação:</span> {translateWord(documentationType)}</p>
+            { errors && errors.bike && errors.bike.documentation_type && (
+              <p className="text-danger ms-2">{errors.bike.documentation_type[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Condição:</span> {translateWord(bikeCondition)}</p>
+            { errors && errors.bike && errors.bike.bike_condition && (
+              <p className="text-danger ms-2">{errors.bike.bike_condition[0]}</p>
+            )}
+          </div>
+          <p><span className="text-success">Peso:</span> {weight}Kg</p>
           <p><span className="text-success">Estado da Bike:</span> {translateWord(bikeConditionStatus)}</p>
           {bikeConditionDescription && (
           <p><span className="text-success">Descrição da Condição:</span> {bikeConditionDescription}</p>
@@ -2130,9 +2196,25 @@ export function BikeForm(props) {
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Quadro</button>
         <div id="Quadro(review)" className="d-none">
-          <p><span className="text-success">Marca:</span> {frameBrand === "other" ? otherFrameBrand : frameBrand}</p>
-          <p><span className="text-success">Material:</span> {frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
-          <p><span className="text-success">Tamanho:</span> {frameSize === "other" ? otherFrameSize : frameSize}</p>
+          <div className="d-flex">
+            <p><span className="text-success">Marca:</span> {frameBrand === "other" ? otherFrameBrand : frameBrand}</p>
+            { errors && errors.bike && errors.bike.frame_brand && (
+              <p className="text-danger ms-2">{errors.bike.frame_brand[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Material:</span> {frameMaterial === "other" ? otherFrameMaterial : translateWord(frameMaterial) }</p>
+            { errors && errors.bike && errors.bike.frame_material && (
+              <p className="text-danger ms-2">{errors.bike.frame_material[0]}</p>
+            )}
+          </div>
+          <div className="d-flex">
+            <p><span className="text-success">Tamanho:</span> {frameSize === "other" ? otherFrameSize : frameSize}</p>
+            { errors && errors.bike && errors.bike.frame_size && (
+              <p className="text-danger ms-2">{errors.bike.frame_size[0]}</p>
+            )}
+          </div>
+
         </div>
 
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Transmissão</button>
@@ -2154,15 +2236,15 @@ export function BikeForm(props) {
           <p><span className="text-success">Modelo:</span> {brakeModel === "other" ? otherBrakeModel : brakeModel }</p>
         </div>
 
-        {!category === "road" && (
+        {category !== "road" && (
           <>
             <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Suspensões</button>
             <div id="Suspensões(review)" className="d-none">
-              <p><span className="text-success">Tipo:</span> {suspensionType}</p>
-              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel}</p>
-              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel}</p>
-              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel }</p>
-              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel }</p>
+              <p><span className="text-success">Tipo:</span> {translateWord(suspensionType)}</p>
+              <p><span className="text-success">Curso dianteira:</span> {frontSuspensionTravel === "other" ? otherFrontSuspensionTravel : frontSuspensionTravel}</p>
+              <p><span className="text-success">Modelo dianteira:</span> {frontSuspensionModel === "other" ? otherFrontSuspensionModel : frontSuspensionModel}</p>
+              <p><span className="text-success">Curso traseira:</span> {rearSuspensionTravel === "other" ? otherRearSuspensionTravel : rearSuspensionTravel }</p>
+              <p><span className="text-success">Modelo traseira:</span> {rearSuspensionModel === "other" ? otherRearSuspensionModel : rearSuspensionModel }</p>
             </div>
           </>
         )}
@@ -2266,9 +2348,10 @@ export function BikeForm(props) {
           </>)}
 
           { ((priceInCents * 100) > 100000) && ((priceInCents * 100) <= 500000) && (<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 39,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 39,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2289,9 +2372,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 500000) && ((priceInCents * 100) <= 1000000) && (<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 59,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 59,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2312,9 +2396,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 1000000) && ((priceInCents * 100) <= 2000000) &&(<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 89,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 89,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2335,9 +2420,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 2000000) && ((priceInCents * 100) <= 3000000) &&(<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 129,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 129,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">
@@ -2358,9 +2444,10 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 3000000) && (<>
+            <h6 className="announce-terms text-center">Valor do anúncio: R$ 159,00</h6>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h6 className="announce-terms">Entendo que o anúncio custará R$ 159,00</h6>
+              <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="d-flex mt-3">

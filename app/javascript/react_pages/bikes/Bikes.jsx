@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import NormalBikeImage from "../../../assets/images/normal-bike.png";
 import EBikeImage from "../../../assets/images/e-bike.png";
 import IntlCurrencyInput from "react-intl-currency-input"
+import VerifiedImage from "../../../assets/images/badge.png";
+
 
 export function Bikes(props) {
   const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -57,6 +59,8 @@ export function Bikes(props) {
   const [modalityOptionsToFilter, setModalityOptionsToFilter] = useState([]);
   const [frameSizeOptionsToFilter, setFrameSizeOptionsToFilter] = useState([]);
   const [frameMaterialOptionsToFilter, setFrameMaterialOptionsToFilter] = useState([]);
+  const [verifiedBikeFilter, setVerifiedBikeFilter] = useState([params.verified] || "");
+
 
 
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
@@ -147,9 +151,9 @@ export function Bikes(props) {
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
     if (frameSizeOptionsToFilter) url = url + `&frame_sizes=${frameSizeOptionsToFilter}`
     if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
+    if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
 
-    console.log(url)
-    console.log(categoryOptionsToFilter.includes(null))
+
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
@@ -157,7 +161,7 @@ export function Bikes(props) {
   suspensionTypeFilter, frontSuspensionTravelFilter, rearSuspensionTravelFilter, frontSuspensionModelFilter, rearSuspensionModelFilter, frontDerailleurModelFilter,
   rearDerailleurModelFilter, frontGearsFilter, rearGearsFilter, brakeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter])
+  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter])
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -203,12 +207,14 @@ export function Bikes(props) {
 
   const handleLike = (e) => {
     e.preventDefault()
+    console.log(e.target)
+
 
     const dataObject = new FormData();
-    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
 
-    console.log(e.nativeEvent.path[1].id)
+    // console.log(e.nativeEvent.path[1].id)
     axios.post('/likes',dataObject)
 
     .then(function (response) {
@@ -606,7 +612,6 @@ export function Bikes(props) {
               <button type="button" value="all-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
 
               <div id="all-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-
                 <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
                 <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
                 <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
@@ -808,7 +813,7 @@ export function Bikes(props) {
 
                 {allFrameSizes.map((frameSize, index)=> {
                   return (
-                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
                   );
                 })}
 
@@ -829,7 +834,7 @@ export function Bikes(props) {
                 <h5 className=" mt-3">tamanho</h5>
                 {roadFrameSizes.map((frameSize, index)=> {
                   return (
-                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
                   );
                 })}
               </>)}
@@ -838,7 +843,7 @@ export function Bikes(props) {
                 <h5 className=" mt-3">tamanho</h5>
                   {dirtMtbFrameSizes.map((frameSize, index)=> {
                   return (
-                    <button type="button" value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
+                    <button type="button" key={index} value={frameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{frameSize}</button>
                   );
                 })}
               </>)}
@@ -1201,6 +1206,9 @@ export function Bikes(props) {
                     <div className="d-flex justify-content-center gap-2 mt-1">
                       <h4 className="card-title text-center">{bike.frame_brand}</h4>
                       <h4 className="card-title text-center">{bike.model}</h4>
+                      {bike.verified && (
+                        <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
+                      )}
                     </div>
                     <h4 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
@@ -1224,7 +1232,7 @@ export function Bikes(props) {
                             <img src={EBikeImage} alt="" className="icon-card-index ms-1"/> <br />
                           </>
                           )}
-                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i className="far fa-heart"></i></button>
+                          <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={bike.id}><i id={bike.id} className="far fa-heart"></i></button>
                         </div>
                       </div>
                     </div>

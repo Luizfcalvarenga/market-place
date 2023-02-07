@@ -30,6 +30,8 @@ export function ProductForm(props) {
   const [productConditionDescription, setProductConditionDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productQuantity, setProductQuantity ] = useState("");
+  const [productCityId, setProductCityId ] = useState("");
+  const [productStateId, setProductStateId ] = useState("");
   const [productCity, setProductCity ] = useState("");
   const [productState, setProductState ] = useState("");
   const [productYear, setProductYear ] = useState("");
@@ -170,24 +172,10 @@ export function ProductForm(props) {
   }
 
   const removePhoto = (e) => {
-    // console.log(e)
-    // console.log(e.target.id)
     const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
     setPhotosPreview(newPhotosPreview);
     const photoToRemove = photoFile.find(element => element.url === e.target.id).name
     setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    // if (e.nativeEvent.path[1].childNodes[0].src) {
-
-    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-    //   setPhotosPreview(newPhotosPreview);
-    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    // } else if (e.nativeEvent.path[2].childNodes[0].src) {
-    //   const newPhotosPreview = photosPreview.filter(element => element !== e.nativeEvent.path[1].childNodes[0].src)
-    //   setPhotosPreview(newPhotosPreview);
-    //   const photoToRemove = photoFile.find(element => element.url === e.nativeEvent.path[1].childNodes[0].src).name
-    //   setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
-    // }
   }
 
   const handleReviewSection = (e) => {
@@ -199,7 +187,7 @@ export function ProductForm(props) {
     const response = await axios.get(
       `/api/v1/products/${props.productId}/edit`
     );
-    alert(JSON.stringify(response.data))
+    // alert(JSON.stringify(response.data))
     if (response.data) {
       setProductCategory(response.data.category);
       setUser(response.data.product.user_id);
@@ -210,13 +198,18 @@ export function ProductForm(props) {
       setProductName(response.data.product.name);
       setProductModel(response.data.product.model);
       setProductDescription(response.data.product.description);
-      setProductPrice(response.data.product.price_in_cents);
+      setProductPrice(response.data.product.price_in_cents / 100);
       setProductQuantity(response.data.product.quantity);
-      setProductCity(response.data.product.city_id);
-      setProductState(response.data.product.state_id);
+      setProductCityId(response.data.product.city_id);
+      setProductStateId(response.data.product.state_id);
+      setProductState(response.data.state);
+      setProductCity(response.data.city);
       setProductYear(response.data.product.year);
       setProductDocumentationType(response.data.product.documentation_type);
       setProductCondition(response.data.product.condition);
+      setProductConditionStatus(response.data.product.product_condition_status);
+      setProductConditionDescription(response.data.product.product_condition_description);
+
       if (response.data.product_attributes) {
         setProductAttributes(
           response.data.product_attributes
@@ -260,7 +253,6 @@ export function ProductForm(props) {
   }
 
   const renderProductTypeAttributeSelect = (attribute, index) => {
-    // VERIFICAR RETORNO DO ESCOLHA DE TIPO DE SUSPENSÃO PARA COMPONENTO QUADROAPARENTEMENTE PRA QUADRO E HARDTAIL NÃO PERGUNTA CURSO DE NENHUMA SUSPANSÃO(CONFERIR)
     let options = []
     if (["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory) && attribute.name === "frame_size") {
       options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
@@ -356,8 +348,8 @@ export function ProductForm(props) {
     dataObject.append( "product[description]", productDescription );
     dataObject.append( "product[price_in_cents]", (productPrice * 100) );
     dataObject.append( "product[quantity]", productQuantity );
-    dataObject.append( "product[city_id]", productCity );
-    dataObject.append( "product[state_id]", productState );
+    dataObject.append( "product[city_id]", productCityId );
+    dataObject.append( "product[state_id]", productStateId );
     dataObject.append( "product[documentation_type]", productDocumentationType );
     dataObject.append( "product[condition]", productCondition );
     dataObject.append( "product[product_condition_status]", productConditionStatus );
@@ -388,7 +380,6 @@ export function ProductForm(props) {
       })
     }
     for (const [key, value] of Object.entries(productAttributes)) {
-      // console.log(`${key}: ${value}`);
       dataObject.append( `product[productAttributes][${key}]`, value );
     }
 
@@ -415,10 +406,8 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    // console.log(e)
     if (e.target.localName === "img") {
       let filter = e.target.alt;
-      // console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
@@ -429,7 +418,6 @@ export function ProductForm(props) {
 
     } else {
       let filter = e.target.id;
-      // console.log(filter)
       if (filter === "acessories") {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
       } else if (filter === "components") {
@@ -447,10 +435,21 @@ export function ProductForm(props) {
   }
 
   const handleLocality = (e) => {
-    // console.log(e)
-    // console.log(e.target.value)
-    setProductState(e.target.value)
-    setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+    console.log(e)
+    if (e.target.id === "state-input") {
+      console.log(e.target.id)
+      console.log(e.target.value)
+      console.log(states.find(element => element.id === Number(e.target.value)).acronym)
+      setProductStateId(e.target.value)
+      setProductState(states.find(element => element.id === Number(e.target.value)).acronym)
+      setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
+    } else {
+      console.log(e.id)
+      console.log(e.target.value)
+      console.log(cities.find(element => element.id === Number(e.target.value)).name)
+      setProductCityId(e.target.value)
+      setProductCity(cities.find(element => element.id === Number(e.target.value)).name)
+    }
   }
 
   // const handleProductCondition = (e) => {
@@ -687,9 +686,6 @@ export function ProductForm(props) {
     const progressThird = document.getElementById("progress-3")
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
-
-
-
     progressThird.classList.add("section-done")
     thirdSection.classList.add("d-none")
     fourthSection.classList.remove("d-none")
@@ -766,7 +762,12 @@ export function ProductForm(props) {
       "import_document": "Documento de Importação",
       "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
       "no_documentation": "Sem Documento",
-      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação"
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo"
     };
 
     return languageMap[word]
@@ -1036,7 +1037,7 @@ export function ProductForm(props) {
             <option value="urban">Urbano</option>
           </select>
           { errors && errors.product && errors.product.category && (
-            <p className="text-danger">{errors.product.category[0]}</p>
+            <p className="text-danger">{errors.product.category[1]}</p>
           )}
 
           {productCategory === "mountain_bike" && (<>
@@ -1107,8 +1108,8 @@ export function ProductForm(props) {
               return (<option key={productType.id} value={productType.id}>{productType.prompt}</option>)
             })}
           </select>
-          { errors && errors.product && errors.product.product_type && (
-            <p className="text-danger">{errors.product.product_type}</p>
+          { errors && errors.product && errors.product.product_type_id && (
+            <p className="text-danger">{errors.product.product_type_id}</p>
           )}
 
           <label htmlFor="productModel" className="mt-4">Nome:<span className="requested-information ms-1">*</span></label>
@@ -1572,14 +1573,18 @@ export function ProductForm(props) {
                 <label htmlFor="productLocality" className="mt-3">Estado:<span className="requested-information ms-1">*</span></label>
                 <select
                   className="select-answer"
-                  value={productState}
+                  id="state-input"
+                  value={productStateId}
                   onChange={(e) => handleLocality(e)}
                 >
                   <option value=""></option>
                   {states.map((state, index)=> {
-                    return (<option key={index} value={state.id}>{state.acronym}</option>);
+                    return (<option id="state-input" key={index} value={state.id}>{state.acronym}</option>);
                   })}
                 </select>
+                { errors && errors.product && errors.product.state_id && (
+                  <p className="text-danger ms-2">{errors.product.state_id[0]}</p>
+                )}
               </div>
 
               <div className="col-md-9">
@@ -1587,27 +1592,35 @@ export function ProductForm(props) {
                 {productState && (<>
                   <select
                     className="select-answer"
-                    value={productCity}
-                    onChange={(e) => setProductCity(e.target.value)}
+                    id="city-input"
+                    value={productCityId}
+                    onChange={(e) => handleLocality(e)}
                   >
                     <option value=""></option>
                     {mapedCitiesForState.map((city, index)=> {
-                      return (<option key={index} value={city.id}>{city.name}</option>);
+                      return (<option id="city-input" key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
+                  { errors && errors.product && errors.product.city_id && (
+                    <p className="text-danger ms-2">{errors.product.city_id[0]}</p>
+                  )}
                 </>)}
 
                 {!productState && (<>
                   <select
                     className="select-answer"
-                    value={productCity}
-                    onChange={(e) => setProductCity(e.target.value)}
+                    id="city-input"
+                    value={productCityId}
+                    onChange={(e) => handleLocality(e)}
                   >
                     <option value=""></option>
                     {cities.map((city, index)=> {
                       return (<option key={index} value={city.id}>{city.name}</option>);
                     })}
                   </select>
+                  { errors && errors.product && errors.product.city_id && (
+                    <p className="text-danger ms-2">{errors.product.city_id[0]}</p>
+                  )}
                 </>)}
               </div>
             </div>
@@ -1625,6 +1638,9 @@ export function ProductForm(props) {
               <option value="foreign_tax_coupon_and_import_document">Cupom Fiscal Estrangeiro + Documento de Importação</option>
               <option value="no_documentation">Sem Documento</option>
             </select>
+            { errors && errors.product && errors.product.documentation_type && (
+              <p className="text-danger ms-2">{errors.product.documentation_type[0]}</p>
+            )}
 
             <div className="condition">
               <label htmlFor="´rpductCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
@@ -1651,13 +1667,13 @@ export function ProductForm(props) {
                 <div className="mb-5 mt-3">
                   <div id="debt-amount-slider">
                     <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
+                    <label id="label-bad" htmlFor="1" data-debt-amount="Ruim"></label>
                     <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-reasonable" for="2" data-debt-amount="Razoável"></label>
+                    <label id="label-reasonable" htmlFor="2" data-debt-amount="Razoável"></label>
                     <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-good" for="3" data-debt-amount="Bom"></label>
+                    <label id="label-good" htmlFor="3" data-debt-amount="Bom"></label>
                     <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => handleProductConditionStatus(e)}/>
-                    <label id="label-excellent" for="4" data-debt-amount="Ótimo"></label>
+                    <label id="label-excellent" htmlFor="4" data-debt-amount="Ótimo"></label>
                     <div id="debt-amount-pos"></div>
                   </div>
                 </div>
@@ -1769,8 +1785,8 @@ export function ProductForm(props) {
             photosPreview?.length > 0 ?
             <div  className="d-flex justify-content-center flex-wrap mt-3">
               {
-                photosPreview.map((photoPreview, idx) => {
-                  return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
+                photosPreview.map((photoPreview, index) => {
+                  return  (<><button key={index} className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
                       <img src={photoPreview} alt="" className="image-preview-form mt-1" />
                       <div id={photoPreview} className="middle">
                         <div id={photoPreview} className="text">Remover</div>
@@ -1792,43 +1808,109 @@ export function ProductForm(props) {
           <h4 className="text-center text-success">Revise as informações</h4>
           <h4 className="text-success mt-3 text-center">Gerais</h4>
           <div id="Gerais" className="">
-            <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
-            <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
-            <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
-            {productCity && productState && (<>
-              <p><span className="text-success">Local: </span>{cities.find((element) => element.id === Number(productCity)).name} - {states.find((element) => element.id === Number(productState)).acronym}</p>
-            </>)}
-            <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
-            <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+            <div className="d-flex">
+              <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
+              { errors && errors.product && errors.product.category && (
+                <p className="text-danger ms-2">{errors.product.category[1]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Modalidade:</span> {translateWord(productModality)}</p>
+              { errors && errors.product && errors.product.modality && (
+                <p className="text-danger ms-2">{errors.product.modality[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Quantidade:</span> {productQuantity}</p>
+              { errors && errors.product && errors.product.quantity && (
+                <p className="text-danger ms-2">{errors.product.quantity[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Nome:</span> {productName}</p>
+              { errors && errors.product && errors.product.name && (
+                <p className="text-danger ms-2">{errors.product.name[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Local: </span>{productCity} - {productState}</p>
+              { errors && errors.product && errors.product.city_id && (
+                <p className="text-danger ms-2">{errors.product.city_id[0]} (Cidade e Estado)</p>
+              )}
+
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Documento:</span> {translateWord(productDocumentationType)}</p>
+              { errors && errors.product && errors.product.documentation_type && (
+                <p className="text-danger ms-2">{errors.product.documentation_type[0]}</p>
+              )}
+            </div>
+            <div className="d-flex">
+              <p><span className="text-success">Condição:</span> {translateWord(productCondition)}</p>
+              { errors && errors.product && errors.product.condition && (
+                <p className="text-danger ms-2">{errors.product.condition[0]}</p>
+              )}
+            </div>
             {productCondition === "used" && (
-              <p><span className="text-success">Estado:</span>{productConditionStatus}</p>
+              <p><span className="text-success">Estado:</span> {translateWord(productConditionStatus)}</p>
             )}
             {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (
               <p><span className="text-success">descrição:</span>{productConditionDescription}</p>
             )}
 
-            <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
+            <div className="d-flex">
+              <p><span className="text-success">Preço:</span>  {productPrice?.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
                   })}</p>
-            {productYear === "other" && (
+              { errors && errors.product && errors.product.price_in_cents && (
+                <p className="text-danger ms-2">{errors.product.price_in_cents[0]}</p>
+              )}
+            </div>
 
-              <p><span className="text-success">Ano:</span> {otherProductYear}</p>
+
+            {productYear === "other" && (
+              <div className="d-flex">
+                <p><span className="text-success">Ano:</span> {otherProductYear}</p>
+
+                { errors && errors.product && errors.product.year && (
+                  <p className="text-danger ms-2">{errors.product.year[0]}</p>
+                )}
+              </div>
             )}
             {productYear !== "other" && (
-
-              <p><span className="text-success">Ano:</span> {productYear}</p>
+              <div className="d-flex">
+                <p><span className="text-success">Ano:</span> {productYear}</p>
+                { errors && errors.product && errors.product.year && (
+                  <p className="text-danger ms-2">{errors.product.year[0]}</p>
+                )}
+              </div>
             )}
 
             {productBrand === "Outra" && (
-
-              <p><span className="text-success">Marca:</span> {otherProductBrand}</p>
+              <div className="d-flex">
+                <p><span className="text-success">Marca:</span> {otherProductBrand}</p>
+                { errors && errors.product && errors.product.brand && (
+                  <p className="text-danger ms-2">{errors.product.brand[0]}</p>
+                )}
+              </div>
             )}
             {productBrand !== "Outra" && (
-
-              <p><span className="text-success">Marca:</span> {productBrand}</p>
+              <div className="d-flex">
+                <p><span className="text-success">Marca:</span> {productBrand}</p>
+                { errors && errors.product && errors.product.brand && (
+                  <p className="text-danger ms-2">{errors.product.brand[0]}</p>
+                )}
+              </div>
             )}
-            <p><span className="text-success">Modelo:</span> {productModel}</p>
+
+            <div className="d-flex">
+              <p><span className="text-success">Modelo:</span> {productModel}</p>
+              { errors && errors.product && errors.product.model && (
+                <p className="text-danger ms-2">{errors.product.model[0]}</p>
+              )}
+            </div>
+
             <p><span className="text-success">Descrição:</span> {productDescription}</p>
 
           </div>
@@ -1860,7 +1942,7 @@ export function ProductForm(props) {
             photosPreview?.length > 0 ?
             <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
               {
-                photosPreview.map((photoPreview, idx) => {
+                photosPreview.map((photoPreview, index) => {
                   return <img src={photoPreview} alt="" className="image-review" />
                 })
               }
@@ -1883,9 +1965,10 @@ export function ProductForm(props) {
             </>)}
 
             { ((productPrice * 100) > 100000) && ((productPrice * 100) <= 500000) && (<>
+              <h6 className="announce-terms text-center">Valor do anúncio: R$ 39,00</h6>
               <div className="d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h6 className="announce-terms">Entendo que o anúncio custará R$ 39,00</h6>
+                <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
@@ -1906,9 +1989,10 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 500000) && ((productPrice * 100) <= 1000000) && (<>
+              <h6 className="announce-terms text-center">Valor do anúncio: R$ 59,00</h6>
               <div className="d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h6 className="announce-terms">Entendo que o anúncio custará R$ 59,00</h6>
+                <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
@@ -1929,9 +2013,10 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 1000000) && ((productPrice * 100) <= 2000000) &&(<>
+              <h6 className="announce-terms text-center">Valor do anúncio: R$ 89,00</h6>
               <div className="d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h6 className="announce-terms">Entendo que o anúncio custará R$ 89,00</h6>
+                <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">
@@ -1952,9 +2037,10 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 2000000) && ((productPrice * 100) <= 3000000) &&(<>
+              <h6 className="announce-terms text-center">Valor do anúncio: R$ 129,00</h6>
               <div className="d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h6 className="announce-terms">Entendo que o anúncio custará R$ 129,00</h6>
+                <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
               </div>
               <div className="d-flex mt-3">
                 <label htmlFor="discountCoupon" className="w-70 mt-1">Cupom de desconto:</label>
@@ -1974,9 +2060,10 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 3000000) && (<>
+              <h6 className="announce-terms text-center">Valor do anúncio: R$ 159,00</h6>
               <div className="d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h6 className="announce-terms">Entendo que o anúncio custará R$ 159,00</h6>
+                <h6 className="announce-terms">Aceito os termos e condições de uso.</h6>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
               <div className="d-flex mt-3">

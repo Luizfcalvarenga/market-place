@@ -32,15 +32,13 @@ module Api
         @products = @products.where(brand: params[:brand]) if params[:brand].present?
         @products = @products.where(model: params[:model]) if params[:model].present?
         @products = @products.where('products.name @@ ?', params[:name]) if params[:name].present?
+        @products = @products.where(verified: params[:verified]) if params[:verified].present?
 
         @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:clothe_sizes].split(",")}) if params[:clothe_sizes].present?
 
         @products = @products.where(product_type_id: (1..40).to_a) if params[:products_components].present?
         @products = @products.where(product_type_id: (41..47).to_a) if params[:products_accessories].present?
         @products = @products.where(product_type_id: (48..68).to_a) if params[:products_clothes].present?
-
-
-
 
         # @products = ProductAttribute.where(value: params[:components_attributes_values].split(",")).map { |value| value.product } if params[:components_attributes_values].present?
 
@@ -57,7 +55,8 @@ module Api
         @product_attributes =  @product.product_attributes
         @product_type_attributes = ProductTypeAttribute.where(product_type: @product.product_type)
         @present_ids = Product.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
-
+        @state = @product.state.acronym
+        @city = @product.city.name
       end
 
       def new
@@ -103,12 +102,14 @@ module Api
         authorize @product
         @product_attributes = {}
         @category = @product.category.name
+        @state = @product.state.acronym
+        @city = @product.city.name
         if @product.product_attributes.present?
           @product.product_attributes.each { |product_attribute|
             @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
           }
         end
-        render json: { product: @product, product_attributes: @product_attributes, category: @category }
+        render json: { product: @product, product_attributes: @product_attributes, category: @category, state: @state, city: @city }
       end
 
       def update

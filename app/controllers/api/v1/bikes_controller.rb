@@ -53,12 +53,16 @@ module Api
         @bikes = (@bikes.where('front_tyre_model @@ ?', params[:tyre])  || @bikes.where('rear_tyre_model @@ ?', params[:tyre]) )if params[:tyre].present?
         @bikes = @bikes.where('stem @@ ?', params[:stem]) if params[:stem].present?
         @bikes = @bikes.where('handlebar @@ ?', params[:handlebar]) if params[:handlebar].present?
+        @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
+
       end
 
       def show
         @bike = Bike.find(params[:id])
         skip_authorization
         @category = Category.find_by(id: @bike.category)
+        @state = @bike.state.acronym
+        @city = @bike.city.name
         @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
         @current_user = user_signed_in
       end
@@ -102,8 +106,9 @@ module Api
         authorize @bike
         @category = @bike.category.name
         @modalities = @bike.category.modalities
-
-        render json: { bike: @bike, category: @category, modalities: @modalities }
+        @state = @bike.state.acronym
+        @city = @bike.city.name
+        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city }
       end
 
       def update

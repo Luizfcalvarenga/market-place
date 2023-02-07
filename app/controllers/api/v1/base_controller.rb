@@ -1,5 +1,5 @@
 class Api::V1::BaseController < ActionController::API
-  include Pundit
+  include Pundit::Authorization
 	include DeviseTokenAuth::Concerns::SetUserByToken
 
 	rescue_from Pundit::NotAuthorizedError,   with: :user_not_authorized

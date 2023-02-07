@@ -55,6 +55,9 @@ json.handlebar_material @bike.handlebar_material
 json.wheel_material @bike.wheel_material
 json.seat_post_material @bike.seat_post_material
 json.battery_cycles @bike.battery_cycles
+json.verified @bike.verified
+
 json.photos @bike.photos.map(&:url)
-json.current_user @current_user
+json.city @city
+json.state @state
 json.present_ids @present_ids

@@ -5,24 +5,36 @@ class ProductPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    true
-  end
+  # def new?
+  #   true
+  # end
 
   def create?
     true
   end
 
-  def edit?
-    update?
-  end
+  # def edit?
+  #   record.user == user
+  #   # raise
+  # end
 
   def update?
+    # record.user == user || user_is_admin?
     true
   end
 
 
   def destroy?
     record.user == user
+  end
+
+  def toggle_product_verify?
+    user_is_admin?
+  end
+
+
+  private
+  def user_is_admin?
+    user.access == "admin"
   end
 end

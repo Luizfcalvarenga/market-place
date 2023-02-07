@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
+import VerifiedImage from "../../../assets/images/badge.png";
+
 
 export function Product(props) {
   const [product, setProduct] = useState()
   const [presentIds, setPresentIds] = useState([])
-
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
   const [quantity, setQuantity] = useState()
   let productId = window.location.pathname.split("/").pop();
 
@@ -15,22 +18,18 @@ export function Product(props) {
     const response = await axios.get(url);
     setProduct(response.data);
     setPresentIds(response.data.present_ids);
-
-
-    console.log(window.location)
+    setCity(response.data.city);
+    setState(response.data.state);
   }, [])
 
   const handleLike = (e) => {
     e.preventDefault()
     const dataObject = new FormData();
-    dataObject.append( "like[likeble_id]", e.nativeEvent.path[1].id );
+    dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Product" );
-
-    console.log(e.nativeEvent.path[1].id)
     axios.post('/likes', dataObject)
 
     .then(function (response) {
-      console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else if (!response.data.errors) {
@@ -58,6 +57,8 @@ export function Product(props) {
 
   const translateWord = (word) => {
     const languageMap = {
+      "front_and_rear" : "Dianteira e Traseira",
+
       "mountain_bike" : "Mountain Bike",
       "dirt_street" : "Dirt",
       "road" : "Road",
@@ -103,10 +104,16 @@ export function Product(props) {
       "new" : "Novo",
       "used" : "Usado",
 
-      "receipt" : "Nota Fiscal",
-      "import_document" : "Documento de Importação",
-      "foreign_tax_coupon" : "Cupom Fiscal Estrangeiro",
-      "no_documentation" : "Sem Documento",
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
     };
 
     return languageMap[word]
@@ -147,14 +154,13 @@ export function Product(props) {
 
     <div className="product-show index-container" product={product} key={product}>
       {product && (
-        <div className="row row-cols-1">
-          {handleNextPrevious()}
+        <div className="row row-cols-1 mt-3">
+          {/* {handleNextPrevious()} */}
           <div className="other-infos col-12 col-md-8">
             <div id="carouselExampleControls" className="carousel slide product-photos" data-bs-ride="carousel">
               <div className="carousel-inner">
                 {product.photos.map((photo, index) => {
                   return (
-
                     <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
                       <img src={photo} className="d-block w-100 img-card-show" alt="" />
                     </div>
@@ -181,54 +187,49 @@ export function Product(props) {
               </button>
             </div>
 
-            {product.product_attributes.length > 0 && (<>
-              <h3 className="text-success mb-4 mt-3">Mais Informações</h3>
-              <ul className="main__menu">
-                <li className="list-item w-100">
-                  <div className="kabobs item--js">
-                  { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
-                    <img src={AccessorieImage} alt="" className="icon-card-index ms-1"/>
-                  )}
-                  { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
-                    <img src={ComponentImage} alt="" className="icon-card-index ms-1"/>
-                  )}
-                  { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                    <img src={ClotheImage} alt="" className="icon-card-index ms-1"/>
-                  )}
-                    <span className="text-success mb-3">Ver mais</span>
-                  </div>
-                  <ul className="drop-menu menu-2">
-                    {product.product_attributes.map((attribute) => {
-                      return (
-                        <li className="drop-item">
-                          <div className="text-success item list-item d-flex ms-3">
-                            <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
-                            <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
-                          </div>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </li>
-              </ul>
-            </>)}
+            <h3 className="mb-4 mt-3">Mais Informações</h3>
+            <div className="card-for-info">
+              {product.product_attributes.length > 0 && (<>
+                {product.product_attributes.map((attribute) => {
+                  return (
+                    <div className="text-success item list-item d-flex">
+                      <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
+                      <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
+                    </div>
+                  )
+                })}
+              </>)}
+              <p className="bike-attrs-parts"><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
+              <p className="bike-attrs-parts"><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
+              <p className="bike-attrs-parts"><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
+              {product.product_condition_description && (
+                <p className=""><strong className="text-success">mais informações:</strong> {translateWord(product.product_condition_description)}</p>
+              )}
+              <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
+            </div>
           </div>
 
           <div className="col-11 col-md-4 card-product">
+            {product.verified && (
+              <div className="d-flex justify-content-between mt-3">
+                <p className="text-verified">PRODUTO CERTIFICADO</p>
+                <img src={VerifiedImage} alt="" width="20" height="20" class="mt-1 me-1"/>
+              </div>
+            )}
             <div className="d-flex justify-content-between">
               <div>
-                <h3 className="card-title mt-3"> {product.brand} {product.model}</h3>
+                <h3 className="card-title"> {product.brand} {product.model}</h3>
               </div>
               { ["air_bomb", "eletronics", "oil_lubricant", "stand", "tools", "car_protector", "training_roller", "bike_rack"].includes(product.product_type.name) &&(
-                <img src={AccessorieImage} alt="" className="icon-card-index ms-1 mt-4"/>
+                <img src={AccessorieImage} alt="" className="icon-card-index mt-2"/>
               )}
               { ["battery", "brake", "brake_levers", "cassete", "chain", "chainring", "crankset", "fender", "frame", "front_derailleur", "front_shifter", "front_suspension", "full_wheel", "grips", "handlebar", "headset", "hub", "pedals", "rim", "saddle", "seat_post", "spoke", "rear_derailleur", "rear_shifter", "rear_suspension", "stem", "tyre", "adapters", "blocking", "bearing", "brake_pad", "central_movement", "chain_guide", "relation_kit_complete_group", "hanger", "power_meter", "sheave", "tube", "bottle_cage"].includes(product.product_type.name) &&(
-                <img src={ComponentImage} alt="" className="icon-card-index ms-1 mt-4"/>
+                <img src={ComponentImage} alt="" className="icon-card-index mt-2"/>
               )}
               { ["bretelle", "shorts", "inner_shorts", "shirt", "vest", "windbreaker", "thermal_clothing", "helmet", "elbow_pad", "knee_pad", "water_bottle", "hydration_backpack", "fanny_pack", "sneaker"].includes(product.product_type.name) &&(
-                <img src={ClotheImage} alt="" className="icon-card-index ms-1 mt-4"/>
+                <img src={ClotheImage} alt="" className="icon-card-index mt-2"/>
               )}
-              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i className="far fa-heart"></i></button>
+              <button type="button" onClick={(e) => handleLike(e)} className="like-btn" id={product.id}><i id={product.id} className="far fa-heart"></i></button>
             </div>
             <div className="card-content">
               <h4 className="text-success mt-1">
@@ -242,10 +243,8 @@ export function Product(props) {
               <p className=""><strong className="text-success">Modalidade:</strong> {translateWord(product.modality)}</p>
               <p className=""><strong className="text-success">Tipo da produto:</strong> {product.product_type.prompt}</p>
               <p className=""><strong className="text-success">Ano:</strong> {product.year}</p>
-              <p className=""><strong className="text-success">Local:</strong> {product.locality}</p>
-              <p className=""><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
-              <p className=""><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
-              <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
+              <p className=""><strong className="text-success">Local:</strong> {city} - {state}</p>
+
             </div>
             {product.user.show_contact && (<>
               <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
@@ -253,7 +252,7 @@ export function Product(props) {
                 <p className=" text-center"><strong className="text-success mask-phone">Telefone:</strong>  {product.user.phone_number}</p>
               </div>
             </>)}
-            <a href={"/user/" + product.user.id}>
+            <a href={"/user/" + product.user.id + "?product_id=" + product.id + "&photo=" + product.photos[0]}>
               <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
             </a>
           </div>
