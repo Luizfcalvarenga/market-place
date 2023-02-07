@@ -5,8 +5,8 @@ json.modality @bike.modality
 json.bike_type @bike.bike_type
 json.price_in_cents @bike.price_in_cents
 json.quantity @bike.quantity
-json.state_id @bike.state_id
-json.city_id @bike.city_id
+json.state @bike.state
+json.city @bike.city
 json.frame_brand @bike.frame_brand
 json.frame_size @bike.frame_size
 json.frame_material @bike.frame_material
