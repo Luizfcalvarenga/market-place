@@ -1215,8 +1215,8 @@ export function Bikes(props) {
               </div>
             </>)}
 
-            <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Transmissão</button>
-            <div id="Transmissão" className="suspension-filter d-none">
+            <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Câmbio</button>
+            <div id="Câmbio" className="suspension-filter d-none">
               <h5 className="mt-3">dianteira</h5>
               <h5 className=" mt-3">n ºmarchas</h5>
               <select
@@ -1448,6 +1448,7 @@ export function Bikes(props) {
             )}
           </div>
         </div>
+        
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {bikes && bikes.map((bike, idx) => {
             return (
