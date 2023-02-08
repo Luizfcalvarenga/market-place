@@ -30,14 +30,15 @@ module Api
         @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travels].split(",")) if params[:rear_suspension_travels].present?
         @bikes = @bikes.where(front_suspension_model: params[:front_suspension_models].split(",")) if params[:front_suspension_models].present?
         @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_models].split(",")) if params[:rear_suspension_models].present?
-
         @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears].split(",")) if params[:number_of_front_gears].present?
         @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears].split(",")) if params[:number_of_rear_gears].present?
+        @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_models].split(",")) if params[:font_derailleur_models].present?
+        @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_models].split(",")) if params[:rear_derailleur_models].present?
+        @bikes = @bikes.where(crankset: params[:cranksets]) if params[:cranksets].present?
+        @bikes = @bikes.where(chain: params[:chains]) if params[:chains].present?
 
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_model]) if params[:font_derailleur_model].present?
-        @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_model]) if params[:rear_derailleur_model].present?
         @bikes = @bikes.where(brake_type: params[:brake_type]) if params[:brake_type].present?
         @bikes = @bikes.where(brake_disc_size: params[:brake_disc_size]) if params[:brake_disc_size].present?
         @bikes = @bikes.where(brake_model: params[:brake_model]) if params[:brake_model].present?
@@ -48,8 +49,8 @@ module Api
         @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
         @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
         @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
-        @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
-        @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
+        # @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
+        # @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
         @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
         @bikes = (@bikes.where('front_hub_model @@ ?', params[:hub])  || @bikes.where('rear_hub_model @@ ?', params[:hub]) )if params[:hub].present?
         @bikes = (@bikes.where('front_rim_model @@ ?', params[:rim])  || @bikes.where('rear_rim_model @@ ?', params[:rim]) )if params[:rim].present?

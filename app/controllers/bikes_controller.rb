@@ -96,13 +96,19 @@ class BikesController < ApplicationController
     @rear_suspension_travels = @bikes.where.not(rear_suspension_travel: "null").pluck(:rear_suspension_travel).uniq.compact_blank
     @front_suspension_models = @bikes.where.not(front_suspension_model: "null").pluck(:front_suspension_model).uniq.compact_blank
     @road_fork_materials = @bikes.where(category: Category.where(name: "road")).where.not(fork_material: "null").pluck(:fork_material).uniq.compact_blank
-    @mtb_dirt_front_suspension_models = @bikes.where.not(category: Category.where(name:  ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(rear_suspension_model: "null").where.not(rear_suspension_model: "null").pluck(:front_suspension_model).uniq.compact_blank
+    @mtb_dirt_front_suspension_models = @bikes.where(category: Category.where(name:  ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(rear_suspension_model: "null").pluck(:front_suspension_model).uniq.compact_blank
     @rear_suspension_models = @bikes.where.not(rear_suspension_model: "null").pluck(:rear_suspension_model).uniq.compact_blank
-    @mtb_dirt_rear_suspension_models = @bikes.where.not(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(rear_suspension_model: "null").pluck(:rear_suspension_model).uniq.compact_blank
+    @mtb_dirt_rear_suspension_models = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(rear_suspension_model: "null").pluck(:rear_suspension_model).uniq.compact_blank
 
     @number_of_front_gears = @bikes.pluck(:number_of_front_gears).uniq.compact_blank
     @number_of_rear_gears = @bikes.pluck(:number_of_rear_gears).uniq.compact_blank
+    @mtb_dirt_front_derailleur_models = @bikes.where(category: Category.where(name:  ["dirt_street", "mountain_bike", "urban", "infant"])).where(front_derailleur_model: "null").pluck(:front_derailleur_model).uniq.compact_blank
+    @mtb_dirt_rear_derailleur_models = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(rear_derailleur_model: "null").pluck(:rear_derailleur_model).uniq.compact_blank
+    @road_front_derailleur_models = @bikes.where(category: Category.where(name: "road")).where.not(front_derailleur_model: "null").pluck(:front_derailleur_model).uniq.compact_blank
+    @road_rear_derailleur_models = @bikes.where(category: Category.where(name: "road")).where.not(rear_derailleur_model: "null").pluck(:rear_derailleur_model).uniq.compact_blank
 
+    @cranksets = @bikes.where.not(crankset: "null").pluck(:crankset).uniq.compact_blank
+    @chains = @bikes.where.not(chain: "null").pluck(:chain).uniq.compact_blank
 
 
 
@@ -131,7 +137,14 @@ class BikesController < ApplicationController
         rear_suspension_models: @rear_suspension_models,
         mtb_dirt_rear_suspension_models: @mtb_dirt_rear_suspension_models,
         number_of_front_gears: @number_of_front_gears,
-        number_of_rear_gears: @number_of_rear_gears
+        number_of_rear_gears: @number_of_rear_gears,
+        mtb_dirt_front_derailleur_models: @mtb_dirt_front_derailleur_models,
+        mtb_dirt_rear_derailleur_models: @mtb_dirt_rear_derailleur_models,
+        road_front_derailleur_models: @road_front_derailleur_models,
+        road_rear_derailleur_models: @road_rear_derailleur_models,
+        cranksets: @cranksets,
+        chains: @chains
+
       } }
     end
   end
