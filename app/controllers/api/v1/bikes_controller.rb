@@ -40,9 +40,17 @@ module Api
         @bikes = @bikes.where(brake_type: params[:brake_types].split(",")) if params[:brake_types].present?
         @bikes = @bikes.where(brake_disc_size: params[:brake_disc_sizes].split(",")) if params[:brake_disc_sizes].present?
         @bikes = @bikes.where(brake_model: params[:brake_models].split(",")) if params[:brake_models].present?
+        @bikes = @bikes.where(rim_size: params[:rim_sizes].split(",")) if params[:rim_sizes].present?
+        @bikes = @bikes.where(wheel_material: params[:wheel_materials].split(",")) if params[:wheel_materials].present?
+        @bikes = @bikes.where(front_rim_model: params[:rim_models].split(",")).where(rear_rim_model: params[:rim_models].split(",")) if params[:rim_models].present?
+        @bikes = @bikes.where(front_hub_model: params[:hub_models].split(",")).where(front_hub_model: params[:hub_models].split(",")) if params[:hub_models].present?
+        @bikes = @bikes.where(front_tyre_model: params[:tyre_models].split(",")).where(front_tyre_model: params[:tyre_models].split(",")) if params[:tyre_models].present?
+
+
+
+
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(rim_size: params[:rim_size]) if params[:rim_size].present?
         @bikes = @bikes.where(seat_post_type: params[:seat_post_type]) if params[:seat_post_type].present?
         @bikes = @bikes.where(seat_post_travel: params[:seat_post_travel]) if params[:seat_post_travel].present?
         @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?

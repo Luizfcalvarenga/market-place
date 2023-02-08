@@ -108,6 +108,20 @@ export function Bikes(props) {
   const [presentMtbDirtBrakeModels, setPresentMtbDirtBrakeModels] = useState([]);
   const [brakeModelOptionsToFilter, setBrakeModelOptionsToFilter] = useState([]);
 
+  const [presentRimSizes, setPresentRimSizes] = useState([]);
+  const [rimSizeOptionsToFilter, setRimSizeOptionsToFilter] = useState([]);
+
+  const [presentWheelMaterials, setPresentWheelMaterials] = useState([]);
+  const [wheelMaterialOptionsToFilter, setWheelMaterialOptionsToFilter] = useState([]);
+
+  const [presentRimModels, setPresentRimModels] = useState([]);
+  const [rimModelOptionsToFilter, setRimModelOptionsToFilter] = useState([]);
+
+  const [presentHubModels, setPresentHubModels] = useState([]);
+  const [hubModelOptionsToFilter, setHubModelOptionsToFilter] = useState([]);
+
+  const [presentTyreModels, setPresentTyreModels] = useState([]);
+  const [tyreModelOptionsToFilter, setTyreModelOptionsToFilter] = useState([]);
 
 
 
@@ -213,6 +227,13 @@ export function Bikes(props) {
     if (brakeDiscSizeOptionsToFilter) url = url + `&brake_disc_sizes=${brakeDiscSizeOptionsToFilter}`
     if (brakeModelOptionsToFilter) url = url + `&brake_models=${brakeModelOptionsToFilter}`
 
+    if (rimSizeOptionsToFilter) url = url + `&rim_sizes=${rimSizeOptionsToFilter}`
+    if (wheelMaterialOptionsToFilter) url = url + `&wheel_materials=${wheelMaterialOptionsToFilter}`
+    if (rimModelOptionsToFilter) url = url + `&rim_models=${rimModelOptionsToFilter}`
+    if (hubModelOptionsToFilter) url = url + `&hub_models=${hubModelOptionsToFilter}`
+    if (tyreModelOptionsToFilter) url = url + `&tyre_models=${tyreModelOptionsToFilter}`
+
+
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
 
 
@@ -225,7 +246,7 @@ export function Bikes(props) {
   handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
   frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
   numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter, frontDerailleurModelOptionsToFilter, rearDerailleurModelOptionsToFilter, cranksetOptionsToFilter, chainOptionsToFilter,
-  brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter])
+  brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter, rimSizeOptionsToFilter, wheelMaterialOptionsToFilter, rimModelOptionsToFilter, hubModelOptionsToFilter, tyreModelOptionsToFilter ])
 
   useEffect(() => {
     fetch(`/get_attributes_that_are_present_for_filter`)
@@ -266,6 +287,13 @@ export function Bikes(props) {
       setPresentBrakeDiscSizes(data.brake_disc_sizes)
       setPresentMtbDirtBrakeModels(data.mtb_dirt_brake_models)
       setPresentRoadBrakeModels(data.road_brake_models)
+      // RODAS
+      setPresentRimSizes(data.rim_sizes)
+      setPresentRimModels(data.rim_models)
+      setPresentWheelMaterials(data.wheel_materials)
+      setPresentHubModels(data.hub_models)
+      setPresentTyreModels(data.tyre_models)
+
 
      })
 
@@ -706,6 +734,82 @@ export function Bikes(props) {
     } else {
       currentOptionsToFilter.push(e.target.value)
       setBrakeModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+
+  const handleMultipleFiltersRimSize = (e) => {
+    const currentOptionsToFilter = [...rimSizeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setRimSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setRimSizeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersRimModel = (e) => {
+    const currentOptionsToFilter = [...rimModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setRimModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setRimModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersWheelMaterial = (e) => {
+    const currentOptionsToFilter = [...wheelMaterialOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setWheelMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setWheelMaterialOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersHubModel = (e) => {
+    const currentOptionsToFilter = [...hubModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setHubModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setHubModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersTyreModel = (e) => {
+    const currentOptionsToFilter = [...tyreModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setTyreModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setTyreModelOptionsToFilter(currentOptionsToFilter)
       console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
@@ -1635,7 +1739,17 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Rodas</button>
             <div id="Rodas" className="suspension-filter d-none">
-              <h5 className=" mt-3">tamanho aro</h5>
+              {presentRimSizes.length > 0 && (<>
+                <h5 className=" mt-3">tamanho da roda</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentRimSizes.map((presentRimSize, index) => {
+                    return (
+                      <button type="button" key={index} value={presentRimSize} className="filter-tag" onClick={(e) => handleMultipleFiltersRimSize(e)}>{presentRimSize}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+              {/* <h5 className=" mt-3">tamanho aro</h5>
               <select
                 className="select-answer"
                 value={rimSizeFilter}
@@ -1646,10 +1760,57 @@ export function Bikes(props) {
                 {rimSizes.map((rimSize, index)=> {
                   return (<option key={index}>{rimSize}</option>);
                 })}
-              </select>
+              </select> */}
+
+              {presentWheelMaterials.length > 0 && (<>
+                <h5 className=" mt-3">material da roda</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentWheelMaterials.map((presentWheelMaterial, index) => {
+                    return (
+                      <button type="button" key={index} value={presentWheelMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersWheelMaterial(e)}>{translateWord(presentWheelMaterial)}</button>
+                    )
+                  })}
+                </div>
+              </>)}
 
 
-              <div className="rim-filter">
+
+              {presentRimModels.length > 0 && (<>
+                <h5 className=" mt-3">Aro</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentRimModels.map((presentRimModel, index) => {
+                    return (
+                      <button type="button" key={index} value={presentRimModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRimModel(e)}>{translateWord(presentRimModel)}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+
+
+              {presentHubModels.length > 0 && (<>
+                <h5 className=" mt-3">Aro</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentHubModels.map((presentHubModel, index) => {
+                    return (
+                      <button type="button" key={index} value={presentHubModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHubModel(e)}>{translateWord(presentHubModel)}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+
+              {presentTyreModels.length > 0 && (<>
+                <h5 className=" mt-3">Aro</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentTyreModels.map((presentTyreModel, index) => {
+                    return (
+                      <button type="button" key={index} value={presentTyreModel} className="filter-tag" onClick={(e) => handleMultipleFiltersTyreModel(e)}>{translateWord(presentTyreModel)}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+
+
+              {/* <div className="rim-filter">
                 <h5 className=" mt-3">Aro</h5>
                 <input type="text" className="text-input" onChange={(e) => setRimFilter(e.target.value)}/>
               </div>
@@ -1662,7 +1823,7 @@ export function Bikes(props) {
               <div className="tyre-filter">
                 <h5 className=" mt-3">Pneu</h5>
                 <input type="text" className="text-input" onChange={(e) => setTyreFilter(e.target.value)}/>
-              </div>
+              </div> */}
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Canote</button>
