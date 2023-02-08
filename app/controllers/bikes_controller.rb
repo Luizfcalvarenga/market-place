@@ -127,6 +127,12 @@ class BikesController < ApplicationController
     @seat_post_models = @bikes.where.not(seat_post_model: "null").pluck(:seat_post_model).uniq.compact_blank
 
 
+    @handlebar_models = @bikes.where.not(handlebar: "null").pluck(:handlebar).uniq.compact_blank
+    @handlebar_materials = @bikes.where.not(handlebar_material: "null").pluck(:handlebar_material).uniq.compact_blank
+    @stem_models = @bikes.where.not(stem: "null").pluck(:stem).uniq.compact_blank
+
+    @batteries = @bikes.where.not(battery: "null").pluck(:battery).uniq.compact_blank
+
 
 
     skip_authorization
@@ -172,8 +178,13 @@ class BikesController < ApplicationController
         seat_post_types: @seat_post_types,
         seat_post_travels: @seat_post_travels,
         seat_post_materials: @seat_post_materials,
-        seat_post_models: @seat_post_models
+        seat_post_models: @seat_post_models,
 
+        handlebar_models: @handlebar_models,
+        handlebar_materials: @handlebar_materials,
+        stem_models: @stem_models,
+
+        batteries: @batteries
       } }
     end
   end

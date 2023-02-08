@@ -35,22 +35,22 @@ export function Bikes(props) {
   // const [brakeDiscSizeFilter, setBrakeDiscSizeFilter] = useState("");
   // const [brakeModelFilter, setBrakeModelFilter] = useState("");
   // const [rimSizeFilter, setRimSizeFilter] = useState("");
-  const [seatPostTypeFilter, setSeatPostTypeFilter] = useState("");
-  const [seatPostTravelFilter, setSeatPostTravelFilter] = useState("");
-  const [seatPostModelFilter, setSeatPostModelFilter] = useState("");
-  const [batteryFilter, setBatteryFilter] = useState("");
+  // const [seatPostTypeFilter, setSeatPostTypeFilter] = useState("");
+  // const [seatPostTravelFilter, setSeatPostTravelFilter] = useState("");
+  // const [seatPostModelFilter, setSeatPostModelFilter] = useState("");
+  // const [batteryFilter, setBatteryFilter] = useState("");
   const [batteryCyclesFilter, setBatteryCyclesFilter] = useState("");
   const [mileageFilter, setMileageFilter] = useState("");
   const [stateFilter, setStateFilter] = useState("");
   const [cityFilter, setCityFilter] = useState("");
   const [modelFilter, setModelFilter] = useState("");
-  const [cranksetFilter, setCranksetFilter] = useState("");
-  const [chainFilter, setChainFilter] = useState("");
-  const [rimFilter, setRimFilter] = useState("");
-  const [hubFilter, setHubFilter] = useState("");
-  const [tyreFilter, setTyreFilter] = useState("");
-  const [stemFilter, setStemFilter] = useState("");
-  const [handlebarFilter, setHandlebarFilter] = useState("");
+  // const [cranksetFilter, setCranksetFilter] = useState("");
+  // const [chainFilter, setChainFilter] = useState("");
+  // const [rimFilter, setRimFilter] = useState("");
+  // const [hubFilter, setHubFilter] = useState("");
+  // const [tyreFilter, setTyreFilter] = useState("");
+  // const [stemFilter, setStemFilter] = useState("");
+  // const [handlebarFilter, setHandlebarFilter] = useState("");
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
@@ -128,6 +128,15 @@ export function Bikes(props) {
   const [presentSeatPostModels, setPresentSeatPostModels] = useState([]);
   const [seatPostModelOptionsToFilter, setSeatPostModelOptionsToFilter] = useState([]);
 
+  const [presentHandlebarModels, setPresentHandlebarModels] = useState([]);
+  const [handlebarModelOptionsToFilter, setHandlebarModelOptionsToFilter] = useState([]);
+  const [presentHandlebarMaterials, setPresentHandlebarMaterials] = useState([]);
+  const [handlebarMaterialOptionsToFilter, setHandlebarMaterialOptionsToFilter] = useState([]);
+  const [presentStemModels, setPresentStemModels] = useState([]);
+  const [stemModelOptionsToFilter, setStemModelOptionsToFilter] = useState([]);
+
+  const [presentBatteries, setPresentBatteries] = useState([]);
+  const [batteryOptionsToFilter, setBatteryOptionsToFilter] = useState([]);
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -193,10 +202,10 @@ export function Bikes(props) {
     // if (brakeDiscSizeFilter) url = url + `&brake_disc_size=${brakeDiscSizeFilter}`
     // if (brakeModelFilter) url = url + `&brake_model=${brakeModelFilter}`
     // if (rimSizeFilter) url = url + `&rim_size=${rimSizeFilter}`
-    if (seatPostTypeFilter) url = url + `&seat_post_type=${seatPostTypeFilter}`
-    if (seatPostTravelFilter) url = url + `&seat_post_travel=${seatPostTravelFilter}`
-    if (seatPostModelFilter) url = url + `&seat_post_model=${seatPostModelFilter}`
-    if (batteryFilter) url = url + `&battery=${batteryFilter}`
+    // if (seatPostTypeFilter) url = url + `&seat_post_type=${seatPostTypeFilter}`
+    // if (seatPostTravelFilter) url = url + `&seat_post_travel=${seatPostTravelFilter}`
+    // if (seatPostModelFilter) url = url + `&seat_post_model=${seatPostModelFilter}`
+    // if (batteryFilter) url = url + `&battery=${batteryFilter}`
     if (batteryCyclesFilter) url = url + `&battery_cycles=${batteryCyclesFilter}`
     if (mileageFilter) url = url + `&mileage=${mileageFilter}`
     if (stateFilter) url = url + `&state=${stateFilter}`
@@ -204,11 +213,11 @@ export function Bikes(props) {
     if (modelFilter) url = url + `&model=${modelFilter}`
     // if (cranksetFilter) url = url + `&crankset=${cranksetFilter}`
     // if (chainFilter) url = url + `&chain=${chainFilter}`
-    if (rimFilter) url = url + `&rim=${rimFilter}`
-    if (hubFilter) url = url + `&hub=${hubFilter}`
-    if (tyreFilter) url = url + `&tyre=${tyreFilter}`
-    if (stemFilter) url = url + `&stem=${stemFilter}`
-    if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
+    // if (rimFilter) url = url + `&rim=${rimFilter}`
+    // if (hubFilter) url = url + `&hub=${hubFilter}`
+    // if (tyreFilter) url = url + `&tyre=${tyreFilter}`
+    // if (stemFilter) url = url + `&stem=${stemFilter}`
+    // if (handlebarFilter) url = url + `&handlebar=${handlebarFilter}`
     if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
     if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
     if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
@@ -242,6 +251,11 @@ export function Bikes(props) {
     if (seatPostTravelOptionsToFilter) url = url + `&seat_post_travels=${seatPostTravelOptionsToFilter}`
     if (seatPostModelOptionsToFilter) url = url + `&seat_post_models=${seatPostModelOptionsToFilter}`
 
+    if (handlebarMaterialOptionsToFilter) url = url + `&handlebar_materials=${handlebarMaterialOptionsToFilter}`
+    if (handlebarModelOptionsToFilter) url = url + `&handlebar_models=${handlebarModelOptionsToFilter}`
+    if (stemModelOptionsToFilter) url = url + `&stem_models=${stemModelOptionsToFilter}`
+
+    if (batteryOptionsToFilter) url = url + `&batteries=${batteryOptionsToFilter}`
 
 
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
@@ -251,13 +265,13 @@ export function Bikes(props) {
     setBikes(response.data.bikes);
 
 
-  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, seatPostTypeFilter, seatPostTravelFilter,
-  seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
-  handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
+  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter,
+  filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
   frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
   numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter, frontDerailleurModelOptionsToFilter, rearDerailleurModelOptionsToFilter, cranksetOptionsToFilter, chainOptionsToFilter,
   brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter, rimSizeOptionsToFilter, wheelMaterialOptionsToFilter, rimModelOptionsToFilter, hubModelOptionsToFilter, tyreModelOptionsToFilter,
-  seatPostTypeOptionsToFilter, seatPostMaterialOptionsToFilter, seatPostTravelOptionsToFilter, seatPostModelOptionsToFilter ])
+  seatPostTypeOptionsToFilter, seatPostMaterialOptionsToFilter, seatPostTravelOptionsToFilter, seatPostModelOptionsToFilter, handlebarMaterialOptionsToFilter, handlebarModelOptionsToFilter, stemModelOptionsToFilter,
+  batteryOptionsToFilter])
 
   useEffect(() => {
     fetch(`/get_attributes_that_are_present_for_filter`)
@@ -309,6 +323,13 @@ export function Bikes(props) {
       setPresentSeatPostTravels(data.seat_post_travels)
       setPresentSeatPostMaterials(data.seat_post_materials)
       setPresentSeatPostModels(data.seat_post_models)
+      // COCKPIT
+      setPresentHandlebarMaterials(data.handlebar_materials)
+      setPresentHandlebarModels(data.handlebar_models)
+      setPresentStemModels(data.stem_models)
+      // BATERIA
+      setPresentBatteries(data.batteries)
+
 
      })
 
@@ -885,6 +906,67 @@ export function Bikes(props) {
     } else {
       currentOptionsToFilter.push(e.target.value)
       setSeatPostModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersHandlebarMaterial = (e) => {
+    const currentOptionsToFilter = [...handlebarMaterialOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setHandlebarMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setHandlebarMaterialOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersHandlebarModel = (e) => {
+    const currentOptionsToFilter = [...handlebarModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setHandlebarModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setHandlebarModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersStemModel = (e) => {
+    const currentOptionsToFilter = [...stemModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setStemModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setStemModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+
+  const handleMultipleFiltersBattery = (e) => {
+    const currentOptionsToFilter = [...batteryOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setBatteryOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setBatteryOptionsToFilter(currentOptionsToFilter)
       console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
@@ -1842,7 +1924,7 @@ export function Bikes(props) {
                 <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
                   {presentWheelMaterials.map((presentWheelMaterial, index) => {
                     return (
-                      <button type="button" key={index} value={presentWheelMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersWheelMaterial(e)}>{translateWord(presentWheelMaterial)}</button>
+                      <button type="button" key={index} value={presentWheelMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersWheelMaterial(e)}>{translateWord(presentWheelMaterial) || presentWheelMaterial}</button>
                     )
                   })}
                 </div>
@@ -1931,11 +2013,11 @@ export function Bikes(props) {
 
               {seatPostTypeOptionsToFilter.includes("rigid") && (<>
                 {presentSeatPostMaterials.length > 0 && (<>
-                  <h5 className=" mt-3">tipo</h5>
+                  <h5 className=" mt-3">material</h5>
                   <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
                     {presentSeatPostMaterials.map((presentSeatPostMaterial, index) => {
                       return (
-                        <button type="button" key={index} value={presentSeatPostMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostMaterial(e)}>{translateWord(presentSeatPostMaterial)}</button>
+                        <button type="button" key={index} value={presentSeatPostMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostMaterial(e)}>{translateWord(presentSeatPostMaterial) || presentSeatPostMaterial}</button>
                       )
                     })}
                   </div>
@@ -1985,7 +2067,40 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Cockpit</button>
             <div id="Cockpit" className="cockpit-filter d-none">
-              <div className="hub-filter">
+
+              {presentHandlebarMaterials.length > 0 && (<>
+                <h5 className=" mt-3">material guidão</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentHandlebarMaterials.map((presenthandlebarMaterial, index) => {
+                    return (
+                      <button type="button" key={index} value={presenthandlebarMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersHandlebarMaterial(e)}>{translateWord(presenthandlebarMaterial) || presenthandlebarMaterial }</button>
+                    )
+                  })}
+                </div>
+              </>)}
+
+              {presentHandlebarModels.length > 0 && (<>
+                <h5 className=" mt-3">guidão</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentHandlebarModels.map((presentHandlebarModel, index) => {
+                    return (
+                      <button type="button" key={index} value={presentHandlebarModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHandlebarModel(e)}>{presentHandlebarModel}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+
+              {presentStemModels.length > 0 && (<>
+                <h5 className=" mt-3">mesa</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentStemModels.map((presentStemModel, index) => {
+                    return (
+                      <button type="button" key={index} value={presentStemModel} className="filter-tag" onClick={(e) => handleMultipleFiltersStemModel(e)}>{presentStemModel}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+              {/* <div className="hub-filter">
                 <h5 className=" mt-3">Mesa</h5>
                 <input type="text" className="text-input" onChange={(e) => setStemFilter(e.target.value)}/>
               </div>
@@ -1993,13 +2108,13 @@ export function Bikes(props) {
               <div className="handlebar-filter">
                 <h5 className=" mt-3">Guidão</h5>
                 <input type="text" className="text-input" onChange={(e) => setHandlebarFilter(e.target.value)}/>
-              </div>
+              </div> */}
             </div>
 
             {bikeTypeFilter === "e-bike" && (<>
               <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Parte Elétrica</button>
               <div id="Parte Elétrica">
-                <h5 className=" mt-3">bateria</h5>
+                {/* <h5 className=" mt-3">bateria</h5>
                 <select
                   className="select-answer"
                   value={batteryFilter}
@@ -2009,7 +2124,18 @@ export function Bikes(props) {
                   {batteries.map((battery, index)=> {
                     return (<option key={index}>{battery}</option>);
                   })}
-                </select>
+                </select> */}
+
+                {presentBatteries.length > 0 && (<>
+                  <h5 className=" mt-3">mesa</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentBatteries.map((presentBattery, index) => {
+                      return (
+                        <button type="button" key={index} value={presentBattery} className="filter-tag" onClick={(e) => handleMultipleFiltersBattery(e)}>{presentBattery}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
 
                 <div className="d-flex justify-content-between">
                   <h5 className=" mt-3">Ciclos bateria</h5>
