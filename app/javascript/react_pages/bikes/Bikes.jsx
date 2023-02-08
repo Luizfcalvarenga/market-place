@@ -85,6 +85,15 @@ export function Bikes(props) {
   const [presentMtbDirtRearSuspensionModels, setPresentMtbDirtRearSuspensionModels] = useState([]);
   const [rearSuspensionModelOptionsToFilter, setRearSuspensionModelOptionsToFilter] = useState([]);
 
+  const [presentNumberOfFrontGears, setPresentNumberOfFrontGerar] = useState([]);
+  const [numberOfFrontGearsOptionsToFilter, setNumberOfFrontGearsOptionsToFilter] = useState([]);
+
+  const [presentNumberOfRearGears, setPresentNumberOfRearGerar] = useState([]);
+  const [numberOfRearGearsOptionsToFilter, setNumberOfRearGearsOptionsToFilter] = useState([]);
+
+
+
+
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -138,14 +147,14 @@ export function Bikes(props) {
     // if (frameBrandFilter) url = url + `&frame_brand=${frameBrandFilter}`
     // if (frameMaterialFilter) url = url + `&frame_material=${frameMaterialFilter}`
     // if (suspensionTypeFilter) url = url + `&suspension_type=${suspensionTypeFilter}`
-    if (frontSuspensionTravelFilter) url = url + `&front_suspension_travel=${frontSuspensionTravelFilter}`
-    if (rearSuspensionTravelFilter) url = url + `&rear_suspension_travel=${rearSuspensionTravelFilter}`
-    if (frontSuspensionModelFilter) url = url + `&front_suspension_model=${frontSuspensionModelFilter}`
-    if (rearSuspensionModelFilter) url = url + `&rear_suspension_model=${rearSuspensionModelFilter}`
+    // if (frontSuspensionTravelFilter) url = url + `&front_suspension_travel=${frontSuspensionTravelFilter}`
+    // if (rearSuspensionTravelFilter) url = url + `&rear_suspension_travel=${rearSuspensionTravelFilter}`
+    // if (frontSuspensionModelFilter) url = url + `&front_suspension_model=${frontSuspensionModelFilter}`
+    // if (rearSuspensionModelFilter) url = url + `&rear_suspension_model=${rearSuspensionModelFilter}`
     if (frontDerailleurModelFilter) url = url + `&front_derailleur_model=${frontDerailleurModelFilter}`
     if (rearDerailleurModelFilter) url = url + `&rear_derailleur_model=${rearDerailleurModelFilter}`
-    if (frontGearsFilter) url = url + `&number_of_front_gears=${frontGearsFilter}`
-    if (rearGearsFilter) url = url + `&number_of_rear_gears=${rearGearsFilter}`
+    // if (frontGearsFilter) url = url + `&number_of_front_gears=${frontGearsFilter}`
+    // if (rearGearsFilter) url = url + `&number_of_rear_gears=${rearGearsFilter}`
     if (brakeTypeFilter) url = url + `&brake_type=${brakeTypeFilter}`
     if (brakeDiscSizeFilter) url = url + `&brake_disc_size=${brakeDiscSizeFilter}`
     if (brakeModelFilter) url = url + `&brake_model=${brakeModelFilter}`
@@ -178,10 +187,9 @@ export function Bikes(props) {
     if (rearSuspensionTravelOptionsToFilter) url = url + `&rear_suspension_travels=${rearSuspensionTravelOptionsToFilter}`
     if (frontSuspensionModelOptionsToFilter) url = url + `&front_suspension_models=${frontSuspensionModelOptionsToFilter}`
     if (rearSuspensionModelOptionsToFilter) url = url + `&rear_suspension_models=${rearSuspensionModelOptionsToFilter}`
-
-
-
-
+    if (rearSuspensionModelOptionsToFilter) url = url + `&rear_suspension_models=${rearSuspensionModelOptionsToFilter}`
+    if (numberOfFrontGearsOptionsToFilter) url = url + `&number_of_front_gears=${numberOfFrontGearsOptionsToFilter}`
+    if (numberOfRearGearsOptionsToFilter) url = url + `&number_of_rear_gears=${numberOfRearGearsOptionsToFilter}`
 
 
 
@@ -199,7 +207,7 @@ export function Bikes(props) {
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
   handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
   frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
- ])
+  numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter])
 
   useEffect(() => {
     fetch(`/get_attributes_that_are_present_for_filter`)
@@ -226,6 +234,8 @@ export function Bikes(props) {
       setPresentRearSuspensionTravels(data.rear_suspension_travels)
       setPresentRearSuspensionModels(data.rear_suspension_models)
       setPresentMtbDirtRearSuspensionModels(data.mtb_dirt_rear_suspension_models)
+      setPresentNumberOfFrontGerar(data.number_of_front_gears)
+      setPresentNumberOfRearGerar(data.number_of_rear_gears)
 
 
      })
@@ -462,81 +472,110 @@ export function Bikes(props) {
     }
   }
 
- const handleMultipleFiltersSuspensionType = (e) => {
-  const currentOptionsToFilter = [...suspensionTypeOptionsToFilter]
-  const tagFilter = e.target
-  if (currentOptionsToFilter.includes(e.target.value)) {
-    setSuspensionTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.remove("selected-tag")
-  } else {
-    currentOptionsToFilter.push(e.target.value)
-    setSuspensionTypeOptionsToFilter(currentOptionsToFilter)
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.add("selected-tag")
+  const handleMultipleFiltersSuspensionType = (e) => {
+    const currentOptionsToFilter = [...suspensionTypeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setSuspensionTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setSuspensionTypeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
- }
 
- const handleMultipleFiltersFrontSuspensionTravel = (e) => {
-  const currentOptionsToFilter = [...frontSuspensionTravelOptionsToFilter]
-  const tagFilter = e.target
-  if (currentOptionsToFilter.includes(e.target.value)) {
-    setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.remove("selected-tag")
-  } else {
-    currentOptionsToFilter.push(e.target.value)
-    setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter)
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.add("selected-tag")
+  const handleMultipleFiltersFrontSuspensionTravel = (e) => {
+    const currentOptionsToFilter = [...frontSuspensionTravelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
- }
 
- const handleMultipleFiltersRearSuspensionTravel = (e) => {
-  const currentOptionsToFilter = [...rearSuspensionTravelOptionsToFilter]
-  const tagFilter = e.target
-  if (currentOptionsToFilter.includes(e.target.value)) {
-    setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.remove("selected-tag")
-  } else {
-    currentOptionsToFilter.push(e.target.value)
-    setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter)
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.add("selected-tag")
+  const handleMultipleFiltersRearSuspensionTravel = (e) => {
+    const currentOptionsToFilter = [...rearSuspensionTravelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
- }
 
- const handleMultipleFiltersFrontSuspensionModel = (e) => {
-  const currentOptionsToFilter = [...frontSuspensionModelOptionsToFilter]
-  const tagFilter = e.target
-  if (currentOptionsToFilter.includes(e.target.value)) {
-    setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.remove("selected-tag")
-  } else {
-    currentOptionsToFilter.push(e.target.value)
-    setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter)
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.add("selected-tag")
+  const handleMultipleFiltersFrontSuspensionModel = (e) => {
+    const currentOptionsToFilter = [...frontSuspensionModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
- }
 
- const handleMultipleFiltersRearSuspensionModel = (e) => {
-  const currentOptionsToFilter = [...rearSuspensionModelOptionsToFilter]
-  const tagFilter = e.target
-  if (currentOptionsToFilter.includes(e.target.value)) {
-    setRearSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.remove("selected-tag")
-  } else {
-    currentOptionsToFilter.push(e.target.value)
-    setRearSuspensionModelOptionsToFilter(currentOptionsToFilter)
-    console.log(currentOptionsToFilter)
-    tagFilter.classList.add("selected-tag")
+  const handleMultipleFiltersRearSuspensionModel = (e) => {
+    const currentOptionsToFilter = [...rearSuspensionModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setRearSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setRearSuspensionModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
   }
- }
 
+  const handleMultipleFiltersNumberOfFrontGears = (e) => {
+    const currentOptionsToFilter = [...numberOfFrontGearsOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setNumberOfFrontGearsOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setNumberOfFrontGearsOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersNumberOfRearGears = (e) => {
+    const currentOptionsToFilter = [...numberOfRearGearsOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setNumberOfRearGearsOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setNumberOfRearGearsOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
 
   //?///////////////////////////////////FRAME FILTERS/////////////////////////////////////////
   // const frameBrands = [
@@ -1095,7 +1134,7 @@ export function Bikes(props) {
                 {presentFrameMaterials.map((presentFrameMaterial, index) => {
                   return (
 
-                    <button type="button" key={index} value={presentFrameMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>{translateWord(presentFrameMaterial)}</button>
+                    <button type="button" key={index} value={presentFrameMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>{translateWord(presentFrameMaterial) || presentFrameMaterial }</button>
                   )
                 })}
 
@@ -1218,8 +1257,17 @@ export function Bikes(props) {
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Câmbio</button>
             <div id="Câmbio" className="suspension-filter d-none">
               <h5 className="mt-3">dianteira</h5>
-              <h5 className=" mt-3">n ºmarchas</h5>
-              <select
+              {presentNumberOfFrontGears.length > 0 && (<>
+                <h5 className=" mt-3">n ºmarchas</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentNumberOfFrontGears.map((presentNumberOfFrontGear, index) => {
+                    return (
+                      <button type="button" key={index} value={presentNumberOfFrontGear} className="filter-tag" onClick={(e) => handleMultipleFiltersNumberOfFrontGears(e)}>{presentNumberOfFrontGear}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+              {/* <select
                 className="select-answer"
                 value={frontGearsFilter}
                 onChange={(e) => setFrontGearsFilter(e.target.value)}
@@ -1229,7 +1277,7 @@ export function Bikes(props) {
                 {frontGears.map((frontGear, index)=> {
                   return (<option key={index}>{frontGear}</option>);
                 })}
-              </select>
+              </select> */}
 
               <h5 className=" mt-3">Marca | modelo</h5>
               <select
@@ -1244,8 +1292,18 @@ export function Bikes(props) {
               </select>
 
               <h5 className="mt-3">traseira</h5>
-              <h5 className=" mt-3">nº marchas</h5>
-              <select
+              {presentNumberOfRearGears.length > 0 && (<>
+                <h5 className=" mt-3">n ºmarchas</h5>
+
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentNumberOfRearGears.map((presentNumberOfRearGear, index) => {
+                    return (
+                      <button type="button" key={index} value={presentNumberOfRearGear} className="filter-tag" onClick={(e) => handleMultipleFiltersNumberOfRearGears(e)}>{presentNumberOfRearGear}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+              {/* <select
                 className="select-answer"
                 value={rearGearsFilter}
                 onChange={(e) => setRearGearsFilter(e.target.value)}
@@ -1254,7 +1312,7 @@ export function Bikes(props) {
                 {rearGears.map((rearGear, index)=> {
                   return (<option key={index}>{rearGear}</option>);
                 })}
-              </select>
+              </select> */}
 
               <h5 className=" mt-3">Marca | modelo</h5>
               <select
@@ -1448,7 +1506,7 @@ export function Bikes(props) {
             )}
           </div>
         </div>
-        
+
         <div className="col-12 col-md-9 d-flex flex-wrap">
           {bikes && bikes.map((bike, idx) => {
             return (

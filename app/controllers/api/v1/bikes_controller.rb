@@ -31,11 +31,11 @@ module Api
         @bikes = @bikes.where(front_suspension_model: params[:front_suspension_models].split(",")) if params[:front_suspension_models].present?
         @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_models].split(",")) if params[:rear_suspension_models].present?
 
+        @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears].split(",")) if params[:number_of_front_gears].present?
+        @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears].split(",")) if params[:number_of_rear_gears].present?
 
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears]) if params[:number_of_front_gears].present?
-        @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears]) if params[:number_of_rear_gears].present?
         @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_model]) if params[:font_derailleur_model].present?
         @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_model]) if params[:rear_derailleur_model].present?
         @bikes = @bikes.where(brake_type: params[:brake_type]) if params[:brake_type].present?
