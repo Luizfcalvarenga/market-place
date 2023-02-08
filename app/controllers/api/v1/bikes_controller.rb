@@ -37,11 +37,11 @@ module Api
         @bikes = @bikes.where(crankset: params[:cranksets]) if params[:cranksets].present?
         @bikes = @bikes.where(chain: params[:chains]) if params[:chains].present?
 
+        @bikes = @bikes.where(brake_type: params[:brake_types].split(",")) if params[:brake_types].present?
+        @bikes = @bikes.where(brake_disc_size: params[:brake_disc_sizes].split(",")) if params[:brake_disc_sizes].present?
+        @bikes = @bikes.where(brake_model: params[:brake_models].split(",")) if params[:brake_models].present?
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(brake_type: params[:brake_type]) if params[:brake_type].present?
-        @bikes = @bikes.where(brake_disc_size: params[:brake_disc_size]) if params[:brake_disc_size].present?
-        @bikes = @bikes.where(brake_model: params[:brake_model]) if params[:brake_model].present?
         @bikes = @bikes.where(rim_size: params[:rim_size]) if params[:rim_size].present?
         @bikes = @bikes.where(seat_post_type: params[:seat_post_type]) if params[:seat_post_type].present?
         @bikes = @bikes.where(seat_post_travel: params[:seat_post_travel]) if params[:seat_post_travel].present?

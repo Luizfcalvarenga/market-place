@@ -106,9 +106,15 @@ class BikesController < ApplicationController
     @mtb_dirt_rear_derailleur_models = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(rear_derailleur_model: "null").pluck(:rear_derailleur_model).uniq.compact_blank
     @road_front_derailleur_models = @bikes.where(category: Category.where(name: "road")).where.not(front_derailleur_model: "null").pluck(:front_derailleur_model).uniq.compact_blank
     @road_rear_derailleur_models = @bikes.where(category: Category.where(name: "road")).where.not(rear_derailleur_model: "null").pluck(:rear_derailleur_model).uniq.compact_blank
-
     @cranksets = @bikes.where.not(crankset: "null").pluck(:crankset).uniq.compact_blank
     @chains = @bikes.where.not(chain: "null").pluck(:chain).uniq.compact_blank
+
+
+    @brake_types = @bikes.where.not(brake_type: "null").pluck(:brake_type).uniq.compact_blank
+    @road_brake_models = @bikes.where(category: Category.where(name: "road")).where.not(brake_model: "null").pluck(:brake_model).uniq.compact_blank
+    @mtb_dirt_brake_models = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(brake_model: "null").pluck(:brake_model).uniq.compact_blank
+    @brake_disc_sizes = @bikes.where.not(brake_disc_size: "null").pluck(:brake_disc_size).uniq.compact_blank
+
 
 
 
@@ -143,7 +149,11 @@ class BikesController < ApplicationController
         road_front_derailleur_models: @road_front_derailleur_models,
         road_rear_derailleur_models: @road_rear_derailleur_models,
         cranksets: @cranksets,
-        chains: @chains
+        chains: @chains,
+        brake_types: @brake_types,
+        road_brake_models: @road_brake_models,
+        mtb_dirt_brake_models: @mtb_dirt_brake_models,
+        brake_disc_sizes: @brake_disc_sizes
 
       } }
     end

@@ -100,6 +100,17 @@ export function Bikes(props) {
   const [presentChains, setPresentChains] = useState([]);
   const [chainOptionsToFilter, setChainOptionsToFilter] = useState([]);
 
+  const [presentBrakeTypes, setPresentBrakeTypes] = useState([]);
+  const [brakeTypeOptionsToFilter, setBrakeTypeOptionsToFilter] = useState([]);
+  const [presentBrakeDiscSizes, setPresentBrakeDiscSizes] = useState([]);
+  const [brakeDiscSizeOptionsToFilter, setBrakeDiscSizeOptionsToFilter] = useState([]);
+  const [presentRoadBrakeModels, setPresentRoadBrakeModels] = useState([]);
+  const [presentMtbDirtBrakeModels, setPresentMtbDirtBrakeModels] = useState([]);
+  const [brakeModelOptionsToFilter, setBrakeModelOptionsToFilter] = useState([]);
+
+
+
+
   const currencyConfig = {
     locale: "pt-BR",
     formats: {
@@ -198,10 +209,9 @@ export function Bikes(props) {
     if (rearDerailleurModelOptionsToFilter) url = url + `&rear_derailleur_models=${rearDerailleurModelOptionsToFilter}`
     if (cranksetOptionsToFilter) url = url + `&cranksets=${cranksetOptionsToFilter}`
     if (chainOptionsToFilter) url = url + `&chains=${chainOptionsToFilter}`
-
-
-
-
+    if (brakeTypeOptionsToFilter) url = url + `&brake_types=${brakeTypeOptionsToFilter}`
+    if (brakeDiscSizeOptionsToFilter) url = url + `&brake_disc_sizes=${brakeDiscSizeOptionsToFilter}`
+    if (brakeModelOptionsToFilter) url = url + `&brake_models=${brakeModelOptionsToFilter}`
 
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
 
@@ -214,7 +224,8 @@ export function Bikes(props) {
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
   handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
   frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
-  numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter, frontDerailleurModelOptionsToFilter, rearDerailleurModelOptionsToFilter, cranksetOptionsToFilter, chainOptionsToFilter])
+  numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter, frontDerailleurModelOptionsToFilter, rearDerailleurModelOptionsToFilter, cranksetOptionsToFilter, chainOptionsToFilter,
+  brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter])
 
   useEffect(() => {
     fetch(`/get_attributes_that_are_present_for_filter`)
@@ -250,7 +261,11 @@ export function Bikes(props) {
       setPresentRoadRearDerailleurModels(data.road_rear_derailleur_models)
       setPresentCranksets(data.cranksets)
       setPresentChains(data.chains)
-
+      // FREIO
+      setPresentBrakeTypes(data.brake_types)
+      setPresentBrakeDiscSizes(data.brake_disc_sizes)
+      setPresentMtbDirtBrakeModels(data.mtb_dirt_brake_models)
+      setPresentRoadBrakeModels(data.road_brake_models)
 
      })
 
@@ -262,7 +277,6 @@ export function Bikes(props) {
      .then((data) => {
       setStates(data.states)
       setCities(data.cities)
-
      })
 
   }, []);
@@ -647,6 +661,51 @@ export function Bikes(props) {
     } else {
       currentOptionsToFilter.push(e.target.value)
       setChainOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersBrakeType = (e) => {
+    const currentOptionsToFilter = [...brakeTypeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setBrakeTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setBrakeTypeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersBrakeDiscSize = (e) => {
+    const currentOptionsToFilter = [...brakeDiscSizeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setBrakeDiscSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setBrakeDiscSizeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersBrakeModel = (e) => {
+    const currentOptionsToFilter = [...brakeModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setBrakeModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setBrakeModelOptionsToFilter(currentOptionsToFilter)
       console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
@@ -1485,7 +1544,18 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Freios</button>
             <div id="Freios" className="suspension-filter d-none">
-              <h5 className=" mt-3">tipo</h5>
+
+              {presentBrakeTypes.length > 0 && (<>
+                <h5 className=" mt-3">tipo</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentBrakeTypes.map((presentBrakeType, index) => {
+                    return (
+                      <button type="button" key={index} value={presentBrakeType} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeType(e)}>{translateWord(presentBrakeType)}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+              {/* <h5 className=" mt-3">tipo</h5>
               <select
                 className="select-answer"
                 value={brakeTypeFilter}
@@ -1498,10 +1568,20 @@ export function Bikes(props) {
                 <option value="mechanical_disc">À Disco - Mecânico</option>
                 <option value="coaster_brake">Contra pedal</option>
                 <option value="caliper">Cantilevers</option>
-              </select>
+              </select> */}
 
-              {(brakeTypeFilter === "hydraulic_disc" || brakeTypeFilter === "mechanical_disc") && (<>
-                <h5 className=" mt-3">disco</h5>
+              {(brakeTypeOptionsToFilter.includes("hydraulic_disc") || brakeTypeOptionsToFilter.includes("mechanical_disc")) && (<>
+                {presentBrakeDiscSizes.length > 0 && (<>
+                  <h5 className=" mt-3">Disco</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentBrakeDiscSizes.map((presentBrakeDiscSize, index) => {
+                      return (
+                        <button type="button" key={index} value={presentBrakeDiscSize} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeDiscSize(e)}>{presentBrakeDiscSize}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+                {/* <h5 className=" mt-3">disco</h5>
                 <select
                   className="select-answer"
                   value={brakeDiscSizeFilter}
@@ -1510,11 +1590,37 @@ export function Bikes(props) {
                   <option value=""></option>
                   {discSizes.map((discSize, index)=> {
                     return (<option key={index}>{discSize}</option>);
-                  })}
-                </select>
-                </>)}
+                  })} */}
+                {/* </select> */}
+              </>)}
 
-              <h5 className=" mt-3">Marca | modelo</h5>
+              {categoryOptionsToFilter.includes("road") && (<>
+                {presentRoadBrakeModels.length > 0 && (<>
+                  <h5 className=" mt-3">Marca</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentRoadBrakeModels.map((presentRoadBrakeModel, index) => {
+                      return (
+                        <button type="button" key={index} value={presentRoadBrakeModel} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeModel(e)}>{presentRoadBrakeModel}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+              </>)}
+
+              {!categoryOptionsToFilter.includes("road") && (<>
+                {presentMtbDirtBrakeModels.length > 0 && (<>
+                  <h5 className=" mt-3">marca</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentMtbDirtBrakeModels.map((presentMtbDirtBrakeModel, index) => {
+                      return (
+                        <button type="button" key={index} value={presentMtbDirtBrakeModel} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeModel(e)}>{presentMtbDirtBrakeModel}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+              </>)}
+
+              {/* <h5 className=" mt-3">Marca | modelo</h5>
               <select
                 className="select-answer"
                 value={brakeModelFilter}
@@ -1524,7 +1630,7 @@ export function Bikes(props) {
                 {brakeModels.map((brakeModel, index)=> {
                   return (<option key={index}>{brakeModel}</option>);
                 })}
-              </select>
+              </select> */}
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Rodas</button>
