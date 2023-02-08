@@ -2174,7 +2174,7 @@ export function Bikes(props) {
           {bikes && bikes.map((bike, idx) => {
             return (
               <div className="w-25 my-2" bike={bike} key={bike.id} id="mobile">
-                <a href={"bikes/" + bike.id} className="remove-link">
+                <a href={"bikes/" + bike.id} className="remove-link" target="_blank">
                   <div className="cards-bikes">
                     <div id={"carouselExampleControls" + bike.id.toString()} className="carousel slide" data-bs-ride="carousel">
                       <div className="carousel-inner">
