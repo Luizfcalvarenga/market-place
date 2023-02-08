@@ -121,9 +121,10 @@ class BikesController < ApplicationController
     @tyre_models = @bikes.where.not(front_tyre: "null").where.not(rear_tyre: "null").pluck(:front_tyre, :rear_tyre).flatten.uniq.compact_blank
     @hub_models = @bikes.where.not(front_hub: "null").where.not(rear_hub: "null").pluck(:front_hub, :rear_hub).flatten.uniq.compact_blank
 
-
-
-
+    @seat_post_types = @bikes.where.not(seat_post_type: "null").pluck(:seat_post_type).uniq.compact_blank
+    @seat_post_travels = @bikes.where.not(seat_post_travel: "null").pluck(:seat_post_travel).uniq.compact_blank
+    @seat_post_materials = @bikes.where.not(seat_post_material: "null").pluck(:seat_post_material).uniq.compact_blank
+    @seat_post_models = @bikes.where.not(seat_post_model: "null").pluck(:seat_post_model).uniq.compact_blank
 
 
 
@@ -166,7 +167,12 @@ class BikesController < ApplicationController
         wheel_materials: @wheel_materials,
         rim_models: @rim_models,
         tyre_models: @tyre_models,
-        hub_models: @hub_models
+        hub_models: @hub_models,
+
+        seat_post_types: @seat_post_types,
+        seat_post_travels: @seat_post_travels,
+        seat_post_materials: @seat_post_materials,
+        seat_post_models: @seat_post_models
 
       } }
     end

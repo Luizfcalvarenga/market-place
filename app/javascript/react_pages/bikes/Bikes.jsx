@@ -31,10 +31,10 @@ export function Bikes(props) {
   // const [rearGearsFilter, setRearGearsFilter] = useState("");
   // const [frontDerailleurModelFilter, setFrontDerailleurModelFilter] = useState("");
   // const [rearDerailleurModelFilter, setRearDerailleurModelFilter] = useState("");
-  const [brakeTypeFilter, setBrakeTypeFilter] = useState("");
-  const [brakeDiscSizeFilter, setBrakeDiscSizeFilter] = useState("");
-  const [brakeModelFilter, setBrakeModelFilter] = useState("");
-  const [rimSizeFilter, setRimSizeFilter] = useState("");
+  // const [brakeTypeFilter, setBrakeTypeFilter] = useState("");
+  // const [brakeDiscSizeFilter, setBrakeDiscSizeFilter] = useState("");
+  // const [brakeModelFilter, setBrakeModelFilter] = useState("");
+  // const [rimSizeFilter, setRimSizeFilter] = useState("");
   const [seatPostTypeFilter, setSeatPostTypeFilter] = useState("");
   const [seatPostTravelFilter, setSeatPostTravelFilter] = useState("");
   const [seatPostModelFilter, setSeatPostModelFilter] = useState("");
@@ -110,19 +110,23 @@ export function Bikes(props) {
 
   const [presentRimSizes, setPresentRimSizes] = useState([]);
   const [rimSizeOptionsToFilter, setRimSizeOptionsToFilter] = useState([]);
-
   const [presentWheelMaterials, setPresentWheelMaterials] = useState([]);
   const [wheelMaterialOptionsToFilter, setWheelMaterialOptionsToFilter] = useState([]);
-
   const [presentRimModels, setPresentRimModels] = useState([]);
   const [rimModelOptionsToFilter, setRimModelOptionsToFilter] = useState([]);
-
   const [presentHubModels, setPresentHubModels] = useState([]);
   const [hubModelOptionsToFilter, setHubModelOptionsToFilter] = useState([]);
-
   const [presentTyreModels, setPresentTyreModels] = useState([]);
   const [tyreModelOptionsToFilter, setTyreModelOptionsToFilter] = useState([]);
 
+  const [presentSeatPostTypes, setPresentSeatPostTypes] = useState([]);
+  const [seatPostTypeOptionsToFilter, setSeatPostTypeOptionsToFilter] = useState([]);
+  const [presentSeatPostMaterials, setPresentSeatPostMaterials] = useState([]);
+  const [seatPostMaterialOptionsToFilter, setSeatPostMaterialOptionsToFilter] = useState([]);
+  const [presentSeatPostTravels, setPresentSeatPostTravels] = useState([]);
+  const [seatPostTravelOptionsToFilter, setSeatPostTravelOptionsToFilter] = useState([]);
+  const [presentSeatPostModels, setPresentSeatPostModels] = useState([]);
+  const [seatPostModelOptionsToFilter, setSeatPostModelOptionsToFilter] = useState([]);
 
 
   const currencyConfig = {
@@ -185,10 +189,10 @@ export function Bikes(props) {
     // if (rearDerailleurModelFilter) url = url + `&rear_derailleur_model=${rearDerailleurModelFilter}`
     // if (frontGearsFilter) url = url + `&number_of_front_gears=${frontGearsFilter}`
     // if (rearGearsFilter) url = url + `&number_of_rear_gears=${rearGearsFilter}`
-    if (brakeTypeFilter) url = url + `&brake_type=${brakeTypeFilter}`
-    if (brakeDiscSizeFilter) url = url + `&brake_disc_size=${brakeDiscSizeFilter}`
-    if (brakeModelFilter) url = url + `&brake_model=${brakeModelFilter}`
-    if (rimSizeFilter) url = url + `&rim_size=${rimSizeFilter}`
+    // if (brakeTypeFilter) url = url + `&brake_type=${brakeTypeFilter}`
+    // if (brakeDiscSizeFilter) url = url + `&brake_disc_size=${brakeDiscSizeFilter}`
+    // if (brakeModelFilter) url = url + `&brake_model=${brakeModelFilter}`
+    // if (rimSizeFilter) url = url + `&rim_size=${rimSizeFilter}`
     if (seatPostTypeFilter) url = url + `&seat_post_type=${seatPostTypeFilter}`
     if (seatPostTravelFilter) url = url + `&seat_post_travel=${seatPostTravelFilter}`
     if (seatPostModelFilter) url = url + `&seat_post_model=${seatPostModelFilter}`
@@ -233,6 +237,12 @@ export function Bikes(props) {
     if (hubModelOptionsToFilter) url = url + `&hub_models=${hubModelOptionsToFilter}`
     if (tyreModelOptionsToFilter) url = url + `&tyre_models=${tyreModelOptionsToFilter}`
 
+    if (seatPostTypeOptionsToFilter) url = url + `&seat_post_types=${seatPostTypeOptionsToFilter}`
+    if (seatPostMaterialOptionsToFilter) url = url + `&seat_post_materials=${seatPostMaterialOptionsToFilter}`
+    if (seatPostTravelOptionsToFilter) url = url + `&seat_post_travels=${seatPostTravelOptionsToFilter}`
+    if (seatPostModelOptionsToFilter) url = url + `&seat_post_models=${seatPostModelOptionsToFilter}`
+
+
 
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
 
@@ -241,12 +251,13 @@ export function Bikes(props) {
     setBikes(response.data.bikes);
 
 
-  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, brakeDiscSizeFilter, brakeModelFilter, rimSizeFilter, seatPostTypeFilter, seatPostTravelFilter,
+  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, seatPostTypeFilter, seatPostTravelFilter,
   seatPostModelFilter, batteryFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter, cranksetFilter, chainFilter, hubFilter, rimFilter, tyreFilter, stemFilter,
   handlebarFilter, filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
   frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
   numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter, frontDerailleurModelOptionsToFilter, rearDerailleurModelOptionsToFilter, cranksetOptionsToFilter, chainOptionsToFilter,
-  brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter, rimSizeOptionsToFilter, wheelMaterialOptionsToFilter, rimModelOptionsToFilter, hubModelOptionsToFilter, tyreModelOptionsToFilter ])
+  brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter, rimSizeOptionsToFilter, wheelMaterialOptionsToFilter, rimModelOptionsToFilter, hubModelOptionsToFilter, tyreModelOptionsToFilter,
+  seatPostTypeOptionsToFilter, seatPostMaterialOptionsToFilter, seatPostTravelOptionsToFilter, seatPostModelOptionsToFilter ])
 
   useEffect(() => {
     fetch(`/get_attributes_that_are_present_for_filter`)
@@ -293,7 +304,11 @@ export function Bikes(props) {
       setPresentWheelMaterials(data.wheel_materials)
       setPresentHubModels(data.hub_models)
       setPresentTyreModels(data.tyre_models)
-
+      // CANOTE
+      setPresentSeatPostTypes(data.seat_post_types)
+      setPresentSeatPostTravels(data.seat_post_travels)
+      setPresentSeatPostMaterials(data.seat_post_materials)
+      setPresentSeatPostModels(data.seat_post_models)
 
      })
 
@@ -810,6 +825,66 @@ export function Bikes(props) {
     } else {
       currentOptionsToFilter.push(e.target.value)
       setTyreModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersSeatPostType = (e) => {
+    const currentOptionsToFilter = [...seatPostTypeOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setSeatPostTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setSeatPostTypeOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersSeatPostMaterial = (e) => {
+    const currentOptionsToFilter = [...seatPostMaterialOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setSeatPostMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setSeatPostMaterialOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersSeatPostTravel = (e) => {
+    const currentOptionsToFilter = [...seatPostTravelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setSeatPostTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setSeatPostTravelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersSeatPostModel = (e) => {
+    const currentOptionsToFilter = [...seatPostModelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setSeatPostModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setSeatPostModelOptionsToFilter(currentOptionsToFilter)
       console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
@@ -1828,7 +1903,56 @@ export function Bikes(props) {
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Canote</button>
             <div id="Canote" className="suspension-filter d-none">
-              <h5 className=" mt-3">tipo</h5>
+
+              {presentSeatPostTypes.length > 0 && (<>
+                <h5 className=" mt-3">tipo</h5>
+                <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                  {presentSeatPostTypes.map((presentSeatPostType, index) => {
+                    return (
+                      <button type="button" key={index} value={presentSeatPostType} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostType(e)}>{translateWord(presentSeatPostType)}</button>
+                    )
+                  })}
+                </div>
+              </>)}
+
+
+              {seatPostTypeOptionsToFilter.includes("retractable") && (<>
+                {presentSeatPostTravels.length > 0 && (<>
+                  <h5 className=" mt-3">tamanho</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentSeatPostTravels.map((presentSeatPostTravel, index) => {
+                      return (
+                        <button type="button" key={index} value={presentSeatPostTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostTravel(e)}>{presentSeatPostTravel}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+              </>)}
+
+              {seatPostTypeOptionsToFilter.includes("rigid") && (<>
+                {presentSeatPostMaterials.length > 0 && (<>
+                  <h5 className=" mt-3">tipo</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentSeatPostMaterials.map((presentSeatPostMaterial, index) => {
+                      return (
+                        <button type="button" key={index} value={presentSeatPostMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostMaterial(e)}>{translateWord(presentSeatPostMaterial)}</button>
+                      )
+                    })}
+                  </div>
+                </>)}
+              </>)}
+
+              {presentSeatPostModels.length > 0 && (<>
+                  <h5 className=" mt-3">marca</h5>
+                  <div id="suspension-type" className="d-flex flex-wrap justify-content-between mt-3">
+                    {presentSeatPostModels.map((presentSeatPostModel, index) => {
+                      return (
+                        <button type="button" key={index} value={presentSeatPostModel} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostModel(e)}>{presentSeatPostModel}</button>
+                      )
+                    })}
+                  </div>
+              </>)}
+              {/* <h5 className=" mt-3">tipo</h5>
               <select
                 className="select-answer"
                 value={seatPostTypeFilter}
@@ -1856,7 +1980,7 @@ export function Bikes(props) {
               </>
               )}
               <h5 className=" mt-3">Modelo</h5>
-              <input type="text" className="text-input" onChange={(e) => setSeatPostModelFilter(e.target.value)}/>
+              <input type="text" className="text-input" onChange={(e) => setSeatPostModelFilter(e.target.value)}/> */}
             </div>
 
             <button type="button" className="btn-filter mt-3" onClick={(e) => handleFilter(e)}>Cockpit</button>

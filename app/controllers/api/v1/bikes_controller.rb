@@ -46,13 +46,17 @@ module Api
         @bikes = @bikes.where(front_hub_model: params[:hub_models].split(",")).where(front_hub_model: params[:hub_models].split(",")) if params[:hub_models].present?
         @bikes = @bikes.where(front_tyre_model: params[:tyre_models].split(",")).where(front_tyre_model: params[:tyre_models].split(",")) if params[:tyre_models].present?
 
+        @bikes = @bikes.where(seat_post_type: params[:seat_post_types].split(",")) if params[:seat_post_types].present?
+        @bikes = @bikes.where(seat_post_travel: params[:seat_post_travels].split(",")) if params[:seat_post_travels].present?
+        @bikes = @bikes.where(seat_post_model: params[:seat_post_models].split(",")) if params[:seat_post_models].present?
+        @bikes = @bikes.where(seat_post_material: params[:seat_post_materials].split(",")) if params[:seat_post_materials].present?
+
+
 
 
 
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(seat_post_type: params[:seat_post_type]) if params[:seat_post_type].present?
-        @bikes = @bikes.where(seat_post_travel: params[:seat_post_travel]) if params[:seat_post_travel].present?
         @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?
         @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
         @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
