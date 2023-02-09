@@ -157,7 +157,7 @@ class ProductsController < ApplicationController
 
 
 
-    @products_attributes =  ProductAttribute.where(product_id: (1..40).to_a).uniq.compact_blank
+    @product_attributes =  ProductAttribute.where(product_id: (1..40).to_a).uniq.compact_blank
 
 
     skip_authorization
@@ -173,7 +173,7 @@ class ProductsController < ApplicationController
         dirt_modalities: @dirt_modalities,
         models: @models,
         brands: @brands,
-        products_attributes: @products_attributes
+        product_attributes: @product_attributes
       } }
     end
   end

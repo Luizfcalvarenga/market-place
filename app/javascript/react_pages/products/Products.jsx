@@ -112,32 +112,19 @@ export function Products(props) {
      .then((data) => {
       setStates(data.states)
       setCities(data.cities)
-
      })
-
   }, []);
 
-
-  // useEffect(() => {
-  //   if (productTypes) {
-  //     setAccessories(productTypes.filter(element => element.id >= 40 && element.id <= 47));
-  //     setComponents(productTypes.filter(element => element.id >= 1 && element.id <= 39));
-  //     setClothes(productTypes.filter(element => element.id >= 48 && element.id <= 66));
-  //   }
-
-  // }, []);
 
   useEffect(async () => {
     let url = "/api/v1/products?";
     // if (categoryFilter) url = url + `&category=${categoryFilter}`
     // if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (nameFilter) url = url + `&name=${nameFilter}`
-
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${(minPriceFilter * 100)}`
     if (maxPriceFilter) url = url + `&max_price=${(maxPriceFilter * 100)}`
-
     if (productAttributesFilter) url = url + `&product_attribute_value=${productAttributesFilter}`
     // if (brandFilter) url = url + `&brand=${brandFilter}`
     if (stateFilter) url = url + `&state=${stateFilter}`
@@ -156,11 +143,8 @@ export function Products(props) {
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
     if (verifiedProductFilter) url = url + `&verified=${verifiedProductFilter}`
 
-
     if (modelOptionsToFilter) url = url + `&models=${modelOptionsToFilter}`
     if (brandOptionsToFilter) url = url + `&brands=${brandOptionsToFilter}`
-
-
 
     const response = await axios.get(url);
     setProductTypes(response.data.product_types.sort(function (a, b) {
@@ -200,8 +184,6 @@ export function Products(props) {
         setPresentModels(data.models)
         setPresentBrands(data.brands)
         setPresentProductAttributes(data.product_attriutes)
-
-
 
        })
 
@@ -1122,6 +1104,15 @@ export function Products(props) {
 
             </>)}
 
+
+            {/* <div id="Categoria" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
+              {presentProductAttributtes.map((productAttributte, index) => {
+                return (
+
+                  <button type="button" key={index} value={productAttributte.value} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{productTypeAttributes.find(element => element.id === productAttributte.product_type_attribute_id).prompt}</button>
+                )
+              })}
+            </div> */}
             {/*
             {productTypeFilter.length > 1 && (<>
               <h5 className="mt-3">Atributos</h5>
