@@ -16,18 +16,12 @@ export function Products(props) {
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
-  // const [categoryFilter, setCategoryFilter] = useState("");
-  // const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
   const [productTypeFilter, setProductTypeFilter] = useState("");
-
   const [conditionFilter, setConditionFilter] = useState("");
   const [nameFilter, setNameFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
-  // const [modalityFilter, setModalityFilter] = useState("");
   const [productAttributesFilter, setProductAttributesFilter] = useState("");
-  // const [brandFilter, setBrandFilter] = useState("");
-  // const [modelFilter, setModelFilter] = useState("");
   const [minYearFilter, setMinYearFilter] = useState("");
   const [maxYearFilter, setMaxYearFilter] = useState("");
   const [states, setStates] = useState([]);
@@ -35,7 +29,6 @@ export function Products(props) {
   const [mapedCitiesForState, setMapedCitiesForState] = useState([]);
   const [stateFilter, setStateFilter] = useState("");
   const [cityFilter, setCityFilter] = useState("");
-
   const [accessoriesProducts, setAccessoriesProducts] = useState([]);
   const [clothesProducts, setClothesProducts] = useState([]);
   const [componentsProducts, setComponentsProducts] = useState([]);
@@ -118,15 +111,13 @@ export function Products(props) {
 
   useEffect(async () => {
     let url = "/api/v1/products?";
-    // if (categoryFilter) url = url + `&category=${categoryFilter}`
-    // if (modalityFilter) url = url + `&modality=${modalityFilter}`
+
     if (nameFilter) url = url + `&name=${nameFilter}`
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${(minPriceFilter * 100)}`
     if (maxPriceFilter) url = url + `&max_price=${(maxPriceFilter * 100)}`
     if (productAttributesFilter) url = url + `&product_attribute_value=${productAttributesFilter}`
-    // if (brandFilter) url = url + `&brand=${brandFilter}`
     if (stateFilter) url = url + `&state=${stateFilter}`
     if (cityFilter) url = url + `&city=${cityFilter}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
@@ -158,10 +149,6 @@ export function Products(props) {
     }))
     setProductTypeAttributes(response.data.product_type_attributes)
     setProducts(response.data.products);
-    // setAccessories(response.data.product_types.filter(element => element.id >= 40 && element.id <= 47));
-    // setComponents(response.data.product_types.filter(element => element.id >= 1 && element.id <= 39));
-    // setClothes(response.data.product_types.filter(element => element.id >= 48 && element.id <= 66));
-
 
   }, [productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, stateFilter, cityFilter,
     minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter,
@@ -210,64 +197,6 @@ export function Products(props) {
       tagFilter.classList.add("selected-tag")
     }
   }
-
-  // const renderProductAttributeSelect = (attribute, index) => {
-  //   let options = []
-  //   if (["mountain_bike", "dirt_street"].includes(categoryFilter) && attribute.name === "frame_size") {
-  //     options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
-  //   } else if (categoryFilter === "road" && attribute.name === "frame_size") {
-  //     options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-  //   } else if (!categoryFilter && attribute.name === "frame_size") {
-  //     options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-  //   } else if (attribute.name === "frame_brand") {
-  //     return
-  //   } else if (attribute.name === "suspension_type") {
-  //     options = [ ["no_suspension", "Sem Suspensão"], ["full_suspension", "Full Suspension" ]]
-  //   } else if (attribute.name === "brake_type") {
-  //     options = [ ["v_brake", "V-Brake"], ["hydraulic_disc", "À Disco Hidraulico" ], ["mechanical_disc", "À Disco Mecânico" ], ["coaster_brake", "Contra Pedal" ]]
-  //   }  else if (attribute.name === "condition") {
-  //     options = [ ["new", "Novo"], ["used", "Usado" ]]
-  //   }  else if (attribute.name === "documentation_type") {
-  //     options = [ ["receipt", "Nota Fiscal"], ["import_document", "Documento de Importação" ], ["foreign_tax_coupon", "Cupom Fiscal Estrangeiro" ], ["no_documentation", "Sem Documentação" ]]
-  //   } else if (attribute.name === "frame_material") {
-  //     options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-  //   } else if (attribute.name === "rim_material") {
-  //     options = [ ["carbon", "Carbono"], ["aluminum", "Aluminio" ], ["carbon_aluminum_chainstay", "Carbono/Aumínio (Chainstay)" ], ["other", "Outro" ]]
-  //   } else if (attribute.name === "brake_model" || attribute.name === "model" ) {
-  //     return
-  //   } else if (attribute.name === "seat_post_type") {
-  //     options = [ ["retractable", "Retrátil"], ["rigid", "Rigido" ]]
-  //   } else if (attribute.options.includes("other") ) {
-  //     attribute.options.pop()
-  //     options = attribute.options
-  //   } else {
-  //     options = attribute.options
-  //   }
-
-  //   return (
-  //     <div className="attributes-filters">
-  //       <h5 className="text-success mt-3" key={index}>{attribute.prompt}</h5> <br />
-  //       <select
-  //       className="select-answer"
-  //       onChange={(e) => setProductAttributesFilter(e.target.value)}
-  //       >
-  //         <option value=""></option>
-  //         {options?.map((option, index) => {
-  //            if (Array.isArray(option)) {
-  //             return (
-  //               <option key={index} value={option[0]}>{option[1]}</option>
-  //             )
-  //           } else {
-  //             return (
-
-  //               <option key={index} value={option}>{option}</option>
-  //             )
-  //           }
-  //         })}
-  //       </select>
-  //     </div>
-  //   )
-  // }
 
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
@@ -418,8 +347,6 @@ export function Products(props) {
     }
   }
 
-
-
   const handleMultipleFiltersCategory = (e) => {
     const currentOptionsToFilter = [...categoryOptionsToFilter]
     const tagFilter = e.target
@@ -449,18 +376,6 @@ export function Products(props) {
       tagFilter.classList.add("selected-tag")
     }
   }
-
-  // const handleModalityFilter = (e) => {
-  //   console.log(e)
-  //   e.target.classList.toggle("active")
-  //   if (e.target.classList.contains("active")) {
-  //     document.getElementById(e.target.value).classList.remove("d-none")
-  //     e.target.classList.add("selected-tag")
-  //   } else {
-  //     document.getElementById(e.target.value).classList.add("d-none")
-  //     e.target.classList.remove("selected-tag")
-  //   }
-  // }
 
   const handleMultipleFiltersModel = (e) => {
     const currentOptionsToFilter = [...modelOptionsToFilter]
@@ -597,98 +512,7 @@ export function Products(props) {
     };
     return languageMap[word]
   }
-  // const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Alfameq",
-  // "Astro",
-  // "Audax",
-  // "BH",
-  // "Bianchi",
-  // "BMC",
-  // "Caloi",
-  // "Cannondale",
-  // "Canyon",
-  // "Carrera",
-  // "Cervelo",
-  // "Corratec",
-  // "Cube",
-  // "Dabomb",
-  // "Felt",
-  // "First",
-  // "Focus",
-  // "Fuji",
-  // "Giant",
-  // "Groove",
-  // "GT",
-  // "GTS",
-  // "Ibis",
-  // "Jamis",
-  // "Kona",
-  // "Lapierre",
-  // "Marin",
-  // "Merida",
-  // "Mosso",
-  // "Oggi",
-  // "Orbea",
-  // "Pinarello",
-  // "Raleigh",
-  // "Rava",
-  // "Ridley",
-  // "Santa_cruz",
-  // "Schwinn",
-  // "Scott",
-  // "Sense",
-  // "Soul",
-  // "Specialized",
-  // "Swift Carbon",
-  // "Trek",
-  // "Tsw",
-  // "Wilier",
-  // "YT",
-  // "Argon 21",
-  // "Bliv",
-  // "Blue",
-  // "Bottecchia",
-  // "Cipollini",
-  // "Cly",
-  // "Cumberland",
-  // "De Rosa",
-  // "E Moving",
-  // "Gary Fisher",
-  // "Gioia",
-  // "Kaiena",
-  // "Kestrel",
-  // "Kode",
-  // "Kuota",
-  // "Lazzaretti",
-  // "Lev E-Bike",
-  // "Litespeed",
-  // "Look",
-  // "Lotus",
-  // "Mercian",
-  // "Miyamura Gravel",
-  // "Open",
-  // "Quintana Roo",
-  // "Redland",
-  // "Riva",
-  // "Rose",
-  // "Sava",
-  // "Sundown",
-  // "Time",
-  // "Trinx",
-  // "Trust",
-  // "Velorbis",
-  // "Vicinitech",
-  // "Victory",
-  // "Eddy Merckx",
-  // "Salsa",
-  // "Surly",
-  // "Soma",
-  // "Diamondback",
-  // "Dahon"].sort()
 
-  // const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
-  //   "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
-  //   "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
-  // ].sort()
 
 
 
@@ -706,28 +530,6 @@ export function Products(props) {
                 <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usado</button>
               </div>
             </div>
-            {/* <div className="condition-filter">
-              <h5 className="mt-3">condição</h5>
-              <div className="d-flex justify-content-between">
-                <label htmlFor="new" className="me-2">
-                  <input
-                    type="checkbox"
-                    value="new"
-                    name="condition"
-                    onChange={(e) => handleConditionFilter(e)}
-                  />  Novo
-                </label>
-
-                <label htmlFor="used" className=" me-2">
-                  <input
-                    type="checkbox"
-                    value="used"
-                    name="condition"
-                    onChange={(e) => handleConditionFilter(e)}
-                  />  Usado
-                </label>
-              </div>
-            </div> */}
             <h6 className=" mt-3">Produtos</h6>
             <div className="d-flex justify-content-between">
               {presentAccessories.length > 0 && (
@@ -740,7 +542,6 @@ export function Products(props) {
                 <button type="button" value="" className="filter-tag" onClick={(e) => hendleClothesFiltes(e)}>Vestuário</button>
               )}
             </div>
-
 
             <div id="products-accessories" className="d-flex flex-wrap justify-content-between gap-1 mt-3 d-none">
               {presentAccessories.map((presentAccessory, index) => {
@@ -763,81 +564,14 @@ export function Products(props) {
               })}
             </div>
 
-
-
-            {/* <h5 className=" mt-3">Produto</h5>
-            <select
-              value={productTypeFilter}
-              onChange={(e) => handleProductAtributes(e)}
-              className="select-answer"
-            >
-              <option value=""></option>
-              {productTypes.map((productType, index) => {
-                return (<option key={index} value={productType.id}>{productType.prompt}</option>)
-              })}
-            </select> */}
-
             <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Categoria</button>
-
             <div id="Categoria" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
               {presentCategories.map((category, index) => {
                 return (
-
                   <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
                 )
               })}
             </div>
-            {/*
-            <h6 className=" mt-3">categoria</h6>
-            <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
-              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>Mountain Bike</button>
-              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Dirt</button>
-              <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Road</button>
-              <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Infantil</button>
-              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Urbana</button>
-            </div> */}
-            {/* <h5 className=" mt-3">categoria</h5>
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              className="select-answer"
-            >
-              <option value=""></option>
-              <option value="mountain_bike">Mountain Bike</option>
-              <option value="dirt_street">Dirt</option>
-              <option value="road">Road</option>
-              <option value="infant">Infantil</option>
-              <option value="urban">Urbano</option>
-            </select> */}
-
-              {/* <h5 className="mt-3">Modalidade</h5>
-               */}
-            {/* {categoryOptionsToFilter.includes("mountain_bike") && (<>
-              <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
-
-               <div id="mtb-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-                <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
-                <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
-                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
-                <button type="button" value="speed" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Speed</button>
-                <button type="button" value="trail" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Trail</button>
-                <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button>
-               </div>
-
-              <select
-                value={modalityFilter}
-                onChange={(e) => setModalityFilter(e.target.value)}
-                className="select-answer"
-              >
-                <option value=""></option>
-                <option value="downhill">Downhill</option>
-                <option value="enduro">Enduro</option>
-                <option value="gravel">Gravel</option>
-                <option value="speed">Speed</option>
-                <option value="trail">Trail</option>
-                <option value="xc_cross_country">XC Cross Country</option>
-              </select>
-            </>)} */}
 
             {categoryOptionsToFilter.includes("mountain_bike", "urban", "infant") && (<>
               <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidades MTB</button>
@@ -861,32 +595,6 @@ export function Products(props) {
               </div>
             </>)}
 
-            {/* {categoryOptionsToFilter.includes("dirt_street") && (<>
-              <h5 className="mt-3">Modalidade</h5>
-              <button type="button" value="dirt-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
-
-              <div id="dirt-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-                <button type="button" value="street_bmx" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Street BMX</button>
-                <button type="button" value="race_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Race BMX</button>
-                <button type="button" value="big_wheel_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Big Wheel BMX</button>
-                <button type="button" value="dirt_jump" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Dirt Jump</button>
-              </div>
-
-
-              <select
-                value={modalityFilter}
-                onChange={(e) => setModalityFilter(e.target.value)}
-                className="select-answer"
-
-              >
-                <option value=""></option>
-                <option value="street_bmx">Street BMX</option>
-                <option value="race_bmx">Race BMX</option>
-                <option value="big_wheel_bmx">Big Wheel BMX</option>
-                <option value="dirt_jump">Dirt Jump</option>
-              </select>
-            </>)} */}
-
             {categoryOptionsToFilter.includes("road") &&(<>
               <button type="button" value="road-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidades Road</button>
               <div id="Modalidades Road" className="d-flex flex-wrap justify-content-between mt-3 d-none">
@@ -897,79 +605,7 @@ export function Products(props) {
                 })}
               </div>
             </>)}
-            {/* {categoryOptionsToFilter.includes("road") &&(<>
-              <h5 className="mt-3">Modalidade</h5>
-              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
-              <div id="road-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-                <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
-                <button type="button" value="triathlon" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Triathon</button>
-                <button type="button" value="ciclocross" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Ciclocross</button>
-                <button type="button" value="cicloviagem" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Cicloviagem</button>
-                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
-              </div>
 
-              <select
-                value={modalityFilter}
-                onChange={(e) => setModalityFilter(e.target.value)}
-                className="select-answer"
-              >
-                <option value=""></option>
-                <option value="speed_performance">Speed Performance</option>
-                <option value="triathlon">Triathon</option>
-                <option value="ciclocross">Ciclocross</option>
-                <option value="cicloviagem">Cicloviagme</option>
-                <option value="gravel">Gravel</option>
-              </select>
-            </>)} */}
-
-            {(categoryOptionsToFilter.length <= 0) && (<>
-              {/* <h5 className=" mt-3">Modalidade</h5> */}
-              <button type="button" value="all-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidade</button>
-
-              <div id="Modalidade" className="d-flex flex-wrap justify-content-between mt-3 d-none">
-
-                <button type="button" value="downhill" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Downhill</button>
-                <button type="button" value="enduro" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Enduro</button>
-                <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
-                <button type="button" value="speed" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Speed</button>
-                <button type="button" value="trail" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Trail</button>
-                <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button>
-                <button type="button" value="street_bmx" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Street BMX</button>
-                <button type="button" value="race_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Race BMX</button>
-                <button type="button" value="big_wheel_bmx" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Big Wheel BMX</button>
-                <button type="button" value="dirt_jump" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Dirt Jump</button>
-                <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
-                <button type="button" value="triathlon" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Triathlon</button>
-                <button type="button" value="ciclocross" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Ciclocross</button>
-                <button type="button" value="cicloviagem" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Cicloviagme</button>
-              </div>
-
-
-
-
-              {/* <select
-                value={modalityFilter}
-                onChange={(e) => setModalityFilter(e.target.value)}
-                className="select-answer"
-
-              >
-                <option value=""></option>
-                <option value="speed_performance">Speed Performance</option>
-                <option value="triathlon">triathon</option>
-                <option value="ciclocross">Ciclocross</option>
-                <option value="cicloviagem">Cicloviagme</option>
-                <option value="gravel">Gravel</option>
-                <option value="downhill">Downhill</option>
-                <option value="enduro">Enduro</option>
-                <option value="speed">Speed</option>
-                <option value="trail">Trail</option>
-                <option value="xc_cross_country">XC Cross Country</option>
-                <option value="street_bmx">Street BMX</option>
-                <option value="race_bmx">Race BMX</option>
-                <option value="big_wheel_bmx">Big Wheel BMX</option>
-                <option value="dirt_jump">Dirt Jump</option>
-              </select> */}
-            </>)}
 
             <div id="clothes-sizes-filter" className="d-none">
               <h6 className=" mt-3">tamanhos</h6>
@@ -986,7 +622,6 @@ export function Products(props) {
 
 
             <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Marca</button>
-
             <div id="Marca" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
               {presentBrands.map((brand, index) => {
                 return (
@@ -995,19 +630,6 @@ export function Products(props) {
               })}
             </div>
 
-            {/* <div className="brand-filter">
-              <h5 className=" mt-3">Marca</h5>
-              <select
-              value={brandFilter ? brandFilter : ""}
-              onChange={(e) => setBrandFilter(e.target.value)}
-              className="select-answer"
-              >
-                <option value=""></option>
-                {componentBrands.map((componentBrand, index) => {
-                  return (<option key={index} value={componentBrand}>{componentBrand}</option>)
-                })}
-              </select>
-            </div> */}
 
             <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modelo</button>
 
@@ -1018,20 +640,6 @@ export function Products(props) {
                 )
               })}
             </div>
-            {/* <div className="model-filter">
-              <h5 className=" mt-3">Modelo</h5>
-              <select
-              value={modelFilter ? modelFilter : ""}
-              onChange={(e) => setModelFilter(e.target.value)}
-              className="select-answer"
-              >
-                <option value=""></option>
-                {componentModels.map((componentModel, index) => {
-                  return (<option key={index} value={componentModel}>{componentModel}</option>)
-                })}
-              </select>
-            </div> */}
-
 
             <div className="name-filter">
               <h5 className="mt-3">Nome</h5>
@@ -1083,8 +691,6 @@ export function Products(props) {
                 <h5 className="mt-3">preço</h5>
                 <div className="d-flex justify-content-between">
                   {BrlCurrencyComponent()}
-                  {/* <input type="number" className="text-input" placeholder="DE"  onChange={(e) => setMinPriceFilter(e.target.value * 100)}/> */}
-                  {/* <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxPriceFilter(e.target.value * 100)}/> */}
                 </div>
               </div>
             </div>
@@ -1099,37 +705,10 @@ export function Products(props) {
               </div>
             </div>
 
-
             {attributeOptionsToFilter && (<>
-
               {renderOptionsToFilterAttributes(attributeOptionsToFilter)}
-
-
             </>)}
-
-
-            {/* <div id="Categoria" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
-              {presentProductAttributtes.map((productAttributte, index) => {
-                return (
-
-                  <button type="button" key={index} value={productAttributte.value} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{productTypeAttributes.find(element => element.id === productAttributte.product_type_attribute_id).prompt}</button>
-                )
-              })}
-            </div> */}
-            {/*
-            {productTypeFilter.length > 1 && (<>
-              <h5 className="mt-3">Atributos</h5>
-                {attributesForProduct.map((attribute, index) => {
-                  return renderProductAttributeSelect(attribute, index)
-                })}
-            </>)}
-
-            {productTypeFilter.length === 1 && (<>
-              <h5 className="mt-3">Atributos</h5>
-                {attributesForProduct.map((attribute, index) => {
-                  return renderProductAttributeSelect(attribute, index)
-                })}
-            </>)} */}
+            
           </div>
         </div>
         <div className="col-12 col-md-9 d-flex flex-wrap">
