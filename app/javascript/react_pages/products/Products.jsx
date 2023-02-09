@@ -16,7 +16,7 @@ export function Products(props) {
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
-  const [categoryFilter, setCategoryFilter] = useState("");
+  // const [categoryFilter, setCategoryFilter] = useState("");
   // const [productTypeFilter, setProductTypeFilter] = useState(params.product_type_id || "");
   const [productTypeFilter, setProductTypeFilter] = useState("");
 
@@ -24,10 +24,10 @@ export function Products(props) {
   const [nameFilter, setNameFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
-  const [modalityFilter, setModalityFilter] = useState("");
+  // const [modalityFilter, setModalityFilter] = useState("");
   const [productAttributesFilter, setProductAttributesFilter] = useState("");
-  const [brandFilter, setBrandFilter] = useState("");
-  const [modelFilter, setModelFilter] = useState("");
+  // const [brandFilter, setBrandFilter] = useState("");
+  // const [modelFilter, setModelFilter] = useState("");
   const [minYearFilter, setMinYearFilter] = useState("");
   const [maxYearFilter, setMaxYearFilter] = useState("");
   const [states, setStates] = useState([]);
@@ -54,7 +54,17 @@ export function Products(props) {
   const [onlyClothes, setOnlyClothes] = useState(params.products_clothes || "");
   const [onlyComponents, setOnlyComponents] = useState(params.products_components || "");
 
+  const [presentCategories, setPresentCategories] = useState([]);
 
+  const [presentRoadModalities, setPresentRoadModalities] = useState([]);
+  const [presentMtbModalities, setPresentMtbModalities] = useState([]);
+  const [presentDirtModalities, setPresentDirtModalities] = useState([]);
+
+  const [presentModels, setPresentModels] = useState([]);
+  const [modelOptionsToFilter, setModelOptionsToFilter] = useState([]);
+
+  const [presentBrands, setPresentBrands] = useState([]);
+  const [brandOptionsToFilter, setBrandOptionsToFilter] = useState([]);
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -115,8 +125,8 @@ export function Products(props) {
 
   useEffect(async () => {
     let url = "/api/v1/products?";
-    if (categoryFilter) url = url + `&category=${categoryFilter}`
-    if (modalityFilter) url = url + `&modality=${modalityFilter}`
+    // if (categoryFilter) url = url + `&category=${categoryFilter}`
+    // if (modalityFilter) url = url + `&modality=${modalityFilter}`
     if (nameFilter) url = url + `&name=${nameFilter}`
 
     if (productTypeFilter) url = url + `&product_type_id=${productTypeFilter}`
@@ -125,8 +135,7 @@ export function Products(props) {
     if (maxPriceFilter) url = url + `&max_price=${(maxPriceFilter * 100)}`
 
     if (productAttributesFilter) url = url + `&product_attribute_value=${productAttributesFilter}`
-    if (brandFilter) url = url + `&brand=${brandFilter}`
-    if (modelFilter) url = url + `&model=${modelFilter}`
+    // if (brandFilter) url = url + `&brand=${brandFilter}`
     if (stateFilter) url = url + `&state=${stateFilter}`
     if (cityFilter) url = url + `&city=${cityFilter}`
     if (minYearFilter) url = url + `&min_year=${minYearFilter}`
@@ -142,6 +151,10 @@ export function Products(props) {
     if (onlyClothes) url = url + `&products_clothes=${onlyClothes}`
     if (componentsAttributesOptionsToFilter) url = url + `&components_attributes_values=${componentsAttributesOptionsToFilter}`
     if (verifiedProductFilter) url = url + `&verified=${verifiedProductFilter}`
+
+
+    if (modelOptionsToFilter) url = url + `&models=${modelOptionsToFilter}`
+    if (brandOptionsToFilter) url = url + `&brands=${brandOptionsToFilter}`
 
 
 
@@ -162,10 +175,27 @@ export function Products(props) {
     setClothes(response.data.product_types.filter(element => element.id >= 48 && element.id <= 66));
 
 
-  }, [categoryFilter, modalityFilter, productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, brandFilter, modelFilter, stateFilter, cityFilter,
+  }, [productTypeFilter, conditionFilter, minPriceFilter, maxPriceFilter, productAttributesFilter, stateFilter, cityFilter,
     minYearFilter, maxYearFilter, filteredLink, nameFilter, clothesProducts, productTypeOptionsToFilter, categoryOptionsToFilter, modalityOptionsToFilter, clotheSizeOptionsToFilter,
-    onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter, verifiedProductFilter])
+    onlyClothes, onlyComponents, onlyAccessories, componentsAttributesOptionsToFilter, verifiedProductFilter, modelOptionsToFilter, brandOptionsToFilter ])
 
+
+    useEffect(() => {
+      fetch(`/get_product_attributes_that_are_present_for_filter`)
+       .then((response) => response.json())
+       .then((data) => {
+        console.log(data)
+        setPresentCategories(data.categories)
+        setPresentRoadModalities(data.road_modalities)
+        setPresentMtbModalities(data.mtb_modalities)
+        setPresentDirtModalities(data.dirt_modalities)
+        setPresentModels(data.models)
+        setPresentBrands(data.brands)
+
+
+       })
+
+    }, []);
 
   const handleProductAtributes = (e) => {
     console.log(e.target.value)
@@ -246,6 +276,14 @@ export function Products(props) {
   //     </div>
   //   )
   // }
+
+  const handleFilter = (e) => {
+    const sectionFilter = document.getElementById(e.target.innerText);
+    const sectionActive = e.target;
+    console.log(sectionFilter);
+    sectionFilter.classList.toggle("d-none")
+    sectionActive.classList.toggle("selected-filter")
+  }
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     let options = []
@@ -387,7 +425,7 @@ export function Products(props) {
 
 
 
-  const handleMultipleFilters = (e) => {
+  const handleMultipleFiltersCategory = (e) => {
     const currentOptionsToFilter = [...categoryOptionsToFilter]
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
@@ -426,6 +464,36 @@ export function Products(props) {
     } else {
       document.getElementById(e.target.value).classList.add("d-none")
       e.target.classList.remove("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersModel = (e) => {
+    const currentOptionsToFilter = [...modelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersBrand = (e) => {
+    const currentOptionsToFilter = [...brandOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setBrandOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setBrandOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
     }
   }
 
@@ -475,98 +543,157 @@ export function Products(props) {
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
   }
 
-  const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Alfameq",
-  "Astro",
-  "Audax",
-  "BH",
-  "Bianchi",
-  "BMC",
-  "Caloi",
-  "Cannondale",
-  "Canyon",
-  "Carrera",
-  "Cervelo",
-  "Corratec",
-  "Cube",
-  "Dabomb",
-  "Felt",
-  "First",
-  "Focus",
-  "Fuji",
-  "Giant",
-  "Groove",
-  "GT",
-  "GTS",
-  "Ibis",
-  "Jamis",
-  "Kona",
-  "Lapierre",
-  "Marin",
-  "Merida",
-  "Mosso",
-  "Oggi",
-  "Orbea",
-  "Pinarello",
-  "Raleigh",
-  "Rava",
-  "Ridley",
-  "Santa_cruz",
-  "Schwinn",
-  "Scott",
-  "Sense",
-  "Soul",
-  "Specialized",
-  "Swift Carbon",
-  "Trek",
-  "Tsw",
-  "Wilier",
-  "YT",
-  "Argon 21",
-  "Bliv",
-  "Blue",
-  "Bottecchia",
-  "Cipollini",
-  "Cly",
-  "Cumberland",
-  "De Rosa",
-  "E Moving",
-  "Gary Fisher",
-  "Gioia",
-  "Kaiena",
-  "Kestrel",
-  "Kode",
-  "Kuota",
-  "Lazzaretti",
-  "Lev E-Bike",
-  "Litespeed",
-  "Look",
-  "Lotus",
-  "Mercian",
-  "Miyamura Gravel",
-  "Open",
-  "Quintana Roo",
-  "Redland",
-  "Riva",
-  "Rose",
-  "Sava",
-  "Sundown",
-  "Time",
-  "Trinx",
-  "Trust",
-  "Velorbis",
-  "Vicinitech",
-  "Victory",
-  "Eddy Merckx",
-  "Salsa",
-  "Surly",
-  "Soma",
-  "Diamondback",
-  "Dahon"].sort()
+  const translateWord = (word) => {
+    const languageMap = {
+      "bike": "Bike",
+      "e-bike": "E-Bike",
 
-  const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
-    "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
-    "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
-  ].sort()
+      "mountain_bike" : "Mountain Bike",
+      "dirt_street" : "Dirt",
+      "road" : "Road",
+      "urban" : "Urbana",
+      "infant" : "Infantil",
+
+      "downhill" : "Downhill",
+      "enduro" : "Enduro",
+      "gravel" : "Gravel",
+      "speed" : "Speed",
+      "trail" : "Trail",
+      "xc_cross_country" : "XC Cross Country",
+      "street_bmx" : "Street BMX",
+      "race_bmx" : "Race BMX",
+      "big_wheel_bmx" : "Big Wheel BMX",
+      "dirt_jump" : "Dirt Jump",
+      "speed_performance" : "Speed Performance",
+      "triathlon" : "Triathlon",
+      "ciclocross" : "Ciclocross",
+      "cicloviagem" : "Cicloviagem",
+
+      "aluminum" : "Alumínio",
+      "carbon" : "Carbono",
+      "carbon_aluminum_chainstay" : "Carbono/Aumínio (Chainstay)",
+      "other" : "Outro",
+
+      "v_brake" : "V-Brake (frenagem no aro)",
+      "hydraulic_disc" : "À Disco - Hidráulico",
+      "mechanical_disc" : "À Disco - Mecânico",
+      "coaster_brake" : "Contra pedal",
+
+      "no_suspension" : "Sem Suspensão",
+      "hardtail" : "Hardtail",
+      "full_suspension" : "Full Suspension",
+
+      "retractable" : "Retrátil",
+      "rigid" : "Rigido",
+
+      "new": "Novo",
+      "used": "Usado",
+
+      "receipt": "Nota Fiscal",
+      "import_document": "Documento de Importação",
+      "foreign_tax_coupon": "Cupom Fiscal Estrangeiro",
+      "no_documentation": "Sem Documento",
+      "foreign_tax_coupon_and_import_document": "Cupom Fiscal Estrangeiro + Documento de Importação",
+
+      "bad": "Ruim",
+      "reasonable": "Razoável",
+      "good": "Bom",
+      "excellent": "Ótimo",
+    };
+    return languageMap[word]
+  }
+  // const componentBrands = ["SHIMANO", "SRAM", "FOX", "ROCKSHOX", "SPECIALIZED", "Alfameq",
+  // "Astro",
+  // "Audax",
+  // "BH",
+  // "Bianchi",
+  // "BMC",
+  // "Caloi",
+  // "Cannondale",
+  // "Canyon",
+  // "Carrera",
+  // "Cervelo",
+  // "Corratec",
+  // "Cube",
+  // "Dabomb",
+  // "Felt",
+  // "First",
+  // "Focus",
+  // "Fuji",
+  // "Giant",
+  // "Groove",
+  // "GT",
+  // "GTS",
+  // "Ibis",
+  // "Jamis",
+  // "Kona",
+  // "Lapierre",
+  // "Marin",
+  // "Merida",
+  // "Mosso",
+  // "Oggi",
+  // "Orbea",
+  // "Pinarello",
+  // "Raleigh",
+  // "Rava",
+  // "Ridley",
+  // "Santa_cruz",
+  // "Schwinn",
+  // "Scott",
+  // "Sense",
+  // "Soul",
+  // "Specialized",
+  // "Swift Carbon",
+  // "Trek",
+  // "Tsw",
+  // "Wilier",
+  // "YT",
+  // "Argon 21",
+  // "Bliv",
+  // "Blue",
+  // "Bottecchia",
+  // "Cipollini",
+  // "Cly",
+  // "Cumberland",
+  // "De Rosa",
+  // "E Moving",
+  // "Gary Fisher",
+  // "Gioia",
+  // "Kaiena",
+  // "Kestrel",
+  // "Kode",
+  // "Kuota",
+  // "Lazzaretti",
+  // "Lev E-Bike",
+  // "Litespeed",
+  // "Look",
+  // "Lotus",
+  // "Mercian",
+  // "Miyamura Gravel",
+  // "Open",
+  // "Quintana Roo",
+  // "Redland",
+  // "Riva",
+  // "Rose",
+  // "Sava",
+  // "Sundown",
+  // "Time",
+  // "Trinx",
+  // "Trust",
+  // "Velorbis",
+  // "Vicinitech",
+  // "Victory",
+  // "Eddy Merckx",
+  // "Salsa",
+  // "Surly",
+  // "Soma",
+  // "Diamondback",
+  // "Dahon"].sort()
+
+  // const componentModels = ["SLX", "ACERA", "ALIVIO", "ALTUS", "DEORE", "SAINT", "TOURNEY", "XT", "XTR", "ZEE", "Code", "DB", "G2", "GUIDE", "Level",
+  //   "32", "34", "36", "38", "40", "30", "35", "BLUTO", "BOXXER", "DOMAIN", "JUDY", "LYRIK", "PARAGON", "PIKE", "REBA ", "RECON", "REVELATION", "RUDY", "SEKTOR", "SID", "YARI", "ZEB",
+  //   "DHX", "DHX2 ", "FLOAT DPS", "FLOAT DPX2", "FLOAT X", "FLOAT X2", "DELUXE", "MONARCH", "SIDLUXE", "SUPER DELUXE", "105", "CLARIS", "DURA-ACE", "SORA", "TIAGRA", "TOURNEY", "ULTEGRA", "Force", "GRX", "RED", "Rival"
+  // ].sort()
 
 
 
@@ -648,15 +775,25 @@ export function Products(props) {
               })}
             </select> */}
 
+            <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Categoria</button>
 
+            <div id="Categoria" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
+              {presentCategories.map((category, index) => {
+                return (
+
+                  <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
+                )
+              })}
+            </div>
+            {/*
             <h6 className=" mt-3">categoria</h6>
             <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
-              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFilters(e)}>Mountain Bike</button>
-              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Dirt</button>
-              <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Road</button>
-              <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Infantil</button>
-              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFilters(e)}>Urbana</button>
-            </div>
+              <button type="button" value="mountain_bike" className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>Mountain Bike</button>
+              <button type="button" value="dirt_street" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Dirt</button>
+              <button type="button" value="road" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Road</button>
+              <button type="button" value="infant" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Infantil</button>
+              <button type="button" value="urban" className="filter-tag"  onClick={(e) => handleMultipleFiltersCategory(e)}>Urbana</button>
+            </div> */}
             {/* <h5 className=" mt-3">categoria</h5>
             <select
               value={categoryFilter}
@@ -671,9 +808,9 @@ export function Products(props) {
               <option value="urban">Urbano</option>
             </select> */}
 
-            {categoryOptionsToFilter.includes("mountain_bike") && (<>
               {/* <h5 className="mt-3">Modalidade</h5>
                */}
+            {/* {categoryOptionsToFilter.includes("mountain_bike") && (<>
               <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
 
                <div id="mtb-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
@@ -685,7 +822,7 @@ export function Products(props) {
                 <button type="button" value="xc_cross_country" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>XC Cross Country</button>
                </div>
 
-              {/* <select
+              <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
@@ -697,11 +834,33 @@ export function Products(props) {
                 <option value="speed">Speed</option>
                 <option value="trail">Trail</option>
                 <option value="xc_cross_country">XC Cross Country</option>
-              </select> */}
+              </select>
+            </>)} */}
+
+            {categoryOptionsToFilter.includes("mountain_bike", "urban", "infant") && (<>
+              <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidades MTB</button>
+               <div id="Modalidades MTB" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                {presentMtbModalities.map((presentMtbModality, index) => {
+                    return (
+                      <button type="button" key={index} value={presentMtbModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentMtbModality)}</button>
+                    )
+                  })}
+
+               </div>
+            </>)}
+            {categoryOptionsToFilter.includes("dirt_street", "urban", "infant") && (<>
+              <button type="button" value="dirt-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidades Dirt</button>
+              <div id="Modalidades Dirt" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                {presentDirtModalities.map((presentDirtModality, index) => {
+                  return (
+                    <button type="button" key={index} value={presentDirtModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentDirtModality)}</button>
+                  )
+                })}
+              </div>
             </>)}
 
-            {categoryOptionsToFilter.includes("dirt_street") && (<>
-              {/* <h5 className="mt-3">Modalidade</h5> */}
+            {/* {categoryOptionsToFilter.includes("dirt_street") && (<>
+              <h5 className="mt-3">Modalidade</h5>
               <button type="button" value="dirt-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
 
               <div id="dirt-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
@@ -712,7 +871,7 @@ export function Products(props) {
               </div>
 
 
-              {/* <select
+              <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
@@ -723,13 +882,22 @@ export function Products(props) {
                 <option value="race_bmx">Race BMX</option>
                 <option value="big_wheel_bmx">Big Wheel BMX</option>
                 <option value="dirt_jump">Dirt Jump</option>
-              </select> */}
-            </>)}
+              </select>
+            </>)} */}
 
             {categoryOptionsToFilter.includes("road") &&(<>
-              {/* <h5 className="mt-3">Modalidade</h5> */}
+              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleFilter(e)}>Modalidades Road</button>
+              <div id="Modalidades Road" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+                {presentRoadModalities.map((presentRoadModality, index) => {
+                  return (
+                    <button type="button" key={index} value={presentRoadModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentRoadModality)}</button>
+                  )
+                })}
+              </div>
+            </>)}
+            {/* {categoryOptionsToFilter.includes("road") &&(<>
+              <h5 className="mt-3">Modalidade</h5>
               <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
-
               <div id="road-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
                 <button type="button" value="speed_performance" className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>Speed Performance</button>
                 <button type="button" value="triathlon" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Triathon</button>
@@ -738,8 +906,7 @@ export function Products(props) {
                 <button type="button" value="gravel" className="filter-tag"  onClick={(e) => handleMultipleFiltersModality(e)}>Gravel</button>
               </div>
 
-
-              {/* <select
+              <select
                 value={modalityFilter}
                 onChange={(e) => setModalityFilter(e.target.value)}
                 className="select-answer"
@@ -750,10 +917,10 @@ export function Products(props) {
                 <option value="ciclocross">Ciclocross</option>
                 <option value="cicloviagem">Cicloviagme</option>
                 <option value="gravel">Gravel</option>
-              </select> */}
-            </>)}
+              </select>
+            </>)} */}
 
-            {(categoryOptionsToFilter.length <= 0 || categoryOptionsToFilter.includes("urban", "infant")) && (<>
+            {(categoryOptionsToFilter.length <= 0) && (<>
               {/* <h5 className=" mt-3">Modalidade</h5> */}
               <button type="button" value="all-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidade</button>
 
@@ -820,7 +987,17 @@ export function Products(props) {
               <input type="text" className="text-input" onChange={(e) => setNameFilter(e.target.value)}/>
             </div>
 
-            <div className="brand-filter">
+            <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Marca</button>
+
+            <div id="Marca" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
+              {presentBrands.map((brand, index) => {
+                return (
+                  <button type="button" key={index} value={brand} className="filter-tag" onClick={(e) => handleMultipleFiltersBrand(e)}>{brand}</button>
+                )
+              })}
+            </div>
+
+            {/* <div className="brand-filter">
               <h5 className=" mt-3">Marca</h5>
               <select
               value={brandFilter ? brandFilter : ""}
@@ -832,9 +1009,18 @@ export function Products(props) {
                   return (<option key={index} value={componentBrand}>{componentBrand}</option>)
                 })}
               </select>
-            </div>
+            </div> */}
 
-            <div className="model-filter">
+            <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modelo</button>
+
+            <div id="Modelo" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
+              {presentModels.map((model, index) => {
+                return (
+                  <button type="button" key={index} value={model} className="filter-tag" onClick={(e) => handleMultipleFiltersModel(e)}>{model}</button>
+                )
+              })}
+            </div>
+            {/* <div className="model-filter">
               <h5 className=" mt-3">Modelo</h5>
               <select
               value={modelFilter ? modelFilter : ""}
@@ -846,7 +1032,7 @@ export function Products(props) {
                   return (<option key={index} value={componentModel}>{componentModel}</option>)
                 })}
               </select>
-            </div>
+            </div> */}
 
             <div className="locality-filter">
               <h5 className=" mt-3">Estado</h5>

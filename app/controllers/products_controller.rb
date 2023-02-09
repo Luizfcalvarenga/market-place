@@ -142,6 +142,32 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_product_attributes_that_are_present_for_filter
+    @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
+    @categories = Category.where(id: @products.pluck(:category_id).uniq).compact_blank
+    @road_modalities = @products.where(category: Category.where(name: "road")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
+    @mtb_modalities = @products.where(category: Category.where(name: "mountain_bike")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
+    @dirt_modalities = @products.where(category: Category.where(name: "dirt_street")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
+    @models = @products.where.not(model: "null").pluck(:model).uniq.compact_blank
+    @brands = @products.where.not(brand: "null").pluck(:brand).uniq.compact_blank
+
+
+
+
+
+    skip_authorization
+    respond_to do |format|
+      format.json { render json: {
+        categories: @categories,
+        road_modalities: @road_modalities,
+        mtb_modalities: @mtb_modalities,
+        dirt_modalities: @dirt_modalities,
+        models: @models,
+        brands: @brands,
+      } }
+    end
+  end
+
   private
 
   def product_params

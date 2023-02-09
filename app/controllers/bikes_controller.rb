@@ -79,7 +79,7 @@ class BikesController < ApplicationController
     end
   end
 
-  def get_attributes_that_are_present_for_filter
+  def get_bike_attributes_that_are_present_for_filter
     @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
     # Category.where(id: Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:category_id))
     @categories = Category.where(id: @bikes.pluck(:category_id).uniq).compact_blank
