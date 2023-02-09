@@ -450,17 +450,17 @@ export function Products(props) {
     }
   }
 
-  const handleModalityFilter = (e) => {
-    console.log(e)
-    e.target.classList.toggle("active")
-    if (e.target.classList.contains("active")) {
-      document.getElementById(e.target.value).classList.remove("d-none")
-      e.target.classList.add("selected-tag")
-    } else {
-      document.getElementById(e.target.value).classList.add("d-none")
-      e.target.classList.remove("selected-tag")
-    }
-  }
+  // const handleModalityFilter = (e) => {
+  //   console.log(e)
+  //   e.target.classList.toggle("active")
+  //   if (e.target.classList.contains("active")) {
+  //     document.getElementById(e.target.value).classList.remove("d-none")
+  //     e.target.classList.add("selected-tag")
+  //   } else {
+  //     document.getElementById(e.target.value).classList.add("d-none")
+  //     e.target.classList.remove("selected-tag")
+  //   }
+  // }
 
   const handleMultipleFiltersModel = (e) => {
     const currentOptionsToFilter = [...modelOptionsToFilter]

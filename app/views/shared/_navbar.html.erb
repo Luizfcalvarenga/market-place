@@ -48,7 +48,7 @@
                     <%= link_to "Freios", {:controller => "products", :action => "index", :product_types => "Freio"}, class: "text-white" %>
                     <%= link_to "Câmbio Traseiro", {:controller => "products", :action => "index", :product_types => "Câmbio Traseiro"}, class: "text-white" %>
                     <%= link_to "Suspensão dianteira", {:controller => "products", :action => "index", :product_types => "Suspensão Dianteira"}, class: "text-white" %>
-                    <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_components => "products_components"}, class: "text-white pb-3" %>
                   <% end%>
                 </div>
                 <div class="drpdw-components  mx-auto">
@@ -58,7 +58,7 @@
                     <%= link_to "Ferramentas", {:controller => "products", :action => "index", :product_types => "Ferramentas"}, class: "text-white" %>
                     <%= link_to "Rolo de treino", {:controller => "products", :action => "index", :product_types => "Rolo de treino"}, class: "text-white" %>
                     <%= link_to "Suporte para carro", {:controller => "products", :action => "index", :product_types => "Suporte para carro"}, class: "text-white" %>
-                    <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_accessories => "products_accessories"}, class: "text-white pb-3" %>
                   <% end%>
                 </div>
                 <div class="drpdw-components  mx-auto">
@@ -68,7 +68,7 @@
                     <%= link_to "Sapatilha", {:controller => "products", :action => "index", :product_types => "Sapatilha"}, class: "text-white" %>
                     <%= link_to "Bermuda", {:controller => "products", :action => "index", :product_types => "Bermuda"}, class: "text-white" %>
                     <%= link_to "Camisa", {:controller => "products", :action => "index", :product_types => "Camisa"}, class: "text-white" %>
-                    <%= link_to "Ver mais", products_path, class: "text-white pb-3" %>
+                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_clothes => "products_clothes"}, class: "text-white pb-3" %>
                   <% end%>
                 </div>
               </div>
