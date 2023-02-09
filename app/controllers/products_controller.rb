@@ -144,6 +144,10 @@ class ProductsController < ApplicationController
 
   def get_product_attributes_that_are_present_for_filter
     @products = Product.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
+    @products_component =  ProductType.where(id: @products.where(product_type_id: (1..40).to_a).pluck(:product_type_id).uniq).compact_blank
+    @products_accessory = ProductType.where(id: @products.where(product_type_id: (41..49).to_a).pluck(:product_type_id).uniq).compact_blank
+    @products_clothe = ProductType.where(id: @products.where(product_type_id: (50..68).to_a).pluck(:product_type_id).uniq).compact_blank
+
     @categories = Category.where(id: @products.pluck(:category_id).uniq).compact_blank
     @road_modalities = @products.where(category: Category.where(name: "road")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
     @mtb_modalities = @products.where(category: Category.where(name: "mountain_bike")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
@@ -153,17 +157,23 @@ class ProductsController < ApplicationController
 
 
 
+    @products_attributes =  ProductAttribute.where(product_id: (1..40).to_a).uniq.compact_blank
 
 
     skip_authorization
     respond_to do |format|
       format.json { render json: {
+
+        products_component: @products_component,
+        products_accessory: @products_accessory,
+        products_clothe: @products_clothe,
         categories: @categories,
         road_modalities: @road_modalities,
         mtb_modalities: @mtb_modalities,
         dirt_modalities: @dirt_modalities,
         models: @models,
         brands: @brands,
+        products_attributes: @products_attributes
       } }
     end
   end

@@ -37,8 +37,8 @@ module Api
         @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:clothe_sizes].split(",")}) if params[:clothe_sizes].present?
 
         @products = @products.where(product_type_id: (1..40).to_a) if params[:products_components].present?
-        @products = @products.where(product_type_id: (41..47).to_a) if params[:products_accessories].present?
-        @products = @products.where(product_type_id: (48..68).to_a) if params[:products_clothes].present?
+        @products = @products.where(product_type_id: (41..49).to_a) if params[:products_accessories].present?
+        @products = @products.where(product_type_id: (50..68).to_a) if params[:products_clothes].present?
 
         @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:components_attributes_values].split(",")}) if params[:components_attributes_values].present?
 
