@@ -183,7 +183,7 @@ export function Products(props) {
         setPresentDirtModalities(data.dirt_modalities)
         setPresentModels(data.models)
         setPresentBrands(data.brands)
-        setPresentProductAttributes(data.product_attriutes)
+        setPresentProductAttributes(data.product_attributes)
 
        })
 
@@ -279,6 +279,8 @@ export function Products(props) {
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     let options = []
+    let options_present = []
+
     let attributesToFilter = []
     let ObjectOfAttributes = {}
     attributeOptionsToFilter.map((attribute, index) => {
@@ -303,7 +305,8 @@ export function Products(props) {
         } else {
           options = question.options
         }
-        console.log(question.prompt)
+        // options_present = presentProductAttributes.filter(e => e.product_type_id === question.id)
+        console.log(options_present)
 
         if (question.prompt in ObjectOfAttributes) {
           console.log("já tem")
@@ -325,11 +328,11 @@ export function Products(props) {
             <h5 className="text-gray">{key}</h5>
             <div className="d-flex flex-wrap gap-2">
               {ObjectOfAttributes[key].map((option, index) => {
-                if (Array.isArray(option)) {
+                if (Array.isArray(option) && presentProductAttributes.includes(option[0])) {
                   return (
                     <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
                   )
-                } else {
+                } else if ( presentProductAttributes.includes(option)) {
                   return (
                     <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
                   )
