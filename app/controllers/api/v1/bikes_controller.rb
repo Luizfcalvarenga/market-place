@@ -61,6 +61,7 @@ module Api
         @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
 
         @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
+        @bikes = @bikes.where(model: params[:models].split(",")) if params[:models].present?
 
         # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
         # @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?

@@ -16,7 +16,36 @@
 .selected-tag {
   background-color: rgb(0,0,0) !important;
   color: $color-primary !important;
+}
 
+.filter-link {
+  color: gray;
+  font-weight: lighter !important;
+  font-size: 15px;
+  padding-bottom: 0 !important;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+}
+
+
+.filter-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $color-primary;
+  transition: width .3s;
+}
+
+.filter-link:hover::after {
+  color: $color-primary;
+  width: 100%;
 }
 
 .filter-tag {

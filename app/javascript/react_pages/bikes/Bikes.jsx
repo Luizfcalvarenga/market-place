@@ -62,15 +62,22 @@ export function Bikes(props) {
   const [verifiedBikeFilter, setVerifiedBikeFilter] = useState([params.verified] || "");
   const [filteredLinkBikeType, setFilteredLinkBikeType] = useState("");
   const [presentCategories, setPresentCategories] = useState([]);
+
   const [presentRoadModalities, setPresentRoadModalities] = useState([]);
   const [presentMtbModalities, setPresentMtbModalities] = useState([]);
   const [presentDirtModalities, setPresentDirtModalities] = useState([]);
+
+  const [presentModels, setPresentModels] = useState([]);
+  const [modelOptionsToFilter, setModelOptionsToFilter] = useState([]);
+
+
   const [presentFrameBrands, setPresentFrameBrands] = useState([]);
   const [frameBrandOptionsToFilter, setFrameBrandOptionsToFilter] = useState([]);
   const [presentRoadFrameSizes, setPresentRoadFrameSizes] = useState([]);
   const [presentDirtMtbFrameSizes, setPresentDirtMtbFrameSizes] = useState([]);
   const [presentFrameSizes, setPresentFrameSizes] = useState([]);
   const [presentFrameMaterials, setPresentFrameMaterials] = useState([]);
+
   const [presentSuspensionTypes, setPresentSuspensionTypes] = useState([]);
   const [suspensionTypeOptionsToFilter, setSuspensionTypeOptionsToFilter] = useState([]);
   const [presentFrontSuspensionTravels, setPresentFrontSuspensionTravels] = useState([]);
@@ -210,7 +217,7 @@ export function Bikes(props) {
     if (mileageFilter) url = url + `&mileage=${mileageFilter}`
     if (stateFilter) url = url + `&state=${stateFilter}`
     if (cityFilter) url = url + `&city=${cityFilter}`
-    if (modelFilter) url = url + `&model=${modelFilter}`
+    // if (modelFilter) url = url + `&model=${modelFilter}`
     // if (cranksetFilter) url = url + `&crankset=${cranksetFilter}`
     // if (chainFilter) url = url + `&chain=${chainFilter}`
     // if (rimFilter) url = url + `&rim=${rimFilter}`
@@ -221,21 +228,28 @@ export function Bikes(props) {
     if (filteredLinkCategory) url = url + `&category=${filteredLinkCategory}`
     if (filteredLinkBikeType) url = url + `&bike_type=${filteredLinkBikeType}`
     if (categoryOptionsToFilter) url = url + `&categories=${categoryOptionsToFilter}`
+
     if (modalityOptionsToFilter) url = url + `&modalities=${modalityOptionsToFilter}`
+
+    if (modelOptionsToFilter) url = url + `&models=${modelOptionsToFilter}`
+
     if (frameSizeOptionsToFilter) url = url + `&frame_sizes=${frameSizeOptionsToFilter}`
     if (frameMaterialOptionsToFilter) url = url + `&frame_materials=${frameMaterialOptionsToFilter}`
     if (frameBrandOptionsToFilter) url = url + `&frame_brands=${frameBrandOptionsToFilter}`
+
     if (suspensionTypeOptionsToFilter) url = url + `&suspension_types=${suspensionTypeOptionsToFilter}`
     if (frontSuspensionTravelOptionsToFilter) url = url + `&front_suspension_travels=${frontSuspensionTravelOptionsToFilter}`
     if (rearSuspensionTravelOptionsToFilter) url = url + `&rear_suspension_travels=${rearSuspensionTravelOptionsToFilter}`
     if (frontSuspensionModelOptionsToFilter) url = url + `&front_suspension_models=${frontSuspensionModelOptionsToFilter}`
     if (rearSuspensionModelOptionsToFilter) url = url + `&rear_suspension_models=${rearSuspensionModelOptionsToFilter}`
+
     if (numberOfFrontGearsOptionsToFilter) url = url + `&number_of_front_gears=${numberOfFrontGearsOptionsToFilter}`
     if (numberOfRearGearsOptionsToFilter) url = url + `&number_of_rear_gears=${numberOfRearGearsOptionsToFilter}`
     if (frontDerailleurModelOptionsToFilter) url = url + `&front_derailleur_models=${frontDerailleurModelOptionsToFilter}`
     if (rearDerailleurModelOptionsToFilter) url = url + `&rear_derailleur_models=${rearDerailleurModelOptionsToFilter}`
     if (cranksetOptionsToFilter) url = url + `&cranksets=${cranksetOptionsToFilter}`
     if (chainOptionsToFilter) url = url + `&chains=${chainOptionsToFilter}`
+
     if (brakeTypeOptionsToFilter) url = url + `&brake_types=${brakeTypeOptionsToFilter}`
     if (brakeDiscSizeOptionsToFilter) url = url + `&brake_disc_sizes=${brakeDiscSizeOptionsToFilter}`
     if (brakeModelOptionsToFilter) url = url + `&brake_models=${brakeModelOptionsToFilter}`
@@ -265,8 +279,8 @@ export function Bikes(props) {
     setBikes(response.data.bikes);
 
 
-  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter, modelFilter,
-  filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
+  }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter,
+  filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, modelOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
   frameBrandOptionsToFilter, suspensionTypeOptionsToFilter, frontSuspensionTravelOptionsToFilter, rearSuspensionTravelOptionsToFilter, frontSuspensionModelOptionsToFilter,rearSuspensionModelOptionsToFilter,
   numberOfFrontGearsOptionsToFilter, numberOfRearGearsOptionsToFilter, frontDerailleurModelOptionsToFilter, rearDerailleurModelOptionsToFilter, cranksetOptionsToFilter, chainOptionsToFilter,
   brakeTypeOptionsToFilter, brakeDiscSizeOptionsToFilter, brakeModelOptionsToFilter, rimSizeOptionsToFilter, wheelMaterialOptionsToFilter, rimModelOptionsToFilter, hubModelOptionsToFilter, tyreModelOptionsToFilter,
@@ -283,6 +297,8 @@ export function Bikes(props) {
       setPresentRoadModalities(data.road_modalities)
       setPresentMtbModalities(data.mtb_modalities)
       setPresentDirtModalities(data.dirt_modalities)
+      setPresentModels(data.models)
+
                     // QUADRO
       setPresentFrameBrands(data.frame_brands.sort())
       setPresentRoadFrameSizes(data.road_frame_sizes)
@@ -505,6 +521,21 @@ export function Bikes(props) {
     } else {
       document.getElementById(e.target.value).classList.add("d-none")
       e.target.classList.remove("selected-tag")
+    }
+  }
+
+  const handleMultipleFiltersModel = (e) => {
+    const currentOptionsToFilter = [...modelOptionsToFilter]
+    const tagFilter = e.target
+    if (currentOptionsToFilter.includes(e.target.value)) {
+      setModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.remove("selected-tag")
+    } else {
+      currentOptionsToFilter.push(e.target.value)
+      setModelOptionsToFilter(currentOptionsToFilter)
+      console.log(currentOptionsToFilter)
+      tagFilter.classList.add("selected-tag")
     }
   }
 
@@ -1149,8 +1180,10 @@ export function Bikes(props) {
             </div>
 
 
-            <h6 className=" mt-3">categoria</h6>
-            <div className="multiple-filters d-flex gap-3 flex-wrap justify-content-center">
+            {/* <h6 className=" mt-3">categoria</h6> */}
+            <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Categoria</button>
+
+            <div id="Categoria" className="multiple-filters d-flex gap-3 flex-wrap justify-content-center d-none">
               {presentCategories.map((category, index) => {
                 return (
 
@@ -1175,9 +1208,9 @@ export function Bikes(props) {
             {categoryOptionsToFilter.includes("mountain_bike") && (<>
               {/* <h5 className="mt-3">Modalidade</h5>
                */}
-              <button type="button" value="mtb-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidades MTB</button>
+              <button type="button" value="mtb-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidades MTB</button>
 
-               <div id="mtb-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+               <div id="Modalidades MTB" className="d-flex flex-wrap justify-content-between mt-3 d-none">
 
                 {presentMtbModalities.map((presentMtbModality, index) => {
                     return (
@@ -1210,9 +1243,9 @@ export function Bikes(props) {
 
             {categoryOptionsToFilter.includes("dirt_street") && (<>
               {/* <h5 className="mt-3">Modalidade</h5> */}
-              <button type="button" value="dirt-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidades Dirt</button>
+              <button type="button" value="dirt-modalities" className="filter-link" onClick={(e) => handleFilter(e)}>Modalidades Dirt</button>
 
-              <div id="dirt-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+              <div id="Modalidades Dirt" className="d-flex flex-wrap justify-content-between mt-3 d-none">
                 {presentDirtModalities.map((presentDirtModality, index) => {
                   return (
 
@@ -1241,9 +1274,9 @@ export function Bikes(props) {
 
             {categoryOptionsToFilter.includes("road") &&(<>
               {/* <h5 className="mt-3">Modalidade</h5> */}
-              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleModalityFilter(e)}>Modalidades Road</button>
+              <button type="button" value="road-modalities" className="filter-tag" onClick={(e) => handleFilter(e)}>Modalidades Road</button>
 
-              <div id="road-modalities" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+              <div id="Modalidades Road" className="d-flex flex-wrap justify-content-between mt-3 d-none">
                 {presentRoadModalities.map((presentRoadModality, index) => {
                   return (
 
@@ -1395,8 +1428,8 @@ export function Bikes(props) {
             </>)} */}
 
             {/* <h5 className=" mt-3">marca</h5> */}
-            <button type="button" value="frame_brands" className="filter-tag" onClick={(e) => handleFrameBrandFilter(e)}>Marca</button>
-            <div id="frame_brands" className="d-flex flex-wrap justify-content-between mt-3 d-none">
+            <button type="button" value="frame_brands" className="filter-link" onClick={(e) => handleFilter(e)}>Marca</button>
+            <div id="Marca" className="d-flex flex-wrap justify-content-between mt-3 d-none">
               {presentFrameBrands.map((presentFrameBrand, index) => {
                 return (
 
@@ -1416,8 +1449,17 @@ export function Bikes(props) {
             </select> */}
 
             <div className="model-filter">
-              <h5 className=" mt-3">Modelo</h5>
-              <input type="text" className="text-input" onChange={(e) => setModelFilter(e.target.value)}/>
+              {presentModels.length > 0 && (<>
+                <h5 className=" mt-3">modelo  </h5>
+                {presentModels.map((presentModel, index)=> {
+                  return (
+                    <button type="button" key={index} value={presentModel} className="filter-tag"  onClick={(e) => handleMultipleFiltersModel(e)}>{presentModel}</button>
+                  );
+                })}
+              </>)}
+
+              {/* <h5 className=" mt-3">Modelo</h5>
+              <input type="text" className="text-input" onChange={(e) => setModelFilter(e.target.value)}/> */}
             </div>
 
             <div className="locality-filter">

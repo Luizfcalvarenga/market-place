@@ -86,6 +86,8 @@ class BikesController < ApplicationController
     @road_modalities = @bikes.where(category: Category.where(name: "road")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
     @mtb_modalities = @bikes.where(category: Category.where(name: "mountain_bike")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
     @dirt_modalities = @bikes.where(category: Category.where(name: "dirt_street")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
+    @models = @bikes.where.not(model: "null").pluck(:model).uniq.compact_blank
+
     @frame_brands = @bikes.where.not(frame_brand: "null").pluck(:frame_brand).uniq.compact_blank
     @road_frame_sizes = @bikes.where(category: Category.where(name: "road")).where.not(frame_size: "null").pluck(:frame_size).uniq.compact_blank
     @mtb_dirt_infant_urban_frame_sizes = @bikes.where(category: Category.where(name: ["dirt_street", "mountain_bike", "urban", "infant"])).where.not(frame_size: "null").pluck(:frame_size).uniq.compact_blank
@@ -142,6 +144,7 @@ class BikesController < ApplicationController
         road_modalities: @road_modalities,
         mtb_modalities: @mtb_modalities,
         dirt_modalities: @dirt_modalities,
+        models: @models,
         frame_brands: @frame_brands,
         road_frame_sizes: @road_frame_sizes,
         mtb_dirt_infant_urban_frame_sizes: @mtb_dirt_infant_urban_frame_sizes,
