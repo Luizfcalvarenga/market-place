@@ -157,7 +157,7 @@ class ProductsController < ApplicationController
 
 
 
-    @product_attributes =  ProductAttribute.where(product_id: (1..40).to_a).pluck(:value).uniq.compact_blank
+    @product_attributes =  ProductAttribute.where(product_id: (1..40).to_a).pluck( :value).uniq.compact_blank
 
 
     skip_authorization
