@@ -61,6 +61,8 @@ export function Products(props) {
   const [brandOptionsToFilter, setBrandOptionsToFilter] = useState([]);
 
   const [presentProductAttributes, setPresentProductAttributes] = useState([]);
+  const [allProductAttributes, setAllProductAttributes] = useState([]);
+
 
 
   const currencyConfig = {
@@ -171,6 +173,8 @@ export function Products(props) {
         setPresentModels(data.models)
         setPresentBrands(data.brands)
         setPresentProductAttributes(data.product_attributes)
+        setAllProductAttributes(data.product_attributes_all)
+
 
        })
 
@@ -209,30 +213,40 @@ export function Products(props) {
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     let options = []
     let options_present = []
-
+    let allOptions = []
     let attributesToFilter = []
     let ObjectOfAttributes = {}
     attributeOptionsToFilter.map((attribute, index) => {
       // console.log(attribute)
       attribute.map((question, index) => {
 
-        if ((categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("urban") || categoryOptionsToFilter.includes("infant") )&& attribute.name === "frame_size") {
-          options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
-        } else if (categoryOptionsToFilter.includes("road")  && question.name === "frame_size") {
-          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
-        } else if (categoryOptionsToFilter.length <= 1 && question.name === "frame_size") {
-          options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
-        } else if (question.name === "disc_include") {
+        // if ((categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("urban") || categoryOptionsToFilter.includes("infant") )&& attribute.name === "frame_size") {
+        //   options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "XL", "XXL" ]
+        // } else if (categoryOptionsToFilter.includes("road")  && question.name === "frame_size") {
+        //   options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL" ]
+        // } else if (categoryOptionsToFilter.length <= 1 && question.name === "frame_size") {
+        //   options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "XXS", "XS", "S", "M", "L", "M/L", "XL", "XXL"]
+        // } else if (question.name === "disc_include") {
+        //   return
+        // }  else if (question.options.includes("other") ) {
+        //   question.options.pop()
+        //   options = question.options
+        // } else if (question.kind === "text" ) {
+        //   return
+        // } else if (question.name.includes("material")) {
+        //   return
+        // } else {
+        //   options = question.options
+        // }
+        if (question.name === "disc_include") {
           return
-        }  else if (question.options.includes("other") ) {
-          question.options.pop()
-          options = question.options
         } else if (question.kind === "text" ) {
           return
-        } else if (question.name.includes("material")) {
-          return
+        } else if (allProductAttributes.find(e => e.product_type_attribute_id === question.id)) {
+          allOptions = allProductAttributes.filter(e => e.product_type_attribute_id === question.id).map(a => a.value);
+          options = [...new Set(allOptions)]
         } else {
-          options = question.options
+          options = []
         }
         // options_present = presentProductAttributes.filter(e => e.product_type_id === question.id)
         console.log(options_present)
@@ -252,23 +266,29 @@ export function Products(props) {
     return (<>
       {Object.keys(ObjectOfAttributes).length != 0 && (<>
         <h5 className="mt-3 mb-1">Atributos</h5>
+
         {Object.keys(ObjectOfAttributes).map((key, index) => {
+
+
           return (<>
-            <h5 className="text-gray my=1">{key}</h5>
-            <div className="d-flex flex-wrap justify-content-between gap-1">
-              {ObjectOfAttributes[key].map((option, index) => {
-                if (Array.isArray(option) && presentProductAttributes.includes(option[0])) {
-                  return (
-                    <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
-                  )
-                } else if ( presentProductAttributes.includes(option)) {
-                  return (
-                    <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option}</button>
-                  )
-                }
-              })}
-            </div>
+            {(ObjectOfAttributes[key].length > 0) &&(<>
+              <h5 className="text-gray mt-3 mb=1">{key}</h5>
+              <div className="d-flex flex-wrap justify-content-between gap-1">
+                {ObjectOfAttributes[key].map((option, index) => {
+                  if (Array.isArray(option) && presentProductAttributes.includes(option[0])) {
+                    return (
+                      <button type="button" key={index} value={option[0]} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{option[1]}</button>
+                    )
+                  } else if ( presentProductAttributes.includes(option)) {
+                    return (
+                      <button type="button" key={index} value={option} className="filter-tag" onClick={(e) => handleMultipleFiltersComponentsAttributes(e)}>{translateWord(option)? translateWord(option) : option}</button>
+                    )
+                  }
+                })}
+              </div>
+            </>)}
           </>)
+
         })}
       </>)}
     </>)
@@ -509,6 +529,11 @@ export function Products(props) {
       "reasonable": "Razoável",
       "good": "Bom",
       "excellent": "Ótimo",
+      "front_and_rear": "Dianteira e Traseira",
+      "front": "Dianteira",
+      "rear": "Traseira",
+
+
     };
     return languageMap[word]
   }

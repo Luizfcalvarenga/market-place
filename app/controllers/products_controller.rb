@@ -158,6 +158,8 @@ class ProductsController < ApplicationController
 
 
     @product_attributes =  ProductAttribute.where(product_id: @products.pluck(:id)).pluck( :value).uniq.compact_blank
+    @product_attributes_all =  ProductAttribute.where(product_id: @products.pluck(:id))
+
 
 
     skip_authorization
@@ -173,7 +175,8 @@ class ProductsController < ApplicationController
         dirt_modalities: @dirt_modalities,
         models: @models,
         brands: @brands,
-        product_attributes: @product_attributes
+        product_attributes: @product_attributes,
+        product_attributes_all: @product_attributes_all
       } }
     end
   end
