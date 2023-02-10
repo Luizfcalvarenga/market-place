@@ -2,7 +2,7 @@
   <ul class="search-list w-100">
     <% if @bikes.present? %>
       <h5 class="text-center mt-3">Bikes</h5>
-      <% @bikes.first(5).each do | bike | %>
+      <% @bikes.each do | bike | %>
         <%= link_to bike_path(bike), class: "links" do %>
           <li class="d-flex justify-content-start search-list-item mt-2">
             <% if bike.photos.attached? %>
@@ -24,18 +24,12 @@
           </li>
         <% end %>
       <% end %>
-      <% if @bikes.count > 5 %>
-        <li class="text-center mt-0">
-          <%= link_to search_path, class: "text-success btn-search-all" do %>
-            Ver mais<i class="fas fa-angle-double-right"></i>
-          <% end %>
-        </li>
-      <% end %>
+
     <% end %>
 
     <% if @products.present? %>
       <h5 class="text-center mt-3">Produtos</h5>
-      <% @products.first(5).each do | product | %>
+      <% @products.each do | product | %>
         <%= link_to product_path(product), class: "links" do %>
           <li class="d-flex justify-content-start align-middle search-list-item mt-2">
             <% if product.photos.attached? %>
@@ -57,13 +51,7 @@
           </li>
         <% end %>
       <% end %>
-      <% if @products.count > 5 %>
-        <li class="text-center mt-0">
-          <%= link_to search_path, class: "text-success btn-search-all" do %>
-            Ver mais<i class="fas fa-angle-double-right"></i>
-          <% end %>
-        </li>
-      <% end %>
+      
     <% end %>
   </ul>
 </div>

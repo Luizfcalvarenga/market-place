@@ -11,7 +11,7 @@
       <thead>
         <th>Código</th>
         <th>Valor</th>
-        <th>Tipo</th>
+        <%# <th>Tipo</th> %>
         <th>Data de expiração</th>
         <th>Quantidade</th>
         <th>Utilizados</th>
@@ -30,9 +30,9 @@
                 <%= display_price_in_cents(coupon.discount.to_f) %>
               <% end %>
             </td>
-            <td class="align-middle">
+            <%# <td class="align-middle">
               <%= coupon.kind %>
-            </td>
+            </td> 
             <td class="align-middle">
               <%= coupon.valid_until.strftime("%d/%m/%Y") %>
             </td>
