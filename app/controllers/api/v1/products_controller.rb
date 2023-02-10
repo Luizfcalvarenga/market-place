@@ -40,7 +40,7 @@ module Api
         @products = @products.where(product_type_id: (41..49).to_a) if params[:products_accessories].present?
         @products = @products.where(product_type_id: (50..68).to_a) if params[:products_clothes].present?
 
-        @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:components_attributes_values].split(",")}) if params[:components_attributes_values].present?
+        @products = @products.joins(:product_attributes).where(product_attributes: {value: params[:components_attributes_values].split(",")}).uniq if params[:components_attributes_values].present?
 
 
 

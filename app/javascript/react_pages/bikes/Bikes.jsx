@@ -925,11 +925,16 @@ export function Bikes(props) {
     }
   }
 
+  const handleToggleFilerMobile = (e) => {
+    document.getElementById("filters").classList.toggle("d-none")
+  }
+
   return (
     <div className="p-5 br-8 index-container">
       <h2 className="text-center text-success">Bikes</h2>
+      <button type="button" className="filter-link" onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter"></i>Filtrar</button>
       <div className="row row-cols-1 mt-5">
-        <div className="filters col-12 col-md-3 my-1">
+        <div id="filters" className="filters col-12 col-md-3 my-1">
           <p className="">Filtrar</p>
           <div className="">
             <div className="condition-filter">
