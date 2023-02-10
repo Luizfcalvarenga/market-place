@@ -547,7 +547,7 @@ export function Products(props) {
   return (
     <div className="p-5 br-8 index-container">
       <h2 className="text-center text-success">Produtos</h2>
-      <button type="button" className={`filter-link ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter"></i>Filtrar</button>
+      <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
 
       <div className="d-flex mt-3 index-content">
         <div id="filters" className={`filters my-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>

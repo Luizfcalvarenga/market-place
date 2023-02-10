@@ -244,12 +244,18 @@ $color-primary: #00c454;
   border: 1px solid $color-primary;
   border-radius: 4px;
   z-index: 10000;
+  overflow-y: scroll;
+  padding-left: 0;
+
+}
+.search-list::-webkit-scrollbar {
+  display: none;
 }
 
 .results-list  {
   position: absolute;
   top: 100%;
-  overflow: hidden;
+  // overflow-y: scroll;
   transition: all 6s ease-in-out;
 
   .search-title {
@@ -302,6 +308,10 @@ $color-primary: #00c454;
     .form-icon {
       font-size: 18px;
     }
+
+    .search-list {
+      width: 100%;
+    }
   }
 
   .mobile-menu {
@@ -317,6 +327,7 @@ $color-primary: #00c454;
     font-weight: normal;
 
   }
+
 
 }
 
