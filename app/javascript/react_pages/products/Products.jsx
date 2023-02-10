@@ -514,13 +514,18 @@ export function Products(props) {
   }
 
 
-
+  const handleToggleFilerMobile = (e) => {
+    document.getElementById("filters").classList.toggle("d-none")
+    e.target.classList.toggle("selected-filter")
+  }
 
   return (
     <div className="p-5 br-8 index-container">
       <h2 className="text-center text-success">Produtos</h2>
-      <div className="row row-cols-1 mt-5">
-        <div className="filters col-12 col-md-3 my-1">
+      <button type="button" className={`filter-link ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter"></i>Filtrar</button>
+
+      <div className="d-flex mt-3 index-content">
+        <div id="filters" className={`filters my-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
           <p className="">Filtrar</p>
           <div className="">
           <div className="condition-filter">
@@ -708,13 +713,13 @@ export function Products(props) {
             {attributeOptionsToFilter && (<>
               {renderOptionsToFilterAttributes(attributeOptionsToFilter)}
             </>)}
-            
+
           </div>
         </div>
-        <div className="col-12 col-md-9 d-flex flex-wrap">
+        <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap`}>
           {products.map((product, idx) => {
             return (
-              <div className="w-25  my-2" product={product} key={product.id} id="mobile">
+              <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} my-2`} product={product} key={product.id} id="mobile">
                 <a href={"products/" + product.id} className="remove-link" target="_blank">
                   <div className="cards-products">
                     <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">

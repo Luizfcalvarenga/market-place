@@ -211,7 +211,7 @@ export function Bike(props) {
 
             <h3 className="mb-4 mt-3">Características Técnicas</h3>
             <div className="card-for-info">
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between bike-sections-show">
                 <div className="">
                   <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Quadro")}>Quadro</button>
                 </div>
