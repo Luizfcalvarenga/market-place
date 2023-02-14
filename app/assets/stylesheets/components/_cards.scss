@@ -319,9 +319,11 @@
   height: 270px;
   margin-left: 13.5%;
   padding: 10px;
-  background-color: rgb(240,240,240);
+  background-color: transparent;
+  box-shadow: rgba(17, 17, 26, 0.3) 0px 1px 0px, rgba(17, 17, 26, 0.3) 0px 8px 24px, rgba(17, 17, 26, 0.3) 0px 16px 48px;
+  // border: 1px solid rgb(158,158,165);;
   .fa-star {
-    color: yellow;
+    color: rgb(240, 218, 20);
   }
 }
 
