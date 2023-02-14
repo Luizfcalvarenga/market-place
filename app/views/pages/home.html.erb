@@ -78,48 +78,71 @@
   </div>
 </div>
 
-<div class="third-section-home mt-3 mb-5 px-5">
-  <div class="card-nf-services">
-    <h3 class="text-center">PARA MAIS COMODIDADE E SEGURANÇA, CONTE COM NOSSOS SERVIÇOS</h3>
-    <h3 class="text-center">PRODUTOS <span class="text-success mt-3">CERTIFICADOS</span> NUFLOW</h3>
-    <p class="text-center">Para você não ter nenhuma surpresa</p>
-    <p class=""> <span class="text-success">Inspeção:</span> Oficinas qualifacadas fazem a inspeção do produto e emitem um laudo mecânico.</p>
-    <p class=""> <span class="text-success">Negociação com especialistas:</span> Você conversa diretamente com a oficina que fez a inspeção e conta com a ajuda de quem conhece.</p>
-    <p class=""> <span class="text-success">Compra segura:</span> Todos os produtos certificados já incluem a Compra Segura.</p>
-    <div class="d-flex justify-content-center gap-5">
-      <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link" %>
-      <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link" %>
-    </div>
-  </div>
-
-
-  <div class="card-nf-services mt-4">
-    <h3 class="text-center text-success">COMPRA SEGURA</h3>
-    <h3 class="text-center">Evite riscos com produtos tão caros e sensiveis</h3>
-    <p class=""> <span class="text-success">Procedência verificada:</span> Verificamos a procedência do vendedor e emitimos um contrato de transferência de posse do produto.</p>
-    <p class=""> <span class="text-success">Pagamento seguro:</span> Você faz o pagamento de forma segura a em até 12 vezes. Retemos seu pagamento até a sua confirmação de recebimento do produto.</p>
-    <p class=""> <span class="text-success">Logística assegurada:</span> Solução única de logística com seguro compatível com o alto valor de bicicletas e componentes de ciclismo.</p>
-    <div class="text-center">
-      <%= link_to "Contratar serviços", "#", class: "nav-link" %>
-    </div>
-  </div>
-
-  <div class="card-nf-services mt-4">
-    <h3 class="text-center text-success">FAZ tudo</h3>
-    <h3 class="text-center">O jeito mais fácil de vender sua bicicleta ou componente usado</h3>
-    <p class=""> <span class="text-success">Acessoria:</span> Conte com especialistas para criar seu anúncio..</p>
-    <p class=""> <span class="text-success">Laudo mecânico:</span> Aumente as chances de vender seu produto ao anunciá-lo com a inspeção de uma oficina qualificada. .</p>
-    <p class=""> <span class="text-success">Intemediação:</span> Não se preocupe com o atendimento dos interessados, especialistas farão isso por você.</p>
-    <p class=""> <span class="text-success">Flexibilidade:</span> Ofereça parcelamento em até 12 vezes para o comprador, enquanto você recebe à vista!</p>
-    <p class=""> <span class="text-success">Logística:</span> Envie seu produto para o Brasil inteiro, com seguro compatível com o alto valor de bicicletas e componentes de ciclismo.</p>
-
-    <div class="text-center">
-      <%= link_to "Contratar serviços", "#", class: "nav-link" %>
-    </div>
-  </div>
-</div>
 
 <div class="seventh-section-home pb-2 mx-5">
+<h3 class="mt-3 text-success text-center">Conte com os serviços da Nuflow para comprar e vender com comodidade e segurança</h3>
+  <div class="buyer-section mx-5">
+    <p class=" text-center text-gray mt-3 fs-20">Evite riscos com produtos tão caros e sensíveis com a certificação Nuflow Tecnologia by Bike Hero</p>
+    <div class="d-flex justify-content-between gap-3">
+      <div class="card-how-works text-center">
+        <i class="fas fa-user-check text-success mt-4 icon"></i>
+        <h4 class="text-success">PERFIL VERIFICADO</h4>
+        <p>Identidade do comprador ou vendedor verificados na Receita Federal.</p>
+      </div>
+
+      <div class="card-how-works text-center">
+        <i class="fas fa-thumbs-up text-success mt-4 icon"></i>
+        <h4 class="text-success">PRODUTOS VERIFICADOS</h4>
+        <p>Prova de posse e validação do produto com verificação anti-fraude por foto e vídeo.</p>
+      </div>
+
+
+      <div class="card-how-works text-center">
+        <i class="fas fa-clipboard-check text-success mt-4 icon"></i>
+        <h4 class="text-success">CERTIFICADO DE TRANFERÊNCIA</h4>
+        <p>Oficialize a transação reunindo todos dados do produto  disponível para verificação por seguradoras parceiras e órgãos de segurança pública.</p>
+      </div>
+
+    </div>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <div class="d-flex justify-content-center gap-5">
+        <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link" %>
+        <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link" %>
+        <%= link_to "Contratar Serviços", "#", class: "nav-link" %>
+      </div>
+    </div>
+  </div>
+
+  <hr class="index-line w-50">
+
+  <div class="seller-section mx-5 mb-3">
+    <h3 class="text-success text-end me-2 mb-3">COMPRE COM TRANQUILIDADE</h3>
+    <div class="d-flex justify-content-between gap-3">
+
+      <div class="card-how-works text-center">
+        <i class="fas fa-credit-card text-success mt-4 icon"></i>
+        <h4 class="text-success">PARCELAMENTO</h4>
+        <p>Compre sua bike ou componente em até 12x no cartão de crédito.</p>
+      </div>
+
+      <div class="card-how-works text-center">
+        <i class="fas fa-shield-alt text-success mt-4 icon"></i>
+        <h4 class="text-success">PAGAMENTO SEGURO</h4>
+        <p>Retemos o pagamento até a confirmação de entrega do produto.</p>
+      </div>
+
+      <div class="card-how-works text-center">
+        <i class="fas fa-truck text-success mt-4 icon"></i>
+        <h4 class="text-success">LOGÍSTICA ASSEGURADA</h4>
+        <p>Solução de logística com seguro compatível com o alto valor de bicicletas e componentes de ciclismo.</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="fourth-section-home pb-5 my-3 pt-3">
   <div class="row row-cols-1 mx-5">
     <div class="col-12 col-md-4 review-icons">
       <h3 class="text-success text-start mt-5">A Nuflow te ajuda a vender e comprar com mais facilidade</h3>
@@ -188,78 +211,6 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-    </div>
-  </div>
-</div>
-
-<div class="fourth-section-home pb-5 my-3 pt-3">
-  <h3 class="mt-3 text-success text-center">POR QUE A NUFLOW?</h3>
-  <div class="buyer-section mx-5">
-    <h3 class="text-success mt-3">COMPRE COM SEGURANÇA</h3>
-    <div class="row row-cols-1">
-      <div class="col-12 col-md-4">
-        <div class="cards-differential text-center">
-          <i class="fas fa-headset text-success mt-4 icon"></i>
-          <h4 class="text-success">ASSESSORIA NA COMPRA</h4>
-          <p>Conte com a ajuda de especialistas <br> para encontrar a bike ideal para você.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="cards-differential text-center">
-          <i class="fas fa-credit-card text-success mt-4 icon"></i>
-          <h4 class="text-success">PAGAMENTO FLEXÍVEL E SEGURO</h4>
-          <p>Parcele sua compra em até 12x. <br> Nós retemos seu pagamento até a <br> confirmação de recebimento.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="cards-differential text-center">
-          <i class="fas fa-clipboard-check text-success mt-4 icon"></i>
-          <h4 class="text-success">LAUDO MECÊNICO</h4>
-          <p>Com o Bike Check sua bike é verificada e <br> revisada por oficinas qualificadas.</p>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center gap-3 mt-4">
-      <%= link_to bikes_path, class: "nav-link text-gray" do %>
-        BIKES<i class="fas fa-bicycle ms-1"></i>
-      <% end %>
-      <%= link_to products_path, class: "nav-link text-gray" do %>
-        PRODUTOS<i class="fab fa-product-hunt ms-1"></i>
-      <% end %>
-    </div>
-  </div>
-
-  <hr class="index-line w-50">
-
-  <div class="seller-section mx-5">
-    <h3 class="text-success text-end me-2 mb-3">VENDA COM GARANTIA</h3>
-    <div class="row row-cols-1 mb-2">
-      <div  class="col-12 col-md-4">
-        <div class="cards-differential text-center">
-          <i class="fas fa-handshake text-success mt-4 icon"></i>
-          <h4 class="text-success">VENDA MAIS RÁPIDO</h4>
-          <p>Atinja milhares de ciclistas e venda <br> para todo Brasil.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="cards-differential text-center">
-          <i class="fas fa-hand-holding-usd text-success mt-4 icon"></i>
-          <h4 class="text-success">PARCELE E RECEBA À VISTA</h4>
-          <p>Flexibilidade de pagamento para os  <br> interessados em sua bike.</p>
-        </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="cards-differential text-center">
-          <i class="fas fa-people-arrows text-success mt-4 icon"></i>
-          <h4 class="text-success">ASSISTÊNCIA NA NEGOCIAÇÂO</h4>
-          <p>Atendemos os interessados em sua bike, preocupe-se apenas com as propostas.</p>
-        </div>
-      </div>
-    </div>
-    <div class="text-center">
-      <%= link_to new_announce_path, class: "nav-link mt-3 text-gray" do %>
-        ANUNCIE<i class="fas fa-bullhorn ms-1"></i>
-      <% end %>
     </div>
   </div>
 </div>
