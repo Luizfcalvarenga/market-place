@@ -22,6 +22,14 @@
 }
 
 ///////////////////////////// 3ª SECTION
+.card-how-works-services {
+  transition: .5s ease;
+  border-radius: 4px;
+  padding: 20px;
+  align-items: center;
+  background-color: rgb(21, 21, 21);
+  width: 100%;
+}
 
 .third-section-home {
   // height: 1636px;
@@ -154,27 +162,13 @@
     .third-section-title {
       width: 90%;
     }
-
-    .bike-check-img, .v-check-line, .h-check-line, .v-check-line-b, .v-check-line-left, .v-check-line-left-4, .v-check-line-b-left, .v-check-line-right, .v-check-line-right-5, .v-check-line-b3 {
-
-      display: none
-    }
-
-    .responsive-block {
-      display: block !important;
-    }
-
-    .check-text {
-      display: block !important;
-      margin: 0 !important;
-      width: 90%;
-      text-align: center !important;
-
-      h2 {
-        font-size: 36px !important;
-      }
-
-    }
+  }
+  .card-how-works-services {
+    margin-top: 10px;
+  }
+  .cards-services, .links-service {
+    display: block!important;
+    text-align: center;
   }
 
   .fourth-section-home {
