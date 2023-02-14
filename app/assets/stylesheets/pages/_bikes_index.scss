@@ -19,7 +19,7 @@
 }
 
 .filter-link {
-  color: #919991;
+  color: rgb(158,158,165);
   font-weight: lighter !important;
   font-size: 18px;
   padding: 0 !important;
@@ -37,18 +37,15 @@
 }
 
 
-.filter-link::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: $color-primary;
-  transition: width .3s;
-}
 
-.filter-link:hover::after {
+.selected-filter-section {
   color: $color-primary;
-  width: 100%;
+
+  i {
+    transform: rotate(-180deg);
+    margin-bottom: 5%;
+  }
+
 }
 
 .filter-tag {
@@ -155,6 +152,16 @@
 .price-filter, .year-filter {
   .text-input {
     width: 35% !important;
+  }
+}
+
+.filter-section:hover {
+  cursor: pointer;
+  i {
+    color: $color-primary;
+  }
+  .filter-link {
+    color: $color-primary;
   }
 }
 

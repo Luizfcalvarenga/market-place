@@ -298,6 +298,7 @@ export function Bikes(props) {
   }, []);
 
   const handleFilter = (e) => {
+    console.log(e.target.innerText)
     const sectionFilter = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
     console.log(sectionActive.classList.contains("btn-filter"));
@@ -310,6 +311,14 @@ export function Bikes(props) {
 
       sectionActive.classList.toggle("selected-filter")
     }
+  }
+
+  const handleFilterTest = (e) => {
+    console.log(e.target.innerText)
+    const sectionFilter = document.getElementById(e.target.innerText);
+    const sectionActive = e.target;
+    sectionFilter.classList.toggle("d-none")
+    sectionActive.classList.toggle("selected-filter-section")
   }
 
   const handleBikeTypeFilter = (e) => {
@@ -455,17 +464,17 @@ export function Bikes(props) {
     }
   }
 
-  const handleModalityFilter = (e) => {
-    console.log(e)
-    e.target.classList.toggle("active")
-    if (e.target.classList.contains("active")) {
-      document.getElementById(e.target.value).classList.remove("d-none")
-      e.target.classList.add("selected-tag")
-    } else {
-      document.getElementById(e.target.value).classList.add("d-none")
-      e.target.classList.remove("selected-tag")
-    }
-  }
+  // const handleModalityFilter = (e) => {
+  //   console.log(e)
+  //   e.target.classList.toggle("active")
+  //   if (e.target.classList.contains("active")) {
+  //     document.getElementById(e.target.value).classList.remove("d-none")
+  //     e.target.classList.add("selected-tag")
+  //   } else {
+  //     document.getElementById(e.target.value).classList.add("d-none")
+  //     e.target.classList.remove("selected-tag")
+  //   }
+  // }
 
   const handleMultipleFiltersModel = (e) => {
     const currentOptionsToFilter = [...modelOptionsToFilter]
@@ -932,7 +941,7 @@ export function Bikes(props) {
     }
   }
 
-  const handleToggleFilerMobile = (e) => {
+  const handleToggleFilterMobile = (e) => {
     document.getElementById("filters").classList.toggle("d-none")
     e.target.classList.toggle("selected-filter")
   }
@@ -940,34 +949,53 @@ export function Bikes(props) {
   return (
     <div className="p-5 br-8 index-container">
       <h2 className="text-center text-success">Bikes</h2>
-      <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
+      <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilterMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
       <div className={`mt-3 index-content ${ window.screen.width < 768 ? "d-block" : "d-flex"}`}>
         <div id="filters" className={`filters my-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
           <p className="">Filtrar</p>
           <div className="">
-            <div className="condition-filter">
-              <h5 className=" mt-3">tipo</h5>
-              <div className="d-flex justify-content-between">
+
+            <div className="border-bottom">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Tipo
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
+                </div>
+              </button>
+              <div id="Tipo" className="d-flex justify-content-between mb-3 d-none">
                 <button type="button" value="e-bike" className="filter-tag" onClick={(e) => handleBikeTypeFilter(e)}>E-Bike</button>
                 <button type="button" value="bike" className="filter-tag" onClick={(e) => handleBikeTypeFilter(e)}>Bike</button>
               </div>
             </div>
 
-            <div className="condition-filter">
-              <h5 className=" mt-3">condição</h5>
-              <div className="d-flex justify-content-between">
+
+            <div className="border-bottom mt-3">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Condição
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
+                </div>
+              </button>
+              <div id="Condição" className="d-flex justify-content-between mb-3 d-none">
                 <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Nova</button>
                 <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usada</button>
               </div>
             </div>
 
-            <button type="button" value="mtb-modalities" className="filter-link  mt-3 mb-1" onClick={(e) => handleFilter(e)}>Categoria</button> <br />
-            <div id="Categoria" className="multiple-filters d-flex gap-1 flex-wrap justify-content-center d-none">
-              {presentCategories.map((category, index) => {
-                return (
-                  <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
-                )
-              })}
+            <div className="border-bottom mt-3">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Categoria
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
+                </div>
+              </button>
+              <div id="Categoria" className="multiple-filters d-flex gap-1 flex-wrap justify-content-center mb-3 d-none">
+                {presentCategories.map((category, index) => {
+                  return (
+                    <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
+                  )
+                })}
+              </div>
             </div>
 
             {categoryOptionsToFilter.includes("mountain_bike") && (<>
@@ -1003,20 +1031,33 @@ export function Bikes(props) {
               </div>
             </>)}
 
-            <button type="button" value="frame_brands" className="filter-link  my-1" onClick={(e) => handleFilter(e)}>Marca</button>
-            <div id="Marca" className="d-flex flex-wrap justify-content-between gap-1 d-none">
-              {presentFrameBrands.map((presentFrameBrand, index) => {
-                return (
 
-                  <button type="button" key={index} value={presentFrameBrand} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameBrand(e)}>{presentFrameBrand}</button>
-                )
-              })}
+            <div className="border-bottom mt-3">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Marca
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
+                </div>
+              </button>
+              <div id="Marca" className="d-flex flex-wrap justify-content-between gap-1 mb-3 d-none">
+                {presentFrameBrands.map((presentFrameBrand, index) => {
+                  return (
+
+                    <button type="button" key={index} value={presentFrameBrand} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameBrand(e)}>{presentFrameBrand}</button>
+                  )
+                })}
+              </div>
             </div>
 
-            <div className="model-filter">
+            <div className="border-bottom mt-3">
               {presentModels.length > 0 && (<>
-                <button type="button" value="frame_brands" className="filter-link  my-1" onClick={(e) => handleFilter(e)}>Modelo</button>
-                <div id="Modelo" className="multiple-filters d-flex gap-1 flex-wrap justify-content-center d-none">
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                  <div className="d-flex justify-content-between filter-section">
+                    Modelo
+                    <i id="section-arrow" className="fas fa-chevron-down"></i>
+                  </div>
+                </button>
+                <div id="Modelo" className="multiple-filters d-flex gap-1 flex-wrap mb-3 justify-content-center d-none">
                   {presentModels.map((presentModel, index)=> {
                     return (
                       <button type="button" key={index} value={presentModel} className="filter-tag"  onClick={(e) => handleMultipleFiltersModel(e)}>{presentModel}</button>
@@ -1026,58 +1067,76 @@ export function Bikes(props) {
               </>)}
             </div>
 
-            <div className="locality-filter">
-              <h5 className=" mt-3">Estado</h5>
-              <select
-                className="select-answer"
-                value={stateFilter}
-                onChange={(e) => handleLocality(e)}
-              >
-                <option value=""></option>
-                {states.map((state, index)=> {
-                  return (<option key={index} value={state.name}>{state.acronym}</option>);
-                })}
-              </select>
-              <h5 className=" mt-3">Cidade</h5>
-              {stateFilter && (<>
-                <select
-                  className="select-answer"
-                  value={cityFilter}
-                  onChange={(e) => setCityFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {mapedCitiesForState.map((city, index)=> {
-                    return (<option key={index} value={city.name}>{city.name}</option>);
-                  })}
-                </select>
-              </>)}
-
-              {!stateFilter && (<>
-                <select
-                  className="select-answer"
-                  value={cityFilter}
-                  onChange={(e) => setCityFilter(e.target.value)}
-                >
-                  <option value=""></option>
-                  {cities.map((city, index)=> {
-                    return (<option key={index} value={city.name}>{city.name}</option>);
-                  })}
-                </select>
-              </>)}
-            </div>
-
-            <div className="price-filter">
-              <div className="">
-                <h5 className=" mt-3">preço</h5>
-                <div className="d-flex justify-content-between">
-                  {BrlCurrencyComponent()}
+            <div className="border-bottom mt-3">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Local
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </div>
+              </button>
+              <div id="Local" className="locality-filter d-none mb-3">
+                <h5 className="">Estado</h5>
+                <select
+                  className="select-answer"
+                  value={stateFilter}
+                  onChange={(e) => handleLocality(e)}
+                >
+                  <option value=""></option>
+                  {states.map((state, index)=> {
+                    return (<option key={index} value={state.name}>{state.acronym}</option>);
+                  })}
+                </select>
+                <h5 className=" mt-3">Cidade</h5>
+                {stateFilter && (<>
+                  <select
+                    className="select-answer"
+                    value={cityFilter}
+                    onChange={(e) => setCityFilter(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {mapedCitiesForState.map((city, index)=> {
+                      return (<option key={index} value={city.name}>{city.name}</option>);
+                    })}
+                  </select>
+                </>)}
+
+                {!stateFilter && (<>
+                  <select
+                    className="select-answer"
+                    value={cityFilter}
+                    onChange={(e) => setCityFilter(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {cities.map((city, index)=> {
+                      return (<option key={index} value={city.name}>{city.name}</option>);
+                    })}
+                  </select>
+                </>)}
               </div>
             </div>
 
-            <div className="year-filter mb-3">
-              <h5 className=" mt-3">ano</h5>
-              <div className="d-flex justify-content-between">
+
+            <div className="border-bottom mt-3">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Preço
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
+                </div>
+              </button>
+              <div id="Preço" className="d-flex justify-content-between gap-2 d-none mb-3">
+                {BrlCurrencyComponent()}
+              </div>
+            </div>
+
+
+            <div className="border-bottom mt-3">
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <div className="d-flex justify-content-between filter-section">
+                  Ano
+                  <i id="section-arrow" className="fas fa-chevron-down"></i>
+                </div>
+              </button>
+              <div id="Ano" className="d-flex justify-content-between gap-2 mb-3 d-none">
                 <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
                 <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
               </div>
