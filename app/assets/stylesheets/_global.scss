@@ -15,6 +15,10 @@ $white: #fff;
   margin-bottom: 0 !important;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 36px !important;

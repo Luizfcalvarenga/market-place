@@ -30,32 +30,49 @@ module Api
         @bikes = @bikes.where(rear_suspension_travel: params[:rear_suspension_travels].split(",")) if params[:rear_suspension_travels].present?
         @bikes = @bikes.where(front_suspension_model: params[:front_suspension_models].split(",")) if params[:front_suspension_models].present?
         @bikes = @bikes.where(rear_suspension_model: params[:rear_suspension_models].split(",")) if params[:rear_suspension_models].present?
+        @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears].split(",")) if params[:number_of_front_gears].present?
+        @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears].split(",")) if params[:number_of_rear_gears].present?
+        @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_models].split(",")) if params[:font_derailleur_models].present?
+        @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_models].split(",")) if params[:rear_derailleur_models].present?
+        @bikes = @bikes.where(crankset: params[:cranksets]) if params[:cranksets].present?
+        @bikes = @bikes.where(chain: params[:chains]) if params[:chains].present?
+
+        @bikes = @bikes.where(brake_type: params[:brake_types].split(",")) if params[:brake_types].present?
+        @bikes = @bikes.where(brake_disc_size: params[:brake_disc_sizes].split(",")) if params[:brake_disc_sizes].present?
+        @bikes = @bikes.where(brake_model: params[:brake_models].split(",")) if params[:brake_models].present?
+        @bikes = @bikes.where(rim_size: params[:rim_sizes].split(",")) if params[:rim_sizes].present?
+        @bikes = @bikes.where(wheel_material: params[:wheel_materials].split(",")) if params[:wheel_materials].present?
+        @bikes = @bikes.where(front_rim_model: params[:rim_models].split(",")).where(rear_rim_model: params[:rim_models].split(",")) if params[:rim_models].present?
+        @bikes = @bikes.where(front_hub_model: params[:hub_models].split(",")).where(front_hub_model: params[:hub_models].split(",")) if params[:hub_models].present?
+        @bikes = @bikes.where(front_tyre_model: params[:tyre_models].split(",")).where(front_tyre_model: params[:tyre_models].split(",")) if params[:tyre_models].present?
+
+        @bikes = @bikes.where(seat_post_type: params[:seat_post_types].split(",")) if params[:seat_post_types].present?
+        @bikes = @bikes.where(seat_post_travel: params[:seat_post_travels].split(",")) if params[:seat_post_travels].present?
+        @bikes = @bikes.where(seat_post_model: params[:seat_post_models].split(",")) if params[:seat_post_models].present?
+        @bikes = @bikes.where(seat_post_material: params[:seat_post_materials].split(",")) if params[:seat_post_materials].present?
 
 
-        # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        @bikes = @bikes.where(number_of_front_gears: params[:number_of_front_gears]) if params[:number_of_front_gears].present?
-        @bikes = @bikes.where(number_of_rear_gears: params[:number_of_rear_gears]) if params[:number_of_rear_gears].present?
-        @bikes = @bikes.where(font_derailleur_model: params[:font_derailleur_model]) if params[:font_derailleur_model].present?
-        @bikes = @bikes.where(rear_derailleur_model: params[:rear_derailleur_model]) if params[:rear_derailleur_model].present?
-        @bikes = @bikes.where(brake_type: params[:brake_type]) if params[:brake_type].present?
-        @bikes = @bikes.where(brake_disc_size: params[:brake_disc_size]) if params[:brake_disc_size].present?
-        @bikes = @bikes.where(brake_model: params[:brake_model]) if params[:brake_model].present?
-        @bikes = @bikes.where(rim_size: params[:rim_size]) if params[:rim_size].present?
-        @bikes = @bikes.where(seat_post_type: params[:seat_post_type]) if params[:seat_post_type].present?
-        @bikes = @bikes.where(seat_post_travel: params[:seat_post_travel]) if params[:seat_post_travel].present?
-        @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?
-        @bikes = @bikes.where(battery: params[:battery]) if params[:battery].present?
+
+        @bikes = @bikes.where(stem: params[:stem_models].split(",")) if params[:stem_models].present?
+        @bikes = @bikes.where(handlebar: params[:handlebar_models].split(",")) if params[:handlebar_models].present?
+        @bikes = @bikes.where(handlebar_material: params[:handlebar_materials].split(",")) if params[:handlebar_materials].present?
+        @bikes = @bikes.where(battery: params[:batteries].split(",")) if params[:batteries].present?
         @bikes = @bikes.where('battery_cycles BETWEEN ? AND ?', 0, params[:battery_cycles]) if params[:battery_cycles].present?
         @bikes = @bikes.where('mileage BETWEEN ? AND ?', 0, params[:mileage]) if params[:mileage].present?
-        @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
-        @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
-        @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
-        @bikes = (@bikes.where('front_hub_model @@ ?', params[:hub])  || @bikes.where('rear_hub_model @@ ?', params[:hub]) )if params[:hub].present?
-        @bikes = (@bikes.where('front_rim_model @@ ?', params[:rim])  || @bikes.where('rear_rim_model @@ ?', params[:rim]) )if params[:rim].present?
-        @bikes = (@bikes.where('front_tyre_model @@ ?', params[:tyre])  || @bikes.where('rear_tyre_model @@ ?', params[:tyre]) )if params[:tyre].present?
-        @bikes = @bikes.where('stem @@ ?', params[:stem]) if params[:stem].present?
-        @bikes = @bikes.where('handlebar @@ ?', params[:handlebar]) if params[:handlebar].present?
+
         @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
+        @bikes = @bikes.where(model: params[:models].split(",")) if params[:models].present?
+
+        # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
+        # @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?
+
+        # @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
+        # @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
+        # @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
+        # @bikes = (@bikes.where('front_hub_model @@ ?', params[:hub])  || @bikes.where('rear_hub_model @@ ?', params[:hub]) )if params[:hub].present?
+        # @bikes = (@bikes.where('front_rim_model @@ ?', params[:rim])  || @bikes.where('rear_rim_model @@ ?', params[:rim]) )if params[:rim].present?
+        # @bikes = (@bikes.where('front_tyre_model @@ ?', params[:tyre])  || @bikes.where('rear_tyre_model @@ ?', params[:tyre]) )if params[:tyre].present?
+
 
       end
 
@@ -85,14 +102,11 @@ module Api
               @bike.photos.attach(photo)
             end
           end
-
           if params[:advertisement].present?
             @coupon_code = params[:advertisement][:discount_coupon]
           end
-
           @service = AdvertisementGenerator.new(@bike, @coupon_code)
           @service.call()
-
           if @bike.advertisement.present? &&  @service.errors.blank?
             render json: { success: true, bike: @bike, photos: @photos, advertisement: @bike.advertisement, redirect_url: advertisement_path(@bike.advertisement) }
           else

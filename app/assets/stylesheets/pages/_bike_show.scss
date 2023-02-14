@@ -89,6 +89,14 @@
 
   .bike-attrs-parts, .bike-info {
     font-size: 15px;
+  }
 
+  .bike-sections-show {
+    overflow-x: auto;
+  }
+
+
+  .bike-sections-show::-webkit-scrollbar {
+    display: none;
   }
 }
