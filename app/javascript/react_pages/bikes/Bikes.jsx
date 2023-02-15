@@ -303,21 +303,7 @@ export function Bikes(props) {
 
   }, []);
 
-  // const handleFilter = (e) => {
-  //   console.log(e.target.innerText)
-  //   const sectionFilter = document.getElementById(e.target.innerText);
-  //   const sectionActive = e.target;
-  //   console.log(sectionActive.classList.contains("btn-filter"));
-  //   sectionFilter.classList.toggle("d-none")
-  //   if (sectionActive.classList.contains("btn-filter")) {
-  //     console.log("tem")
-  //     sectionActive.classList.toggle("selected")
-
-  //   } else {
-
-  //     sectionActive.classList.toggle("selected-filter")
-  //   }
-  // }
+  
 
   const handleFilter = (e) => {
     console.log(e.target.innerText)

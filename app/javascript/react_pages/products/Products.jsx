@@ -93,10 +93,16 @@ export function Products(props) {
 
     return(
       <>
-        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+        <div>
+          <p className="m-0">DE</p>
+          <IntlCurrencyInput currency="BRL" config={currencyConfig}
           className="text-input" value={minPriceFilter}   onChange={handleMinPriceFIlter} />
-        <IntlCurrencyInput currency="BRL" config={currencyConfig}
+        </div>
+        <div>
+          <p className="m-0">ATÉ</p>
+          <IntlCurrencyInput currency="BRL" config={currencyConfig}
           className="text-input" value={maxPriceFilter}   onChange={handlemaxPriceFIlter} />
+        </div>
       </>
     );
   }
@@ -581,7 +587,7 @@ export function Products(props) {
               </div>
             </div>
 
-            {presentAccessories.length > 1}
+
             <div className="border-bottom mt-3">
               <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
@@ -602,7 +608,7 @@ export function Products(props) {
                     <button id="btn-clothes" type="button" value="" className="filter-tag" onClick={(e) => hendleClothesFilters(e)}>Vestuário</button>
                   )}
                 </div>
-                <hr />
+                <hr className="index-line"/>
                 <div className="d-flex flex-wrap justify-content-between gap-1 mb-3">
                   <div id="products-accessories" className="d-flex flex-wrap justify-content-between gap-1 d-none">
                     {presentAccessories.map((presentAccessory, index) => {

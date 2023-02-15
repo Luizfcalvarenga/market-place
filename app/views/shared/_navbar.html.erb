@@ -149,7 +149,7 @@
   </div>
   <% if mobile_device? %>
     <div class="flex center between w-100">
-      <%= link_to root_path, class: "nav-link-drop" do %>
+      <%= link_to root_path, class: "nav-link-drop", id: "mobile-home-link" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
       <div id="navbar-form-mobile" data-controller="search" class="input-group input-group-navbar mt-3 px-1 d-none">
@@ -192,16 +192,16 @@
     </div>
 
     <div class="bottom-navbar">
-      <%= link_to bikes_path, class: "block-item" do %>
+      <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
         <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
       <% end %>
-      <%= link_to products_path, class: "block-item" do %>
+      <%= link_to products_path, class: "block-item #{current_page?(controller: 'products', action: 'index')? "selected-path" : ""}" do %>
         <i class="fab fa-product-hunt nav-bottom-icon"></i><br><span class="nav-bottom-link">Produtos</span>
       <% end %>
-      <%= link_to new_announce_path, class: "block-item" do %>
+      <%= link_to new_announce_path, class: "block-item #{(current_page?(controller: 'bikes', action: 'new') || current_page?(controller: 'products', action: 'new') || current_page?(controller: 'pages', action: 'new_announce'))? "selected-path" : ""}" do %>
         <i class="far fa-edit nav-bottom-icon"></i> <br><span class="nav-bottom-link">Anunciar</span>
       <% end %>
-      <%= link_to chats_path, class: "block-item" do %>
+      <%= link_to chats_path, class: "block-item #{(current_page?(controller: 'chats', action: 'index') || current_page?(controller: 'users', action: 'show'))? "selected-path" : ""}" do %>
         <i class="far fa-comment-alt  nav-bottom-icon"></i> <br><span class="nav-bottom-link">Chat</span>
         <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
           <span class="badge badge-danger mobile-notification">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
@@ -224,6 +224,7 @@
             <% end %>
           <% end %>
         </div>
+
         <div class="d-flex justify-content-between my-3">
           <%= link_to  "#", class: "dropup-link d-block text-center" do %>
             <i class="fas fa-info-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Institucional</span>
