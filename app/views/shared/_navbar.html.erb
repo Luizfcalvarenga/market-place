@@ -178,7 +178,7 @@
           <i class="fas fa-times text-success" id="close-icon"></i>
         </button>
         <div id="navbar-links-mobile" class="mt-3">
-          <%= link_to likes_path, class: "nav-link-drop me-3 text-success" do %>
+          <%= link_to likes_path, class: "nav-link-drop me-3 #{current_page?(controller: 'likes', action: 'index')? "text-success" : ""}" do %>
             <i class="fas fa-heart"></i>
           <% end %>
           <% if user_signed_in? %>
