@@ -303,23 +303,23 @@ export function Bikes(props) {
 
   }, []);
 
+  // const handleFilter = (e) => {
+  //   console.log(e.target.innerText)
+  //   const sectionFilter = document.getElementById(e.target.innerText);
+  //   const sectionActive = e.target;
+  //   console.log(sectionActive.classList.contains("btn-filter"));
+  //   sectionFilter.classList.toggle("d-none")
+  //   if (sectionActive.classList.contains("btn-filter")) {
+  //     console.log("tem")
+  //     sectionActive.classList.toggle("selected")
+
+  //   } else {
+
+  //     sectionActive.classList.toggle("selected-filter")
+  //   }
+  // }
+
   const handleFilter = (e) => {
-    console.log(e.target.innerText)
-    const sectionFilter = document.getElementById(e.target.innerText);
-    const sectionActive = e.target;
-    console.log(sectionActive.classList.contains("btn-filter"));
-    sectionFilter.classList.toggle("d-none")
-    if (sectionActive.classList.contains("btn-filter")) {
-      console.log("tem")
-      sectionActive.classList.toggle("selected")
-
-    } else {
-
-      sectionActive.classList.toggle("selected-filter")
-    }
-  }
-
-  const handleFilterTest = (e) => {
     console.log(e.target.innerText)
     const sectionFilter = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
@@ -962,7 +962,7 @@ export function Bikes(props) {
           <div className="">
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
                   Local
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1011,7 +1011,7 @@ export function Bikes(props) {
 
             {presentCategories.length > 1 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Categoria
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1029,7 +1029,7 @@ export function Bikes(props) {
 
             {(presentMtbModalities.length > 1 || presentRoadModalities.length > 1|| presentDirtModalities.length > 1)&& (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Modalidade
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1056,7 +1056,7 @@ export function Bikes(props) {
             )}
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
                   Tipo
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1071,7 +1071,7 @@ export function Bikes(props) {
             </div>
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
                   Condição
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1085,7 +1085,7 @@ export function Bikes(props) {
 
             {presentFrameBrands.length > 1 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Marca
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1104,7 +1104,7 @@ export function Bikes(props) {
 
             {presentModels.length > 1 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Modelo
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1121,7 +1121,7 @@ export function Bikes(props) {
             )}
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
                   Preço
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1133,7 +1133,7 @@ export function Bikes(props) {
             </div>
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
                   Ano
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1148,7 +1148,7 @@ export function Bikes(props) {
             {(presentFrameSizes.length > 1 || presentRoadFrameSizes.length > 1 || presentFrameMaterials.length > 1 || presentDirtMtbFrameSizes.length > 1)&& (
 
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Quadro
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1210,7 +1210,7 @@ export function Bikes(props) {
             {presentRoadForkMaterials.length > 1 && (<>
               {categoryOptionsToFilter.includes("road") && (<>
                 <div className="border-bottom mt-3">
-                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                     <div className="d-flex justify-content-between filter-section">
                       Garfo
                       <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1232,7 +1232,7 @@ export function Bikes(props) {
 
             {!categoryOptionsToFilter.includes("road") && (<>
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Suspensão
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1320,7 +1320,7 @@ export function Bikes(props) {
             {(presentNumberOfFrontGears.length > 1 || presentNumberOfRearGears.length > 1 || presentRoadFrontDerailleurModels.length > 1 || presentMtbDirtFrontDerailleurModels.length > 1
               || presentRoadRearDerailleurModels.length > 1 || presentMtbDirtRearDerailleurModels.length > 1 || presentChains.length > 1 || presentCranksets.length > 1)&& (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Câmbio
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1427,7 +1427,7 @@ export function Bikes(props) {
 
             {(presentBrakeTypes.length > 1 || presentBrakeDiscSizes.length > 1 || presentRoadBrakeModels.length > 1 || presentMtbDirtBrakeModels.length > 1) && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Freio
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1488,7 +1488,7 @@ export function Bikes(props) {
 
             {(presentRimSizes.length > 1 || presentWheelMaterials.length > 1 || presentRimModels.length > 1) && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Rodas
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1555,7 +1555,7 @@ export function Bikes(props) {
 
             {(presentSeatPostTypes.length > 1 || presentSeatPostTravels.length > 1 || presentSeatPostMaterials.length > 1) && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Canote
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1616,7 +1616,7 @@ export function Bikes(props) {
             {(presentHandlebarMaterials.length > 1 || presentHandlebarModels.length > 1 || presentStemModels.length > 1) && (
 
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
                     Cockpit
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
@@ -1662,7 +1662,7 @@ export function Bikes(props) {
             {presentBatteries.length > 1  && (<>
               {bikeTypeFilter === "e-bike" && (<>
                 <div className="border-bottom mt-3">
-                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilterTest(e)}>
+                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                     <div className="d-flex justify-content-between filter-section">
                       Parte Elétrica
                       <i id="section-arrow" className="fas fa-chevron-down"></i>
