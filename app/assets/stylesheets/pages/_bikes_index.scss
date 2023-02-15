@@ -13,9 +13,19 @@
   color: $color-primary;
 }
 
+.icon-filter-bike {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(5%) saturate(274%) hue-rotate(201deg) brightness(88%) contrast(86%);
+}
+
 .selected-tag {
   background-color: rgb(0,0,0) !important;
   color: $color-primary !important;
+  img {
+    filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+
+  }
 }
 
 .filter-link {
@@ -60,6 +70,10 @@
   &:hover {
     background-color: rgb(0,0,0) !important;
     color: $color-primary !important;
+    img {
+      filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+
+    }
   }
 }
 
