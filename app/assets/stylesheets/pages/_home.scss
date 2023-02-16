@@ -180,6 +180,17 @@
       margin-top: 20px;
       height: auto;
     }
+
+    .review-icons {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    .review-card {
+      width: 100% ;
+      margin-left: 0;
+      height: 23rem;
+      box-shadow: none;
+    }
   }
 
   .fifth-section-home {
@@ -199,6 +210,12 @@
       width: 100%;
       margin-top: 20px;
       margin-left: 0;
+      margin-bottom: 20%;
+      height: 30rem;
+    }
+
+    .blog-section {
+      display: block !important;
     }
   }
 

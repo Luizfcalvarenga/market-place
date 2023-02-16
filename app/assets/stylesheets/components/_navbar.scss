@@ -75,6 +75,10 @@ $color-primary: #00c454;
 
   }
 
+  .dropdown-toggle[aria-expanded="true"]{
+    color: $color-primary;
+  }
+
   .dropdown-toggle::after {
     display: none;
   }
@@ -261,7 +265,6 @@ $color-primary: #00c454;
 .results-list  {
   position: absolute;
   top: 100%;
-  // overflow-y: scroll;
   transition: all 6s ease-in-out;
 
   .search-title {
@@ -271,7 +274,6 @@ $color-primary: #00c454;
   .search-list-details {
     font-size: 15px;
     font-weight: normal;
-
   }
 }
 
@@ -283,16 +285,13 @@ $color-primary: #00c454;
   border-bottom: 1px solid $color-primary;
   p {
     font-size: 15px;
-    // margin-bottom: 0 !important;
   }
 }
 .btn-search-all {
   font-size: 16px;
-
   .fa-angle-double-right {
     font-size: 16px;
   }
-
 }
 @media (max-width: 768px) {
   .navbar {
@@ -308,20 +307,11 @@ $color-primary: #00c454;
       height: 25px !important;
       margin-bottom: 0.25rem !important;
       --bs-btn-padding-x: -1rem  !important;
-
     }
 
     .form-icon {
       font-size: 18px;
     }
-
-    // .search-list {
-    //   // width: 132% !important;
-
-    //   // position: absolute;
-    //   // right: -29px;
-    // }
-
   }
 
   .mobile-menu {
@@ -335,10 +325,7 @@ $color-primary: #00c454;
   .search-list-details {
     font-size: 10px !important;
     font-weight: normal;
-
   }
-
-
 }
 
 //////////////////////// RESPONSIVE 425px
@@ -361,7 +348,6 @@ $color-primary: #00c454;
     .form-icon {
       font-size: 18px;
     }
-
   }
 
   #navbar-form {
@@ -379,6 +365,5 @@ $color-primary: #00c454;
   .search-list-details {
     font-size: 10px !important;
     font-weight: normal;
-
   }
 }

@@ -24,7 +24,7 @@
       <h3 class="mt-5 text-success ms-5 mb-2">CATEGORIAS</h3>
     </div>
   </div>
-  <div class="row row-cols-1 category-cards mx-5">
+  <div class="row row-cols-1 category-cards <%= mobile_device? ? "mx-4" : "mx-5" %>">
     <div class="col-12 col-md-4">
       <%= link_to :controller => "bikes", :action => "index", :categories => "mountain_bike" do %>
         <div class="card card-bikes mb-5 btn-remove-link">
@@ -79,9 +79,9 @@
 </div>
 
 
-<div class="seventh-section-home pb-3 mx-5">
-  <h3 class="mt-3 text-success text-center">Conte com os serviços da Nuflow para comprar e vender com comodidade e segurança</h3>
-  <div class="buyer-section mx-5">
+<div class="seventh-section-home my-3">
+  <h3 class="mt-1 text-success text-center">Conte com os serviços da Nuflow para comprar e vender com comodidade e segurança</h3>
+  <div class="buyer-section  <%= mobile_device? ? "mx-4" : "mx-5" %>">
     <p class=" text-center text-gray mt-3 fs-20">Evite riscos com produtos tão caros e sensíveis com a certificação Nuflow Tecnologia by Bike Hero</p>
     <div class="d-flex justify-content-between gap-3 cards-services">
       <div class="card-how-works-services text-center">
@@ -115,7 +115,7 @@
 
   <hr class="index-line w-50">
 
-  <div class="seller-section mx-5 mb-3">
+  <div class="seller-section  <%= mobile_device? ? "mx-4" : "mx-5" %> mb-5">
     <h3 class="text-success me-2 mb-3 <%= mobile_device? ? "text-center" : " text-end" %>">COMPRE COM TRANQUILIDADE</h3>
     <div class="d-flex justify-content-between gap-3 cards-services">
 
@@ -143,7 +143,7 @@
 </div>
 
 <div class="fourth-section-home py-2">
-  <div class="row row-cols-1 mx-5">
+  <div class="row row-cols-1 <%= mobile_device? ? "mx-3" : "mx-5" %>">
     <div class="col-12 col-md-4 review-icons">
       <h3 class="text-success text-start mt-5">A Nuflow te ajuda a vender e comprar com mais facilidade</h3>
       <p class="text-start text-gray mt-4"><i class="fas fa-hands-helping me-1"></i> Ajuda na negociação</p>
@@ -215,60 +215,58 @@
   </div>
 </div>
 
-<div class="fifth-section-home mx-5 py-5">
-  <div class="row row-cols-1 mx-3">
-    <div class="col-12 col-md-5 blog-text">
+<div class="fifth-section-home py-5 <%= mobile_device? ? "mx-4" : "mx-5" %>">
+  <div class="d-flex justify-content-between blog-section">
+    <div class="col-12 col-md-6 blog-text">
       <h2 class="text-success mb-4">BLOG</h2>
       <h3 class="mb-5">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
-      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-5" %>
+      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "nav-link mt-5" %>
     </div>
-    <div class="col-12 col-md-7">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
-              <div class="cards-blog">
-                <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
-                <h4 class="text-white text-center mt-1">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
-                <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
-              </div>
-            <% end %>
-          </div>
-          <div class="carousel-item">
-            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
-              <div class="cards-blog">
-                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
-                <h4 class="text-white text-center mt-1">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
-                <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
-              </div>
-            <% end %>
-          </div>
-          <div class="carousel-item">
-            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
-              <div class="cards-blog">
-                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
-                <h4 class="text-white text-center mt-1">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
-                <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
-              </div>
-            <% end %>
-          </div>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
+            <div class="cards-blog">
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
+              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
+              <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
+            </div>
+          <% end %>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        <div class="carousel-item">
+          <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+            <div class="cards-blog">
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
+              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
+              <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
+            </div>
+          <% end %>
+        </div>
+        <div class="carousel-item">
+          <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+            <div class="cards-blog">
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
+              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
+              <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
+            </div>
+          <% end %>
+        </div>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
 </div>
 
 <div class="sixth-section-home py-5">
   <h3 class="text-success text-center mb-3">ENCONTRE A GENTE</h3>
-  <div class="d-flex justify-content-around mx-5 mb-3 social">
+  <div class="d-flex justify-content-around <%= mobile_device? ? "mx-4" : "mx-5" %> mb-3 social">
     <div class="cards-social-media youtube text-center">
       <i class="fab fa-youtube"></i>
       <p class="mt-1">Nos assista no</p>
