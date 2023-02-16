@@ -1701,7 +1701,7 @@ export function Bikes(props) {
           </div>
         </div>
 
-        <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap`}>
+        <div className={`${window.screen.width < 768? 'w-100 gap-3' : 'w-75'} d-flex flex-wrap`}>
           {bikes && bikes.map((bike, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
