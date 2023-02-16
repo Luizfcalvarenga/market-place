@@ -303,7 +303,7 @@ export function Bikes(props) {
 
   }, []);
 
-  
+
 
   const handleFilter = (e) => {
     console.log(e.target.innerText)
@@ -943,7 +943,7 @@ export function Bikes(props) {
       <h2 className="text-center text-success">Bikes</h2>
       <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilterMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
       <div className={`mt-3 index-content ${ window.screen.width < 768 ? "d-block" : "d-flex"}`}>
-        <div id="filters" className={`filters mt-2 mb-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
+        <div id="filters" className={`filters mt-1 mb-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
           <p className="">Filtrar</p>
           <div className="">
 
@@ -1704,7 +1704,7 @@ export function Bikes(props) {
         <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap`}>
           {bikes && bikes.map((bike, idx) => {
             return (
-              <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} my-2`} bike={bike} key={bike.id} id="mobile">
+              <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
                 <a href={"bikes/" + bike.id} className="remove-link" target="_blank">
                   <div className="cards-bikes">
                     <div id={"carouselExampleControls" + bike.id.toString()} className="carousel slide" data-bs-ride="carousel">

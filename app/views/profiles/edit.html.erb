@@ -53,8 +53,8 @@
           <div class="modal-body">
             <%= simple_form_for @profile, :url => profiles_path, :method => :patch do |f| %>
               <%= f.input :full_name %>
-              <div class="d-flex justify-content-around">
-                <%= f.input :document_number, input_html: { class: "mask-cpf  me-2" } %>
+              <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-around" %>">
+                <%= f.input :document_number, input_html: { class: "mask-cpf  me-2 #{mobile_device? ? "" : "w-90"}" } %>
                 <%= f.input :phone_number, input_html: { class: "mask-phone" } %>
               </div>
               <%= f.input :cep, input_html: { class: "mask-cep" } %>

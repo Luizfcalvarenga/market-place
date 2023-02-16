@@ -536,7 +536,7 @@ export function Products(props) {
       <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
 
       <div className="d-flex mt-3 index-content">
-        <div id="filters" className={`filters my-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
+        <div id="filters" className={`filters mt-1 ${ window.screen.width < 768 ? "d-none w-100 mb-1" : "w-25"}`}>
           <p className="">Filtrar</p>
           <div className="">
             <div className="border-bottom mt-3">
@@ -802,7 +802,7 @@ export function Products(props) {
         <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap`}>
           {products.map((product, idx) => {
             return (
-              <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} my-2`} product={product} key={product.id} id="mobile">
+              <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} mb-3`} product={product} key={product.id} id="mobile">
                 <a href={"products/" + product.id} className="remove-link" target="_blank">
                   <div className="cards-products">
                     <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">
@@ -852,8 +852,8 @@ export function Products(props) {
                     <div className="card-content mt-2">
                       <div className="d-flex justify-content-around mb-2">
                         <div className="infos">
-                          <p>{product.product_type.prompt}</p>
-                          <p className="mt-2">{product.city.name} - {product.state.acronym}</p>
+                          <p className="fs-18">{product.product_type.prompt}</p>
+                          <p className="mt-2 fs-18">{product.city.name} - {product.state.acronym}</p>
                         </div>
                         <div className="infos">
                           { ["air_bomb", "bottle_cage", "eletronics", "oil_lubricant", "stand", "tools", "car_protectors", "training_roller", "bike_rack", "water_bottle"].includes(product.product_type.name) &&(
