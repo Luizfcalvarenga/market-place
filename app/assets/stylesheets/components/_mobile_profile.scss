@@ -52,4 +52,10 @@
 
 .profile-content {
   min-height: 50vh;
+  .profile-links-mobile {
+    border: 1px solid #959ea5;
+    padding: 30px;
+    border-radius: 4px;
+    color: #959ea5;
+  }
 }
