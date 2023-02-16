@@ -172,14 +172,14 @@
       </div>
       <div class="icons d-flex gap-3">
         <button id="search-btn-mobile" class="nav-link-drop mt-3">
-          <i class="fas fa-search  text-success" id="search-icon"></i>
+          <i class="fas fa-search" id="search-icon"></i>
         </button>
         <button id="close-btn-mobile" class="nav-link-drop mt-3 d-none">
           <i class="fas fa-times text-success" id="close-icon"></i>
         </button>
         <div id="navbar-links-mobile" class="mt-3">
-          <%= link_to likes_path, class: "nav-link-drop me-3 #{current_page?(controller: 'likes', action: 'index')? "text-success" : ""}" do %>
-            <i class="fas fa-heart"></i>
+          <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
+            <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
           <% end %>
           <% if user_signed_in? %>
             <%= link_to edit_profiles_path, class: "nav-link-drop" do %>

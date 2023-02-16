@@ -293,6 +293,11 @@ $color-primary: #00c454;
     font-size: 16px;
   }
 }
+
+.like-mobile-nav {
+  color: white ;
+}
+
 @media (max-width: 768px) {
   .navbar {
     height: 75px !important;
