@@ -169,6 +169,10 @@ export function Bike(props) {
     }
     document.getElementById(section).style.display = "block";
     e.currentTarget.className += " show-section";
+
+    if (e.target.innerText != "Quadro") {
+      document.getElementById("Quadro").classList.remove("d-block")
+    }
   }
 
 
@@ -254,7 +258,7 @@ export function Bike(props) {
         <div className="card-for-info">
           <div className="d-flex justify-content-between bike-sections-show">
             <div className="">
-              <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Quadro")}>Quadro</button>
+              <button className="btn-info-section tablinks show-section"  onClick={(e) => openTab(e, "Quadro")}>Quadro</button>
             </div>
             <div className="">
               <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Câmbio")}>Câmbio</button>
@@ -294,7 +298,7 @@ export function Bike(props) {
             </div>
           </div>
           <hr className="index-line"/>
-          <div id="Quadro" className="tabcontent">
+          <div id="Quadro" className="tabcontent d-block">
             <div className="text-success item list-item d-flex ms-3">
               <p className="bike-attrs-parts"><strong>Marca:</strong> </p>
               <p className="bike-info ms-2 align-middle">{bike.frame_brand}</p>
