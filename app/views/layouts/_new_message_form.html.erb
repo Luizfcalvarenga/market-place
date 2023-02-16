@@ -1,4 +1,4 @@
-<div class="input-group msg-form mt-3" >
+<div class="input-group msg-form <%= mobile_device? ? "mb-1" : "mt-3" %>" >
   <%= form_with(model: [@single_chat, @message], remote: true, clas: "d-flex", data: { controller: "reset-form", action: 'turbo:submit-end->reset-form#reset' }) do |f| %>
     <div id="attachment-previews"
     class="d-none"

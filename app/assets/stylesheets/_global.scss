@@ -6,6 +6,12 @@ $white: #fff;
   color: rgb(158,158,165);
 }
 
+// #footer {
+//   position: absolute;
+//   bottom: 0 !important;
+//   width: 100%;
+// }
+
 .bg-card-dark {
   background-color: rgb(20, 20, 20)
 }
@@ -20,28 +26,6 @@ a {
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 36px !important;
-  }
-  h2 {
-    font-size: 36px !important;
-  }
-  h3 {
-    font-size: 18px !important;
-  }
-  h4 {
-    font-size: 14px !important;
-  }
-  p {
-    font-size: 16px;
-  }
-
-  li {
-    font-size: 16px;
-  }
-}
-h1 {
-  font-size: 70px;
 }
 h2 {
   font-size: 56px;

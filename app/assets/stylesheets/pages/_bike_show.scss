@@ -52,7 +52,6 @@
 
 .tabcontent {
   display: none;
-  padding: 6px 12px;
 }
 
 .bike-part-card {
@@ -83,9 +82,16 @@
     margin-top: 10%;
     margin-left: 2px;
     margin-right: 2px;
-    width: 100%;
+    width: 100% !important;
   }
 
+  .bike-photos {
+    width: 100% !important;
+  }
+
+  .bike-show-infos {
+    display: block !important;
+  }
 
   .bike-attrs-parts, .bike-info {
     font-size: 15px;

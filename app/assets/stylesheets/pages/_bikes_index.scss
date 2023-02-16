@@ -13,13 +13,23 @@
   color: $color-primary;
 }
 
+.icon-filter-bike {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(5%) saturate(274%) hue-rotate(201deg) brightness(88%) contrast(86%);
+}
+
 .selected-tag {
   background-color: rgb(0,0,0) !important;
   color: $color-primary !important;
+  img {
+    filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+
+  }
 }
 
 .filter-link {
-  color: #919991;
+  color: rgb(158,158,165);
   font-weight: lighter !important;
   font-size: 18px;
   padding: 0 !important;
@@ -37,18 +47,15 @@
 }
 
 
-.filter-link::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: $color-primary;
-  transition: width .3s;
-}
 
-.filter-link:hover::after {
+.selected-filter-section {
   color: $color-primary;
-  width: 100%;
+
+  i {
+    transform: rotate(-180deg);
+    margin-bottom: 5%;
+  }
+
 }
 
 .filter-tag {
@@ -63,6 +70,10 @@
   &:hover {
     background-color: rgb(0,0,0) !important;
     color: $color-primary !important;
+    img {
+      filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+
+    }
   }
 }
 
@@ -155,6 +166,16 @@
 .price-filter, .year-filter {
   .text-input {
     width: 35% !important;
+  }
+}
+
+.filter-section:hover {
+  cursor: pointer;
+  i {
+    color: $color-primary;
+  }
+  .filter-link {
+    color: $color-primary;
   }
 }
 
