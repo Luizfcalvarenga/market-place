@@ -4,12 +4,16 @@ document.addEventListener("turbo:load", () => {
     const closeBTN = document.getElementById('close-btn-mobile');
     const searchBTN = document.getElementById('search-btn-mobile');
     const form = document.getElementById('navbar-form-mobile');
+    const brandImg = document.getElementById('mobile-home-link');
+
     console.log(searchBTN)
 
     navLinks.classList.toggle('d-none');
     closeBTN.classList.toggle('d-none');
     searchBTN.classList.toggle('d-none');
     form.classList.toggle('d-none') ;
+    brandImg.classList.toggle('d-none') ;
+
   }
 
   const searchBTN = document.getElementById('search-btn-mobile');

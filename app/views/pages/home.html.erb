@@ -24,7 +24,7 @@
       <h3 class="mt-5 text-success ms-5 mb-2">CATEGORIAS</h3>
     </div>
   </div>
-  <div class="row row-cols-1 category-cards mx-5">
+  <div class="row row-cols-1 category-cards <%= mobile_device? ? "mx-4" : "mx-5" %>">
     <div class="col-12 col-md-4">
       <%= link_to :controller => "bikes", :action => "index", :categories => "mountain_bike" do %>
         <div class="card card-bikes mb-5 btn-remove-link">
@@ -79,25 +79,25 @@
 </div>
 
 
-<div class="seventh-section-home pb-2 mx-5">
-<h3 class="mt-3 text-success text-center">Conte com os serviços da Nuflow para comprar e vender com comodidade e segurança</h3>
-  <div class="buyer-section mx-5">
+<div class="seventh-section-home my-3">
+  <h3 class="mt-1 text-success text-center">Conte com os serviços da Nuflow para comprar e vender com comodidade e segurança</h3>
+  <div class="buyer-section  <%= mobile_device? ? "mx-4" : "mx-5" %>">
     <p class=" text-center text-gray mt-3 fs-20">Evite riscos com produtos tão caros e sensíveis com a certificação Nuflow Tecnologia by Bike Hero</p>
-    <div class="d-flex justify-content-between gap-3">
-      <div class="card-how-works text-center">
+    <div class="d-flex justify-content-between gap-3 cards-services">
+      <div class="card-how-works-services text-center">
         <i class="fas fa-user-check text-success mt-4 icon"></i>
         <h4 class="text-success">PERFIL VERIFICADO</h4>
         <p>Identidade do comprador ou vendedor verificados na Receita Federal.</p>
       </div>
 
-      <div class="card-how-works text-center">
+      <div class="card-how-works-services text-center">
         <i class="fas fa-thumbs-up text-success mt-4 icon"></i>
         <h4 class="text-success">PRODUTOS VERIFICADOS</h4>
         <p>Prova de posse e validação do produto com verificação anti-fraude por foto e vídeo.</p>
       </div>
 
 
-      <div class="card-how-works text-center">
+      <div class="card-how-works-services text-center">
         <i class="fas fa-clipboard-check text-success mt-4 icon"></i>
         <h4 class="text-success">CERTIFICADO DE TRANFERÊNCIA</h4>
         <p>Oficialize a transação reunindo todos dados do produto  disponível para verificação por seguradoras parceiras e órgãos de segurança pública.</p>
@@ -105,7 +105,7 @@
 
     </div>
     <div class="d-flex justify-content-center gap-3 mt-4">
-      <div class="d-flex justify-content-center gap-5">
+      <div class="d-flex justify-content-center gap-5 links-service">
         <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link" %>
         <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link" %>
         <%= link_to "Contratar Serviços", "#", class: "nav-link" %>
@@ -115,23 +115,23 @@
 
   <hr class="index-line w-50">
 
-  <div class="seller-section mx-5 mb-3">
-    <h3 class="text-success text-end me-2 mb-3">COMPRE COM TRANQUILIDADE</h3>
-    <div class="d-flex justify-content-between gap-3">
+  <div class="seller-section  <%= mobile_device? ? "mx-4" : "mx-5" %> mb-5">
+    <h3 class="text-success me-2 mb-3 <%= mobile_device? ? "text-center" : " text-end" %>">COMPRE COM TRANQUILIDADE</h3>
+    <div class="d-flex justify-content-between gap-3 cards-services">
 
-      <div class="card-how-works text-center">
+      <div class="card-how-works-services text-center">
         <i class="fas fa-credit-card text-success mt-4 icon"></i>
         <h4 class="text-success">PARCELAMENTO</h4>
         <p>Compre sua bike ou componente em até 12x no cartão de crédito.</p>
       </div>
 
-      <div class="card-how-works text-center">
+      <div class="card-how-works-services text-center">
         <i class="fas fa-shield-alt text-success mt-4 icon"></i>
         <h4 class="text-success">PAGAMENTO SEGURO</h4>
         <p>Retemos o pagamento até a confirmação de entrega do produto.</p>
       </div>
 
-      <div class="card-how-works text-center">
+      <div class="card-how-works-services text-center">
         <i class="fas fa-truck text-success mt-4 icon"></i>
         <h4 class="text-success">LOGÍSTICA ASSEGURADA</h4>
         <p>Solução de logística com seguro compatível com o alto valor de bicicletas e componentes de ciclismo.</p>
@@ -142,16 +142,16 @@
 
 </div>
 
-<div class="fourth-section-home pb-5 my-3 pt-3">
-  <div class="row row-cols-1 mx-5">
+<div class="fourth-section-home py-2">
+  <div class="row row-cols-1 <%= mobile_device? ? "mx-3" : "mx-5" %>">
     <div class="col-12 col-md-4 review-icons">
       <h3 class="text-success text-start mt-5">A Nuflow te ajuda a vender e comprar com mais facilidade</h3>
-      <p class="text-start mt-4"><i class="fas fa-hands-helping me-1"></i> Ajuda na negociação</p>
-      <p class="text-start"><i class="fas fa-check me-2"></i> Verificação da bike</p>
-      <p class="text-start"><i class="far fa-clock me-2"></i> Rapidez na venda</p>
-      <p class="text-start"><i class="fas fa-user-shield me-1"></i> Compra segura</p>
+      <p class="text-start text-gray mt-4"><i class="fas fa-hands-helping me-1"></i> Ajuda na negociação</p>
+      <p class="text-start text-gray"><i class="fas fa-check me-2"></i> Verificação da bike</p>
+      <p class="text-start text-gray"><i class="far fa-clock me-2"></i> Rapidez na venda</p>
+      <p class="text-start text-gray"><i class="fas fa-user-shield me-1"></i> Compra segura</p>
     </div>
-    <div class="col-12 col-md-8 mt-5 pt-4">
+    <div class="col-12 col-md-8 mt-2">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators d-none">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -161,44 +161,44 @@
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item active py-5">
             <div class="review-card">
               <h4 class="text-center text-success mt-3">Marcelo Person</h4>
-              <p class="text-center"><small>Comprador</small></p>
+              <p class="text-center text-gray"><small>Comprador</small></p>
               <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">A experiencia foi bem legal. O atendimento foi decisivo para a avaliação, ja que a primeira  bike que queria nao foi aprovada no bike check, que por sinal é algo que da bastante seguranca, já que por ser de outro estado nao deu para ver pessoalmente.</p>
+              <p class="text-center text-gray">A experiencia foi bem legal. O atendimento foi decisivo para a avaliação, ja que a primeira  bike que queria nao foi aprovada no bike check, que por sinal é algo que da bastante seguranca, já que por ser de outro estado nao deu para ver pessoalmente.</p>
             </div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item py-5">
             <div class="review-card">
               <h4 class="text-center text-success mt-3">Gabriel Parisotto</h4>
-              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center text-gray"><small>Vendedor</small></p>
               <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">Galera 100% responsável! Vendi minha bike em questão de dias com muita segurança, agilidade e sem incomodo algum.</p>
+              <p class="text-center text-gray">Galera 100% responsável! Vendi minha bike em questão de dias com muita segurança, agilidade e sem incomodo algum.</p>
             </div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item py-5">
             <div class="review-card">
               <h4 class="text-center text-success mt-3">Edwin van Eijk</h4>
-              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center text-gray"><small>Vendedor</small></p>
               <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">O pessoal é sério e profissional. A bike fica em uma loja parceira e quando a venda é efetuada tem um contrato tudo certinho. Fizeram o depósito depois dos sete dias combinados da venda. Gostei muito da experiência.</p>
+              <p class="text-center text-gray">O pessoal é sério e profissional. A bike fica em uma loja parceira e quando a venda é efetuada tem um contrato tudo certinho. Fizeram o depósito depois dos sete dias combinados da venda. Gostei muito da experiência.</p>
             </div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item py-5">
            <div class="review-card">
               <h4 class="text-center text-success mt-3">Arthur Guerra</h4>
-              <p class="text-center"><small>Vendedor</small></p>
+              <p class="text-center text-gray"><small>Vendedor</small></p>
               <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center"> Empresa de responsa!! já vendi duas bikes com eles, fazem o possível e impossível para dar certo, sucesso para vocês rapaziada! obrigado pela atenção 🤟🏼</p>
+              <p class="text-center text-gray"> Empresa de responsa!! já vendi duas bikes com eles, fazem o possível e impossível para dar certo, sucesso para vocês rapaziada! obrigado pela atenção 🤟🏼</p>
             </div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item py-5">
             <div class="review-card">
               <h4 class="text-center text-success mt-3">Flávio Borges</h4>
-              <p class="text-center"><small>Comprador</small></p>
+              <p class="text-center text-gray"><small>Comprador</small></p>
               <p class="text-center"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
-              <p class="text-center">O excelente atendimento foi um diferencial para fechar negócio. Agradeço ao time Nuflow, bem satisfeito com a aquisição e o serviço de confiança prestado.</p>
+              <p class="text-center text-gray">O excelente atendimento foi um diferencial para fechar negócio. Agradeço ao time Nuflow, bem satisfeito com a aquisição e o serviço de confiança prestado.</p>
             </div>
           </div>
         </div>
@@ -215,60 +215,58 @@
   </div>
 </div>
 
-<div class="fifth-section-home mx-5 py-5">
-  <div class="row row-cols-1 mx-3">
-    <div class="col-12 col-md-5 blog-text">
+<div class="fifth-section-home py-5 <%= mobile_device? ? "mx-4" : "mx-5" %>">
+  <div class="d-flex justify-content-between blog-section">
+    <div class="col-12 col-md-6 blog-text">
       <h2 class="text-success mb-4">BLOG</h2>
       <h3 class="mb-5">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
-      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "btn btn-primary mt-5" %>
+      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "nav-link mt-5" %>
     </div>
-    <div class="col-12 col-md-7">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
-              <div class="cards-blog">
-                <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
-                <h4 class="text-white text-center mt-1">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
-                <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
-              </div>
-            <% end %>
-          </div>
-          <div class="carousel-item">
-            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
-              <div class="cards-blog">
-                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
-                <h4 class="text-white text-center mt-1">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
-                <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
-              </div>
-            <% end %>
-          </div>
-          <div class="carousel-item">
-            <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
-              <div class="cards-blog">
-                <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
-                <h4 class="text-white text-center mt-1">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
-                <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
-              </div>
-            <% end %>
-          </div>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
+            <div class="cards-blog">
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
+              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
+              <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
+            </div>
+          <% end %>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        <div class="carousel-item">
+          <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+            <div class="cards-blog">
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
+              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
+              <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
+            </div>
+          <% end %>
+        </div>
+        <div class="carousel-item">
+          <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+            <div class="cards-blog">
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
+              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
+              <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
+            </div>
+          <% end %>
+        </div>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
 </div>
 
 <div class="sixth-section-home py-5">
   <h3 class="text-success text-center mb-3">ENCONTRE A GENTE</h3>
-  <div class="d-flex justify-content-around mx-5 mb-3 social">
+  <div class="d-flex justify-content-around <%= mobile_device? ? "mx-4" : "mx-5" %> mb-3 social">
     <div class="cards-social-media youtube text-center">
       <i class="fab fa-youtube"></i>
       <p class="mt-1">Nos assista no</p>
