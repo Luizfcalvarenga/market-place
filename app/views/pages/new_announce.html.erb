@@ -1,8 +1,23 @@
 <div class="h-100 w-100 page-body pb-5">
   <div class="<%= mobile_device? ? "w-100" : "w-100" %> new_announce_banner">
-    <div class="spacer-100 page-desktop"></div>
-    <h1 class="pt-5 mt-5">ANUNCIE COM A <span class="text-success mt-3">NUFLOW</span></h1>
-    <p class="text-white">Anuncie bikes e componentes para milhares de ciclistas e venda mais rápido.</p>
+    <div class="spacer-150 page-desktop mb-5"></div>
+    <h3 class="text-white pt-5 <%= mobile_device? ? "" : "mt-5 fs-40" %>">ANUNCIE SUA BIKE OU EQUIPAMENTO PARA MILHARES DE CICLISTAS E VENDA MAIS RÁPIDO.</h3>
+    <div class="d-flex">
+      <div class="card-banner">
+        <h5>ANUNCIE ONDE OS CICLISTAS ESTÃO</h5>
+        <p>Todo dia, milhares de ciclistas de todo o Brasil acessam a Nuflow em busca de bikes e equipamentos.</p>
+      </div>
+
+      <div class="card-banner">
+        <h5>ZERO BUROCRACIA</h5>
+        <p>Anuncie em poucos minutos e sem sair de casa.</p>
+      </div>
+
+      <div class="card-banner">
+        <h5>SEM INTERMEDIÁRIOS</h5>
+        <p>Negocie diretamente com os interessados e decida o melhor negócio para você</p>
+      </div>
+    </div>
     <p class="text-white">O que gostaria de anunciar?</p>
     <div class="row new-announce-btns">
 
@@ -77,13 +92,13 @@
     </div>
 
     <div class="d-flex justify-content-center mt-4 gap-2 section-how-works">
-      <div class="card-how-works w-30">
+      <div class="card-how-works  <%= mobile_device? ? "w-100" : "w-30" %>">
         <p class="text-center"><%= image_tag "disseminate.png", class: "announce-icons" %></p>
         <h4 class="text-center">Publicação</h4>
         <p class="text-center"><small>Agora sim, seu anúncio é publicado em nossas plataformas e será visto por milhares de ciclistas, de todo o Brasil.</small></p>
       </div>
 
-      <div class="card-how-works w-30 <%= mobile_device? ? "mt-3" : "" %>">
+      <div class="card-how-works  <%= mobile_device? ? "mt-3 w-100" : "w-30" %>">
         <p class="text-center"><%= image_tag "negotiation.png", class: "announce-icons" %></p>
         <h4 class="text-center">Negociação</h4>
         <p class="text-center"><small>Você recebe propostas e mensagens dos interessados direto no chat ou celular (quando disponibilizado). Fique tranquilo, você será notificado(a) por e-mail sempre que tiver uma atualização no chat.</small></p>

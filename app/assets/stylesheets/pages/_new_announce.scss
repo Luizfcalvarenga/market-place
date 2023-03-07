@@ -83,7 +83,6 @@
 @media (max-width: 765px) {
 
   .frequent-questions {
-
     margin: 0;
     width: 100%;
 
@@ -91,12 +90,16 @@
 
   .new_announce_banner {
     height: 45vh;
-    background-image: none;
     margin: auto;
+    background-position: center;
 
   }
   .section-how-works {
     display: block !important;
   }
 
+  .card-how-works {
+
+    width: 100%;
+  }
 }
