@@ -118,7 +118,7 @@
       <p class="text-start text-gray"><i class="far fa-clock me-2"></i> Rapidez na venda</p>
       <p class="text-start text-gray"><i class="fas fa-user-shield me-1"></i> Pagamento seguro</p>
       <p class="text-start text-gray"><i class="far fa-credit-card me-2"></i> Parcelamento</p>
-      <p class="text-start text-gray mt-4"><i class="fas fa-hands-helping me-1"></i> Assessoria especializada</p>
+      <p class="text-start text-gray"><i class="fas fa-hands-helping me-1"></i> Assessoria especializada</p>
     </div>
     <div class="col-12 col-md-8 mt-2">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -186,37 +186,45 @@
 
 <div class="fifth-section-home py-5 <%= mobile_device? ? "mx-4" : "mx-5" %>">
   <div class="d-flex justify-content-between blog-section">
-    <div class="col-12 col-md-6 blog-text">
-      <h2 class="text-success mb-4">BLOG</h2>
-      <h3 class="mb-5">Confira dicas de como comprar e vender sua bike, aprimore suas técnicas de pilotagem e manutenção e fique por dentro de conteúdos inéditos.</h3>
-      <%= link_to "ACESSE", "https://nuflowshop.com.br/blog/", target: "_blank", class: "nav-link mt-5" %>
+    <div class="col-12 col-md-6 blog-text d-flex flex-column align-items-stretch">
+      <h2 class="text-success mb-5">BLOG</h2>
+      <h3 class="mb-5">Confira dicas de como comprar e vender sua bike ou equipamento.</h3>
+      <div class="text-center mt-5">
+        <%= link_to "VER DICAS", "https://nuflowshop.com.br/category/compra-e-venda/", target: "_blank", class: "nav-link mt-5" %>
+      </div>
     </div>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <%= link_to "https://nuflowshop.com.br/nova-turbo-levo-s-works-specialized/", class: "", target: "_blank" do %>
+          <%= link_to "https://nuflowshop.com.br/como-vender-sua-bike-online-rapidamente/", class: "", target: "_blank" do %>
             <div class="cards-blog">
-              <img src="https://nuflowshop.com.br/wp-content/uploads/2022/09/95221-05_LEVO-SW-CARBON-BLUGSTPRL-BLK-LTSIL_FDSQ-300x169.webp" alt="" class="blog-img">
-              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">Conheça a nova Turbo Levo 2023 S-Works da Specialized</h4>
-              <p class="text-center"> <small>A nova Turbo Levo 2023 S-Works da Specialized chegou para abalar o mercado de mountain bikes elétricas. Ela entrega o poder de pedalar mais trilhas por meio de uma combinação inigualável de qualidade de pilotagem, potência e alcance para ir a qualquer lugar. </small> </p>
+              <img src="https://lh3.googleusercontent.com/HhzP3dOxdFW90Eso9KE8_eHlhXpzGV3kCjUy1LxTF9DuUlCTn_yZAjNCifkT01610tyS8NekP9rQX9MOLbb8j96CX6aIk2KrpezXcJNuLGZS21Ak3XAPJPEBySpnKvGrFSUrMkzn" alt="" class="blog-img">
+              <div class="p-3">
+                <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">COMO VENDER SUA BIKE ONLINE RAPIDAMENTE</h4>
+                <p class="text-center"> <small>O dia de se desfazer da sua bike finalmente chegou. Talvez tenha sido para pegar um modelo que te atende melhor, talvez por necessidade financeira ou talvez por que você não estava conseguindo dar atenção para a magrela. Com ou sem dor no coração, é hora de começar a anunciar sua bicicleta a espera do próximo dono ou dona aparecer e se apaixonar. </small> </p>
+              </div>
             </div>
           <% end %>
         </div>
         <div class="carousel-item">
-          <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+          <%= link_to "https://nuflowshop.com.br/quanto-vale-minha-bike-guia-para-precificar-bicicletas-usadas/", class: "", target: "_blank" do %>
             <div class="cards-blog">
-              <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/400014_993587_mm_211113__4676.jpg" alt="" class="blog-img">
-              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">Hans Becking e José Dias são os campeões da Santander Brasil Ride Bahia 2021</h4>
-              <p class="text-center"> <small>Vice-campeonato da edição ficou com Gustavo Xavier e Alex Malacarne, melhor dupla das Américas. Entre as mulheres, as alemãs Naima Diesner e Anna Jördens conquistaram a quinta vitória seguida e garantiram o título em Arraial d’Ajuda</small> </p>
+              <img src="https://lh4.googleusercontent.com/hMyyiOzr84W6iEwbSS9x1RqCOJZmVkWR0kRZRhUB4wToDjvtuFVcWz0ZdJKKfQ_wg_0M25DXsBB1FhyJ1sIw8tCmGubLRjSiJEcxJqQ6fmZP0n1z7AHEsf8oXNlDeadjRoQYq2Hn" alt="" class="blog-img">
+              <div class="p-3">
+                <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">QUANTO VALE MINHA BIKE? GUIA PARA PRECIFICAR BICICLETAS USADAS</h4>
+                <p class="text-center"> <small>Saber calcular o preço de venda da sua bike usada é um dos grandes desafios de quem vai trocar de bicicleta. Assim como carros, bicicletas sofrem grande desvalorização a partir do momento que deixam a loja. Mas a taxa de desvalorização depende de fatores que nem sempre são fáceis de medir, por isso chegar a uma resposta precisa pode dar trabalho.</small> </p>
+              </div>
             </div>
           <% end %>
         </div>
         <div class="carousel-item">
-          <%= link_to "https://nuflowshop.com.br/hans-becking-e-jose-dias-sao-campeoes-do-brasil-ride-2021/", class: "", target: "_blank" do %>
+          <%= link_to "https://nuflowshop.com.br/mtb-road-como-escolher-a-bike-certa-para-voce/", class: "", target: "_blank" do %>
             <div class="cards-blog">
-              <img src="https://nuflowshop.com.br/wp-content/uploads/2021/11/399989_993530_mm_211112__3931-300x200.jpg" alt="" class="blog-img">
-              <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">José Dias (POR) e Marcella Toldi vencem o xco da Santander Brasil Ride Bahia</h4>
-              <p class="text-center"> <small>A largada e premiação da sexta etapa foi feita pelo ministro da Cidadania, João Roma. Xavier e Malacarne completaram o top 3 masculino, enquanto o pódio feminino teve as alemãs Anna Jördens e Naima Diesner ao lado de Toldi.</small> </p>
+              <img src="https://nuflowshop.com.br/wp-content/uploads/2023/01/bike-urbana-768x384.jpg" alt="" class="blog-img">
+              <div class="p-3">
+                <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">MTB? ROAD? COMO ESCOLHER A BIKE CERTA PARA VOCÊ!</h4>
+                <p class="text-center"> <small>Quem decide comprar uma bicicleta depois de algum tempo longe dos pedais encontra um mar de opções, tipos e preços. Fica difícil até entender qual o melhor equipamento para o que você busca. Será que preciso de uma MTB (Mountain Bike)? Preciso de suspensão? Como comprar uma bike usada? Estas e outras perguntas devem ter passado na sua cabeça.</small> </p>
+              </div>
             </div>
           <% end %>
         </div>
