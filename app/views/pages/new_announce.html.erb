@@ -1,29 +1,37 @@
 <div class="h-100 w-100 page-body pb-5">
   <div class="<%= mobile_device? ? "w-100" : "w-100" %> new_announce_banner">
     <div class="spacer-150 page-desktop mb-5"></div>
-    <h3 class="text-white pt-5 <%= mobile_device? ? "" : "mt-5 fs-40" %>">ANUNCIE SUA BIKE OU EQUIPAMENTO PARA MILHARES DE CICLISTAS E VENDA MAIS RÁPIDO.</h3>
-    <div class="d-flex gap-2 mx-5">
-      <div class="card-banner w-50">
-        <h5>ANUNCIE ONDE OS CICLISTAS ESTÃO</h5>
-        <p>Todo dia, milhares de ciclistas de todo o Brasil acessam a Nuflow em busca de bikes e equipamentos.</p>
+
+
+      <h4 class="text-white <%= mobile_device? ? "" : "mt-5 " %>">ANUNCIE SUA BIKE OU EQUIPAMENTO PARA MILHARES DE CICLISTAS E VENDA MAIS RÁPIDO.</h4>
+      <div class="d-flex justify-content-between gap-2">
+        <div class="card-banner w-30">
+          <p class="text-center"><%= image_tag "maps.png", class: "banner-icons" %></p>
+          <h5 class="text-success fs-20">ANUNCIE ONDE OS CICLISTAS ESTÃO</h5>
+          <p class="fs-16 text-success">Todo dia, milhares de ciclistas de todo o Brasil acessam a Nuflow em busca de bikes e equipamentos.</p>
+        </div>
+
+        <div class="card-banner w-30">
+            <p class="text-center"><%= image_tag "snap.png", class: "banner-icons" %></p>
+          <h5 class="text-success fs-20">ZERO BUROCRACIA</h5>
+          <p class="fs-16 text-success">Anuncie em poucos minutos e sem sair de casa.</p>
+        </div>
+
+        <div class="card-banner w-30">
+          <p class="text-center"><%= image_tag "discussion.png", class: "banner-icons" %></p>
+          <h5 class="text-success fs-20">SEM INTERMEDIÁRIOS</h5>
+          <p class="fs-16 text-success">Negocie diretamente com os interessados e decida o melhor negócio para você</p>
+        </div>
       </div>
 
-      <div class="card-banner w-50">
-        <h5>ZERO BUROCRACIA</h5>
-        <p>Anuncie em poucos minutos e sem sair de casa.</p>
+
+      <p class="text-white">O que gostaria de anunciar?</p>
+      <div class="new-announce-btns">
+        <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4" %>
+        <%= link_to "PRODUTOS", new_product_path, class: "btn btn-outline mt-3 px-2 ms-3" %>
       </div>
 
-      <div class="card-banner w-50">
-        <h5>SEM INTERMEDIÁRIOS</h5>
-        <p>Negocie diretamente com os interessados e decida o melhor negócio para você</p>
-      </div>
-    </div>
-    <p class="text-white">O que gostaria de anunciar?</p>
-    <div class="row new-announce-btns">
 
-      <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4 col-8 col-md-2" %>
-      <%= link_to "PRODUTOS", new_product_path, class: "btn btn-outline mt-3 px-2 ms-3 col-8 col-md-2" %>
-    </div>
     <% if false %>
       <div class="input-group my-4 text-center">
         <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Bicicletas, assessórios, serviços, etc..." %>" aria-label="Bicicletas, assessórios, serviços, etc..." aria-describedby="button-addon2">
