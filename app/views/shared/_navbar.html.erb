@@ -1,6 +1,6 @@
 <div id="navbar" class="navbar navbar-expand-md navbar-light-lg">
   <div class="collapse navbar-collapse d-flex justify-content-around page-desktop">
-    <div class="flex center around ms-3">
+    <div class="flex center around ms-3 my-auto">
       <%= link_to root_path, class: "nav-link-drop" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
@@ -29,7 +29,7 @@
         <div id="navbar-links" class=" d-flex">
           <li class="nav-item active nav-link-drop ">
             <div class="dropdown">
-              <h3 class="drop-btn mx-3">categorias</h3>
+              <h3 class="drop-btn mx-3 my-auto">categorias</h3>
               <div class="dropdown-content">
                 <div class="drpdw-bike  mx-auto">
                   <h4 class="text-success mt-3">BIKES</h4>
@@ -74,13 +74,13 @@
               </div>
             </div>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active my-auto">
             <%= link_to "INSTITUCIONAL", "#", class: "nav-link mx-3" %>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active my-auto">
             <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link mx-3" %>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active my-auto">
             <%= link_to "EVENTOS", "https://nuflowpass.com.br", class: "nav-link mx-3" %>
           </li>
         </div>
@@ -89,7 +89,7 @@
             <i class="fas fa-search" id="search-icon"></i>
           </button>
         </li>
-        <li class="nav-item mt-1">
+        <li class="nav-item mt-2">
           <button id="close-btn" class="nav-link-drop d-none mb-2 ms-3">
             <i class="fas fa-times" id="close-icon"></i>
           </button>
@@ -98,24 +98,24 @@
     </div>
 
     <div class="f-40 px-2 mt-2">
-      <ul class="navbar-nav font-bebas-neue d-flex flex-row d-flex justify-content-start gap-24">
-        <li class="nav-item active ms-5 me-1">
+      <ul class="navbar-nav font-bebas-neue d-flex flex-row d-flex justify-content-start gap-24 align-middle m-auto">
+        <li class="nav-item active ms-5 me-1 my-auto">
           <%= link_to "VENDER", new_announce_path, class: "btn btn-primary" %>
         </li>
         <% if current_user.present? %>
-          <li class="nav-item active mt-1" style="color: white;">
-            <%= link_to "#" do %>
-              <i class="fas fa-comment-alt text-success mt-2"> <span  class="cart-counter"></span></i>
+          <li class="nav-item active my-auto">
+            <%= link_to "#", class: "nav-link-icon" do %>
+              <i class="fas fa-comment-alt mt-2"> <span  class="cart-counter"></span></i>
+            <% end %>
+          </li>
+          <li class="nav-item active my-auto">
+            <%= link_to likes_path, class: "nav-link-icon" do %>
+              <i class="fa fa-heart mt-2"></i>
             <% end %>
           </li>
         <% end %>
-        <li class="nav-item active mt-1" style="color: white;">
-          <%= link_to likes_path do %>
-            <i class="fa fa-heart text-success mt-2"></i>
-          <% end %>
-        </li>
         <% if user_signed_in? %>
-          <li class="nav-item">
+          <li class="nav-item my-auto">
             <div class="dropdown">
               <% if current_user.photo.attached? %>
                 <%= link_to edit_profiles_path class: "dropbtn" do %>
@@ -126,18 +126,12 @@
                   <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
                 </button>
               <% end %>
-              <div class="dropdown-content-user me-3">
-                <div class="drpdw-user">
-                  <h4 class="text-success mt-2 text-center ms-2">PERFIL</h4>
-                  <hr class="menu-line">
-                  <%= link_to "Nuflow pass", "#", class: "text-white" %>
-                  <%= link_to "Nuflow bike", "#", class: "text-white" %>
-                  <%= link_to "Conta", edit_profiles_path, class: "text-white" %>
-                  <hr class="menu-line">
-                  <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-danger nav-link-drop" %>
-                </div>
-              </div>
             </div>
+          </li>
+          <li class="my-auto">
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link-logout" do %>
+              SAIR <i class="fas fa-sign-out-alt ms-1"></i>
+            <% end %>
           </li>
         <% else %>
           <li class="nav-item mt-2">
