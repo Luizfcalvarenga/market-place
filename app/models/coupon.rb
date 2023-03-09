@@ -5,7 +5,7 @@ class Coupon < ApplicationRecord
   validate :valid_date
   validates :redemption_limit, numericality: { greater_than: 0 }
   validates :discount, numericality: { greater_than: 0 }
-  validates :code, uniqueness: true, length: { is: 10 }
+  validates :code, uniqueness: true
   validate :max_min_discount
 
   has_many :advertisements
