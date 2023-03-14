@@ -555,14 +555,99 @@ export function BikeForm(props) {
     }
   }
 
-  const handleBackToFirst = (e) => {
-    const progressTwo = document.getElementById("progress-2")
-    const secondSection = document.getElementById("second-section")
-    const firstSection = document.getElementById("first-section")
-    progressTwo.classList.remove("section-done")
-    secondSection.classList.add("d-none")
-    firstSection.classList.remove("d-none")
-  }
+  // const handleBackToFirst = (e) => {
+  //   const progressTwo = document.getElementById("progress-2")
+  //   const secondSection = document.getElementById("second-section")
+  //   const firstSection = document.getElementById("first-section")
+  //   progressTwo.classList.remove("section-done")
+  //   secondSection.classList.add("d-none")
+  //   firstSection.classList.remove("d-none")
+  // }
+
+  // const handleBackToSecond = (e) => {
+  //   const progressTwo = document.getElementById("progress-2")
+  //   const progressThree = document.getElementById("progress-3")
+  //   const secondSection = document.getElementById("second-section")
+  //   const thirdSection = document.getElementById("third-section")
+  //   progressTwo.classList.remove("section-done")
+  //   secondSection.classList.remove("d-none")
+  //   progressThree.classList.remove("section-done")
+  //   thirdSection.classList.add("d-none")
+  // }
+
+  // const handleBackToThird = () => {
+  //   const progressThird = document.getElementById("progress-3")
+  //   const progressFourth = document.getElementById("progress-4")
+  //   const thirdSection = document.getElementById("third-section")
+  //   const fourthSection = document.getElementById("fourth-section")
+  //   progressThird.classList.remove("section-done")
+  //   progressFourth.classList.remove("section-done")
+  //   thirdSection.classList.remove("d-none")
+  //   fourthSection.classList.add("d-none")
+  // }
+
+  // const handleBackToFourth = () => {
+  //   const progressFifth = document.getElementById("progress-5")
+  //   const progressFourth = document.getElementById("progress-4")
+  //   const fourthSection = document.getElementById("fourth-section")
+  //   const fifthSection = document.getElementById("fifth-section")
+  //   progressFourth.classList.remove("section-done")
+  //   progressFifth.classList.remove("section-done")
+  //   fourthSection.classList.remove("d-none")
+  //   fifthSection.classList.add("d-none")
+  // }
+
+  // const handleFirstStep = (e) => {
+  //   const progressTwo = document.getElementById("progress-2")
+  //   const firstSection = document.getElementById("first-section")
+  //   const secondSection = document.getElementById("second-section")
+
+  //   progressTwo.classList.add("section-done")
+  //   firstSection.classList.add("d-none")
+  //   secondSection.classList.remove("d-none")
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }
+
+  // const handleSecondStep = (e) => {
+  //   const progressTwo = document.getElementById("progress-2")
+  //   const secondSection = document.getElementById("second-section")
+  //   const thirdSection = document.getElementById("third-section")
+  //   progressTwo.classList.add("section-done")
+  //   secondSection.classList.add("d-none")
+  //   thirdSection.classList.remove("d-none")
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }
+
+  // const handleThirdStep = () => {
+  //   const progressThird = document.getElementById("progress-3")
+  //   const thirdSection = document.getElementById("third-section")
+  //   const fourthSection = document.getElementById("fourth-section")
+  //   progressThird.classList.add("section-done")
+  //   thirdSection.classList.add("d-none")
+  //   fourthSection.classList.remove("d-none")
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }
+
+  // const handleFourthStep = () => {
+  //   const progressFourth = document.getElementById("progress-4")
+  //   const fourthSection = document.getElementById("fourth-section")
+  //   const fifthSection = document.getElementById("fifth-section")
+  //   progressFourth.classList.add("section-done")
+  //   fourthSection.classList.add("d-none")
+  //   fifthSection.classList.remove("d-none")
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }
+
+  // const handleBackToFirst = (e) => {
+  //   const progressOne = document.getElementById("progress-1")
+  //   const progressTwo = document.getElementById("progress-2")
+  //   const secondSection = document.getElementById("second-section")
+  //   const firstSection = document.getElementById("first-section")
+  //   progressOne.classList.remove("section-done")
+  //   progressTwo.classList.remove("section-done")
+  //   secondSection.classList.add("d-none")
+  //   firstSection.classList.remove("d-none")
+  // }
 
   const handleBackToSecond = (e) => {
     const progressTwo = document.getElementById("progress-2")
@@ -597,25 +682,29 @@ export function BikeForm(props) {
     fifthSection.classList.add("d-none")
   }
 
-  const handleFirstStep = (e) => {
-    const progressOne = document.getElementById("progress-1")
-    const firstSection = document.getElementById("first-section")
-    const secondSection = document.getElementById("second-section")
-
-    progressOne.classList.add("section-done")
-    firstSection.classList.add("d-none")
-    secondSection.classList.remove("d-none")
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleBackToFifth = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const progressSixth = document.getElementById("progress-6")
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
+    progressFifth.classList.remove("section-done")
+    progressSixth.classList.remove("section-done")
+    fifthSection.classList.remove("d-none")
+    sixthSection.classList.add("d-none")
   }
+
+  // const handleFirstStep = () => {
+  //   const progressOne = document.querySelector(".progress-1")
+
+  // }
 
   const handleSecondStep = (e) => {
     const progressTwo = document.getElementById("progress-2")
+    const progressThird = document.getElementById("progress-3")
+
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-    progressTwo.classList.add("section-done")
-    secondSection.classList.add("d-none")
-    thirdSection.classList.remove("d-none")
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const fourthSection = document.getElementById("fourth-section")
   }
 
   const handleThirdStep = () => {
@@ -625,7 +714,6 @@ export function BikeForm(props) {
     progressThird.classList.add("section-done")
     thirdSection.classList.add("d-none")
     fourthSection.classList.remove("d-none")
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const handleFourthStep = () => {
@@ -635,13 +723,17 @@ export function BikeForm(props) {
     progressFourth.classList.add("section-done")
     fourthSection.classList.add("d-none")
     fifthSection.classList.remove("d-none")
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  const handleTerms = (e) => {
-    const btnAnnounce = document.getElementById("new-announce")
-    btnAnnounce.classList.toggle("disable-btn-form")
+  const handleFifthStep = () => {
+    const progressFifth = document.getElementById("progress-5")
+    const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
+    progressFifth.classList.add("section-done")
+    fifthSection.classList.add("d-none")
+    sixthSection.classList.remove("d-none")
   }
+
 
   const handleTechnicalSection = (e) => {
     const technicalSection = document.getElementById(e.target.innerText);
@@ -700,10 +792,6 @@ export function BikeForm(props) {
   }
 
   const handleLocality = (e) => {
-    // setStateId(e.target.value)
-    // setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
-
-    console.log(e)
     if (e.target.id === "state-input") {
       console.log(e.target.id)
       console.log(e.target.value)
@@ -739,8 +827,6 @@ export function BikeForm(props) {
     }
   }
 
-
-
   const handleBikeConditionStatus = (e) => {
     setBikeConditionStatus(e.target.value)
     if (e.target.value === "bad") {
@@ -764,6 +850,10 @@ export function BikeForm(props) {
       document.getElementById("label-good").classList.remove("text-primary")
       document.getElementById("label-excellent").classList.add("text-success")
     }
+  }
+
+  const handleBackToForm = (e) => {
+    window.location = 'http://localhost:3000/products/new'
   }
 
   //////////////////////////////////////////////// frames
@@ -972,7 +1062,7 @@ export function BikeForm(props) {
     <div className="w-60 new-bike-react py-5">
       <h1 className="text-success pb-3 text-center">Vamos lá...</h1>
       <ul className="list-group list-group-horizontal-sm progress-bar pb-5">
-        <li id="progress-1" className="progress progress-1"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>1</button></li>
+        <li id="progress-1" className="progress progress-1 section-done"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>1</button></li>
         <hr className="progress-path"/>
         <li id="progress-2" className="progress progress-2"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>2</button></li>
         <hr className="progress-path"/>
@@ -981,9 +1071,11 @@ export function BikeForm(props) {
         <li id="progress-4" className="progress progress-4"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>4</button></li>
         <hr className="progress-path"/>
         <li id="progress-5" className="progress progress-5"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>5</button></li>
+        <hr className="progress-path"/>
+        <li id="progress-6" className="progress progress-6"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>6</button></li>
       </ul>
 
-      <div id="first-section" className="card-bike-select mb-5">
+      <div id="second-section" className="card-bike-select mb-5">
         <h4 className="text-center text-success">Informações gerais</h4>
         <label htmlFor="bikeType" className="mt-3 text-start">Tipo da bike: <span className="requested-information ms-1">*</span></label>
         <select
@@ -1074,6 +1166,7 @@ export function BikeForm(props) {
               <option value="xc_cross_country">XC Cross Country</option>
           </select>
         </>)}
+
 
         {category === "dirt_street" && (<>
           <label htmlFor="modality" className="mt-4 text-start">Modalidade:<span className="requested-information ms-1">*</span></label>
@@ -1356,11 +1449,13 @@ export function BikeForm(props) {
         <input type="number" className="text-input" placeholder="Em Kg" value={weight} onChange={(e) => setWeight(e.target.value)}/>
 
         <div className="text-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+
           {(!category || !modality || !bikeType || !priceInCents || !model || !frameMaterial || !documentationType || !quantity || !frameBrand || !frameSize || !year || !city || !state) && (
             <p className="mt-3">Preencha todas as informações antes de seguir em frente!</p>
           )}
           {category && modality && bikeType && priceInCents && bikeCondition && model && frameMaterial && documentationType && quantity && frameBrand && frameSize && year && city && state && (
-            <button className="btn-next-step mt-4" type="button" onClick={(e) => handleFirstStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            <button className="btn-next-step mt-4" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           )}
 
         </div>
@@ -1369,7 +1464,7 @@ export function BikeForm(props) {
 
                                   {/*/////////////////////////////////////////////////////////2ª SECTION////////////////////////////////////////////////////////////////*/}
 
-      <div id="second-section" className="card-bike-select mb-5 d-none">
+      <div id="third-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Informações técnicas</h4>
         <div className="d-flex justify-content-center">
           <p id="principal" className="me-2 text-success" >PRINCIPAIS</p>
@@ -1581,7 +1676,6 @@ export function BikeForm(props) {
               >
                 <option value=""></option>
                 {roadBrakeModels.map((roadBrakeModel, index)=> {
-                  // return (<option key={index}>{roadBrakeModel}</option>);
                   if (roadBrakeModel === "other") {
                     return (<option key={index} value="other">Outro</option>);
                   } else {
@@ -1805,8 +1899,8 @@ export function BikeForm(props) {
             </div>
           </>)}
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-            <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            <button className="btn-back-step" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-next-step" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
 
@@ -1993,8 +2087,8 @@ export function BikeForm(props) {
               </>)}
             </div>
             <div className="d-flex justify-content-center">
-              <button className="btn-back-step" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-              <button className="btn-next-step" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              <button className="btn-back-step" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+              <button className="btn-next-step" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
           </div>
         </div>
@@ -2002,7 +2096,7 @@ export function BikeForm(props) {
 
                         {/* ////////////////////////////////////////////////////////////////////// 3ª SECTION //////////////////////////////////////////////////////////*/}
 
-      <div id="third-section" className="card-bike-select mb-5 d-none">
+      <div id="fourth-section" className="card-bike-select mb-5 d-none">
         <div className="mb-3">
           <h4 className="text-center text-success">Informações adicionais</h4>
           <label htmlFor="description" className="mt-3">Descrição:</label>
@@ -2050,50 +2144,19 @@ export function BikeForm(props) {
 
             )}
 
-            {/* <select
-              className="select-answer"
-              value={productConditionStatus}
-              onChange={(e) => setProductConditionStatus(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="bad">Ruim</option>
-              <option value="reasonable">Razoável</option>
-              <option value="good">Bom</option>
-              <option value="excellent">Ótimo</option>
-            </select> */}
-
             {(bikeConditionStatus === "bad" || bikeConditionStatus === "reasonable") && (<>
               <label htmlFor="description" className="mt-2">Descreva:</label>
               <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
             </>)}
           </>)}
-
-          {/* {bikeCondition === "used" && (<>
-            <label htmlFor="structuralVisualCondition" className="mt-4">Qual estado da sua bike:</label>
-            <select
-              className="select-answer"
-              value={bikeConditionStatus}
-              onChange={(e) => setBikeConditionStatus(e.target.value)}
-            >
-              <option value=""></option>
-              <option value="bad">Ruim</option>
-              <option value="reasonable">Razoável</option>
-              <option value="good">Bom</option>
-              <option value="excellent">Ótimo</option>
-            </select>
-            { bikeConditionStatus === "bad" || bikeConditionStatus === "reasonable" && (<>
-              <label htmlFor="description" className="mt-3">Descreva:</label>
-              <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
-            </>)}
-          </>)} */}
         </div>
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
 
-      <div id="fourth-section" className="card-bike-select mb-5 d-none">
+      <div id="fifth-sectio" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Imagens</h4>
         <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createBikePhotos(e)}/>
         <p className="text-center my-3">ESCOLHA AS IMAGENS DA SUA BIKE</p>
@@ -2117,11 +2180,11 @@ export function BikeForm(props) {
         }
          <div className="d-flex justify-content-center">
             <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
 
-      <div id="fifth-section" className="card-bike-select mb-5 d-none">
+      <div id="sixth-sectio" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         <div id="Gerais(review)" className=" d-none">
