@@ -3,6 +3,8 @@ import swal from 'sweetalert';
 import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
+import BikeImage from "../../../assets/images/bike-road.png";
+
 import IntlCurrencyInput from "react-intl-currency-input"
 
 export function ProductForm(props) {
@@ -715,6 +717,11 @@ export function ProductForm(props) {
     btnAnnounce.classList.toggle("disable-btn-form")
   }
 
+  const handleCreateBike = (e) => {
+    // console.log(e.target)
+    window.location = 'http://localhost:3000/bikes/new'
+  }
+
   const translateWord = (word) => {
     const languageMap = {
       "mountain_bike" : "Mountain Bike",
@@ -1010,9 +1017,11 @@ export function ProductForm(props) {
       <div id="first-section">
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-          <button id="acessories" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Acessórios<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
-          <button id="components" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Componentes<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
-          <button id="clothes" className="btn-announce-type" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
+          <button id="acessories" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Acessório<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
+          <button id="bikes" className="btn-announce-type w-50" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="clothes" className="icon-card-form"/></button>
+          <button id="components" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
+          <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
+
         </div>
 
       </div>

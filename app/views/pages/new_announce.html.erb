@@ -3,32 +3,31 @@
     <div class="spacer-150 page-desktop mb-5"></div>
 
 
-      <h4 class="text-white <%= mobile_device? ? "" : "mt-5 " %>">ANUNCIE SUA BIKE OU EQUIPAMENTO PARA MILHARES DE CICLISTAS E VENDA MAIS RÁPIDO.</h4>
-      <div class="d-flex justify-content-between gap-2">
+      <h4 class="text-white announce-banner-title <%= mobile_device? ? "" : "mt-5 " %>">ANUNCIE SUA BIKE OU EQUIPAMENTO PARA MILHARES DE CICLISTAS E VENDA MAIS RÁPIDO.</h4>
+      <div class="d-flex justify-content-between gap-2 mt-3">
         <div class="card-banner w-30">
           <p class="text-center"><%= image_tag "maps.png", class: "banner-icons" %></p>
-          <h5 class="text-success fs-20">ANUNCIE ONDE OS CICLISTAS ESTÃO</h5>
-          <p class="fs-16 text-success">Todo dia, milhares de ciclistas de todo o Brasil acessam a Nuflow em busca de bikes e equipamentos.</p>
+          <h5 class="fs-20">ANUNCIE ONDE OS CICLISTAS ESTÃO</h5>
+          <p class="fs-16 text-white">Todo dia, milhares de ciclistas de todo o Brasil acessam a Nuflow em busca de bikes e equipamentos.</p>
         </div>
 
         <div class="card-banner w-30">
             <p class="text-center"><%= image_tag "snap.png", class: "banner-icons" %></p>
-          <h5 class="text-success fs-20">ZERO BUROCRACIA</h5>
-          <p class="fs-16 text-success">Anuncie em poucos minutos e sem sair de casa.</p>
+          <h5 class="fs-20">ZERO BUROCRACIA</h5>
+          <p class="fs-16 text-white">Anuncie em poucos minutos e sem sair de casa.</p>
         </div>
 
         <div class="card-banner w-30">
           <p class="text-center"><%= image_tag "discussion.png", class: "banner-icons" %></p>
-          <h5 class="text-success fs-20">SEM INTERMEDIÁRIOS</h5>
-          <p class="fs-16 text-success">Negocie diretamente com os interessados e decida o melhor negócio para você</p>
+          <h5 class="fs-20">SEM INTERMEDIÁRIOS</h5>
+          <p class="fs-16 text-white">Negocie diretamente com os interessados e decida o melhor negócio para você</p>
         </div>
       </div>
 
 
-      <p class="text-white">O que gostaria de anunciar?</p>
       <div class="new-announce-btns">
-        <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4" %>
-        <%= link_to "PRODUTOS", new_product_path, class: "btn btn-outline mt-3 px-2 ms-3" %>
+        <%# <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4" %>
+        <%= link_to "ANUNCIAR", new_product_path, class: "nav-link" %>
       </div>
 
 
