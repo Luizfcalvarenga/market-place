@@ -1542,14 +1542,14 @@ export function ProductForm(props) {
           </>)}
 
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button> 
-            {(!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) && (
-              <p className="mt-3">Preencha todas as informações antes de seguir em frente!</p>
-            )}
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             {productCategory && productModality && productTypeId && productName && productBrand && productModel  && (
               <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             )}
           </div>
+          {(!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) && (
+            <><br/> <p className="text-center">Preencha todas as informações antes de seguir em frente!</p></>
+          )}
         </div>
 
         <div>
@@ -1658,7 +1658,6 @@ export function ProductForm(props) {
 
             <div className="condition">
               <label htmlFor="´rpductCondition" className="mt-4">Condição:<span className="requested-information ms-1">*</span></label>
-
               <select
                 className="select-answer"
                 value={productCondition}
@@ -1671,10 +1670,6 @@ export function ProductForm(props) {
               { errors && errors.product && errors.product.condition && (
                 <p className="text-danger">{errors.product.condition[0]}</p>
               )}
-              {/* <div className="d-flex justify-content-start gap-3 mt-3">
-                <button type="button" id="new" value="new" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Novo</button>
-                <button type="button" id="used" value="used" className="filter-tag" onClick={(e) => handleProductCondition(e)}>Usado</button>
-              </div> */}
 
               {productCondition === "used" && (<>
                 <label htmlFor="productConditionStatus" className="mt-4">Qual estado da seu produto:</label>
@@ -1701,7 +1696,6 @@ export function ProductForm(props) {
                   <div className="reasonable-text  my-3">
                     Funcinamento comprometido, requer reparo operacional ou estrutural!
                   </div>
-
                 )}
 
                 {productConditionStatus === "good" && (
@@ -1716,18 +1710,6 @@ export function ProductForm(props) {
                   </div>
 
                 )}
-
-                {/* <select
-                  className="select-answer"
-                  value={productConditionStatus}
-                  onChange={(e) => setProductConditionStatus(e.target.value)}
-                >
-                  <option value=""></option>
-                  <option value="bad">Ruim</option>
-                  <option value="reasonable">Razoável</option>
-                  <option value="good">Bom</option>
-                  <option value="excellent">Ótimo</option>
-                </select> */}
 
                 {(productConditionStatus === "bad" || productConditionStatus === "reasonable") && (<>
                   <label htmlFor="description" className="mt-2">Descreva:</label>
@@ -1783,11 +1765,16 @@ export function ProductForm(props) {
 
             <div className="d-flex justify-content-center">
               <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-              <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              {productState && productCity && productDocumentationType && productCondition && productYear && productPrice && productQuantity && (
+                <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              )}
             </div>
+            {(!productState || !productCity || !productDocumentationType || !productCondition || !productYear || !productPrice || !productQuantity ) && (
+            <><br/> <p className="text-center">Preencha todas as informações antes de seguir em frente!</p></>
+            )}
           </div>
         </div>
-
+{/* ///////////////////////////////////////////////////////////// 3° SECTION/////////////////////////////////////////////// */}
         <div id="fifth-section" className="card-questions mb-5 mt-3 d-none">
           <h4 className="text-center text-success">Imagens</h4>
           <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createProductPhotos(e)}/>
