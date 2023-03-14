@@ -700,11 +700,11 @@ export function BikeForm(props) {
 
   const handleSecondStep = (e) => {
     const progressTwo = document.getElementById("progress-2")
-    const progressThird = document.getElementById("progress-3")
-
     const secondSection = document.getElementById("second-section")
     const thirdSection = document.getElementById("third-section")
-    const fourthSection = document.getElementById("fourth-section")
+    progressTwo.classList.add("section-done")
+    secondSection.classList.add("d-none")
+    thirdSection.classList.remove("d-none")
   }
 
   const handleThirdStep = () => {
@@ -2090,8 +2090,8 @@ export function BikeForm(props) {
               <button className="btn-back-step" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
               <button className="btn-next-step" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
-          </div>
         </div>
+      </div>
 
 
                         {/* ////////////////////////////////////////////////////////////////////// 3ª SECTION //////////////////////////////////////////////////////////*/}
@@ -2156,7 +2156,7 @@ export function BikeForm(props) {
         </div>
       </div>
 
-      <div id="fifth-sectio" className="card-bike-select mb-5 d-none">
+      <div id="fifth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Imagens</h4>
         <input id="photo-upload" type="file" className="text-input file-upload" multiple accept="image/png, image/jpg, image/jpeg" onChange={(e) => createBikePhotos(e)}/>
         <p className="text-center my-3">ESCOLHA AS IMAGENS DA SUA BIKE</p>
@@ -2179,12 +2179,12 @@ export function BikeForm(props) {
           </div> : null
         }
          <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
           <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
 
-      <div id="sixth-sectio" className="card-bike-select mb-5 d-none">
+      <div id="sixth-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Revise as informações</h4>
         <button type="button" onClick={(e) => handleReviewSection(e)} className="btn-technicality my-3 w-100 p-2">Gerais</button>
         <div id="Gerais(review)" className=" d-none">
@@ -2543,7 +2543,7 @@ export function BikeForm(props) {
         </div>
 
         <div className="text-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
         </div>
       </div>
     </div>
