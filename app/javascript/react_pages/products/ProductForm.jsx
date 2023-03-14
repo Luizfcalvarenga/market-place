@@ -1542,8 +1542,13 @@ export function ProductForm(props) {
           </>)}
 
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-            <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button> 
+            {(!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) && (
+              <p className="mt-3">Preencha todas as informações antes de seguir em frente!</p>
+            )}
+            {productCategory && productModality && productTypeId && productName && productBrand && productModel  && (
+              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            )}
           </div>
         </div>
 

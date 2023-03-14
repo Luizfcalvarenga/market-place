@@ -1259,9 +1259,7 @@ export function BikeForm(props) {
           {years.map((year, index)=> {
             if (year === "other") {
               return (<option key={index} value="other">Outro</option>);
-
             } else {
-
               return (<option key={index} >{year}</option>);
             }
           })}
@@ -1357,12 +1355,16 @@ export function BikeForm(props) {
         <label htmlFor="weight" className="mt-4">peso:(opicional)</label>
         <input type="number" className="text-input" placeholder="Em Kg" value={weight} onChange={(e) => setWeight(e.target.value)}/>
 
-
-
-
         <div className="text-center">
-          <button className="btn-next-step mt-4" type="button" onClick={(e) => handleFirstStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          {(!category || !modality || !bikeType || !priceInCents || !model || !frameMaterial || !documentationType || !quantity || !frameBrand || !frameSize || !year || !city || !state) && (
+            <p className="mt-3">Preencha todas as informações antes de seguir em frente!</p>
+          )}
+          {category && modality && bikeType && priceInCents && bikeCondition && model && frameMaterial && documentationType && quantity && frameBrand && frameSize && year && city && state && (
+            <button className="btn-next-step mt-4" type="button" onClick={(e) => handleFirstStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          )}
+
         </div>
+
       </div>
 
                                   {/*/////////////////////////////////////////////////////////2ª SECTION////////////////////////////////////////////////////////////////*/}
