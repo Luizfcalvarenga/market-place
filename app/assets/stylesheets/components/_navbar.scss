@@ -187,9 +187,7 @@ $color-primary: #00c454;
     font-size: 25px;
   }
 
-  .fa-heart:hover {
-    color: #f4f4f9 !important;
-  }
+
 }
 
 
@@ -198,9 +196,7 @@ $color-primary: #00c454;
     font-size: 22px;
   }
 
-  .fa-heart:hover {
-    color: #f4f4f9 !important;
-  }
+
 }
 
 .search-btn {
@@ -296,6 +292,23 @@ $color-primary: #00c454;
 
 .like-mobile-nav {
   color: white ;
+}
+
+.nav-link-icon {
+  color: white;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.nav-link-logout {
+  color: white;
+  font-weight: 400;
+
+  &:hover {
+    color: red;
+  }
 }
 
 @media (max-width: 768px) {

@@ -1,8 +1,12 @@
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  border: 1px solid green;
+  border: 2px solid rgba(200, 200, 200, .6);
+  object-fit: cover;
+  &:hover {
+    border-color: green;
+  }
 }
 .avatar-large {
   width: 56px;
@@ -27,7 +31,8 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  
+  object-fit: cover;
+
 }
 
 .avatar-bike {

@@ -29,85 +29,13 @@
   align-items: center;
   background-color: rgb(21, 21, 21);
   width: 100%;
-}
 
-.third-section-home {
-  // height: 1636px;
-  // background-image: url("bike-check-bg.png");
-  // background-size: 920px 1636px;
-  // background-repeat: no-repeat;
-  // background-position: center;
-
-  .v-check-line {
-    border-left: 5px solid rgb(0,195,54);
-    height: 3.75em;
-    position:absolute;
-    left: 26%;
-  }
-
-  .h-check-line {
-    border: 2px solid rgb(0,195,54);
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 26% !important;
-    width: 38.25em;
-
-  }
-
-  .v-check-line-b {
-    border-left: 5px solid rgb(0,195,54);
-    height: 5.125em;
-    margin-left: 26%;
-    margin-top: -116px !important;
-    margin-bottom: 0 !important;
-
-  }
-
-  .v-check-line-left {
-    border-left: 5px solid rgb(0,195,54);
-    height: 4.375em;
-    position:absolute;
-    left: 71%;
-  }
-
-  .v-check-line-left-4 {
-    border-left: 5px solid rgb(0,195,54);
-    height: 6.9375em;
-    position:absolute;
-    left: 71%;
-  }
-
-  .v-check-line-b-left {
-    border-left: 5px solid rgb(0,195,54);
-    height: 5.125em;
-    margin-left: 71%;
-    margin-top: -5.3125em !important;
-    margin-bottom: 0 !important;
-
-  }
-
-  .v-check-line-right {
-    border-left: 5px solid rgb(0,195,54);
-    height: 5.9375em;
-    position:absolute;
-    left: 26%;
-  }
-
-  .v-check-line-right-5 {
-    border-left: 5px solid rgb(0,195,54);
-    height: 5.4375em;
-    position:absolute;
-    left: 26%;
-  }
-
-  .v-check-line-b3 {
-    border-left: 5px solid rgb(0,195,54);
-    height: 6.875em;
-    margin-left: 26%;
-    margin-top: -5.9375em !important;
-    margin-bottom: 0 !important;
+  .icon {
+    font-size: 28px;
   }
 }
+
+
 
 ///////////////////////////// 4ª SECTION
 
