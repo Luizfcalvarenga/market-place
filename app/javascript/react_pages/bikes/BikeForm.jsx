@@ -473,85 +473,96 @@ export function BikeForm(props) {
     const thirdSection = document.getElementById("third-section")
     const fourthSection = document.getElementById("fourth-section")
     const fifthSection = document.getElementById("fifth-section")
+    const sixthSection = document.getElementById("sixth-section")
+
 
     const progressOne = document.getElementById("progress-1")
     const progressTwo = document.getElementById("progress-2")
     const progressThree = document.getElementById("progress-3")
     const progressFour = document.getElementById("progress-4")
     const progressFive = document.getElementById("progress-5")
+    const progressSix = document.getElementById("progress-6")
+
 
     if (e.target.innerHTML === "1") {
-      firstSection.classList.remove("d-none")
-      secondSection.classList.add("d-none")
-      thirdSection.classList.add("d-none")
-      fourthSection.classList.add("d-none")
-      fifthSection.classList.add("d-none")
+      window.location = 'http://localhost:3000/products/new'
+      // secondSection.classList.add("d-none")
+      // thirdSection.classList.add("d-none")
+      // fourthSection.classList.add("d-none")
+      // fifthSection.classList.add("d-none")
 
-      progressOne.classList.add("section-done")
-      progressTwo.classList.remove("section-done")
-      progressThree.classList.remove("section-done")
-      progressFour.classList.remove("section-done")
-      progressFive.classList.remove("section-done")
+      // progressTwo.classList.remove("section-done")
+      // progressThree.classList.remove("section-done")
+      // progressFour.classList.remove("section-done")
+      // progressFive.classList.remove("section-done")
     } else if (e.target.innerHTML === "2") {
-      firstSection.classList.add("d-none")
       secondSection.classList.remove("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
       fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
-      progressOne.classList.add("section-done")
+
       progressTwo.classList.remove("section-done")
       progressThree.classList.remove("section-done")
       progressFour.classList.remove("section-done")
       progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+
     } else if (e.target.innerHTML === "3") {
-      firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
       thirdSection.classList.remove("d-none")
       fourthSection.classList.add("d-none")
       fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
-      progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
       progressThree.classList.remove("section-done")
       progressFour.classList.remove("section-done")
       progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+
     } else if (e.target.innerHTML === "4") {
-      firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.remove("d-none")
       fifthSection.classList.add("d-none")
+      sixthSection.classList.add("d-none")
 
-      progressOne.classList.add("section-done")
+
       progressTwo.classList.add("section-done")
       progressThree.classList.add("section-done")
       progressFour.classList.remove("section-done")
       progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+
     } else if (e.target.innerHTML === "5") {
-      firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
       fifthSection.classList.remove("d-none")
+      sixthSection.classList.add("d-none")
 
-      progressOne.classList.add("section-done")
       progressTwo.classList.add("section-done")
       progressThree.classList.add("section-done")
       progressFour.classList.add("section-done")
       progressFive.classList.remove("section-done")
+      progressSix.classList.remove("section-done")
+
     } else if (e.target.innerHTML === "6") {
-      firstSection.classList.add("d-none")
       secondSection.classList.add("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
       fifthSection.classList.add("d-none")
+      sixthSection.classList.remove("d-none")
 
-      progressOne.classList.add("section-done")
+
       progressTwo.classList.add("section-done")
       progressThree.classList.add("section-done")
       progressFour.classList.add("section-done")
       progressFive.classList.add("section-done")
+      progressSix.classList.remove("section-done")
+
     }
   }
 
