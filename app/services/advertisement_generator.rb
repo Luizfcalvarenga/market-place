@@ -30,8 +30,6 @@ class AdvertisementGenerator
       ::NovaIugu::InvoiceGenerator.new(@advertisement).call
     end
     AdvertisementMailer.with(advertisement: @advertisement).advertisement_creation.deliver_now
-    AdvertisementMailer.with(advertisement: @advertisement).notify_admin_advertisement_creation.deliver_now
-
   end
 
   def advertisement_price
