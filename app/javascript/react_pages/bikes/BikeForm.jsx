@@ -566,100 +566,6 @@ export function BikeForm(props) {
     }
   }
 
-  // const handleBackToFirst = (e) => {
-  //   const progressTwo = document.getElementById("progress-2")
-  //   const secondSection = document.getElementById("second-section")
-  //   const firstSection = document.getElementById("first-section")
-  //   progressTwo.classList.remove("section-done")
-  //   secondSection.classList.add("d-none")
-  //   firstSection.classList.remove("d-none")
-  // }
-
-  // const handleBackToSecond = (e) => {
-  //   const progressTwo = document.getElementById("progress-2")
-  //   const progressThree = document.getElementById("progress-3")
-  //   const secondSection = document.getElementById("second-section")
-  //   const thirdSection = document.getElementById("third-section")
-  //   progressTwo.classList.remove("section-done")
-  //   secondSection.classList.remove("d-none")
-  //   progressThree.classList.remove("section-done")
-  //   thirdSection.classList.add("d-none")
-  // }
-
-  // const handleBackToThird = () => {
-  //   const progressThird = document.getElementById("progress-3")
-  //   const progressFourth = document.getElementById("progress-4")
-  //   const thirdSection = document.getElementById("third-section")
-  //   const fourthSection = document.getElementById("fourth-section")
-  //   progressThird.classList.remove("section-done")
-  //   progressFourth.classList.remove("section-done")
-  //   thirdSection.classList.remove("d-none")
-  //   fourthSection.classList.add("d-none")
-  // }
-
-  // const handleBackToFourth = () => {
-  //   const progressFifth = document.getElementById("progress-5")
-  //   const progressFourth = document.getElementById("progress-4")
-  //   const fourthSection = document.getElementById("fourth-section")
-  //   const fifthSection = document.getElementById("fifth-section")
-  //   progressFourth.classList.remove("section-done")
-  //   progressFifth.classList.remove("section-done")
-  //   fourthSection.classList.remove("d-none")
-  //   fifthSection.classList.add("d-none")
-  // }
-
-  // const handleFirstStep = (e) => {
-  //   const progressTwo = document.getElementById("progress-2")
-  //   const firstSection = document.getElementById("first-section")
-  //   const secondSection = document.getElementById("second-section")
-
-  //   progressTwo.classList.add("section-done")
-  //   firstSection.classList.add("d-none")
-  //   secondSection.classList.remove("d-none")
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }
-
-  // const handleSecondStep = (e) => {
-  //   const progressTwo = document.getElementById("progress-2")
-  //   const secondSection = document.getElementById("second-section")
-  //   const thirdSection = document.getElementById("third-section")
-  //   progressTwo.classList.add("section-done")
-  //   secondSection.classList.add("d-none")
-  //   thirdSection.classList.remove("d-none")
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }
-
-  // const handleThirdStep = () => {
-  //   const progressThird = document.getElementById("progress-3")
-  //   const thirdSection = document.getElementById("third-section")
-  //   const fourthSection = document.getElementById("fourth-section")
-  //   progressThird.classList.add("section-done")
-  //   thirdSection.classList.add("d-none")
-  //   fourthSection.classList.remove("d-none")
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }
-
-  // const handleFourthStep = () => {
-  //   const progressFourth = document.getElementById("progress-4")
-  //   const fourthSection = document.getElementById("fourth-section")
-  //   const fifthSection = document.getElementById("fifth-section")
-  //   progressFourth.classList.add("section-done")
-  //   fourthSection.classList.add("d-none")
-  //   fifthSection.classList.remove("d-none")
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }
-
-  // const handleBackToFirst = (e) => {
-  //   const progressOne = document.getElementById("progress-1")
-  //   const progressTwo = document.getElementById("progress-2")
-  //   const secondSection = document.getElementById("second-section")
-  //   const firstSection = document.getElementById("first-section")
-  //   progressOne.classList.remove("section-done")
-  //   progressTwo.classList.remove("section-done")
-  //   secondSection.classList.add("d-none")
-  //   firstSection.classList.remove("d-none")
-  // }
-
   const handleBackToSecond = (e) => {
     const progressTwo = document.getElementById("progress-2")
     const progressThree = document.getElementById("progress-3")
@@ -704,10 +610,6 @@ export function BikeForm(props) {
     sixthSection.classList.add("d-none")
   }
 
-  // const handleFirstStep = () => {
-  //   const progressOne = document.querySelector(".progress-1")
-
-  // }
 
   const handleSecondStep = (e) => {
     const progressTwo = document.getElementById("progress-2")
@@ -865,6 +767,12 @@ export function BikeForm(props) {
 
   const handleBackToForm = (e) => {
     window.location = 'http://localhost:3000/products/new'
+  }
+
+  const handleTerms = (e) => {
+    // console.log(e.target)
+    const btnAnnounce = document.getElementById("new-announce")
+    btnAnnounce.classList.toggle("disable-btn-form")
   }
 
   //////////////////////////////////////////////// frames

@@ -62,18 +62,6 @@ module Api
 
         @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
         @bikes = @bikes.where(model: params[:models].split(",")) if params[:models].present?
-
-        # @bikes = @bikes.where(frame_brand: params[:frame_brand]) if params[:frame_brand].present?
-        # @bikes = @bikes.where('seat_post_model @@ ?', params[:seat_post_model]) if params[:seat_post_model].present?
-
-        # @bikes = @bikes.where('model @@ ?', params[:model]) if params[:model].present?
-        # @bikes = @bikes.where('crankset @@ ?', params[:crankset]) if params[:crankset].present?
-        # @bikes = @bikes.where('chain @@ ?', params[:chain]) if params[:chain].present?
-        # @bikes = (@bikes.where('front_hub_model @@ ?', params[:hub])  || @bikes.where('rear_hub_model @@ ?', params[:hub]) )if params[:hub].present?
-        # @bikes = (@bikes.where('front_rim_model @@ ?', params[:rim])  || @bikes.where('rear_rim_model @@ ?', params[:rim]) )if params[:rim].present?
-        # @bikes = (@bikes.where('front_tyre_model @@ ?', params[:tyre])  || @bikes.where('rear_tyre_model @@ ?', params[:tyre]) )if params[:tyre].present?
-
-
       end
 
       def show

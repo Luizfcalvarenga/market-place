@@ -12,7 +12,6 @@ module NovaIugu
 
     def call
       @response = ::Iugu::Invoice.create(charge_params)
-
       if @response.errors.blank?
         @entity.update!(
           invoice_id: @response.attributes["id"],

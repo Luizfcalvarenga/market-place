@@ -18,6 +18,7 @@ class AdvertisementApprover
         status: "approved"
       )
       AdvertisementMailer.with(advertisement: @advertisement).advertisement_approval.deliver_now
+
     end
 
     true
