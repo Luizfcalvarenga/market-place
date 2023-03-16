@@ -29,7 +29,7 @@
               </button>
           </div>
           <div class="w-50 mt-3 ms-3">
-            <p><strong>Local:</strong> <%= product.locality %></p>
+            <p><strong>Local:</strong> <%= product.city.name %> - <%= product.state.acronym %></p>
             <p><strong>Ano:</strong> <%= product.year %></p>
             <p><strong>Preço:</strong> <%= number_to_currency(product.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%></p>
             <p><strong>Produto:</strong> <%= product.product_type.name_display %></p>
@@ -87,7 +87,7 @@
             </button>
           </div>
           <div class="w-50 mt-3 ms-3 my-product-infos">
-            <p><strong>Local:</strong> <%= bike.locality %></p>
+            <p><strong>Local:</strong> <%= bike.city.name %> - <%= bike.state.acronym %></p>
             <p><strong>Ano:</strong> <%= bike.year %></p>
             <p><strong>Preço:</strong> <%= number_to_currency(bike.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".")%></p>
             <p><strong>Tipo:</strong> <%= bike.type_display %></p>
