@@ -167,7 +167,7 @@ export function BikeForm(props) {
     if (props.bikeId && stateId) {
       setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (!photos) {
@@ -272,7 +272,6 @@ export function BikeForm(props) {
       setBatteryCycles(response.data.bike.battery_cycles);
       setPedals(response.data.bike.pedals);
       setPhotosEdit(response.data.photos);
-      setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
 
     }
   }
@@ -2025,13 +2024,13 @@ export function BikeForm(props) {
             <div className="mb-5 mt-3">
               <div id="debt-amount-slider">
                 <input type="radio" name="debt-amount" id="1" value="bad" required onClick={(e) => handleBikeConditionStatus(e)}/>
-                <label id="label-bad" for="1" data-debt-amount="Ruim"></label>
+                <label id="label-bad" htmlFor="1" data-debt-amount="Ruim"></label>
                 <input type="radio" name="debt-amount" id="2" value="reasonable" required onClick={(e) => handleBikeConditionStatus(e)}/>
-                <label id="label-reasonable" for="2" data-debt-amount="Razoável"></label>
+                <label id="label-reasonable" htmlFor="2" data-debt-amount="Razoável"></label>
                 <input type="radio" name="debt-amount" id="3" value="good" required onClick={(e) => handleBikeConditionStatus(e)}/>
-                <label id="label-good" for="3" data-debt-amount="Bom"></label>
+                <label id="label-good" htmlFor="3" data-debt-amount="Bom"></label>
                 <input type="radio" name="debt-amount" id="4" value="excellent" required onClick={(e) => handleBikeConditionStatus(e)}/>
-                <label id="label-excellent" for="4" data-debt-amount="Ótimo"></label>
+                <label id="label-excellent" htmlFor="4" data-debt-amount="Ótimo"></label>
                 <div id="debt-amount-pos"></div>
               </div>
             </div>
@@ -2308,7 +2307,7 @@ export function BikeForm(props) {
             <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
               {
                 photosPreview.map((photoPreview, idx) => {
-                  return <img src={photoPreview} alt="" className="image-review" />
+                  return <img src={photoPreview} key={idx} alt="" className="image-review" />
                 })
               }
             </div>
@@ -2318,7 +2317,7 @@ export function BikeForm(props) {
         <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
           {(props.bikeId && !photosPreview) && (
             photosEdit.map((photo, idx) => {
-              return <img src={photo} alt="" className="image-review" />
+              return <img src={photo} key={idx} alt="" className="image-review" />
             })
           )}
         </div>

@@ -168,7 +168,7 @@ export function ProductForm(props) {
     if (props.productId && productStateId) {
       setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
     }
-  });
+  }, []);
 
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
@@ -220,7 +220,6 @@ export function ProductForm(props) {
       setProductConditionStatus(response.data.product.product_condition_status);
       setProductConditionDescription(response.data.product.product_condition_description);
       setPhotosEdit(response.data.photos);
-      setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
 
       if (response.data.product_attributes) {
         setProductAttributes(
@@ -1812,8 +1811,6 @@ export function ProductForm(props) {
           </div>
         </div>
 
-
-
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
           <h4 className="text-center text-success">Revise as informações</h4>
           <h4 className="text-success mt-3 text-center">Gerais</h4>
@@ -1953,7 +1950,7 @@ export function ProductForm(props) {
               <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
                 {
                   photosPreview.map((photoPreview, index) => {
-                    return <img src={photoPreview} alt="" className="image-review" />
+                    return <img src={photoPreview} key={idx} alt="" className="image-review" />
                   })
                 }
               </div>
@@ -1963,7 +1960,7 @@ export function ProductForm(props) {
           <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
             {(props.productId && !photosPreview) && (
               photosEdit.map((photo, idx) => {
-                return <img src={photo} alt="" className="image-review" />
+                return <img src={photo} key={idx} alt="" className="image-review" />
               })
             )}
           </div>
