@@ -92,6 +92,8 @@ export function BikeForm(props) {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [photos, setPhotos ] = useState(null);
+  const [photosEdit, setPhotosEdit ] = useState([]);
+
   const [photoFile, setPhotoFile] = useState({
     index: null,
   });
@@ -119,10 +121,10 @@ export function BikeForm(props) {
       event.preventDefault();
       setPriceInCents(value)
     };
-
     return(
       <IntlCurrencyInput currency="BRL" config={currencyConfig}
-          className="text-input" value={priceInCents}   onChange={handleChange} />
+        className="text-input" value={priceInCents}   onChange={handleChange}
+      />
     );
   }
 
@@ -162,6 +164,12 @@ export function BikeForm(props) {
   });
 
   useEffect(() => {
+    if (props.bikeId && stateId) {
+      setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+    }
+  });
+
+  useEffect(() => {
     if (!photos) {
         setPhotosPreview(undefined)
         return
@@ -189,7 +197,6 @@ export function BikeForm(props) {
   const createBikePhotos = (e) => {
     const photos = Object.values(e.target.files)
     setPhotos(photos)
-    // console.log(photos)
   }
 
   function removeObjectWithId(arr, name) {
@@ -199,7 +206,6 @@ export function BikeForm(props) {
   }
 
   const removePhoto = (e) => {
-    // console.log(e.target.id)
     const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
     setPhotosPreview(newPhotosPreview);
     const photoToRemove = photoFile.find(element => element.url === e.target.id).name
@@ -210,7 +216,6 @@ export function BikeForm(props) {
     const response = await axios.get(
       `/api/v1/bikes/${props.bikeId}/edit`
     );
-    // alert(JSON.stringify(response.data))
     if (response.data) {
       setUser(response.data.bike.user_id);
       setCategory(response.data.category);
@@ -266,6 +271,9 @@ export function BikeForm(props) {
       setMileage(response.data.bike.mileage);
       setBatteryCycles(response.data.bike.battery_cycles);
       setPedals(response.data.bike.pedals);
+      setPhotosEdit(response.data.photos);
+      setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+
     }
   }
 
@@ -308,7 +316,6 @@ export function BikeForm(props) {
     dataObject.append( "bike[front_rim_model]", frontRimModel );
     dataObject.append( "bike[rear_rim_model]", rearRimModel );
     dataObject.append( "bike[pedals]", pedals );
-
     dataObject.append( "bike[mileage]", mileage );
     dataObject.append( "bike[chain]", chain );
     dataObject.append( "bike[crankset]", crankset );
@@ -475,7 +482,6 @@ export function BikeForm(props) {
     const fifthSection = document.getElementById("fifth-section")
     const sixthSection = document.getElementById("sixth-section")
 
-
     const progressOne = document.getElementById("progress-1")
     const progressTwo = document.getElementById("progress-2")
     const progressThree = document.getElementById("progress-3")
@@ -485,23 +491,14 @@ export function BikeForm(props) {
 
 
     if (e.target.innerHTML === "1") {
-      window.location = 'http://localhost:3000/products/new'
-      // secondSection.classList.add("d-none")
-      // thirdSection.classList.add("d-none")
-      // fourthSection.classList.add("d-none")
-      // fifthSection.classList.add("d-none")
+      window.location = 'https://nuflowshop.herokuapp.com/products/new'
 
-      // progressTwo.classList.remove("section-done")
-      // progressThree.classList.remove("section-done")
-      // progressFour.classList.remove("section-done")
-      // progressFive.classList.remove("section-done")
     } else if (e.target.innerHTML === "2") {
       secondSection.classList.remove("d-none")
       thirdSection.classList.add("d-none")
       fourthSection.classList.add("d-none")
       fifthSection.classList.add("d-none")
       sixthSection.classList.add("d-none")
-
 
       progressTwo.classList.remove("section-done")
       progressThree.classList.remove("section-done")
@@ -529,7 +526,6 @@ export function BikeForm(props) {
       fifthSection.classList.add("d-none")
       sixthSection.classList.add("d-none")
 
-
       progressTwo.classList.add("section-done")
       progressThree.classList.add("section-done")
       progressFour.classList.remove("section-done")
@@ -556,13 +552,11 @@ export function BikeForm(props) {
       fifthSection.classList.add("d-none")
       sixthSection.classList.remove("d-none")
 
-
       progressTwo.classList.add("section-done")
       progressThree.classList.add("section-done")
       progressFour.classList.add("section-done")
       progressFive.classList.add("section-done")
       progressSix.classList.remove("section-done")
-
     }
   }
 
@@ -766,14 +760,26 @@ export function BikeForm(props) {
   }
 
   const handleBackToForm = (e) => {
-    window.location = 'http://localhost:3000/products/new'
+    window.location = 'https://nuflowshop.herokuapp.com/products/new'
   }
 
   const handleTerms = (e) => {
-    // console.log(e.target)
     const btnAnnounce = document.getElementById("new-announce")
     btnAnnounce.classList.toggle("disable-btn-form")
   }
+
+  const handlePermitNextStep = () => {
+    if (!category || !modality || !bikeType || !priceInCents || !model || !frameMaterial || !documentationType || !quantity || !frameBrand || !frameSize || !year || !city || !state) {
+      return (
+        <button className="btn-next-step mt-4 pe-none" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      )
+    } else if (category && modality && bikeType && priceInCents && bikeCondition && model && frameMaterial && documentationType && quantity && frameBrand && frameSize && year && city && state) {
+      return (
+        <button className="btn-next-step mt-4" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      )
+    }
+  }
+
 
   //////////////////////////////////////////////// frames
 
@@ -1369,16 +1375,8 @@ export function BikeForm(props) {
 
         <div className="text-center">
           <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-
-          {(!category || !modality || !bikeType || !priceInCents || !model || !frameMaterial || !documentationType || !quantity || !frameBrand || !frameSize || !year || !city || !state) && (
-            <p className="mt-3">Preencha todas as informações antes de seguir em frente!</p>
-          )}
-          {category && modality && bikeType && priceInCents && bikeCondition && model && frameMaterial && documentationType && quantity && frameBrand && frameSize && year && city && state && (
-            <button className="btn-next-step mt-4" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-          )}
-
+          {handlePermitNextStep()}
         </div>
-
       </div>
 
                                   {/*/////////////////////////////////////////////////////////2ª SECTION////////////////////////////////////////////////////////////////*/}
@@ -2305,15 +2303,28 @@ export function BikeForm(props) {
 
         <h4 className="text-success mt-3 text-center">Imagens</h4>
         {
-          photosPreview?.length > 0 ?
-          <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
-            {
-              photosPreview.map((photoPreview, idx) => {
-                return <img src={photoPreview} alt="" className="image-review" />
-              })
-            }
-          </div> : <p className="text-center">Nenhuma imagem adicionada</p>
+          photosPreview?.length > 0 && (
+
+            <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
+              {
+                photosPreview.map((photoPreview, idx) => {
+                  return <img src={photoPreview} alt="" className="image-review" />
+                })
+              }
+            </div>
+          )
         }
+
+        <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
+          {(props.bikeId && !photosPreview) && (
+            photosEdit.map((photo, idx) => {
+              return <img src={photo} alt="" className="image-review" />
+            })
+          )}
+        </div>
+        {(!props.bikeId && !photosPreview) && (
+          <p>Nenhuma foto adicionada!!</p>
+        )}
 
 
 

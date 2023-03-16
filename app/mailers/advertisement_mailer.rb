@@ -4,7 +4,7 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
-    mail(to: [@client.email, "contato@nuflowshop.com.br"], subject: "Anúncio criado com sucesso!!!")
+    mail(to: @client.email, subject: "Anúncio criado com sucesso!!!")
   end
 
 

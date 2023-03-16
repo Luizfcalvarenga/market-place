@@ -45,6 +45,8 @@ export function ProductForm(props) {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [discountCoupon, setDiscountCoupon] = useState("");
+  const [photosEdit, setPhotosEdit ] = useState([]);
+
   const [photoFile, setPhotoFile] = useState({
     index: null,
   });
@@ -162,6 +164,12 @@ export function ProductForm(props) {
     }
   })
 
+  useEffect(() => {
+    if (props.productId && productStateId) {
+      setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
+    }
+  });
+
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
     setProductPhotos(photos)
@@ -211,6 +219,8 @@ export function ProductForm(props) {
       setProductCondition(response.data.product.condition);
       setProductConditionStatus(response.data.product.product_condition_status);
       setProductConditionDescription(response.data.product.product_condition_description);
+      setPhotosEdit(response.data.photos);
+      setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
 
       if (response.data.product_attributes) {
         setProductAttributes(
@@ -300,12 +310,11 @@ export function ProductForm(props) {
           <label htmlFor="product attribute" className="mt-4" key={index}>{attribute.prompt}</label><br />
           {attribute.kind === "text" && (
             <input type="text" className="text-input" onChange={(e) => createProductAttributes(e, attribute)}/>
-
           )}
-          {attribute.kind === "multiple_choice" && (<>
+          {(attribute.kind === "multiple_choice" || attribute.kind === "multiple_choices") && (<>
             <select
-            className="select-answer"
-            onChange={(e) => createProductAttributes(e, attribute)}
+              className="select-answer"
+              onChange={(e) => createProductAttributes(e, attribute)}
             >
               <option value=""></option>
               {options?.map((option, index) => {
@@ -454,22 +463,6 @@ export function ProductForm(props) {
     }
   }
 
-  // const handleProductCondition = (e) => {
-  //   console.log(e.target.value)
-  //   e.target.classList.toggle("active")
-  //   const newBtn = document.getElementById("new")
-  //   const usedBtn = document.getElementById("used")
-  //   if (e.target.id === "new") {
-  //     usedBtn.classList.remove("selected-tag")
-  //     newBtn.classList.add("selected-tag")
-  //     setProductCondition(e.target.value)
-  //     setProductConditionStatus("")
-  //   } else if (e.target.id === "used") {
-  //     usedBtn.classList.add("selected-tag")
-  //     newBtn.classList.remove("selected-tag")
-  //     setProductCondition(e.target.value)
-  //   }
-  // }
 
   const handleProductConditionStatus = (e) => {
     setProductConditionStatus(e.target.value)
@@ -712,14 +705,12 @@ export function ProductForm(props) {
   }
 
   const handleTerms = (e) => {
-    // console.log(e.target)
     const btnAnnounce = document.getElementById("new-announce")
     btnAnnounce.classList.toggle("disable-btn-form")
   }
 
   const handleCreateBike = (e) => {
-    // console.log(e.target)
-    window.location = 'http://localhost:3000/bikes/new'
+    window.location = 'https://nuflowshop.herokuapp.com/bikes/new'
   }
 
   const translateWord = (word) => {
@@ -780,6 +771,29 @@ export function ProductForm(props) {
     return languageMap[word]
   }
 
+  const handlePermitSecondStep = () => {
+    if (!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) {
+      return (
+        <button className="btn-next-step me-3 mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      )
+    } else if (productCategory && productModality && productTypeId && productName && productBrand && productModel) {
+      return (
+        <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      )
+    }
+  }
+
+  const handlePermitFourthStep = () => {
+    if (!productState || !productCity || !productDocumentationType || !productCondition || !productYear || !productPrice || !productQuantity) {
+      return (
+        <button className="btn-next-step mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      )
+    } else if (productState && productCity && productDocumentationType && productCondition && productYear && productPrice && productQuantity) {
+      return (
+        <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      )
+    }
+  }
 
   //////////////////////////////////////////////////////////////////////////////////
   const frameBrands = [
@@ -1018,10 +1032,9 @@ export function ProductForm(props) {
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
           <button id="acessories" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Acessório<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
-          <button id="bikes" className="btn-announce-type w-50" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="clothes" className="icon-card-form"/></button>
+          <button id="bikes" className="btn-announce-type w-50" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="bikes" className="icon-card-form"/></button>
           <button id="components" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
           <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
-
         </div>
 
       </div>
@@ -1543,13 +1556,14 @@ export function ProductForm(props) {
 
           <div className="d-flex justify-content-center">
             <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-            {productCategory && productModality && productTypeId && productName && productBrand && productModel  && (
+            {handlePermitSecondStep()}
+            {/* {productCategory && productModality && productTypeId && productName && productBrand && productModel  && (
               <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-            )}
+            )} */}
           </div>
-          {(!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) && (
+          {/* {(!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) && (
             <><br/> <p className="text-center">Preencha todas as informações antes de seguir em frente!</p></>
-          )}
+          )} */}
         </div>
 
         <div>
@@ -1765,13 +1779,8 @@ export function ProductForm(props) {
 
             <div className="d-flex justify-content-center">
               <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-              {productState && productCity && productDocumentationType && productCondition && productYear && productPrice && productQuantity && (
-                <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-              )}
+              {handlePermitFourthStep()}
             </div>
-            {(!productState || !productCity || !productDocumentationType || !productCondition || !productYear || !productPrice || !productQuantity ) && (
-            <><br/> <p className="text-center">Preencha todas as informações antes de seguir em frente!</p></>
-            )}
           </div>
         </div>
 {/* ///////////////////////////////////////////////////////////// 3° SECTION/////////////////////////////////////////////// */}
@@ -1940,17 +1949,28 @@ export function ProductForm(props) {
 
           <h4 className="text-success mt-3 text-center">Imagens</h4>
           {
-            photosPreview?.length > 0 ?
-            <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
-              {
-                photosPreview.map((photoPreview, index) => {
-                  return <img src={photoPreview} alt="" className="image-review" />
-                })
-              }
-            </div> : <p className="text-center">Nenhuma imagem adicionada</p>
+            photosPreview?.length > 0 && (
+              <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
+                {
+                  photosPreview.map((photoPreview, index) => {
+                    return <img src={photoPreview} alt="" className="image-review" />
+                  })
+                }
+              </div>
+            )
           }
 
+          <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
+            {(props.productId && !photosPreview) && (
+              photosEdit.map((photo, idx) => {
+                return <img src={photo} alt="" className="image-review" />
+              })
+            )}
+          </div>
 
+          {(!props.productId && !photosPreview) && (
+            <p>Nenhuma foto adicionada!!</p>
+          )}
 
           {!props.productId && (<>
             {((productPrice * 100) <= 100000) && (<>

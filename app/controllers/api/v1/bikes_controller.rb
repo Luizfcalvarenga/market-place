@@ -112,7 +112,9 @@ module Api
         @modalities = @bike.category.modalities
         @state = @bike.state.acronym
         @city = @bike.city.name
-        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city }
+        @photos = @bike.photos.map(&:url)
+
+        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city, photos: @photos }
       end
 
       def update

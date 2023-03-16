@@ -92,12 +92,13 @@ module Api
         @category = @product.category.name
         @state = @product.state.acronym
         @city = @product.city.name
+        @photos = @product.photos.map(&:url)
         if @product.product_attributes.present?
           @product.product_attributes.each { |product_attribute|
             @product_attributes[(ProductTypeAttribute.find_by(id: product_attribute.product_type_attribute_id)).name] = product_attribute.value
           }
         end
-        render json: { product: @product, product_attributes: @product_attributes, category: @category, state: @state, city: @city }
+        render json: { product: @product, product_attributes: @product_attributes, category: @category, state: @state, city: @city, photos: @photos }
       end
 
       def update

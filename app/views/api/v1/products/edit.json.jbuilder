@@ -10,9 +10,9 @@ json.description @product.description
 json.price_in_cents @product.price_in_cents
 json.quantity @product.quantity
 json.product_attributes @product_attributes
-json.product_photos @product.photos
 json.state @product.state
 json.city @product.city
 json.year @product.year
 json.product_condition_status @product.product_condition_status
 json.product_condition_description @product.product_condition_description
+json.photos @photos

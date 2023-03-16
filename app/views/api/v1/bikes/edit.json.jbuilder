@@ -55,4 +55,4 @@ json.handlebar_material @bike.handlebar_material
 json.wheel_material @bike.wheel_material
 json.seat_post_material @bike.seat_post_material
 json.battery_cycles @bike.battery_cycles
-json.photos @bike.photos
+json.photos @photos

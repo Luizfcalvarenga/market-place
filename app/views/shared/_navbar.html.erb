@@ -172,8 +172,10 @@
           <i class="fas fa-times text-success" id="close-icon"></i>
         </button>
         <div id="navbar-links-mobile" class="mt-3">
-          <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
-            <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
+          <% unless current_page?(new_user_session_path) %>
+            <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
+              <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
+            <% end %>
           <% end %>
           <% if user_signed_in? %>
             <%= link_to edit_profiles_path, class: "nav-link-drop" do %>
@@ -186,19 +188,22 @@
     </div>
 
     <div class="bottom-navbar">
-      <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
-        <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
-      <% end %>
-      <%= link_to products_path, class: "block-item #{current_page?(controller: 'products', action: 'index')? "selected-path" : ""}" do %>
-        <i class="fab fa-product-hunt nav-bottom-icon"></i><br><span class="nav-bottom-link">Produtos</span>
-      <% end %>
-      <%= link_to new_announce_path, class: "block-item #{(current_page?(controller: 'bikes', action: 'new') || current_page?(controller: 'products', action: 'new') || current_page?(controller: 'pages', action: 'new_announce'))? "selected-path" : ""}" do %>
-        <i class="far fa-edit nav-bottom-icon"></i> <br><span class="nav-bottom-link">Anunciar</span>
-      <% end %>
-      <%= link_to chats_path, class: "block-item #{(current_page?(controller: 'chats', action: 'index') || current_page?(controller: 'users', action: 'show'))? "selected-path" : ""}" do %>
-        <i class="far fa-comment-alt  nav-bottom-icon"></i> <br><span class="nav-bottom-link">Chat</span>
-        <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
-          <span class="badge badge-danger mobile-notification">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
+      <% unless current_page?(new_user_session_path) %>
+
+        <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
+          <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
+        <% end %>
+        <%= link_to products_path, class: "block-item #{current_page?(controller: 'products', action: 'index')? "selected-path" : ""}" do %>
+          <i class="fab fa-product-hunt nav-bottom-icon"></i><br><span class="nav-bottom-link">Produtos</span>
+        <% end %>
+        <%= link_to new_announce_path, class: "block-item #{(current_page?(controller: 'bikes', action: 'new') || current_page?(controller: 'products', action: 'new') || current_page?(controller: 'pages', action: 'new_announce'))? "selected-path" : ""}" do %>
+          <i class="far fa-edit nav-bottom-icon"></i> <br><span class="nav-bottom-link">Anunciar</span>
+        <% end %>
+        <%= link_to chats_path, class: "block-item #{(current_page?(controller: 'chats', action: 'index') || current_page?(controller: 'users', action: 'show'))? "selected-path" : ""}" do %>
+          <i class="far fa-comment-alt  nav-bottom-icon"></i> <br><span class="nav-bottom-link">Chat</span>
+          <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
+            <span class="badge badge-danger mobile-notification">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
+          <% end %>
         <% end %>
       <% end %>
       <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
