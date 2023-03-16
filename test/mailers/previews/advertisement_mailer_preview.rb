@@ -6,6 +6,11 @@ class AdvertisementMailerPreview < ActionMailer::Preview
     AdvertisementMailer.with(advertisement: advertisement).advertisement_creation
   end
 
+  def notify_admin_advertisement_creation
+    advertisement = Advertisement.last
+    AdvertisementMailer.with(advertisement: advertisement).notify_admin_advertisement_creation
+  end
+
   def advertisement_approval
     advertisement = Advertisement.last
     AdvertisementMailer.with(advertisement: advertisement).advertisement_approval
