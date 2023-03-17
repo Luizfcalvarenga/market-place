@@ -2082,7 +2082,7 @@ export function BikeForm(props) {
             {
               photosPreview.map((photoPreview, idx) => {
                 return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
-                    <img src={photoPreview} alt="" className="image-preview-form" />
+                    <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
                     <div id={photoPreview} className="middle">
                       <div id={photoPreview} className="text">Remover</div>
                     </div>

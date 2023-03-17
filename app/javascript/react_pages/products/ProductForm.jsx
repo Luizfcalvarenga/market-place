@@ -224,7 +224,7 @@ export function ProductForm(props) {
 
 
       if (response.data.product_attributes) {
-        setProductAttributes(  
+        setProductAttributes(
           response.data.product_attributes
         );
       }
@@ -1953,7 +1953,7 @@ export function ProductForm(props) {
             photosPreview?.length > 0 && (
               <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
                 {
-                  photosPreview.map((photoPreview, index) => {
+                  photosPreview.map((photoPreview, idx) => {
                     return <img src={photoPreview} key={idx} alt="" className="image-review" />
                   })
                 }
