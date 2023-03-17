@@ -119,35 +119,6 @@ export function Product(props) {
     return languageMap[word]
   }
 
-  // const handleNextPrevious = () => {
-  //   const nextId = presentIds.filter(element => element > productId ).shift()
-  //   const previousId = presentIds.filter(element => element < productId ).pop()
-  //   if (nextId && previousId) {
-  //     return (
-  //       <div className="d-flex justify-content-between my-3">
-  //         <a href={`http://localhost:3000/products/${(previousId)}`} className="btn-back-step "> <i className="fas fa-angle-double-left mt-1 me-2"></i>anterior</a>
-  //         <a href={`http://localhost:3000/products/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
-  //       </div>
-  //     )
-  //   } else if (nextId && !previousId) {
-  //     return (
-  //       <div className="d-flex justify-content-end my-3">
-  //         <a href={`http://localhost:3000/products/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
-  //       </div>
-  //     )
-  //   } else if (previousId && !nextId) {
-  //     return (
-  //       <div className="d-flex justify-content-between my-3">
-  //         <a href={`http://localhost:3000/products/${(previousId)}`} className="btn-back-step "><i className="fas fa-angle-double-left mt-1 me-2"></i> anterior</a>
-  //       </div>
-  //     )
-  //   } else if (!previousId && !nextId) {
-  //     return (
-  //       <div className="d-flex justify-content-between my-3">
-  //       </div>
-  //     )
-  //   }
-  // }
 
 
   return (
@@ -155,7 +126,6 @@ export function Product(props) {
     <div className="product-show index-container" product={product} key={product}>
       {product && (<>
 
-          {/* {handleNextPrevious()} */}
           <div className="other-infos d-flex justify-content-between gap-3 product-show-infos">
             <div id="carouselExampleControls" className="carousel slide product-photos w-70" data-bs-ride="carousel">
               <div className="carousel-inner">
