@@ -1962,15 +1962,15 @@ export function ProductForm(props) {
           }
 
           <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
-            {(props.productId && !photosPreview) && (
+            {(props.productId && typeof(photosPreview) === "undefined") && (
               photosEdit.map((photo, idx) => {
                 return <img src={photo} key={idx} alt="" className="image-review" />
               })
             )}
           </div>
 
-          {(!props.productId && !photosPreview) && (
-            <p>Nenhuma foto adicionada!!</p>
+          {(photosEdit?.length === 0 && typeof(photosPreview) === "undefined") && (
+            <p className="text-center">Nenhuma foto adicionada!!</p>
           )}
 
           {!props.productId && (<>

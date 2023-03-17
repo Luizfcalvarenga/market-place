@@ -101,10 +101,18 @@
   }
 
   .new_announce_banner {
-    height: 45vh;
+    height: 60vh;
     margin: auto;
     background-position: center;
+    .announce-banner-title {
+      padding-top: 100px;
+    }
 
+    .card-banner {
+      .text-white {
+        display: none;
+      }
+    }
   }
   .section-how-works {
     display: block !important;
