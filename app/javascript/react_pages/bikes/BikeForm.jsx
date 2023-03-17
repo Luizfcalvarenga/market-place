@@ -696,16 +696,10 @@ export function BikeForm(props) {
 
   const handleLocality = (e) => {
     if (e.target.id === "state-input") {
-      console.log(e.target.id)
-      console.log(e.target.value)
-      console.log(states.find(element => element.id === Number(e.target.value)).acronym)
       setStateId(e.target.value)
       setState(states.find(element => element.id === Number(e.target.value)).acronym)
       setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
     } else {
-      console.log(e.target.id)
-      console.log(e.target.value)
-      console.log(cities.find(element => element.id === Number(e.target.value)).name)
       setCityId(e.target.value)
       setCity(cities.find(element => element.id === Number(e.target.value)).name)
     }
@@ -2082,7 +2076,7 @@ export function BikeForm(props) {
             {
               photosPreview.map((photoPreview, idx) => {
                 return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
-                    <img src={photoPreview} alt="" className="image-preview-form" />
+                    <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
                     <div id={photoPreview} className="middle">
                       <div id={photoPreview} className="text">Remover</div>
                     </div>
@@ -2312,14 +2306,14 @@ export function BikeForm(props) {
         }
 
         <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
-          {(props.bikeId && !photosPreview) && (
+          {(props.bikeId && typeof(photosPreview) === "undefined") && (
             photosEdit.map((photo, idx) => {
               return <img src={photo} key={idx} alt="" className="image-review" />
             })
           )}
         </div>
-        {(!props.bikeId && !photosPreview) && (
-          <p>Nenhuma foto adicionada!!</p>
+        {(photosEdit?.length === 0 && typeof(photosPreview) === "undefined") && (
+          <p className="text-center">Nenhuma foto adicionada!!</p>
         )}
 
 
