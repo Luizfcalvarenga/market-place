@@ -113,8 +113,10 @@ module Api
         @state = @bike.state.acronym
         @city = @bike.city.name
         @photos = @bike.photos.map(&:url)
+        @maped_cities = City.where(state_id: @bike.state_id)
 
-        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city, photos: @photos }
+
+        render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city, photos: @photos, maped_cities: @maped_cities }
       end
 
       def update

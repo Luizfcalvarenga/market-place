@@ -56,3 +56,4 @@ json.wheel_material @bike.wheel_material
 json.seat_post_material @bike.seat_post_material
 json.battery_cycles @bike.battery_cycles
 json.photos @photos
+json.maped_cities @maped_cities

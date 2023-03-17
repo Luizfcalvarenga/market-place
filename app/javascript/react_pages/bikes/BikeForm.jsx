@@ -163,11 +163,7 @@ export function BikeForm(props) {
     }
   });
 
-  useEffect(() => {
-    if (props.bikeId && stateId) {
-      setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
-    }
-  }, []);
+
 
   useEffect(() => {
     if (!photos) {
@@ -272,6 +268,7 @@ export function BikeForm(props) {
       setBatteryCycles(response.data.bike.battery_cycles);
       setPedals(response.data.bike.pedals);
       setPhotosEdit(response.data.photos);
+      setMapedCitiesForState(response.data.maped_cities)
 
     }
   }

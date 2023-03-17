@@ -16,3 +16,4 @@ json.year @product.year
 json.product_condition_status @product.product_condition_status
 json.product_condition_description @product.product_condition_description
 json.photos @photos
+json.maped_cities @maped_cities

@@ -164,11 +164,11 @@ export function ProductForm(props) {
     }
   })
 
-  useEffect(() => {
-    if (props.productId && productStateId) {
-      setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (props.productId ) {
+  //     setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
+  //   }
+  // }, []);
 
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
@@ -220,9 +220,11 @@ export function ProductForm(props) {
       setProductConditionStatus(response.data.product.product_condition_status);
       setProductConditionDescription(response.data.product.product_condition_description);
       setPhotosEdit(response.data.photos);
+      setMapedCitiesForState(response.data.maped_cities)
+
 
       if (response.data.product_attributes) {
-        setProductAttributes(
+        setProductAttributes(  
           response.data.product_attributes
         );
       }
@@ -1027,6 +1029,8 @@ export function ProductForm(props) {
         <li id="progress-6" className="progress progress-6"><button className="btn-progress" onClick={(e) => handleShowSection(e)}>6</button></li>
       </ul>
 
+
+
       <div id="first-section">
         <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
         <div className="d-flex justify-content-between gap-3 btns-components mt-3">
@@ -1035,8 +1039,8 @@ export function ProductForm(props) {
           <button id="components" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
           <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
         </div>
-
       </div>
+
 
 
       <form id="product-form" className="">
