@@ -17,9 +17,6 @@ export function Bike(props) {
   const [presentIds, setPresentIds] = useState([])
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
-
-
-
   useEffect(async () => {
     let url = `/api/v1/bikes/${bikeId}`;
     const response = await axios.get(url);
@@ -27,8 +24,6 @@ export function Bike(props) {
     setPresentIds(response.data.present_ids);
     setCity(response.data.city);
     setState(response.data.state);
-
-
   }, [])
 
   const handleLike = (e) => {
@@ -51,7 +46,6 @@ export function Bike(props) {
         }
       }
     })
-
   }
 
   const showSellerContact = () => {
@@ -125,36 +119,6 @@ export function Bike(props) {
     return languageMap[word]
   }
 
-  // const handleNextPrevious = () => {
-  //   const nextId = presentIds.filter(element => element > bikeId ).shift()
-  //   const previousId = presentIds.filter(element => element < bikeId ).pop()
-  //   if (nextId && previousId) {
-  //     return (
-  //       <div className="d-flex justify-content-between my-3">
-  //         <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "> <i className="fas fa-angle-double-left mt-1 me-2"></i>anterior</a>
-  //         <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
-  //       </div>
-  //     )
-  //   } else if (nextId && !previousId) {
-  //     return (
-  //       <div className="d-flex justify-content-end my-3">
-  //         <a href={`http://localhost:3000/bikes/${(nextId)}`} className="btn-next-step ">próximo <i className="fas fa-angle-double-right mt-1 ms-1"></i></a>
-  //       </div>
-  //     )
-  //   } else if (previousId && !nextId) {
-  //     return (
-  //       <div className="d-flex justify-content-between my-3">
-  //         <a href={`http://localhost:3000/bikes/${(previousId)}`} className="btn-back-step "><i className="fas fa-angle-double-left mt-1 me-2"></i> anterior</a>
-  //       </div>
-  //     )
-  //   } else if (!previousId && !nextId) {
-  //     return (
-  //       <div className="d-flex justify-content-between my-3">
-
-  //       </div>
-  //     )
-  //   }
-  // }
 
   const openTab = (e, section) => {
     e.target.classList.toggle("show-section")
@@ -180,7 +144,6 @@ export function Bike(props) {
     <div className="bike-show" bike={bike} key={bike} >
       {bike && (<>
 
-        {/* {handleNextPrevious()} */}
         <div className="d-flex justify-content-between gap-3 bike-show-infos">
           <div id="carouselExampleControls" className="carousel slide bike-photos w-70" data-bs-ride="carousel">
             <div className="carousel-inner">

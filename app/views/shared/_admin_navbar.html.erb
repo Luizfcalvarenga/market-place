@@ -33,18 +33,12 @@
                   <%= image_tag "avatar-bike.png", class: "avatar-bike"%>
                 </button>
               <% end %>
-              <div class="dropdown-content-user">
-                <div class="drpdw-user">
-                  <h4 class="text-success mt-2 text-center ms-2">ADMIN</h4>
-                  <hr class="menu-line">
-                  <%= link_to "Nuflow pass", "#", class: "text-white" %>
-                  <%= link_to "Nuflow bike", "#", class: "text-white" %>
-                  <%= link_to "Conta", edit_profiles_path, class: "text-white" %>
-                  <hr class="menu-line">
-                  <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-danger nav-link-drop" %>
-                </div>
-              </div>
             </div>
+          </li>
+          <li class="my-auto">
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link-logout ms-3" do %>
+              SAIR
+            <% end %>
           </li>
         <% else %>
           <li class="nav-item">
@@ -53,8 +47,6 @@
         <% end %>
       </ul>
     </div>
-
-
   </div>
 
   <% if mobile_device? %>

@@ -7,7 +7,7 @@
   text-align: center;
   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("new-announce-banner.jpg");
   background-size: cover;
-  height: 80vh;
+  height:80vh;
   margin-top: -150px;
 }
 
@@ -17,6 +17,18 @@
   width: 50px;
   height: 50px;
   filter: invert(86%) sepia(56%) saturate(0%) hue-rotate(288deg) brightness(108%) contrast(101%);
+}
+
+.banner-icons {
+  width: 40px;
+  height: 40px;
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(26deg) brightness(114%) contrast(101%);
+  text-shadow: 1px 1px 2px black;
+
+}
+
+.announce-banner-title {
+  text-shadow: 1px 1px 2px black;
 }
 
 
@@ -42,7 +54,8 @@
   border-radius: 4px;
   padding: 20px;
   align-items: center;
-  background-color: rgb(21, 21, 21);
+  background-color: transparent;
+  width: 50%;
 }
 // .step {
 //   margin-bottom: 0 !important;
@@ -82,7 +95,6 @@
 @media (max-width: 765px) {
 
   .frequent-questions {
-
     margin: 0;
     width: 100%;
 
@@ -90,12 +102,16 @@
 
   .new_announce_banner {
     height: 45vh;
-    background-image: none;
     margin: auto;
+    background-position: center;
 
   }
   .section-how-works {
     display: block !important;
   }
 
+  .card-how-works {
+
+    width: 100%;
+  }
 }

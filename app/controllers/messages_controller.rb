@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
       attachments: msg_params[:attachments]
     )
     skip_authorization
+    MessageMailer.with(message: @message).new_message.deliver_now
 
   end
 

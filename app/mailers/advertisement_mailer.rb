@@ -14,6 +14,7 @@ class AdvertisementMailer < ApplicationMailer
     mail(to: "contato@nuflowshop.com.br", subject: "Novo anúncio para revisão")
   end
 
+
   def advertisement_approval
     @advertisement = params[:advertisement]
     @client = @advertisement.user
@@ -35,5 +36,6 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     # @client = User.find(id: @advertisement.user_id)
     mail(to:"contato@nuflowshop.com.br", subject: "Anuncio revisado!!!")
+
   end
 end

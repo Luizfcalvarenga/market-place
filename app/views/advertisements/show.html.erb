@@ -66,7 +66,6 @@
       <div>
         <p><span class="text-success me-2">Marca:</span><%= @item.frame_brand %></p>
         <p><span class="text-success me-2">Modelo:</span><%= @item.model %></p>
-        <p><span class="text-success me-2">Modelo:</span><%= @item.model %></p>
         <p><span class="text-success me-2">Ano:</span><%= @item.year %></p>
         <p><span class="text-success me-2">Quantidade:</span><%= @item.quantity %></p>
         <p><span class="text-success me-2">Preço:</span><%= number_to_currency(@item.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
