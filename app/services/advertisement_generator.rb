@@ -33,7 +33,6 @@ class AdvertisementGenerator
   end
 
   def advertisement_price
-
     price_in_cents = nil
     product_price = @advertisable.price_in_cents
 

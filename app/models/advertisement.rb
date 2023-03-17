@@ -53,9 +53,7 @@ class Advertisement < ApplicationRecord
   end
 
   def final_price_with_coupon_in_cents
-
     return price_in_cents if coupon.blank?
-
     if coupon.kind_percentage?
       (price_in_cents * (1 - coupon.discount.to_f/100)).to_i
     else
@@ -91,7 +89,7 @@ class Advertisement < ApplicationRecord
   end
 
   def should_generate_new_invoice?
-    invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled"
+    !is_free? || invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled"
   end
 
   def check_payment_actions_performed

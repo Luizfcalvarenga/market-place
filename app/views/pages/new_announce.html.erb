@@ -1,14 +1,36 @@
 <div class="h-100 w-100 page-body pb-5">
   <div class="<%= mobile_device? ? "w-100" : "w-100" %> new_announce_banner">
-    <div class="spacer-100 page-desktop"></div>
-    <h1 class="pt-5 mt-5">ANUNCIE COM A <span class="text-success mt-3">NUFLOW</span></h1>
-    <p class="text-white">Anuncie bikes e componentes para milhares de ciclistas e venda mais rápido.</p>
-    <p class="text-white">O que gostaria de anunciar?</p>
-    <div class="row new-announce-btns">
+    <div class="spacer-150 page-desktop mb-5"></div>
 
-      <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4 col-8 col-md-2" %>
-      <%= link_to "PRODUTOS", new_product_path, class: "btn btn-outline mt-3 px-2 ms-3 col-8 col-md-2" %>
-    </div>
+
+      <h4 class="text-white announce-banner-title <%= mobile_device? ? "" : "mt-5 " %>">ANUNCIE SUA BIKE OU EQUIPAMENTO PARA MILHARES DE CICLISTAS E VENDA MAIS RÁPIDO.</h4>
+      <div class="d-flex justify-content-between gap-2 mt-3">
+        <div class="card-banner w-30">
+          <p class="text-center"><%= image_tag "maps.png", class: "banner-icons" %></p>
+          <h5 class="fs-20">ANUNCIE ONDE OS CICLISTAS ESTÃO</h5>
+          <p class="fs-16 text-white">Todo dia, milhares de ciclistas de todo o Brasil acessam a Nuflow em busca de bikes e equipamentos.</p>
+        </div>
+
+        <div class="card-banner w-30">
+            <p class="text-center"><%= image_tag "snap.png", class: "banner-icons" %></p>
+          <h5 class="fs-20">ZERO BUROCRACIA</h5>
+          <p class="fs-16 text-white">Anuncie em poucos minutos e sem sair de casa.</p>
+        </div>
+
+        <div class="card-banner w-30">
+          <p class="text-center"><%= image_tag "discussion.png", class: "banner-icons" %></p>
+          <h5 class="fs-20">SEM INTERMEDIÁRIOS</h5>
+          <p class="fs-16 text-white">Negocie diretamente com os interessados e decida o melhor negócio para você</p>
+        </div>
+      </div>
+
+
+      <div class="new-announce-btns">
+        <%# <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4" %>
+        <%= link_to "ANUNCIAR", new_product_path, class: "nav-link" %>
+      </div>
+
+
     <% if false %>
       <div class="input-group my-4 text-center">
         <input type="text" class="form-control" placeholder="<%= mobile_device? ? "Busque" : "Bicicletas, assessórios, serviços, etc..." %>" aria-label="Bicicletas, assessórios, serviços, etc..." aria-describedby="button-addon2">
@@ -72,28 +94,24 @@
       <div class="card-how-works <%= mobile_device? ? "mt-3" : "" %>">
         <p class="text-center"><%= image_tag "approval.png", class: "announce-icons" %></p>
         <h4 class="text-center">Aprovação</h4>
-        <p class="text-center"><small>Seu anúncio é encaminhado para revisão e caso esteja tudo em ordem ele será aprovado pela nossa equipe. Caso contrário entraremos em contato para atualizar as informações necessárias.</small></p>
+        <p class="text-center"><small>Agora sim, seu anúncio é publicado em nossas plataformas e é visto por milhares de ciclistas, de todo o Brasil. </small></p>
       </div>
     </div>
 
-    <div class="d-flex justify-content-between mt-4 gap-2 section-how-works">
-      <div class="card-how-works">
+    <div class="d-flex justify-content-center mt-4 gap-2 section-how-works">
+      <div class="card-how-works  <%= mobile_device? ? "w-100" : "w-30" %>">
         <p class="text-center"><%= image_tag "disseminate.png", class: "announce-icons" %></p>
         <h4 class="text-center">Publicação</h4>
         <p class="text-center"><small>Agora sim, seu anúncio é publicado em nossas plataformas e será visto por milhares de ciclistas, de todo o Brasil.</small></p>
       </div>
 
-      <div class="card-how-works <%= mobile_device? ? "mt-3" : "" %>">
+      <div class="card-how-works  <%= mobile_device? ? "mt-3 w-100" : "w-30" %>">
         <p class="text-center"><%= image_tag "negotiation.png", class: "announce-icons" %></p>
         <h4 class="text-center">Negociação</h4>
-        <p class="text-center"><small>Você recebe propostas e mensagens dos interessados direto no chat. Fique tranquilo, você será notificado(a) por e-mail sempre que tiver uma atualização.</small></p>
+        <p class="text-center"><small>Você recebe propostas e mensagens dos interessados direto no chat ou celular (quando disponibilizado). Fique tranquilo, você será notificado(a) por e-mail sempre que tiver uma atualização no chat.</small></p>
       </div>
 
-      <div class="card-how-works <%= mobile_device? ? "mt-3" : "" %>">
-        <p class="text-center"><%= image_tag "social-care.png", class: "announce-icons" %></p>
-        <h4 class="text-center">Assessoria</h4>
-        <p class="text-center"><small>Conte com a assessoria de especialistas para tudo que precisar na venda da sua bike ou componente usado. Nossos serviços incluem soluções de intermediação, pagamento e envio.</small></p>
-      </div>
+
     </div>
   </div>
 
