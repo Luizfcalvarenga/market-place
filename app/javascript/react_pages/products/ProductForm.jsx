@@ -164,11 +164,6 @@ export function ProductForm(props) {
     }
   })
 
-  // useEffect(() => {
-  //   if (props.productId ) {
-  //     setMapedCitiesForState(cities.filter(element => element.state_id === productStateId))
-  //   }
-  // }, []);
 
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
@@ -418,6 +413,7 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
+    console.log(e)
     if (e.target.localName === "img") {
       let filter = e.target.alt;
       if (filter === "acessories") {

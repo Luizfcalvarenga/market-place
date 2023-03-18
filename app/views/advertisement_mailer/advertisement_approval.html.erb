@@ -134,20 +134,26 @@
     <p class="item-name">Seu anúncio foi aprovado!</p>
 
     <p class="item-name">Você pode acessa-lo no link abaixo.</p>
+    <% if @advertisement.advertisable_type == "Product" %>
+      <div class="invoice-link">
+        <a href="https://nuflowshop.herokuapp.com/products/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
+      </div>
+    <% else %>
+      <div class="invoice-link">
+        <a href="https://nuflowshop.herokuapp.com/bikes/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
+      </div>
+    <% end %>
+
     <div class="invoice-link">
-      <a href="https://nuflowshop.herokuapp.com/products/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
     </div>
     <h2>Detalhes do seu pedido:</h2>
     <p><strong class="item-name">Pedido:</strong> #<%= @advertisement.id %></p>
     <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
-    <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_type %></p>
+    <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_display %></p>
     <p><strong class="item-name">Status:</strong> <%= @advertisement.status %></p>
-    <h6>Dúvidas? Entre em contato com  através do email <strong></strong></h6>
     <hr class="footer-line">
     <div class="footer">
-
       <%= image_tag "white_logo.png", class: "footer-brand"%>
-
       <div class="social-icons">
         <a href="#" class="footer-icon"><%= image_tag "youtube.png", class: "social-icon" %></a>
         <a href="#"><%= image_tag "instagram.png", class: "social-icon" %></a>
