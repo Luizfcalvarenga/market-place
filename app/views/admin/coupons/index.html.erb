@@ -15,6 +15,7 @@
         <th>Data de expiração</th>
         <th>Quantidade</th>
         <th>Utilizados</th>
+        <th>Restantes</th>
         <th>Editar</th>
       </thead>
       <tbody>
@@ -30,9 +31,7 @@
                 <%= display_price_in_cents(coupon.discount.to_f) %>
               <% end %>
             </td>
-            <%# <td class="align-middle">
-              <%= coupon.kind %>
-            </td> 
+
             <td class="align-middle">
               <%= coupon.valid_until.strftime("%d/%m/%Y") %>
             </td>
@@ -41,6 +40,9 @@
             </td>
             <td class="align-middle">
               <%= coupon.advertisements.count %>
+            </td>
+            <td class="align-middle">
+              <%= coupon.redemption_limit - coupon.advertisements.count %>
             </td>
             <td class="align-middle">
               <%= link_to edit_admin_coupon_path(coupon) do %>

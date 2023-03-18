@@ -9,8 +9,6 @@ class Advertisement < ApplicationRecord
     waiting_review: "Aguardando Revisão",
     approved: "Publicado",
     update_requested: "Edição Solicitada",
-
-
   }
 
   def status_display
@@ -42,7 +40,6 @@ class Advertisement < ApplicationRecord
 
   def perform_after_payment_confirmation_actions
     self.update(status: "paid")
-
     if is_free?
       self.update(
         value: 0,
