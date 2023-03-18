@@ -57,7 +57,7 @@ class BikesController < ApplicationController
     @bike.touch(:removed_at)
     if @bike.removed_at != nil
       flash[:alert] = "Seu Produto #{@bike.model} foi removida"
-      redirect_to my_products_path
+      redirect_to advertisements_path
     end
   end
 

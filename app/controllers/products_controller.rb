@@ -71,7 +71,7 @@ class ProductsController < ApplicationController
     @product.touch(:removed_at)
     if @product.removed_at != nil
       flash[:alert] = "Seu Produto #{@product.name} foi removido"
-      redirect_to my_products_path
+      redirect_to advertisements_path
     end
   end
 
