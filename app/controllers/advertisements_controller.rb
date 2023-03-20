@@ -23,7 +23,7 @@ class AdvertisementsController < ApplicationController
     if @advertisement.is_free?
       @advertisement.perform_after_payment_confirmation_actions
       flash[:notice] = "Anúncio criado com sucesso"
-      redirect_to my_products_path and return
+      redirect_to advertisements_path and return
     end
 
     if @advertisement.should_generate_new_invoice?

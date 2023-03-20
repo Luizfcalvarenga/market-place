@@ -34,7 +34,6 @@ class AdvertisementMailer < ApplicationMailer
 
   def advertisement_updater
     @advertisement = params[:advertisement]
-    # @client = User.find(id: @advertisement.user_id)
     mail(to:"contato@nuflowshop.com.br", subject: "Anuncio revisado!!!")
 
   end
