@@ -34,7 +34,7 @@ class Advertisement < ApplicationRecord
   }
 
   def is_free?
-    price_in_cents.zero?
+    price_in_cents.zero? || advertisement.final_price_with_coupon_in_cents == 0
   end
 
 
@@ -44,7 +44,8 @@ class Advertisement < ApplicationRecord
       self.update(
         value: 0,
         net_value: 0,
-        invoice_paid_at: Time.current
+        invoice_paid_at: Time.current,
+        status: "waiting_review"
       )
     end
   end

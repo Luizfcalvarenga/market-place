@@ -1773,7 +1773,7 @@ export function BikeForm(props) {
                   })}
                 </select>
 
-                { rearSuspensionTravel === "other"  && (
+                { frontSuspensionTravel === "other"  && (
                   <>
                     <label htmlFor="year" className="mt-4">Qual?</label>
                     <input type="text" className="text-input" value={otherRearSuspensionTravel} onChange={(e) => setOtherFrontSuspensionTravel(e.target.value)}/>

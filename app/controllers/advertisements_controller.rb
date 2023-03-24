@@ -25,6 +25,7 @@ class AdvertisementsController < ApplicationController
       flash[:notice] = "Anúncio criado com sucesso"
       redirect_to advertisements_path and return
     end
+    
 
     if @advertisement.should_generate_new_invoice?
       ::NovaIugu::InvoiceGenerator.new(@advertisement).call
