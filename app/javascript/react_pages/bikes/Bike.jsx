@@ -224,7 +224,7 @@ export function Bike(props) {
               <button className="btn-info-section tablinks show-section"  onClick={(e) => openTab(e, "Quadro")}>Quadro</button>
             </div>
             <div className="">
-              <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Câmbio")}>Câmbio</button>
+              <button className="btn-info-section tablinks"  onClick={(e) => openTab(e, "Transmissão")}>Transmissão</button>
             </div>
             {bike.category.name !== "road" && (
               <div className="">
@@ -275,7 +275,7 @@ export function Bike(props) {
               <p className="bike-info ms-2 align-middle">{translateWord(bike.frame_material) || bike.frame_material}</p>
             </div>
           </div>
-          <div id="Câmbio" className="tabcontent">
+          <div id="Transmissão" className="tabcontent">
             <div className="text-success item list-item d-flex ms-3">
               <p className="bike-attrs-parts"><strong>Pedivela:</strong> </p>
               <p className="bike-info ms-2 align-middle">{bike.crankset}</p>

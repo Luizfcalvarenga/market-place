@@ -1295,11 +1295,11 @@ export function Bikes(props) {
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
-                    Câmbio
+                    Transmissão
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
                   </div>
                 </button>
-                <div id="Câmbio" className="mb-3 d-none">
+                <div id="Transmissão" className="mb-3 d-none">
                   {presentNumberOfFrontGears.length > 0 && (<>
                     <h5 className="mb-2">nº coroas (dianteiro)</h5>
                     <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">

@@ -263,9 +263,9 @@ export function ProductForm(props) {
   const renderProductTypeAttributeSelect = (attribute, index) => {
     let options = []
     if (["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory) && attribute.name === "frame_size") {
-      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
-    } else if (productCategory === "road" && attribute.name === "frame_size") {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "other" ]
+    } else if (productCategory === "road" && attribute.name === "frame_size") {
+      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
      } else if (attribute.name === "rear_suspension_travel" && ["road"].includes(productCategory)) {
@@ -417,21 +417,21 @@ export function ProductForm(props) {
     if (e.target.localName === "img") {
       let filter = e.target.alt;
       if (filter === "acessories") {
-        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
       } else if (filter === "components") {
         setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
+        setProductTypes(allProducts.filter(element => element.id >= 49 && element.id <= 68));
       }
 
     } else {
       let filter = e.target.id;
       if (filter === "acessories") {
-        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
       } else if (filter === "components") {
         setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
       }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
+        setProductTypes(allProducts.filter(element => element.id >= 49 && element.id <= 68));
       }
 
     }
