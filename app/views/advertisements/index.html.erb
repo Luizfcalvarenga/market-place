@@ -12,21 +12,23 @@
               <h6><span class="text-success">Status:</span> <%= advertisement.status_display %> </h6>
             </div>
 
-            <% if advertisement.invoice_paid_at.blank? %>
+            <% if advertisement.invoice_paid_at.blank?  && (advertisement.final_price_with_coupon_in_cents > 0)%>
               <div>
                 <%= link_to "Pagar anúncio", advertisement_invoice_path(advertisement), class: "btn-invoice"  %>
               </div>
             <% end %>
           </div>
             <div class="d-flex justify-content-between">
-              <% if advertisement.invoice_paid_at.present? %>
+              <% if advertisement.invoice_paid_at.present?  %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-handshake mt-1 me-2"></i>Pago em: </span> <%= advertisement.invoice_paid_at.strftime("%d/%m/%Y") %> </p>
+              <% elsif advertisement.final_price_with_coupon_in_cents < 100 %>
+                <p><span class="topic-cards-index-media text-success"><i class="fas fa-handshake mt-1 me-2"></i>Anunciado com cupom </span> </p>
               <% else%>
                 <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
               <% end %>
-              <% if advertisement.status === "pending" %>
+              <% if (advertisement.status === "pending"  && (advertisement.final_price_with_coupon_in_cents > 0)) %>
                 <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
-              <% elsif  advertisement.status === "waiting_review" || advertisement.status === "paid"%>
+              <% elsif  (advertisement.status === "waiting_review" || advertisement.status === "paid" || advertisement.final_price_with_coupon_in_cents == 0) %>
                 <p><span class="topic-cards-index-media text-primary"><i class="fas fa-clock mt-1 me-2"></i>Aguardando revisão</p>
               <% elsif  advertisement.status === "approved" %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>
@@ -73,7 +75,7 @@
                       <i class="fas fa-pen"></i>  Editar <br>
                     <% end %>
                   <% end %>
-                  
+
                   <% if policy(advertisement.advertisable).destroy? %>
                     <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.product_type.prompt}?"}, class: "nav-link fs-18 text-gray" do %>
                       <i class="fas fa-trash"></i> Remover

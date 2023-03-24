@@ -86,7 +86,7 @@ class Advertisement < ApplicationRecord
   end
 
   def should_generate_new_invoice?
-    !is_free? && (invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled")
+    !(final_price_with_coupon_in_cents < 100) && !is_free? && (invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled")
   end
 
   def check_payment_actions_performed
