@@ -104,8 +104,8 @@
     </div>
 
       <div class="d-flex justify-content-center gap-5 links-servic my-5">
-        <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link" %>
-        <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link" %>
+        <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "btn btn-primary" %>
+        <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "btn btn-primary" %>
       </div>
 
   </div>
@@ -190,7 +190,7 @@
       <h2 class="text-success mb-5">BLOG</h2>
       <h3 class="mb-5">Confira dicas de como comprar e vender sua bike ou equipamento.</h3>
       <div class="text-center mt-5">
-        <%= link_to "VER DICAS", "https://nuflowshop.com.br/category/compra-e-venda/", target: "_blank", class: "nav-link mt-5" %>
+        <%= link_to "VER DICAS", "https://nuflowshop.com.br/category/compra-e-venda/", target: "_blank", class: "btn btn-outline mt-5" %>
       </div>
     </div>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -201,7 +201,7 @@
               <img src="https://lh3.googleusercontent.com/HhzP3dOxdFW90Eso9KE8_eHlhXpzGV3kCjUy1LxTF9DuUlCTn_yZAjNCifkT01610tyS8NekP9rQX9MOLbb8j96CX6aIk2KrpezXcJNuLGZS21Ak3XAPJPEBySpnKvGrFSUrMkzn" alt="" class="blog-img">
               <div class="p-3">
                 <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">COMO VENDER SUA BIKE ONLINE RAPIDAMENTE</h4>
-                <p class="text-center"> <small>O dia de se desfazer da sua bike finalmente chegou. Talvez tenha sido para pegar um modelo que te atende melhor, talvez por necessidade financeira ou talvez por que você não estava conseguindo dar atenção para a magrela. Com ou sem dor no coração, é hora de começar a anunciar sua bicicleta a espera do próximo dono ou dona aparecer e se apaixonar. </small> </p>
+                <p class="text-center text-gray"> <small>O dia de se desfazer da sua bike finalmente chegou. Talvez tenha sido para pegar um modelo que te atende melhor, talvez por necessidade financeira ou talvez por que você não estava conseguindo dar atenção para a magrela. Com ou sem dor no coração, é hora de começar a anunciar sua bicicleta a espera do próximo dono ou dona aparecer e se apaixonar. </small> </p>
               </div>
             </div>
           <% end %>
@@ -212,7 +212,7 @@
               <img src="https://lh4.googleusercontent.com/hMyyiOzr84W6iEwbSS9x1RqCOJZmVkWR0kRZRhUB4wToDjvtuFVcWz0ZdJKKfQ_wg_0M25DXsBB1FhyJ1sIw8tCmGubLRjSiJEcxJqQ6fmZP0n1z7AHEsf8oXNlDeadjRoQYq2Hn" alt="" class="blog-img">
               <div class="p-3">
                 <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">QUANTO VALE MINHA BIKE? GUIA PARA PRECIFICAR BICICLETAS USADAS</h4>
-                <p class="text-center"> <small>Saber calcular o preço de venda da sua bike usada é um dos grandes desafios de quem vai trocar de bicicleta. Assim como carros, bicicletas sofrem grande desvalorização a partir do momento que deixam a loja. Mas a taxa de desvalorização depende de fatores que nem sempre são fáceis de medir, por isso chegar a uma resposta precisa pode dar trabalho.</small> </p>
+                <p class="text-center text-gray"> <small>Saber calcular o preço de venda da sua bike usada é um dos grandes desafios de quem vai trocar de bicicleta. Assim como carros, bicicletas sofrem grande desvalorização a partir do momento que deixam a loja. Mas a taxa de desvalorização depende de fatores que nem sempre são fáceis de medir, por isso chegar a uma resposta precisa pode dar trabalho.</small> </p>
               </div>
             </div>
           <% end %>
@@ -223,7 +223,7 @@
               <img src="https://nuflowshop.com.br/wp-content/uploads/2023/01/bike-urbana-768x384.jpg" alt="" class="blog-img">
               <div class="p-3">
                 <h4 class="text-white text-center <%= mobile_device? ? "mt-3" : "mt-1" %>">MTB? ROAD? COMO ESCOLHER A BIKE CERTA PARA VOCÊ!</h4>
-                <p class="text-center"> <small>Quem decide comprar uma bicicleta depois de algum tempo longe dos pedais encontra um mar de opções, tipos e preços. Fica difícil até entender qual o melhor equipamento para o que você busca. Será que preciso de uma MTB (Mountain Bike)? Preciso de suspensão? Como comprar uma bike usada? Estas e outras perguntas devem ter passado na sua cabeça.</small> </p>
+                <p class="text-center text-gray"> <small>Quem decide comprar uma bicicleta depois de algum tempo longe dos pedais encontra um mar de opções, tipos e preços. Fica difícil até entender qual o melhor equipamento para o que você busca. Será que preciso de uma MTB (Mountain Bike)? Preciso de suspensão? Como comprar uma bike usada? Estas e outras perguntas devem ter passado na sua cabeça.</small> </p>
               </div>
             </div>
           <% end %>
