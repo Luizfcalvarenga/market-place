@@ -1006,7 +1006,7 @@ export function BikeForm(props) {
           <p className="text-danger">{errors.bike.bike_type[0]}</p>
         )}
 
-        { bikeType === "e-bike" && (<>
+        {/* { bikeType === "e-bike" && (<>
           <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
           <div id="Parte elétrica" className="rims d-none mb-3">
             <div className="d-flex">
@@ -1043,7 +1043,7 @@ export function BikeForm(props) {
               <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={mileage} onChange={(e) => setMileage(e.target.value)}/>
             </div>
           </div>
-        </>)}
+        </>)} */}
 
         <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
         <select
@@ -1384,6 +1384,44 @@ export function BikeForm(props) {
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
         <div id="principal-infos" className="principal-infos">
+          {bikeType === "e-bike" && (<>
+            <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
+            <div id="Parte elétrica" className="rims d-none mb-3">
+              <div className="d-flex">
+                <div className="w-40 me-3">
+                  <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
+                  <select
+                    className="select-answer" aria-label=".form-select-sm example"
+                    value={battery}
+                    onChange={(e) => setBattery(e.target.value)}
+                  >
+                    <option value=""></option>
+                    {batteries.map((battery, index)=> {
+                      if (battery === "other") {
+                        return (<option key={index} value="other">Outra</option>);
+                      } else {
+                        return (<option key={index}>{battery}</option>);
+                      }
+
+                    })}
+                  </select>
+
+                  { battery === "other" && (<>
+                    <label htmlFor="otherBattery" className="">Qual?</label>
+                    <input type="text"  className="text-input" placeholder="" value={otherBattery} aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
+                  </>)}
+                </div>
+                <div className="">
+                  <label htmlFor="batteryCyle" className="mt-3">Ciclos da bateria:</label>
+                  <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={batteryCycles} onChange={(e) => setBatteryCycles(e.target.value)}/>
+                </div>
+              </div>
+              <div className="">
+                <label htmlFor="mileage" className="mt-4">KM:</label>
+                <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={mileage} onChange={(e) => setMileage(e.target.value)}/>
+              </div>
+            </div>
+          </>)}
           <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Transmissão<i className="fas fa-chevron-down ms-2"></i></button>
           <div id="Transmissão" className="transmission d-none mb-3">
               <label htmlFor="numberOfFrontGears" className="mt-3">Número de coroas (dianteira):</label>
