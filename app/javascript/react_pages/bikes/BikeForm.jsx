@@ -771,12 +771,21 @@ export function BikeForm(props) {
   }
 
   const openTab = (e, section) => {
-
-    if (e.target.classList.contains("active-tab")) {
-      e.target.classList.remove("active-tab")
-      e.target.classList.remove("active-tab")
-
+    e.target.classList.toggle("active-tab")
+    const principalTab = document.getElementById("principal-tab")
+    const aditionalTab = document.getElementById("aditional-tab")
+    if (e.target.innerText === "Principais") {
+      aditionalTab.classList.add("unactive-tab");
+      aditionalTab.classList.remove("active-tab");
+      principalTab.classList.add("active-tab");
+      principalTab.classList.remove("unactive-tab");
+    } else if (e.target.innerText === "Adicionais") {
+      principalTab.classList.add("unactive-tab");
+      principalTab.classList.remove("active-tab");
+      aditionalTab.classList.remove("unactive-tab");
+      aditionalTab.classList.add("active-tab");
     }
+
     const tabcontent = document.getElementsByClassName("tabcontent");
     let i
     for (i = 0; i < tabcontent.length; i++) {
@@ -1364,13 +1373,11 @@ export function BikeForm(props) {
           </div>
           <p id="additional" className="" >ADICIONAIS</p>
         </div> */}
-        <div className="d-flex justify-content-center bike-form-infos">
-          <div className="title-tab">
-            <button className="tablinks active-tab"  onClick={(e) => openTab(e, "Principais")}>Principais</button>
-          </div>
-          <div className="title-tab ">
-            <button className="tablinks unactive-tab"  onClick={(e) => openTab(e, "Adicionais")}>Adicionais</button>
-          </div>
+        <div id="tabs" className="d-flex justify-content-center bike-form-infos">
+
+          <button id="principal-tab" className="tablinks active-tab"  onClick={(e) => openTab(e, "Principais")}>Principais</button>
+          <button id="aditional-tab" className="tablinks unactive-tab"  onClick={(e) => openTab(e, "Adicionais")}>Adicionais</button>
+
         </div>
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 
