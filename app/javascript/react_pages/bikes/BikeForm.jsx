@@ -1374,10 +1374,8 @@ export function BikeForm(props) {
           <p id="additional" className="" >ADICIONAIS</p>
         </div> */}
         <div id="tabs" className="d-flex justify-content-center bike-form-infos">
-
           <button id="principal-tab" className="tablinks active-tab"  onClick={(e) => openTab(e, "Principais")}>Principais</button>
           <button id="aditional-tab" className="tablinks unactive-tab"  onClick={(e) => openTab(e, "Adicionais")}>Adicionais</button>
-
         </div>
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 

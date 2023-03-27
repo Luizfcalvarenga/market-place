@@ -87,7 +87,8 @@ module Api
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
-              @bike.photos.attach(photo)
+              # @bike.photos.attach(photo)
+              UploadBikePhotosJob.perform_later(@bike, photo)
             end
           end
           if params[:advertisement].present?
