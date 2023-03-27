@@ -770,6 +770,26 @@ export function BikeForm(props) {
     }
   }
 
+  const openTab = (e, section) => {
+
+    e.target.classList.toggle("active-tab")
+    const tabcontent = document.getElementsByClassName("tabcontent");
+    let i
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    const tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" show-section", "");
+    }
+    document.getElementById(section).style.display = "block";
+    e.currentTarget.className += " show-section";
+
+    if (e.target.innerText != "Principais") {
+      document.getElementById("Principais").classList.remove("d-block")
+    }
+  }
+
 
   //////////////////////////////////////////////// frames
 
@@ -1006,45 +1026,6 @@ export function BikeForm(props) {
           <p className="text-danger">{errors.bike.bike_type[0]}</p>
         )}
 
-        {/* { bikeType === "e-bike" && (<>
-          <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
-          <div id="Parte elétrica" className="rims d-none mb-3">
-            <div className="d-flex">
-              <div className="w-40 me-3">
-                <label htmlFor="frameSize" className="mt-3">Capacidade:</label>
-                <select
-                  className="select-answer" aria-label=".form-select-sm example"
-                  value={battery}
-                  onChange={(e) => setBattery(e.target.value)}
-                >
-                  <option value=""></option>
-                  {batteries.map((battery, index)=> {
-                    if (battery === "other") {
-                      return (<option key={index} value="other">Outra</option>);
-                    } else {
-                      return (<option key={index}>{battery}</option>);
-                    }
-
-                  })}
-                </select>
-
-                { battery === "other" && (<>
-                  <label htmlFor="otherBattery" className="">Qual?</label>
-                  <input type="text"  className="text-input" placeholder="" value={otherBattery} aria-label=".form-control-sm example" onChange={(e) => setOtherBattery(e.target.value)}/>
-                </>)}
-              </div>
-              <div className="">
-                <label htmlFor="batteryCyle" className="mt-3">Ciclos da bateria:</label>
-                <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={batteryCycles} onChange={(e) => setBatteryCycles(e.target.value)}/>
-              </div>
-            </div>
-            <div className="">
-              <label htmlFor="mileage" className="mt-4">KM:</label>
-              <input className="text-input" type="number" placeholder="" aria-label=".form-control-sm example" value={mileage} onChange={(e) => setMileage(e.target.value)}/>
-            </div>
-          </div>
-        </>)} */}
-
         <label htmlFor="category" className="mt-4 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
         <select
         value={category}
@@ -1158,7 +1139,6 @@ export function BikeForm(props) {
               } else {
                 return (<option key={index}>{frameSize}</option>);
               }
-              // return (<option key={index}>{frameSize}</option>);
             })}
           </select>
           { errors && errors.bike && errors.bike.frame_size && (
@@ -1373,17 +1353,25 @@ export function BikeForm(props) {
 
       <div id="third-section" className="card-bike-select mb-5 d-none">
         <h4 className="text-center text-success">Informações técnicas</h4>
-        <div className="d-flex justify-content-center">
+        {/* <div className="d-flex justify-content-center">
           <p id="principal" className="me-2 text-success" >PRINCIPAIS</p>
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={(e) => handleSwitchSection(e)}/>
           </div>
           <p id="additional" className="" >ADICIONAIS</p>
+        </div> */}
+        <div className="d-flex justify-content-center bike-form-infos">
+          <div className="title-tab">
+            <button className="tablinks active-tab"  onClick={(e) => openTab(e, "Principais")}>Principais</button>
+          </div>
+          <div className="title-tab ">
+            <button className="tablinks unactive-tab"  onClick={(e) => openTab(e, "Adicionais")}>Adicionais</button>
+          </div>
         </div>
                                                                         {/*//////////////////TRANSMISSÂO///////////////////////*/}
 
         {/* BIKE <TRANSMISSION></TRANSMISSION>  fazer render das partials e diminuir código para todas as seções */}
-        <div id="principal-infos" className="principal-infos">
+        <div id="Principais" className="principal-infos tabcontent d-block">
           {bikeType === "e-bike" && (<>
             <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Parte elétrica<i className="fas fa-chevron-down ms-2"></i></button>
             <div id="Parte elétrica" className="rims d-none mb-3">
@@ -1851,7 +1839,7 @@ export function BikeForm(props) {
         </div>
 
                                                                         {/*//////////////////RODAS///////////////////////*/}
-        <div id="additional-infos" className="additional-infos d-none">
+        <div id="Adicionais" className="additional-infos tabcontent ">
             <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Rodas<i className="fas fa-chevron-down ms-2"></i></button>
             <div id="Rodas" className="rims d-none mb-3">
               <label htmlFor="bikeCondition" className="mt-4">Tamanho da roda:</label>
