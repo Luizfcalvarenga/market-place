@@ -772,7 +772,11 @@ export function BikeForm(props) {
 
   const openTab = (e, section) => {
 
-    e.target.classList.toggle("active-tab")
+    if (e.target.classList.contains("active-tab")) {
+      e.target.classList.remove("active-tab")
+      e.target.classList.remove("active-tab")
+
+    }
     const tabcontent = document.getElementsByClassName("tabcontent");
     let i
     for (i = 0; i < tabcontent.length; i++) {
