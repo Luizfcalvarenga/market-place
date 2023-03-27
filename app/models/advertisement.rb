@@ -34,7 +34,7 @@ class Advertisement < ApplicationRecord
   }
 
   def is_free?
-    price_in_cents.zero? || advertisement.final_price_with_coupon_in_cents == 0
+    price_in_cents.zero? || final_price_with_coupon_in_cents == 0
   end
 
 

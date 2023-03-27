@@ -87,8 +87,9 @@ module Api
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
-              # @bike.photos.attach(photo)
-              UploadBikePhotosJob.perform_later(@bike, photo)
+              file_path_to_save_to = "#{Rails.root}/public/images/#{SecureRandom.uuid}#{photo.original_filename}"
+              File.write(file_path_to_save_to, photo)
+              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to)
             end
           end
           if params[:advertisement].present?
@@ -115,8 +116,6 @@ module Api
         @city = @bike.city.name
         @photos = @bike.photos.map(&:url)
         @maped_cities = City.where(state_id: @bike.state_id)
-
-
         render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city, photos: @photos, maped_cities: @maped_cities }
       end
 
@@ -193,7 +192,7 @@ module Api
           :battery_cycles,
           :pedals,
 
-          photos: []
+          # photos: []
         )
       end
 
