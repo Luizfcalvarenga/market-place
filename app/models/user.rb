@@ -110,8 +110,8 @@ class User < ApplicationRecord
     return if photo.attached?
 
     photo.attach(
-      io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-bike.png')),
-      filename: 'avatar-bike.png',
+      io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-shop.png')),
+      filename: 'avatar-shop.png',
       content_type: 'image/png'
     )
   end
