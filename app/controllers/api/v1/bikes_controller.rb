@@ -88,11 +88,9 @@ module Api
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
               photo_name =  photo.original_filename
-              photo_content_type =  photo.content_type
               file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
               File.write(file_path_to_save_to, photo)
-              binding.pry
-              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
+              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name)
             end
           end
           if params[:advertisement].present?
