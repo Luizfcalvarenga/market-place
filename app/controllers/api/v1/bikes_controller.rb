@@ -89,10 +89,8 @@ module Api
             params[:bike][:photos].each do | photo |
               photo_name =  photo.original_filename
               photo_content_type =  photo.content_type
-
               file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
               FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              # File.write(file_path_to_save_to, photo)
               UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
