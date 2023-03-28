@@ -62,7 +62,12 @@ module Api
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
-              @product.photos.attach(photo)
+              # @product.photos.attach(photo)
+              photo_name =  photo.original_filename
+              photo_content_type =  photo.content_type
+              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
+              UploadBikePhotosJob.perform_later(@product, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
           if params[:product][:productAttributes].present?
@@ -113,6 +118,17 @@ module Api
         authorize @product
 
         if @product.update(product_params) || @product_attributes.update(product_attribute_params)
+          if params[:product][:photos].present?
+            @product.photos.purge
+            params[:product][:photos].each do | photo |
+              # @product.photos.attach(photo)
+              photo_name =  photo.original_filename
+              photo_content_type =  photo.content_type
+              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
+              UploadBikePhotosJob.perform_later(@product, file_path_to_save_to, photo_name, photo_content_type)
+            end
+          end
           @advertisement = Advertisement.where(advertisable: @product).first
           @advertisable = @product
           AdvertisementUpdater.new(@advertisement, @advertisable).call
@@ -146,8 +162,8 @@ module Api
           :documentation_type,
           :condition,
           :product_condition_status,
-          :product_condition_description,
-          photos: []
+          :product_condition_description
+          # photos: []
         )
       end
 

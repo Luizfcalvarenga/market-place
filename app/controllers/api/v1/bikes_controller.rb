@@ -125,6 +125,16 @@ module Api
         @bike = Bike.find(params[:id])
         authorize @bike
         if @bike.update(bike_params)
+          if params[:bike][:photos].present?
+            @bike.photos.purge
+            params[:bike][:photos].each do | photo |
+              photo_name =  photo.original_filename
+              photo_content_type =  photo.content_type
+              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
+              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
+            end
+          end
           @advertisement = Advertisement.where(advertisable: @bike).first
           @advertisable = @bike
           AdvertisementUpdater.new(@advertisement, @advertisable).call
