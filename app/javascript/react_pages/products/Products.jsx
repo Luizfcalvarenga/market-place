@@ -591,7 +591,7 @@ export function Products(props) {
             <div className="border-bottom mt-3">
               <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
-                  Tipo de Produto
+                  Categoria de Produto
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </div>
               </button>

@@ -285,7 +285,7 @@ export function Bike(props) {
               <p className="bike-info ms-2 align-middle">{bike.chain}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
-              <p className="bike-orientation"><strong>DIANTEIRO</strong> </p>
+              <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
               <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
@@ -296,7 +296,7 @@ export function Bike(props) {
               <p className="bike-info ms-2 align-middle">{bike.front_derailleur_model}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
-              <p className="bike-orientation"><strong>TRASEIRO</strong> </p>
+              <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
               <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
@@ -327,7 +327,7 @@ export function Bike(props) {
               <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
-              <p className="bike-attrs-parts"><strong>Curso/Tamanho Shock:</strong> </p>
+              <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
               <p className="bike-info ms-2 align-middle">{bike.rear_suspension_travel}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
@@ -351,7 +351,7 @@ export function Bike(props) {
               <p className="bike-info ms-2 align-middle">{bike.brake_disc_size}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
-              <p className="bike-attrs-parts"><strong>Marca | Modeo:</strong> </p>
+              <p className="bike-attrs-parts"><strong>Marca | Modelo:</strong> </p>
               <p className="bike-info ms-2 align-middle">{bike.brake_model}</p>
             </div>
           </div>
@@ -371,7 +371,7 @@ export function Bike(props) {
           </div>
           <div id="Rodas" className="tabcontent">
             <div className="text-success item list-item d-flex ms-3">
-              <p className="bike-attrs-parts"><strong>Tamano:</strong> </p>
+              <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
               <p className="bike-info ms-2 align-middle">{bike.rim_size}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
@@ -419,7 +419,7 @@ export function Bike(props) {
               <p className="bike-info ms-2 align-middle">{translateWord(bike.seat_post_material)}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
-              <p className="bike-attrs-parts"><strong>Tamanho:</strong> </p>
+              <p className="bike-attrs-parts"><strong>Curso:</strong> </p>
               <p className="bike-info ms-2 align-middle">{bike.seat_post_travel}</p>
             </div>
             <div className="text-success item list-item d-flex ms-3">
