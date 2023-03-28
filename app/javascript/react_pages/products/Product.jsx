@@ -219,12 +219,18 @@ export function Product(props) {
                 })}
               </>)}
               <p className="bike-attrs-parts"><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
-              <p className="bike-attrs-parts"><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
-              <p className="bike-attrs-parts"><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
+              {product.condition && (
+                <p className="bike-attrs-parts"><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
+              )}
+              {product.product_condition_status && (
+                <p className="bike-attrs-parts"><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
+              )}
               {product.product_condition_description && (
                 <p className=""><strong className="text-success">mais informações:</strong> {translateWord(product.product_condition_description)}</p>
               )}
-              <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
+              {product.description && (
+                <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
+              )}
             </div>
        </>
       )
