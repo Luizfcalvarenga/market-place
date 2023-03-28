@@ -3,7 +3,7 @@
     <div class="col-12 d-flex align-items-center justify-content-between">
       <em class="last-message ms-3">
         <% if sender.id.eql?(Current.user.id) %>
-          <%= "You: #{last_message.content}".truncate(40) %>
+          <%= "Você: #{last_message.content}".truncate(40) %>
         <% else %>
           <%= "#{sender.full_name.present? ? sender.full_name : sender.email}: #{last_message.content}".truncate(40) %>
         <% end %>
@@ -13,7 +13,7 @@
                 time: last_message.created_at.to_i
                 }) do %>
         <em class="last-message">
-          <%= "#{time_ago_in_words(last_message.created_at)} ago"%>
+          <%= "#{time_ago_in_words(last_message.created_at)} atrás"%>
         </em>
       <% end %>
     </div>

@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   include ChatsHelper
   def show
+    if current_user.blank?
+      redirect_to new_user_session_path
+      flash[:alert] = "você deve fazer login ou criar uma conta para iniciar um chat."
+    end
     @user = User.find(params[:id])
     @chat = Chat.new
     @chats = Chat.public_chats
@@ -10,7 +14,6 @@ class UsersController < ApplicationController
     current_user.update(current_chat: @single_chat)
     @product = Product.find(params[:product_id]) if params[:product_id].present?
     @product = Bike.find(params[:bike_id]) if params[:bike_id].present?
-    # @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
     if Chat.where(is_private: true).present?
       @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
       @conversations.compact()
@@ -35,11 +38,7 @@ class UsersController < ApplicationController
       elsif @product.instance_of? Product
         @message_beggining = Message.create(chat: @single_chat, user: current_user, content: "Olá, gostaria de conversar sobre o produto: #{@product.product_type.prompt} - #{@product.name} - #{@product.brand} #{@product.model} - #{display_price(@product.price_in_cents)} - #{@product.city.name} - #{@product.state.acronym}")
       end
-        # if @product.photos.attached? && params[:photo].present?
-      #   @message_beggining.attachments.attach(params[:photo])
-      # end
     end
-    # raise
     render 'chats/index'
   end
 
