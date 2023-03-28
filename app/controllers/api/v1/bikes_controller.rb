@@ -87,9 +87,12 @@ module Api
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
-              file_path_to_save_to = "#{Rails.root}/public/images/#{SecureRandom.uuid}#{photo.original_filename}"
+              photo_name =  photo.original_filename
+              photo_content_type =  photo.content_type
+              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
               File.write(file_path_to_save_to, photo)
-              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to)
+              binding.pry
+              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
           if params[:advertisement].present?
@@ -191,11 +194,15 @@ module Api
           :mileage,
           :battery_cycles,
           :pedals,
+          :fork_material,
+          :crankset_material,
+          :handlebar_material,
+          :wheel_material,
+          :seat_post_material
 
           # photos: []
         )
       end
-
       def user_signed_in
         current_user.present?
       end
