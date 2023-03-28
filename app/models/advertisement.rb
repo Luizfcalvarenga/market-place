@@ -45,7 +45,6 @@ class Advertisement < ApplicationRecord
         value: 0,
         net_value: 0,
         invoice_paid_at: Time.current,
-        status: "waiting_review"
       )
     end
   end

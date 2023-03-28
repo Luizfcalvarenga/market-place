@@ -26,6 +26,9 @@ class AdvertisementGenerator
       )
       @advertisement.persisted?
     end
+    if (@advertisement.is_free? || @advertisement.final_price_with_coupon_in_cents == 0)
+      @advertisement.update(status: "waiting_review")
+    end
     if @advertisement.should_generate_new_invoice?
       ::NovaIugu::InvoiceGenerator.new(@advertisement).call
     end

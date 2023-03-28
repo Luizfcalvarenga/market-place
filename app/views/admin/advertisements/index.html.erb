@@ -48,7 +48,7 @@
     <thead>
       <tr>
         <th scope="col" class="w-15">Usuário</th>
-        <th scope="col" class="w-5">ID Pedido</th>
+        <th scope="col" class="w-5">Anunciado</th>
         <th scope="col">Pago em</th>
         <th scope="col">Status</th>
         <th scope="col">Valor</th>
@@ -62,7 +62,7 @@
       <% @advertisements.each do |advertisement| %>
         <tr>
           <td class="align-middle" data-label="Usuário"><%= advertisement.user.email %></td>
-          <td class="align-middle" data-label="Nome do usuário"><%= advertisement.id %></td>
+          <td class="align-middle" data-label="Status"><%= advertisement.advertisable_display %></td>
           <td class="align-middle" data-label="Gerado em"><%= advertisement.invoice_paid_at&.strftime("%d/%m/%Y - %H:%M") || "-" %></td>
           <td class="align-middle" data-label="Status"><%= advertisement.status_display %></td>
           <td class="align-middle" data-label="Valor"><%= number_to_currency(advertisement.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></td>
@@ -72,21 +72,21 @@
           <td class="align-middle" data-label="Criado em"><%= advertisement.created_at.strftime("%d/%m/%Y")  %></td>
           <td class="align-middle" data-label="Ações">
             <div class="d-flex  ms-3">
-              <% if advertisement.status === "paid" || advertisement.status === "waiting_review" || advertisement.final_price_with_coupon_in_cents == 0 %>
+              <% if advertisement.status === "paid" || advertisement.status === "waiting_review" %>
                 <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2 align-middle" do %>
                   <i class="fas fa-search mt-1"></i>
                   <span class="ms-2">Revisar</span>
                 <% end %>
               <% elsif  advertisement.status === "pending" %>
                 <i class="fas fa-clock mt-1 text-danger align-middle" ></i>
-                <p><span class="topic-cards-index-media ms-3 text-danger align-middle">Aguardando pagamento</p>
+                <span class="topic-cards-index-media ms-3 text-danger align-middle">Aguardando pagamento</span>
               <% elsif  advertisement.status === "update_requested" %>
                 <i class="fas fa-clock mt-1 text-warning align-middle" ></i>
-                <p><span class="topic-cards-index-media ms-3 text-warning align-middle">Aguardando edição</p>
+                <span class="topic-cards-index-media ms-3 text-warning align-middle ">Aguardando edição</span>
               <% else %>
                 <%= link_to admin_advertisement_path(advertisement.id), class: "view-btn mb-2 align-middle" do %>
                   <i class="fas fa-check mt-1"></i>
-                  <span class="ms-2">Publicado
+                  <span class="ms-2">Publicado</span>
                 <% end %>
               <% end %>
             </div>
