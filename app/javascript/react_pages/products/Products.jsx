@@ -651,7 +651,7 @@ export function Products(props) {
               </div>
             </div>
 
-            {presentCategories.length > 1 && (
+            {presentCategories.length > 0 && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -669,7 +669,7 @@ export function Products(props) {
               </div>
             )}
 
-            {(presentMtbModalities.length > 1 || presentRoadModalities.length > 1|| presentDirtModalities.length > 1) && (
+            {(presentMtbModalities.length > 0 || presentRoadModalities.length > 0 || presentDirtModalities.length > 0) && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -710,7 +710,7 @@ export function Products(props) {
               </div>
             </div>
 
-            {presentBrands.length > 1 && (
+            {presentBrands.length > 0 && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -728,7 +728,7 @@ export function Products(props) {
               </div>
             )}
 
-            {presentModels.length > 1 && (
+            {presentModels.length > 0 && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
