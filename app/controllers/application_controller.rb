@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
     names.include?(params[:controller]) unless params[:controller].blank? || false
   end
 
-
-
 	private
 
   def display_price(price_in_cents)
@@ -78,8 +76,4 @@ class ApplicationController < ActionController::Base
     # :user is the scope we are authenticating
     store_location_for(:user, request.fullpath)
   end
-
-  # def current_controller?(names)
-  #   names.include?(current_controller)
-  # end
 end

@@ -2001,9 +2001,6 @@ export function BikeForm(props) {
               <input className="text-input" type="text" placeholder="" aria-label=".form-control-sm example"  value={seatPostModel} onChange={(e) => setSeatPostModel(e.target.value)}/>
             </div>
 
-                                                                            {/*//////////////////BATERIA///////////////////////*/}
-
-
                                                                             {/*//////////////////Accessories///////////////////////*/}
 
             <button type="button" className="btn-technicality my-3 w-100 p-2" onClick={(e) => handleTechnicalSection(e)}>Acessórios<i className="fas fa-chevron-down ms-2"></i></button>
@@ -2088,7 +2085,7 @@ export function BikeForm(props) {
             )}
 
             {(bikeConditionStatus === "bad" || bikeConditionStatus === "reasonable") && (<>
-              <label htmlFor="description" className="mt-2">Descreva:</label>
+              <label htmlFor="description" className="mt-2">Descreva o estado da bike:</label>
               <textarea className="text-input-description" id="exampleFormControlTextarea1" rows="3" value={bikeConditionDescription} onChange={(e) => setBikeConditionDescription(e.target.value)}></textarea>
             </>)}
           </>)}
