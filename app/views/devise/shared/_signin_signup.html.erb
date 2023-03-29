@@ -11,12 +11,14 @@
       <div class="p-5 bg-dark br-12 d-flex flex-column <%= mobile_device? ? "vh-90" : "vh-80 mt-5" %>">
         <h2 class="text-center text-success f-20">Fazer Login</h2>
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "form-signin"}) do |f| %>
+
           <div class="h-100">
             <div class="h-80">
               <%= f.input :email,
                     required: false,
                     autofocus: true, input_html: {id: "email-signin", autocomplete: "email" } %>
               <%= f.input :password,
+                          label: "Senha",
                           required: false,
                           input_html: { autocomplete: "current-password", id: "password_signin" } %>
               <%= f.input :remember_me, label: 'Continuar logado', as: :boolean, input_html: { checked: true } if devise_mapping.rememberable? %>
@@ -32,7 +34,6 @@
             </div>
           </div>
         <% end %>
-        <%= render "devise/shared/error_messages" %>
         <% if mobile_device? %>
           <p class="my-4">Não tem uma conta? Clique no botão Criar conta no topo desta página</p>
         <% end %>
@@ -50,21 +51,26 @@
                           autofocus: true,
                           input_html: { autocomplete: "email" }%>
               <%= f.input :full_name,
+                          label: "Nome",
                           required: true,
                           autofocus: true %>
               <%= f.input :document_number,
+                          label: "CPF",
                           required: true,
                           autofocus: true,
                           input_html: { class: "mask-cpf" } %>
               <%= f.input :phone_number,
+                          label: "Telefone",
                           required: true,
                           autofocus: true,
                           input_html: { class: "mask-phone" } %>
               <%= f.input :cep,
+                          label: "CEP",
                           required: true,
                           autofocus: true,
                           input_html: { class: "mask-cep" } %>
               <%= f.input :password,
+                          label: "Senha",
                           required: true,
                           hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                           input_html: { autocomplete: "new-password", id: "password_signup" } %>
@@ -81,7 +87,6 @@
           <div class="text-center mt-5 h-20">
             <%= f.button :submit, "Criar nova conta", class: "btn btn-success" %>
           </div>
-          <%= render "devise/shared/error_messages" %>
 
         <% end %>
       </div>
@@ -90,8 +95,8 @@
 </div>
 
 <%# <script>
-let $myGroup = document.getElementById('myGroup');
-  $myGroup.on('show.bs.collapse','.collapse', function() {
+  let $myGroup = document.getElementById('myGroup');
+  $myGroup.on('turbo:load', 'show.bs.collapse','.collapse', function() {
       $myGroup.find('.collapse.in').collapse('hide');
   });
 

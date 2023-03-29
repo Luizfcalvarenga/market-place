@@ -52,13 +52,6 @@ Rails.application.routes.draw do
   get 'get_attributes_for_product', to: 'product_type_attributes#get_attributes_for_product'
   get 'get_product_attributes', to: 'product_attributes#get_product_attributes'
   get 'get_information_for_new_bike', to: 'bikes#get_information_for_new_bike'
-
-  # get '/bikes/:category', to: 'bikes#index'
-  # resources :orders, only: [ :index, :show ]
-
-  # get "advertisement/:id/invoice", to: "advertisement#invoice", as: "advertisement_invoice"
-  # get "advertisement/:id/status", to: "advertisement#status", as: "advertisement_status", format: :json
-
   get 'new_announce', to: 'pages#new_announce', as: "new_announce"
   get 'search', to: 'pages#search', as: "search"
   resource :profiles
@@ -67,9 +60,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth'
-
       get 'users/me', to: 'users#me'
-
       resources :bikes
       resources :products
     end

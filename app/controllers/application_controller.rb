@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
 
 	after_action :verify_authorized, except: :index, unless: :skip_pundit?
 	after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+  helper_method :current_controller?
+
+  def current_controller?(names)
+    names.include?(params[:controller]) unless params[:controller].blank? || false
+  end
+
 
 
 	private
@@ -72,4 +78,8 @@ class ApplicationController < ActionController::Base
     # :user is the scope we are authenticating
     store_location_for(:user, request.fullpath)
   end
+
+  # def current_controller?(names)
+  #   names.include?(current_controller)
+  # end
 end
