@@ -113,6 +113,4 @@ class User < ApplicationRecord
       content_type: 'image/png'
     )
   end
-  private
-
 end
