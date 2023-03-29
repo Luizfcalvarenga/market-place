@@ -32,6 +32,7 @@
             </div>
           </div>
         <% end %>
+        <%= render "devise/shared/error_messages" %>
         <% if mobile_device? %>
           <p class="my-4">Não tem uma conta? Clique no botão Criar conta no topo desta página</p>
         <% end %>
@@ -80,6 +81,8 @@
           <div class="text-center mt-5 h-20">
             <%= f.button :submit, "Criar nova conta", class: "btn btn-success" %>
           </div>
+          <%= render "devise/shared/error_messages" %>
+
         <% end %>
       </div>
     </div>
