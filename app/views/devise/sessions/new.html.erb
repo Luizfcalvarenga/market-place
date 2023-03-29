@@ -2,7 +2,6 @@
   <div class="p-5 bg-dark br-8 <%= mobile_device? ? "p-3 my-3" : "my-5" %>">
     <h2 class="text-center text-success f-20">Fazer Login</h2>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "form-signin"}) do |f| %>
-
       <div class="h-100">
         <div class="h-80">
           <%= f.input :email,
@@ -13,7 +12,6 @@
                       required: false,
                       input_html: { autocomplete: "current-password", id: "password_signin" } %>
           <%= f.input :remember_me, label: 'Continuar logado', as: :boolean, input_html: { checked: true } if devise_mapping.rememberable? %>
-
           <label for="toggle-password-signin" class="mt-3">Mostrar senha</label>
           <input type="checkbox" id="toggle-password-signin" />
         <div class="py-2">
