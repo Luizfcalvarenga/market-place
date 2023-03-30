@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import swal from 'sweetalert';
 import IntlCurrencyInput from "react-intl-currency-input"
 
-
 export function BikeForm(props) {
   const [bikeId, setBikeId] = useState([]);
   const [user, setUser] = useState([]);
@@ -127,6 +126,34 @@ export function BikeForm(props) {
       />
     );
   }
+
+  //save reference for dragItem and dragOverItem
+	const dragItem = React.useRef(null)
+	const dragOverItem = React.useRef(null)
+
+	//const handle drag sorting
+	const handleSort = () => {
+		//duplicate items
+		let _photosPreview = [...photosPreview]
+
+		//remove and save the dragged item content
+		const draggedItemContent = _photosPreview.splice(dragItem.current, 1)[0]
+
+		//switch the position
+		_photosPreview.splice(dragOverItem.current, 0, draggedItemContent)
+
+		//reset the position ref
+		dragItem.current = null
+		dragOverItem.current = null
+
+		//update the actual array
+		setPhotosPreview(_photosPreview)
+	}
+
+	//handle name change
+	// const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	// 	setNewFruitItem(e.target.value)
+	// }
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -2070,7 +2097,7 @@ export function BikeForm(props) {
         <div className="text-center">
           <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
         </div>
-        {
+        {/* {
           photosPreview?.length > 0 ?
           <div  className="d-flex justify-content-center flex-wrap mt-3">
             {
@@ -2084,9 +2111,32 @@ export function BikeForm(props) {
               })
             }
           </div> : null
+        } */}
+
+        {photosPreview?.length > 0 ?
+          <div className="d-flex justify-content-center flex-wrap mt-3">
+            {
+              photosPreview.map((photoPreview, idx) => {
+                return  (
+                  <div
+                    key={idx}
+                    className="list-item"
+                    draggable
+                    onDragStart={(e) => (dragItem.current = idx)}
+                    onDragEnter={(e) => (dragOverItem.current = idx)}
+                    onDragEnd={handleSort}
+                    onDragOver={(e) => e.preventDefault()}>
+                    <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
+                  </div>
+                )
+              })
+            }
+
+          </div> : null
+
         }
-         <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
           <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
