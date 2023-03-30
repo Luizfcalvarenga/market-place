@@ -150,10 +150,7 @@ export function BikeForm(props) {
 		setPhotosPreview(_photosPreview)
 	}
 
-	//handle name change
-	// const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-	// 	setNewFruitItem(e.target.value)
-	// }
+
 
   useEffect(() => {
     fetch(`/get_information_for_new_bike`)
@@ -2114,27 +2111,35 @@ export function BikeForm(props) {
         } */}
 
         {photosPreview?.length > 0 ?
-          <div className="d-flex justify-content-center flex-wrap mt-3">
+          <div className="d-flex justify-content-center flex-wrap mt-3 gap-2">
             {
               photosPreview.map((photoPreview, idx) => {
-                return  (
-                  <div
-                    key={idx}
-                    className="list-item"
-                    draggable
-                    onDragStart={(e) => (dragItem.current = idx)}
-                    onDragEnter={(e) => (dragOverItem.current = idx)}
-                    onDragEnd={handleSort}
-                    onDragOver={(e) => e.preventDefault()}>
-                    <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
+                return  (<>
+                  <div>
+                    <div
+                      key={idx}
+                      className=""
+                      draggable
+                      onDragStart={(e) => (dragItem.current = idx)}
+                      onDragEnter={(e) => (dragOverItem.current = idx)}
+                      onDragEnd={handleSort}
+                      onDragOver={(e) => e.preventDefault()}>
+                      <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
+                    </div>
+                    <button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
+                      <div id={photoPreview} className="middle">
+                        <div id={photoPreview} className="text">Remover</div>
+                      </div>
+                    </button>
                   </div>
-                )
+                </>)
               })
             }
-
           </div> : null
 
         }
+
+
         <div className="d-flex justify-content-center">
           <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
           <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
