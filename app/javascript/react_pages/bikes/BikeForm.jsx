@@ -2126,7 +2126,7 @@ export function BikeForm(props) {
                       onDragOver={(e) => e.preventDefault()}>
                       <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
                     </div>
-                    <button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
+                    <button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
                       <div id={photoPreview} className="middle">
                         <div id={photoPreview} className="text">Remover</div>
                       </div>
@@ -2136,7 +2136,6 @@ export function BikeForm(props) {
               })
             }
           </div> : null
-
         }
 
 

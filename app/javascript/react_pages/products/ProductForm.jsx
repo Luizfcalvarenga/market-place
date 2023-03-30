@@ -82,6 +82,30 @@ export function ProductForm(props) {
     );
   }
 
+  //save reference for dragItem and dragOverItem
+	const dragItem = React.useRef(null)
+	const dragOverItem = React.useRef(null)
+
+	//const handle drag sorting
+	const handleSort = () => {
+		//duplicate items
+		let _photosPreview = [...photosPreview]
+
+		//remove and save the dragged item content
+		const draggedItemContent = _photosPreview.splice(dragItem.current, 1)[0]
+
+		//switch the position
+		_photosPreview.splice(dragOverItem.current, 0, draggedItemContent)
+
+		//reset the position ref
+		dragItem.current = null
+		dragOverItem.current = null
+
+		//update the actual array
+		setPhotosPreview(_photosPreview)
+	}
+
+
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
      .then((response) => response.json())
@@ -1790,7 +1814,7 @@ export function ProductForm(props) {
           <div className="text-center">
             <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
           </div>
-          {
+          {/* {
             photosPreview?.length > 0 ?
             <div  className="d-flex justify-content-center flex-wrap mt-3">
               {
@@ -1801,6 +1825,34 @@ export function ProductForm(props) {
                         <div id={photoPreview} className="text">Remover</div>
                       </div>
                     </button></>)
+                })
+              }
+            </div> : null
+          } */}
+
+          {photosPreview?.length > 0 ?
+            <div className="d-flex justify-content-center flex-wrap mt-3 gap-2">
+              {
+                photosPreview.map((photoPreview, idx) => {
+                  return  (<>
+                    <div>
+                      <div
+                        key={idx}
+                        className=""
+                        draggable
+                        onDragStart={(e) => (dragItem.current = idx)}
+                        onDragEnter={(e) => (dragOverItem.current = idx)}
+                        onDragEnd={handleSort}
+                        onDragOver={(e) => e.preventDefault()}>
+                        <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
+                      </div>
+                      <button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
+                        <div id={photoPreview} className="middle">
+                          <div id={photoPreview} className="text">Remover</div>
+                        </div>
+                      </button>
+                    </div>
+                  </>)
                 })
               }
             </div> : null
