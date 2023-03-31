@@ -2121,7 +2121,6 @@ export function BikeForm(props) {
 
         {photoFiles?.length > 0 && (<>
           <p className="text-center fs-15">Você pode clicar e arrastar as imagens para reordenala-las</p>
-
           <div className="d-flex justify-content-center flex-wrap mt-3 gap-2">
             {photoFiles.map((photo, idx) => {
                 return  (<>

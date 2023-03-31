@@ -47,7 +47,7 @@ export function ProductForm(props) {
   const [discountCoupon, setDiscountCoupon] = useState("");
   const [photosEdit, setPhotosEdit ] = useState([]);
 
-  const [photoFile, setPhotoFile] = useState({
+  const [photoFiles, setPhotoFiles] = useState({
     index: null,
   });
   const [errors, setErrors] = useState({
@@ -89,20 +89,20 @@ export function ProductForm(props) {
 	//const handle drag sorting
 	const handleSort = () => {
 		//duplicate items
-		let _photosPreview = [...photosPreview]
+		let _photoFiles = [...photoFiles]
 
 		//remove and save the dragged item content
-		const draggedItemContent = _photosPreview.splice(dragItem.current, 1)[0]
+		const draggedItemContent = _photoFiles.splice(dragItem.current, 1)[0]
 
 		//switch the position
-		_photosPreview.splice(dragOverItem.current, 0, draggedItemContent)
+		_photoFiles.splice(dragOverItem.current, 0, draggedItemContent)
 
 		//reset the position ref
 		dragItem.current = null
 		dragOverItem.current = null
 
 		//update the actual array
-		setPhotosPreview(_photosPreview)
+		setPhotoFiles(_photoFiles)
 	}
 
 
@@ -162,7 +162,7 @@ export function ProductForm(props) {
         setPhotosPreview(undefined)
         return
     }
-    const photoFile = []
+    const photoFiles = []
     const objectUrls = []
     for (let i = 0; i < productPhotos.length; i++) {
       const photoName = productPhotos[i].name
@@ -172,11 +172,11 @@ export function ProductForm(props) {
         name: photoName,
         url: fileURL
       }
-      photoFile.push(nameURL)
+      photoFiles.push(nameURL)
       objectUrls.push(fileURL);
     }
     setPhotosPreview(objectUrls)
-    setPhotoFile(photoFile)
+    setPhotoFiles(photoFiles)
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
   }, [productPhotos])
@@ -1830,10 +1830,11 @@ export function ProductForm(props) {
             </div> : null
           } */}
 
-          {photosPreview?.length > 0 ?
+
+          {photoFiles?.length > 0 && (<>
+            <p className="text-center fs-15">Você pode clicar e arrastar as imagens para reordenala-las</p>
             <div className="d-flex justify-content-center flex-wrap mt-3 gap-2">
-              {
-                photosPreview.map((photoPreview, idx) => {
+              {photoFiles.map((photo, idx) => {
                   return  (<>
                     <div>
                       <div
@@ -1844,19 +1845,18 @@ export function ProductForm(props) {
                         onDragEnter={(e) => (dragOverItem.current = idx)}
                         onDragEnd={handleSort}
                         onDragOver={(e) => e.preventDefault()}>
-                        <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
+                        <img src={photo.url} key={idx} alt="" className="image-preview-form" />
                       </div>
                       <button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
-                        <div id={photoPreview} className="middle">
-                          <div id={photoPreview} className="text">Remover</div>
+                        <div id={photo.url} className="middle">
+                          <div id={photo.url} className="text">Remover</div>
                         </div>
                       </button>
                     </div>
                   </>)
-                })
-              }
-            </div> : null
-          }
+                })}
+            </div>
+          </>)}
           <div className="d-flex justify-content-center">
             <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
@@ -1998,11 +1998,11 @@ export function ProductForm(props) {
 
           <h4 className="text-success mt-3 text-center">Imagens</h4>
           {
-            photosPreview?.length > 0 && (
+            photoFiles?.length > 0 && (
               <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
                 {
-                  photosPreview.map((photoPreview, idx) => {
-                    return <img src={photoPreview} key={idx} alt="" className="image-review" />
+                  photoFiles.map((photo, idx) => {
+                    return <img src={photo.url} key={idx} alt="" className="image-review" />
                   })
                 }
               </div>
