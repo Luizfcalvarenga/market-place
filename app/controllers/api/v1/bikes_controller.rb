@@ -84,7 +84,6 @@ module Api
         @bike = Bike.new(bike_params)
         skip_authorization
         @categories = Category.all
-        binding.pry
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |

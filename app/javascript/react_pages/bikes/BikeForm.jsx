@@ -152,9 +152,9 @@ export function BikeForm(props) {
 		//update the actual array
 		setPhotoFiles(_photoFiles)
 		// setPhotos(_photos)
-    let order = photoFiles.map((photo) => { return photo.name })
+    let order = _photoFiles.map((photo) => { return photo.name })
     console.log(order)
-    // let orderedArray = mapOrder(photos, order, 'name');
+    mapOrder(photos, order, 'name');
 
     // console.log(_photos)
 	}
