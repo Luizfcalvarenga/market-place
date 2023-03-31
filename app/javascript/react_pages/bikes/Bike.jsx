@@ -150,12 +150,32 @@ export function Bike(props) {
               {bike.photos.map((photo, index) => {
                 return (
 
-                  <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                    <img src={photo} className="d-block w-100 img-card-show" alt="" />
+                  <div>
+
+                    <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                      <button type="button" class="" data-bs-toggle="modal" data-bs-target={`#exampleModal${index}`}>
+                        <img src={photo} className="d-block w-100 img-card-show" alt="" />
+                      </button>
+                    </div>
+
+                    <div class="modal fade" id={`exampleModal${index}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                          <img src={photo} alt="" className="photo-modal" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
                 )
               })}
             </div>
+
+
+
             {bike.photos.length === 0 && (
               <div className="carousel-inner">
                 <div className="carousel-item active">
