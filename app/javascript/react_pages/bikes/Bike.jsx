@@ -150,7 +150,7 @@ export function Bike(props) {
               {bike.photos.map((photo, index) => {
                 return (
 
-                  <div>
+                  <>
 
                     <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
                       <button type="button" class="" data-bs-toggle="modal" data-bs-target={`#exampleModal${index}`}>
@@ -168,7 +168,7 @@ export function Bike(props) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </>
 
                 )
               })}

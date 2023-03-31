@@ -71,6 +71,13 @@
 .photo-modal {
   max-width: 100%;
   height: auto;
+  object-fit: cover;
+}
+
+.modal-dialog {
+  max-width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
 }
 
 
