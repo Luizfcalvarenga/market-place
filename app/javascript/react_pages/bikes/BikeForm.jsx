@@ -93,7 +93,7 @@ export function BikeForm(props) {
   const [photos, setPhotos ] = useState(null);
   const [photosEdit, setPhotosEdit ] = useState([]);
 
-  const [photoFile, setPhotoFile] = useState({
+  const [photoFiles, setPhotoFiles] = useState({
     index: null,
   });
   const [errors, setErrors] = useState({
@@ -134,20 +134,28 @@ export function BikeForm(props) {
 	//const handle drag sorting
 	const handleSort = () => {
 		//duplicate items
-		let _photosPreview = [...photosPreview]
+		let _photoFiles = [...photoFiles]
+		let _photos = [...photos]
+
 
 		//remove and save the dragged item content
-		const draggedItemContent = _photosPreview.splice(dragItem.current, 1)[0]
+		const draggedItemContent = _photoFiles.splice(dragItem.current, 1)[0]
+		const draggedItemContentPhoto = _photos.splice(dragItem.current, 1)[0]
+
 
 		//switch the position
-		_photosPreview.splice(dragOverItem.current, 0, draggedItemContent)
+		_photoFiles.splice(dragOverItem.current, 0, draggedItemContent)
+		_photos.splice(dragOverItem.current, 0, draggedItemContent)
+
 
 		//reset the position ref
 		dragItem.current = null
 		dragOverItem.current = null
 
 		//update the actual array
-		setPhotosPreview(_photosPreview)
+		setPhotoFiles(_photoFiles)
+		// setPhotos(_photos)
+    console.log(_photos)
 	}
 
 
@@ -194,7 +202,7 @@ export function BikeForm(props) {
         setPhotosPreview(undefined)
         return
     }
-    const photoFile = []
+    const photoFiles = []
     const objectUrls = []
     for (let i = 0; i < photos.length; i++) {
       const photoName = photos[i].name
@@ -204,11 +212,11 @@ export function BikeForm(props) {
         name: photoName,
         url: fileURL
       }
-      photoFile.push(nameURL)
+      photoFiles.push(nameURL)
       objectUrls.push(fileURL);
     }
     setPhotosPreview(objectUrls)
-    setPhotoFile(photoFile)
+    setPhotoFiles(photoFiles)
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
   }, [photos])
@@ -217,6 +225,7 @@ export function BikeForm(props) {
   const createBikePhotos = (e) => {
     const photos = Object.values(e.target.files)
     setPhotos(photos)
+    console.log(photos)
   }
 
   function removeObjectWithId(arr, name) {
@@ -2110,10 +2119,11 @@ export function BikeForm(props) {
           </div> : null
         } */}
 
-        {photosPreview?.length > 0 ?
+        {photoFiles?.length > 0 && (<>
+          <p className="text-center fs-15">Você pode clicar e arrastar as imagens para reordenala-las</p>
+
           <div className="d-flex justify-content-center flex-wrap mt-3 gap-2">
-            {
-              photosPreview.map((photoPreview, idx) => {
+            {photoFiles.map((photo, idx) => {
                 return  (<>
                   <div>
                     <div
@@ -2124,19 +2134,18 @@ export function BikeForm(props) {
                       onDragEnter={(e) => (dragOverItem.current = idx)}
                       onDragEnd={handleSort}
                       onDragOver={(e) => e.preventDefault()}>
-                      <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
+                      <img src={photo.url} key={idx} alt="" className="image-preview-form" />
                     </div>
                     <button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
-                      <div id={photoPreview} className="middle">
-                        <div id={photoPreview} className="text">Remover</div>
+                      <div id={photo.url} className="middle">
+                        <div id={photo.url} className="text">Remover</div>
                       </div>
                     </button>
                   </div>
                 </>)
-              })
-            }
-          </div> : null
-        }
+              })}
+          </div>
+        </>)}
 
 
         <div className="d-flex justify-content-center">
@@ -2347,12 +2356,12 @@ export function BikeForm(props) {
 
         <h4 className="text-success mt-3 text-center">Imagens</h4>
         {
-          photosPreview?.length > 0 && (
+          photoFiles?.length > 0 && (
 
             <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
               {
-                photosPreview.map((photoPreview, idx) => {
-                  return <img src={photoPreview} key={idx} alt="" className="image-review" />
+                photoFiles.map((photo, idx) => {
+                  return <img src={photo.url} key={idx} alt="" className="image-review" />
                 })
               }
             </div>
