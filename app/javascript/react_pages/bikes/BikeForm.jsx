@@ -151,17 +151,15 @@ export function BikeForm(props) {
 
 		//update the actual array
 		setPhotoFiles(_photoFiles)
-		// setPhotos(_photos)
+    // order photos to back from user order
     let order = _photoFiles.map((photo) => { return photo.name })
     console.log(order)
     mapOrder(photos, order, 'name');
 
-    // console.log(_photos)
 	}
 
 
   function mapOrder (array, order, key) {
-
     array.sort( function (a, b) {
       var A = a[key], B = b[key];
 
@@ -172,7 +170,6 @@ export function BikeForm(props) {
       }
 
     });
-
     return array;
   };
 
