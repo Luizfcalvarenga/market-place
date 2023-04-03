@@ -231,9 +231,7 @@ export function Bikes(props) {
     fetch(`/get_bike_attributes_that_are_present_for_filter`)
      .then((response) => response.json())
      .then((data) => {
-      console.log(data)
       setPresentCategories(data.categories)
-
       setPresentRoadModalities(data.road_modalities)
       setPresentMtbModalities(data.mtb_modalities)
       setPresentDirtModalities(data.dirt_modalities)
@@ -304,7 +302,6 @@ export function Bikes(props) {
 
 
   const handleFilter = (e) => {
-    console.log(e.target.innerText)
     const sectionFilter = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
     sectionFilter.classList.toggle("d-none")
@@ -339,7 +336,6 @@ export function Bikes(props) {
     axios.post('/likes',dataObject)
 
     .then(function (response) {
-      console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else if (!response.data.errors) {
@@ -415,26 +411,21 @@ export function Bikes(props) {
   }
 
   const handleLocality = (e) => {
-    console.log(e)
-    console.log(e.target.value)
+
     setStateFilter(e.target.value)
     let stateId = states.find(state => state.name === e.target.value).id
-    console.log(stateId)
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
   }
 
   const handleMultipleFiltersCategory = (e) => {
-    // console.log(e)
     const currentOptionsToFilter = [...categoryOptionsToFilter]
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setCategoryOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setCategoryOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -444,12 +435,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setModalityOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setModalityOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -460,12 +449,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -475,12 +462,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setFrameBrandOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setFrameBrandOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -490,12 +475,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setFrameSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setFrameSizeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -505,12 +488,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setFrameMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setFrameMaterialOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -520,12 +501,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setSuspensionTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setSuspensionTypeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -535,12 +514,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setFrontSuspensionTravelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -550,12 +527,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setRearSuspensionTravelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -565,12 +540,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setFrontSuspensionModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -580,12 +553,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setRearSuspensionModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setRearSuspensionModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -595,12 +566,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setNumberOfFrontGearsOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setNumberOfFrontGearsOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -610,12 +579,9 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setNumberOfRearGearsOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
-      tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setNumberOfRearGearsOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -625,12 +591,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setFrontDerailleurModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setFrontDerailleurModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -640,12 +604,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setRearDerailleurModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setRearDerailleurModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -655,12 +617,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setCranksetOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setCranksetOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -670,12 +630,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setChainOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setChainOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -685,12 +643,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setBrakeTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setBrakeTypeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -700,12 +656,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setBrakeDiscSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setBrakeDiscSizeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -715,12 +669,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setBrakeModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setBrakeModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -730,12 +682,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setRimSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setRimSizeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -745,12 +695,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setRimModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setRimModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -760,12 +708,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setWheelMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setWheelMaterialOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -775,12 +721,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setHubModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setHubModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -790,12 +734,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setTyreModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setTyreModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -805,12 +747,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setSeatPostTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setSeatPostTypeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -820,12 +760,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setSeatPostMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setSeatPostMaterialOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -835,12 +773,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setSeatPostTravelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setSeatPostTravelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -850,12 +786,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setSeatPostModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setSeatPostModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -865,12 +799,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setHandlebarMaterialOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setHandlebarMaterialOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -880,12 +812,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setHandlebarModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setHandlebarModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -895,12 +825,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setStemModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setStemModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -910,12 +838,10 @@ export function Bikes(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setBatteryOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setBatteryOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }

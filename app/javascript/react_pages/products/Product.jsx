@@ -130,11 +130,19 @@ export function Product(props) {
             <div id="carouselExampleControls" className="carousel slide product-photos w-70" data-bs-ride="carousel">
               <div className="carousel-inner">
                 {product.photos.map((photo, index) => {
-                  return (
+                  return (<>
                     <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                      <img src={photo} className="d-block w-100 img-card-show" alt="" />
+                      <button type="button" className="photo-btn" data-toggle="modal" data-target={`#exampleModal${index}`} >
+                        <img id={index} src={photo} className="d-block w-100 img-card-show" alt="" />
+                      </button>
                     </div>
-                  )
+                    <div className="modal fade modal-photo" id={`exampleModal${index}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div className="modal-dialog">
+                        <img id={index} src={photo} className="photo-modal" alt="" />
+                      </div>
+
+                    </div>
+                  </>)
                 })}
               </div>
               {product.photos.length === 0 && (
