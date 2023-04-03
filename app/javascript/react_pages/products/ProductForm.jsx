@@ -47,7 +47,7 @@ export function ProductForm(props) {
   const [discountCoupon, setDiscountCoupon] = useState("");
   const [photosEdit, setPhotosEdit ] = useState([]);
 
-  const [photoFile, setPhotoFile] = useState({
+  const [photoFiles, setPhotoFiles] = useState({
     index: null,
   });
   const [errors, setErrors] = useState({
@@ -81,6 +81,48 @@ export function ProductForm(props) {
           className="text-input" value={productPrice}   onChange={handleChange} />
     );
   }
+
+  //save reference for dragItem and dragOverItem
+	const dragItem = React.useRef(null)
+	const dragOverItem = React.useRef(null)
+
+	//const handle drag sorting
+	const handleSort = () => {
+		//duplicate items
+		let _photoFiles = [...photoFiles]
+
+		//remove and save the dragged item content
+		const draggedItemContent = _photoFiles.splice(dragItem.current, 1)[0]
+
+		//switch the position
+		_photoFiles.splice(dragOverItem.current, 0, draggedItemContent)
+
+		//reset the position ref
+		dragItem.current = null
+		dragOverItem.current = null
+
+		//update the actual array
+		setPhotoFiles(_photoFiles)
+
+    let order = _photoFiles.map((photo) => { return photo.name })
+    mapOrder(productPhotos, order, 'name');
+
+	}
+
+  function mapOrder (array, order, key) {
+    array.sort( function (a, b) {
+      var A = a[key], B = b[key];
+      if (order.indexOf(A) > order.indexOf(B)) {
+        return 1;
+      } else {
+        return -1;
+      }
+
+    });
+
+    return array;
+  };
+
 
   useEffect(() => {
     fetch(`/get_information_for_new_product`)
@@ -138,7 +180,7 @@ export function ProductForm(props) {
         setPhotosPreview(undefined)
         return
     }
-    const photoFile = []
+    const photoFiles = []
     const objectUrls = []
     for (let i = 0; i < productPhotos.length; i++) {
       const photoName = productPhotos[i].name
@@ -148,11 +190,11 @@ export function ProductForm(props) {
         name: photoName,
         url: fileURL
       }
-      photoFile.push(nameURL)
+      photoFiles.push(nameURL)
       objectUrls.push(fileURL);
     }
     setPhotosPreview(objectUrls)
-    setPhotoFile(photoFile)
+    setPhotoFiles(photoFiles)
     // free memory when ever this component is unmounted
     return () => URL.revokeObjectURL(objectUrls)
   }, [productPhotos])
@@ -177,9 +219,9 @@ export function ProductForm(props) {
   }
 
   const removePhoto = (e) => {
-    const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
-    setPhotosPreview(newPhotosPreview);
-    const photoToRemove = photoFile.find(element => element.url === e.target.id).name
+    const newPhotoFiles = photoFiles.filter(element => element.url !== e.target.id)
+    setPhotoFiles(newPhotoFiles);
+    const photoToRemove = photoFiles.find(element => element.url === e.target.id).name
     setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
   }
 
@@ -443,18 +485,11 @@ export function ProductForm(props) {
   }
 
   const handleLocality = (e) => {
-    console.log(e)
     if (e.target.id === "state-input") {
-      console.log(e.target.id)
-      console.log(e.target.value)
-      console.log(states.find(element => element.id === Number(e.target.value)).acronym)
       setProductStateId(e.target.value)
       setProductState(states.find(element => element.id === Number(e.target.value)).acronym)
       setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
     } else {
-      console.log(e.id)
-      console.log(e.target.value)
-      console.log(cities.find(element => element.id === Number(e.target.value)).name)
       setProductCityId(e.target.value)
       setProductCity(cities.find(element => element.id === Number(e.target.value)).name)
     }
@@ -1790,7 +1825,7 @@ export function ProductForm(props) {
           <div className="text-center">
             <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
           </div>
-          {
+          {/* {
             photosPreview?.length > 0 ?
             <div  className="d-flex justify-content-center flex-wrap mt-3">
               {
@@ -1804,7 +1839,35 @@ export function ProductForm(props) {
                 })
               }
             </div> : null
-          }
+          } */}
+
+
+          {photoFiles?.length > 0 && (<>
+            <p className="text-center fs-15">Você pode clicar e arrastar as imagens para reordenala-las</p>
+            <div className="d-flex justify-content-center flex-wrap mt-3 gap-2">
+              {photoFiles.map((photo, idx) => {
+                  return  (<>
+                    <div>
+                      <div
+                        key={idx}
+                        className=""
+                        draggable
+                        onDragStart={(e) => (dragItem.current = idx)}
+                        onDragEnter={(e) => (dragOverItem.current = idx)}
+                        onDragEnd={handleSort}
+                        onDragOver={(e) => e.preventDefault()}>
+                        <img src={photo.url} key={idx} alt="" className="image-preview-form" />
+                      </div>
+                      <button className="remove-photo" type="button" onClick={(e) => removePhoto(e)}>
+                        <div id={photo.url} className="middle">
+                          <div id={photo.url} className="text">Remover</div>
+                        </div>
+                      </button>
+                    </div>
+                  </>)
+                })}
+            </div>
+          </>)}
           <div className="d-flex justify-content-center">
             <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
             <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
@@ -1946,11 +2009,11 @@ export function ProductForm(props) {
 
           <h4 className="text-success mt-3 text-center">Imagens</h4>
           {
-            photosPreview?.length > 0 && (
+            photoFiles?.length > 0 && (
               <div  className="d-flex gap-2 justify-content-center flex-wrap mt-3">
                 {
-                  photosPreview.map((photoPreview, idx) => {
-                    return <img src={photoPreview} key={idx} alt="" className="image-review" />
+                  photoFiles.map((photo, idx) => {
+                    return <img src={photo.url} key={idx} alt="" className="image-review" />
                   })
                 }
               </div>

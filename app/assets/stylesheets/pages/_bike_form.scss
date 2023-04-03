@@ -96,7 +96,6 @@
   input#file-upload-button {
     background-color: transparent !important;
   }
-
 }
 
 .btn-technicality {
@@ -104,7 +103,6 @@
   background-color: rgb(10,10,10);
   color: $color-primary;
   border-radius: 3px;
-
 
   &:hover {
     color: #22e058;
@@ -116,11 +114,9 @@
   background-color: $color-primary;
   color: white;
   border-color: $color-primary;
-
   i {
     transform: rotate(-180deg);
   }
-
   &:hover {
     color: white;
   }
@@ -129,26 +125,28 @@
 .image-preview-form {
   width: 285px;
   height: 190px;
-  border-radius: 3px;
+  border-radius: 5px 5px 0 0;
   transition: .5s ease;
   backface-visibility: hidden;
   object-fit: cover;
+  cursor: grab;
 }
+
 .middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-  width: 285px;
-  height: 190px;
-  background-image: image-url("bin.png");
-  background-size: 30%;
-  background-position: center;
-  background-repeat: no-repeat;
+  // transition: .5s ease;
+  // opacity: 0;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // -ms-transform: translate(-50%, -50%);
+  // text-align: center;
+  // width: 285px;
+  // height: 10px;
+  // background-image: image-url("bin.png");
+  // background-size: 30%;
+  // background-position: center;
+  // background-repeat: no-repeat;
 }
 
 .file-upload {
@@ -165,37 +163,35 @@
   cursor: pointer;
   &:hover {
     color: #22e058;
-
   }
 }
 
 
 .remove-photo {
-  position: relative;
   border: none !important;
-  background-color: transparent;
+  background-color: #464343;
+  font-size: 15px;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+  padding: 4px;
 }
 
-.remove-photo:hover .image-preview-form {
-  opacity: 0.3;
-}
-
-.remove-photo:hover .middle {
-  opacity: 1;
+.remove-photo:hover {
+  .text {
+    color: red;
+  }
 }
 
 .text {
   background-color: transparent;
-  color: red;
+  color: white;
   font-size: 13px;
-  margin-top: 30%;
 }
 
 .review-selected {
   background-color: $color-primary;
   color: white;
   border-color: $color-primary;
-
   &:hover {
     color: white;
   }
@@ -206,9 +202,8 @@
 .image-review {
   width: 150px;
   height: 95px;
-  border-radius: 3px;
+  border-radius: 5px;
   object-fit: cover;
-
 }
 
 .announce-terms {
@@ -223,10 +218,7 @@
 @media screen and (max-width: 768px) {
   .new-bike-react {
    width: 100% !important;
-
-
   }
-
   .progress-bar {
     display: none;
   }
