@@ -153,7 +153,6 @@ export function BikeForm(props) {
 		setPhotoFiles(_photoFiles)
     // order photos to back from user order
     let order = _photoFiles.map((photo) => { return photo.name })
-    console.log(order)
     mapOrder(photos, order, 'name');
 
 	}
@@ -240,7 +239,6 @@ export function BikeForm(props) {
   const createBikePhotos = (e) => {
     const photos = Object.values(e.target.files)
     setPhotos(photos)
-    console.log(photos)
   }
 
   function removeObjectWithId(arr, name) {

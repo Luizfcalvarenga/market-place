@@ -105,7 +105,6 @@ export function ProductForm(props) {
 		setPhotoFiles(_photoFiles)
 
     let order = _photoFiles.map((photo) => { return photo.name })
-    console.log(order)
     mapOrder(productPhotos, order, 'name');
 
 	}
@@ -486,18 +485,11 @@ export function ProductForm(props) {
   }
 
   const handleLocality = (e) => {
-    console.log(e)
     if (e.target.id === "state-input") {
-      console.log(e.target.id)
-      console.log(e.target.value)
-      console.log(states.find(element => element.id === Number(e.target.value)).acronym)
       setProductStateId(e.target.value)
       setProductState(states.find(element => element.id === Number(e.target.value)).acronym)
       setMapedCitiesForState(cities.filter(element => element.state_id === Number(e.target.value)))
     } else {
-      console.log(e.id)
-      console.log(e.target.value)
-      console.log(cities.find(element => element.id === Number(e.target.value)).name)
       setProductCityId(e.target.value)
       setProductCity(cities.find(element => element.id === Number(e.target.value)).name)
     }

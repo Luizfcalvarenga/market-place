@@ -81,12 +81,10 @@ export function Products(props) {
 
   const BrlCurrencyComponent = () => {
     const handleMinPriceFIlter = (event, value, maskedValue) => {
-      // console.log(value)
       event.preventDefault();
       setMinPriceFilter(value)
     };
     const handlemaxPriceFIlter = (event, value, maskedValue) => {
-      // console.log(value)
       event.preventDefault();
       setMaxPriceFilter(value)
     };
@@ -178,7 +176,6 @@ export function Products(props) {
       fetch(`/get_product_attributes_that_are_present_for_filter`)
        .then((response) => response.json())
        .then((data) => {
-        console.log(data)
         setPresentAccessories(data.products_accessory)
         setPresentComponents(data.products_component)
         setPresentClothes(data.products_clothe)
@@ -197,23 +194,18 @@ export function Products(props) {
     }, []);
 
   const handleProductAtributes = (e) => {
-    console.log(e.target.value)
     const currentOptionsToFilter = [...productTypeOptionsToFilter]
     const currentAttributeOptionsToFilter = [...attributeOptionsToFilter]
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.innerHTML)) {
       setProductTypeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
       setAttributeOptionsToFilter(currentAttributeOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
-      console.log(currentAttributeOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.innerHTML)
       currentAttributeOptionsToFilter.push(productTypeAttributes.filter(attribute => attribute.product_type_id === Number(e.target.value)))
       setProductTypeOptionsToFilter(currentOptionsToFilter)
       setAttributeOptionsToFilter(currentAttributeOptionsToFilter)
-      console.log(currentOptionsToFilter)
-      console.log(currentAttributeOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -221,7 +213,6 @@ export function Products(props) {
   const handleFilter = (e) => {
     const sectionFilter = document.getElementById(e.target.innerText);
     const sectionActive = e.target;
-    console.log(sectionFilter);
     sectionFilter.classList.toggle("d-none")
     sectionActive.classList.toggle("selected-filter")
   }
@@ -244,12 +235,6 @@ export function Products(props) {
         } else {
           options = []
         }
-
-        // if (question.prompt in ObjectOfAttributes) {
-        //   console.log("já tem")
-        // } else {
-        //   console.log("Adicionar")
-        // }
         ObjectOfAttributes[question.prompt] = options
       })
     })
@@ -281,17 +266,14 @@ export function Products(props) {
   }
 
   const handleMultipleFiltersComponentsAttributes = (e) => {
-    console.log(e.target.value)
     const currentOptionsToFilter = [...componentsAttributesOptionsToFilter]
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setComponentsAttributesOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setComponentsAttributesOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -338,17 +320,14 @@ export function Products(props) {
   }
 
   const handleMultipleFiltersClotheSizes = (e) => {
-    console.log(e.target.value)
     const currentOptionsToFilter = [...clotheSizeOptionsToFilter]
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.innerHTML)) {
       setClotheSizeOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.innerHTML));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.innerHTML)
       setClotheSizeOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -358,12 +337,10 @@ export function Products(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setCategoryOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setCategoryOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -373,12 +350,10 @@ export function Products(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setModalityOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setModalityOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -388,12 +363,10 @@ export function Products(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setModelOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setModelOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -403,12 +376,10 @@ export function Products(props) {
     const tagFilter = e.target
     if (currentOptionsToFilter.includes(e.target.value)) {
       setBrandOptionsToFilter(currentOptionsToFilter.filter(element => element != e.target.value));
-      console.log(currentOptionsToFilter)
       tagFilter.classList.remove("selected-tag")
     } else {
       currentOptionsToFilter.push(e.target.value)
       setBrandOptionsToFilter(currentOptionsToFilter)
-      console.log(currentOptionsToFilter)
       tagFilter.classList.add("selected-tag")
     }
   }
@@ -425,16 +396,11 @@ export function Products(props) {
 
   const handleLike = (e) => {
     e.preventDefault()
-    console.log(e)
-    console.log(e.target.id)
     const dataObject = new FormData();
     dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Product" );
-    console.log(e.target.id)
     axios.post('/likes', dataObject)
-
     .then(function (response) {
-      console.log(response);
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
       } else if (!response.data.errors) {
@@ -451,11 +417,8 @@ export function Products(props) {
   }
 
   const handleLocality = (e) => {
-    console.log(e)
-    console.log(e.target.value)
     setStateFilter(e.target.value)
     let stateId = states.find(state => state.name === e.target.value).id
-    console.log(stateId)
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
   }
 
