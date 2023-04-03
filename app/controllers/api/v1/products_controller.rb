@@ -62,7 +62,6 @@ module Api
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
-              # @product.photos.attach(photo)
               photo_name =  photo.original_filename
               photo_content_type =  photo.content_type
               file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
@@ -121,7 +120,6 @@ module Api
           if params[:product][:photos].present?
             @product.photos.purge
             params[:product][:photos].each do | photo |
-              # @product.photos.attach(photo)
               photo_name =  photo.original_filename
               photo_content_type =  photo.content_type
               file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"

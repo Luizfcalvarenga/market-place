@@ -2149,21 +2149,7 @@ export function BikeForm(props) {
         <div className="text-center">
           <label htmlFor="photo-upload" className="label-upload my-2"><i className="fas fa-file-upload"></i></label>
         </div>
-        {/* {
-          photosPreview?.length > 0 ?
-          <div  className="d-flex justify-content-center flex-wrap mt-3">
-            {
-              photosPreview.map((photoPreview, idx) => {
-                return  (<><button className="remove-photo mt-2" type="button" onClick={(e) => removePhoto(e)}>
-                    <img src={photoPreview} key={idx} alt="" className="image-preview-form" />
-                    <div id={photoPreview} className="middle">
-                      <div id={photoPreview} className="text">Remover</div>
-                    </div>
-                  </button></>)
-              })
-            }
-          </div> : null
-        } */}
+
 
         {photoFiles?.length > 0 && (<>
           <p className="text-center fs-15">Você pode clicar e arrastar as imagens para reordenala-las</p>
@@ -2386,8 +2372,6 @@ export function BikeForm(props) {
             </>)}
             <p><span className="text-success">Descrição:</span> {accessoriesDescription}</p>
           </>)}
-
-
         </div>
 
         { bikeType === "e-bike" && (<>
@@ -2400,18 +2384,15 @@ export function BikeForm(props) {
         </>)}
 
         <h4 className="text-success mt-3 text-center">Imagens</h4>
-        {
-          photoFiles?.length > 0 && (
-
-            <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
-              {
-                photoFiles.map((photo, idx) => {
-                  return <img src={photo.url} key={idx} alt="" className="image-review" />
-                })
-              }
-            </div>
-          )
-        }
+        {photoFiles?.length > 0 && (
+          <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
+            {
+              photoFiles.map((photo, idx) => {
+                return <img src={photo.url} key={idx} alt="" className="image-review" />
+              })
+            }
+          </div>
+        )}
 
         <div  className="d-flex gap-2 justify-content-center flex-wrap my-3">
           {(props.bikeId && typeof(photosPreview) === "undefined") && (

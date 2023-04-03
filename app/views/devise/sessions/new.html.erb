@@ -1,12 +1,12 @@
 <div id="sign-in" class="<%= mobile_device? ? "w-90" : "w-40" %> m-auto">
   <div class="p-5 bg-dark br-8 <%= mobile_device? ? "p-3 my-3" : "my-5" %>">
     <h2 class="text-center text-success f-20">Fazer Login</h2>
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "form-signin"}) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="h-100">
         <div class="h-80">
           <%= f.input :email,
                 required: false,
-                autofocus: true, input_html: {id: "email-signin", autocomplete: "email" } %>
+                autofocus: true, input_html: {autocomplete: "email" } %>
           <%= f.input :password,
                       label: "Senha",
                       required: false,

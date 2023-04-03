@@ -296,13 +296,13 @@ export function Bike(props) {
               </div>
             )}
             {(bike.number_of_front_gears || bike.front_derailleur_model ) && (
-              <div className="text-success item list-item d-flex ms-3">
+              <div className="ms-3">
                 <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
               </div>
             )}
             {bike.number_of_front_gears && (
               <div className="text-success item list-item d-flex ms-3">
-                <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
+                <p className="bike-attrs-parts"><strong>Nº Coroas:</strong> </p>
                 <p className="bike-info ms-2 align-middle">{bike.number_of_front_gears}</p>
               </div>
             )}
@@ -313,13 +313,13 @@ export function Bike(props) {
               </div>
             )}
             {(bike.number_of_rear_gears || bike.rear_derailleur_model ) && (
-              <div className="text-success item list-item d-flex ms-3">
+              <div className="ms-3">
                 <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
               </div>
             )}
-            {bike.number_of_rear_gear && (
+            {bike.number_of_rear_gears && (
               <div className="text-success item list-item d-flex ms-3">
-                <p className="bike-attrs-parts"><strong>Nº Marchas:</strong> </p>
+                <p className="bike-attrs-parts"><strong>Nº Velocidades:</strong> </p>
                 <p className="bike-info ms-2 align-middle">{bike.number_of_rear_gears}</p>
               </div>
             )}
@@ -338,7 +338,7 @@ export function Bike(props) {
               </div>
             )}
             {(bike.front_suspension_travel || bike.front_suspension_model) && (
-              <div className="text-success item list-item d-flex ms-3">
+              <div className="ms-3">
                 <p className="bike-orientation"><strong>DIANTEIRA</strong> </p>
               </div>
             )}
@@ -355,7 +355,7 @@ export function Bike(props) {
               </div>
             )}
             {(bike.rear_suspension_travel || bike.rear_suspension_model) && (
-              <div className="text-success item list-item d-flex ms-3">
+              <div className=" ms-3">
                 <p className="bike-orientation"><strong>TRASEIRA</strong> </p>
               </div>
             )}
