@@ -139,20 +139,7 @@ export function Bike(props) {
     }
   }
 
-  const handleEnlargePhoto = (e) => {
-    console.log(e.target)
-    let photo = document.getElementById(e.target.id)
-    let photoEnlarged = document.getElementById(`photo-${e.target.id}`)
-    photoEnlarged.classList.remove("d-none")
 
-
-    // Set image size to 1.5 times original
-    photo.classList.add("zoom");
-
-    // photo.style.transform("scale(1.5)");
-    // // // Animation effect
-    // photo.style.transition("transform 0.25s ease")
-  }
 
   return (
     <div className="bike-show" bike={bike} key={bike} >
@@ -163,22 +150,14 @@ export function Bike(props) {
               {bike.photos.map((photo, index) => {
                 return (<>
                   <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                    <button type="button" class="photo-btn" data-toggle="modal" data-target={`#exampleModal${index}`} >
-                      <img id={index} src={photo} className="d-block w-100 img-card-show" alt="" />
+                    <button type="button" className="photo-btn" data-toggle="modal" data-target={`#exampleModal${index}`} >
+                      <img key={index} id={index} src={photo} className="d-block w-100 img-card-show" alt="" />
                     </button>
                   </div>
-                  <div class="modal fade" id={`exampleModal${index}`} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div id={`photo-enlarge-${index}`} class="modal-dialog modal-photo" role="document">
+                  <div className="modal fade  modal-photo" id={`exampleModal${index}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog">
                       <img id={index} src={photo} className="photo-modal" alt="" />
                     </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target={`#photo-enlarge-${index}`} data-bs-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target={`#photo-enlarge-${index}`} data-bs-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Next</span>
-                    </button>
                   </div>
                 </>)
               })}

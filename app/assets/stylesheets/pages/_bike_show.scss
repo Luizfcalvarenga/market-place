@@ -33,7 +33,7 @@
 
 .bike-show {
   background-color: rgb(16,16,16);
-  padding: 0 50px 50px 50px;
+  padding: 15px 50px 50px 50px;
 }
 
 .card-bike {
@@ -80,6 +80,10 @@
   border: none !important;
   border-radius: 5px !important;
   width: 100%;
+}
+
+.modal-photo {
+  margin-top: 100px !important;
 }
 
 .modal-dialog{
