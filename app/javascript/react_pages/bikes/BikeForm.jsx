@@ -250,9 +250,9 @@ export function BikeForm(props) {
   }
 
   const removePhoto = (e) => {
-    const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
-    setPhotosPreview(newPhotosPreview);
-    const photoToRemove = photoFile.find(element => element.url === e.target.id).name
+    const newPhotoFiles = photoFiles.filter(element => element.url !== e.target.id)
+    setPhotoFiles(newPhotoFiles);
+    const photoToRemove = photoFiles.find(element => element.url === e.target.id).name
     setPhotos(removeObjectWithId(photos, photoToRemove))
   }
 

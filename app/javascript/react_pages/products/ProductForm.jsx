@@ -111,10 +111,8 @@ export function ProductForm(props) {
 	}
 
   function mapOrder (array, order, key) {
-
     array.sort( function (a, b) {
       var A = a[key], B = b[key];
-
       if (order.indexOf(A) > order.indexOf(B)) {
         return 1;
       } else {
@@ -222,9 +220,9 @@ export function ProductForm(props) {
   }
 
   const removePhoto = (e) => {
-    const newPhotosPreview = photosPreview.filter(element => element !== e.target.id)
-    setPhotosPreview(newPhotosPreview);
-    const photoToRemove = photoFile.find(element => element.url === e.target.id).name
+    const newPhotoFiles = photoFiles.filter(element => element.url !== e.target.id)
+    setPhotoFiles(newPhotoFiles);
+    const photoToRemove = photoFiles.find(element => element.url === e.target.id).name
     setProductPhotos(removeObjectWithId(productPhotos, photoToRemove))
   }
 
