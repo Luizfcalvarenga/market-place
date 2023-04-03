@@ -139,49 +139,58 @@ export function Bike(props) {
     }
   }
 
+  const handleEnlargePhoto = (e) => {
+    console.log(e.target)
+    let photo = document.getElementById(e.target.id)
+    let photoEnlarged = document.getElementById(`photo-${e.target.id}`)
+    photoEnlarged.classList.remove("d-none")
+
+
+    // Set image size to 1.5 times original
+    photo.classList.add("zoom");
+
+    // photo.style.transform("scale(1.5)");
+    // // // Animation effect
+    // photo.style.transition("transform 0.25s ease")
+  }
 
   return (
     <div className="bike-show" bike={bike} key={bike} >
       {bike && (<>
-
         <div className="d-flex justify-content-between gap-3 bike-show-infos">
           <div id="carouselExampleControls" className="carousel slide bike-photos w-70" data-bs-ride="carousel">
             <div className="carousel-inner">
               {bike.photos.map((photo, index) => {
-                return (
-
-                  <>
-
-                    <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                      <button type="button" class="" data-bs-toggle="modal" data-bs-target={`#exampleModal${index}`}>
-                        <img src={photo} className="d-block w-100 img-card-show" alt="" />
-                      </button>
+                return (<>
+                  <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                    <button type="button" class="photo-btn" data-toggle="modal" data-target={`#exampleModal${index}`} >
+                      <img id={index} src={photo} className="d-block w-100 img-card-show" alt="" />
+                    </button>
+                  </div>
+                  <div class="modal fade" id={`exampleModal${index}`} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div id={`photo-enlarge-${index}`} class="modal-dialog modal-photo" role="document">
+                      <img id={index} src={photo} className="photo-modal" alt="" />
                     </div>
-
-                    <div class="modal fade" id={`exampleModal${index}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-                          <img src={photo} alt="" className="photo-modal" />
-                        </div>
-                      </div>
-                    </div>
-                  </>
-
-                )
+                    <button className="carousel-control-prev" type="button" data-bs-target={`#photo-enlarge-${index}`} data-bs-slide="prev">
+                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button className="carousel-control-next" type="button" data-bs-target={`#photo-enlarge-${index}`} data-bs-slide="next">
+                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span className="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                </>)
               })}
             </div>
+
+
 
 
 
             {bike.photos.length === 0 && (
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
-                </div>
-                <div className="carousel-item">
                   <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
                 </div>
               </div>
@@ -195,7 +204,6 @@ export function Bike(props) {
               <span className="visually-hidden">Next</span>
             </button>
           </div>
-
           <div className="card-bike w-30 p-2">
             {bike.verified && (
               <div className="d-flex justify-content-between mt-3">
