@@ -67,4 +67,13 @@ class Bike < ApplicationRecord
     CONDITION_OPTIONS[bike_condition.to_sym]
   end
 
+  MATERIAL_OPTIONS = {
+    "aluminum": "Alumínio",
+    "carbon": "Carbono",
+    "carbon_aluminum_chainstay": "Carbono/Aumínio (Chainstay)",
+  }
+  def material_display()
+    MATERIAL_OPTIONS[frame_material.to_sym || wheel_material.to_sym || seat_post_material.to_sym || handlebar_material.to_sym || fork_material.to_sym]
+  end
+
 end

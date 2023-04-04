@@ -128,6 +128,11 @@
   .info-review {
     color: red;
   }
+
+  .text-center {
+    text-align: center;
+  }
+
 </style>
 
 <body>
@@ -136,16 +141,12 @@
   </div>
   <div class="mail-content">
     <% if @advertisement.user.full_name %>
-    <h2>Olá <%= @advertisement.user.full_name %>,</h2>
+    <h2 class="text-center">Olá <%= @advertisement.user.full_name %></h2>
     <% else %>
-    <h2>Olá,</h2>
+    <h2 class="text-center">Olá</h2>
     <% end %>
-    <p class="item-name">Seu anúncio foi reprovado, abaixo as informações para corrigir!</p>
-    <% if @cooments %>
-      <p> <small>Cometário:</small> </p>
-      <p><%= @comments %></p>
-    <% end %>
-
+    <p class="text-center">Seu anúncio foi analisado pela nossa equipe e é necessário revisá-lo para se adequar às nossas diretrizes de segurança e/ou qualidade. Isso aumentará a qualidade do seu anúncio e as chances de vender o seu produto! </p>
+    <p>Revise os campos abaixo:</p>
     <div class="review-result">
       <div class="rejected-attrs">
         <% @attrs_rejected.each do |attr_rejected | %>
@@ -158,6 +159,13 @@
         <% end %>
       </div>
     </div>
+
+
+    <% if @comments %>
+      <p>Considere esta nota da nossa equipe para te ajudar:: </p>
+      <p><%= @comments %></p>
+    <% end %>
+
 
 
     <% if @advertisement.advertisable_type == "Product" %>
@@ -175,16 +183,12 @@
     <p><strong class="item-name">Pedido:</strong> #<%= @advertisement.id %></p>
     <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
     <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_display %></p>
-    <p><strong class="item-name">Status:</strong> <%= @advertisement.status %></p>
-    <p class="item-name">Para saber mais você pode entrar em contato com nosso time no link abaixo:</p>
-    <div class="invoice-link mb-3">
-      <a href="https://wa.me/553196225074" target="_blank" class="btn-invoice">Duvidas</a>
-    </div>
+    <p><strong class="item-name">Status:</strong> <%= @advertisement.status_display %></p>
+    <p>Para saber mais você pode entrar em contato com nosso time através do e-mail <strong>contato@nuflowshop.com.br</strong></p>
     <hr class="footer-line">
     <div class="footer">
 
       <%= image_tag "white_logo.png", class: "footer-brand"%>
-
       <div class="social-icons">
         <a href="#" class="footer-icon"><%= image_tag "youtube.png", class: "social-icon" %></a>
         <a href="#"><%= image_tag "instagram.png", class: "social-icon" %></a>

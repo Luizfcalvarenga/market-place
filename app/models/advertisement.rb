@@ -11,6 +11,7 @@ class Advertisement < ApplicationRecord
     update_requested: "Edição Solicitada",
   }
 
+
   def status_display
    STATUSES_OPTIONS[status.to_sym]
   end
@@ -21,6 +22,17 @@ class Advertisement < ApplicationRecord
   }
 
   def advertisable_display
+   ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
+  end
+
+  ATTRIBUTES_OPTIONS = {
+    "reject locality": "Local",
+    "reject year": "Ano",
+    "reject model": "Modelo",
+
+  }
+
+  def reject_attr_display
    ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
