@@ -62,6 +62,8 @@ module Api
 
         @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
         @bikes = @bikes.where(model: params[:models].split(",")) if params[:models].present?
+        # @bikes = @bikes.where(verified: params[:certified]) if params[:certified].present?
+
       end
 
       def show

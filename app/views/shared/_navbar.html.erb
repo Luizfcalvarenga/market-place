@@ -104,7 +104,7 @@
         </li>
         <% if current_user.present? %>
           <li class="nav-item active my-auto">
-            <%= link_to "#", class: "nav-link-icon" do %>
+            <%= link_to User.find(4), class: "nav-link-icon",  title: 'Converse com o suporte'  do %>
               <i class="fas fa-comment-alt mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>

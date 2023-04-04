@@ -116,6 +116,9 @@ export function Bikes(props) {
   const [presentBatteries, setPresentBatteries] = useState([]);
   const [batteryOptionsToFilter, setBatteryOptionsToFilter] = useState([]);
 
+  // const [verifiedBikeFilter, setVerifiedBikeFilter] = useState("");
+
+
   const currencyConfig = {
     locale: "pt-BR",
     formats: {
@@ -216,6 +219,8 @@ export function Bikes(props) {
     if (stemModelOptionsToFilter) url = url + `&stem_models=${stemModelOptionsToFilter}`
     if (batteryOptionsToFilter) url = url + `&batteries=${batteryOptionsToFilter}`
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
+    // if (certifiedFilter) url = url + `&certified=${certifiedFilter}`
+
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
@@ -415,6 +420,18 @@ export function Bikes(props) {
     setStateFilter(e.target.value)
     let stateId = states.find(state => state.name === e.target.value).id
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+  }
+
+  const handleVerifiedFilter = (e) => {
+    console.log(e.target)
+    if (verifiedBikeFilter === "true" ) {
+      setVerifiedBikeFilter("");
+      document.getElementById("verified-bike").classList.remove("text-success")
+
+    } else {
+      setVerifiedBikeFilter(e.target.value);
+      document.getElementById("verified-bike").classList.add("text-success")
+    }
   }
 
   const handleMultipleFiltersCategory = (e) => {
@@ -857,9 +874,17 @@ export function Bikes(props) {
       <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilterMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
       <div className={`mt-3 index-content ${ window.screen.width < 768 ? "d-block" : "d-flex"}`}>
         <div id="filters" className={`filters mt-1 mb-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
-          <p className="">Filtrar</p>
-          <div className="">
+          <div className="d-flex justify-content-between">
+            <p className="">Filtrar</p>
+            <div className="d-flex justify-content-center">
+              <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)}/>
+              </div>
+              <p id="verified-bike" className="" >Certificadas</p>
+            </div>
+          </div>
 
+          <div className="">
             <div className="border-bottom mt-3">
               <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
