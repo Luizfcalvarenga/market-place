@@ -1090,10 +1090,10 @@ export function ProductForm(props) {
           className="select-answer"
           >
             <option value=""></option>
-            <option value="mountain_bike">Mountain Bike</option>
             <option value="dirt_street">Dirt</option>
-            <option value="road">Road</option>
             <option value="infant">Infantil</option>
+            <option value="mountain_bike">Mountain Bike</option>
+            <option value="road">Road</option>
             <option value="urban">Urbano</option>
           </select>
           { errors && errors.product && errors.product.category && (
@@ -1125,10 +1125,10 @@ export function ProductForm(props) {
               className="select-answer"
             >
               <option value=""></option>
-              <option value="street_bmx">Street BMX</option>
-              <option value="race_bmx">Race BMX</option>
               <option value="big_wheel_bmx">Big Wheel BMX</option>
               <option value="dirt_jump">Dirt Jump</option>
+              <option value="street_bmx">Street BMX</option>
+              <option value="race_bmx">Race BMX</option>
             </select>
           </>)}
 
@@ -1140,11 +1140,11 @@ export function ProductForm(props) {
               className="select-answer"
             >
               <option value=""></option>
-              <option value="speed_performance">Speed Performance</option>
-              <option value="triathlon">Triathon</option>
               <option value="ciclocross">Ciclocross</option>
               <option value="cicloviagem">Cicloviagme</option>
               <option value="gravel">Gravel</option>
+              <option value="triathlon">Triathon</option>
+              <option value="speed_performance">Speed Performance</option>
             </select>
           </>)}
 
