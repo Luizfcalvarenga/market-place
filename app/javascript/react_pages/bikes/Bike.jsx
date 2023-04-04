@@ -505,12 +505,8 @@ export function Bike(props) {
           <div id="Acessórios" className="tabcontent">
             {bike.accessories.length > 0 && (
               <div className="text-success item list-item d-flex ms-3">
-                <p className="bike-attrs-parts"><strong>Possui:</strong> </p>
-                {bike.accessories.map((accessory) => {
-                  return (<>
-                    <p className="bike-info ms-2 align-middle">{accessory}</p>
-                  </>)
-                })}
+                <p className="bike-attrs-parts"><strong>Possui:</strong></p>
+                <p className="bike-info ms-2 align-middle">{bike.accessories.join(', ')}</p>
               </div>
             )}
             {bike.accessories_description && (
