@@ -12,6 +12,10 @@ export function ProductForm(props) {
   const [user, setUser] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
+  const [productTypesAccessories, setProductTypesAccessories] = useState([]);
+  const [productTypesClothes, setProductTypesClothes] = useState([]);
+  const [productTypesComponents, setProductTypesComponents] = useState([]);
+
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -133,8 +137,7 @@ export function ProductForm(props) {
       setUser(data.user.id)
       setStates(data.states)
       setCities(data.cities)
-
-     })
+    })
     if (props.productId) {
       fetchProduct();
       setProductId(props.productId);
@@ -455,28 +458,29 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    console.log(e)
-    if (e.target.localName === "img") {
-      let filter = e.target.alt;
-      if (filter === "acessories") {
-        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
-      } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
-      }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 49 && element.id <= 68));
+    fetch(`/get_information_for_new_product`)
+     .then((response) => response.json())
+     .then((data) => {
+      if (e.target.localName === "img") {
+        let filter = e.target.alt;
+        if (filter === "acessories") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 40 && element.id <= 48));
+        } else if (filter === "components") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 39));
+        }  else if (filter === "clothes") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 49 && element.id <= 68));
+        }
+      } else {
+        let filter = e.target.id;
+        if (filter === "acessories") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 40 && element.id <= 48));
+        } else if (filter === "components") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 39));
+        }  else if (filter === "clothes") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 49 && element.id <= 68));
+        }
       }
-
-    } else {
-      let filter = e.target.id;
-      if (filter === "acessories") {
-        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
-      } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
-      }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 49 && element.id <= 68));
-      }
-
-    }
+    })
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
     firstSection.classList.add("d-none")
