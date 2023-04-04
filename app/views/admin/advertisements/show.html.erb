@@ -794,131 +794,160 @@
               </div>
             </div>
           </div>
-
-          <h4 class="text-center text-white my-3">Suspensão</h4>
-          <div class="d-flex">
-            <div class="w-100" data-column="suspension_type">
-              <div class="d-flex">
-                <p class="m-0 text-success">Tipo:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.suspension_type %></p>
-              </div>
-              <div class="d-flex">
-                <label htmlFor="accept suspension_type" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="<%= @advertisable.suspension_type %>"
-                    name="accept suspension_type"
-                  /><i class="fas fa-check ms-2"></i>
-                </label>
-                <label htmlFor="reject suspension_type" className=" text-success">
-                  <input
-                    class="ms-3"
-                    type="checkbox"
-                    value="<%= @advertisable.suspension_type %>"
-                    name="reject suspension_type"
-                  /><i class="fas fa-times text-danger ms-2"></i>
-                </label>
-              </div>
-            </div>
-          </div>
-          <p class="text-center text-white my-1">Dianteira</p>
-          <div class="d-flex">
-            <div class="w-50" data-column="front_suspension_travel">
-              <div class="d-flex">
-                <p class="m-0 text-success">Curso:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.front_suspension_travel %></p>
-              </div>
-              <div class="d-flex">
-                <label htmlFor="accept front_suspension_travel" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="<%= @advertisable.front_suspension_travel %>"
-                    name="accept front_suspension_travel"
-                  /><i class="fas fa-check ms-2"></i>
-                </label>
-                <label htmlFor="reject front_suspension_travel" className=" text-success">
-                  <input
-                    class="ms-3"
-                    type="checkbox"
-                    value="<%= @advertisable.front_suspension_travel %>"
-                    name="reject front_suspension_travel"
-                  /><i class="fas fa-times text-danger ms-2"></i>
-                </label>
+          <% if @advertisable.category.name == "road" %>
+            <h4 class="text-center text-white my-3">Garfo</h4>
+            <div class="d-flex">
+              <div class="w-100" data-column="suspension_type">
+                <div class="d-flex">
+                  <p class="m-0 text-success">Material:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @advertisable.fork_material %></p>
+                </div>
+                <div class="d-flex">
+                  <label htmlFor="accept fork_material" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @advertisable.fork_material %>"
+                      name="accept fork_material"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject fork_material" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @advertisable.fork_material %>"
+                      name="reject fork_material"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
+                </div>
               </div>
             </div>
-            <div class="w-50" data-column="front_suspension_model">
-              <div class="d-flex">
-                <p class="m-0 text-success">Modelo:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.front_suspension_model %></p>
-              </div>
-              <div class="d-flex">
-                <label htmlFor="accept front_suspension_model" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="<%= @advertisable.front_suspension_model %>"
-                    name="accept front_suspension_model"
-                  /><i class="fas fa-check ms-2"></i>
-                </label>
-                <label htmlFor="reject front_suspension_model" className=" text-success">
-                  <input
-                    class="ms-3"
-                    type="checkbox"
-                    value="<%= @advertisable.front_suspension_model %>"
-                    name="reject front_suspension_model"
-                  /><i class="fas fa-times text-danger ms-2"></i>
-                </label>
-              </div>
-            </div>
-          </div>
-          <p class="text-center text-white my-1">Traseira</p>
-          <div class="d-flex">
-            <div class="w-50" data-column="rear_suspension_travel">
-              <div class="d-flex">
-                <p class="m-0 text-success">Curso:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_suspension_travel %></p>
-              </div>
-              <div class="d-flex">
-                <label htmlFor="accept rear_suspension_travel" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="<%= @advertisable.rear_suspension_travel %>"
-                    name="accept rear_suspension_travel"
-                  /><i class="fas fa-check ms-2"></i>
-                </label>
-                <label htmlFor="reject rear_suspension_travel" className=" text-success">
-                  <input
-                    class="ms-3"
-                    type="checkbox"
-                    value="<%= @advertisable.rear_suspension_travel %>"
-                    name="reject rear_suspension_travel"
-                  /><i class="fas fa-times text-danger ms-2"></i>
-                </label>
+          <% end %>
+          <% if @advertisable.category.name != "road" %>
+            <h4 class="text-center text-white my-3">Suspensão</h4>
+            <div class="d-flex">
+              <div class="w-100" data-column="suspension_type">
+                <div class="d-flex">
+                  <p class="m-0 text-success">Tipo:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @advertisable.suspension_type %></p>
+                </div>
+                <div class="d-flex">
+                  <label htmlFor="accept suspension_type" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @advertisable.suspension_type %>"
+                      name="accept suspension_type"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject suspension_type" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @advertisable.suspension_type %>"
+                      name="reject suspension_type"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
+                </div>
               </div>
             </div>
-            <div class="w-50" data-column="rear_suspension_model">
-              <div class="d-flex">
-                <p class="m-0 text-success">Modelo:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_suspension_model %></p>
+            <p class="text-center text-white my-1">Dianteira</p>
+            <div class="d-flex">
+              <div class="w-50" data-column="front_suspension_travel">
+                <div class="d-flex">
+                  <p class="m-0 text-success">Curso:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @advertisable.front_suspension_travel %></p>
+                </div>
+                <div class="d-flex">
+                  <label htmlFor="accept front_suspension_travel" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @advertisable.front_suspension_travel %>"
+                      name="accept front_suspension_travel"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject front_suspension_travel" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @advertisable.front_suspension_travel %>"
+                      name="reject front_suspension_travel"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
+                </div>
               </div>
-              <div class="d-flex">
-                <label htmlFor="accept rear_suspension_model" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="<%= @advertisable.rear_suspension_model %>"
-                    name="accept rear_suspension_model"
-                  /><i class="fas fa-check ms-2"></i>
-                </label>
-                <label htmlFor="reject rear_suspension_model" className=" text-success">
-                  <input
-                    class="ms-3"
-                    type="checkbox"
-                    value="<%= @advertisable.rear_suspension_model %>"
-                    name="reject rear_suspension_model"
-                  /><i class="fas fa-times text-danger ms-2"></i>
-                </label>
+              <div class="w-50" data-column="front_suspension_model">
+                <div class="d-flex">
+                  <p class="m-0 text-success">Modelo:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @advertisable.front_suspension_model %></p>
+                </div>
+                <div class="d-flex">
+                  <label htmlFor="accept front_suspension_model" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @advertisable.front_suspension_model %>"
+                      name="accept front_suspension_model"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject front_suspension_model" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @advertisable.front_suspension_model %>"
+                      name="reject front_suspension_model"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
+            <p class="text-center text-white my-1">Traseira</p>
+            <div class="d-flex">
+              <div class="w-50" data-column="rear_suspension_travel">
+                <div class="d-flex">
+                  <p class="m-0 text-success">Curso:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_suspension_travel %></p>
+                </div>
+                <div class="d-flex">
+                  <label htmlFor="accept rear_suspension_travel" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @advertisable.rear_suspension_travel %>"
+                      name="accept rear_suspension_travel"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject rear_suspension_travel" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @advertisable.rear_suspension_travel %>"
+                      name="reject rear_suspension_travel"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
+                </div>
+              </div>
+              <div class="w-50" data-column="rear_suspension_model">
+                <div class="d-flex">
+                  <p class="m-0 text-success">Modelo:</p>
+                  <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_suspension_model %></p>
+                </div>
+                <div class="d-flex">
+                  <label htmlFor="accept rear_suspension_model" className="me-2 text-success">
+                    <input
+                      type="checkbox"
+                      value="<%= @advertisable.rear_suspension_model %>"
+                      name="accept rear_suspension_model"
+                    /><i class="fas fa-check ms-2"></i>
+                  </label>
+                  <label htmlFor="reject rear_suspension_model" className=" text-success">
+                    <input
+                      class="ms-3"
+                      type="checkbox"
+                      value="<%= @advertisable.rear_suspension_model %>"
+                      name="reject rear_suspension_model"
+                    /><i class="fas fa-times text-danger ms-2"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+          <% end %>
 
 
           <h4 class="text-center text-white my-3">Rodas</h4>
@@ -1142,6 +1171,29 @@
                 </label>
               </div>
             </div>
+            <div class="w-50" data-column="seat_post_travel">
+              <div class="d-flex">
+                <p class="m-0 text-success">Material:</p>
+                <p class="ms-2 mb-0 field-value"><%= @advertisable.seat_post_material %></p>
+              </div>
+              <div class="d-flex">
+                <label htmlFor="accept seat_post_material" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= @advertisable.seat_post_material %>"
+                    name="accept seat_post_material"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="reject seat_post_matrial" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= @advertisable.seat_post_material %>"
+                    name="reject seat_post_material"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
+            </div>
             <div class="w-50" data-column="seat_post_model">
               <div class="d-flex">
                 <p class="m-0 text-success">Modelo:</p>
@@ -1222,7 +1274,7 @@
             <div class="w-50" data-column="accessories">
               <div class="d-flex">
                 <p class="m-0 text-success">Acompanha:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.accessories %></p>
+                <p class="ms-2 mb-0 field-value"><%= @advertisable.accessories.join(', ') %></p>
               </div>
               <div class="d-flex">
                 <label htmlFor="accept accessories" className="me-2 text-success">
