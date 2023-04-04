@@ -4,8 +4,8 @@
       <div class="spacer-100 page-desktop"></div>
       <h2>A COMUNIDADE DE COMPRA E VENDA DO <br><span class="text-success mt-3">CICLISTA</span></h2>
       <p class="text-white">Compre e venda sua bike, componentes e equipamentos com facilidade e segurança!</p>
-      <%= link_to "VER BIKES", bikes_path, class: "btn btn-primary mt-5" %>
-      <%= link_to "VER PRODUTOS", products_path, class: "btn btn-outline mt-5 ms-3" %>
+      <%= link_to "VER BIKES", bikes_path, class: "btn-home-smooth mt-5" %>
+      <%= link_to "VER PRODUTOS", products_path, class: "btn-home-smooth mt-5 ms-3" %>
 
       <% if false %>
         <div class="input-group my-4 text-center">
@@ -104,8 +104,8 @@
     </div>
 
       <div class="d-flex justify-content-center gap-5 links-servic my-5">
-        <%= link_to "Bikes Certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "btn btn-primary" %>
-        <%= link_to "Produtos Certificados",  {:controller => "products", :action => "index", :verified => true}, class: "btn btn-primary" %>
+        <%= link_to "BIKES CERTIFICADAS",  {:controller => "bikes", :action => "index", :verified => true}, class: "btn-new-announce" %>
+        <%= link_to "PRODUTOS CERTIFICADOS",  {:controller => "products", :action => "index", :verified => true}, class: "btn-new-announce" %>
       </div>
 
   </div>
@@ -190,7 +190,7 @@
       <h2 class="text-success mb-5">BLOG</h2>
       <h3 class="mb-5">Confira dicas de como comprar e vender sua bike ou equipamento.</h3>
       <div class="text-center mt-5">
-        <%= link_to "VER DICAS", "https://nuflowshop.com.br/category/compra-e-venda/", target: "_blank", class: "btn btn-outline mt-5" %>
+        <%= link_to "VER DICAS", "https://nuflowshop.com.br/category/compra-e-venda/", target: "_blank", class: "btn-new-announce mt-5" %>
       </div>
     </div>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
