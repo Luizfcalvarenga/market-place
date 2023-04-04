@@ -27,6 +27,7 @@ class Bike < ApplicationRecord
 
   default_scope { where(removed_at: nil) }
 
+  serialize :accessories
 
   TYPE_OPTIONS = {
     bike: "Bike",

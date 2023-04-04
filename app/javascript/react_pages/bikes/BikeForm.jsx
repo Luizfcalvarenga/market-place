@@ -339,7 +339,7 @@ export function BikeForm(props) {
     dataObject.append( "bike[bike_condition_description]", bikeConditionDescription );
     dataObject.append( "bike[documentation_type]", documentationType );
     dataObject.append( "bike[description]", description );
-    dataObject.append( "bike[accessories]", accessories );
+    dataObject.append( "bike[accessories]", accessories);
     dataObject.append( "bike[accessories_description]", accessoriesDescription );
     dataObject.append( "bike[front_hub]", frontHub );
     dataObject.append( "bike[rear_hub]", rearHub );
