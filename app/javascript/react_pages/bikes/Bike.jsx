@@ -163,10 +163,6 @@ export function Bike(props) {
               })}
             </div>
 
-
-
-
-
             {bike.photos.length === 0 && (
               <div className="carousel-inner">
                 <div className="carousel-item active">
@@ -376,7 +372,7 @@ export function Bike(props) {
             {bike.fork_material && (
               <div className="text-success item list-item d-flex ms-3">
                 <p className="bike-attrs-parts"><strong>Material:</strong> </p>
-                <p className="bike-info ms-2 align-middle">{bike.fork_material}</p>
+                <p className="bike-info ms-2 align-middle">{translateWord(bike.fork_material)}</p>
               </div>
             )}
           </div>
@@ -410,7 +406,7 @@ export function Bike(props) {
             {bike.handlebar_material && (
               <div className="text-success item list-item d-flex ms-3">
                 <p className="bike-attrs-parts"><strong>Material do guidão:</strong> </p>
-                <p className="bike-info ms-2 align-middle">{bike.handlebar_material}</p>
+                <p className="bike-info ms-2 align-middle">{translateWord(bike.handlebar_material)}</p>
               </div>
             )}
             {bike.stem && (
@@ -430,7 +426,7 @@ export function Bike(props) {
             {bike.wheel_material && (
               <div className="text-success item list-item d-flex ms-3">
                 <p className="bike-attrs-parts"><strong>Material:</strong> </p>
-                <p className="bike-info ms-2 align-middle">{bike.wheel_material}</p>
+                <p className="bike-info ms-2 align-middle">{translateWord(bike.wheel_material)}</p>
               </div>
             )}
             {(bike.front_rim_model || bike.front_hub || bike.front_tyre) && (
@@ -565,7 +561,7 @@ export function Bike(props) {
             )}
             {bike.bike_condition_status && (
               <div className="text-success item list-item d-flex ms-3">
-                <p className="bike-attrs-parts"><strong>Estado:</strong> </p>
+                <p className="bike-attrs-parts"><strong>Estado de conservação:</strong> </p>
                 <p className="bike-info ms-2 align-middle">{translateWord(bike.bike_condition_status)}</p>
               </div>
             )}

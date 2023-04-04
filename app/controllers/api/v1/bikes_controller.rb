@@ -81,6 +81,10 @@ module Api
       end
 
       def create
+        if params[:bike][:accessories].present?
+          params[:bike][:accessories].split(',')
+        end
+        binding.pry
         @bike = Bike.new(bike_params)
         skip_authorization
         @categories = Category.all

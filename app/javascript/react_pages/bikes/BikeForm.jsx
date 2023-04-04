@@ -135,39 +135,29 @@ export function BikeForm(props) {
 	const handleSort = () => {
 		//duplicate items
 		let _photoFiles = [...photoFiles]
-
-
 		//remove and save the dragged item content
 		const draggedItemContent = _photoFiles.splice(dragItem.current, 1)[0]
-
-
 		//switch the position
 		_photoFiles.splice(dragOverItem.current, 0, draggedItemContent)
-
-
 		//reset the position ref
 		dragItem.current = null
 		dragOverItem.current = null
-
 		//update the actual array
 		setPhotoFiles(_photoFiles)
     // order photos to back from user order
     let order = _photoFiles.map((photo) => { return photo.name })
     mapOrder(photos, order, 'name');
-
 	}
 
 
   function mapOrder (array, order, key) {
     array.sort( function (a, b) {
       var A = a[key], B = b[key];
-
       if (order.indexOf(A) > order.indexOf(B)) {
         return 1;
       } else {
         return -1;
       }
-
     });
     return array;
   };
