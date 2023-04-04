@@ -358,6 +358,18 @@ export function Products(props) {
     }
   }
 
+  const handleVerifiedFilter = (e) => {
+    console.log(e.target)
+    if (verifiedProductFilter === "true" ) {
+      setVerifiedProductFilter("");
+      document.getElementById("verified-product").classList.remove("text-success")
+
+    } else {
+      setVerifiedProductFilter(e.target.value);
+      document.getElementById("verified-product").classList.add("text-success")
+    }
+  }
+
   const handleMultipleFiltersModel = (e) => {
     const currentOptionsToFilter = [...modelOptionsToFilter]
     const tagFilter = e.target
@@ -500,7 +512,15 @@ export function Products(props) {
 
       <div className="d-flex mt-3 index-content">
         <div id="filters" className={`filters mt-1 ${ window.screen.width < 768 ? "d-none w-100 mb-1" : "w-25"}`}>
-          <p className="">Filtrar</p>
+          <div className="d-flex justify-content-between">
+            <p className="">Filtrar</p>
+            <div className="d-flex justify-content-center">
+              <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)}/>
+              </div>
+              <p id="verified-product" className="" >Certificados</p>
+            </div>
+          </div>
           <div className="">
             <div className="border-bottom mt-3">
               <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
