@@ -27,8 +27,6 @@ class Bike < ApplicationRecord
 
   default_scope { where(removed_at: nil) }
 
-  serialize :accessories
-
   TYPE_OPTIONS = {
     bike: "Bike",
     "e-bike": "E-Bike"
@@ -76,5 +74,7 @@ class Bike < ApplicationRecord
   def material_display()
     MATERIAL_OPTIONS[frame_material.to_sym || wheel_material.to_sym || seat_post_material.to_sym || handlebar_material.to_sym || fork_material.to_sym]
   end
+
+
 
 end

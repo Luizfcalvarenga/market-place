@@ -82,7 +82,9 @@ module Api
 
       def create
         binding.pry
+
         @bike = Bike.new(bike_params)
+        @bike.accessories = params[:bike][:accessories].split(',')
         skip_authorization
         @categories = Category.all
         if @bike.save

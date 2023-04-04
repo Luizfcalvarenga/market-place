@@ -728,6 +728,9 @@ export function BikeForm(props) {
       setAccessories(currentAccessories)
       tagFilter.classList.add("selected-tag")
     }
+    console.log(curentAccessories)
+    console.log(e)
+
   }
 
   const handleLocality = (e) => {
