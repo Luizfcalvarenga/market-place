@@ -104,12 +104,12 @@
         </li>
         <% if current_user.present? %>
           <li class="nav-item active my-auto">
-            <%= link_to User.find(4), class: "nav-link-icon",  title: 'Converse com o suporte'  do %>
+            <%= link_to User.find(4), class: "nav-link-icon", title: 'Converse com o suporte'  do %>
               <i class="fas fa-comment-alt mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
           <li class="nav-item active my-auto">
-            <%= link_to likes_path, class: "nav-link-icon" do %>
+            <%= link_to likes_path, class: "nav-link-icon", title: 'Favoritos' do %>
               <i class="fa fa-heart mt-2"></i>
             <% end %>
           </li>
@@ -189,7 +189,6 @@
 
     <div class="bottom-navbar ">
       <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-
         <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
           <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
         <% end %>
