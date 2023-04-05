@@ -37,7 +37,7 @@ $number-of-options: 4;
   }
 
 
-  .form-check-input:checked {
+  .filter-switch:checked {
     background-color: transparent !important;
     border-color: $color-primary !important;
   }
@@ -46,7 +46,7 @@ $number-of-options: 4;
   //   box-shadow: none !important;
   // }
 
-  .form-check-input:focus {
+  .filter-switch:focus {
     border-color: $color-primary !important;
     outline: 0 !important;
     box-shadow: none !important;

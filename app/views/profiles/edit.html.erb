@@ -16,9 +16,9 @@
   </div>
   <div class="profile-content mb-3">
     <% if current_user.full_name.present? %>
-      <h3 class="title text-center"><%= current_user.full_name %></h3>
+      <h3 class="title text-center mt-5"><%= current_user.full_name %></h3>
     <% else %>
-      <h3 class="title text-center"><%= current_user.email %></h3>
+      <h3 class="title text-center mt-5"><%= current_user.email %></h3>
     <% end %>
     <div class="text-center">
       <% if current_user.phone_number.present? %>
@@ -108,7 +108,7 @@
         <%= link_to advertisements_path, class: " profile-links text-success" do %>
           <i class="fas fa-shopping-bag me-2 "></i>ANÚNCIOS
         <% end %>
-       
+
         <%= link_to likes_path, class: "profile-links text-success" do %>
           <i class="fas fa-heart me-2"></i>FAVORITOS
         <% end %>
