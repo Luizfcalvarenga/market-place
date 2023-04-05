@@ -37,20 +37,7 @@ $number-of-options: 4;
   }
 
 
-  .filter-switch:checked {
-    background-color: transparent !important;
-    border-color: $color-primary !important;
-  }
-
-  // .form-check-input:focus {
-  //   box-shadow: none !important;
-  // }
-
-  .filter-switch:focus {
-    border-color: $color-primary !important;
-    outline: 0 !important;
-    box-shadow: none !important;
-  }
+  
 
 
   .text-input-description {

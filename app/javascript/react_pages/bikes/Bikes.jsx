@@ -878,7 +878,7 @@ export function Bikes(props) {
             <p className="">Filtrar</p>
             <div className="d-flex justify-content-center">
               <div className="form-check form-switch">
-                <input className="form-check-input filter-switch" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)}/>
+                <input className="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)}/>
               </div>
               <p id="verified-bike" className="" >Certificadas</p>
             </div>
