@@ -81,9 +81,7 @@ class BikesController < ApplicationController
 
   def get_bike_attributes_that_are_present_for_filter
     @bikes = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).order(created_at: :desc)
-    # Category.where(id: Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:category_id))
     @categories = Category.where(id: @bikes.pluck(:category_id).uniq).compact_blank
-    # @modalities = Category.where(id: @bikes.pluck(:category_id).uniq).compact_blank
 
     @road_modalities = @bikes.where(category: Category.where(name: "road")).where.not(modality: "null").pluck(:modality).uniq.compact_blank
     @mtb_modalities = @bikes.where(category: Category.where(name: "mountain_bike")).where.not(modality: "null").pluck(:modality).uniq.compact_blank

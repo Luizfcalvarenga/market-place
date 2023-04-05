@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
 	include DeviseTokenAuth::Concerns::User
 
-
   scope :all_except, ->(user) {where.not(id: user)}
   after_create_commit { broadcast_append_to "users" }
   after_update_commit { broadcast_update }
@@ -27,7 +26,6 @@ class User < ApplicationRecord
     user: "user",
     admin: "admin",
   }
-
 
   after_commit :add_default_photo, on: %i[create update]
 
@@ -110,11 +108,9 @@ class User < ApplicationRecord
     return if photo.attached?
 
     photo.attach(
-      io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-bike.png')),
-      filename: 'avatar-bike.png',
+      io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-shop.png')),
+      filename: 'avatar-shop.png',
       content_type: 'image/png'
     )
   end
-  private
-
 end

@@ -4,10 +4,10 @@
       <%= cl_image_tag(message.user.photo.key, class:'chat_pfp') %>
       <div class="mb-3">
         <h6 class="name text-success"><small> <%= message.user.full_name.present? ? message.user.full_name : message.user.email %></small></h6>
-        <p class="time text-white"><%= time_ago_in_words(message.created_at) %> ago</p>
+        <p class="time text-white"><%= time_ago_in_words(message.created_at) %> atrás</p>
       </div>
     </div>
-    <div>
+    <div class="fs-20">
       <%= message.content %>
     </div>
     <%= render "messages/attachments", message: message %>

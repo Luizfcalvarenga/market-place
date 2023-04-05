@@ -33,7 +33,7 @@
               <div class="dropdown-content">
                 <div class="drpdw-bike  mx-auto">
                   <h4 class="text-success mt-3">BIKES</h4>
-                  <% unless current_page?(new_user_session_path) %>
+                  <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path) || current_controller?('users/registrations') || current_controller?('users/sessions')%>
                     <%= link_to "MTB",  {:controller => "bikes", :action => "index", :categories => "mountain_bike"}, class: "text-white" %>
                     <%= link_to "ROAD",  {:controller => "bikes", :action => "index", :categories => "road"}, class: "text-white" %>
                     <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type => "e-bike"}, class: "text-white" %>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="drpdw-components  mx-auto">
                   <h4 class=" text-success mt-3">COMPONENTES</h4>
-                  <% unless current_page?(new_user_session_path) %>
+                  <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
                     <%= link_to "Quadro", {:controller => "products", :action => "index", :product_types => "Quadro"}, class: "text-white" %>
                     <%= link_to "Freios", {:controller => "products", :action => "index", :product_types => "Freio"}, class: "text-white" %>
                     <%= link_to "Câmbio Traseiro", {:controller => "products", :action => "index", :product_types => "Câmbio Traseiro"}, class: "text-white" %>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="drpdw-components  mx-auto">
                   <h4 class=" text-success mt-3">ACESSÓRIOS</h4>
-                  <% unless current_page?(new_user_session_path) %>
+                  <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
                     <%= link_to "Eletrônicos", {:controller => "products", :action => "index", :product_types => "Eletrônicos"}, class: "text-white" %>
                     <%= link_to "Ferramentas", {:controller => "products", :action => "index", :product_types => "Ferramentas"}, class: "text-white" %>
                     <%= link_to "Rolo de treino", {:controller => "products", :action => "index", :product_types => "Rolo de treino"}, class: "text-white" %>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="drpdw-components  mx-auto">
                   <h4 class=" text-success mt-3">VESTUÁRIO</h4>
-                  <% unless current_page?(new_user_session_path) %>
+                  <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
                     <%= link_to "Capacete", {:controller => "products", :action => "index", :product_types => "Capacete"}, class: "text-white" %>
                     <%= link_to "Sapatilha", {:controller => "products", :action => "index", :product_types => "Sapatilha"}, class: "text-white" %>
                     <%= link_to "Bermuda", {:controller => "products", :action => "index", :product_types => "Bermuda"}, class: "text-white" %>
@@ -100,11 +100,11 @@
     <div class="f-40 px-2 mt-2">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row d-flex justify-content-start gap-24 align-middle m-auto">
         <li class="nav-item active ms-5 me-1 my-auto">
-          <%= link_to "VENDER", new_announce_path, class: "btn btn-primary" %>
+          <%= link_to "VENDER", new_announce_path, class: "btn-home-smooth" %>
         </li>
         <% if current_user.present? %>
           <li class="nav-item active my-auto">
-            <%= link_to "#", class: "nav-link-icon" do %>
+            <%= link_to User.find(4), class: "nav-link-icon",  title: 'Converse com o suporte'  do %>
               <i class="fas fa-comment-alt mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
@@ -135,7 +135,7 @@
           </li>
         <% else %>
           <li class="nav-item mt-2">
-            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link-drop text-decoration-underline nav-login" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link ms-5" %>
           </li>
         <% end %>
       </ul>
@@ -172,7 +172,7 @@
           <i class="fas fa-times text-success" id="close-icon"></i>
         </button>
         <div id="navbar-links-mobile" class="mt-3">
-          <% unless current_page?(new_user_session_path) %>
+          <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
             <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
               <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
             <% end %>
@@ -187,8 +187,8 @@
 
     </div>
 
-    <div class="bottom-navbar">
-      <% unless current_page?(new_user_session_path) %>
+    <div class="bottom-navbar ">
+      <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
 
         <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
           <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>

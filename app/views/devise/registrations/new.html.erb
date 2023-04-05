@@ -1,2 +1,51 @@
-<%= render "devise/shared/signin_signup" %>
-<%= render "devise/shared/links" %>
+
+<div id="sign-up" class="<%= mobile_device? ? "w-90" : "w-40" %> m-auto">
+  <div class="bg-dark br-12 <%= mobile_device? ? "p-3 my-3" : "p-5 vh-120 my-5" %>">
+    <h2 class="text-center text-success f-20">Criar conta</h2>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+      <div class="h-80">
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+          <%= f.input :document_number,
+                      label: "CPF",
+                      required: true,
+                      autofocus: true,
+                      input_html: { class: "mask-cpf" } %>
+          <%= f.input :phone_number,
+                      label: "Telefone",
+                      required: true,
+                      autofocus: true,
+                      input_html: { class: "mask-phone" } %>
+          <%= f.input :cep,
+                      label: "CEP",
+                      required: true,
+                      autofocus: true,
+                      input_html: { class: "mask-cep" } %>
+          <%= f.input :password,
+                      label: "Senha",
+                      required: true,
+                      hint: ("#{@minimum_password_length} caracteres no minimo" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password", id: "password_signup" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      label: "Confirmação de senha",
+                      input_html: { autocomplete: "new-password", id: "password_confirmation" } %>
+        </div>
+        <div class="">
+          <label for="toggle-password-signup">Mostrar senha</label>
+          <input type="checkbox" id="toggle-password-signup" />
+        </div>
+      </div>
+      <div class="text-center mt-5 h-20">
+        <%= f.button :submit, "Criar nova conta", class: "btn btn-success" %>
+      </div>
+      <div class="text-center mt-3">
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+</div>

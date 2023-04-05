@@ -11,6 +11,7 @@ class Advertisement < ApplicationRecord
     update_requested: "Edição Solicitada",
   }
 
+
   def status_display
    STATUSES_OPTIONS[status.to_sym]
   end
@@ -24,6 +25,17 @@ class Advertisement < ApplicationRecord
    ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
+  ATTRIBUTES_OPTIONS = {
+    "reject locality": "Local",
+    "reject year": "Ano",
+    "reject model": "Modelo",
+
+  }
+
+  def reject_attr_display
+   ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
+  end
+
 
   enum status: {
     pending: "pending",
@@ -34,7 +46,7 @@ class Advertisement < ApplicationRecord
   }
 
   def is_free?
-    price_in_cents.zero?
+    price_in_cents.zero? || final_price_with_coupon_in_cents == 0
   end
 
 
@@ -44,7 +56,7 @@ class Advertisement < ApplicationRecord
       self.update(
         value: 0,
         net_value: 0,
-        invoice_paid_at: Time.current
+        invoice_paid_at: Time.current,
       )
     end
   end
@@ -86,7 +98,7 @@ class Advertisement < ApplicationRecord
   end
 
   def should_generate_new_invoice?
-    !is_free? && (invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled")
+    !(final_price_with_coupon_in_cents < 100) && !is_free? && (invoice_id.blank? || invoice_status == "expired" || invoice_status == "canceled")
   end
 
   def check_payment_actions_performed

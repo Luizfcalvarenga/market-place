@@ -12,6 +12,10 @@ export function ProductForm(props) {
   const [user, setUser] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
+  const [productTypesAccessories, setProductTypesAccessories] = useState([]);
+  const [productTypesClothes, setProductTypesClothes] = useState([]);
+  const [productTypesComponents, setProductTypesComponents] = useState([]);
+
   const [productTypeId, setProductTypeId] = useState("");
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState();
@@ -133,8 +137,7 @@ export function ProductForm(props) {
       setUser(data.user.id)
       setStates(data.states)
       setCities(data.cities)
-
-     })
+    })
     if (props.productId) {
       fetchProduct();
       setProductId(props.productId);
@@ -305,9 +308,9 @@ export function ProductForm(props) {
   const renderProductTypeAttributeSelect = (attribute, index) => {
     let options = []
     if (["mountain_bike", "dirt_street", "urban", "infant"].includes(productCategory) && attribute.name === "frame_size") {
-      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
-    } else if (productCategory === "road" && attribute.name === "frame_size") {
       options = ["<13''", "14''", "15''", "16''", "17''", "18''", "19''", "20''", "21''", "22''", ">23''", "XXS", "XS", "S", "M", "M/L", "L", "XL", "XXL", "other" ]
+    } else if (productCategory === "road" && attribute.name === "frame_size") {
+      options = [ "<46", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "S1", "S2", "S3", "S4", "S5", "S6", "XXS", "XS", "S", "M", "L", "XL", "XXL", "other" ]
     } else if (attribute.name === "suspension_type" && ["road"].includes(productCategory)) {
       return
      } else if (attribute.name === "rear_suspension_travel" && ["road"].includes(productCategory)) {
@@ -455,28 +458,29 @@ export function ProductForm(props) {
   }
 
   const handleProductType = (e) => {
-    console.log(e)
-    if (e.target.localName === "img") {
-      let filter = e.target.alt;
-      if (filter === "acessories") {
-        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
-      } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
-      }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
+    fetch(`/get_information_for_new_product`)
+     .then((response) => response.json())
+     .then((data) => {
+      if (e.target.localName === "img") {
+        let filter = e.target.alt;
+        if (filter === "acessories") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 40 && element.id <= 48));
+        } else if (filter === "components") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 39));
+        }  else if (filter === "clothes") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 49 && element.id <= 68));
+        }
+      } else {
+        let filter = e.target.id;
+        if (filter === "acessories") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 40 && element.id <= 48));
+        } else if (filter === "components") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 39));
+        }  else if (filter === "clothes") {
+          setProductTypes(data.types_of_product.filter(element => element.id >= 49 && element.id <= 68));
+        }
       }
-
-    } else {
-      let filter = e.target.id;
-      if (filter === "acessories") {
-        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 47));
-      } else if (filter === "components") {
-        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
-      }  else if (filter === "clothes") {
-        setProductTypes(allProducts.filter(element => element.id >= 48 && element.id <= 68));
-      }
-
-    }
+    })
     const firstSection = document.getElementById("first-section")
     const secondSection = document.getElementById("second-section")
     firstSection.classList.add("d-none")
@@ -1086,10 +1090,10 @@ export function ProductForm(props) {
           className="select-answer"
           >
             <option value=""></option>
-            <option value="mountain_bike">Mountain Bike</option>
             <option value="dirt_street">Dirt</option>
-            <option value="road">Road</option>
             <option value="infant">Infantil</option>
+            <option value="mountain_bike">Mountain Bike</option>
+            <option value="road">Road</option>
             <option value="urban">Urbano</option>
           </select>
           { errors && errors.product && errors.product.category && (
@@ -1121,10 +1125,10 @@ export function ProductForm(props) {
               className="select-answer"
             >
               <option value=""></option>
-              <option value="street_bmx">Street BMX</option>
-              <option value="race_bmx">Race BMX</option>
               <option value="big_wheel_bmx">Big Wheel BMX</option>
               <option value="dirt_jump">Dirt Jump</option>
+              <option value="street_bmx">Street BMX</option>
+              <option value="race_bmx">Race BMX</option>
             </select>
           </>)}
 
@@ -1136,11 +1140,11 @@ export function ProductForm(props) {
               className="select-answer"
             >
               <option value=""></option>
-              <option value="speed_performance">Speed Performance</option>
-              <option value="triathlon">Triathon</option>
               <option value="ciclocross">Ciclocross</option>
               <option value="cicloviagem">Cicloviagme</option>
               <option value="gravel">Gravel</option>
+              <option value="triathlon">Triathon</option>
+              <option value="speed_performance">Speed Performance</option>
             </select>
           </>)}
 

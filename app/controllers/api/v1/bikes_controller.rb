@@ -62,6 +62,8 @@ module Api
 
         @bikes = @bikes.where(verified: params[:verified]) if params[:verified].present?
         @bikes = @bikes.where(model: params[:models].split(",")) if params[:models].present?
+        # @bikes = @bikes.where(verified: params[:certified]) if params[:certified].present?
+
       end
 
       def show
@@ -81,13 +83,20 @@ module Api
       end
 
       def create
+        binding.pry
+
         @bike = Bike.new(bike_params)
+        @bike.accessories = params[:bike][:accessories].split(',')
         skip_authorization
         @categories = Category.all
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
-              @bike.photos.attach(photo)
+              photo_name =  photo.original_filename
+              photo_content_type =  photo.content_type
+              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
+              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
           if params[:advertisement].present?
@@ -114,8 +123,6 @@ module Api
         @city = @bike.city.name
         @photos = @bike.photos.map(&:url)
         @maped_cities = City.where(state_id: @bike.state_id)
-
-
         render json: { bike: @bike, category: @category, modalities: @modalities, state: @state, city: @city, photos: @photos, maped_cities: @maped_cities }
       end
 
@@ -123,6 +130,16 @@ module Api
         @bike = Bike.find(params[:id])
         authorize @bike
         if @bike.update(bike_params)
+          if params[:bike][:photos].present?
+            @bike.photos.purge
+            params[:bike][:photos].each do | photo |
+              photo_name =  photo.original_filename
+              photo_content_type =  photo.content_type
+              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
+              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
+            end
+          end
           @advertisement = Advertisement.where(advertisable: @bike).first
           @advertisable = @bike
           AdvertisementUpdater.new(@advertisement, @advertisable).call
@@ -191,11 +208,15 @@ module Api
           :mileage,
           :battery_cycles,
           :pedals,
+          :fork_material,
+          :crankset_material,
+          :handlebar_material,
+          :wheel_material,
+          :seat_post_material
 
-          photos: []
+          # photos: []
         )
       end
-
       def user_signed_in
         current_user.present?
       end

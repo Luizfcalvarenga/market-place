@@ -122,6 +122,41 @@
   }
 }
 
+#tabs {
+  border-bottom: 1px solid $color-primary;
+}
+
+// .bike-form-infos:first-child { border-bottom: none; }
+
+#tabs .active-tab {
+  background-color: #151515;
+  padding: 7px;
+  border-radius: 5px 5px 0 0;
+  border-top: 2px solid $color-primary;
+  border-right: .5px solid $color-primary;
+  border-left: .5px solid $color-primary;
+  border-bottom: 1px solid #151515;
+  color: $color-primary;
+  width: inherit;
+}
+
+#tabs .unactive-tab {
+  background-color: #101010;
+  padding: 7px;
+  border-radius: 5px 5px 0 0;
+  color: rgb(158,158,165);
+  border-top: 2px solid #101010;
+  border-right: .5px solid #101010;
+  border-left: .5px solid #101010;
+
+}
+
+.border-line {
+  border-bottom: 1px solid $color-primary;
+
+}
+
+
 .image-preview-form {
   width: 285px;
   height: 190px;

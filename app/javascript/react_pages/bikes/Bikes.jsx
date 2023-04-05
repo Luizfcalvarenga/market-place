@@ -116,6 +116,9 @@ export function Bikes(props) {
   const [presentBatteries, setPresentBatteries] = useState([]);
   const [batteryOptionsToFilter, setBatteryOptionsToFilter] = useState([]);
 
+  // const [verifiedBikeFilter, setVerifiedBikeFilter] = useState("");
+
+
   const currencyConfig = {
     locale: "pt-BR",
     formats: {
@@ -216,6 +219,8 @@ export function Bikes(props) {
     if (stemModelOptionsToFilter) url = url + `&stem_models=${stemModelOptionsToFilter}`
     if (batteryOptionsToFilter) url = url + `&batteries=${batteryOptionsToFilter}`
     if (verifiedBikeFilter) url = url + `&verified=${verifiedBikeFilter}`
+    // if (certifiedFilter) url = url + `&certified=${certifiedFilter}`
+
     const response = await axios.get(url);
     setBikes(response.data.bikes);
 
@@ -415,6 +420,18 @@ export function Bikes(props) {
     setStateFilter(e.target.value)
     let stateId = states.find(state => state.name === e.target.value).id
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
+  }
+
+  const handleVerifiedFilter = (e) => {
+    console.log(e.target)
+    if (verifiedBikeFilter === "true" ) {
+      setVerifiedBikeFilter("");
+      document.getElementById("verified-bike").classList.remove("text-success")
+
+    } else {
+      setVerifiedBikeFilter(e.target.value);
+      document.getElementById("verified-bike").classList.add("text-success")
+    }
   }
 
   const handleMultipleFiltersCategory = (e) => {
@@ -857,9 +874,17 @@ export function Bikes(props) {
       <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilterMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
       <div className={`mt-3 index-content ${ window.screen.width < 768 ? "d-block" : "d-flex"}`}>
         <div id="filters" className={`filters mt-1 mb-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
-          <p className="">Filtrar</p>
-          <div className="">
+          <div className="d-flex justify-content-between">
+            <p className="">Filtrar</p>
+            <div className="d-flex justify-content-center">
+              <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)}/>
+              </div>
+              <p id="verified-bike" className="" >Certificadas</p>
+            </div>
+          </div>
 
+          <div className="">
             <div className="border-bottom mt-3">
               <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                 <div className="d-flex justify-content-between filter-section">
@@ -926,7 +951,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {(presentMtbModalities.length > 1 || presentRoadModalities.length > 1|| presentDirtModalities.length > 1)&& (
+            {(presentMtbModalities.length > 0 || presentRoadModalities.length > 0 || presentDirtModalities.length > 0)&& (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -982,7 +1007,7 @@ export function Bikes(props) {
               </div>
             </div>
 
-            {presentFrameBrands.length > 1 && (
+            {presentFrameBrands.length > 0 && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -1001,7 +1026,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {presentModels.length > 1 && (
+            {presentModels.length > 0 && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -1044,7 +1069,7 @@ export function Bikes(props) {
               </div>
             </div>
 
-            {(presentFrameSizes.length > 1 || presentRoadFrameSizes.length > 1 || presentFrameMaterials.length > 1 || presentDirtMtbFrameSizes.length > 1)&& (
+            {(presentFrameSizes.length > 0 || presentRoadFrameSizes.length > 0 || presentFrameMaterials.length > 0 || presentDirtMtbFrameSizes.length > 0)&& (
 
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
@@ -1106,7 +1131,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {presentRoadForkMaterials.length > 1 && (<>
+            {presentRoadForkMaterials.length > 0 && (<>
               {categoryOptionsToFilter.includes("road") && (<>
                 <div className="border-bottom mt-3">
                   <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
@@ -1216,16 +1241,16 @@ export function Bikes(props) {
               </div>
             </>)}
 
-            {(presentNumberOfFrontGears.length > 1 || presentNumberOfRearGears.length > 1 || presentRoadFrontDerailleurModels.length > 1 || presentMtbDirtFrontDerailleurModels.length > 1
-              || presentRoadRearDerailleurModels.length > 1 || presentMtbDirtRearDerailleurModels.length > 1 || presentChains.length > 1 || presentCranksets.length > 1)&& (
+            {(presentNumberOfFrontGears.length > 0 || presentNumberOfRearGears.length > 0 || presentRoadFrontDerailleurModels.length > 0 || presentMtbDirtFrontDerailleurModels.length > 0
+              || presentRoadRearDerailleurModels.length > 0 || presentMtbDirtRearDerailleurModels.length > 0 || presentChains.length > 0 || presentCranksets.length > 0)&& (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
-                    Câmbio
+                    Transmissão
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
                   </div>
                 </button>
-                <div id="Câmbio" className="mb-3 d-none">
+                <div id="Transmissão" className="mb-3 d-none">
                   {presentNumberOfFrontGears.length > 0 && (<>
                     <h5 className="mb-2">nº coroas (dianteiro)</h5>
                     <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
@@ -1324,7 +1349,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {(presentBrakeTypes.length > 1 || presentBrakeDiscSizes.length > 1 || presentRoadBrakeModels.length > 1 || presentMtbDirtBrakeModels.length > 1) && (
+            {(presentBrakeTypes.length > 0 || presentBrakeDiscSizes.length > 0 || presentRoadBrakeModels.length > 0 || presentMtbDirtBrakeModels.length > 0) && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -1385,7 +1410,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {(presentRimSizes.length > 1 || presentWheelMaterials.length > 1 || presentRimModels.length > 1) && (
+            {(presentRimSizes.length > 0 || presentWheelMaterials.length > 0 || presentRimModels.length > 0) && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -1452,7 +1477,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {(presentSeatPostTypes.length > 1 || presentSeatPostTravels.length > 1 || presentSeatPostMaterials.length > 1) && (
+            {(presentSeatPostTypes.length > 0 || presentSeatPostTravels.length > 0 || presentSeatPostMaterials.length > 0) && (
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
                   <div className="d-flex justify-content-between filter-section">
@@ -1512,7 +1537,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {(presentHandlebarMaterials.length > 1 || presentHandlebarModels.length > 1 || presentStemModels.length > 1) && (
+            {(presentHandlebarMaterials.length > 0 || presentHandlebarModels.length > 0 || presentStemModels.length > 0) && (
 
               <div className="border-bottom mt-3">
                 <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
@@ -1558,7 +1583,7 @@ export function Bikes(props) {
               </div>
             )}
 
-            {presentBatteries.length > 1  && (<>
+            {presentBatteries.length > 0  && (<>
               {bikeTypeFilter === "e-bike" && (<>
                 <div className="border-bottom mt-3">
                   <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
