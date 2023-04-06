@@ -447,6 +447,7 @@ export function ProductForm(props) {
 
     const response = await axios[method](url, dataObject);
     if (response.data.success) {
+      console.log(response)
       window.location = response.data.redirect_url;
       swal("OHH YEAHH", "Anúncio criado com sucesso!!!", "success");
     } else {
