@@ -92,7 +92,7 @@ module Api
             params[:bike][:photos].each do | photo |
               photo_name =  photo.original_filename
               photo_content_type =  photo.content_type
-              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
               FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
               UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end
@@ -103,7 +103,7 @@ module Api
           @service = AdvertisementGenerator.new(@bike, @coupon_code)
           @service.call()
           if @bike.advertisement.present? &&  @service.errors.blank?
-            render json: { success: true, bike: @bike, photos: @photos, advertisement: @bike.advertisement, redirect_url: advertisement_path(@bike.advertisement) }
+            render json: { success: true, bike: @bike, photos: @photos, advertisement: @bike.advertisement, redirect_url: advertisement_invoice_path(@bike.advertisement) }
           else
             render json: { success: false, errors: {bike: @bike.errors, coupon: @service.errors}}
           end
@@ -133,7 +133,7 @@ module Api
             params[:bike][:photos].each do | photo |
               photo_name =  photo.original_filename
               photo_content_type =  photo.content_type
-              file_path_to_save_to = "#{Rails.root}/public/images/#{photo.original_filename}"
+              file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
               FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
               UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end

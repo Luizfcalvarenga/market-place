@@ -1,5 +1,4 @@
 .filters {
-  // border: 1px solid $color-primary;
   border-radius: 5px;
   padding: 20px;
   position: sticky;
@@ -8,7 +7,6 @@
   height: fit-content;
 
   h5 {
-    // margin-bottom: 0 !important;
     font-size: 18px !important;
     color: #919991;
   }
@@ -53,8 +51,6 @@
   height: 22px;
   filter:  invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
 }
-
-
 
 
 .attributes-filters {
