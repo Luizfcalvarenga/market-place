@@ -83,6 +83,7 @@ module Api
       end
 
       def create
+
         @bike = Bike.new(bike_params)
         @bike.accessories = params[:bike][:accessories].split(',')
         skip_authorization
@@ -90,11 +91,14 @@ module Api
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
-              photo_name =  photo.original_filename
-              photo_content_type =  photo.content_type
-              file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
-              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
+              # image_data_uri = Base64.encode64(File.open(photo).read).gsub("\n", "")
+              UploadBikePhotosJob.perform_later(@bike.id, photo)
+
+              # photo_name =  photo.original_filename
+              # photo_content_type =  photo.content_type
+              # file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
+              # FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
+              # UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
           if params[:advertisement].present?
