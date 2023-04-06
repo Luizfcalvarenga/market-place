@@ -91,8 +91,8 @@ module Api
         if @bike.save
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
-              # image_data_uri = Base64.encode64(File.open(photo).read).gsub("\n", "")
-              UploadBikePhotosJob.perform_later(@bike.id, photo)
+              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              UploadBikePhotosJob.perform_later(@bike, image_data_uri)
 
               # photo_name =  photo.original_filename
               # photo_content_type =  photo.content_type
