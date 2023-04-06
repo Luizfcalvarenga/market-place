@@ -66,7 +66,7 @@ module Api
               photo_content_type =  photo.content_type
               file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
               FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              UploadBikePhotosJob.perform_later(@product, file_path_to_save_to, photo_name, photo_content_type)
+              UploadProductPhotosJob.perform_later(@product, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
           if params[:product][:productAttributes].present?
