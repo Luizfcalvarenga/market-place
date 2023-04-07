@@ -62,11 +62,8 @@ module Api
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
-              photo_name =  photo.original_filename
-              photo_content_type =  photo.content_type
-              file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
-              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              UploadProductPhotosJob.perform_later(@product, file_path_to_save_to, photo_name, photo_content_type)
+              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              UploadProductPhotosJob.perform_later(@product, image_data_uri)
             end
           end
           if params[:product][:productAttributes].present?
@@ -120,11 +117,8 @@ module Api
           if params[:product][:photos].present?
             @product.photos.purge
             params[:product][:photos].each do | photo |
-              photo_name =  photo.original_filename
-              photo_content_type =  photo.content_type
-              file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
-              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              UploadProductPhotosJob.perform_later(@product, file_path_to_save_to, photo_name, photo_content_type)
+              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              UploadProductPhotosJob.perform_later(@product, image_data_uri)
             end
           end
           @advertisement = Advertisement.where(advertisable: @product).first
