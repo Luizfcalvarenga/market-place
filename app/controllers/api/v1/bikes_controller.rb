@@ -93,11 +93,6 @@ module Api
             params[:bike][:photos].each do | photo |
               image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
               UploadBikePhotosJob.perform_later(@bike, image_data_uri)
-              # photo_name =  photo.original_filename
-              # photo_content_type =  photo.content_type
-              # file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
-              # FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              # UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
             end
           end
           if params[:advertisement].present?
@@ -134,11 +129,8 @@ module Api
           if params[:bike][:photos].present?
             @bike.photos.purge
             params[:bike][:photos].each do | photo |
-              photo_name =  photo.original_filename
-              photo_content_type =  photo.content_type
-              file_path_to_save_to = "#{Rails.root}/tmp/#{photo.original_filename}"
-              FileUtils.cp(photo.tempfile.path, file_path_to_save_to)
-              UploadBikePhotosJob.perform_later(@bike, file_path_to_save_to, photo_name, photo_content_type)
+              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              UploadBikePhotosJob.perform_later(@bike, image_data_uri)
             end
           end
           @advertisement = Advertisement.where(advertisable: @bike).first
