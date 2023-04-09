@@ -62,8 +62,10 @@ module Api
         if @product.save
           if params[:product][:photos].present?
             params[:product][:photos].each do | photo |
-              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
-              UploadProductPhotosJob.perform_later(@product, image_data_uri)
+              @product.photos.attach(photo)
+
+              # image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              # UploadProductPhotosJob.perform_later(@product, image_data_uri)
             end
           end
           if params[:product][:productAttributes].present?
@@ -117,8 +119,10 @@ module Api
           if params[:product][:photos].present?
             @product.photos.purge
             params[:product][:photos].each do | photo |
-              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
-              UploadProductPhotosJob.perform_later(@product, image_data_uri)
+              @product.photos.attach(photo)
+
+              # image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              # UploadProductPhotosJob.perform_later(@product, image_data_uri)
             end
           end
           @advertisement = Advertisement.where(advertisable: @product).first
@@ -154,8 +158,8 @@ module Api
           :documentation_type,
           :condition,
           :product_condition_status,
-          :product_condition_description
-          # photos: []
+          :product_condition_description,
+          photos: []
         )
       end
 

@@ -313,7 +313,10 @@ export function BikeForm(props) {
     e.preventDefault()
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
+    const loadingText = document.getElementById("upload-text")
     spinner.classList.remove("d-none")
+    loadingText.classList.remove("d-none")
+
 
     const dataObject = new FormData();
     dataObject.append( "bike[user_id]", user );
@@ -481,7 +484,6 @@ export function BikeForm(props) {
     } else {
       dataObject.append( "bike[accessories]", accessories );
     }
-
     dataObject.append( "advertisement[discount_coupon]", discountCoupon );
 
     const url = props.bikeId
@@ -503,6 +505,8 @@ export function BikeForm(props) {
       setErrors(response.data.errors);
       e.target.classList.remove("d-none")
       document.getElementById("spinner").classList.add("d-none")
+      document.getElementById("upload-text").classList.add("d-none")
+
     }
   }
 
@@ -2408,10 +2412,10 @@ export function BikeForm(props) {
               <h5 className="announce-terms fs-20">Seu anúncio não será cobrado</h5>
               {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
-
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+                <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2436,6 +2440,7 @@ export function BikeForm(props) {
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+                <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2460,6 +2465,7 @@ export function BikeForm(props) {
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+                <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2484,6 +2490,7 @@ export function BikeForm(props) {
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+                <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2508,6 +2515,7 @@ export function BikeForm(props) {
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+                <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2532,6 +2540,7 @@ export function BikeForm(props) {
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
+                <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
