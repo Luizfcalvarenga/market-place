@@ -117,8 +117,10 @@ module Api
           if params[:product][:photos].present?
             @product.photos.purge
             params[:product][:photos].each do | photo |
-              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
-              UploadProductPhotosJob.perform_later(@product, image_data_uri)
+              @product.photos.attach(photo)
+
+              # image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              # UploadProductPhotosJob.perform_later(@product, image_data_uri)
             end
           end
           @advertisement = Advertisement.where(advertisable: @product).first

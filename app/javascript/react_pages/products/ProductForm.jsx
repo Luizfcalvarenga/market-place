@@ -2048,6 +2048,7 @@ export function ProductForm(props) {
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
                   </div>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2072,6 +2073,7 @@ export function ProductForm(props) {
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
                   </div>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2120,6 +2122,7 @@ export function ProductForm(props) {
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
                   </div>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2143,6 +2146,7 @@ export function ProductForm(props) {
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
                   </div>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2167,6 +2171,7 @@ export function ProductForm(props) {
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
                   </div>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
