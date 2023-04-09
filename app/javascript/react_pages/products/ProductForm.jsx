@@ -389,7 +389,9 @@ export function ProductForm(props) {
     e.preventDefault()
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
+    const loadingText = document.getElementById("upload-text")
     spinner.classList.remove("d-none")
+    loadingText.classList.remove("d-none")
 
     const dataObject = new FormData();
     dataObject.append( "product[user_id]", user );
@@ -455,6 +457,8 @@ export function ProductForm(props) {
       swal("OPS, Algo deu errado!", "Revise suas informaçoes", "error");
       e.target.classList.remove("d-none")
       document.getElementById("spinner").classList.add("d-none")
+      document.getElementById("upload-text").classList.add("d-none")
+
     }
   }
 
@@ -2047,8 +2051,8 @@ export function ProductForm(props) {
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
-                    <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                   </div>
+                  <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2072,8 +2076,8 @@ export function ProductForm(props) {
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
-                    <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                   </div>
+                  <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2121,8 +2125,8 @@ export function ProductForm(props) {
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
-                    <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                   </div>
+                  <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2145,8 +2149,8 @@ export function ProductForm(props) {
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
-                    <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                   </div>
+                  <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
@@ -2170,8 +2174,8 @@ export function ProductForm(props) {
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                   <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                     <span className="sr-only">Loading...</span>
-                    <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                   </div>
+                  <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}

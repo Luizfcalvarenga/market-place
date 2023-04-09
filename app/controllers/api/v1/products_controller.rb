@@ -156,8 +156,8 @@ module Api
           :documentation_type,
           :condition,
           :product_condition_status,
-          :product_condition_description
-          # photos: []
+          :product_condition_description,
+          photos: []
         )
       end
 

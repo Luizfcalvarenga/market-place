@@ -205,9 +205,8 @@ module Api
           :crankset_material,
           :handlebar_material,
           :wheel_material,
-          :seat_post_material
-
-          # photos: []
+          :seat_post_material,
+          photos: []
         )
       end
       def user_signed_in
