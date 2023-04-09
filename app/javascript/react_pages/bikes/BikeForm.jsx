@@ -2410,8 +2410,8 @@ export function BikeForm(props) {
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </div>
-                <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2435,8 +2435,8 @@ export function BikeForm(props) {
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </div>
-                <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2460,8 +2460,8 @@ export function BikeForm(props) {
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </div>
-                <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2485,8 +2485,8 @@ export function BikeForm(props) {
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </div>
-                <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2510,8 +2510,8 @@ export function BikeForm(props) {
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </div>
-                <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
@@ -2535,8 +2535,8 @@ export function BikeForm(props) {
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3  disable-btn-form">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
                   <span className="sr-only">Loading...</span>
+                  <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </div>
-                <p className="text-center fs-18 text-gray">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
               </>)}
             </div>
           </>)}
