@@ -129,8 +129,10 @@ module Api
           if params[:bike][:photos].present?
             @bike.photos.purge
             params[:bike][:photos].each do | photo |
-              image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
-              UploadBikePhotosJob.perform_later(@bike, image_data_uri)
+              @bike.photos.attach(photo)
+
+              # image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
+              # UploadBikePhotosJob.perform_later(@bike, image_data_uri)
             end
           end
           @advertisement = Advertisement.where(advertisable: @bike).first
