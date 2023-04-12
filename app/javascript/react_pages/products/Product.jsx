@@ -164,7 +164,6 @@ export function Product(props) {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-
             <div className="card-product w-30 p-2">
               {product.verified && (
                 <div className="d-flex justify-content-between mt-3">
@@ -214,32 +213,38 @@ export function Product(props) {
             </div>
           </div>
 
-          <h3 className="my-4">Mais Informações</h3>
-            <div className="card-for-info p-3">
-              {product.product_attributes.length > 0 && (<>
-                {product.product_attributes.map((attribute) => {
-                  return (
-                    <div className="text-success item list-item d-flex">
-                      <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
-                      <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
-                    </div>
-                  )
-                })}
-              </>)}
-              <p className="bike-attrs-parts"><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
-              {product.condition && (
-                <p className="bike-attrs-parts"><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
-              )}
-              {product.product_condition_status && (
-                <p className="bike-attrs-parts"><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
-              )}
-              {product.product_condition_description && (
-                <p className=""><strong className="text-success">mais informações:</strong> {translateWord(product.product_condition_description)}</p>
-              )}
-              {product.description && (
-                <p className=""><strong className="text-success">Descrição:</strong> {product.description}</p>
-              )}
+          {product.description && (<>
+            <h3 className="my-4">Descrição do vendedor</h3>
+            <div className="card-for-info">
+              <p className="bike-info align-middle my-3">{product.description}</p>
             </div>
+          </>)}
+
+          <h3 className="my-4">Mais Informações</h3>
+          <div className="card-for-info p-3">
+            {product.product_attributes.length > 0 && (<>
+              {product.product_attributes.map((attribute) => {
+                return (
+                  <div className="text-success item list-item d-flex">
+                    <p className="bike-attrs-parts"><strong>{product.product_type_attributes.find(element => element.id === attribute.product_type_attribute_id).prompt}:</strong></p>
+                    <p className="bike-info ms-2 align-middle">{translateWord(attribute.value) ? translateWord(attribute.value) : attribute.value}</p>
+                  </div>
+                )
+              })}
+            </>)}
+            {product.description && (
+              <p className="bike-attrs-parts"><strong className="text-success">Documentação:</strong> {translateWord(product.documentation_type)}</p>
+            )}
+            {product.condition && (
+              <p className="bike-attrs-parts"><strong className="text-success">Condição:</strong> {translateWord(product.condition)}</p>
+            )}
+            {product.product_condition_status && (
+              <p className="bike-attrs-parts"><strong className="text-success">Estado:</strong> {translateWord(product.product_condition_status)}</p>
+            )}
+            {product.product_condition_description && (
+              <p className=""><strong className="text-success">mais informações:</strong> {translateWord(product.product_condition_description)}</p>
+            )}
+          </div>
        </>
       )
       }
