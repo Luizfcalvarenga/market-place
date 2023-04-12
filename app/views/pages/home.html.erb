@@ -189,7 +189,7 @@
     <div class="col-12 col-md-6 blog-text d-flex flex-column align-items-stretch">
       <h2 class="text-success mb-5">BLOG</h2>
       <h3 class="mb-5">Confira dicas de como comprar e vender sua bike ou equipamento.</h3>
-      <div class="text-center mt-5">
+      <div class="text-center <%= mobile_device? ? "my-5" : "mt-5" %>">
         <%= link_to "VER DICAS", "https://nuflowshop.com.br/category/compra-e-venda/", target: "_blank", class: "btn-new-announce mt-5" %>
       </div>
     </div>

@@ -814,9 +814,10 @@ export function ProductForm(props) {
 
   const handlePermitSecondStep = () => {
     if (!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) {
-      return (
+      return (<div className="">
         <button className="btn-next-step me-3 mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-      )
+        <br /> <p className="text-center">Para avançar preencha todas as informações.</p>
+      </div>)
     } else if (productCategory && productModality && productTypeId && productName && productBrand && productModel) {
       return (
         <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>

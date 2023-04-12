@@ -80,6 +80,9 @@
     h1 {
       font-size: 90px !important;
     }
+    .btn-home-smooth {
+      margin-left: 5px !important;
+    }
   }
 
   .btn-outline {
@@ -114,10 +117,12 @@
       margin-right: 0 !important;
     }
     .review-card {
-      width: 100% ;
-      margin-left: 0;
+      width: 80% ;
       height: 23rem;
       box-shadow: none;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      filter: invert(1);
     }
   }
 
@@ -232,6 +237,15 @@
       height: auto;
 
     }
+
+    .review-card {
+      width: 80% ;
+      height: 23rem;
+      box-shadow: none;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      filter: invert(1);
+    }
   }
 
   .fifth-section-home {
@@ -331,6 +345,15 @@
     .cards-differential {
       margin-top: 20px;
       height: auto;
+    }
+
+    .review-card {
+      width: 80% ;
+      height: 23rem;
+      box-shadow: none;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      filter: invert(1);
     }
   }
 
