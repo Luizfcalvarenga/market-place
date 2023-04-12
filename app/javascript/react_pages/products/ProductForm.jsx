@@ -814,25 +814,38 @@ export function ProductForm(props) {
 
   const handlePermitSecondStep = () => {
     if (!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) {
-      return (<div className="">
-        <button className="btn-next-step me-3 mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-        <br /> <p className="text-center">Para avançar preencha todas as informações.</p>
-      </div>)
+      return (<>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        </div>
+        <p className="text-center">Para avançar preencha todas as informações.</p>
+      </>)
     } else if (productCategory && productModality && productTypeId && productName && productBrand && productModel) {
       return (
-        <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        </div>
       )
     }
   }
 
   const handlePermitFourthStep = () => {
     if (!productState || !productCity || !productDocumentationType || !productCondition || !productYear || !productPrice || !productQuantity) {
-      return (
-        <button className="btn-next-step mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-      )
+      return (<>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        </div>
+        <p className="text-center">Para avançar preencha todas as informações.</p>
+      </>)
     } else if (productState && productCity && productDocumentationType && productCondition && productYear && productPrice && productQuantity) {
       return (
-        <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        </div>
       )
     }
   }
@@ -1598,16 +1611,7 @@ export function ProductForm(props) {
             )}
           </>)}
 
-          <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-            {handlePermitSecondStep()}
-            {/* {productCategory && productModality && productTypeId && productName && productBrand && productModel  && (
-              <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
-            )} */}
-          </div>
-          {/* {(!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) && (
-            <><br/> <p className="text-center">Preencha todas as informações antes de seguir em frente!</p></>
-          )} */}
+          {handlePermitSecondStep()}
         </div>
 
         <div>
@@ -1820,11 +1824,8 @@ export function ProductForm(props) {
 
             <label htmlFor="productDescription" className="mt-4">Descrição:</label>
             <textarea className="text-input-description"  id="exampleFormControlTextarea1" rows="3" value={productDescription} onChange={(e) => setProductDescription(e.target.value)}></textarea>
+            {handlePermitFourthStep()}
 
-            <div className="d-flex justify-content-center">
-              <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-              {handlePermitFourthStep()}
-            </div>
           </div>
         </div>
 {/* ///////////////////////////////////////////////////////////// 3° SECTION/////////////////////////////////////////////// */}

@@ -732,8 +732,7 @@ export function BikeForm(props) {
       setAccessories(currentAccessories)
       tagFilter.classList.add("selected-tag")
     }
-    console.log(curentAccessories)
-    console.log(e)
+
 
   }
 
@@ -803,12 +802,20 @@ export function BikeForm(props) {
 
   const handlePermitNextStep = () => {
     if (!category || !modality || !bikeType || !priceInCents || !model || !frameMaterial || !documentationType || !quantity || !frameBrand || !frameSize || !year || !city || !state) {
-      return (
-        <button className="btn-next-step mt-4 pe-none" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+      return (<>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-4" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-4 pe-none" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        </div>
+        <p className="text-center">Para avançar preencha todas as informações.</p>
+      </>
       )
     } else if (category && modality && bikeType && priceInCents && bikeCondition && model && frameMaterial && documentationType && quantity && frameBrand && frameSize && year && city && state) {
       return (
-        <button className="btn-next-step mt-4" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        <div className="d-flex justify-content-center">
+          <button className="btn-back-step me-3 mt-4" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-4" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+        </div>
       )
     }
   }
@@ -1400,7 +1407,7 @@ export function BikeForm(props) {
         <input type="number" className="text-input" placeholder="Em Kg" value={weight} onChange={(e) => setWeight(e.target.value)}/>
 
         <div className="text-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          {/* <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button> */}
           {handlePermitNextStep()}
         </div>
       </div>
