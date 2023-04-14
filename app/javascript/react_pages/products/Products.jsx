@@ -578,7 +578,7 @@ export function Products(props) {
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </div>
               </button>
-              <div id="Tipo de Produto" className="d-none mb-3">
+              <div id="Categoria de Produto" className="d-none mb-3">
                 <div className="d-flex flex-wrap justify-content-between gap-1 mb-3">
 
                   {presentAccessories.length > 0 && (

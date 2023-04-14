@@ -187,7 +187,8 @@
 
     </div>
 
-    <div class="bottom-navbar ">
+
+    <div class="bottom-navbar <% current_page?(user_path(current_user))? "d-none" : "" %>">
       <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
         <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
           <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
