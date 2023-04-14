@@ -101,11 +101,44 @@
   }
 
   .new_announce_banner {
-    height: 50vh;
+    height: 60vh;
     margin: auto;
     background-position: center;
     .announce-banner-title {
       padding-top: 100px;
+    }
+
+    .card-banner {
+      .text-white {
+        display: none;
+      }
+    }
+  }
+  .section-how-works {
+    display: block !important;
+  }
+
+  .card-how-works {
+
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 425px) {
+
+  .frequent-questions {
+    margin: 0;
+    width: 100%;
+
+  }
+
+  .new_announce_banner {
+    height: 80vh;
+    margin: auto;
+    background-position: center;
+    .announce-banner-title {
+      padding-top: 300px;
     }
 
     .card-banner {

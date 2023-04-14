@@ -220,6 +220,13 @@ export function Bike(props) {
           </div>
         </div>
 
+        {bike.description && (<>
+          <h3 className="my-4">Descrição do vendedor</h3>
+          <div className="card-for-info">
+            <p className="bike-info align-middle my-3">{bike.description}</p>
+          </div>
+        </>)}
+
         <h3 className="my-4">Características Técnicas</h3>
         <div className="card-for-info">
           <div className="d-flex justify-content-between bike-sections-show">
@@ -567,12 +574,7 @@ export function Bike(props) {
                 <p className="bike-info ms-2 align-middle">{bike.bike_condition_description}</p>
               </div>
             )}
-            {bike.bike_condition_status && (
-              <div className="text-success item list-item d-flex ms-3">
-                <p className="bike-attrs-parts"><strong>Descrição:</strong> </p>
-                <p className="bike-info ms-2 align-middle">{bike.description}</p>
-              </div>
-            )}
+
           </div>
         </div>
       </>)}

@@ -326,15 +326,32 @@
 @media (max-width: 767px) {
 
  #chatroom_container {
-  margin-top: 15px;
+  // margin-top: 15px;
+  height: calc(100vh - 65px);
   margin-left: 0;
  }
 
  #chat_container {
-    height: 100vh;
+    height: 90vh;
   }
 
- .message-video, .message-img {
+  #side_panel {
+    height: calc(100vh - 65px);
+  }
+
+  #messages {
+    height: calc(85vh - 160px);
+  }
+
+  #single_chat {
+    height: calc(85vh - 65px);
+  }
+
+  .msg-form {
+    margin-top: 5%;
+  }
+
+  .message-video, .message-img {
     width: 100%;
     height: auto;
   }
