@@ -323,6 +323,12 @@
   border: none;
 }
 
+.user-link-chat:hover {
+  .chat_pfp {
+    border-color: $color-primary;
+  }
+}
+
 @media (max-width: 767px) {
 
  #chatroom_container {
