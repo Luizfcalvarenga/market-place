@@ -27,6 +27,9 @@ import "channels"
 import "./components/form_navbar";
 import "./components/chat_mobile";
 import "./components/mobile_search";
+import "./components/bottom_navbar_btn";
+
+
 
 
 import "./mask";

@@ -8,7 +8,14 @@
     <div class="row">
       <div class="col-12 d-flex align-items-center justify-content-between">
         <div class="icon-container ms-3 mt-3">
-          <%= link_to cl_image_tag(user.photo.key, class: 'chat_pfp'), user %>
+          <%= link_to user, class: 'd-flex', data: {turbo: "false"} do %>
+            <%= cl_image_tag(user.photo.key), class: 'chat_pfp' %>
+            <% if user.full_name.present? %>
+              <p class='ms-2 me-auto username'><%= user.full_name%></p>
+            <% else %>
+              <p class='ms-2 me-auto username'><%= user.fuemailll_name%> </p>
+            <% end %>
+          <% end %>
           <%= turbo_stream_from "user_status" %>
           <div>
             <%= render "users/status", user: user %>

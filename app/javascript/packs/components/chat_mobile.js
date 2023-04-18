@@ -13,6 +13,7 @@ document.addEventListener("turbo:load", () => {
     console.log("cade?")
     sidePanel.classList.add("d-none")
     document.getElementById("footer").classList.add("d-none")
+    document.getElementById("bottom-navbar").classList.add("d-none")
   }
 
 
