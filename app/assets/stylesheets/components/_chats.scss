@@ -329,6 +329,36 @@
   }
 }
 
+.enlarged-img-chat-other {
+
+
+  transform: scale(2);
+  /* margin-right: 30px; */
+  /* position: fixed; */
+  top: 40% !important;
+  /* height: auto !important; */
+  -o-object-fit: cover;
+  object-fit: cover;
+  max-height: none !important;
+  max-width: 90%;
+  margin: 40%;
+}
+
+.enlarged-img-chat-me {
+
+
+  transform: scale(2);
+  /* margin-right: 30px; */
+  /* position: fixed; */
+  top: 40% !important;
+  /* height: auto !important; */
+  -o-object-fit: cover;
+  object-fit: cover;
+  max-height: none !important;
+  max-width: 90%;
+  margin: -27%;
+}
+
 @media (max-width: 767px) {
 
  #chatroom_container {
@@ -391,7 +421,7 @@
     top: 0;
     left: 0;
     border-radius: 5px;
-    width: auto;
+    // width: auto;
     max-height: 130px;
     background-size: contain;
     background-position: center;
