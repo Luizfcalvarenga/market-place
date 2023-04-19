@@ -888,9 +888,7 @@ export function Bikes(props) {
     e.target.classList.toggle("selected-filter")
   }
 
-  // let buttonEvent = window.PointerEvent ? 'touchstart' : 'click';
   let buttonEvent = window.matchMedia("(hover: hover)").matches ? 'mousedown' : 'touchstart';
-
 
   return (
     <div className="p-5 br-8 index-container">

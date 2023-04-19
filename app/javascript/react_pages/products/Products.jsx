@@ -510,7 +510,9 @@ export function Products(props) {
     e.target.classList.toggle("selected-filter")
   }
 
-  let buttonEvent = window.PointerEvent ? 'touchstart' : 'click';
+  // let buttonEvent = window.PointerEvent ? 'touchstart' : 'click';
+  let buttonEvent = window.matchMedia("(hover: hover)").matches ? 'mousedown' : 'touchstart';
+
 
 
   return (
