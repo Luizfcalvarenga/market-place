@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def create
     @message = current_user.messages.create(
       content: msg_params[:content],
@@ -7,7 +8,6 @@ class MessagesController < ApplicationController
     )
     skip_authorization
     MessageMailer.with(message: @message).new_message.deliver_now
-
   end
 
   private

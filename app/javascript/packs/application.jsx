@@ -27,6 +27,13 @@ import "channels"
 import "./components/form_navbar";
 import "./components/chat_mobile";
 import "./components/mobile_search";
+import "./components/bottom_navbar_btn";
+import "./components/toggle_password";
+import "./components/enlarge_chat_img";
+
+
+
+
 
 
 import "./mask";

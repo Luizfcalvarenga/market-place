@@ -5,8 +5,6 @@ document.addEventListener("turbo:load", () => {
     const closeBTN = document.getElementById('close-btn');
     const searchBTN = document.getElementById('search-btn');
     const form = document.getElementById('navbar-form');
-    console.log(searchBTN)
-
     navLinks.classList.toggle('d-none');
     closeBTN.classList.toggle('d-none');
     searchBTN.classList.toggle('d-none');
@@ -24,16 +22,12 @@ document.addEventListener("turbo:load", () => {
   let myNav = document.getElementById('navbar');
   let sticky = myNav.offsetTop;
 
-
-
   function setNavbar() {
-
     if (window.pageYOffset > sticky && window.screen.width > 768) {
       myNav.classList.add("navbar-scroll");
       myNav.classList.remove("navbar");
       logoNav.classList.add("navbar-brand-scroll");
       logoNav.classList.remove("navbar-brand");
-
     } else if (window.pageYOffset === sticky && window.screen.width > 768) {
       myNav.classList.add("navbar");
       myNav.classList.remove("navbar-scroll");
@@ -41,5 +35,4 @@ document.addEventListener("turbo:load", () => {
       logoNav.classList.remove("navbar-brand-scroll");
     }
   }
-
 })

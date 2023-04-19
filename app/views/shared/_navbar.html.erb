@@ -172,10 +172,14 @@
           <i class="fas fa-times text-success" id="close-icon"></i>
         </button>
         <div id="navbar-links-mobile" class="mt-3">
-          <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-            <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
-              <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
+          <% if user_signed_in? %>
+            <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
+              <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
+                <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
+              <% end %>
             <% end %>
+          <% else %>
+            <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
           <% end %>
           <% if user_signed_in? %>
             <%= link_to edit_profiles_path, class: "nav-link-drop" do %>
@@ -188,7 +192,7 @@
     </div>
 
 
-    <div class="bottom-navbar">
+    <div id="bottom-navbar" class="bottom-navbar">
       <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
         <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
           <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
@@ -206,10 +210,10 @@
           <% end %>
         <% end %>
       <% end %>
-      <button type="button" class="navbar-toggler dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button id="plus-btn-bottom-navbar" type="button" class="navbar-toggler dropdown-toggle" >
         <i class="fas fa-ellipsis-h nav-bottom-icon mb-2"></i><br> <span class="nav-bottom-link">Mais</span>
       </button>
-      <div class="dropdown-menu dropup">
+      <div id="bottom-navbar-menu" class="dropup d-none">
         <div class="d-flex justify-content-between mt-3">
           <% if user_signed_in? %>
             <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center" do %>

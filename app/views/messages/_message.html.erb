@@ -1,4 +1,4 @@
-<div class="cont-<%=message.user.id%> msg-content">
+<div id="message" class="cont-<%=message.user.id%> msg-content">
   <div class="message-box msg-<%= message.user.id %>">
     <div class="d-flex align-items-center mb-1 user-infos">
       <%= cl_image_tag(message.user.photo.key, class:'chat_pfp') %>
