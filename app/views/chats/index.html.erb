@@ -42,7 +42,7 @@
         <%= turbo_stream_from @single_chat %>
         <div id="messages" data-controller="scroll">
           <div id="messages-container">
-            <%= render @messages %>
+            <%= render @messages, locals: {current_user_id: @current_user_id} %>
           </div>
         </div>
         <%= render 'layouts/new_message_form' %>
