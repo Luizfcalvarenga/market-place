@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
   def create
     @message = current_user.messages.create(
       content: msg_params[:content],
@@ -6,6 +7,8 @@ class MessagesController < ApplicationController
       attachments: msg_params[:attachments]
     )
     skip_authorization
+    # authorize @message
+
     MessageMailer.with(message: @message).new_message.deliver_now
 
   end
