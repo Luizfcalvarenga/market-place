@@ -6,5 +6,6 @@ document.addEventListener("turbo:load", () => {
 
   function toggleMenu() {
     bottomMenu.classList.toggle("d-none")
+    plusBtn.classList.toggle("plus-btn-selected")
   }
 })

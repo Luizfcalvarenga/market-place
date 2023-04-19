@@ -39,6 +39,9 @@ $color-primary: #00c454;
 
 }
 
+.plus-btn-selected {
+  color: $color-primary !important;
+}
 
 .bottom-navbar {
   position: fixed;
