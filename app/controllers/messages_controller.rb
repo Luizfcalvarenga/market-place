@@ -1,10 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :authenticate_user!
-  def index
 
-    @current_user_id = current_user.id
-
-  end
   def create
     @message = current_user.messages.create(
       content: msg_params[:content],
@@ -12,9 +7,6 @@ class MessagesController < ApplicationController
       attachments: msg_params[:attachments]
     )
     skip_authorization
-    # authorize @message
-    @current_user_id = current_user.id
-
     MessageMailer.with(message: @message).new_message.deliver_now
   end
 
