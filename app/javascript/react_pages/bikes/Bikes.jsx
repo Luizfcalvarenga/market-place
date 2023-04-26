@@ -9,7 +9,7 @@ export function Bikes(props) {
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   });
-
+  let buttonEvent = window.matchMedia("(hover: hover)").matches ? 'mousedown' : 'touchstart';
   const [bikes, setBikes] = useState([])
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
@@ -119,7 +119,6 @@ export function Bikes(props) {
 
   // const [verifiedBikeFilter, setVerifiedBikeFilter] = useState("");
 
-
   const currencyConfig = {
     locale: "pt-BR",
     formats: {
@@ -143,7 +142,6 @@ export function Bikes(props) {
       event.preventDefault();
       setMaxPriceFilter(value)
     };
-
     return(
       <>
         <div>
@@ -163,7 +161,6 @@ export function Bikes(props) {
 
   useEffect(async () => {
     let url = "/api/v1/bikes?";
-
     if (conditionFilter) url = url + `&condition=${conditionFilter}`
     if (minPriceFilter) url = url + `&min_price=${minPriceFilter * 100}`
     if (maxPriceFilter) url = url + `&max_price=${maxPriceFilter * 100}`
@@ -242,7 +239,6 @@ export function Bikes(props) {
       setPresentMtbModalities(data.mtb_modalities)
       setPresentDirtModalities(data.dirt_modalities)
       setPresentModels(data.models)
-
                     // QUADRO
       setPresentFrameBrands(data.frame_brands.sort())
       setPresentRoadFrameSizes(data.road_frame_sizes)
@@ -289,8 +285,6 @@ export function Bikes(props) {
       setPresentStemModels(data.stem_models)
       // BATERIA
       setPresentBatteries(data.batteries)
-
-
      })
 
   }, []);
@@ -305,8 +299,6 @@ export function Bikes(props) {
 
   }, []);
 
-
-
   const handleFilter = (e) => {
     if (eventProcessed) {
       setEventProcessed(false);
@@ -317,8 +309,6 @@ export function Bikes(props) {
     sectionFilter.classList.toggle("d-none")
     sectionActive.classList.toggle("selected-filter-section")
     setEventProcessed(true);
-
-
   }
 
   // const handleMouseDown = (e) => {
@@ -359,7 +349,6 @@ export function Bikes(props) {
     dataObject.append( "like[likeble_id]", e.target.id );
     dataObject.append( "like[likeble_type]", "Bike" );
     axios.post('/likes',dataObject)
-
     .then(function (response) {
       if (response.data.success) {
         swal(" OHH YEAHH!", "Produto adicionada aos favoritos!!!", "success");
@@ -436,7 +425,6 @@ export function Bikes(props) {
   }
 
   const handleLocality = (e) => {
-
     setStateFilter(e.target.value)
     let stateId = states.find(state => state.name === e.target.value).id
     setMapedCitiesForState(cities.filter(element => element.state_id === stateId))
@@ -447,7 +435,6 @@ export function Bikes(props) {
     if (verifiedBikeFilter === "true" ) {
       setVerifiedBikeFilter("");
       document.getElementById("verified-bike").classList.remove("text-success")
-
     } else {
       setVerifiedBikeFilter(e.target.value);
       document.getElementById("verified-bike").classList.add("text-success")
@@ -479,7 +466,6 @@ export function Bikes(props) {
       tagFilter.classList.add("selected-tag")
     }
   }
-
 
   const handleMultipleFiltersModel = (e) => {
     const currentOptionsToFilter = [...modelOptionsToFilter]
@@ -888,7 +874,6 @@ export function Bikes(props) {
     e.target.classList.toggle("selected-filter")
   }
 
-  let buttonEvent = window.matchMedia("(hover: hover)").matches ? 'mousedown' : 'touchstart';
 
   return (
     <div className="p-5 br-8 index-container">
