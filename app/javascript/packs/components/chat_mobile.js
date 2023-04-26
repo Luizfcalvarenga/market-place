@@ -2,12 +2,17 @@ document.addEventListener("turbo:load", () => {
   const screenWidth = screen.width
   const sidePanel = document.getElementById("side_panel")
   const chatContainer = document.getElementById("charoom_container")
-  const userSelected = document.getElementById("list_item")
+  const userSelected = document.querySelectorAll("#list_item")
   const backBtn = document.getElementById("back-to-users")
-  if (screen.width < 768 && userSelected?.classList.contains("active")) {
-    sidePanel.classList.add("d-none")
-    document.getElementById("footer").classList.add("d-none")
-    document.getElementById("bottom-navbar").classList.add("d-none")
+
+  if (screenWidth < 768 && userSelected) {
+    userSelected.forEach((item) => {
+      if (item.classList.contains("active")) {
+        sidePanel.classList.add("d-none")
+        document.getElementById("footer").classList.add("d-none")
+        document.getElementById("bottom-navbar").classList.add("d-none")
+      }
+    })
   }
 
   if (backBtn) backBtn.addEventListener("click", removeDisplayNone);

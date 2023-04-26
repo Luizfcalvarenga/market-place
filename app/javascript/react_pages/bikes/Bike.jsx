@@ -139,6 +139,12 @@ export function Bike(props) {
     }
   }
 
+  const breakLines = (text) => {
+    return text.split(".").map((line, index) => {
+      return <p key={index}>{line.trim()}.</p>;
+    });
+  };
+
 
 
   return (
@@ -223,7 +229,7 @@ export function Bike(props) {
         {bike.description && (<>
           <h3 className="my-4">Descrição do vendedor</h3>
           <div className="card-for-info">
-            <p className="bike-info align-middle my-3">{bike.description}</p>
+            <p className="bike-info align-middle my-3">{breakLines(bike.description)}</p>
           </div>
         </>)}
 
