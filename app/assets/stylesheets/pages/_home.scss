@@ -41,6 +41,9 @@
 
 .fourth-section-home {
   background-color: #F4F4F9;
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1);
+  }
 }
 
 ///////////////////////////// 5ª SECTION
@@ -454,6 +457,10 @@
     .cards-differential {
       margin-top: 20px;
       height: auto;
+    }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      filter: invert(1);
     }
   }
 
