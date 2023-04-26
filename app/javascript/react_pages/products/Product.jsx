@@ -119,6 +119,12 @@ export function Product(props) {
     return languageMap[word]
   }
 
+  const breakLines = (text) => {
+    return text.split(".").map((line, index) => {
+      return <p key={index}>{line.trim()}.</p>;
+    });
+  };
+
 
 
   return (
@@ -216,7 +222,7 @@ export function Product(props) {
           {product.description && (<>
             <h3 className="my-4">Descrição do vendedor</h3>
             <div className="card-for-info">
-              <p className="bike-info align-middle my-3">{product.description}</p>
+              <p className="bike-info align-middle my-3">{breakLines(product.description)}</p>
             </div>
           </>)}
 
