@@ -307,6 +307,7 @@ export function Bikes(props) {
     //   setEventProcessed(false);
     //   return;
     // }
+    console.log(e.target)
     if (e.target.id === "section-arrow") {
       const sectionFilter = document.getElementById(e.target.parentElement.innerText)
       const sectionActive = e.target.parentElement;
@@ -911,7 +912,7 @@ export function Bikes(props) {
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </div>
               </button> */}
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onPointerEnter={(e) => handleFilter(e)}>
                 Local
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
