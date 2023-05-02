@@ -303,7 +303,7 @@ export function Bikes(props) {
 
   const isTouchDevice = ('ontouchstart' in window);
 
-  const handleMouseDown = (e) => {
+  const handleClick = (e) => {
     if (!isTouchDevice) {
       handleFilterSection(e);
     }
@@ -929,7 +929,7 @@ export function Bikes(props) {
             <p className="">Filtrar</p>
             <div className="d-flex justify-content-center">
               <div className="form-check form-switch">
-                <input className="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)} onTouchStart={(e) => handleTouchStart(e)}/>
+                <input className="form-check-input" type="checkbox" role="switch" value="true" id="flexSwitchCheckDefault" onChange={(e) => handleVerifiedFilter(e)}/>
               </div>
               <p id="verified-bike" className="" >Certificadas</p>
             </div>
@@ -943,7 +943,7 @@ export function Bikes(props) {
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </div>
               </button> */}
-              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onTouchStart={(e) => handleFilterSection(e)}>
+              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleClick(e)} onTouchStart={(e) => handleTouchStart(e)}>
                 Local
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
