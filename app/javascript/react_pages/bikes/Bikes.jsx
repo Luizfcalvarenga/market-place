@@ -945,17 +945,21 @@ export function Bikes(props) {
 
             {presentCategories.length > 1 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection(e)}>
                   Categoria
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Categoria" className="multiple-filters d-flex gap-1 flex-wrap justify-content-between mb-3 d-none">
-                  {presentCategories.map((category, index) => {
-                    return (
-                      <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
-                    )
-                  })}
-                </div>
+                {
+                  openFilters.includes("Categoria") && (
+                    <div id="Categoria" className="multiple-filters d-flex gap-1 flex-wrap justify-content-between mb-3">
+                      {presentCategories.map((category, index) => {
+                        return (
+                          <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
+                        )
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
