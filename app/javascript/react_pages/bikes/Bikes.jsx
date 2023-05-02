@@ -115,9 +115,8 @@ export function Bikes(props) {
 
   const [presentBatteries, setPresentBatteries] = useState([]);
   const [batteryOptionsToFilter, setBatteryOptionsToFilter] = useState([]);
-  // const [eventProcessed, setEventProcessed] = useState(false);
+  const [openFilters, setOpenFilters] = useState([]);
 
-  // const [verifiedBikeFilter, setVerifiedBikeFilter] = useState("");
 
   const currencyConfig = {
     locale: "pt-BR",
@@ -302,11 +301,24 @@ export function Bikes(props) {
   }, []);
 
   const handleFilterSection = (e) => {
-    console.log(e.currentTarget)
-    const sectionFilter = document.getElementById(e.currentTarget.innerText);
-    const sectionActive = e.currentTarget;
-    sectionFilter.classList.toggle("d-none")
-    sectionActive.classList.toggle("selected-filter-section")
+    console.log(e.currentTarget.innerText)
+    const currentOpenFilters = [...openFilters]
+    const filterName = e.currentTarget.innerText
+    var index = currentOpenFilters.indexOf(filterName);
+
+    if (index === -1) {
+        currentOpenFilters.push(filterName);
+    } else {
+        currentOpenFilters.splice(index, 1);
+    }
+    setOpenFilters(currentOpenFilters)
+
+
+    // console.log(e.currentTarget)
+    // const sectionFilter = document.getElementById(e.currentTarget.innerText);
+    // const sectionActive = e.currentTarget;
+    // sectionFilter.classList.toggle("d-none")
+    // sectionActive.classList.toggle("selected-filter-section")
   }
 
   const handleBikeTypeFilter = (e) => {
@@ -881,65 +893,73 @@ export function Bikes(props) {
 
           <div className="">
             <div className="border-bottom mt-3">
-
               <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection(e)} >
                 Local
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Local" className="locality-filter d-none mb-3">
-                <h5 className="">Estado</h5>
-                <select
-                  className="select-answer"
-                  value={stateFilter}
-                  onChange={(e) => handleLocality(e)}
-                >
-                  <option value=""></option>
-                  {states.map((state, index)=> {
-                    return (<option key={index} value={state.name}>{state.acronym}</option>);
-                  })}
-                </select>
-                <h5 className=" mt-3">Cidade</h5>
-                {stateFilter && (<>
-                  <select
-                    className="select-answer"
-                    value={cityFilter}
-                    onChange={(e) => setCityFilter(e.target.value)}
-                  >
-                    <option value=""></option>
-                    {mapedCitiesForState.map((city, index)=> {
-                      return (<option key={index} value={city.name}>{city.name}</option>);
-                    })}
-                  </select>
-                </>)}
 
-                {!stateFilter && (<>
-                  <select
-                    className="select-answer"
-                    value={cityFilter}
-                    onChange={(e) => setCityFilter(e.target.value)}
-                  >
-                    <option value=""></option>
-                    {cities.map((city, index)=> {
-                      return (<option key={index} value={city.name}>{city.name}</option>);
-                    })}
-                  </select>
-                </>)}
-              </div>
+              {
+                openFilters.includes("Local") && (
+                  <div id="Local" className="locality-filter mb-3">
+                    <h5 className="">Estado</h5>
+                    <select
+                      className="select-answer"
+                      value={stateFilter}
+                      onChange={(e) => handleLocality(e)}
+                    >
+                      <option value=""></option>
+                      {states.map((state, index)=> {
+                        return (<option key={index} value={state.name}>{state.acronym}</option>);
+                      })}
+                    </select>
+                    <h5 className=" mt-3">Cidade</h5>
+                    {stateFilter && (<>
+                      <select
+                        className="select-answer"
+                        value={cityFilter}
+                        onChange={(e) => setCityFilter(e.target.value)}
+                      >
+                        <option value=""></option>
+                        {mapedCitiesForState.map((city, index)=> {
+                          return (<option key={index} value={city.name}>{city.name}</option>);
+                        })}
+                      </select>
+                    </>)}
+
+                    {!stateFilter && (<>
+                      <select
+                        className="select-answer"
+                        value={cityFilter}
+                        onChange={(e) => setCityFilter(e.target.value)}
+                      >
+                        <option value=""></option>
+                        {cities.map((city, index)=> {
+                          return (<option key={index} value={city.name}>{city.name}</option>);
+                        })}
+                      </select>
+                    </>)}
+                  </div>
+                )
+              }
             </div>
 
             {presentCategories.length > 1 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection(e)}>
                   Categoria
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Categoria" className="multiple-filters d-flex gap-1 flex-wrap justify-content-between mb-3 d-none">
-                  {presentCategories.map((category, index) => {
-                    return (
-                      <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
-                    )
-                  })}
-                </div>
+                {
+                  openFilters.includes("Categoria") && (
+                    <div id="Categoria" className="multiple-filters d-flex gap-1 flex-wrap justify-content-between mb-3">
+                      {presentCategories.map((category, index) => {
+                        return (
+                          <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
+                        )
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
