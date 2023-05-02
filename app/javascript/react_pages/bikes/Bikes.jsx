@@ -301,69 +301,13 @@ export function Bikes(props) {
 
   }, []);
 
-  const isTouchDevice = ('ontouchstart' in window);
-
-  const handleClick = (e) => {
-    if (!isTouchDevice) {
-      handleFilterSection(e);
-    }
-  }
-
-  const handleTouchStart = (e) => {
-    if (isTouchDevice) {
-      handleFilterSection(e);
-    }
-  }
-
   const handleFilterSection = (e) => {
-    // e.preventDefault()
-    console.log(e)
-    if (e.target.id === "section-arrow") {
-      const sectionToToggle  = document.getElementById(e.target.parentElement.innerText)
-      const sectionBtn = e.target.parentElement;
-      sectionFilter.classList.toggle("d-none")
-      sectionActive.classList.toggle("selected-filter-section")
-    } else {
-      const sectionFilter = document.getElementById(e.target.innerText);
-      const sectionActive = e.target;
-      sectionFilter.classList.toggle("d-none")
-      sectionActive.classList.toggle("selected-filter-section")
-    }
+    console.log(e.currentTarget)
+    const sectionFilter = document.getElementById(e.currentTarget.innerText);
+    const sectionActive = e.currentTarget;
+    sectionFilter.classList.toggle("d-none")
+    sectionActive.classList.toggle("selected-filter-section")
   }
-
-  const handleFilter = (e) => {
-    // if (eventProcessed) {
-    //   setEventProcessed(false);
-    //   return;
-    // }
-    e.preventDefault()
-    console.log(e)
-    if (e.target.id === "section-arrow") {
-      const sectionFilter = document.getElementById(e.target.parentElement.innerText)
-      const sectionActive = e.target.parentElement;
-      sectionFilter.classList.toggle("d-none")
-      sectionActive.classList.toggle("selected-filter-section")
-    } else {
-      const sectionFilter = document.getElementById(e.target.innerText);
-      const sectionActive = e.target;
-      sectionFilter.classList.toggle("d-none")
-      sectionActive.classList.toggle("selected-filter-section")
-    }
-    // setEventProcessed(true);
-  }
-
-  // const handleMouseDown = (e) => {
-  //   // verifique se o botão esquerdo do mouse foi pressionado
-  //   if (e.which === 1 || e.button === 0) {
-  //     if (!eventProcessed) {
-  //       handleFilter(e);
-  //       setEventProcessed(true);
-  //     } else {
-  //       setEventProcessed(false);
-  //     }
-  //   }
-  // }
-
 
   const handleBikeTypeFilter = (e) => {
     const tagFilter = e.target
@@ -937,13 +881,8 @@ export function Bikes(props) {
 
           <div className="">
             <div className="border-bottom mt-3">
-              {/* <button id="toggle-filter" type="button" value="mtb-modalities" className="filter-link w-100 mb-3" onClick={(e) => handleFilter(e)}>
-                <div className="d-flex justify-content-between filter-section" onClick={(e) => handleFilter(e)}>
-                  Local
-                  <i id="section-arrow" className="fas fa-chevron-down"></i>
-                </div>
-              </button> */}
-              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleClick(e)} onTouchStart={(e) => handleTouchStart(e)}>
+
+              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection(e)} >
                 Local
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
