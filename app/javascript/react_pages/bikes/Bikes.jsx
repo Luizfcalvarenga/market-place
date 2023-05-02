@@ -300,10 +300,8 @@ export function Bikes(props) {
 
   }, []);
 
-  const handleFilterSection = (e) => {
-    console.log(e.currentTarget.innerText)
+  const handleFilterSection = (filterName) => {
     const currentOpenFilters = [...openFilters]
-    const filterName = e.currentTarget.innerText
     var index = currentOpenFilters.indexOf(filterName);
 
     if (index === -1) {
@@ -893,7 +891,7 @@ export function Bikes(props) {
 
           <div className="">
             <div className="border-bottom mt-3">
-              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection(e)} >
+              <button type="button" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Local")} >
                 Local
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
