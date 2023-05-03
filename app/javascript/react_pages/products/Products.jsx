@@ -3,7 +3,6 @@ import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
 import IntlCurrencyInput from "react-intl-currency-input"
-import VerifiedImage from "../../../assets/images/badge.png";
 
 
 
@@ -807,11 +806,16 @@ export function Products(props) {
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} mb-3`} product={product} key={product.id} id="mobile">
                 <a href={"products/" + product.id} className="remove-link" target="_blank">
                   <div className="cards-products">
+                    {
+                      product.verified &&
+                      (
+                        <div className="verified-icon"></div>
+                      )
+                    }
                     <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">
                       <div className="carousel-inner">
                         {product.photos.map((photo, index) => {
                           return (
-
                             <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
                               <img src={photo} className="d-block w-100 img-card-index" alt="" />
                             </div>
@@ -837,14 +841,7 @@ export function Products(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <div className="d-flex justify-content-center gap-2 mt-1">
-                      
-                      <h4 className="card-title text-center">{product.brand}</h4>
-                      <h4 className="card-title text-center">{product.model}</h4>
-                      {product.verified && (
-                        <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
-                      )}
-                    </div>
+                    <h4 className="card-title text-center  gap-2 mt-1">{product.brand} {product.model}</h4>
                     <h4 className="text-center mt-1">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",

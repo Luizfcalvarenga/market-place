@@ -1675,14 +1675,16 @@ export function Bikes(props) {
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
                 <a href={"bikes/" + bike.id} className="remove-link" target="_blank">
                   <div className="cards-bikes">
-                    {bike.verified && (
-                      <div className="verified-icon"></div>
-                    )}
+                    {
+                      bike.verified &&
+                      (
+                        <div className="verified-icon"></div>
+                      )
+                    }
                     <div id={"carouselExampleControls" + bike.id.toString()} className="carousel slide" data-bs-ride="carousel">
                       <div className="carousel-inner">
                         {bike.photos.map((photo, index) => {
                           return (
-
                             <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
                               <img src={photo} className="d-block w-100 img-card-index" alt="" />
                             </div>
@@ -1708,16 +1710,7 @@ export function Bikes(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <div className="d-flex justify-content-center gap-2 mt-1">
-                      <div>
-                        <h4 className="card-title text-center">{bike.frame_brand}</h4>
-                        <h4 className="card-title text-center">{bike.model}</h4>
-                        {/* {bike.verified && (
-                          <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
-                        )} */}
-                      </div>
-
-                    </div>
+                    <h4 className="card-title text-center gap-2 mt-2">{bike.frame_brand}  {bike.model}</h4>
                     <h4 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
