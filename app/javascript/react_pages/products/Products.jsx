@@ -221,20 +221,6 @@ export function Products(props) {
     setOpenFilters(currentOpenFilters)
   }
 
-  // const handleFilter = (e) => {
-  //   console.log(e.target.id)
-  //   if (e.target.id === "section-arrow") {
-  //     const sectionFilter = document.getElementById(e.target.parentElement.innerText)
-  //     const sectionActive = e.target.parentElement;
-  //     sectionFilter.classList.toggle("d-none")
-  //     sectionActive.classList.toggle("selected-filter-section")
-  //   } else {
-  //     const sectionFilter = document.getElementById(e.target.innerText);
-  //     const sectionActive = e.target;
-  //     sectionFilter.classList.toggle("d-none")
-  //     sectionActive.classList.toggle("selected-filter-section")
-  //   }
-  // }
 
   const renderOptionsToFilterAttributes = (attributeOptionsToFilter) => {
     let options = []
@@ -259,6 +245,7 @@ export function Products(props) {
     })
     return (<>
       {Object.keys(ObjectOfAttributes).length != 0 && (<>
+        <h3 className="filter-link">Mais</h3>
         {Object.keys(ObjectOfAttributes).map((key, index) => {
           return (<>
             {(ObjectOfAttributes[key].length > 0) &&(<>
@@ -664,7 +651,7 @@ export function Products(props) {
                 </button>
                 {
                   openFilters.includes("Categoria") && (
-                    <div id="Categoria" className="d-flex flex-wrap justify-content-between gap-2 d-none mb-3">
+                    <div id="Categoria" className="d-flex flex-wrap justify-content-between gap-2 mb-3">
                       {presentCategories.map((category, index) => {
                         return (
                           <button type="button" key={index} value={category.name} className="filter-tag" onClick={(e) => handleMultipleFiltersCategory(e)}>{translateWord(category.name)}</button>
@@ -707,87 +694,107 @@ export function Products(props) {
             )}
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Condição")}>
                 Condição
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Condição" className="d-flex justify-content-between gap-2 d-none mb-3">
-                <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Novo</button>
-                <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usado</button>
-              </div>
+              {
+                  openFilters.includes("Condição") && (
+                    <div id="Condição" className="d-flex justify-content-between gap-2 mb-3">
+                      <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Novo</button>
+                      <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usado</button>
+                    </div>
+                  )
+                }
             </div>
 
             {presentBrands.length > 0 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Marca")}>
                   Marca
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Marca" className="d-flex flex-wrap justify-content-between gap-2 d-none mb-3">
-                  {presentBrands.map((brand, index) => {
-                    return (
-                      <button type="button" key={index} value={brand} className="filter-tag" onClick={(e) => handleMultipleFiltersBrand(e)}>{brand}</button>
-                    )
-                  })}
-                </div>
+                {
+                  openFilters.includes("Marca") && (
+                    <div id="Marca" className="d-flex flex-wrap justify-content-between gap-2 mb-3">
+                      {presentBrands.map((brand, index) => {
+                        return (
+                          <button type="button" key={index} value={brand} className="filter-tag" onClick={(e) => handleMultipleFiltersBrand(e)}>{brand}</button>
+                        )
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
             {presentModels.length > 0 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Modelo")}>
                   Modelo
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Modelo" className="d-flex flex-wrap justify-content-between gap-2 d-none mb-3">
-                  {presentModels.map((model, index) => {
-                    return (
-                      <button type="button" key={index} value={model} className="filter-tag" onClick={(e) => handleMultipleFiltersModel(e)}>{model}</button>
-                    )
-                  })}
-                </div>
+                {
+                  openFilters.includes("Modelo") && (
+                    <div id="Modelo" className="d-flex flex-wrap justify-content-between gap-2 mb-3">
+                      {presentModels.map((model, index) => {
+                        return (
+                          <button type="button" key={index} value={model} className="filter-tag" onClick={(e) => handleMultipleFiltersModel(e)}>{model}</button>
+                        )
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Preço")}>
                 Preço
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Preço" className="d-flex justify-content-between gap-1 d-none mb-3">
-                {BrlCurrencyComponent()}
-              </div>
+              {
+                  openFilters.includes("Preço") && (
+                    <div id="Preço" className="d-flex justify-content-between gap-1 mb-3">
+                      {BrlCurrencyComponent()}
+                    </div>
+                  )
+                }
             </div>
 
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Ano")}>
                 Ano
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Ano" className="d-flex justify-content-between gap-1 d-none mb-3">
-                <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
-                <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
-              </div>
+              {
+                  openFilters.includes("Ano") && (
+                    <div id="Ano" className="d-flex justify-content-between gap-1 mb-3">
+                      <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
+                      <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
+                    </div>
+                  )
+                }
             </div>
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Nome")}>
                 Nome
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Nome" className="d-none mb-3">
-                <input type="text" className="text-input" onChange={(e) => setNameFilter(e.target.value)}/>
-              </div>
+              {
+                openFilters.includes("Nome") && (
+                  <div id="Nome" className="mb-3">
+                    <input type="text" className="text-input" onChange={(e) => setNameFilter(e.target.value)}/>
+                  </div>
+                )
+              }
             </div>
 
             {attributeOptionsToFilter && (<>
-              <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection(e)}>
-                  Atributos
-                  <i id="section-arrow" className="fas fa-chevron-down"></i>
-                </button>
-                <div id="Atributos" className="d-none mb-3">
+              <div className="mt-3">
+                <div id="Atributos" className="mb-3  border-botom">
                   {renderOptionsToFilterAttributes(attributeOptionsToFilter)}
                 </div>
               </div>
@@ -831,6 +838,7 @@ export function Products(props) {
                       </button>
                     </div>
                     <div className="d-flex justify-content-center gap-2 mt-1">
+                      
                       <h4 className="card-title text-center">{product.brand}</h4>
                       <h4 className="card-title text-center">{product.model}</h4>
                       {product.verified && (
