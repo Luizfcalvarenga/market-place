@@ -303,20 +303,12 @@ export function Bikes(props) {
   const handleFilterSection = (filterName) => {
     const currentOpenFilters = [...openFilters]
     var index = currentOpenFilters.indexOf(filterName);
-
     if (index === -1) {
         currentOpenFilters.push(filterName);
     } else {
         currentOpenFilters.splice(index, 1);
     }
     setOpenFilters(currentOpenFilters)
-
-
-    // console.log(e.currentTarget)
-    // const sectionFilter = document.getElementById(e.currentTarget.innerText);
-    // const sectionActive = e.currentTarget;
-    // sectionFilter.classList.toggle("d-none")
-    // sectionActive.classList.toggle("selected-filter-section")
   }
 
   const handleBikeTypeFilter = (e) => {
@@ -868,8 +860,6 @@ export function Bikes(props) {
   const handleToggleFilterMobile = (e) => {
     document.getElementById("filters").classList.toggle("d-none")
     e.target.classList.toggle("selected-filter")
-    console.log(e.target)
-
   }
 
 
@@ -943,7 +933,7 @@ export function Bikes(props) {
 
             {presentCategories.length > 1 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Categoria")}>
                   Categoria
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
@@ -964,651 +954,714 @@ export function Bikes(props) {
             {(presentMtbModalities.length > 0 || presentRoadModalities.length > 0 || presentDirtModalities.length > 0)&& (
               <div className="border-bottom mt-3">
 
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Modalidade")}>
                   Modalidade
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Modalidade" className="multiple-filters d-flex gap-1 flex-wrap justify-content-between mb-3 d-none">
-                  {presentMtbModalities.map((presentMtbModality, index) => {
-                    return (
-                      <button type="button" key={index} value={presentMtbModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentMtbModality)}</button>
-                    )
-                  })}
-                  {presentDirtModalities.map((presentDirtModality, index) => {
-                    return (
-                      <button type="button" key={index} value={presentDirtModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentDirtModality)}</button>
-                    )
-                  })}
-                  {presentRoadModalities.map((presentRoadModality, index) => {
-                    return (
-                      <button type="button" key={index} value={presentRoadModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentRoadModality)}</button>
-                    )
-                  })}
-                </div>
+                {
+                  openFilters.includes("Modalidade") && (
+                    <div id="Modalidade" className="multiple-filters d-flex gap-1 flex-wrap justify-content-between mb-3">
+                      {presentMtbModalities.map((presentMtbModality, index) => {
+                        return (
+                          <button type="button" key={index} value={presentMtbModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentMtbModality)}</button>
+                        )
+                      })}
+                      {presentDirtModalities.map((presentDirtModality, index) => {
+                        return (
+                          <button type="button" key={index} value={presentDirtModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentDirtModality)}</button>
+                        )
+                      })}
+                      {presentRoadModalities.map((presentRoadModality, index) => {
+                        return (
+                          <button type="button" key={index} value={presentRoadModality} className="filter-tag" onClick={(e) => handleMultipleFiltersModality(e)}>{translateWord(presentRoadModality)}</button>
+                        )
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Tipo")}>
                 Tipo
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Tipo" className="d-flex justify-content-between mb-3 d-none">
-                <button type="button" value="e-bike" className="filter-tag fs-15" onClick={(e) => handleBikeTypeFilter(e)}><img src={EBikeImage} alt="" className="icon-filter-bike me-1"/> E-Bike</button>
-                <button type="button" value="bike" className="filter-tag fs-15" onClick={(e) => handleBikeTypeFilter(e)}><img src={NormalBikeImage} alt="" className="icon-filter-bike me-1"/> Bike</button>
-              </div>
+              {
+                openFilters.includes("Tipo") && (
+                  <div id="Tipo" className="d-flex justify-content-between mb-3">
+                    <button type="button" value="e-bike" className="filter-tag fs-15" onClick={(e) => handleBikeTypeFilter(e)}><img src={EBikeImage} alt="" className="icon-filter-bike me-1"/> E-Bike</button>
+                    <button type="button" value="bike" className="filter-tag fs-15" onClick={(e) => handleBikeTypeFilter(e)}><img src={NormalBikeImage} alt="" className="icon-filter-bike me-1"/> Bike</button>
+                  </div>
+                )
+              }
             </div>
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Condição")}>
                 Condição
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Condição" className="d-flex justify-content-between mb-3 d-none">
-                <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Nova</button>
-                <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usada</button>
-              </div>
+              {
+                openFilters.includes("Condição") && (
+                  <div id="Condição" className="d-flex justify-content-between mb-3">
+                    <button type="button" value="new" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Nova</button>
+                    <button type="button" value="used" className="filter-tag" onClick={(e) => handleConditionFilter(e)}>Usada</button>
+                  </div>
+                )
+              }
             </div>
 
             {presentFrameBrands.length > 0 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Marca")}>
                   Marca
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Marca" className="d-flex flex-wrap justify-content-between gap-1 mb-3 d-none">
-                  {presentFrameBrands.map((presentFrameBrand, index) => {
-                    return (
-
-                      <button type="button" key={index} value={presentFrameBrand} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameBrand(e)}>{presentFrameBrand}</button>
-                    )
-                  })}
-                </div>
+                {
+                  openFilters.includes("Marca") && (
+                    <div id="Marca" className="d-flex flex-wrap justify-content-between gap-1 mb-3">
+                      {presentFrameBrands.map((presentFrameBrand, index) => {
+                        return (
+                          <button type="button" key={index} value={presentFrameBrand} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameBrand(e)}>{presentFrameBrand}</button>
+                        )
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
             {presentModels.length > 0 && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Modelo")}>
                   Modelo
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Modelo" className="multiple-filters d-flex gap-1 flex-wrap mb-3 justify-content-between d-none">
-                  {presentModels.map((presentModel, index)=> {
-                    return (
-                      <button type="button" key={index} value={presentModel} className="filter-tag"  onClick={(e) => handleMultipleFiltersModel(e)}>{presentModel}</button>
-                    );
-                  })}
-                </div>
+                {
+                  openFilters.includes("Modelo") && (
+                    <div id="Modelo" className="multiple-filters d-flex gap-1 flex-wrap mb-3 justify-content-between">
+                      {presentModels.map((presentModel, index)=> {
+                        return (
+                          <button type="button" key={index} value={presentModel} className="filter-tag"  onClick={(e) => handleMultipleFiltersModel(e)}>{presentModel}</button>
+                        );
+                      })}
+                    </div>
+                  )
+                }
               </div>
             )}
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Preço")}>
                 Preço
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Preço" className="d-flex justify-content-between gap-2 d-none mb-3">
-                {BrlCurrencyComponent()}
-              </div>
+              {
+                openFilters.includes("Preço") && (
+                  <div id="Preço" className="d-flex justify-content-between gap-2 mb-3">
+                    {BrlCurrencyComponent()}
+                  </div>
+                )
+              }
             </div>
 
             <div className="border-bottom mt-3">
-              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+              <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Ano")}>
                 Ano
                 <i id="section-arrow" className="fas fa-chevron-down"></i>
               </button>
-              <div id="Ano" className="d-flex justify-content-between gap-2 mb-3 d-none">
-                <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
-                <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
-              </div>
+              {
+                openFilters.includes("Ano") && (
+                  <div id="Ano" className="d-flex justify-content-between gap-2 mb-3">
+                    <input type="number" className="text-input" placeholder="DE" onChange={(e) => setMinYearFilter(e.target.value)}/>
+                    <input type="number" className="text-input" placeholder="ATÉ" onChange={(e) => setMaxYearFilter(e.target.value)}/>
+                  </div>
+                )
+              }
             </div>
 
             {(presentFrameSizes.length > 0 || presentRoadFrameSizes.length > 0 || presentFrameMaterials.length > 0 || presentDirtMtbFrameSizes.length > 0)&& (
 
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Quadro")}>
                   Quadro
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Quadro" className="mb-3 d-none">
-                  <div>
-                    {categoryOptionsToFilter.length <= 1 && (<>
-                      {presentFrameSizes.length > 0 && (<>
+                {
+                  openFilters.includes("Quadro") && (
+                    <div id="Quadro" className="mb-3">
+                      <div>
+                        {categoryOptionsToFilter.length <= 1 && (<>
+                          {presentFrameSizes.length > 0 && (<>
+                            <h5 className="mb-2">tamanho</h5>
+                            <div className="d-flex gap-3 flex-wrap justify-content-center">
+                              {presentFrameSizes.map((presentFrameSize, index)=> {
+                                return (
+                                  <button type="button" key={index} value={presentFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentFrameSize}</button>
+                                );
+                              })}
+                            </div>
+                          </>)}
+                        </>)}
+                      </div>
+
+                      {categoryOptionsToFilter.includes("road") && (<>
                         <h5 className="mb-2">tamanho</h5>
-                        <div className="d-flex gap-3 flex-wrap justify-content-center">
-                          {presentFrameSizes.map((presentFrameSize, index)=> {
+                        <div className="d-flex gap-1 flex-wrap justify-content-center">
+
+                          {presentRoadFrameSizes.map((presentRoadFrameSize, index)=> {
                             return (
-                              <button type="button" key={index} value={presentFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentFrameSize}</button>
+                              <button type="button" key={index} value={presentRoadFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentRoadFrameSize}</button>
                             );
                           })}
                         </div>
                       </>)}
-                    </>)}
-                  </div>
 
-                  {categoryOptionsToFilter.includes("road") && (<>
-                    <h5 className="mb-2">tamanho</h5>
-                    <div className="d-flex gap-1 flex-wrap justify-content-center">
+                      {(categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("infant") || categoryOptionsToFilter.includes("urban")) && (<>
+                        <h5 className="mb-2">tamanho</h5>
+                        <div className="d-flex gap-1 flex-wrap justify-content-center">
+                          {presentDirtMtbFrameSizes.map((presentDirtMtbFrameSize, index)=> {
+                            return (
+                              <button type="button" key={index} value={presentDirtMtbFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentDirtMtbFrameSize}</button>
+                            );
+                          })}
+                        </div>
+                      </>)}
 
-                      {presentRoadFrameSizes.map((presentRoadFrameSize, index)=> {
-                        return (
-                          <button type="button" key={index} value={presentRoadFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentRoadFrameSize}</button>
-                        );
-                      })}
+                      <div>
+                        <h5 className="my-2">material</h5>
+                        <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentFrameMaterials.map((presentFrameMaterial, index) => {
+                            return (
+                              <button type="button" key={index} value={presentFrameMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>{translateWord(presentFrameMaterial) || presentFrameMaterial }</button>
+                            )
+                          })}
+                        </div>
+                      </div>
                     </div>
-                  </>)}
-
-                  {(categoryOptionsToFilter.includes("dirt_street") || categoryOptionsToFilter.includes("mountain_bike") || categoryOptionsToFilter.includes("infant") || categoryOptionsToFilter.includes("urban")) && (<>
-                    <h5 className="mb-2">tamanho</h5>
-                    <div className="d-flex gap-1 flex-wrap justify-content-center">
-                      {presentDirtMtbFrameSizes.map((presentDirtMtbFrameSize, index)=> {
-                        return (
-                          <button type="button" key={index} value={presentDirtMtbFrameSize} className="filter-tag"  onClick={(e) => handleMultipleFiltersFrameSize(e)}>{presentDirtMtbFrameSize}</button>
-                        );
-                      })}
-                    </div>
-                  </>)}
-
-                  <div>
-                    <h5 className="my-2">material</h5>
-                    <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentFrameMaterials.map((presentFrameMaterial, index) => {
-                        return (
-                          <button type="button" key={index} value={presentFrameMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersFrameMaterial(e)}>{translateWord(presentFrameMaterial) || presentFrameMaterial }</button>
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
+                  )
+                }
               </div>
             )}
 
             {presentRoadForkMaterials.length > 0 && (<>
               {categoryOptionsToFilter.includes("road") && (<>
                 <div className="border-bottom mt-3">
-                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Garfo")}>
                     Garfo
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
                   </button>
-                  <div id="Garfo" className="d-flex justify-content-between gap-2 mb-3 d-none">
-                    <h5 className="mb-2">material</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentRoadForkMaterials.map((presentRoadForkMaterial, index) => {
-                        return (
-                          <button type="button" key={index} value={presentRoadForkMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSuspensionType(e)}>{translateWord(presentRoadForkMaterial)}</button>
-                        )
-                      })}
-                    </div>
-                  </div>
+                  {
+                    openFilters.includes("Garfo") && (
+                      <div id="Garfo" className="d-flex justify-content-between gap-2 mb-3">
+                        <h5 className="mb-2">material</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentRoadForkMaterials.map((presentRoadForkMaterial, index) => {
+                            return (
+                              <button type="button" key={index} value={presentRoadForkMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSuspensionType(e)}>{translateWord(presentRoadForkMaterial)}</button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  }
                 </div>
               </>)}
             </>)}
 
             {!categoryOptionsToFilter.includes("road") && (<>
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilterSection("Suspensão")}>
                   Suspensão
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Suspensão" className="mb-3 d-none">
-                  {presentSuspensionTypes.length > 0 && (<>
-                    <h5 className="mb-2">tipo</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentSuspensionTypes.map((presentSuspensionType, index) => {
-                        return (
-                          <button type="button" key={index} value={presentSuspensionType} className="filter-tag" onClick={(e) => handleMultipleFiltersSuspensionType(e)}>{translateWord(presentSuspensionType)}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
-                  {(presentFrontSuspensionTravels && !suspensionTypeOptionsToFilter.includes("no_suspension")) &&(<>
-                    <h5 className="my-2">dianteira</h5>
-                    <div id="front_suspension_travel" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentFrontSuspensionTravels.map((presentFrontSuspensionTravel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentFrontSuspensionTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionTravel(e)}>{presentFrontSuspensionTravel}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                {
+                  openFilters.includes("Suspensão") && (
+                    <div id="Suspensão" className="mb-3">
+                      {presentSuspensionTypes.length > 0 && (<>
+                        <h5 className="mb-2">tipo</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentSuspensionTypes.map((presentSuspensionType, index) => {
+                            return (
+                              <button type="button" key={index} value={presentSuspensionType} className="filter-tag" onClick={(e) => handleMultipleFiltersSuspensionType(e)}>{translateWord(presentSuspensionType)}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+                      {(presentFrontSuspensionTravels && !suspensionTypeOptionsToFilter.includes("no_suspension")) &&(<>
+                        <h5 className="my-2">dianteira</h5>
+                        <div id="front_suspension_travel" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentFrontSuspensionTravels.map((presentFrontSuspensionTravel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentFrontSuspensionTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionTravel(e)}>{presentFrontSuspensionTravel}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {(presentMtbDirtFrontSuspensionModels.length > 0 && !suspensionTypeOptionsToFilter.includes("no_suspension")) && (<>
-                    <h5 className="my-2">Marca</h5>
-                    <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentMtbDirtFrontSuspensionModels.map((presentMtbDirtFrontSuspensionModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentMtbDirtFrontSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionModel(e)}>{presentMtbDirtFrontSuspensionModel}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
-                  {categoryOptionsToFilter.length < 1 && (<>
-                    <h5 className="my-2">Marca</h5>
-                    <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentFrontSuspensionModels.map((presentFrontSuspensionModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentFrontSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionModel(e)}>{presentFrontSuspensionModel}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                      {(presentMtbDirtFrontSuspensionModels.length > 0 && !suspensionTypeOptionsToFilter.includes("no_suspension")) && (<>
+                        <h5 className="my-2">Marca</h5>
+                        <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentMtbDirtFrontSuspensionModels.map((presentMtbDirtFrontSuspensionModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentMtbDirtFrontSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionModel(e)}>{presentMtbDirtFrontSuspensionModel}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+                      {categoryOptionsToFilter.length < 1 && (<>
+                        <h5 className="my-2">Marca</h5>
+                        <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentFrontSuspensionModels.map((presentFrontSuspensionModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentFrontSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontSuspensionModel(e)}>{presentFrontSuspensionModel}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {(!suspensionTypeOptionsToFilter.includes("hardtail") && !suspensionTypeOptionsToFilter.includes("no_suspension"))&& (<>
-                    {presentRearSuspensionTravels && (<>
-                      <h5 className="my-2">traseira</h5>
-                      <div id="Rear_suspension_travel" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentRearSuspensionTravels.map((presentRearSuspensionTravel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentRearSuspensionTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionTravel(e)}>{presentRearSuspensionTravel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                    {presentMtbDirtRearSuspensionModels.length > 0 && (<>
-                      <h5 className="my-2">Marca</h5>
-                      <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentMtbDirtRearSuspensionModels.map((presentMtbDirtRearSuspensionModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentMtbDirtRearSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionModel(e)}>{presentMtbDirtRearSuspensionModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                    {categoryOptionsToFilter.length < 1 && (<>
-                      <h5 className="my-2">Marca</h5>
-                      <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentRearSuspensionModels.map((presentRearSuspensionModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentRearSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionModel(e)}>{presentRearSuspensionModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-                </div>
+                      {(!suspensionTypeOptionsToFilter.includes("hardtail") && !suspensionTypeOptionsToFilter.includes("no_suspension"))&& (<>
+                        {presentRearSuspensionTravels && (<>
+                          <h5 className="my-2">traseira</h5>
+                          <div id="Rear_suspension_travel" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentRearSuspensionTravels.map((presentRearSuspensionTravel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentRearSuspensionTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionTravel(e)}>{presentRearSuspensionTravel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                        {presentMtbDirtRearSuspensionModels.length > 0 && (<>
+                          <h5 className="my-2">Marca</h5>
+                          <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentMtbDirtRearSuspensionModels.map((presentMtbDirtRearSuspensionModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentMtbDirtRearSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionModel(e)}>{presentMtbDirtRearSuspensionModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                        {categoryOptionsToFilter.length < 1 && (<>
+                          <h5 className="my-2">Marca</h5>
+                          <div id="frame_materials" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentRearSuspensionModels.map((presentRearSuspensionModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentRearSuspensionModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearSuspensionModel(e)}>{presentRearSuspensionModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+                    </div>
+                  )
+                }
               </div>
             </>)}
 
             {(presentNumberOfFrontGears.length > 0 || presentNumberOfRearGears.length > 0 || presentRoadFrontDerailleurModels.length > 0 || presentMtbDirtFrontDerailleurModels.length > 0
               || presentRoadRearDerailleurModels.length > 0 || presentMtbDirtRearDerailleurModels.length > 0 || presentChains.length > 0 || presentCranksets.length > 0)&& (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Transmissão")}>
                   Transmissão
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Transmissão" className="mb-3 d-none">
-                  {presentNumberOfFrontGears.length > 0 && (<>
-                    <h5 className="mb-2">nº coroas (dianteiro)</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentNumberOfFrontGears.map((presentNumberOfFrontGear, index) => {
-                        return (
-                          <button type="button" key={index} value={presentNumberOfFrontGear} className="filter-tag" onClick={(e) => handleMultipleFiltersNumberOfFrontGears(e)}>{presentNumberOfFrontGear}</button>
-                        )
-                      })}
+                {
+                  openFilters.includes("Transmissão") && (
+                    <div id="Transmissão" className="mb-3">
+                      {presentNumberOfFrontGears.length > 0 && (<>
+                        <h5 className="mb-2">nº coroas (dianteiro)</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentNumberOfFrontGears.map((presentNumberOfFrontGear, index) => {
+                            return (
+                              <button type="button" key={index} value={presentNumberOfFrontGear} className="filter-tag" onClick={(e) => handleMultipleFiltersNumberOfFrontGears(e)}>{presentNumberOfFrontGear}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+                      {categoryOptionsToFilter.includes("road") && (<>
+                        {presentRoadFrontDerailleurModels.length > 0 && (<>
+                          <h5 className="my-2">Marca (dianteiro)</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentRoadFrontDerailleurModels.map((presentRoadFrontDerailleurModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentRoadFrontDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontDerailleurModels(e)}>{presentRoadFrontDerailleurModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {!categoryOptionsToFilter.includes("road") && (<>
+                        {presentMtbDirtFrontDerailleurModels.length > 0 && (<>
+                          <h5 className="my-2">marca</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentMtbDirtFrontDerailleurModels.map((presentMtbDirtFrontDerailleurModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentMtbDirtFrontDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontDerailleurModels(e)}>{presentMtbDirtFrontDerailleurModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {presentNumberOfRearGears.length > 0 && (<>
+                        <h5 className="mt-2">nº velocidades (traseiro)</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentNumberOfRearGears.map((presentNumberOfRearGear, index) => {
+                            return (
+                              <button type="button" key={index} value={presentNumberOfRearGear} className="filter-tag" onClick={(e) => handleMultipleFiltersNumberOfRearGears(e)}>{presentNumberOfRearGear}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+
+                      {categoryOptionsToFilter.includes("road") && (<>
+                        {presentRoadRearDerailleurModels.length > 0 && (<>
+                          <h5 className="my-2">marca(traseiro)</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentRoadRearDerailleurModels.map((presentRoadRearDerailleurModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentRoadRearDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearDerailleurModels(e)}>{presentRoadRearDerailleurModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {!categoryOptionsToFilter.includes("road") && (<>
+                        {presentMtbDirtRearDerailleurModels.length > 0 && (<>
+                          <h5 className="my-2">marca(traseiro)</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentMtbDirtRearDerailleurModels.map((presentMtbDirtRearDerailleurModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentMtbDirtRearDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearDerailleurModels(e)}>{presentMtbDirtRearDerailleurModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+                      <hr />
+                      {presentCranksets.length > 0 && (<>
+                        <h5 className="my-2">pedivela</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentCranksets.map((presentCrankset, index) => {
+                            return (
+                              <button type="button" key={index} value={presentCrankset} className="filter-tag" onClick={(e) => handleMultipleFiltersCrankset(e)}>{presentCrankset}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+
+                      {presentChains.length > 0 && (<>
+                        <h5 className="my-2">corrente</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentChains.map((presentChain, index) => {
+                            return (
+                              <button type="button" key={index} value={presentChain} className="filter-tag" onClick={(e) => handleMultipleFiltersChain(e)}>{presentChain}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
                     </div>
-                  </>)}
-                  {categoryOptionsToFilter.includes("road") && (<>
-                    {presentRoadFrontDerailleurModels.length > 0 && (<>
-                      <h5 className="my-2">Marca (dianteiro)</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentRoadFrontDerailleurModels.map((presentRoadFrontDerailleurModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentRoadFrontDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontDerailleurModels(e)}>{presentRoadFrontDerailleurModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {!categoryOptionsToFilter.includes("road") && (<>
-                    {presentMtbDirtFrontDerailleurModels.length > 0 && (<>
-                      <h5 className="my-2">marca</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentMtbDirtFrontDerailleurModels.map((presentMtbDirtFrontDerailleurModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentMtbDirtFrontDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersFrontDerailleurModels(e)}>{presentMtbDirtFrontDerailleurModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {presentNumberOfRearGears.length > 0 && (<>
-                    <h5 className="mt-2">nº velocidades (traseiro)</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentNumberOfRearGears.map((presentNumberOfRearGear, index) => {
-                        return (
-                          <button type="button" key={index} value={presentNumberOfRearGear} className="filter-tag" onClick={(e) => handleMultipleFiltersNumberOfRearGears(e)}>{presentNumberOfRearGear}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
-
-                  {categoryOptionsToFilter.includes("road") && (<>
-                    {presentRoadRearDerailleurModels.length > 0 && (<>
-                      <h5 className="my-2">marca(traseiro)</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentRoadRearDerailleurModels.map((presentRoadRearDerailleurModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentRoadRearDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearDerailleurModels(e)}>{presentRoadRearDerailleurModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {!categoryOptionsToFilter.includes("road") && (<>
-                    {presentMtbDirtRearDerailleurModels.length > 0 && (<>
-                      <h5 className="my-2">marca(traseiro)</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentMtbDirtRearDerailleurModels.map((presentMtbDirtRearDerailleurModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentMtbDirtRearDerailleurModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRearDerailleurModels(e)}>{presentMtbDirtRearDerailleurModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-                  <hr />
-                  {presentCranksets.length > 0 && (<>
-                    <h5 className="my-2">pedivela</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentCranksets.map((presentCrankset, index) => {
-                        return (
-                          <button type="button" key={index} value={presentCrankset} className="filter-tag" onClick={(e) => handleMultipleFiltersCrankset(e)}>{presentCrankset}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
-
-                  {presentChains.length > 0 && (<>
-                    <h5 className="my-2">corrente</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentChains.map((presentChain, index) => {
-                        return (
-                          <button type="button" key={index} value={presentChain} className="filter-tag" onClick={(e) => handleMultipleFiltersChain(e)}>{presentChain}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
-                </div>
+                  )
+                }
               </div>
             )}
 
             {(presentBrakeTypes.length > 0 || presentBrakeDiscSizes.length > 0 || presentRoadBrakeModels.length > 0 || presentMtbDirtBrakeModels.length > 0) && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Freio")}>
                   Freio
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Freio" className="mb-3 d-none">
-                  {presentBrakeTypes.length > 0 && (<>
-                    <h5 className="mb-2">tipo</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentBrakeTypes.map((presentBrakeType, index) => {
-                        return (
-                          <button type="button" key={index} value={presentBrakeType} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeType(e)}>{translateWord(presentBrakeType)}</button>
-                        )
-                      })}
+                {
+                  openFilters.includes("Freio") && (
+                    <div id="Freio" className="mb-3">
+                      {presentBrakeTypes.length > 0 && (<>
+                        <h5 className="mb-2">tipo</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentBrakeTypes.map((presentBrakeType, index) => {
+                            return (
+                              <button type="button" key={index} value={presentBrakeType} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeType(e)}>{translateWord(presentBrakeType)}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+                      {(brakeTypeOptionsToFilter.includes("hydraulic_disc") || brakeTypeOptionsToFilter.includes("mechanical_disc")) && (<>
+                        {presentBrakeDiscSizes.length > 0 && (<>
+                          <h5 className="my-2">Disco</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentBrakeDiscSizes.map((presentBrakeDiscSize, index) => {
+                              return (
+                                <button type="button" key={index} value={presentBrakeDiscSize} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeDiscSize(e)}>{presentBrakeDiscSize}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {categoryOptionsToFilter.includes("road") && (<>
+                        {presentRoadBrakeModels.length > 0 && (<>
+                          <h5 className="my-2">Marca</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentRoadBrakeModels.map((presentRoadBrakeModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentRoadBrakeModel} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeModel(e)}>{presentRoadBrakeModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {!categoryOptionsToFilter.includes("road") && (<>
+                        {presentMtbDirtBrakeModels.length > 0 && (<>
+                          <h5 className="my-2">marca</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentMtbDirtBrakeModels.map((presentMtbDirtBrakeModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentMtbDirtBrakeModel} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeModel(e)}>{presentMtbDirtBrakeModel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
                     </div>
-                  </>)}
-                  {(brakeTypeOptionsToFilter.includes("hydraulic_disc") || brakeTypeOptionsToFilter.includes("mechanical_disc")) && (<>
-                    {presentBrakeDiscSizes.length > 0 && (<>
-                      <h5 className="my-2">Disco</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentBrakeDiscSizes.map((presentBrakeDiscSize, index) => {
-                          return (
-                            <button type="button" key={index} value={presentBrakeDiscSize} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeDiscSize(e)}>{presentBrakeDiscSize}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {categoryOptionsToFilter.includes("road") && (<>
-                    {presentRoadBrakeModels.length > 0 && (<>
-                      <h5 className="my-2">Marca</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentRoadBrakeModels.map((presentRoadBrakeModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentRoadBrakeModel} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeModel(e)}>{presentRoadBrakeModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {!categoryOptionsToFilter.includes("road") && (<>
-                    {presentMtbDirtBrakeModels.length > 0 && (<>
-                      <h5 className="my-2">marca</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentMtbDirtBrakeModels.map((presentMtbDirtBrakeModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentMtbDirtBrakeModel} className="filter-tag" onClick={(e) => handleMultipleFiltersBrakeModel(e)}>{presentMtbDirtBrakeModel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-                </div>
+                  )
+                }
               </div>
             )}
 
             {(presentRimSizes.length > 0 || presentWheelMaterials.length > 0 || presentRimModels.length > 0) && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Rodas")}>
                   Rodas
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Rodas" className="mb-3 d-none">
-                  {presentRimSizes.length > 0 && (<>
-                    <h5 className="mb-2">tamanho da roda</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentRimSizes.map((presentRimSize, index) => {
-                        return (
-                          <button type="button" key={index} value={presentRimSize} className="filter-tag" onClick={(e) => handleMultipleFiltersRimSize(e)}>{presentRimSize}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                {
+                  openFilters.includes("Rodas") && (
+                    <div id="Rodas" className="mb-3">
+                      {presentRimSizes.length > 0 && (<>
+                        <h5 className="mb-2">tamanho da roda</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentRimSizes.map((presentRimSize, index) => {
+                            return (
+                              <button type="button" key={index} value={presentRimSize} className="filter-tag" onClick={(e) => handleMultipleFiltersRimSize(e)}>{presentRimSize}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {presentWheelMaterials.length > 0 && (<>
-                    <h5 className="my-2">material da roda</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentWheelMaterials.map((presentWheelMaterial, index) => {
-                        return (
-                          <button type="button" key={index} value={presentWheelMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersWheelMaterial(e)}>{translateWord(presentWheelMaterial) || presentWheelMaterial}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                      {presentWheelMaterials.length > 0 && (<>
+                        <h5 className="my-2">material da roda</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentWheelMaterials.map((presentWheelMaterial, index) => {
+                            return (
+                              <button type="button" key={index} value={presentWheelMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersWheelMaterial(e)}>{translateWord(presentWheelMaterial) || presentWheelMaterial}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {presentRimModels.length > 0 && (<>
-                    <h5 className="my-2">Aro</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentRimModels.map((presentRimModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentRimModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRimModel(e)}>{translateWord(presentRimModel)}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                      {presentRimModels.length > 0 && (<>
+                        <h5 className="my-2">Aro</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentRimModels.map((presentRimModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentRimModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRimModel(e)}>{translateWord(presentRimModel)}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {presentHubModels.length > 0 && (<>
-                    <h5 className="my-2">Cubo</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentHubModels.map((presentHubModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentHubModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHubModel(e)}>{translateWord(presentHubModel)}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                      {presentHubModels.length > 0 && (<>
+                        <h5 className="my-2">Cubo</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentHubModels.map((presentHubModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentHubModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHubModel(e)}>{translateWord(presentHubModel)}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {presentTyreModels.length > 0 && (<>
-                    <h5 className="my-2">Pneu</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentTyreModels.map((presentTyreModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentTyreModel} className="filter-tag" onClick={(e) => handleMultipleFiltersTyreModel(e)}>{translateWord(presentTyreModel)}</button>
-                        )
-                      })}
+                      {presentTyreModels.length > 0 && (<>
+                        <h5 className="my-2">Pneu</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentTyreModels.map((presentTyreModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentTyreModel} className="filter-tag" onClick={(e) => handleMultipleFiltersTyreModel(e)}>{translateWord(presentTyreModel)}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
                     </div>
-                  </>)}
-                </div>
+                  )
+                }
               </div>
             )}
 
             {(presentSeatPostTypes.length > 0 || presentSeatPostTravels.length > 0 || presentSeatPostMaterials.length > 0) && (
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Canote")}>
                   Canote
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Canote" className="mb-3 d-none">
-                  {presentSeatPostTypes.length > 0 && (<>
-                    <h5 className="mb-2">tipo</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentSeatPostTypes.map((presentSeatPostType, index) => {
-                        return (
-                          <button type="button" key={index} value={presentSeatPostType} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostType(e)}>{translateWord(presentSeatPostType)}</button>
-                        )
-                      })}
+                {
+                  openFilters.includes("Canote") && (
+                    <div id="Canote" className="mb-3">
+                      {presentSeatPostTypes.length > 0 && (<>
+                        <h5 className="mb-2">tipo</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentSeatPostTypes.map((presentSeatPostType, index) => {
+                            return (
+                              <button type="button" key={index} value={presentSeatPostType} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostType(e)}>{translateWord(presentSeatPostType)}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
+
+                      {seatPostTypeOptionsToFilter.includes("retractable") && (<>
+                        {presentSeatPostTravels.length > 0 && (<>
+                          <h5 className="my-2">tamanho</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentSeatPostTravels.map((presentSeatPostTravel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentSeatPostTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostTravel(e)}>{presentSeatPostTravel}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {seatPostTypeOptionsToFilter.includes("rigid") && (<>
+                        {presentSeatPostMaterials.length > 0 && (<>
+                          <h5 className="my-2">material</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentSeatPostMaterials.map((presentSeatPostMaterial, index) => {
+                              return (
+                                <button type="button" key={index} value={presentSeatPostMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostMaterial(e)}>{translateWord(presentSeatPostMaterial) || presentSeatPostMaterial}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+                      </>)}
+
+                      {presentSeatPostModels.length > 0 && (<>
+                          <h5 className="my-2">marca</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentSeatPostModels.map((presentSeatPostModel, index) => {
+                              return (
+                                <button type="button" key={index} value={presentSeatPostModel} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostModel(e)}>{presentSeatPostModel}</button>
+                              )
+                            })}
+                          </div>
+                      </>)}
                     </div>
-                  </>)}
-
-                  {seatPostTypeOptionsToFilter.includes("retractable") && (<>
-                    {presentSeatPostTravels.length > 0 && (<>
-                      <h5 className="my-2">tamanho</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentSeatPostTravels.map((presentSeatPostTravel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentSeatPostTravel} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostTravel(e)}>{presentSeatPostTravel}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {seatPostTypeOptionsToFilter.includes("rigid") && (<>
-                    {presentSeatPostMaterials.length > 0 && (<>
-                      <h5 className="my-2">material</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentSeatPostMaterials.map((presentSeatPostMaterial, index) => {
-                          return (
-                            <button type="button" key={index} value={presentSeatPostMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostMaterial(e)}>{translateWord(presentSeatPostMaterial) || presentSeatPostMaterial}</button>
-                          )
-                        })}
-                      </div>
-                    </>)}
-                  </>)}
-
-                  {presentSeatPostModels.length > 0 && (<>
-                      <h5 className="my-2">marca</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentSeatPostModels.map((presentSeatPostModel, index) => {
-                          return (
-                            <button type="button" key={index} value={presentSeatPostModel} className="filter-tag" onClick={(e) => handleMultipleFiltersSeatPostModel(e)}>{presentSeatPostModel}</button>
-                          )
-                        })}
-                      </div>
-                  </>)}
-                </div>
+                  )
+                }
               </div>
             )}
 
             {(presentHandlebarMaterials.length > 0 || presentHandlebarModels.length > 0 || presentStemModels.length > 0) && (
 
               <div className="border-bottom mt-3">
-                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Cockpit")}>
                   Cockpit
                   <i id="section-arrow" className="fas fa-chevron-down"></i>
                 </button>
-                <div id="Cockpit" className="mb-3 d-none">
-                  {presentHandlebarMaterials.length > 0 && (<>
-                    <h5 className="my-2">material guidão</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentHandlebarMaterials.map((presenthandlebarMaterial, index) => {
-                        return (
-                          <button type="button" key={index} value={presenthandlebarMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersHandlebarMaterial(e)}>{translateWord(presenthandlebarMaterial) || presenthandlebarMaterial }</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                {
+                  openFilters.includes("Cockpit") && (
+                    <div id="Cockpit" className="mb-3">
+                      {presentHandlebarMaterials.length > 0 && (<>
+                        <h5 className="my-2">material guidão</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentHandlebarMaterials.map((presenthandlebarMaterial, index) => {
+                            return (
+                              <button type="button" key={index} value={presenthandlebarMaterial} className="filter-tag" onClick={(e) => handleMultipleFiltersHandlebarMaterial(e)}>{translateWord(presenthandlebarMaterial) || presenthandlebarMaterial }</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {presentHandlebarModels.length > 0 && (<>
-                    <h5 className="my-2">guidão</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentHandlebarModels.map((presentHandlebarModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentHandlebarModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHandlebarModel(e)}>{presentHandlebarModel}</button>
-                        )
-                      })}
-                    </div>
-                  </>)}
+                      {presentHandlebarModels.length > 0 && (<>
+                        <h5 className="my-2">guidão</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentHandlebarModels.map((presentHandlebarModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentHandlebarModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHandlebarModel(e)}>{presentHandlebarModel}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
 
-                  {presentStemModels.length > 0 && (<>
-                    <h5 className="my-2">mesa</h5>
-                    <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                      {presentStemModels.map((presentStemModel, index) => {
-                        return (
-                          <button type="button" key={index} value={presentStemModel} className="filter-tag" onClick={(e) => handleMultipleFiltersStemModel(e)}>{presentStemModel}</button>
-                        )
-                      })}
+                      {presentStemModels.length > 0 && (<>
+                        <h5 className="my-2">mesa</h5>
+                        <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                          {presentStemModels.map((presentStemModel, index) => {
+                            return (
+                              <button type="button" key={index} value={presentStemModel} className="filter-tag" onClick={(e) => handleMultipleFiltersStemModel(e)}>{presentStemModel}</button>
+                            )
+                          })}
+                        </div>
+                      </>)}
                     </div>
-                  </>)}
-                </div>
+                  )
+                }
               </div>
             )}
 
             {presentBatteries.length > 0  && (<>
               {bikeTypeFilter === "e-bike" && (<>
                 <div className="border-bottom mt-3">
-                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={(e) => handleFilter(e)}>
+                  <button type="button" value="mtb-modalities" className="filter-link w-100 mb-3 d-flex justify-content-between" onClick={() => handleFilterSection("Parte Elétrica")}>
                     Parte Elétrica
                     <i id="section-arrow" className="fas fa-chevron-down"></i>
                   </button>
-                  <div id="Parte Elétrica" className="mb-3 d-none">
-                    {presentBatteries.length > 0 && (<>
-                      <h5 className="my-2">Capacidade da bateria</h5>
-                      <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
-                        {presentBatteries.map((presentBattery, index) => {
-                          return (
-                            <button type="button" key={index} value={presentBattery} className="filter-tag" onClick={(e) => handleMultipleFiltersBattery(e)}>{presentBattery}</button>
-                          )
-                        })}
+                  {
+                    openFilters.includes("Parte Elétrica") && (
+                      <div id="Parte Elétrica" className="mb-3">
+                        {presentBatteries.length > 0 && (<>
+                          <h5 className="my-2">Capacidade da bateria</h5>
+                          <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
+                            {presentBatteries.map((presentBattery, index) => {
+                              return (
+                                <button type="button" key={index} value={presentBattery} className="filter-tag" onClick={(e) => handleMultipleFiltersBattery(e)}>{presentBattery}</button>
+                              )
+                            })}
+                          </div>
+                        </>)}
+
+                        <div className="d-flex justify-content-between">
+                          <h5 className="my-2">Ciclos bateria</h5>
+                          {batteryCyclesFilter && (<>
+                            <h5 className=" mt-3">
+                            {batteryCyclesFilter}
+                          </h5>
+                          </>)}
+                        </div>
+                        <input type="range" className="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
+                        <div className="d-flex justify-content-between">
+                          <h6 className=" price-filter-text"><small>0</small></h6>
+                          <h6 className=" price-filter-text"><small>50</small></h6>
+                        </div>
+
+                        <div className="d-flex justify-content-between">
+                          <h5 className="my">Km</h5>
+                          {mileageFilter && (<>
+                            <h5 className=" mt-3">
+                            {mileageFilter} Km
+                          </h5>
+                          </>)}
+                        </div>
+                        <input type="range" className="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
+                        <div className="d-flex justify-content-between">
+                          <h6 className=" price-filter-text"><small>0</small></h6>
+                          <h6 className=" price-filter-text"><small>200Km</small></h6>
+                        </div>
                       </div>
-                    </>)}
-
-                    <div className="d-flex justify-content-between">
-                      <h5 className="my-2">Ciclos bateria</h5>
-                      {batteryCyclesFilter && (<>
-                        <h5 className=" mt-3">
-                        {batteryCyclesFilter}
-                      </h5>
-                      </>)}
-                    </div>
-                    <input type="range" className="form-range" min="0" max="50" id="customRange1" step="1" onChange={(e) => setBatteryCyclesFilter(e.target.value)} />
-                    <div className="d-flex justify-content-between">
-                      <h6 className=" price-filter-text"><small>0</small></h6>
-                      <h6 className=" price-filter-text"><small>50</small></h6>
-                    </div>
-
-                    <div className="d-flex justify-content-between">
-                      <h5 className="my">Km</h5>
-                      {mileageFilter && (<>
-                        <h5 className=" mt-3">
-                        {mileageFilter} Km
-                      </h5>
-                      </>)}
-                    </div>
-                    <input type="range" className="form-range" min="0" max="200" id="customRange1" step="1" onChange={(e) => setMileageFilter(e.target.value)} />
-                    <div className="d-flex justify-content-between">
-                      <h6 className=" price-filter-text"><small>0</small></h6>
-                      <h6 className=" price-filter-text"><small>200Km</small></h6>
-                    </div>
-                  </div>
+                    )
+                  }
                 </div>
               </>
               )}
@@ -1622,11 +1675,16 @@ export function Bikes(props) {
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
                 <a href={"bikes/" + bike.id} className="remove-link" target="_blank">
                   <div className="cards-bikes">
+                    {
+                      bike.verified &&
+                      (
+                        <div className="verified-icon"></div>
+                      )
+                    }
                     <div id={"carouselExampleControls" + bike.id.toString()} className="carousel slide" data-bs-ride="carousel">
                       <div className="carousel-inner">
                         {bike.photos.map((photo, index) => {
                           return (
-
                             <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
                               <img src={photo} className="d-block w-100 img-card-index" alt="" />
                             </div>
@@ -1652,13 +1710,7 @@ export function Bikes(props) {
                         <span className="visually-hidden">Next</span>
                       </button>
                     </div>
-                    <div className="d-flex justify-content-center gap-2 mt-1">
-                      <h4 className="card-title text-center">{bike.frame_brand}</h4>
-                      <h4 className="card-title text-center">{bike.model}</h4>
-                      {bike.verified && (
-                        <img src={VerifiedImage} alt="" width="20" height="20" className="mt-1"/>
-                      )}
-                    </div>
+                    <h4 className="card-title text-center gap-2 mt-2">{bike.frame_brand}  {bike.model}</h4>
                     <h4 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {
                         style: "currency",
