@@ -74,11 +74,12 @@
 @media (max-width: 725px) {
 
   .first-section-home {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("mobile-banner.jpg");
-    height: 800px !important;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
+    height: 120vh !important;
     padding: 5px !important;
     padding-top: 320px !important;
     background-size: fit !important;
+    background-position: center;
 
     h1 {
       font-size: 90px !important;
@@ -193,11 +194,13 @@
 @media (max-width: 425px) {
 
   .first-section-home {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("mobile-banner.jpg");
-    height: 800px !important;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
+    height: 120vh !important;
     padding: 5px !important;
     padding-top: 200px !important;
     background-size: fit !important;
+    background-position: center;
+
 
     h1 {
       font-size: 90px !important;
@@ -304,14 +307,14 @@
 
 @media (max-width: 415px) {
   .first-section-home {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("mobile-banner.jpg");
-    height: 160vh !important;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
+    height: 120vh !important;
     padding: 5px !important;
     padding-top: 50px !important;
     background-size: fit !important;
 
-    h1 {
-      font-size: 90px !important;
+    h2 {
+      margin-top: 50px;
     }
   }
 
@@ -413,14 +416,15 @@
 @media (max-width: 389px) {
 
   .first-section-home {
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("mobile-banner.jpg");
-    height: 180vh !important;
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
+    height: 120vh !important;
     padding: 5px !important;
     background-size: fit !important;
+    background-position: center;
 
-    h1 {
+
+    h2 {
       margin-top: 100px;
-      font-size: 90px !important;
     }
   }
 
