@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
 	include DeviseTokenAuth::Concerns::User
   devise :omniauthable
-  
+
   scope :all_except, ->(user) {where.not(id: user)}
   after_create_commit { broadcast_append_to "users" }
   after_update_commit { broadcast_update }
@@ -31,6 +31,14 @@ class User < ApplicationRecord
 
   after_commit :add_default_photo, on: %i[create update]
 
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+    end
+  end
+  
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
   end

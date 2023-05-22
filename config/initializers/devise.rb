@@ -29,8 +29,8 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'f8cc5f9360033e2acbdf552cae94c5c0ca241572bd308e34711dd1b109e11761d36767b44523526a9a4353d74c869aa7041438d32cd3a8ed8a0f1e5c0f1c468e'
-  config.omniauth :oauth2, ENV['OKTA_CLIENT_ID'], ENV['OKTA_CLIENT_SECRET'], name: :sso_provider
-  config.omniauth_path_prefix = '/users/auth/sso_provider/callback'
+  config.omniauth :oauth2, ENV['OKTA_CLIENT_ID'], ENV['OKTA_CLIENT_SECRET'], issuer: 'https://dev-61433945.okta.com/oauth2/default'
+  
   # config.sso_provider.redirect_uri = 'http://localhost:3000/users/auth/sso_provider/callback'
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
