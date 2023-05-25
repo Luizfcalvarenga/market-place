@@ -2,11 +2,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable
+         :recoverable, :rememberable, :validatable
 
 	include DeviseTokenAuth::Concerns::User
-  devise :omniauthable
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   scope :all_except, ->(user) {where.not(id: user)}
   after_create_commit { broadcast_append_to "users" }
@@ -33,12 +32,18 @@ class User < ApplicationRecord
 
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
+    # Find or create the user based on the authentication data
+    user = User.find_by(email: auth.info.email)
+    unless user
+      # If the user doesn't exist, create a new one with the necessary data
+      user = User.create(
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
     end
+    user
   end
-  
+
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
   end
