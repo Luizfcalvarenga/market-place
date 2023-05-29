@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 	include DeviseTokenAuth::Concerns::User
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   scope :all_except, ->(user) {where.not(id: user)}
   after_create_commit { broadcast_append_to "users" }
@@ -19,7 +20,7 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-  validates :cep, :document_number, :phone_number,  presence: true
+  # validates :cep, :document_number, :phone_number,  presence: true
   enum status: %i[offline away online]
 
   enum access: {
@@ -28,6 +29,20 @@ class User < ApplicationRecord
   }
 
   after_commit :add_default_photo, on: %i[create update]
+
+
+  def self.from_omniauth(auth)
+    # Find or create the user based on the authentication data
+    user = User.find_by(email: auth.info.email)
+    unless user
+      # If the user doesn't exist, create a new one with the necessary data
+      user = User.create(
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
+    end
+    user
+  end
 
   def broadcast_update
     broadcast_replace_to 'user_status', partial: 'users/status', user: self
