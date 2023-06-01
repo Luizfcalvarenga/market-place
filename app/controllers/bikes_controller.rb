@@ -52,7 +52,7 @@ class BikesController < ApplicationController
   end
 
   def destroy
-    @bike = Bike.find_by(params[:id])
+    @bike = Bike.find(params[:id])
     authorize @bike
     @bike.touch(:removed_at)
     if @bike.removed_at != nil
