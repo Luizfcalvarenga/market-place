@@ -751,7 +751,7 @@ export function ProductForm(props) {
   }
 
   const handleCreateBike = (e) => {
-    window.location = 'https://nuflowshop.herokuapp.com/bikes/new'
+    window.location = 'https://market.nuflow.com.br/bikes/new'
   }
 
   const translateWord = (word) => {

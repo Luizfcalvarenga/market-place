@@ -140,11 +140,11 @@
     <p class="text-center">Você pode acessá-lo no link abaixo:</p>
     <% if @advertisement.advertisable_type == "Product" %>
       <div class="invoice-link">
-        <a href="https://nuflowshop.herokuapp.com/products/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
+        <a href="https://market.nuflow.com.br/products/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
       </div>
     <% else %>
       <div class="invoice-link">
-        <a href="https://nuflowshop.herokuapp.com/bikes/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
+        <a href="https://market.nuflow.com.br/bikes/<%= @advertisement.advertisable.id %>" target="_blank" class="btn-invoice">Ver anúncio</a>
       </div>
     <% end %>
 

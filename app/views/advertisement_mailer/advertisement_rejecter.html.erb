@@ -170,11 +170,11 @@
 
     <% if @advertisement.advertisable_type == "Product" %>
       <div class="invoice-link">
-        <a href="https://nuflowshop.herokuapp.com/products/<%= @advertisement.advertisable_id %>/edit" target="_blank" class="btn-invoice">Editar</a>
+        <a href="https://market.nuflow.com.br/products/<%= @advertisement.advertisable_id %>/edit" target="_blank" class="btn-invoice">Editar</a>
       </div>
     <% else %>
       <div class="invoice-link">
-        <a href="https://nuflowshop.herokuapp.com/bikes/<%= @advertisement.advertisable_id %>/edit" target="_blank" class="btn-invoice">Editar</a>
+        <a href="https://market.nuflow.com.br/bikes/<%= @advertisement.advertisable_id %>/edit" target="_blank" class="btn-invoice">Editar</a>
       </div>
     <% end %>
 
