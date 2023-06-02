@@ -209,6 +209,15 @@ export function ProductForm(props) {
     }
   })
 
+  useEffect(() => {
+    if (props.productId) {
+      const firstSection = document.getElementById("first-section")
+      const secondSection = document.getElementById("second-section")
+      firstSection.classList.add("d-none")
+      secondSection.classList.remove("d-none")
+    }
+  })
+
 
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
@@ -507,7 +516,6 @@ export function ProductForm(props) {
 
   const handleProductConditionStatus = (e) => {
     setProductConditionStatus(e.target.value)
-
     if (e.target.value === "bad") {
       document.getElementById("label-bad").classList.add("text-danger")
       document.getElementById("label-reasonable").classList.remove("text-warning")
@@ -692,6 +700,9 @@ export function ProductForm(props) {
     const progressOne = document.querySelector(".progress-1")
     if (productTypes) {
       progressOne.classList.add("section-done")
+    }
+    if (props.productId) {
+      handleSecondStep()
     }
   }
 
@@ -1094,6 +1105,7 @@ export function ProductForm(props) {
           <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
         </div>
       </div>
+
 
 
 

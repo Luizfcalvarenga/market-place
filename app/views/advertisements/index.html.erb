@@ -30,7 +30,7 @@
                 <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
               <% elsif  (advertisement.status === "waiting_review" || advertisement.status === "paid" || advertisement.final_price_with_coupon_in_cents == 0) %>
                 <p><span class="topic-cards-index-media text-primary"><i class="fas fa-clock mt-1 me-2"></i>Aguardando revisão</p>
-              <% elsif  advertisement.status === "approved" %>
+              <% elsif  advertisement.status === "approved"  || (advertisement.status === "approved" && advertisement.final_price_with_coupon_in_cents == 0) %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>
               <% elsif  advertisement.status === "update_request" %>
                 <p><span class="topic-cards-index-media text-warning"><i class="fas fa-clock mt-1 me-2"></i>Necessita update</p>
