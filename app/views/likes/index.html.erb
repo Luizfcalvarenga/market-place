@@ -2,10 +2,11 @@
   <% if @likes.blank? %>
    <h3 class="text-center my-3">Não favoritou nenhum produto ainda</h3>
   <% else %>
-    <h3 class="text-center text-success py-3">Meus favoritos</h3>
+    <h3 class="text-center text-success pt-3 mb-0">Meus favoritos</h3>
+    <p class="text-center pb-3 fs-15"><small>Caso não encontre o produto, ele pode ter sido removido pelo anunciante.</small> </p>
     <div class="<%= mobile_device? ? "d-block" : "d-flex gap-1 flex-wrap justfy-content-between" %> ">
       <% @likes.each do | like| %>
-        <% if like.likeble_type == "Bike" %>
+        <% if like.likeble_type == "Bike" && like.likeble.present? %>
           <%= link_to bike_path(like.likeble_id), class: "" do %>
             <div class="cards-bikes-likes mt-3">
               <div id="carouselExampleControls<%= like.likeble_id.to_s %>" class="carousel slide" data-bs-ride="carousel">
@@ -60,7 +61,7 @@
               </div>
             </div>
           <% end %>
-        <% elsif like.likeble_type ==  "Product" %>
+        <% elsif like.likeble_type ==  "Product" && like.likeble.present? %>
           <%= link_to product_path(like.likeble_id), class: "" do %>
             <div class="cards-products-likes mt-3">
               <div id="carouselExampleControls<%= like.likeble_id.to_s %>" class="carousel slide" data-bs-ride="carousel">

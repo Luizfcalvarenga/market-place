@@ -49,7 +49,5 @@ class Message < ApplicationRecord
       notification = MessageNotification.with(message: self, chat: self.chat)
       notification.deliver_later(user)
     end
-
   end
-
 end

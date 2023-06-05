@@ -17,7 +17,7 @@ document.addEventListener("turbo:load", () => {
 
   if (backBtn) backBtn.addEventListener("click", removeDisplayNone);
   function removeDisplayNone() {
-    window.location = "https://nuflowshop.herokuapp.com/chats"
+    window.location = "https://market.nuflow.com.br/chats"
     sidePanel.classList.remove("d-none")
   }
 })

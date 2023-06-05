@@ -527,7 +527,7 @@ export function BikeForm(props) {
 
 
     if (e.target.innerHTML === "1") {
-      window.location = 'https://nuflowshop.herokuapp.com/products/new'
+      window.location = 'https://market.nuflow.com.br/products/new'
 
     } else if (e.target.innerHTML === "2") {
       secondSection.classList.remove("d-none")
@@ -792,7 +792,7 @@ export function BikeForm(props) {
   }
 
   const handleBackToForm = (e) => {
-    window.location = 'https://nuflowshop.herokuapp.com/products/new'
+    window.location = 'https://market.nuflow.com.br/products/new'
   }
 
   const handleTerms = (e) => {

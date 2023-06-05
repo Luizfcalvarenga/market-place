@@ -1,4 +1,4 @@
-<div id="message" class="cont-<%=message.user.id%> msg-content">
+<div class="cont-<%=message.user.id%> msg-content">
   <div class="message-box msg-<%= message.user.id %>">
     <div class="d-flex align-items-center mb-1 user-infos">
       <%= cl_image_tag(message.user.photo.key, class:'chat_pfp') %>
@@ -7,7 +7,7 @@
         <p class="time text-white"><%= time_ago_in_words(message.created_at) %> atrás</p>
       </div>
     </div>
-    <div class="fs-20">
+    <div>
       <%= message.content %>
     </div>
     <%= render "messages/attachments", message: message %>

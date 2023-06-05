@@ -121,9 +121,7 @@ export function ProductForm(props) {
       } else {
         return -1;
       }
-
     });
-
     return array;
   };
 
@@ -206,6 +204,23 @@ export function ProductForm(props) {
   useEffect(() => {
     if (productCondition === "new") {
       setProductConditionStatus("")
+    }
+  })
+
+  useEffect(() => {
+    if (props.productId) {
+      const firstSection = document.getElementById("first-section")
+      const secondSection = document.getElementById("second-section")
+      firstSection.classList.add("d-none")
+      secondSection.classList.remove("d-none")
+      console.log(props.productId)
+      if (productTypeId >= 40 && productTypeId <= 48) {
+        setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
+      } else if (productTypeId >= 1 && productTypeId <= 39) {
+        setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
+      }  else if (productTypeId >= 49 && productTypeId <= 68) {
+        setProductTypes(allProducts.filter(element => element.id >= 49 && element.id <= 68));
+      }
     }
   })
 
@@ -507,7 +522,6 @@ export function ProductForm(props) {
 
   const handleProductConditionStatus = (e) => {
     setProductConditionStatus(e.target.value)
-
     if (e.target.value === "bad") {
       document.getElementById("label-bad").classList.add("text-danger")
       document.getElementById("label-reasonable").classList.remove("text-warning")
@@ -693,6 +707,9 @@ export function ProductForm(props) {
     if (productTypes) {
       progressOne.classList.add("section-done")
     }
+    if (props.productId) {
+      handleSecondStep()
+    }
   }
 
   const handleSecondStep = (e) => {
@@ -751,7 +768,7 @@ export function ProductForm(props) {
   }
 
   const handleCreateBike = (e) => {
-    window.location = 'https://nuflowshop.herokuapp.com/bikes/new'
+    window.location = 'https://market.nuflow.com.br/bikes/new'
   }
 
   const translateWord = (word) => {
@@ -1094,7 +1111,6 @@ export function ProductForm(props) {
           <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
         </div>
       </div>
-
 
 
       <form id="product-form" className="">
