@@ -19,12 +19,10 @@
       </div>
     </li>
     <%= link_to "Conversas", chats_path, class: "ms-3 mt-2 nav-link-drop" %>
-    <%# Form to search user %>
     <%= turbo_stream_from "users" %>
     <div id="users" data-controller="user-list">
       <%= render "users/users", users: @users %>
     </div>
-    <%= turbo_stream_from "chats" %>
   </div>
 
   <div id="chat_container" class="col-md-8 col-12 bg-dark text-light">

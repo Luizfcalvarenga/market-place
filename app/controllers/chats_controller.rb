@@ -14,13 +14,13 @@ class ChatsController < ApplicationController
       @users = []
       @conversations = []
     end
-    if params[:query].present?
-      sql_query = "full_name ILIKE :query OR email ILIKE :query"
-      @users = User.where(sql_query, query: "%#{params[:query]}%")
-    else
-      @conversations = @conversations.compact()
-      @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])} if @conversations.present?
-    end
+    # if params[:query].present?
+    #   sql_query = "full_name ILIKE :query OR email ILIKE :query"
+    #   @users = User.where(sql_query, query: "%#{params[:query]}%")
+    # else
+    #   @conversations = @conversations.compact()
+    #   @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])} if @conversations.present?
+    # end
     @current_user_id = current_user.id
     current_user.update(current_chat: nil)
     render 'index'
