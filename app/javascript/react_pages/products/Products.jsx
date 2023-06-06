@@ -801,6 +801,9 @@ export function Products(props) {
           </div>
         </div>
         <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap`}>
+          {products.length === 0 && (
+            <h3 className="mx-auto text-success">Ops! Não encontramos um produto para sua busca. Tente com outras categorias e critérios</h3>
+          )}
           {products.map((product, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} mb-3`} product={product} key={product.id} id="mobile">

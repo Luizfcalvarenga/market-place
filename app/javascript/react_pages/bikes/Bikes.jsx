@@ -1670,6 +1670,9 @@ export function Bikes(props) {
         </div>
 
         <div className={`${window.screen.width < 768? 'w-100 gap-3' : 'w-75'} d-flex flex-wrap`}>
+          {bikes.length === 0 && (
+            <h3 className="mx-auto text-success">Ops! Não encontramos uma bike para sua busca. Tente com outras categorias e critérios</h3>
+          )}
           {bikes && bikes.map((bike, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
