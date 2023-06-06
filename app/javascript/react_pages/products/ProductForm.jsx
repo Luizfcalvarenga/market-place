@@ -209,11 +209,11 @@ export function ProductForm(props) {
 
   useEffect(() => {
     if (props.productId) {
-      const firstSection = document.getElementById("first-section")
-      const secondSection = document.getElementById("second-section")
-      firstSection.classList.add("d-none")
-      secondSection.classList.remove("d-none")
-      console.log(props.productId)
+      // const firstSection = document.getElementById("first-section")
+      // const secondSection = document.getElementById("second-section")
+      // firstSection.classList.add("d-none")
+      // secondSection.classList.remove("d-none")
+      // console.log(props.productId)
       if (productTypeId >= 40 && productTypeId <= 48) {
         setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
       } else if (productTypeId >= 1 && productTypeId <= 39) {
@@ -404,9 +404,9 @@ export function ProductForm(props) {
     e.preventDefault()
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
-    const loadingText = document.getElementById("upload-text")
+    // const loadingText = document.getElementById("upload-text")
     spinner.classList.remove("d-none")
-    loadingText.classList.remove("d-none")
+    // loadingText.classList.remove("d-none")
 
     const dataObject = new FormData();
     dataObject.append( "product[user_id]", user );
@@ -707,12 +707,10 @@ export function ProductForm(props) {
     if (productTypes) {
       progressOne.classList.add("section-done")
     }
-    if (props.productId) {
-      handleSecondStep()
-    }
   }
 
   const handleSecondStep = (e) => {
+    console.log("teste")
     const progressTwo = document.getElementById("progress-2")
     const progressThird = document.getElementById("progress-3")
 
@@ -1102,22 +1100,23 @@ export function ProductForm(props) {
 
 
 
-      <div id="first-section">
-        <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
-        <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-          <button id="acessories" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Acessório<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
-          <button id="bikes" className="btn-announce-type w-50" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="bikes" className="icon-card-form"/></button>
-          <button id="components" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
-          <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
+      {!props.productId && (
+        <div id="first-section">
+          <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
+          <div className="d-flex justify-content-between gap-3 btns-components mt-3">
+            <button id="acessories" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Acessório<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
+            <button id="bikes" className="btn-announce-type w-50" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="bikes" className="icon-card-form"/></button>
+            <button id="components" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
+            <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
+          </div>
         </div>
-      </div>
+      )}
+
 
 
       <form id="product-form" className="">
         <div id="second-section" className="card-questions d-none mb-5 mt-3">
           <h4 className="text-center text-success">Informações gerais</h4>
-
-
           <label htmlFor="category" className="mt-3 text-start">Categoria:<span className="requested-information ms-1">*</span></label>
           <select
           value={productCategory}

@@ -313,9 +313,9 @@ export function BikeForm(props) {
     e.preventDefault()
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
-    const loadingText = document.getElementById("upload-text")
+    // const loadingText = document.getElementById("upload-text")
     spinner.classList.remove("d-none")
-    loadingText.classList.remove("d-none")
+    // loadingText.classList.remove("d-none")
 
 
     const dataObject = new FormData();
