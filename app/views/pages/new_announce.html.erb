@@ -122,71 +122,63 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            Por que comprar?
+            Como vender pela Nuflow?
           </button>
         </h2>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">- Navegue na Nuflow e utilize filtros específicos para facilitar a sua busca. <br>
-            - Conte com a assessoria de especialistas para encontrar a bike ideal para você. <br>
-            - Faça sua compra com segurança, podendo parcelar em até 12 vezes. <br>
-            - Uma oficina mecânica fará o processo de Bike Check antes da entrega da bicicleta, emitindo um laudo com as características e o estado mecânico da bicicleta.<br>
-            - Após aprovação do laudo, a bike é entregue em oficina parceira na sua cidade ou na sua residência. <br>
-            - Seu dinheiro é retido durante todo o processo, com direito à devolução em até 7 dias após o recebimento da bike.
+          <div class="accordion-body">
+            Vender com a Nuflow é simples!<br>
+            1- Você anuncia clicando “vender”, e fazendo seu cadastro.<br>
+            2- Você faz o pagamento do anúncio por PIX ou cartão. O valor do anúncio varia de acordo com o preço do produto.<br>
+            3- Seu anúncio é aprovado e visto por milhares de ciclistas de todo o Brasil.<br>
+            4- Você negocia diretamente com os interessados através do chat no site ou pelo seu contato (se disponibilizado).<br>
+
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-            Por que vender?
+            Anunciei meu produto, e agora?
           </button>
         </h2>
         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">- Anuncie sua bike gratuitamente na plataforma. <br>
-            - Conte com a ajuda de especialistas se precisar. <br>
-            - Fazemos o atendimento dos interessados em sua bike, portanto, preocupe-se apenas com as propostas. <br>
-            - Oferecemos parcelamento em até 12 vezes e soluções de frete para os compradores. <br>
-            - Ao realizar a venda, o próximo passo é levar sua bike até uma oficina parceira para realização do Bike Check, um processo de verificação da condição da bike. <br>
-            - A mesma oficina pode realizar a desmontagem e embalagem da bike, sem custos adicionais. <br>
-            - Em seguida, basta entregar a bike na transportadora. Fique tranquilo(a), entraremos em contato para te orientar. <br>
-            - Você recebe seu dinheiro à vista em 7 dias após o recebimento da bike pelo comprador ou em 15 dias da compra, mesmo em vendas parceladas.
+          <div class="accordion-body">
+            Seu produto passará por uma aprovação pela nossa equipe e logo estará no ar. Se necessário, entraremos em contato para atualizar as informações necessárias.<br>
+            Ele será divulgado e visto por milhares de ciclistas, de todo Brasil, que acessam nosso site e nos acompanham nas redes sociais.<br>
+            É rapidinho até que você receba uma proposta pelo chat e venda seu produto.<br>
+            Você será notificado(a) por e-mail sempre que tiver uma atualização no chat.
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-            O que é o bike check?
+            Qual a diferença das bikes e produtos certificados?
           </button>
         </h2>
         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">- O Bike Check é um serviço realizado por oficinas mecânicas antes da entrega das bikes vendidas. <br>
-            - É normal que uma bicicleta usada apresente marcas de uso e desgaste dos componentes, por isso, é emitido um laudo com as características e o estado mecânico da bike. <br>
-            - Durante esse processo o pagamento do comprador fica seguro, com garantia de devolução. <br>
-            - Além disso, é realizada uma revisão na bicicleta, para que o comprador a receba e só se preocupe em pedalar.
+          <div class="accordion-body">
+            As bikes e produtos certificados são anunciados por lojas e oficinas credenciadas pela Nuflow, que verificam o estado do produto e contam com recursos para garantir uma maior segurança para sua compra.<br>
+            Em conjunto com a Nuflow é possível comprar sua bike ou equipamento de onde estiver, com pagamento parcelado e assegurado até o recebimento do produto.<br>
+            Além disso, você é atendido por vendedores experientes para te ajudar a encontrar a bike ou equipamento ideal para você.<br>
+            Veja as <%= link_to "Bikes certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link fs-18" %> ou <%= link_to "Produtos certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link fs-18" %>
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingThree">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-            É seguro?
+            Tenho interesse em um produto, o que fazer?
           </button>
         </h2>
         <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">- Todas bikes usadas vendidas na Nuflow passam por um processo de certificação de transferência da bike, com inspeção de posse e validação de autenticidade digital. <br>
-            - Na compra de uma bicicleta, o pagamento do comprador fica seguro com a Nuflow e é dado o direito à devolução da bicicleta em até 7 dias após o recebimento.
+          <div class="accordion-body">
+            A Nuflow te ajuda a encontrar e comprar a bike ou equipamento certo com facilidade:<br>
+            1 - Você navega pelo site através de filtros específicos para ciclismo e encontra os melhores produtos para você.<br>
+            2 - Você negocia diretamente com os vendedores dos produtos, chegando ao melhor negócio. Para isso, basta ir até o anúncio, clicar em “conversar com anunciante” e iniciar a negociação.<br>
+
           </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingFive">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-            Quanto custa?
-          </button>
-        </h2>
-        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">Você não paga nada para anunciar! Temos uma comissão apenas no sucesso da venda, sendo de 10% do valor total da bicicleta, com mínimo de R$480,00 e máximo de R$2900,00.</div>
         </div>
       </div>
     </div>
