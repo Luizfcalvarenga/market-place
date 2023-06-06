@@ -313,9 +313,9 @@ export function BikeForm(props) {
     e.preventDefault()
     e.target.classList.add("d-none")
     const spinner = document.getElementById("spinner")
-    // const loadingText = document.getElementById("upload-text")
+    const loadingText = document.getElementById("upload-text")
     spinner.classList.remove("d-none")
-    // loadingText.classList.remove("d-none")
+    loadingText.classList.remove("d-none")
 
 
     const dataObject = new FormData();
@@ -2416,7 +2416,7 @@ export function BikeForm(props) {
         {!props.bikeId && (<>
           {((priceInCents * 100) <= 100000) && (<>
             <div className="text-center mt-3 mb-3">
-              <h5 className="announce-terms fs-20">Seu anúncio não será cobrado</h5>
+              <h5 className="announce-terms fs-22">Seu anúncio não será cobrado</h5>
               {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Anunciar</button>
                 <div id="spinner" className="spinner-border text-success d-none mt-3" role="status">
@@ -2428,7 +2428,7 @@ export function BikeForm(props) {
           </>)}
 
           { ((priceInCents * 100) > 100000) && ((priceInCents * 100) <= 500000) && (<>
-            <h5 className="announce-terms text-center fs-20">Valor do anúncio: R$ 39,00</h5>
+            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 39,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
@@ -2453,7 +2453,7 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 500000) && ((priceInCents * 100) <= 1000000) && (<>
-            <h5 className="announce-terms text-center fs-20">Valor do anúncio: R$ 59,00</h5>
+            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 59,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
@@ -2478,7 +2478,7 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 1000000) && ((priceInCents * 100) <= 2000000) &&(<>
-            <h5 className="announce-terms text-center fs-20">Valor do anúncio: R$ 89,00</h5>
+            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 89,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
@@ -2503,7 +2503,7 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 2000000) && ((priceInCents * 100) <= 3000000) &&(<>
-            <h5 className="announce-terms text-center fs-20">Valor do anúncio: R$ 129,00</h5>
+            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 129,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
@@ -2528,7 +2528,7 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 3000000) && (<>
-            <h5 className="announce-terms text-center fs-20">Valor do anúncio: R$ 159,00</h5>
+            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 159,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
               <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
@@ -2559,6 +2559,7 @@ export function BikeForm(props) {
             <div id="spinner" className="spinner-border text-success d-none" role="status">
               <span className="sr-only">Loading...</span>
             </div>
+            <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
           </>)}
         </div>
 

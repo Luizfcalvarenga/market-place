@@ -52,6 +52,7 @@ class Advertisement < ApplicationRecord
 
   def perform_after_payment_confirmation_actions
     self.update(status: "paid")
+    AdvertisementMailer.with(advertisement: self).advertisement_paid.deliver_now
     if is_free?
       self.update(
         value: 0,
