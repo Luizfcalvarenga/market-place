@@ -2431,7 +2431,7 @@ export function BikeForm(props) {
             <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 39,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
+              <h5 className="announce-terms fs-20">Aceito os <a href="/terms_and_conditions" className="nav-link fs-20">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-20">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="w-50 mx-auto mt-3">
@@ -2456,7 +2456,7 @@ export function BikeForm(props) {
             <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 59,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
+              <h5 className="announce-terms fs-20">Aceito os <a href="/terms_and_conditions" className="nav-link fs-20">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-20">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="w-50 mx-auto mt-3">
@@ -2481,7 +2481,7 @@ export function BikeForm(props) {
             <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 89,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
+              <h5 className="announce-terms fs-20">Aceito os <a href="/terms_and_conditions" className="nav-link fs-20">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-20">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="w-50 mx-auto mt-3">
@@ -2506,7 +2506,7 @@ export function BikeForm(props) {
             <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 129,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
+              <h5 className="announce-terms fs-20">Aceito os <a href="/terms_and_conditions" className="nav-link fs-20">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-20">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="w-50 mx-auto mt-3">
@@ -2531,7 +2531,7 @@ export function BikeForm(props) {
             <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 159,00</h5>
             <div className="d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-20">Aceito os termos e condições de uso.</h5>
+              <h5 className="announce-terms fs-20">Aceito os <a href="/terms_and_conditions" className="nav-link fs-20">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-20">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
             <div className="w-50 mx-auto mt-3">
