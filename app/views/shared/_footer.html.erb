@@ -1,7 +1,7 @@
 <footer class="" id="footer">
   <div class="container border-top border-secondary">
     <div class="d-flex justify-content-around align-items-center">
-      <div class="page-desktop">
+      <div class="page-desktop me-5">
         <h4 class="mt-5">Páginas</h4>
         <ul class="list-unstyled">
           <li><i class="fas fa-angle-right"></i><%= link_to "Vender", new_announce_path, class: "link-white ms-1 mb-5" %></li>
@@ -9,19 +9,19 @@
           <li><i class="fas fa-angle-right"></i><%= link_to "Produtos", products_path, class: "link-white ms-1 mb-5" %></li>
           <li><i class="fas fa-angle-right"></i><%= link_to "Login", new_user_session_path, class: "link-white ms-1 mb-5" %></li>
       </div>
-      <div class="d-flex flex-md-column justify-content-between align-items-center w100 px-4 py-3">
-        <div class="text-center me-5">
+      <div class="align-items-center w100 px-4 py-3 ms-5">
+        <div class="text-center">
           <%= link_to user_signed_in? ? root_path : root_path do %>
             <%= image_tag "white_logo.png", class: "footer-brand" %>
           <% end %>
         </div>
-        <div class="d-flex justify-content-center gap-16 fs-24 me-5">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
+        <div class="d-flex justify-content-center gap-16 fs-24">
+          <a href="https://www.instagram.com/_nuflow_/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/553196225074" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw" target="_blank"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
-      <div class="page-desktop">
+      <div class="page-desktop ms-5">
         <i class="fa-solid fa-pipe"></i><h4 class="mt-5">Ajuda</h4>
         <ul class="list-unstyled">
           <li><i class="fas fa-angle-right"></i><%= link_to "Atendimento", "https://wa.me/553196225074", class: "link-white ms-1", target: "_blank" %></li>
