@@ -53,27 +53,29 @@
     </div>
   </div>
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 text-success" id="exampleModalLabel">Editar informações</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <%= simple_form_for @profile, :url => profiles_path, :method => :patch do |f| %>
-            <%= f.input :full_name %>
-            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-around" %>">
-              <%= f.input :document_number, input_html: { class: "mask-cpf  me-2 #{mobile_device? ? "" : "w-90"}" } %>
-              <%= f.input :phone_number, input_html: { class: "mask-phone" } %>
-            </div>
-            <%= f.input :cep, input_html: { class: "mask-cep" } %>
-            <%= f.input :address %>
-            <%= f.input :show_contact, label: "Permitir informações de contato no anúncio?", as: :boolean, input_html: { class: "mt-3" } %>
-            <%= f.input :photo, as: :file, input_html: { class: "mt-3" } %>
+  <div class="text-center">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 text-success" id="exampleModalLabel">Editar informações</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for @profile, :url => profiles_path, :method => :patch do |f| %>
+              <%= f.input :full_name %>
+              <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-around" %>">
+                <%= f.input :document_number, input_html: { class: "mask-cpf  me-2 #{mobile_device? ? "" : "w-90"}" } %>
+                <%= f.input :phone_number, input_html: { class: "mask-phone" } %>
+              </div>
+              <%= f.input :cep, input_html: { class: "mask-cep" } %>
+              <%= f.input :address %>
+              <%= f.input :show_contact, label: "Permitir informações de contato no anúncio?", as: :boolean, input_html: { class: "mt-3" } %>
+              <%= f.input :photo, label: "Foto", as: :file, input_html: { class: "mt-3" } %>
 
-            <%= f.submit "Editar", class: "btn btn-success mt-3 w-100" %>
-          <% end %>
+              <%= f.submit "Editar", class: "btn btn-success mt-3 w-100" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
