@@ -21,6 +21,8 @@
             <div class="d-flex justify-content-between">
               <% if advertisement.invoice_paid_at.present?  %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-handshake mt-1 me-2"></i>Pago em: </span> <%= advertisement.invoice_paid_at.strftime("%d/%m/%Y") %> </p>
+              <% elsif  advertisement.advertisable.blank? %>
+                <p><span class="topic-cards-index-media text-warning"><i class="fas fa-clock mt-1 me-2"></i>Produto Removido</p>
               <% elsif advertisement.final_price_with_coupon_in_cents < 100 %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-handshake mt-1 me-2"></i>Anunciado com cupom </span> </p>
               <% else%>

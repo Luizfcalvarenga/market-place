@@ -9,6 +9,7 @@ class Advertisement < ApplicationRecord
     waiting_review: "Aguardando Revisão",
     approved: "Publicado",
     update_requested: "Edição Solicitada",
+    removed: "Produto Removido"
   }
 
 
@@ -43,6 +44,7 @@ class Advertisement < ApplicationRecord
     waiting_review: "waiting_review",
     approved: "approved",
     update_requested: "update_requested",
+    removed: "removed",
   }
 
   def is_free?
