@@ -26,16 +26,16 @@ class Advertisement < ApplicationRecord
    ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
-  ATTRIBUTES_OPTIONS = {
-    "reject locality": "Local",
-    "reject year": "Ano",
-    "reject model": "Modelo",
+  # ATTRIBUTES_OPTIONS = {
+  #   "reject locality": "Local",
+  #   "reject year": "Ano",
+  #   "reject model": "Modelo",
 
-  }
+  # }
 
-  def reject_attr_display
-   ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
-  end
+  # def reject_attr_display
+  #  ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
+  # end
 
 
   enum status: {

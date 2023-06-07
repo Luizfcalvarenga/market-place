@@ -65,15 +65,15 @@ class ProductsController < ApplicationController
     end
   end
 
-  def destroy
-    @product = Product.find(params[:id])
-    authorize @product
-    @product.touch(:removed_at)
-    if @product.removed_at != nil
-      flash[:alert] = "Seu Produto #{@product.name} foi removido"
-      redirect_to advertisements_path
-    end
-  end
+  # def destroy
+  #   @product = Product.find(params[:id])
+  #   authorize @product
+  #   @product.touch(:removed_at)
+  #   if @product.removed_at != nil
+  #     flash[:alert] = "Seu Produto #{@product.name} foi removido"
+  #     redirect_to advertisements_path
+  #   end
+  # end
 
   def my_products
     @user = current_user
@@ -115,6 +115,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     authorize @product
     @product.touch(:removed_at)
+    @product.advertisement.update(status: "removed")
     if @product.removed_at.present?
       flash[:alert] = "Produto #{@product.name} removido "
       redirect_to advertisements_path
