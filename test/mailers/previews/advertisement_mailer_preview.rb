@@ -29,4 +29,9 @@ class AdvertisementMailerPreview < ActionMailer::Preview
     AdvertisementMailer.with(advertisement: advertisement).advertisement_updater
   end
 
+  def advertisement_paid
+    advertisement = Advertisement.last
+    AdvertisementMailer.with(advertisement: advertisement).advertisement_paid
+  end
+
 end

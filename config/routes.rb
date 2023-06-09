@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   resources :advertisements, only: [:index, :show, :destroy]
   get "advertisements/:id/invoice", to: "advertisements#invoice", as: "advertisement_invoice"
   get "advertisements/:id/status", to: "advertisements#status", as: "advertisement_status", format: :json
+  
+  get "terms_and_conditions", to: "pages#terms_and_conditions", as: "terms_and_conditions"
+  get "privacy_policy", to: "pages#privacy_policy", as: "privacy_policy"
 
   resources :bikes
 

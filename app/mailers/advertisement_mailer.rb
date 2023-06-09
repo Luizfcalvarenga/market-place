@@ -1,10 +1,10 @@
 class AdvertisementMailer < ApplicationMailer
-  default from: "NuflowPass <naoresponda@nuflowpass.com.br>"
+  default from: "Market Nuflow <naoresponda@nuflowpass.com.br>"
   def advertisement_creation
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
-    mail(to: @client.email, subject: "Anúncio criado com sucesso!!!")
+    mail(to: @client.email, subject: "FALTA POUCO PARA ANUNCIAR SEU PRODUTO!")
   end
 
   def notify_admin_advertisement_creation
@@ -19,7 +19,7 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
-    mail(to: @client.email, subject: "Anúncio aprovado, já está em cirulação!!!")
+    mail(to: @client.email, subject: "PARABÉNS! SEU ANÚNCIO FOI PUBLICADO.")
   end
 
   def advertisement_rejecter
@@ -29,12 +29,18 @@ class AdvertisementMailer < ApplicationMailer
     @comments = params[:comments]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
-    mail(to: @client.email, subject: "Anúncio reprovado, revise as informações!!!")
+    mail(to: @client.email, subject: "QUASE LÁ! REVISE SEU ANÚNCIO PARA PUBLICÁ-LO")
   end
 
   def advertisement_updater
     @advertisement = params[:advertisement]
     mail(to:"contato@nuflowshop.com.br", subject: "Anuncio revisado!!!")
+  end
 
+  def advertisement_paid
+    @advertisement = params[:advertisement]
+    @client = @advertisement.user
+    @advertisable = @advertisement.advertisable
+    mail(to: @client.email, subject: "SEU ANÚNCIO FOI RECEBIDO E SERÁ PUBLICADO EM BREVE.")
   end
 end

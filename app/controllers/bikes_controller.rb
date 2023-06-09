@@ -55,6 +55,8 @@ class BikesController < ApplicationController
     @bike = Bike.find(params[:id])
     authorize @bike
     @bike.touch(:removed_at)
+    @bike.advertisement.update(status: "removed")
+    
     if @bike.removed_at != nil
       flash[:alert] = "Seu Produto #{@bike.model} foi removida"
       redirect_to advertisements_path

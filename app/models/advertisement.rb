@@ -9,6 +9,7 @@ class Advertisement < ApplicationRecord
     waiting_review: "Aguardando Revisão",
     approved: "Publicado",
     update_requested: "Edição Solicitada",
+    removed: "Produto Removido"
   }
 
 
@@ -25,16 +26,16 @@ class Advertisement < ApplicationRecord
    ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
-  ATTRIBUTES_OPTIONS = {
-    "reject locality": "Local",
-    "reject year": "Ano",
-    "reject model": "Modelo",
+  # ATTRIBUTES_OPTIONS = {
+  #   "reject locality": "Local",
+  #   "reject year": "Ano",
+  #   "reject model": "Modelo",
 
-  }
+  # }
 
-  def reject_attr_display
-   ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
-  end
+  # def reject_attr_display
+  #  ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
+  # end
 
 
   enum status: {
@@ -43,6 +44,7 @@ class Advertisement < ApplicationRecord
     waiting_review: "waiting_review",
     approved: "approved",
     update_requested: "update_requested",
+    removed: "removed",
   }
 
   def is_free?
@@ -52,6 +54,7 @@ class Advertisement < ApplicationRecord
 
   def perform_after_payment_confirmation_actions
     self.update(status: "paid")
+    AdvertisementMailer.with(advertisement: self).advertisement_paid.deliver_now
     if is_free?
       self.update(
         value: 0,

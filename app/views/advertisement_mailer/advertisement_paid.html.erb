@@ -123,7 +123,7 @@
 
 <body>
   <div class="orange">
-    <h3>FALTA POUCO PARA ANUNCIAR SEU PRODUTO!</h3>
+    <h3>SEU ANÚNCIO FOI RECEBIDO E SERÁ PUBLICADO EM BREVE.</h3>
   </div>
   <div class="mail-content">
     <% if @advertisement.user.full_name %>
@@ -131,17 +131,15 @@
     <% else %>
     <h2>Olá,</h2>
     <% end %>
-    <p class="item-name">Você está muito próximo de anunciar seu produto para milhares de ciclistas</p>
-    <p class="item-name">Para publicar seu anúncio, basta efetuar o pagamento clicando no link abaixo.</p>
+    <p class="item-name">Recebemos o seu anúncio e seu pagamento já foi confirmado!</p>
+    <p class="item-name">Seu anúncio será analisado pela nossa equipe e se estiver tudo certo será publicado em nossa plataforma.</p>
+    <p class="item-name">Você receberá a confirmação de publicação por e-mail, assim como qualquer necessidade de edição do seu anúncio.</p>
+    <p class="item-name">O prazo para revisão é de 1 dia útil.</p>
 
-    <div class="invoice-link">
-      <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
-      <p class="detail-info">Se você já pagou pelo anúncio desconsidere o link acima.</p>
-    </div>
     <h2>Detalhes do seu anúncio:</h2>
     <p><strong class="item-name">Anúncio:</strong> #<%= @advertisement.id %></p>
     <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
-    <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_display %></p>
+    <p><strong class="item-name">Categoria de produto:</strong> <%= @advertisement.advertisable_display %></p>
     <p><strong class="item-name">Status:</strong> <%= @advertisement.status_display %></p>
     <h6>Dúvidas? Entre em contato através do email <strong>atendimento@nuflow.com.br</strong></h6>
     <hr class="footer-line">

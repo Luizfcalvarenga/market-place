@@ -1,5 +1,5 @@
 class MessageMailer < ApplicationMailer
-  default from: "NuflowPass <naoresponda@nuflowpass.com.br>"
+  default from: "Market Nuflow <naoresponda@nuflowpass.com.br>"
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

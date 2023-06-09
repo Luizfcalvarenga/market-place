@@ -26,7 +26,10 @@
               <% else%>
                 <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
               <% end %>
-              <% if (advertisement.status === "pending"  && (advertisement.final_price_with_coupon_in_cents > 0)) %>
+
+              <% if advertisement.status == "removed" %>
+                <p><span class="topic-cards-index-media text-warning"><i class="fas fa-minus-circle mt-1 me-2"></i>Produto Removido</p>
+              <% elsif (advertisement.status === "pending"  && (advertisement.final_price_with_coupon_in_cents > 0)) %>
                 <p><span class="topic-cards-index-media text-danger"><i class="fas fa-clock mt-1 me-2"></i>Pagamento pendente</p>
               <% elsif  advertisement.status === "approved"  || (advertisement.status === "approved" && advertisement.final_price_with_coupon_in_cents == 0) %>
                 <p><span class="topic-cards-index-media text-success"><i class="fas fa-check mt-1 me-2"></i>Publicado</p>

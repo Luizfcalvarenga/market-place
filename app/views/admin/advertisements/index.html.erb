@@ -83,6 +83,9 @@
               <% elsif  advertisement.status === "update_requested" %>
                 <i class="fas fa-clock mt-1 text-warning align-middle" ></i>
                 <span class="topic-cards-index-media ms-3 text-warning align-middle ">Aguardando edição</span>
+              <% elsif  advertisement.status === "removed" %>
+                <i class="fas fa-minus-circle mt-1 text-warning align-middle" ></i>
+                <span class="topic-cards-index-media ms-3 text-warning align-middle ">Produto removido</span>
               <% else %>
                 <%= link_to admin_advertisement_path(advertisement.id), class: "view-btn mb-2 align-middle" do %>
                   <i class="fas fa-check mt-1"></i>

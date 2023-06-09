@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   after_action :set_status
-  skip_before_action :authenticate_user!, only: [:home, :new_announce, :search]
+  skip_before_action :authenticate_user!, only: [:home, :new_announce, :search, :terms_and_conditions, :privacy_policy]
 
   def home
   end
@@ -38,6 +38,12 @@ class PagesController < ApplicationController
       format.html # Follow regular flow of Rails
       format.text { render partial: 'search_list.html', locals: { products: @products, bikes: @bikes } }
     end
+  end
+
+  def terms_and_conditions
+  end
+
+  def privacy_policy
   end
 
 
