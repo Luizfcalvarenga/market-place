@@ -129,7 +129,7 @@ module Api
           @advertisable = @product
           AdvertisementUpdater.new(@advertisement, @advertisable).call
           if @advertisement.update(status: "waiting_review")
-            render json: { success: true, product: @product, redirect_url: product_path(@product)}
+            render json: { success: true, product: @product, redirect_url: advertisements_path}
           else
             render json: { success: false, errors: {}}, status: 422
           end
