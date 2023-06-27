@@ -2123,6 +2123,7 @@ export function ProductForm(props) {
                   <div id="spinner" className="spinner-border text-success d-none  mt-3" role="status">
                     <span className="sr-only">Loading...</span>
                   </div>
+                  <p id="upload-text" className="text-center fs-18 text-gray d-none">Suas fotos estão sendo carregadas, isso pode levar alguns minutos!</p>
                 </>)}
               </div>
             </>)}
