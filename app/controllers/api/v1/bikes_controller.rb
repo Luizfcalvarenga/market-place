@@ -72,8 +72,9 @@ module Api
         @category = Category.find_by(id: @bike.category)
         @state = @bike.state.acronym
         @city = @bike.city.name
-        @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
+        # @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
         @current_user = user_signed_in
+        
       end
 
       def new

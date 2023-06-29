@@ -916,6 +916,50 @@
     bike_user = User.create!(email: "bike@app.com", password: "123456", document_number: "10581022068", phone_number: "(31) 998943837", cep: "30112-000" )
     admin = User.create!(email: "admin@app.com", password: "123456", document_number: "08439700067", phone_number: "(31) 998943837", cep: "30112-000", access: "admin" )
 
+    puts "creating users"
+
+    user1 = User.create!(email: "user1@app.com", password: "123456")
+    user2 = User.create!(email: "user2@app.com", password: "123456")
+    user3 = User.create!(email: "user3@app.com", password: "123456")
+    user4 = User.create!(email: "user4@app.com", password: "123456")
+    user5 = User.create!(email: "user5@app.com", password: "123456")
+    user6 = User.create!(email: "user6@app.com", password: "123456")
+    user7 = User.create!(email: "user7@app.com", password: "123456")
+    user8 = User.create!(email: "user8@app.com", password: "123456")
+    user9 = User.create!(email: "user9@app.com", password: "123456")
+    user10 = User.create!(email: "user10@app.com", password: "123456")
+    user11 = User.create!(email: "user11@app.com", password: "123456")
+    user12 = User.create!(email: "user12@app.com", password: "123456")
+    user13 = User.create!(email: "user13@app.com", password: "123456")
+    user14 = User.create!(email: "user14@app.com", password: "123456")
+    user15 = User.create!(email: "user15@app.com", password: "123456")
+    user16 = User.create!(email: "user16@app.com", password: "123456")
+    user17 = User.create!(email: "user17@app.com", password: "123456")
+    user18 = User.create!(email: "user18@app.com", password: "123456")
+    user19 = User.create!(email: "user19@app.com", password: "123456")
+    user20 = User.create!(email: "user20@app.com", password: "123456")
+
+      users = [user1,
+        user2,
+        user3,
+        user4,
+        user5,
+        user6,
+        user7,
+        user8,
+        user9,
+        user10,
+        user11,
+        user12,
+        user13,
+        user14,
+        user15,
+        user16,
+        user17,
+        user18,
+        user19,
+        user20]
+
 
 
     #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< COMPONENTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#
@@ -923,7 +967,7 @@
     puts "Creating 10 Products and their products attributes..."
 
     10.times do
-      user = [buyer, seller, bike_user].sample
+      user = users.sample
       category = categories.sample
 
       product = Product.create!(user: user,
@@ -961,7 +1005,7 @@
 
     10.times do
       category = [mtb, dirt, road].sample
-      user = [buyer, seller, bike_user].sample
+      user = users.sample
       types = ["e-bike", "bike"]
 
       bike = Bike.create!(
@@ -972,7 +1016,7 @@
         quantity: 1,
         city_id: [23, 45, 57, 453, 23].sample,
         state_id: [23, 11, 7, 4, 10].sample,
-        user_id: (User.ids).sample,
+        user: user,
         frame_brand: frame_brands.sample,
         model: ["GTX", "Sense mt-4r", "Predator", "Trilheiro", "Sense", "Backtrak", "F-Race"].sample,
         year: ["2017", "2018", "2019", "2020", "2021", "2022"].sample,

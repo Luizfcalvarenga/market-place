@@ -220,9 +220,11 @@ export function Bike(props) {
                 <p className=" text-center"><strong className="text-success">Telefone:</strong>  {bike.user.phone_number}</p>
               </div>
             </>)}
-            <a href={"/user/" + bike.user.id + "?bike_id=" + bike.id + "&photo=" + bike.photos[0]}>
-              <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
-            </a>
+            {Number(props.currentUser) !== bike.user.id && (
+              <a href={"/user/" + bike.user.id + "?bike_id=" + bike.id}>
+                <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
+              </a>
+            )}
           </div>
         </div>
 

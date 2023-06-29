@@ -6,21 +6,10 @@ class ChatsController < ApplicationController
   def index
     @chat = Chat.new
     @chats = policy_scope(Chat)
-    @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first} if Chat.where(is_private: true).present?
-    if Chat.where(is_private: true).present?
-      @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
-      @conversations.compact()
-    else
-      @users = []
-      @conversations = []
-    end
-    if params[:query].present?
-      sql_query = "full_name ILIKE :query OR email ILIKE :query"
-      @users = User.where(sql_query, query: "%#{params[:query]}%")
-    else
-      @conversations = @conversations.compact()
-      @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])} if @conversations.present?
-    end
+    chat_ids = Participant.where(user_id: current_user.id).pluck(:chat_id)
+    user_ids = @chats.where(id: chat_ids).map {|chat| chat.participants.where.not(user_id:  current_user.id)}.flatten.pluck(:user_id)
+    user_ids.uniq!
+    @users = User.where(id: user_ids)
     @current_user_id = current_user.id
     current_user.update(current_chat: nil)
     render 'index'
