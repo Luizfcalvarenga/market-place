@@ -42,7 +42,6 @@ module Admin
       @advertisements = Advertisement.all
       @attrs_rejected =[]
       @values_to_review =[]
-      # raise
       params.each do |key, value|
         if key.include? "revisar"
           @attrs_rejected << key
