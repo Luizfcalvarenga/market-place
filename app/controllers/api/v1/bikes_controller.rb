@@ -74,7 +74,7 @@ module Api
         @city = @bike.city.name
         # @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
         @current_user = user_signed_in
-        
+
       end
 
       def new
@@ -92,8 +92,6 @@ module Api
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
               @bike.photos.attach(photo)
-              # image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
-              # UploadBikePhotosJob.perform_later(@bike, image_data_uri)
             end
           end
           if params[:advertisement].present?

@@ -167,6 +167,10 @@ GEM
       faraday-follow_redirects
     jsonapi-renderer (0.2.2)
     jwt (2.7.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -448,6 +452,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   iugu!
   jbuilder (~> 2.7)
+  letter_opener
   listen (~> 3.3)
   mini_magick
   noticed (~> 1.6)

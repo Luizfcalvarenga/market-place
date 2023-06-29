@@ -42,9 +42,9 @@ module Admin
       @advertisements = Advertisement.all
       @attrs_rejected =[]
       @values_to_review =[]
-
+      # raise
       params.each do |key, value|
-        if key.include? "reject"
+        if key.include? "revisar"
           @attrs_rejected << key
           @values_to_review << value
         end
@@ -56,7 +56,7 @@ module Admin
       @attrs_rejected
       @values_to_review
       @comments
-      service = AdvertisementRejecter.new(@advertisement, @comments, @values_to_review, @attrs_rejected, current_user)
+      service = AdvertisementRejecter.new(@advertisement, current_user, @attrs_rejected, @values_to_review, @comments)
       if service.call
         flash[:notice] = "Anuncio rejeitado"
         next_waiting_review_advertisement =  @advertisements.waiting_review.order(created_at: :asc).first
