@@ -484,18 +484,18 @@ export function ProductForm(props) {
       if (e.target.localName === "img") {
         let filter = e.target.alt;
         if (filter === "acessories") {
-          setProductTypes(data.types_of_product.filter(element => element.id >= 40 && element.id <= 48));
+          setProductTypes(data.types_of_product.filter(element => element.id >= 41 && element.id <= 48));
         } else if (filter === "components") {
-          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 39));
+          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 40));
         }  else if (filter === "clothes") {
           setProductTypes(data.types_of_product.filter(element => element.id >= 49 && element.id <= 68));
         }
       } else {
         let filter = e.target.id;
         if (filter === "acessories") {
-          setProductTypes(data.types_of_product.filter(element => element.id >= 40 && element.id <= 48));
+          setProductTypes(data.types_of_product.filter(element => element.id >= 41 && element.id <= 48));
         } else if (filter === "components") {
-          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 39));
+          setProductTypes(data.types_of_product.filter(element => element.id >= 1 && element.id <= 40));
         }  else if (filter === "clothes") {
           setProductTypes(data.types_of_product.filter(element => element.id >= 49 && element.id <= 68));
         }

@@ -1468,7 +1468,7 @@ export function Bikes(props) {
                         <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
                           {presentRimModels.map((presentRimModel, index) => {
                             return (
-                              <button type="button" key={index} value={presentRimModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRimModel(e)}>{translateWord(presentRimModel)}</button>
+                              <button type="button" key={index} value={presentRimModel} className="filter-tag" onClick={(e) => handleMultipleFiltersRimModel(e)}>{presentRimModel}</button>
                             )
                           })}
                         </div>
@@ -1479,7 +1479,7 @@ export function Bikes(props) {
                         <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
                           {presentHubModels.map((presentHubModel, index) => {
                             return (
-                              <button type="button" key={index} value={presentHubModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHubModel(e)}>{translateWord(presentHubModel)}</button>
+                              <button type="button" key={index} value={presentHubModel} className="filter-tag" onClick={(e) => handleMultipleFiltersHubModel(e)}>{presentHubModel}</button>
                             )
                           })}
                         </div>
@@ -1490,7 +1490,7 @@ export function Bikes(props) {
                         <div id="suspension-type" className="d-flex flex-wrap justify-content-between gap-1">
                           {presentTyreModels.map((presentTyreModel, index) => {
                             return (
-                              <button type="button" key={index} value={presentTyreModel} className="filter-tag" onClick={(e) => handleMultipleFiltersTyreModel(e)}>{translateWord(presentTyreModel)}</button>
+                              <button type="button" key={index} value={presentTyreModel} className="filter-tag" onClick={(e) => handleMultipleFiltersTyreModel(e)}>{presentTyreModel}</button>
                             )
                           })}
                         </div>
