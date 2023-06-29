@@ -139,22 +139,22 @@
               <div class="w-50" data-column="category">
                 <div class="d-flex">
                   <p class="mb-0 text-success">Categoria:</p>
-                  <p class="mb-0 ms-2 field-value"><%= @advertisable.category.name %></p>
+                  <p class="mb-0 ms-2 field-value"><%= @advertisable.category.name_display %></p>
                 </div>
                 <div class="d-flex">
                   <label htmlFor="accept category" className="me-2 text-success">
                     <input
                       type="checkbox"
-                      value="<%= @advertisable.category.name %>"
+                      value="<%= @advertisable.category.name_display %>"
                       name="accept category"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject category" className=" text-success">
+                  <label htmlFor="revisar categoria" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
-                      value="<%= @advertisable.category.name %>"
-                      name="reject category"
+                      value="<%= @advertisable.category.name_display %>"
+                      name="revisar categoria"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -162,22 +162,22 @@
               <div class="w-50" data-column="modality">
                 <div class="d-flex">
                   <p class="m-0 text-success">Modalidade:</p>
-                  <p class="ms-2 mb-2 mb-0 field-value"><%= @advertisable.modality %></p>
+                  <p class="ms-2 mb-2 mb-0 field-value"><%= dictionary[@advertisable.modality] %></p>
                 </div>
                 <div class="d-flex">
                   <label htmlFor="accept modality" className="me-2 text-success">
                     <input
                       type="checkbox"
-                      value="<%= @advertisable.modality %>"
+                      value="<%= dictionary[@advertisable.modality] %>"
                       name="accept modality"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject modality" className=" text-success">
+                  <label htmlFor="revisar modalidade" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
-                      value="<%= @advertisable.modality %>"
-                      name="reject modality"
+                      value="<%= dictionary[@advertisable.modality] %>"
+                      name="revisar modalidade"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -197,12 +197,12 @@
                       name="accept brand"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject brand" className=" text-success">
+                  <label htmlFor="revisar marca" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.brand %>"
-                      name="reject brand"
+                      name="revisar marca"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -220,12 +220,12 @@
                       name="accept model"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject model" className=" text-success">
+                  <label htmlFor="revisar modelo" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.model %>"
-                      name="reject model"
+                      name="revisar modelo"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -245,12 +245,12 @@
                       name="accept quantity"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject quantity" className=" text-success">
+                  <label htmlFor="revisar quantidade" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.quantity %>"
-                      name="reject quantity"
+                      name="revisar quantidade"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -268,12 +268,12 @@
                       name="accept price_in_cents"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject price_in_cents" className=" text-success">
+                  <label htmlFor="revisar preço" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.price_in_cents %>"
-                      name="reject price_in_cents"
+                      name="revisar preço"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -289,16 +289,16 @@
                   <label htmlFor="accept localiy" className="me-2 text-success">
                     <input
                       type="checkbox"
-                      value="<%= @advertisable.city %>"
+                      value="<%= @advertisable.city %> - <%= @advertisable.state.acronym %>"
                       name="accept localiy"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject locality" className=" text-success">
+                  <label htmlFor="revisar local" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
-                      value="<%= @advertisable.city %>"
-                      name="reject locality"
+                      value="<%= @advertisable.city.name %> - <%= @advertisable.state.acronym %>"
+                      name="revisar local"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -316,12 +316,12 @@
                       name="accept year"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject year" className=" text-success">
+                  <label htmlFor="revisar ano" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.year  %>"
-                      name="reject year"
+                      name="revisar ano"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -340,12 +340,12 @@
                     name="accept description"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject description" className=" text-success">
+                <label htmlFor="revisar descrição" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.description  %>"
-                    name="reject description"
+                    name="revisar descrição"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -358,22 +358,22 @@
             <div class="w-50" data-column="bike_type">
               <div class="d-flex">
                 <p class="m-0 text-success">Tipo:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.bike_type %></p>
+                <p class="ms-2 mb-0 field-value"><%=  dictionary[@advertisable.bike_type]  %></p>
               </div>
               <div class="d-flex">
                 <label htmlFor="accept bike_type" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="<%= @advertisable.bike_type %>"
+                    value="<%= dictionary[@advertisable.bike_type] %>"
                     name="accept bike_type"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject bike_type" className=" text-success">
+                <label htmlFor="revisar tipo de bike" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
-                    value="<%= @advertisable.bike_type %>"
-                    name="reject bike_type"
+                    value="<%= dictionary[@advertisable.bike_type] %>"
+                    name="revisar tipo de bike"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -387,16 +387,16 @@
                 <label htmlFor="accept locality" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="<%= @advertisable.city  %>"
+                    value="<%= @advertisable.city.name  %> - <%= @advertisable.state.acronym %>"
                     name="accept locality"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject locality" className=" text-success">
+                <label htmlFor="revisar local" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
-                    value="<%= @advertisable.city  %>"
-                    name="reject locality"
+                    value="<%= @advertisable.city.name  %> - <%= @advertisable.state.acronym %>"
+                    name="revisar local"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -417,12 +417,12 @@
                     name="accept year"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject year" className=" text-success">
+                <label htmlFor="revisar ano" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.year %>"
-                    name="reject year"
+                    name="revisar ano"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -440,12 +440,12 @@
                     name="accept weight"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject weight" className=" text-success">
+                <label htmlFor="revisar peso" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.weight %>"
-                    name="reject weight"
+                    name="revisar peso"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -455,22 +455,45 @@
             <div class="w-50" data-column="category">
               <div class="d-flex">
                 <p class="m-0 text-success">Categoria:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.category.name%></p>
+                <p class="ms-2 mb-0 field-value"><%= @advertisable.category.name_display%></p>
               </div>
               <div class="d-flex">
                 <label htmlFor="accept category" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="<%= @advertisable.category.name%>"
+                    value="<%= @advertisable.category.name_display%>"
                     name="accept category"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject category" className=" text-success">
+                <label htmlFor="revisar categoria" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
-                    value="<%= @advertisable.category.name%>"
-                    name="reject category"
+                    value="<%= @advertisable.category.name_display %>"
+                    name="revisar categoria"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
+            </div>
+            <div class="w-50" data-column="modality">
+              <div class="d-flex">
+                <p class="m-0 text-success">Modalidade:</p>
+                <p class="ms-2 mb-2 mb-0 field-value"><%= dictionary[@advertisable.modality] %></p>
+              </div>
+              <div class="d-flex">
+                <label htmlFor="accept modality" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= dictionary[@advertisable.modality] %>"
+                    name="accept modality"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="revisar modalidade" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= dictionary[@advertisable.modality] %>"
+                    name="revisar modalidade"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -488,12 +511,12 @@
                     name="accept model"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject model" className=" text-success">
+                <label htmlFor="revisar modelo" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.model  %>"
-                    name="reject model"
+                    name="revisar modelo"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -513,12 +536,12 @@
                     name="accept price_in_cents"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject price_in_cents" className=" text-success">
+                <label htmlFor="revisar preço" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.price_in_cents  %>"
-                    name="reject price_in_cents"
+                    name="revisar preço"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -537,12 +560,12 @@
                     name="accept quantity"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject quantity" className=" text-success">
+                <label htmlFor="revisar quantidade" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.quantity%>"
-                    name="reject quantity"
+                    name="revisar quantidade"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -561,12 +584,12 @@
                     name="accept description"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject description" className=" text-success">
+                <label htmlFor="revisar descrição" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.description %>"
-                    name="reject description"
+                    name="revisar descrição"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -588,12 +611,12 @@
                     name="accept frame_brand"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject frame_brand" className=" text-success">
+                <label htmlFor="revisar marca do quadro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.frame_brand %>"
-                    name="reject frame_brand"
+                    name="revisar marca do quadro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -611,12 +634,12 @@
                     name="accept frame_size"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject frame_size" className=" text-success">
+                <label htmlFor="revisar tamanho do quadro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.frame_size%>"
-                    name="reject frame_size"
+                    name="revisar tamanho do quadro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -624,22 +647,22 @@
             <div class="w-50" data-column="frame_material">
               <div class="d-flex">
                 <p class="m-0 text-success">Material:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.material_display %></p>
+                <p class="ms-2 mb-0 field-value"><%=  @advertisable.material_display %></p>
               </div>
               <div class="d-flex">
                 <label htmlFor="accept frame_material" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="<%= @advertisable.frame_material%>"
+                    value="<%=  dictionary[@advertisable.frame_material]  %>"
                     name="accept frame_material"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject frame_material" className=" text-success">
+                <label htmlFor="revisar material do quadro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
-                    value="<%= @advertisable.frame_material%>"
-                    name="reject frame_material"
+                    value="<%= dictionary[@advertisable.frame_material] %>"
+                    name="revisar material do quadro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -662,12 +685,12 @@
                     name="accept crankset"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject crankset" className=" text-success">
+                <label htmlFor="revisar pedivela" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.crankset %>"
-                    name="reject crankset"
+                    name="revisar pedivela"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -685,12 +708,12 @@
                     name="accept chain"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject chain" className=" text-success">
+                <label htmlFor="revisar corrente" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.chain %>"
-                    name="reject chain"
+                    name="revisar corrente"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -711,12 +734,12 @@
                     name="accept number_of_front_gears"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject number_of_front_gears" className=" text-success">
+                <label htmlFor="revisar nº marchas dianteiras" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.number_of_front_gears %>"
-                    name="reject number_of_front_gears"
+                    name="revisar nº marchas dianteiras"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -734,12 +757,12 @@
                     name="accept front_derailleur_model"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject front_derailleur_model" className=" text-success">
+                <label htmlFor="revisar modelo transmissão dianteira" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.front_derailleur_model %>"
-                    name="reject front_derailleur_model"
+                    name="revisar modelo transmissão dianteira"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -760,12 +783,12 @@
                     name="accept number_of_rear_gears"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject number_of_rear_gears" className=" text-success">
+                <label htmlFor="revisar nº marchas traseiras" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.number_of_rear_gears %>"
-                    name="reject number_of_rear_gears"
+                    name="revisar nº marchas traseiras"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -783,12 +806,12 @@
                     name="accept rear_derailleur_model"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject rear_derailleur_model" className=" text-success">
+                <label htmlFor="revisar modelo transmissão traseira" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.rear_derailleur_model %>"
-                    name="reject rear_derailleur_model"
+                    name="revisar modelo transmissão traseira"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -806,16 +829,16 @@
                   <label htmlFor="accept fork_material" className="me-2 text-success">
                     <input
                       type="checkbox"
-                      value="<%= @advertisable.fork_material %>"
+                      value="<%= dictionary[@advertisable.fork_material] %>"
                       name="accept fork_material"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject fork_material" className=" text-success">
+                  <label htmlFor="revisar material do garfo" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
-                      value="<%= @advertisable.fork_material %>"
-                      name="reject fork_material"
+                      value="<%= dictionary[@advertisable.fork_material] %>"
+                      name="revisar material do garfo"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -828,22 +851,22 @@
               <div class="w-100" data-column="suspension_type">
                 <div class="d-flex">
                   <p class="m-0 text-success">Tipo:</p>
-                  <p class="ms-2 mb-0 field-value"><%= @advertisable.suspension_type %></p>
+                  <p class="ms-2 mb-0 field-value"><%= dictionary[@advertisable.suspension_type] %></p>
                 </div>
                 <div class="d-flex">
                   <label htmlFor="accept suspension_type" className="me-2 text-success">
                     <input
                       type="checkbox"
-                      value="<%= @advertisable.suspension_type %>"
+                      value="<%= dictionary[@advertisable.suspension_type] %>"
                       name="accept suspension_type"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject suspension_type" className=" text-success">
+                  <label htmlFor="revisar tipo de suspensão" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
-                      value="<%= @advertisable.suspension_type %>"
-                      name="reject suspension_type"
+                      value="<%= dictionary[@advertisable.suspension_type] %>"
+                      name="revisar tipo de suspensão"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -864,12 +887,12 @@
                       name="accept front_suspension_travel"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject front_suspension_travel" className=" text-success">
+                  <label htmlFor="revisar curso suspensão dianteira" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.front_suspension_travel %>"
-                      name="reject front_suspension_travel"
+                      name="revisar curso suspensão dianteira"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -887,12 +910,12 @@
                       name="accept front_suspension_model"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject front_suspension_model" className=" text-success">
+                  <label htmlFor="revisar modelo suspensão dianteira" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.front_suspension_model %>"
-                      name="reject front_suspension_model"
+                      name="revisar modelo suspensão dianteira"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -913,12 +936,12 @@
                       name="accept rear_suspension_travel"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject rear_suspension_travel" className=" text-success">
+                  <label htmlFor="revisar curso suspensão traseira" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.rear_suspension_travel %>"
-                      name="reject rear_suspension_travel"
+                      name="revisar curso suspensão traseira"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -936,12 +959,12 @@
                       name="accept rear_suspension_model"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject rear_suspension_model" className=" text-success">
+                  <label htmlFor="revisar modelo suspensão traseira" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.rear_suspension_model %>"
-                      name="reject rear_suspension_model"
+                      name="revisar modelo suspensão traseira"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>
@@ -954,7 +977,7 @@
           <div class="d-flex">
             <div class="w-100" data-column="rim_size">
               <div class="d-flex">
-                <p class="m-0 text-success">Tipo:</p>
+                <p class="m-0 text-success">Tamanho:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.rim_size %></p>
               </div>
               <div class="d-flex">
@@ -965,12 +988,12 @@
                     name="accept rim_size"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject rim_size" className=" text-success">
+                <label htmlFor="revisar tamanho da roda" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.rim_size %>"
-                    name="reject rim_size"
+                    name="revisar tamanho da roda"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -991,12 +1014,12 @@
                     name="accept front_rim_model"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject front_rim_model" className=" text-success">
+                <label htmlFor="revisar modelo aro dianteiro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.front_rim_model %>"
-                    name="reject front_rim_model"
+                    name="revisar modelo aro dianteiro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1014,12 +1037,12 @@
                     name="accept front_hub"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject front_hub" className=" text-success">
+                <label htmlFor="revisar cubo dianteiro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.front_hub %>"
-                    name="reject front_hub"
+                    name="revisar cubo dianteiro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1037,12 +1060,12 @@
                     name="accept front_tyre"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject front_tyre" className=" text-success">
+                <label htmlFor="revisar pneu traseiro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.front_tyre %>"
-                    name="reject front_tyre"
+                    name="revisar pneu traseiro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1063,12 +1086,12 @@
                     name="accept rear_rim_model"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject rear_rim_model" className=" text-success">
+                <label htmlFor="revisar modelo aro traseiro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.rear_rim_model %>"
-                    name="reject rear_rim_model"
+                    name="revisar modelo aro traseiro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1086,12 +1109,12 @@
                     name="accept rear_hub"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject rear_hub" className=" text-success">
+                <label htmlFor="revisar cubo traseiro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.rear_hub %>"
-                    name="reject rear_hub"
+                    name="revisar cubo traseiro"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1109,12 +1132,39 @@
                     name="accept rear_tyre"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject rear_tyre" className=" text-success">
+                <label htmlFor="revisar pneu traseiro" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.rear_tyre %>"
-                    name="reject rear_tyre"
+                    name="revisar pneu traseiro"
+                  /><i class="fas fa-times text-danger ms-2"></i>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="text-center text-white my-3">Freios</h4>
+          <div class="d-flex">
+            <div class="w-50" data-column="stem">
+              <div class="d-flex">
+                <p class="m-0 text-success">Tipo de Freio:</p>
+                <p class="ms-2 mb-0 field-value"><%= dictionary[@advertisable.brake_type] %></p>
+              </div>
+              <div class="d-flex">
+                <label htmlFor="accept brake_type" className="me-2 text-success">
+                  <input
+                    type="checkbox"
+                    value="<%= dictionary[@advertisable.brake_type] %>"
+                    name="accept brake_type"
+                  /><i class="fas fa-check ms-2"></i>
+                </label>
+                <label htmlFor="revisar tipo de freio" className=" text-success">
+                  <input
+                    class="ms-3"
+                    type="checkbox"
+                    value="<%= dictionary[@advertisable.brake_type] %>"
+                    name="revisar tipo de freio"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1122,28 +1172,27 @@
           </div>
 
 
-
           <h4 class="text-center text-white my-3">Canote</h4>
           <div class="d-flex">
             <div class="w-50" data-column="seat_post_type">
               <div class="d-flex">
                 <p class="m-0 text-success">Tipo:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.seat_post_type %></p>
+                <p class="ms-2 mb-0 field-value"><%= dictionary[@advertisable.seat_post_type] %></p>
               </div>
               <div class="d-flex">
                 <label htmlFor="accept seat_post_type" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="<%= @advertisable.seat_post_type %>"
+                    value="<%= dictionary[@advertisable.seat_post_type]  %>"
                     name="accept seat_post_type"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject seat_post_type" className=" text-success">
+                <label htmlFor="revisar tipo de canote" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
-                    value="<%= @advertisable.seat_post_type %>"
-                    name="reject seat_post_type"
+                    value="<%= dictionary[@advertisable.seat_post_type]  %>"
+                    name="revisar tipo de canote"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1161,12 +1210,12 @@
                     name="accept seat_post_travel"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject seat_post_travel" className=" text-success">
+                <label htmlFor="revisar curso do canote" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.seat_post_travel %>"
-                    name="reject seat_post_travel"
+                    name="revisar curso do canote"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1180,16 +1229,16 @@
                 <label htmlFor="accept seat_post_material" className="me-2 text-success">
                   <input
                     type="checkbox"
-                    value="<%= @advertisable.seat_post_material %>"
+                    value="<%= dictionary[@advertisable.seat_post_material]  %>"
                     name="accept seat_post_material"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject seat_post_matrial" className=" text-success">
+                <label htmlFor="revisar material do canote" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
-                    value="<%= @advertisable.seat_post_material %>"
-                    name="reject seat_post_material"
+                    value="<%= dictionary[@advertisable.seat_post_material] %>"
+                    name="revisar material do canote"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1207,12 +1256,12 @@
                     name="accept seat_post_model"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject seat_post_model" className=" text-success">
+                <label htmlFor="revisar modelo do canote" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.seat_post_model %>"
-                    name="reject seat_post_model"
+                    name="revisar modelo do canote"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1234,12 +1283,12 @@
                     name="accept stem"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject stem" className=" text-success">
+                <label htmlFor="revisar mesa" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.stem %>"
-                    name="reject stem"
+                    name="revisar mesa"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1257,12 +1306,12 @@
                     name="accept handlebar"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject handlebar" className=" text-success">
+                <label htmlFor="revisar guidão" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.handlebar %>"
-                    name="reject handlebar"
+                    name="revisar guidão"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1284,12 +1333,12 @@
                     name="accept accessories"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject accessories" className=" text-success">
+                <label htmlFor="revisar acessórios" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.accessories %>"
-                    name="reject accessories"
+                    name="revisar acessórios"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1307,12 +1356,12 @@
                     name="accept accessories_description"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject accessories_description" className=" text-success">
+                <label htmlFor="revisar descrição dos acessórios" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.accessories_description %>"
-                    name="reject accessories_description"
+                    name="revisar descrição dos acessórios"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1335,12 +1384,12 @@
                     name="accept battery"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject battery" className=" text-success">
+                <label htmlFor="revisar bateria" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.battery %>"
-                    name="reject battery"
+                    name="revisar bateria"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1358,12 +1407,12 @@
                     name="accept battery_cycles"
                   /><i class="fas fa-check ms-2"></i>
                 </label>
-                <label htmlFor="reject battery_cycles" className=" text-success">
+                <label htmlFor="revisar ciclos da bateria" className=" text-success">
                   <input
                     class="ms-3"
                     type="checkbox"
                     value="<%= @advertisable.battery_cycles %>"
-                    name="reject battery_cycles"
+                    name="revisar ciclos da bateria"
                   /><i class="fas fa-times text-danger ms-2"></i>
                 </label>
               </div>
@@ -1383,12 +1432,12 @@
                       name="accept mileage"
                     /><i class="fas fa-check ms-2"></i>
                   </label>
-                  <label htmlFor="reject mileage" className=" text-success">
+                  <label htmlFor="revisar kilometragem" className=" text-success">
                     <input
                       class="ms-3"
                       type="checkbox"
                       value="<%= @advertisable.mileage %>"
-                      name="reject mileage"
+                      name="revisar kilometragem"
                     /><i class="fas fa-times text-danger ms-2"></i>
                   </label>
                 </div>

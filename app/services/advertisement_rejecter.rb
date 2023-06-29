@@ -17,7 +17,6 @@ class AdvertisementRejecter
       )
       AdvertisementMailer.with(advertisement: @advertisement, attrs_rejected: @attrs_rejected, values_to_review: @values_to_review, comments: @comments).advertisement_rejecter.deliver_now
     end
-
     true
   rescue StandardError  => e
     errors << { generic: e }

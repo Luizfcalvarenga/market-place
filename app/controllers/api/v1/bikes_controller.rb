@@ -72,8 +72,9 @@ module Api
         @category = Category.find_by(id: @bike.category)
         @state = @bike.state.acronym
         @city = @bike.city.name
-        @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
+        # @present_ids = Bike.joins(:advertisement).where(advertisements: {status: "approved"}).pluck(:id)
         @current_user = user_signed_in
+
       end
 
       def new
@@ -84,6 +85,7 @@ module Api
 
       def create
         @bike = Bike.new(bike_params)
+        binding.pry
         @bike.accessories = params[:bike][:accessories].split(',')
         skip_authorization
         @categories = Category.all
@@ -91,8 +93,6 @@ module Api
           if params[:bike][:photos].present?
             params[:bike][:photos].each do | photo |
               @bike.photos.attach(photo)
-              # image_data_uri = Base64.encode64(photo.read).gsub("\n", "")
-              # UploadBikePhotosJob.perform_later(@bike, image_data_uri)
             end
           end
           if params[:advertisement].present?

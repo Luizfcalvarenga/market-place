@@ -4,6 +4,9 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
+    attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
+    attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
+    attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
     mail(to: @client.email, subject: "FALTA POUCO PARA ANUNCIAR SEU PRODUTO!")
   end
 
@@ -11,6 +14,9 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
+    attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
+    attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
+    attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
     mail(to: "contato@nuflowshop.com.br", subject: "Novo anúncio para revisão")
   end
 
@@ -19,6 +25,9 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
+    attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
+    attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
+    attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
     mail(to: @client.email, subject: "PARABÉNS! SEU ANÚNCIO FOI PUBLICADO.")
   end
 
@@ -29,11 +38,17 @@ class AdvertisementMailer < ApplicationMailer
     @comments = params[:comments]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
+    attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
+    attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
+    attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
     mail(to: @client.email, subject: "QUASE LÁ! REVISE SEU ANÚNCIO PARA PUBLICÁ-LO")
   end
 
   def advertisement_updater
     @advertisement = params[:advertisement]
+    attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
+    attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
+    attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
     mail(to:"contato@nuflowshop.com.br", subject: "Anuncio revisado!!!")
   end
 
@@ -41,6 +56,9 @@ class AdvertisementMailer < ApplicationMailer
     @advertisement = params[:advertisement]
     @client = @advertisement.user
     @advertisable = @advertisement.advertisable
+    attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
+    attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
+    attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
     mail(to: @client.email, subject: "SEU ANÚNCIO FOI RECEBIDO E SERÁ PUBLICADO EM BREVE.")
   end
 end

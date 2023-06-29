@@ -66,6 +66,8 @@ document.addEventListener("turbo:load", () => {
         <Bike
           bikeId={reactContainer.dataset.bikeId}
           userPresent={reactContainer.dataset.userPresent}
+          currentUser={reactContainer.dataset.currentUser}
+
         />
       ),
       BikeForm: (
@@ -83,6 +85,8 @@ document.addEventListener("turbo:load", () => {
           productId={reactContainer.dataset.productId}
           productAttributes={reactContainer.dataset.productAttributes}
           userPresent={reactContainer.dataset.userPresent}
+          currentUser={reactContainer.dataset.currentUser}
+
         />
       ),
       ProductForm: (

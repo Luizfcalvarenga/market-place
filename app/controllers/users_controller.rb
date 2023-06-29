@@ -8,26 +8,16 @@ class UsersController < ApplicationController
     end
     @user = User.find(params[:id])
     @chat = Chat.new
-    @chats = Chat.public_chats
     @chat_name = get_name(@user, current_user)
     @single_chat = Chat.where(name: @chat_name).first || Chat.create_private_chat([@user, current_user], @chat_name)
     current_user.update(current_chat: @single_chat)
     @product = Product.find(params[:product_id]) if params[:product_id].present?
     @product = Bike.find(params[:bike_id]) if params[:bike_id].present?
-    if Chat.where(is_private: true).present?
-      @conversations = Chat.where(is_private: true).where("name ILIKE ?", "%_#{current_user.id}%").map { | private_chat | private_chat.participants.where.not(user_id: current_user.id).first}
-      @conversations.compact()
-    else
-      @users = []
-      @conversations = []
-    end
-    if params[:query].present?
-      sql_query = "email ILIKE :query OR full_name ILIKE :query"
-      @users = User.where(sql_query, query: "%#{params[:query]}%").where.not(user: current_user)
-    else
-      @conversations = @conversations.compact()
-      @users = @conversations.map { | conversation | User.find_by(["id = ?", conversation.user_id])}
-    end
+    @chats = policy_scope(Chat)
+    chat_ids =Participant.where(user_id:  current_user.id).pluck(:chat_id)
+    user_ids = @chats.where(id: chat_ids).map {|chat| chat.participants.where.not(user_id:  current_user.id)}.flatten.pluck(:user_id)
+    user_ids.uniq!
+    @users = User.where(id: user_ids)
     authorize @user
     @message = Message.new
     @messages = @single_chat.messages.order(created_at: :asc)
