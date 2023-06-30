@@ -72,8 +72,9 @@
 
 .photo-modal {
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 150px);
   object-fit: contain;
+  border-radius: 10px;
 
 }
 
@@ -86,11 +87,13 @@
 
 .modal-photo {
   margin-top: 100px !important;
-  margin-left: 35%;
+  margin-left: auto;
   .modal-dialog {
     max-width: 100vw !important;
     max-height: calc(100vh - 100px) !important;
     margin: 0 !important;
+    border-radius: 10px;
+
   }
 }
 
