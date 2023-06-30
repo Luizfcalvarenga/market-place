@@ -96,13 +96,13 @@
 
     <div class="table m-0">
       <div class="table-row header blue">
-        <div class="d-flex justify-content-between alig-middle">
+        <div class="<%= mobile_device? ? "d-block admin-review" : "d-flex justify-content-between alig-middle" %>">
           <h3 class="text-center text-success">
             Informações <%= @advertisement.advertisable_display %> anunciado
           </h3>
 
           <% if @advertisable.photos.attached? %>
-            <div class="review-images-admin w-50">
+            <div class="review-images-admin <%= mobile_device? ? "w-100" : "w-50" %>">
               <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                   <% @advertisable.photos.each_with_index do |photo, i| %>
@@ -135,8 +135,8 @@
         <% if @advertisement.advertisable_type == "Product" %>
 
           <div class="table">
-            <div class="d-flex ">
-              <div class="w-50" data-column="category">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="category">
                 <div class="d-flex">
                   <p class="mb-0 text-success">Categoria:</p>
                   <p class="mb-0 ms-2 field-value"><%= @advertisable.category.name_display %></p>
@@ -159,7 +159,7 @@
                   </label>
                 </div>
               </div>
-              <div class="w-50" data-column="modality">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="modality">
                 <div class="d-flex">
                   <p class="m-0 text-success">Modalidade:</p>
                   <p class="ms-2 mb-2 mb-0 field-value"><%= dictionary[@advertisable.modality] %></p>
@@ -183,8 +183,8 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex ">
-              <div class="w-50" data-column="brand">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="brand">
                 <div class="d-flex">
                   <p class="m-0 text-success">Marca:</p>
                   <p class="ms-2 mb-2 mb-0 field-value"><%= @advertisable.brand %></p>
@@ -207,7 +207,7 @@
                   </label>
                 </div>
               </div>
-              <div class="w-50" data-column="model">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="model">
                 <div class="d-flex">
                   <p class="m-0 text-success">Modelo:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.model %></p>
@@ -231,8 +231,8 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex ">
-              <div class="w-50" data-column="quantity">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="quantity">
                 <div class="d-flex">
                   <p class="m-0 text-success">Quantidade:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.quantity %></p>
@@ -255,7 +255,7 @@
                   </label>
                 </div>
               </div>
-              <div class="w-50" data-column="price_in_cents">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="price_in_cents">
                 <div class="d-flex">
                   <p class="m-0 text-success">Preço:</p>
                   <p class="ms-2 mb-0 field-value"><%= number_to_currency(@advertisable.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".")  %></p>
@@ -279,8 +279,8 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex ">
-              <div class="w-50" data-column="locality">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="locality">
                 <div class="d-flex">
                   <p class="m-0 text-success">Cidade:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.city.name %> - <%= @advertisable.state.acronym %></p>
@@ -303,7 +303,7 @@
                   </label>
                 </div>
               </div>
-              <div class="w-50" data-column="yer">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="yer">
                 <div class="d-flex">
                   <p class="m-0 text-success">Ano:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.year  %></p>
@@ -327,7 +327,7 @@
                 </div>
               </div>
             </div>
-              <div class="w-100" data-column="description">
+            <div class="w-100" data-column="description">
               <div class="d-flex">
                 <p class="m-0 text-success">Descrição:</p>
                 <p class="2 mb-0 field-value"><%= @advertisable.description  %></p>
@@ -354,8 +354,8 @@
 
         <% elsif @advertisement.advertisable_type == "Bike" %>
 
-          <div class="d-flex ">
-            <div class="w-50" data-column="bike_type">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="bike_type">
               <div class="d-flex">
                 <p class="m-0 text-success">Tipo:</p>
                 <p class="ms-2 mb-0 field-value"><%=  dictionary[@advertisable.bike_type]  %></p>
@@ -378,7 +378,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="locality">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="locality">
               <div class="d-flex">
                 <p class="m-0 text-success">Cidade:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.city.name %> - <%= @advertisable.state.acronym %></p>
@@ -403,8 +403,9 @@
             </div>
           </div>
 
-          <div class="d-flex ">
-            <div class="w-50" data-column="year">
+
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="year">
               <div class="d-flex">
                 <p class="m-0 text-success">Ano:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.year %></p>
@@ -427,7 +428,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="weight">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="weight">
               <div class="d-flex">
                 <p class="m-0 text-success">Peso:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.weight %>Kg</p>
@@ -451,8 +452,8 @@
               </div>
             </div>
           </div>
-          <div class="d-flex ">
-            <div class="w-50" data-column="category">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="category">
               <div class="d-flex">
                 <p class="m-0 text-success">Categoria:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.category.name_display%></p>
@@ -475,7 +476,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="modality">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="modality">
               <div class="d-flex">
                 <p class="m-0 text-success">Modalidade:</p>
                 <p class="ms-2 mb-2 mb-0 field-value"><%= dictionary[@advertisable.modality] %></p>
@@ -498,7 +499,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="model">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="model">
               <div class="d-flex">
                 <p class="m-0 text-success">Modelo:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.model  %></p>
@@ -522,8 +523,8 @@
               </div>
             </div>
           </div>
-          <div class="d-flex">
-            <div class="w-50" data-column="price_in_cents">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="price_in_cents">
               <div class="d-flex">
                 <p class="m-0 text-success">Preço:</p>
                 <p class="ms-2 mb-0 field-value"><%= number_to_currency(@advertisable.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></p>
@@ -547,7 +548,7 @@
               </div>
             </div>
 
-            <div class="w-50" data-column="quantity">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="quantity">
               <div class="d-flex">
                 <p class="m-0 text-success">Quantidade:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.quantity%></p>
@@ -572,33 +573,33 @@
             </div>
           </div>
           <div class="w-100" data-column="description">
-              <div class="d-flex">
-                <p class="m-0 text-success">descrição:</p>
-                <p class="ms-2 mb-0 field-value"><%= @advertisable.description %></p>
-              </div>
-              <div class="d-flex">
-                <label htmlFor="accept description" className="me-2 text-success">
-                  <input
-                    type="checkbox"
-                    value="<%= @advertisable.description %>"
-                    name="accept description"
-                  /><i class="fas fa-check ms-2"></i>
-                </label>
-                <label htmlFor="revisar descrição" className=" text-success">
-                  <input
-                    class="ms-3"
-                    type="checkbox"
-                    value="<%= @advertisable.description %>"
-                    name="revisar descrição"
-                  /><i class="fas fa-times text-danger ms-2"></i>
-                </label>
-              </div>
+            <div class="d-flex">
+              <p class="m-0 text-success">descrição:</p>
+              <p class="ms-2 mb-0 field-value"><%= @advertisable.description %></p>
             </div>
+            <div class="d-flex">
+              <label htmlFor="accept description" className="me-2 text-success">
+                <input
+                  type="checkbox"
+                  value="<%= @advertisable.description %>"
+                  name="accept description"
+                /><i class="fas fa-check ms-2"></i>
+              </label>
+              <label htmlFor="revisar descrição" className=" text-success">
+                <input
+                  class="ms-3"
+                  type="checkbox"
+                  value="<%= @advertisable.description %>"
+                  name="revisar descrição"
+                /><i class="fas fa-times text-danger ms-2"></i>
+              </label>
+            </div>
+          </div>
 
 
           <h4 class="text-center text-white my-3">Quadro</h4>
-          <div class="d-flex">
-            <div class="w-50" data-column="frame_brand">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="frame_brand">
               <div class="d-flex">
                 <p class="m-0 text-success">Marca:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.frame_brand %></p>
@@ -621,7 +622,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="frame_size">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="frame_size">
               <div class="d-flex">
                 <p class="m-0 text-success">Tamanho:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.frame_size %></p>
@@ -644,7 +645,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="frame_material">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="frame_material">
               <div class="d-flex">
                 <p class="m-0 text-success">Material:</p>
                 <p class="ms-2 mb-0 field-value"><%=  @advertisable.material_display %></p>
@@ -671,8 +672,8 @@
 
 
           <h4 class="text-center text-white my-3">Transmissão</h4>
-          <div class="d-flex">
-            <div class="w-50" data-column="crankset">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="crankset">
               <div class="d-flex">
                 <p class="m-0 text-success">Pedivela:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.crankset %></p>
@@ -695,7 +696,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="chain ">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="chain ">
               <div class="d-flex">
                 <p class="m-0 text-success">Corrente:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.chain %></p>
@@ -720,8 +721,8 @@
             </div>
           </div>
           <p class="text-center text-white my-1">Dianteira</p>
-          <div class="d-flex">
-            <div class="w-50" data-column="number_of_front_gears">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="number_of_front_gears">
               <div class="d-flex">
                 <p class="m-0 text-success">Nº Marchas:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.number_of_front_gears %></p>
@@ -744,7 +745,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="front_derailleur_model ">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="front_derailleur_model ">
               <div class="d-flex">
                 <p class="m-0 text-success">Modelo:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.front_derailleur_model %></p>
@@ -769,8 +770,8 @@
             </div>
           </div>
           <p class="text-center text-white my-1">Traseira</p>
-          <div class="d-flex">
-            <div class="w-50" data-column="number_of_rear_gears">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="number_of_rear_gears">
               <div class="d-flex">
                 <p class="m-0 text-success">Nº Marchas:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.number_of_rear_gears %></p>
@@ -793,7 +794,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="rear_derailleur_model ">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="rear_derailleur_model ">
               <div class="d-flex">
                 <p class="m-0 text-success">Modelo:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_derailleur_model %></p>
@@ -819,7 +820,7 @@
           </div>
           <% if @advertisable.category.name == "road" %>
             <h4 class="text-center text-white my-3">Garfo</h4>
-            <div class="d-flex">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
               <div class="w-100" data-column="suspension_type">
                 <div class="d-flex">
                   <p class="m-0 text-success">Material:</p>
@@ -847,7 +848,7 @@
           <% end %>
           <% if @advertisable.category.name != "road" %>
             <h4 class="text-center text-white my-3">Suspensão</h4>
-            <div class="d-flex">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
               <div class="w-100" data-column="suspension_type">
                 <div class="d-flex">
                   <p class="m-0 text-success">Tipo:</p>
@@ -873,8 +874,8 @@
               </div>
             </div>
             <p class="text-center text-white my-1">Dianteira</p>
-            <div class="d-flex">
-              <div class="w-50" data-column="front_suspension_travel">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="front_suspension_travel">
                 <div class="d-flex">
                   <p class="m-0 text-success">Curso:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.front_suspension_travel %></p>
@@ -897,7 +898,7 @@
                   </label>
                 </div>
               </div>
-              <div class="w-50" data-column="front_suspension_model">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="front_suspension_model">
                 <div class="d-flex">
                   <p class="m-0 text-success">Modelo:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.front_suspension_model %></p>
@@ -922,8 +923,8 @@
               </div>
             </div>
             <p class="text-center text-white my-1">Traseira</p>
-            <div class="d-flex">
-              <div class="w-50" data-column="rear_suspension_travel">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="rear_suspension_travel">
                 <div class="d-flex">
                   <p class="m-0 text-success">Curso:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_suspension_travel %></p>
@@ -946,7 +947,7 @@
                   </label>
                 </div>
               </div>
-              <div class="w-50" data-column="rear_suspension_model">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="rear_suspension_model">
                 <div class="d-flex">
                   <p class="m-0 text-success">Modelo:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_suspension_model %></p>
@@ -974,7 +975,7 @@
 
 
           <h4 class="text-center text-white my-3">Rodas</h4>
-          <div class="d-flex">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
             <div class="w-100" data-column="rim_size">
               <div class="d-flex">
                 <p class="m-0 text-success">Tamanho:</p>
@@ -1000,8 +1001,8 @@
             </div>
           </div>
           <p class="text-center text-white my-1">Dianteira</p>
-          <div class="d-flex">
-            <div class="w-50" data-column="front_rim_model">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="front_rim_model">
               <div class="d-flex">
                 <p class="m-0 text-success">Aro:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.front_rim_model %></p>
@@ -1024,7 +1025,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="front_hub">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="front_hub">
               <div class="d-flex">
                 <p class="m-0 text-success">Cubo:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.front_hub %></p>
@@ -1047,7 +1048,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="front_tyre">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="front_tyre">
               <div class="d-flex">
                 <p class="m-0 text-success">Pneu:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.front_tyre %></p>
@@ -1072,8 +1073,8 @@
             </div>
           </div>
           <p class="text-center text-white my-1">Traseira</p>
-          <div class="d-flex">
-            <div class="w-50" data-column="rear_rim_model">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="rear_rim_model">
               <div class="d-flex">
                 <p class="m-0 text-success">Aro:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_rim_model %></p>
@@ -1096,7 +1097,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="rear_hub">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="rear_hub">
               <div class="d-flex">
                 <p class="m-0 text-success">Cubo:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_hub %></p>
@@ -1119,7 +1120,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="rear_tyre">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="rear_tyre">
               <div class="d-flex">
                 <p class="m-0 text-success">Pneu:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.rear_tyre %></p>
@@ -1145,8 +1146,8 @@
           </div>
 
           <h4 class="text-center text-white my-3">Freios</h4>
-          <div class="d-flex">
-            <div class="w-50" data-column="stem">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="stem">
               <div class="d-flex">
                 <p class="m-0 text-success">Tipo de Freio:</p>
                 <p class="ms-2 mb-0 field-value"><%= dictionary[@advertisable.brake_type] %></p>
@@ -1173,8 +1174,8 @@
 
 
           <h4 class="text-center text-white my-3">Canote</h4>
-          <div class="d-flex">
-            <div class="w-50" data-column="seat_post_type">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="seat_post_type">
               <div class="d-flex">
                 <p class="m-0 text-success">Tipo:</p>
                 <p class="ms-2 mb-0 field-value"><%= dictionary[@advertisable.seat_post_type] %></p>
@@ -1197,7 +1198,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="seat_post_travel">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="seat_post_travel">
               <div class="d-flex">
                 <p class="m-0 text-success">Curso:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.seat_post_travel %></p>
@@ -1220,7 +1221,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="seat_post_travel">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="seat_post_travel">
               <div class="d-flex">
                 <p class="m-0 text-success">Material:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.material_display %></p>
@@ -1243,7 +1244,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="seat_post_model">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="seat_post_model">
               <div class="d-flex">
                 <p class="m-0 text-success">Modelo:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.seat_post_model %></p>
@@ -1269,8 +1270,8 @@
           </div>
 
           <h4 class="text-center text-white my-3">Cockpit</h4>
-          <div class="d-flex">
-            <div class="w-50" data-column="stem">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="stem">
               <div class="d-flex">
                 <p class="m-0 text-success">Mesa:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.stem %></p>
@@ -1293,7 +1294,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="handlebar ">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="handlebar ">
               <div class="d-flex">
                 <p class="m-0 text-success">Guidão:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.handlebar %></p>
@@ -1319,8 +1320,8 @@
           </div>
 
           <h4 class="text-center text-white my-3">Acessórios</h4>
-          <div class="d-flex">
-            <div class="w-50" data-column="accessories">
+          <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="accessories">
               <div class="d-flex">
                 <p class="m-0 text-success">Acompanha:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.accessories.join(', ') %></p>
@@ -1343,7 +1344,7 @@
                 </label>
               </div>
             </div>
-            <div class="w-50" data-column="accessories_description ">
+            <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="accessories_description ">
               <div class="d-flex">
                 <p class="m-0 text-success">Descrição:</p>
                 <p class="ms-2 mb-0 field-value"><%= @advertisable.accessories_description %></p>
@@ -1370,8 +1371,8 @@
 
           <% if @advertisable.bike_type == "e-bike" %>
             <h4 class="text-center text-white my-3">Elétrica</h4>
-            <div class="d-flex">
-              <div class="w-50" data-column="battery">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="battery">
                 <div class="d-flex">
                   <p class="m-0 text-success">Bateria:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.battery %></p>
@@ -1394,7 +1395,7 @@
                 </label>
               </div>
               </div>
-              <div class="w-50" data-column="battery_cycles ">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="battery_cycles ">
                 <div class="d-flex">
                   <p class="m-0 text-success">Ciclos:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.battery_cycles %></p>
@@ -1418,8 +1419,8 @@
               </div>
               </div>
             </div>
-            <div class="d-flex">
-              <div class="w-50" data-column="mileage">
+            <div class="<%= mobile_device? ? "d-block" : "d-flex justify-content-between alig-middle" %>">
+              <div class="<%= mobile_device? ? "w-100" : "w-50" %>" data-column="mileage">
                 <div class="d-flex">
                   <p class="m-0 text-success">Km:</p>
                   <p class="ms-2 mb-0 field-value"><%= @advertisable.mileage %></p>

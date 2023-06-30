@@ -1,4 +1,4 @@
-<div class="p-5">
+<div class="<%= mobile_device? ? "p-1" : "p-5" %>">
   <div class="flex center between">
     <h1 class="title">Cupons</h1>
     <%= link_to new_admin_coupon_path do %>
@@ -9,20 +9,23 @@
   <div>
     <table class="table">
       <thead>
-        <th>Código</th>
-        <th>Valor</th>
-        <%# <th>Tipo</th> %>
-        <th>Data de expiração</th>
-        <th>Quantidade</th>
-        <th>Utilizados</th>
-        <th>Restantes</th>
-        <th>Editar</th>
+        <th class="">Código</th>
+        <th class="">Valor</th>
+        <th class="hide-on-mobile">Data de expiração</th>
+        <th class="hide-on-mobile">Quantidade</th>
+        <th class="hide-on-mobile">Utilizados</th>
+        <th class="">Restantes</th>
+        <th class="hide-on-mobile">Editar</th>
       </thead>
       <tbody>
         <% @coupons.each do |coupon| %>
           <tr >
-            <td class="align-middle">
-              <%= coupon.code %>
+            <td class="<%= mobile_device? ? "fs-16" : "" %> align-middle">
+              <% if mobile_device? %>
+                <%= coupon.code.truncate(5) %>
+              <% else %>
+                <%= coupon.code %>
+              <% end %>
             </td>
             <td class="align-middle">
               <% if coupon.kind == 'percentage' %>
@@ -32,13 +35,13 @@
               <% end %>
             </td>
 
-            <td class="align-middle">
+            <td class="align-middle hide-on-mobile">
               <%= coupon.valid_until.strftime("%d/%m/%Y") %>
             </td>
-            <td class="align-middle">
+            <td class="align-middle hide-on-mobile">
               <%= coupon.redemption_limit %>
             </td>
-            <td class="align-middle">
+            <td class="align-middle hide-on-mobile">
               <%= coupon.advertisements.count %>
             </td>
             <td class="align-middle">

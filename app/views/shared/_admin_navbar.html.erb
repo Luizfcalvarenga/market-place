@@ -15,9 +15,6 @@
             <%= link_to "Cupons", admin_coupons_path, class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Financeiro", "#", class: "nav-link mx-3" %>
-          </li>
-          <li class="nav-item active">
             <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
           </li>
         </div>
@@ -59,7 +56,7 @@
         <i class="text-success fas fa-bars"></i>
       </button>
     </div>
-    
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="flex center around mobile-menu">
         <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
@@ -70,7 +67,7 @@
             <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "FINANCEIRO", "#", class: "nav-link" %>
+            <%= link_to "CUPONS", admin_coupons_path, class: "nav-link" %>
           </li>
           <% if user_signed_in? %>
             <li class="nav-item active">
