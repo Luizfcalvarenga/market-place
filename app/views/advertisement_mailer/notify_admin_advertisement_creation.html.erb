@@ -36,15 +36,15 @@
     padding: 0 20px;
   }
   p {
-    color: white;
+    color: gray;
   }
 
   .item-name, h2 {
-    color: #00c454;
+    color:gray;
   }
 
   .detail-info {
-    color: #00c454;
+    color:gray;
     font-size: 12px;
   }
 
@@ -136,7 +136,6 @@
     <p><strong class="item-name">Total:</strong> <%= number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
     <p><strong class="item-name">Categoria do produto:</strong> <%= @advertisement.advertisable_display %></p>
     <p><strong class="item-name">Status:</strong> <%= @advertisement.status_display %></p>
-
     <hr class="footer-line">
     <div class="footer">
 

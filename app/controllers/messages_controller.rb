@@ -1,6 +1,12 @@
 class MessagesController < ApplicationController
 
   def create
+    if  msg_params[:content].blank?
+      flash[:alert] = "Mensagem não pode ser vazia"
+      skip_authorization
+
+      return
+    end
     @message = current_user.messages.create(
       content: msg_params[:content],
       chat_id: params[:chat_id],

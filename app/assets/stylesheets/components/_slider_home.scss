@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$slider-width: 400px;
+$slider-height: 230px;
+$slide-card-width: 200px;
+
+* { box-sizing: border-box; }
+
+
+
+.slider-container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+.slider {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  width: $slider-width;
+  height: $slider-height;
+  box-shadow: 3px 3px 10px rgba(0,0,0,.2);
+}
+
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  width: $slider-width;
+  height: $slider-height;
+  z-index: 1;
+}
+
+.slides {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: -$slider-width;
+  width: 10000px;
+}
+
+.slides.shifting {
+  transition: left .2s ease-out;
+}
+
+.slide-card {
+  width: $slide-card-width;
+  height: $slider-height;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 1s;
+  position: relative;
+  background: transparent;
+  border-radius: 40px;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.slider.loaded {
+  .slide-card:nth-child(8),
+
+  .slide-card:nth-child(7) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("clothes-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .slide-card:nth-child(1),
+
+  .slide-card:nth-child(6) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("components-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .slide-card:nth-child(3) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("road-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .slide-card:nth-child(4) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("e-bike-bckgr.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .slide-card:nth-child(5) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("accessories-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .slide-card:nth-child(2) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("mtb-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+.control {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50px;
+  margin-top: -20px;
+  z-index: 2;
+}
+
+.prev,
+.next {
+  background-size: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.prev {
+  background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronLeft-512.png);
+  left: -5px;
+  filter: invert(52%) sepia(39%) saturate(1710%) hue-rotate(99deg) brightness(94%) contrast(101%);
+}
+
+.next {
+  background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronRight-512.png);
+  right: -5px;
+  filter: invert(52%) sepia(39%) saturate(1710%) hue-rotate(99deg) brightness(94%) contrast(101%);
+}
+
+.prev:active,
+.next:active {
+  transform: scale(.8);
+}
+
+.slide-button {
+  background-color: transparent !important;
+  border: none !important;
+  color: whitesmoke !important;
+  font-size: 28px !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

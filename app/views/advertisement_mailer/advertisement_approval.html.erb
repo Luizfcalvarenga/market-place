@@ -35,16 +35,16 @@
   .mail-content {
     padding: 0 20px;
   }
-  p {
+  p, h2 {
+    color: gray;
+  }
+
+  .item-name {
     color: white;
   }
 
-  .item-name, h2 {
-    color: #00c454;
-  }
-
   .detail-info {
-    color: #00c454;
+    color: white;
     font-size: 12px;
   }
 
@@ -151,11 +151,11 @@
     <div class="invoice-link">
     </div>
     <h2>Detalhes do seu anúncio:</h2>
-    <p><strong class="item-name">Anúncio:</strong> #<%= @advertisement.id %></p>
-    <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
-    <p><strong class="item-name">Categoria do produto:</strong> <%= @advertisement.advertisable_display %></p>
-    <p><strong class="item-name">Status:</strong> <%= @advertisement.status_display %></p>
-    <p>Dúvidas? Entre em contato com através do email <strong  class="item-name">atendimento@nuflow.com.br</strong></p>
+    <p><strong class="">Anúncio:</strong> #<%= @advertisement.id %></p>
+    <p><strong class="">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
+    <p><strong class="">Categoria do produto:</strong> <%= @advertisement.advertisable_display %></p>
+    <p><strong class="">Status:</strong> <%= @advertisement.status_display %></p>
+    <h6>Dúvidas? Entre em contato com através do email <strong  class="item-name">atendimento@nuflow.com.br</strong></h6>
     <hr class="footer-line">
     <div class="footer">
       <%= image_tag attachments["white_logo.png"].url, class: "footer-brand"%>

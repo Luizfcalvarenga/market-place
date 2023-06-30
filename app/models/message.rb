@@ -4,6 +4,7 @@ class Message < ApplicationRecord
   before_create :confirm_participant
   has_many_attached :attachments, dependent: :destroy
 
+  # validates :content,  presence: true
   after_create_commit do
     notify_recipients
     update_parent_chat

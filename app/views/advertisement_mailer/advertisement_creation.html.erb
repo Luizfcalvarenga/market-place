@@ -36,15 +36,15 @@
     padding: 0 20px;
   }
   p {
-    color: white;
+    color: gray;
   }
 
   .item-name, h2 {
-    color: #00c454;
+    color: gray;
   }
 
   .detail-info {
-    color: #00c454;
+    color: gray;
     font-size: 12px;
   }
 
@@ -119,6 +119,10 @@
     text-align: center;
     margin: 0 !important;
   }
+
+  .text-center {
+    text-align: center;
+  }
 </style>
 
 <body>
@@ -127,12 +131,12 @@
   </div>
   <div class="mail-content">
     <% if @advertisement.user.full_name %>
-    <h2>Olá <%= @advertisement.user.full_name %>,</h2>
+    <h2 class="text-center">Olá <%= @advertisement.user.full_name %>,</h2>
     <% else %>
-    <h2>Olá,</h2>
+    <h2 class="text-center">Olá,</h2>
     <% end %>
-    <p class="item-name">Você está muito próximo de anunciar seu produto para milhares de ciclistas</p>
-    <p class="item-name">Para publicar seu anúncio, basta efetuar o pagamento clicando no link abaixo.</p>
+    <p class="text-center">Você está muito próximo de anunciar seu produto para milhares de ciclistas</p>
+    <p class="text-center">Para publicar seu anúncio, basta efetuar o pagamento clicando no link abaixo.</p>
 
     <div class="invoice-link">
       <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>

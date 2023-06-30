@@ -20,9 +20,9 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-  # validates :cep, :document_number, :phone_number,  presence: true
-  # validate :cpf_must_be_valid
-  # validate :cep_must_be_valid
+  validates :cep, :document_number, :phone_number,  presence: true
+  validate :cpf_must_be_valid
+  validate :cep_must_be_valid
 
   enum status: %i[offline away online]
 
@@ -112,5 +112,15 @@ class User < ApplicationRecord
       filename: 'avatar-shop.png',
       content_type: 'image/png'
     )
+  end
+
+  def self.add_default_photo_to_all
+    all.each do |user|
+      user.photo.attach(
+        io: File.open(Rails.root.join('app', 'assets', 'images', 'avatar-shop.png')),
+        filename: 'avatar-shop.png',
+        content_type: 'image/png'
+      )
+    end
   end
 end

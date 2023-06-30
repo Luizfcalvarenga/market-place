@@ -6,9 +6,9 @@ class ChatsController < ApplicationController
   def index
     @chat = Chat.new
     @chats = policy_scope(Chat)
-    chat_ids = Participant.where(user_id: current_user.id).pluck(:chat_id)
+    chat_ids = Participant.where(user_id: current_user.id).pluck(:chat_id).uniq
     user_ids = @chats.where(id: chat_ids).map {|chat| chat.participants.where.not(user_id:  current_user.id)}.flatten.pluck(:user_id)
-    user_ids.uniq!
+    user_ids.uniq
     @users = User.where(id: user_ids)
     @current_user_id = current_user.id
     current_user.update(current_chat: nil)

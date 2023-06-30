@@ -15,9 +15,6 @@
             <%= link_to "Cupons", admin_coupons_path, class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Financeiro", "#", class: "nav-link mx-3" %>
-          </li>
-          <li class="nav-item active">
             <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
           </li>
         </div>
@@ -54,17 +51,12 @@
       <%= link_to root_path, class: "nav-link" do %>
         <%= image_tag "white_logo.png", class: "navbar-brand" %>
       <% end %>
-      <%= link_to "#" do %>
-        <i class="fas fa-shopping-cart text-success me-4"></i><span  class="cart-counter mb-3"><%= rand(1..5) %></span></i>
-      <% end %>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="text-success fas fa-bars"></i>
       </button>
     </div>
-    <div class="input-group input-group-navbar nav-form">
-      <input type="text" class="form-control nav-form" placeholder="O que você procura" aria-label="Recipient's username with two button addons">
-      <button class="btn search-btn" type="button"><i class="fas fa-search form-icon"></i></button>
-    </div>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="flex center around mobile-menu">
         <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
@@ -75,7 +67,7 @@
             <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "FINANCEIRO", "#", class: "nav-link" %>
+            <%= link_to "CUPONS", admin_coupons_path, class: "nav-link" %>
           </li>
           <% if user_signed_in? %>
             <li class="nav-item active">

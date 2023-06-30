@@ -37,15 +37,15 @@
   }
 
   p {
-    color: white;
+    color: gray;
   }
 
   .item-name, h2 {
-    color: #00c454;
+    color: gray;
   }
 
   .detail-info {
-    color: #00c454;
+    color: gray;
     font-size: 12px;
   }
 
@@ -141,11 +141,11 @@
   </div>
   <div class="mail-content">
     <% if @advertisement.user.full_name %>
-    <h2 class="text-center">Olá <%= @advertisement.user.full_name %></h2>
+    <h2 class="item-name">Olá <%= @advertisement.user.full_name %></h2>
     <% else %>
-    <h2 class="text-center">Olá</h2>
+    <h2 class="item-name">Olá</h2>
     <% end %>
-    <p class="text-center">Seu anúncio foi analisado pela nossa equipe e é necessário revisá-lo para se adequar às nossas diretrizes de segurança e/ou qualidade. Isso aumentará a qualidade do seu anúncio e as chances de vender o seu produto! </p>
+    <p class="item-name">Seu anúncio foi analisado pela nossa equipe e é necessário revisá-lo para se adequar às nossas diretrizes de segurança e/ou qualidade. Isso aumentará a qualidade do seu anúncio e as chances de vender o seu produto! </p>
     <p>Revise os campos abaixo:</p>
     <div class="review-result">
       <div class="rejected-attrs">
@@ -155,7 +155,7 @@
       </div>
       <div class="user-infos">
         <% @values_to_review.each do |value | %>
-          <p class="info-review"><%= value %></p>
+          <p class=""><%= value %></p>
         <% end %>
       </div>
     </div>
@@ -177,7 +177,7 @@
     <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
     <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_display %></p>
     <p><strong class="item-name">Status:</strong> <%= @advertisement.status_display %></p>
-    <p>Dúvidas? Entre em contato através do email <strong>atendimento@nuflow.com.br</strong></p>
+    <h6>Dúvidas? Entre em contato através do email <strong>atendimento@nuflow.com.br</strong></h6>
     <hr class="footer-line">
     <div class="footer">
 

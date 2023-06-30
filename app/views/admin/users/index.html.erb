@@ -1,4 +1,4 @@
-<div class="p-5">
+<div class="<%= mobile_device? ? "p-1" : "p-5" %>">
   <div class="flex center between">
     <h1 class="title">Usuários</h1>
     <%= link_to new_admin_user_path do %>
@@ -20,10 +20,10 @@
       <tr>
         <th scope="col" class="w-25">Email</th>
         <th scope="col" class="w-25">Nome completo</th>
-        <th scope="col">CPF</th>
-        <th scope="col">Telefone</th>
-        <th scope="col">CEP</th>
-        <th scope="col">Criado em</th>
+        <th scope="col" class="hide-on-mobile">CPF</th>
+        <th scope="col" class="hide-on-mobile">Telefone</th>
+        <th scope="col" class="hide-on-mobile">CEP</th>
+        <th scope="col" class="hide-on-mobile">Criado em</th>
 
         <th scope="col">Acesso</th>
       </tr>
@@ -31,12 +31,19 @@
     <tbody>
       <% @users.each do |user| %>
       <tr>
-        <td class="align-middle" data-label="Email"><%= user.email %></td>
+        <td class="align-middle" data-label="Email">
+
+          <% if mobile_device? %>
+            <%= user.email.truncate(10) %>
+          <% else %>
+            <%= user.email %>
+          <% end %>
+        </td>
         <td class="align-middle" data-label="Nome completo"><%= user.full_name %></td>
-        <td class="align-middle" data-label="CPF"><%= user.document_number %></td>
-        <td class="align-middle" data-label="CPF"><%= user.phone_number %></td>
-        <td class="align-middle" data-label="CEP"><%= user.cep %></td>
-        <td class="align-middle" data-label="Criado em"><%= user.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
+        <td class="align-middle hide-on-mobile" data-label="CPF"><%= user.document_number %></td>
+        <td class="align-middle hide-on-mobile" data-label="CPF"><%= user.phone_number %></td>
+        <td class="align-middle hide-on-mobile" data-label="CEP"><%= user.cep %></td>
+        <td class="align-middle hide-on-mobile" data-label="Criado em"><%= user.created_at.strftime("%d/%m/%Y - %H:%M") %></td>
         <td class="align-middle" data-label="Acesso"><%= user.access %></td>
       </tr>
       <% end %>

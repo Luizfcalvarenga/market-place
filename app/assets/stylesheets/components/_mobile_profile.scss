@@ -60,19 +60,64 @@
   }
 }
 
-.modal-dialog {
-  width: 30% !important;
+.modal-profile {
+  margin-top: 7rem;
+  border-radius: 3px;
+  margin-left: auto;
+  .modal-dialog {
+    max-height: 100%;
+    width: 30% !important;
+  }
+
+  .modal-content {
+    max-height: calc(100vh - (100px + 65px));
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .modal-content::-webkit-scrollbar {
+    width: 0rem; /* Adjust the width as per your design */
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    background-color: transparent; /* Adjust the background color as per your design */
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Adjust the color as per your design */
+  }
 }
 
 
 
 @media screen and (max-width: 768px) {
-  .modal-dialog {
-    width: 100% !important;
-    overflow-y: scroll;
-  }
-  
-  .modal {
-    margin-left: 0;
+  .modal-profile {
+    margin-top: 7rem;
+    border-radius: 3px;
+    margin: 80px auto;
+    .modal-dialog {
+      max-height: 100%;
+      width: 95% !important;
+    }
+    .modal-content {
+      height: calc(100vh - (100px + 65px));
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+
+    }
+
+    .modal-content::-webkit-scrollbar {
+      width: 0rem; /* Adjust the width as per your design */
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background-color: transparent; /* Adjust the background color as per your design */
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background-color: transparent; /* Adjust the color as per your design */
+    }
   }
 }

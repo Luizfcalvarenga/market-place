@@ -1,12 +1,11 @@
-<div class="p-5">
-  <div class="flex center around">
+<div class="<%= mobile_device? ? "p-1" : "p-5" %>">
+  <div class="<%= mobile_device? ? "d-block" : "flex center around" %>">
     <h1 class="title">Anúncios</h1>
 
     <%= simple_form_for(:advertisements, url: admin_advertisements_url, method: :get) do |f| %>
-      <div class="flex justify-content-end align-items-center w-100">
+      <div class="<%= mobile_device? ? "flex justify-content-center" : "flex justify-content-end align-items-center" %>">
         <div class="f-10">
-
-          <select name="status" id="" class="me-3">
+          <select name="status" id="" class="<%= mobile_device? ? "" : "me-3" %>">
             <option value=""></option>
             <option value="pending">Pendente</option>
             <option value="paid">Pago</option>
@@ -17,7 +16,7 @@
         </div>
         <div class="f-10"><%= select_month(@reference_date, {field_name: "month"}, {class: "w-90"}) %></div>
         <div class="f-10"><%= select_year(@reference_date, {start_year: 2020, end_year: Time.current.year, field_name: "year"}, {class: "w-90"}) %></div>
-        <%= f.submit "Trocar", class: "btn btn-success f-10" %>
+        <%= f.submit "Trocar", class: "#{mobile_device? ? '' : 'btn btn-success f-10'}" %>
       </div>
     <% end %>
   </div>
@@ -47,13 +46,13 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col" class="w-15">Usuário</th>
+        <th scope="col" class="w-15 hide-on-mobile">Usuário</th>
         <th scope="col" class="w-5">Anunciado</th>
-        <th scope="col">Pago em</th>
-        <th scope="col">Status</th>
-        <th scope="col">Valor</th>
-        <th scope="col">Com coupon</th>
-        <th scope="col">Criado em</th>
+        <th scope="col" class="hide-on-mobile">Pago em</th>
+        <th scope="col" class="hide-on-mobile">Status</th>
+        <th scope="col" class="hide-on-mobile">Valor</th>
+        <th scope="col" class="hide-on-mobile">Com coupon</th>
+        <th scope="col" class="hide-on-mobile">Criado em</th>
         <th scope="col">Ações</th>
       </tr>
     </thead>
@@ -61,34 +60,34 @@
     <tbody class="mt-3">
       <% @advertisements.each do |advertisement| %>
         <tr>
-          <td class="align-middle" data-label="Usuário"><%= advertisement.user.email %></td>
+          <td class="align-middle hide-on-mobile" data-label="Usuário"><%= advertisement.user.email %></td>
           <td class="align-middle" data-label="Status"><%= advertisement.advertisable_display %></td>
-          <td class="align-middle" data-label="Gerado em"><%= advertisement.invoice_paid_at&.strftime("%d/%m/%Y - %H:%M") || "-" %></td>
-          <td class="align-middle" data-label="Status"><%= advertisement.status_display %></td>
-          <td class="align-middle" data-label="Valor"><%= number_to_currency(advertisement.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></td>
+          <td class="align-middle hide-on-mobile" data-label="Gerado em"><%= advertisement.invoice_paid_at&.strftime("%d/%m/%Y - %H:%M") || "-" %></td>
+          <td class="align-middle hide-on-mobile" data-label="Status"><%= advertisement.status_display %></td>
+          <td class="align-middle hide-on-mobile" data-label="Valor"><%= number_to_currency(advertisement.price_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></td>
 
-          <td class="align-middle" data-label="Valor"><%= number_to_currency(advertisement.final_price_with_coupon_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></td>
+          <td class="align-middle hide-on-mobile" data-label="Valor"><%= number_to_currency(advertisement.final_price_with_coupon_in_cents.to_f/100, unit: "R$", separator: ",", delimiter: ".") %></td>
 
-          <td class="align-middle" data-label="Criado em"><%= advertisement.created_at.strftime("%d/%m/%Y")  %></td>
+          <td class="align-middle hide-on-mobile" data-label="Criado em"><%= advertisement.created_at.strftime("%d/%m/%Y")  %></td>
           <td class="align-middle" data-label="Ações">
             <div class="d-flex  ms-3">
               <% if advertisement.status === "paid" || advertisement.status === "waiting_review" %>
-                <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2 align-middle" do %>
-                  <i class="fas fa-search mt-1"></i>
+                <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2 align-middle #{mobile_device? ? 'fs-16' : ''}" do %>
+                  <i class="fas fa-search mt-1 <%= mobile_device? ? "fs-16" : "" %>"></i>
                   <span class="ms-2">Revisar</span>
                 <% end %>
               <% elsif  advertisement.status === "pending" %>
-                <i class="fas fa-clock mt-1 text-danger align-middle" ></i>
-                <span class="topic-cards-index-media ms-3 text-danger align-middle">Aguardando pagamento</span>
+                <i class="fas fa-clock mt-1 text-danger align-middle <%= mobile_device? ? "fs-16" : "" %>" ></i>
+                <span class="topic-cards-index-media ms-3 text-danger align-middle <%= mobile_device? ? "fs-16" : "" %>">Ainda não pago</span>
               <% elsif  advertisement.status === "update_requested" %>
-                <i class="fas fa-clock mt-1 text-warning align-middle" ></i>
-                <span class="topic-cards-index-media ms-3 text-warning align-middle ">Aguardando edição</span>
+                <i class="fas fa-clock mt-1 text-warning align-middle <%= mobile_device? ? "fs-16" : "" %>" ></i>
+                <span class="topic-cards-index-media ms-3 text-warning align-middle <%= mobile_device? ? "fs-16" : "" %>">Aguardando edição</span>
               <% elsif  advertisement.status === "removed" %>
-                <i class="fas fa-minus-circle mt-1 text-warning align-middle" ></i>
-                <span class="topic-cards-index-media ms-3 text-warning align-middle ">Produto removido</span>
+                <i class="fas fa-minus-circle mt-1 text-warning align-middle <%= mobile_device? ? "fs-16" : "" %>" ></i>
+                <span class="topic-cards-index-media ms-3 text-warning align-middle <%= mobile_device? ? "fs-16" : "" %>">Produto removido</span>
               <% else %>
-                <%= link_to admin_advertisement_path(advertisement.id), class: "view-btn mb-2 align-middle" do %>
-                  <i class="fas fa-check mt-1"></i>
+                <%= link_to admin_advertisement_path(advertisement.id), class: "view-btn mb-2 align-middle #{mobile_device? ? 'fs-16' : ''}" do %>
+                  <i class="fas fa-check mt-1 <%= mobile_device? ? "fs-16" : "" %>"></i>
                   <span class="ms-2">Publicado</span>
                 <% end %>
               <% end %>
