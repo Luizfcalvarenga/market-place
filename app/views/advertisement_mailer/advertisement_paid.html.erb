@@ -36,15 +36,15 @@
     padding: 0 20px;
   }
   p {
-    color: white;
+    color: gray;
   }
 
   .item-name, h2 {
-    color: #00c454;
+    color: gray;
   }
 
   .detail-info {
-    color: #00c454;
+    color: gray;
     font-size: 12px;
   }
 
@@ -119,6 +119,11 @@
     text-align: center;
     margin: 0 !important;
   }
+
+  .text-center {
+    text-align: center;
+  }
+
 </style>
 
 <body>
@@ -127,14 +132,14 @@
   </div>
   <div class="mail-content">
     <% if @advertisement.user.full_name %>
-    <h2>Olá <%= @advertisement.user.full_name %>,</h2>
+    <h2 class="text-center">Olá <%= @advertisement.user.full_name %>,</h2>
     <% else %>
-    <h2>Olá,</h2>
+    <h2 class="text-center">Olá,</h2>
     <% end %>
-    <p class="item-name">Recebemos o seu anúncio e seu pagamento já foi confirmado!</p>
-    <p class="item-name">Seu anúncio será analisado pela nossa equipe e se estiver tudo certo será publicado em nossa plataforma.</p>
-    <p class="item-name">Você receberá a confirmação de publicação por e-mail, assim como qualquer necessidade de edição do seu anúncio.</p>
-    <p class="item-name">O prazo para revisão é de 1 dia útil.</p>
+    <p class="text-center">Recebemos o seu anúncio e seu pagamento já foi confirmado!</p>
+    <p class="text-center">Seu anúncio será analisado pela nossa equipe e se estiver tudo certo será publicado em nossa plataforma.</p>
+    <p class="text-center">Você receberá a confirmação de publicação por e-mail, assim como qualquer necessidade de edição do seu anúncio.</p>
+    <p class="text-center">O prazo para revisão é de 1 dia útil.</p>
 
     <h2>Detalhes do seu anúncio:</h2>
     <p><strong class="item-name">Anúncio:</strong> #<%= @advertisement.id %></p>
