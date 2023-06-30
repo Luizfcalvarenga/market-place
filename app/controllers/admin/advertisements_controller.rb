@@ -10,7 +10,10 @@ module Admin
         @advertisements = Advertisement.where("created_at > ? and created_at < ?", min_date, max_date).order(created_at: :desc)
       end
       @products = @advertisements.map { |advertisement| advertisement.advertisable}
-      @net_total_sales = @advertisements.map(&:price_in_cents).compact.sum
+      @net_total_sales = @advertisements.map do |advertisement|
+        coupon_price = advertisement.final_price_with_coupon_in_cents
+        coupon_price.present? ? coupon_price : advertisement.price_in_cents
+      end.compact.sum
     end
 
     def show
