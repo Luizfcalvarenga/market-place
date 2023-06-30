@@ -178,18 +178,30 @@ export function BikeForm(props) {
     if (props.bikeId) {
       fetchBike();
       setBikeId(props.bikeId);
-      setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
-      //jeito por enquanto pra setar modalidades, todas de uma vez
 
+      if (categories.length > 1) {
+        setModalities(categories.find(element => element.id === props.categoryId).modalities)
+      }
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (category && !props.bikeId) {
+  //     setModalities(categories.find(element => element.name === category).modalities)
+  //     setCategoryId(categories.find(element => element.name === category).modalities);
+  //   }
+  // });
+
   useEffect(() => {
-    if (category && !props.bikeId) {
-      setModalities(categories.find(element => element.name === category).modalities)
-      setCategoryId(categories.find(element => element.name === category).id);
+    if (category && category !== "" && categories.length > 0 && !props.bikeId) {
+      const selectedCategory = categories.find(element => element.name === category);
+      if (selectedCategory) {
+        setModalities(selectedCategory.modalities);
+        setCategoryId(selectedCategory.modalities);
+      }
     }
-  });
+  }, [category, categories, props.bikeId]);
+
 
   useEffect(() => {
     if (category === "urban") {
