@@ -807,7 +807,7 @@ export function Products(props) {
           {products.map((product, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} mb-3`} product={product} key={product.id} id="mobile">
-                <a href={"products/" + product.id} className="remove-link" target="_blank">
+                <a href={"products/" + product.id} className="" target="_blank">
                   <div className="cards-products">
                     {
                       product.verified &&

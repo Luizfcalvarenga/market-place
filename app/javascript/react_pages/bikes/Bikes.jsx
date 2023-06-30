@@ -1676,7 +1676,7 @@ export function Bikes(props) {
           {bikes && bikes.map((bike, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
-                <a href={"bikes/" + bike.id + "?bike=" + bike.frame_brand + bike.model} className="remove-link" target="_blank">
+                <a href={"bikes/" + bike.id + "?bike=" + bike.frame_brand + bike.model} className="" target="_blank">
                   <div className="cards-bikes">
                     {
                       bike.verified &&

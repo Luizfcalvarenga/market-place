@@ -86,13 +86,14 @@
 
 .modal-photo {
   margin-top: 100px !important;
+  margin-left: 35%;
+  .modal-dialog {
+    max-width: 100vw !important;
+    max-height: calc(100vh - 100px) !important;
+    margin: 0 !important;
+  }
 }
 
-.modal-dialog{
-  max-width: 100vw !important;
-  max-height: calc(100vh - 100px) !important;
-  margin: 0 !important;
-}
 
 
 @media (max-width: 768px) {
@@ -131,4 +132,9 @@
   .bike-sections-show::-webkit-scrollbar {
     display: none;
   }
+
+  .modal-photo {
+    margin: 80px auto;
+  }
+
 }

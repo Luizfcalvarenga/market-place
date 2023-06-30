@@ -160,7 +160,7 @@ export function Bike(props) {
                       <img key={index} id={index} src={photo} className="d-block w-100 img-card-show" alt="" />
                     </button>
                   </div>
-                  <div className="modal fade  modal-photo" id={`exampleModal${index}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div className="modal fade modal-photo" id={`exampleModal${index}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
                       <img id={index} src={photo} className="photo-modal" alt="" />
                     </div>
