@@ -40,7 +40,8 @@ $slide-card-width: 200px;
 }
 
 .slides.shifting {
-  transition: left .2s ease-out;
+  // transition: left .2s ease-out;
+  transition: left .5s ease-in-out;
 }
 
 .slide-card {
@@ -59,7 +60,11 @@ $slide-card-width: 200px;
 }
 
 .slider.loaded {
-  .slide-card:nth-child(8),
+  .slide-card:nth-child(8) {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("mtb-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
 
   .slide-card:nth-child(7) {
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url("clothes-bg.jpg");
@@ -135,6 +140,6 @@ $slide-card-width: 200px;
   background-color: transparent !important;
   border: none !important;
   color: whitesmoke !important;
-  font-size: 28px !important;
+  font-size: 20px !important;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
