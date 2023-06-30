@@ -16,21 +16,41 @@
     </div>
   </div>
 </div>
-<div id="slider" class="slider <%= mobile_device? ? "" : "d-none" %>">
-  <div class="wrapper">
-    <div id="slides" class="slides">
-      <span class="slide-card"><button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'mountain_bike') %>">Bikes MTB</button></span>
-      <span class="slide-card"><button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'road') %>">Bikes ROAD</button></span>
-      <span class="slide-card"><button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', bike_type: 'e-bike') %>">E-Bike</button></span>
-      <span class="slide-card"><button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_accessories: 'products_accessories:') %>">Acessórios</button></span>
-      <span class="slide-card"><button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_components: 'products_components') %>">Componentes</button></span>
-      <span class="slide-card"><button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_clothes: 'products_clothes') %>">Vestuário</button></span>
-    </div>
-  </div>
-  <a id="prev" class="control prev"></a>
-  <a id="next" class="control next"></a>
-</div>
 
+
+<swiper-container slides-per-view="2" speed="500" loop="true" css-mode="true">
+  <swiper-slide>
+    <div class="slide-card" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url('mtb-bg.jpg');">
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'mountain_bike') %>">Bikes MTB</button>
+    </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div class="slide-card" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url('road-bg.jpg');">
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'road') %>">Bikes ROAD</button>
+    </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div class="slide-card" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url('e-bike-bg.jpg');">
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', bike_type: 'e-bike') %>">E-Bike</button>
+    </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div class="slide-card" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url('accessories-bg.jpg');">
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_accessories: 'products_accessories:') %>">Acessórios</button>
+    </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div class="slide-card" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url('components-bg.jpg');">
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_components: 'products_components') %>">Componentes</button>
+    </div>
+  </swiper-slide>
+  <swiper-slide>
+    <div class="slide-card" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)), image-url('clothes-bg.jpg');">
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_clothes: 'products_clothes') %>">Vestuário</button>
+    </div>
+  </swiper-slide>
+
+</swiper-container>
 
 
 <div class="second-section-home mb-5 pb-5 <%= mobile_device? ? "d-none" : "" %>">
@@ -284,129 +304,23 @@
   <% end %>
 </div>
 
+
 <script>
-  var slider = document.getElementById('slider'),
-    sliderItems = document.getElementById('slides'),
-    prev = document.getElementById('prev'),
-    next = document.getElementById('next');
+  var swiper = new Swiper(".swiper-container", {
+    loopedSlides: 6,
+    loop: true,
+    slidesPerView: "auto",
+    freeMode: true,
+    mousewheel: {
+      releaseOnEdges: true,
+    },
+  });
 
-  function slide(wrapper, items, prev, next) {
-    var posX1 = 0,
-        posX2 = 0,
-        posInitial,
-        posFinal,
-        threshold = 100,
-        slides = items.getElementsByClassName('slide-card'),
-        slidesLength = slides.length,
-        // slideSize = items.getElementsByClassName('slide-card')[0].offsetWidth,
-        slideSize = 200,
-        firstSlide = slides[0],
-        lastSlide = slides[slidesLength - 1],
-        cloneFirst = firstSlide.cloneNode(true),
-        cloneLast = lastSlide.cloneNode(true),
-        index = 0,
-        allowShift = true;
+  var thumb = document.querySelectorAll(".thumbContainer");
 
-
-
-    items.appendChild(cloneFirst);
-    items.insertBefore(cloneLast, firstSlide);
-    wrapper.classList.add('loaded');
-
-    items.onmousedown = dragStart;
-
-    items.addEventListener('touchstart', dragStart);
-    items.addEventListener('touchend', dragEnd);
-    items.addEventListener('touchmove', dragAction);
-
-    prev.addEventListener('click', function () { shiftSlide(-1) });
-    next.addEventListener('click', function () { shiftSlide(1) });
-
-    items.addEventListener('transitionend', checkIndex);
-
-    function dragStart(e) {
-      e = e || window.event;
-      e.preventDefault();
-
-      if (e.target.classList.contains('slide-button')) {
-        var url = e.target.getAttribute('data-url');
-        window.location.href = url;
-        return;
-      }
-
-      posInitial = items.offsetLeft;
-
-      if (e.type == 'touchstart') {
-        posX1 = e.touches[0].clientX;
-      } else {
-        posX1 = e.clientX;
-        document.onmouseup = dragEnd;
-        document.onmousemove = dragAction;
-      }
-    }
-
-    function dragAction (e) {
-      e = e || window.event;
-
-      if (e.type == 'touchmove') {
-        posX2 = posX1 - e.touches[0].clientX;
-        posX1 = e.touches[0].clientX;
-      } else {
-        posX2 = posX1 - e.clientX;
-        posX1 = e.clientX;
-      }
-      items.style.left = (items.offsetLeft - posX2) + "px";
-    }
-
-    function dragEnd (e) {
-      posFinal = items.offsetLeft;
-      if (posFinal - posInitial < -threshold) {
-        shiftSlide(1, 'drag');
-      } else if (posFinal - posInitial > threshold) {
-        shiftSlide(-1, 'drag');
-      } else {
-        items.style.left = (posInitial) + "px";
-      }
-
-      document.onmouseup = null;
-      document.onmousemove = null;
-    }
-
-    function shiftSlide(dir, action) {
-      items.classList.add('shifting');
-
-      if (allowShift) {
-        if (!action) { posInitial = items.offsetLeft; }
-
-        if (dir == 1) {
-          items.style.left = (posInitial - slideSize) + "px";
-          index++;
-        } else if (dir == -1) {
-          items.style.left = (posInitial + slideSize) + "px";
-          index--;
-        }
-
-      };
-
-      allowShift = false;
-    }
-
-    function checkIndex (){
-      items.classList.remove('shifting');
-
-      if (index == -1) {
-        items.style.left = -(slidesLength * slideSize) + "px";
-        index = slidesLength - 1;
-      }
-
-      if (index == slidesLength) {
-        items.style.left = -(1 * slideSize) + "px";
-        index = 0;
-      }
-
-      allowShift = true;
-    }
-  }
-
-  slide(slider, sliderItems, prev, next);
+  thumb.forEach(function(image, index) {
+    var delay = index * 90;
+    image.classList.add("fadeInSlide");
+    image.style.animationDelay = delay + "ms";
+  });
 </script>
