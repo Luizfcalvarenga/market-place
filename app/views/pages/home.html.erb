@@ -55,8 +55,7 @@
       <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_clothes: 'products_clothes') %>">Vestuário</button>
     </div>
   </swiper-slide>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  
 </swiper-container>
 
 
@@ -313,34 +312,14 @@
 
 
 <script>
-  // var swiper = new Swiper(".swiper-container", {
-  //   loopedSlides: 6,
-  //   loop: true,
-  //   slidesPerView: "auto",
-  //   freeMode: true,
-  //   mousewheel: {
-  //     releaseOnEdges: true,
-  //   },
-  // });
-
-  // var thumb = document.querySelectorAll(".thumbContainer");
-
-  // thumb.forEach(function(image, index) {
-  //   var delay = index * 90;
-  //   image.classList.add("fadeInSlide");
-  //   image.style.animationDelay = delay + "ms";
-  // });
-
   var slideButtons = document.querySelectorAll('.slide-button');
 
-// Add click event listener to each button
   slideButtons.forEach(function(button) {
     button.addEventListener('click', function() {
-      // Get the URL from the data-url attribute
       var url = button.getAttribute('data-url');
 
-      // Open the URL in a new tab/window
       window.open(url, '_blank');
     });
   });
+
 </script>
