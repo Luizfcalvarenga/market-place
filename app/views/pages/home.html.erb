@@ -18,40 +18,40 @@
 </div>
 
 
-<swiper-container slides-per-view="2" speed="500" loop="true" css-mode="true" class="swiper-container">
+<swiper-container slides-per-view="2" speed="500" loop="true" css-mode="true" class="swiper-container <%= mobile_device? ? "" : "d-none" %>">
   <swiper-slide>
     <div class="slide-card">
-      <%= image_tag "mtb-bg.jpg", style: "width: 100%; height: 250px; object-fit: cover; object-position: center;" %>
+      <%= image_tag "mtb-bg.jpg", class: "slider-img" %>
       <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'mountain_bike') %>">Bikes MTB</button>
     </div>
   </swiper-slide>
   <swiper-slide>
     <div class="slide-card">
-      <%= image_tag "road-bg.jpg", style: "width: 100%; height: 250px; object-fit: cover; object-position: center;" %>
-      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'road') %>">Bikes ROAD</button>
+      <%= image_tag "road-bg.jpg", class: "slider-img" %>
+      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', categories: 'road') %>">Bikes Road</button>
     </div>
   </swiper-slide>
   <swiper-slide>
     <div class="slide-card">
-      <%= image_tag "e-bike-bg.jpg", style: "width: 100%; height: 250px; object-fit: cover; object-position: center;" %>
+      <%= image_tag "e-bike-bg.jpg", class: "slider-img" %>
       <button type="button" class="slide-button" data-url="<%= url_for(controller: 'bikes', action: 'index', bike_type: 'e-bike') %>">E-Bike</button>
     </div>
   </swiper-slide>
   <swiper-slide>
     <div class="slide-card">
-      <%= image_tag "accessories-bg.jpg", style: "width: 100%; height: 250px; object-fit: cover; object-position: center;" %>
+      <%= image_tag "accessories-bg.jpg", class: "slider-img" %>
       <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_accessories: 'products_accessories:') %>">Acessórios</button>
     </div>
   </swiper-slide>
   <swiper-slide>
     <div class="slide-card">
-      <%= image_tag "components-bg.jpg", style: "width: 100%; height: 250px; object-fit: cover; object-position: center;" %>
-      <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_components: 'products_components') %>">Componentes</button>
+      <%= image_tag "components-bg.jpg", class: "slider-img" %>
+      <button type="button" class="slide-button me-5" data-url="<%= url_for(controller: 'products', action: 'index', products_components: 'products_components') %>">Componentes</button>
     </div>
   </swiper-slide>
   <swiper-slide>
     <div class="slide-card">
-      <%= image_tag "clothes-bg.jpg", style: "width: 100%; height: 250px; object-fit: cover; object-position: center;" %>
+      <%= image_tag "clothes-bg.jpg", class: "slider-img" %>
       <button type="button" class="slide-button" data-url="<%= url_for(controller: 'products', action: 'index', products_clothes: 'products_clothes') %>">Vestuário</button>
     </div>
   </swiper-slide>

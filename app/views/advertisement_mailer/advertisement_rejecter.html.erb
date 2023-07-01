@@ -44,6 +44,12 @@
     color: gray;
   }
 
+.social-icon {
+    width: 22px;
+    height: 22px;
+    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
+  }
+
   .detail-info {
     color: gray;
     font-size: 12px;
@@ -121,6 +127,10 @@
     margin: 0 !important;
   }
 
+  .ml-10 {
+    margin-left: 10px
+  }
+
   .review-result {
     display: flex;
     gap: 30px;
@@ -148,16 +158,18 @@
     <p class="item-name">Seu anúncio foi analisado pela nossa equipe e é necessário revisá-lo para se adequar às nossas diretrizes de segurança e/ou qualidade. Isso aumentará a qualidade do seu anúncio e as chances de vender o seu produto! </p>
     <p>Revise os campos abaixo:</p>
     <div class="review-result">
-      <div class="rejected-attrs">
-        <% @attrs_rejected.each do |attr_rejected | %>
-          <p class="info-review"><%= attr_rejected %>:</p>
-        <% end %>
-      </div>
-      <div class="user-infos">
-        <% @values_to_review.each do |value | %>
-          <p class=""><%= value %></p>
-        <% end %>
-      </div>
+
+        <table>
+          <tbody class="mt-3">
+            <% @attrs_rejected.zip(@values_to_review).each do |key, value| %>
+              <tr>
+                <td class="item-name"><%= key %>:</td>
+                <td class="item-name ml-10"><%= value %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
     </div>
     <% if @comments %>
       <p>Considere esta nota da nossa equipe para te ajudar:</p>
