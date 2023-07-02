@@ -20,7 +20,7 @@
               <% if order_item.product.photos.attached? %>
                 <%= cl_image_tag order_item.product.photos.first.key, crop: :fill, class: "my-product-img" %>
               <% else %>
-                <%= image_tag "e-bike-bg.jpg", class: "my-product-img" %>
+                <%= image_tag "bike-forest.png", class: "my-product-img" %>
               <% end %>
             </div>
             <div class="card-body d-flex align-items-start flex-column">

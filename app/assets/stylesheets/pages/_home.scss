@@ -18,29 +18,31 @@
 ///////////////////////////// 2ª SECTION
 
 .second-section-home {
-  background-color: #F4F4F9;
+  background-color:  #151515;
+
+
 }
 
 ///////////////////////////// 3ª SECTION
-.card-how-works-services {
-  transition: .5s ease;
-  border-radius: 4px;
-  padding: 20px;
-  align-items: center;
-  background-color: rgb(21, 21, 21);
-  width: 100%;
+// .card-how-works-services {
+//   transition: .5s ease;
+//   border-radius: 4px;
+//   padding: 20px;
+//   align-items: center;
+//   background-color: $color-darker;
+//   width: 100%;
 
-  .icon {
-    font-size: 28px;
-  }
-}
+//   .icon {
+//     font-size: 28px;
+//   }
+// }
 
 
 
 ///////////////////////////// 4ª SECTION
 
 .fourth-section-home {
-  background-color: #F4F4F9;
+  background-color:  #151515;
   .carousel-control-prev-icon, .carousel-control-next-icon {
     filter: invert(1);
   }
@@ -57,7 +59,7 @@
 ///////////////////////////// 6ª SECTION
 
 .sixth-section-home {
-  background-color: #F4F4F9;
+  background-color:  #151515;
 }
 
 ///////////////////////////// 7ª SECTION
@@ -75,12 +77,14 @@
 
   .first-section-home {
     background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
-    height: 120vh !important;
     padding: 5px !important;
     padding-top: 320px !important;
     background-size: fit !important;
     background-position: center;
-
+    height: 140vh;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 150px;
     h1 {
       font-size: 90px !important;
     }
@@ -185,11 +189,16 @@
 
   .first-section-home {
     background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
-    height: 120vh !important;
+    // height: 120vh !important;
     padding: 5px !important;
     padding-top: 200px !important;
     background-size: fit !important;
     background-position: center;
+
+    height: 140vh;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 150px;
 
 
     h1 {
@@ -287,10 +296,15 @@
 @media (max-width: 415px) {
   .first-section-home {
     background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
-    height: 120vh !important;
+    // height: 120vh !important;
     padding: 5px !important;
     padding-top: 50px !important;
     background-size: fit !important;
+
+    height: 140vh;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 150px;
 
     h2 {
       margin-top: 50px;
@@ -385,10 +399,14 @@
 
   .first-section-home {
     background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("banner-home.jpg");
-    height: 120vh !important;
     padding: 5px !important;
     background-size: fit !important;
     background-position: center;
+
+    height: 140vh;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 150px;
 
 
     h2 {

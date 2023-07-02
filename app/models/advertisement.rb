@@ -26,18 +26,6 @@ class Advertisement < ApplicationRecord
    ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
   end
 
-  # ATTRIBUTES_OPTIONS = {
-  #   "reject locality": "Local",
-  #   "reject year": "Ano",
-  #   "reject model": "Modelo",
-
-  # }
-
-  # def reject_attr_display
-  #  ADVERTISABLE_OPTIONS[advertisable_type.to_sym]
-  # end
-
-
   enum status: {
     pending: "pending",
     paid: "paid",
@@ -64,6 +52,10 @@ class Advertisement < ApplicationRecord
     end
   end
 
+  # @net_total_sales = @advertisements.map do |advertisement|
+  #   coupon_price = advertisement.final_price_with_coupon_in_cents
+  #   coupon_price.present? ? coupon_price : advertisement.price_in_cents
+  # end.compact.sum
   def final_price_with_coupon_in_cents
     return price_in_cents if coupon.blank?
     if coupon.kind_percentage?

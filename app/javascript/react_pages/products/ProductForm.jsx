@@ -139,17 +139,30 @@ export function ProductForm(props) {
     if (props.productId) {
       fetchProduct();
       setProductId(props.productId);
-      setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
+      // setModalities(["downhill", "enduro", "gravel", "speed", "trail", "xc_cross_country", "speed_performance", "triathlon", "ciclocross", "cicloviagem", "street_bmx", "race_bmx", "big_wheel_bmx", "dirt_jump"]);
+      if (categories.length > 1) {
+        setModalities(categories.find(element => element.id === props.categoryId).modalities)
+      }
     }
   }, []);
 
 
+  // useEffect(() => {
+  //   if (productCategory !== "" && !props.productId) {
+  //     setModalities(categories.find(element => element.name === productCategory).modalities)
+  //     setCategoryId(categories.find(element => element.name === productCategory).id);
+  //   }
+  // });
+
   useEffect(() => {
-    if (productCategory && !props.productId) {
-      setModalities(categories.find(element => element.name === productCategory).modalities)
-      setCategoryId(categories.find(element => element.name === productCategory).id);
+    if (productCategory && productCategory !== "" && categories.length > 0 && !props.productId) {
+      const selectedCategory = categories.find(element => element.name === productCategory);
+      if (selectedCategory) {
+        setModalities(selectedCategory.modalities);
+        setCategoryId(selectedCategory.modalities);
+      }
     }
-  });
+  }, [productCategory, categories, props.productId]);
 
   useEffect(() => {
     if (productCategory === "urban") {
@@ -206,24 +219,6 @@ export function ProductForm(props) {
       setProductConditionStatus("")
     }
   })
-
-  // useEffect(() => {
-  //   if (props.productId) {
-  //     // const firstSection = document.getElementById("first-section")
-  //     // const secondSection = document.getElementById("second-section")
-  //     // firstSection.classList.add("d-none")
-  //     // secondSection.classList.remove("d-none")
-  //     // console.log(props.productId)
-  //     if (productTypeId >= 40 && productTypeId <= 48) {
-  //       setProductTypes(allProducts.filter(element => element.id >= 40 && element.id <= 48));
-  //     } else if (productTypeId >= 1 && productTypeId <= 39) {
-  //       setProductTypes(allProducts.filter(element => element.id >= 1 && element.id <= 39));
-  //     }  else if (productTypeId >= 49 && productTypeId <= 68) {
-  //       setProductTypes(allProducts.filter(element => element.id >= 49 && element.id <= 68));
-  //     }
-  //   }
-  // })
-
 
   const createProductPhotos = (e) => {
     const photos = Object.values(e.target.files)
