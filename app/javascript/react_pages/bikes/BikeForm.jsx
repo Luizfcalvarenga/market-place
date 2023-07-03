@@ -197,7 +197,7 @@ export function BikeForm(props) {
       const selectedCategory = categories.find(element => element.name === category);
       if (selectedCategory) {
         setModalities(selectedCategory.modalities);
-        setCategoryId(selectedCategory.modalities);
+        setCategoryId(selectedCategory.id);
       }
     }
   }, [category, categories, props.bikeId]);

@@ -159,7 +159,7 @@ export function ProductForm(props) {
       const selectedCategory = categories.find(element => element.name === productCategory);
       if (selectedCategory) {
         setModalities(selectedCategory.modalities);
-        setCategoryId(selectedCategory.modalities);
+        setCategoryId(selectedCategory.id);
       }
     }
   }, [productCategory, categories, props.productId]);
