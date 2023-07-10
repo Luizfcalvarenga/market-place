@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   include Devise::Controllers::UrlHelpers
-  default from: 'Market Nuflow <naoresponda@nuflowpass.com.br>'
+  default from: 'Market Nuflow <mail@nuflow.com.br>'
 
   def password_reset(user, token)
     @user = user
