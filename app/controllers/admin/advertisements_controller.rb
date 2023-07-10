@@ -26,7 +26,6 @@ module Admin
       @advertisement = Advertisement.find(params[:advertisement_id])
       @advertisements = Advertisement.all
       service = AdvertisementApprover.new(@advertisement, current_user)
-      binding.pry
       if service.call
         flash[:notice] = "Pedido aprovado"
         next_waiting_review_advertisement = @advertisements.waiting_review.order(created_at: :asc).first
