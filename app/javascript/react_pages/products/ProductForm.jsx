@@ -147,13 +147,6 @@ export function ProductForm(props) {
   }, []);
 
 
-  // useEffect(() => {
-  //   if (productCategory !== "" && !props.productId) {
-  //     setModalities(categories.find(element => element.name === productCategory).modalities)
-  //     setCategoryId(categories.find(element => element.name === productCategory).id);
-  //   }
-  // });
-
   useEffect(() => {
     if (productCategory && productCategory !== "" && categories.length > 0 && !props.productId) {
       const selectedCategory = categories.find(element => element.name === productCategory);

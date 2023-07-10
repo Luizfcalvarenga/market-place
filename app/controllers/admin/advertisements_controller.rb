@@ -26,6 +26,7 @@ module Admin
       @advertisement = Advertisement.find(params[:advertisement_id])
       @advertisements = Advertisement.all
       service = AdvertisementApprover.new(@advertisement, current_user)
+      binding.pry
       if service.call
         flash[:notice] = "Pedido aprovado"
         next_waiting_review_advertisement = @advertisements.waiting_review.order(created_at: :asc).first
@@ -33,7 +34,7 @@ module Admin
         redirect_to admin_advertisements_path and return
       else
         flash[:alert] = service.errors.to_s
-        redirect_to admin_dvertisement_path(id: @dvertisement.id)
+        redirect_to admin_dvertisement_path(id: @advertisement.id)
       end
     end
 
