@@ -4,7 +4,7 @@
   <div id="side_panel" class="col-md-4 col-12 border-right border-success">
     <li class="list-group-item d-flex align-items-center justify-content-between user_list_item user-info">
       <div class="icon-container  ms-3 mt-2">
-        <%= link_to cl_image_tag(current_user.photo.key, class: 'chat_pfp'), current_user %>
+        <%= link_to cl_image_tag(current_user.photo.key, class: 'chat_pfp user-chat-image', id: "user-chat-image-btn"), current_user %>
         <%= turbo_stream_from "user_status" %>
         <div>
           <%= render "users/status", user: current_user %>
@@ -29,7 +29,7 @@
     <% if @single_chat %>
       <div id="single_chat">
         <div class="d-flex justify-content-around py-2 user-conversation-info mb-1">
-          <button id="back-to-users"><i class="fas fa-arrow-left me-5 mt-2 text-success"></i></button>
+          <button id="back-to-users" class="back-to-user-chat"><i class="fas fa-arrow-left me-5 mt-2 text-success"></i></button>
           <%= cl_image_tag(@user.photo.key, class: 'chat_pfp') %>
           <% if @user.full_name.present? %>
             <h4 class="text-center mt-2"> <%= @user.full_name %> </h4>

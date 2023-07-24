@@ -17,7 +17,7 @@ json.products @products do |product|
   json.product_condition_description product.product_condition_description
   json.verified product.verified
 
-  json.photos product.photos.first(2).map(&:url)
+  json.photos product.photos.map(&:url)
 end
 json.product_types @product_types
 json.product_type_attributes @product_type_attributes

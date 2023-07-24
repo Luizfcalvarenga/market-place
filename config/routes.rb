@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       get 'users/me', to: 'users#me'
       resources :bikes
       resources :products
+      get "coupon_amount", to: "bikes#coupon_amount"
     end
   end
 end

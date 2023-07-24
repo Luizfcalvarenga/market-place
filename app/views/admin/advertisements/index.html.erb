@@ -16,7 +16,7 @@
         </div>
         <div class="f-10"><%= select_month(@reference_date, {field_name: "month"}, {class: "w-90"}) %></div>
         <div class="f-10"><%= select_year(@reference_date, {start_year: 2020, end_year: Time.current.year, field_name: "year"}, {class: "w-90"}) %></div>
-        <%= f.submit "Trocar", class: "#{mobile_device? ? '' : 'btn btn-success f-10'}" %>
+        <%= f.submit "Trocar", class: "#{mobile_device? ? '' : 'btn btn-success f-10'}", id: "to-replac-btn  " %>
       </div>
     <% end %>
   </div>
@@ -38,6 +38,12 @@
       <div class="br-8 bg-dark flex center around flex-column p-4">
         <p class="fw-bold text-white">Receita</p>
         <p class="fw-bold text-white fs-30 m-0"><%= number_to_currency( @net_total_sales/100, unit: "R$", separator: ",", delimiter: ".") %></p>
+      </div>
+    </div>
+    <div class="col-12 col-md-3 p-2 br-8">
+      <div class="br-8 bg-dark flex center around flex-column p-4">
+        <p class="fw-bold text-white">Billing</p>
+        <p class="fw-bold text-white fs-30 m-0"><%= number_to_currency( @net_total_billing/100, unit: "R$", separator: ",", delimiter: ".") %></p>
       </div>
     </div>
   </div>
@@ -72,7 +78,7 @@
           <td class="align-middle" data-label="Ações">
             <div class="d-flex  ms-3">
               <% if advertisement.status === "paid" || advertisement.status === "waiting_review" %>
-                <%= link_to admin_advertisement_path(advertisement.id), class: "review-btn mb-2 align-middle #{mobile_device? ? 'fs-16' : ''}" do %>
+                <%= link_to admin_advertisement_path(advertisement.id), class: "admin-advertisement-review-btn review-btn mb-2 align-middle #{mobile_device? ? 'fs-16' : ''}", id:"admin-advertisement-review" do %>
                   <i class="fas fa-search mt-1 <%= mobile_device? ? "fs-16" : "" %>"></i>
                   <span class="ms-2">Revisar</span>
                 <% end %>
@@ -86,7 +92,7 @@
                 <i class="fas fa-minus-circle mt-1 text-warning align-middle <%= mobile_device? ? "fs-16" : "" %>" ></i>
                 <span class="topic-cards-index-media ms-3 text-warning align-middle <%= mobile_device? ? "fs-16" : "" %>">Produto removido</span>
               <% else %>
-                <%= link_to admin_advertisement_path(advertisement.id), class: "view-btn mb-2 align-middle #{mobile_device? ? 'fs-16' : ''}" do %>
+                <%= link_to admin_advertisement_path(advertisement.id), class: "admin-advertisement-view-btn view-btn mb-2 align-middle #{mobile_device? ? 'fs-16' : ''}", id: "admin-advertisement-view" do %>
                   <i class="fas fa-check mt-1 <%= mobile_device? ? "fs-16" : "" %>"></i>
                   <span class="ms-2">Publicado</span>
                 <% end %>

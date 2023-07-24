@@ -1,8 +1,8 @@
 <div id="navbar" class="navbar navbar-expand-md navbar-light-lg">
   <div class="collapse navbar-collapse d-flex justify-content-around page-desktop">
     <div class="flex center around ms-3 my-auto">
-      <%= link_to root_path, class: "nav-link-drop" do %>
-        <%= image_tag "white_logo.png", class: "navbar-brand" %>
+      <%= link_to root_path, class: "home-btn nav-link-drop", id: "desktop-home-link" do %>
+        <%= image_tag "white_logo_1.png", class: "navbar-brand" %>
       <% end %>
     </div>
     <div class="f-40  w-100">
@@ -18,7 +18,7 @@
                   search_target: 'searchInput',
                   action: "keyup->search#update"
                 } %>
-              <%= form.button class: "btn search-btn" do %>
+              <%= form.button class: "btn search-btn", id: "desktop-search-btn" do %>
                 <i class="fas fa-search form-icon"></i>
               <% end %>
             <% end %>
@@ -34,51 +34,51 @@
                 <div class="drpdw-bike  mx-auto">
                   <h4 class="text-success mt-3">BIKES</h4>
                   <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path) || current_page?(edit_user_password_path) || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-                    <%= link_to "MTB",  {:controller => "bikes", :action => "index", :categories => "mountain_bike"}, class: "text-white" %>
-                    <%= link_to "ROAD",  {:controller => "bikes", :action => "index", :categories => "road"}, class: "text-white" %>
-                    <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type => "e-bike"}, class: "text-white" %>
-                    <%= link_to "DIRT", {:controller => "bikes", :action => "index", :categories => "dirt_street"}, class: "text-white" %>
-                    <%= link_to "Ver mais", bikes_path, class: "text-white pb-3" %>
+                    <%= link_to "MTB",  {:controller => "bikes", :action => "index", :categories => "mountain_bike"}, class: "text-white mountain-bikes", id: "MTB-bikes" %>
+                    <%= link_to "ROAD",  {:controller => "bikes", :action => "index", :categories => "road"}, class: "text-white road-bikes", id: "ROAD-bikes" %>
+                    <%= link_to "E-bike", {:controller => "bikes", :action => "index", :bike_type => "e-bike"}, class: "text-white e-bikes", id: "E-bikes" %>
+                    <%= link_to "DIRT", {:controller => "bikes", :action => "index", :categories => "dirt_street"}, class: "text-white dirt-bikes", id: "DIRT-bikes" %>
+                    <%= link_to "Ver mais", bikes_path, class: "text-white pb-3 view-bikes", id: "ALL-bikes" %>
                   <% end %>
                 </div>
                 <div class="drpdw-components  mx-auto">
                   <h4 class=" text-success mt-3">COMPONENTES</h4>
                   <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path) || current_page?(edit_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_types => "Quadro"}, class: "text-white" %>
-                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_types => "Freio"}, class: "text-white" %>
-                    <%= link_to "Câmbio Traseiro", {:controller => "products", :action => "index", :product_types => "Câmbio Traseiro"}, class: "text-white" %>
-                    <%= link_to "Suspensão dianteira", {:controller => "products", :action => "index", :product_types => "Suspensão Dianteira"}, class: "text-white" %>
-                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_components => "products_components"}, class: "text-white pb-3" %>
+                    <%= link_to "Quadro", {:controller => "products", :action => "index", :product_types => "Quadro"}, class: "text-white products-components-btn", id: "Frame" %>
+                    <%= link_to "Freios", {:controller => "products", :action => "index", :product_types => "Freio"}, class: "text-white products-components-btn", id: "Brakes" %>
+                    <%= link_to "Câmbio Traseiro", {:controller => "products", :action => "index", :product_types => "Câmbio Traseiro"}, class: "text-white products-components-btn", id: "rear-derailleur" %>
+                    <%= link_to "Suspensão dianteira", {:controller => "products", :action => "index", :product_types => "Suspensão Dianteira"}, class: "text-white products-components-btn", id: "front-suspension" %>
+                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_components => "products_components"}, class: "text-white pb-3 view-products", id: "component-products" %>
                   <% end %>
                 </div>
                 <div class="drpdw-components  mx-auto">
                   <h4 class=" text-success mt-3">ACESSÓRIOS</h4>
                   <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path) || current_page?(edit_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-                    <%= link_to "Eletrônicos", {:controller => "products", :action => "index", :product_types => "Eletrônicos"}, class: "text-white" %>
-                    <%= link_to "Ferramentas", {:controller => "products", :action => "index", :product_types => "Ferramentas"}, class: "text-white" %>
-                    <%= link_to "Rolo de treino", {:controller => "products", :action => "index", :product_types => "Rolo de treino"}, class: "text-white" %>
-                    <%= link_to "Suporte para carro", {:controller => "products", :action => "index", :product_types => "Suporte para carro"}, class: "text-white" %>
-                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_accessories => "products_accessories"}, class: "text-white pb-3" %>
+                    <%= link_to "Eletrônicos", {:controller => "products", :action => "index", :product_types => "Eletrônicos"}, class: "text-white products-ac-btn", id: "Electronics" %>
+                    <%= link_to "Ferramentas", {:controller => "products", :action => "index", :product_types => "Ferramentas"}, class: "text-white products-ac-btn", id: "Tools" %>
+                    <%= link_to "Rolo de treino", {:controller => "products", :action => "index", :product_types => "Rolo de treino"}, class: "text-white products-ac-btn", id: "training-roller" %>
+                    <%= link_to "Suporte para carro", {:controller => "products", :action => "index", :product_types => "Suporte para carro"}, class: "text-white products-ac-btn", id: "car-holder" %>
+                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_accessories => "products_accessories"}, class: "text-white pb-3 view-products", id: "accessorie-products" %>
                   <% end%>
                 </div>
                 <div class="drpdw-components  mx-auto">
                   <h4 class=" text-success mt-3">VESTUÁRIO</h4>
                   <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path) || current_page?(edit_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-                    <%= link_to "Capacete", {:controller => "products", :action => "index", :product_types => "Capacete"}, class: "text-white" %>
-                    <%= link_to "Sapatilha", {:controller => "products", :action => "index", :product_types => "Sapatilha"}, class: "text-white" %>
-                    <%= link_to "Bermuda", {:controller => "products", :action => "index", :product_types => "Bermuda"}, class: "text-white" %>
-                    <%= link_to "Camisa", {:controller => "products", :action => "index", :product_types => "Camisa"}, class: "text-white" %>
-                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_clothes => "products_clothes"}, class: "text-white pb-3" %>
+                    <%= link_to "Capacete", {:controller => "products", :action => "index", :product_types => "Capacete"}, class: "text-white products-clothes-btn", id: "Helmet" %>
+                    <%= link_to "Sapatilha", {:controller => "products", :action => "index", :product_types => "Sapatilha"}, class: "text-white products-clothes-btn", id: "Sneaker" %>
+                    <%= link_to "Bermuda", {:controller => "products", :action => "index", :product_types => "Bermuda"}, class: "text-white products-clothes-btn", id: "Shorts" %>
+                    <%= link_to "Camisa", {:controller => "products", :action => "index", :product_types => "Camisa"}, class: "text-white products-clothes-btn" %>
+                    <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_clothes => "products_clothes"}, class: "text-white pb-3 view-products", id: "clothing-products" %>
                   <% end%>
                 </div>
               </div>
             </div>
           </li>
           <li class="nav-item active my-auto">
-            <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link mx-3" %>
+            <%= link_to "DICAS", "https://nuflowshop.com.br/blog/", class: "nav-link mx-3 blogs-btn", id: "Dicas" %>
           </li>
           <li class="nav-item active my-auto">
-            <%= link_to "EVENTOS", "https://nuflowpass.com.br", class: "nav-link mx-3" %>
+            <%= link_to "EVENTOS", "https://nuflowpass.com.br", class: "nav-link mx-3 events-btn", id: "Events" %>
           </li>
         </div>
         <li class="nav-item active mt-2">
@@ -97,16 +97,16 @@
     <div class="f-40 px-2 mt-2">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row d-flex justify-content-start gap-24 align-middle m-auto">
         <li class="nav-item active ms-5 me-1 my-auto">
-          <%= link_to "VENDER", new_announce_path, class: "btn-home-smooth" %>
+          <%= link_to "VENDER", new_announce_path, class: "btn-home-smooth new-announce-btn", id: "sell-btn" %>
         </li>
         <% if current_user.present? %>
           <li class="nav-item active my-auto">
-            <%= link_to "#", class: "nav-link-icon", title: 'Converse com o suporte'  do %>
+            <%= link_to "#", class: "nav-link-icon chat-with-support-btn ", title: 'Converse com o suporte', id: "chat-with-support"  do %>
               <i class="fas fa-comment-alt mt-2"> <span  class="cart-counter"></span></i>
             <% end %>
           </li>
           <li class="nav-item active my-auto">
-            <%= link_to likes_path, class: "nav-link-icon", title: 'Favoritos' do %>
+            <%= link_to likes_path, class: "nav-link-icon user-favorites-btn", title: 'Favoritos', id: "user-likes" do %>
               <i class="fa fa-heart mt-2"></i>
             <% end %>
           </li>
@@ -115,7 +115,7 @@
           <li class="nav-item my-auto">
             <div class="dropdown">
               <% if current_user.photo.attached? %>
-                <%= link_to edit_profiles_path class: "dropbtn" do %>
+                <%= link_to edit_profiles_path, class: "dropbtn edit-profile", id: "edit-user-profile-btn" do %>
                   <%= cl_image_tag current_user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                 <% end %>
               <% else %>
@@ -126,13 +126,13 @@
             </div>
           </li>
           <li class="my-auto">
-            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link-logout" do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link-logout logout", id: "user-logout-btn" do %>
               SAIR <i class="fas fa-sign-out-alt ms-1"></i>
             <% end %>
           </li>
         <% else %>
-          <li class="nav-item mt-2">
-            <%= link_to "Login", new_user_session_path, class: "nav-link ms-5" %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "login nav-link ms-5", id: "user-login-btn" %>
           </li>
         <% end %>
       </ul>
@@ -140,8 +140,8 @@
   </div>
   <% if mobile_device? %>
     <div class="flex center between w-100">
-      <%= link_to root_path, class: "nav-link-drop", id: "mobile-home-link" do %>
-        <%= image_tag "white_logo.png", class: "navbar-brand" %>
+      <%= link_to root_path, class: "home-btn nav-link-drop", id: "mobile-home-link" do %>
+        <%= image_tag "white_logo_1.png", class: "navbar-brand" %>
       <% end %>
       <div id="navbar-form-mobile" data-controller="search" class="input-group input-group-navbar mt-3 px-1 d-none">
         <%= form_with url: search_path, local: true, method: :get, html: {class: "input-group input-group-navbar mobile-search" , data: { search_target: 'form' } } do |form| %>
@@ -154,7 +154,7 @@
               search_target: 'searchInput',
               action: "keyup->search#update"
             } %>
-          <%= form.button class: "btn search-btn" do %>
+          <%= form.button class: "btn search-btn", id: "mobile-search-btn" do %>
             <i class="fas fa-search form-icon"></i>
           <% end %>
         <% end %>
@@ -171,15 +171,15 @@
         <div id="navbar-links-mobile" class="mt-3">
           <% if user_signed_in? %>
             <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-              <%= link_to likes_path, class: "nav-link-drop me-3 " do %>
+              <%= link_to likes_path, class: "nav-link-drop me-3 user-favorites-btn", id: "user-likes" do %>
                 <i class="fas fa-heart like-mobile-nav <%= current_page?(controller: 'likes', action: 'index')? "text-success" : ""%>"></i>
               <% end %>
             <% end %>
           <% else %>
-            <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Entrar", new_user_session_path, class: "login nav-link", id: "user-login-btn" %>
           <% end %>
           <% if user_signed_in? %>
-            <%= link_to edit_profiles_path, class: "nav-link-drop" do %>
+            <%= link_to edit_profiles_path, class: "nav-link-drop edit-profile", id: "edit-user-profile-btn" do %>
               <%= cl_image_tag current_user.photo.key, crop: :fit, class: "avatar-profile-mobile-navbar" %>
             <% end %>
           <% end %>
@@ -191,16 +191,16 @@
 
     <div id="bottom-navbar" class="bottom-navbar">
       <% unless current_page?(new_user_session_path) || current_page?(new_user_password_path)  || current_controller?('users/registrations') || current_controller?('users/sessions')%>
-        <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}" do %>
+        <%= link_to bikes_path, class: "block-item #{current_page?(controller: 'bikes', action: 'index')? "selected-path" : ""}", id: "view-bikes-btn" do %>
           <i class="fas fa-bicycle nav-bottom-icon"></i><br> <span class="nav-bottom-link">Bikes</span>
         <% end %>
-        <%= link_to products_path, class: "block-item #{current_page?(controller: 'products', action: 'index')? "selected-path" : ""}" do %>
+        <%= link_to products_path, class: "block-item #{current_page?(controller: 'products', action: 'index')? "selected-path" : ""}", id: "view-products-btn" do %>
           <i class="fab fa-product-hunt nav-bottom-icon"></i><br><span class="nav-bottom-link">Produtos</span>
         <% end %>
-        <%= link_to new_announce_path, class: "block-item #{(current_page?(controller: 'bikes', action: 'new') || current_page?(controller: 'products', action: 'new') || current_page?(controller: 'pages', action: 'new_announce'))? "selected-path" : ""}" do %>
+        <%= link_to new_announce_path, class: "block-item #{(current_page?(controller: 'bikes', action: 'new') || current_page?(controller: 'products', action: 'new') || current_page?(controller: 'pages', action: 'new_announce'))? "selected-path" : ""}", id: "new-announcement-btn" do %>
           <i class="far fa-edit nav-bottom-icon"></i> <br><span class="nav-bottom-link">Anunciar</span>
         <% end %>
-        <%= link_to chats_path, class: "block-item #{(current_page?(controller: 'chats', action: 'index') || current_page?(controller: 'users', action: 'show'))? "selected-path" : ""}" do %>
+        <%= link_to chats_path, class: "block-item #{(current_page?(controller: 'chats', action: 'index') || current_page?(controller: 'users', action: 'show'))? "selected-path" : ""}", id: "user-chat-btn" do %>
           <i class="far fa-comment-alt  nav-bottom-icon"></i> <br><span class="nav-bottom-link">Chat</span>
           <% if Notification.where(recipient_id: current_user).where(read_at: nil).count > 0 %>
             <span class="badge badge-danger mobile-notification">+ <%= Notification.where(recipient_id: current_user).where(read_at: nil).count %></span>
@@ -213,13 +213,13 @@
       <div id="bottom-navbar-menu" class="dropup d-none">
         <div class="d-flex justify-content-between mt-3">
           <% if user_signed_in? %>
-            <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center" do %>
+            <%= link_to  edit_profiles_path, class: "dropup-link d-block text-center edit-profile", id: "edit-user-profile-btn" do %>
               <i class="fas fa-user-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Perfil</span>
             <% end %>
-            <%= link_to  advertisements_path, class: "dropup-link d-block text-center" do %>
+            <%= link_to  advertisements_path, class: "dropup-link d-block text-center user-advertisements-btn", id: "user-advertisements-btn" do %>
               <i class="fas fa-shopping-bag nav-bottom-icon"></i><br><span class="nav-bottom-link">Meus Anúncios</span>
             <% end %>
-            <%= link_to  likes_path, class: "dropup-link d-block text-center", target: "_blank" do %>
+            <%= link_to  likes_path, class: "dropup-link d-block text-center user-favorites-btn", target: "_blank", id: "user-likes" do %>
               <i class="fas fa-heart nav-bottom-icon"></i><br><span class="nav-bottom-link">Favoritos</span>
             <% end %>
           <% end %>
@@ -227,22 +227,22 @@
 
 
         <div class="d-flex justify-content-between my-3">
-          <%= link_to  "https://wa.me/553196225074", class: "dropup-link d-block text-center", target: "_blank" do %>
+          <%= link_to  "https://wa.me/553196225074", class: "dropup-link d-block text-center whatsapp-btn", target: "_blank", id: "whatsapp-btn" do %>
             <i class="fas fa-question-circle nav-bottom-icon"></i><br><span class="nav-bottom-link">Dúvidas</span>
           <% end %>
-          <%= link_to "https://nuflowpass.com.br/", class: "dropup-link d-block text-center", target: :_blank do %>
+          <%= link_to "https://nuflowpass.com.br/", class: "dropup-link d-block text-center events-btn", target: :_blank, id: "Events" do %>
             <i class="fas fa-calendar-alt nav-bottom-icon"></i><br><span class="nav-bottom-link">Eventos</span>
           <% end %>
-          <%= link_to "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center", target: :_blank do %>
+          <%= link_to "https://nuflowshop.com.br/blog/", class: "dropup-link d-block text-center blogs-btn", target: :_blank, id: "Blogs" do %>
             <i class="fas fa-blog nav-bottom-icon"></i><br><span class="nav-bottom-link">Dicas</span>
           <% end %>
         </div>
         <% if user_signed_in? %>
-          <%= link_to destroy_user_session_path, method: :delete, class: "text-danger dropup-link d-block text-center" do %>
+          <%= link_to destroy_user_session_path, method: :delete, class: "text-danger dropup-link d-block text-center logout", id: "user-logout-btn" do %>
             <i class="fas fa-sign-out-alt nav-bottom-ico"></i> <span class="nav-bottom-link">Sair</span>
           <% end %>
         <% else %>
-          <%= link_to new_user_session_path, class: "text-success dropup-link d-block text-center" do %>
+          <%= link_to new_user_session_path, class: "login text-success dropup-link d-block text-center", id: "user-login-btn" do %>
             <i class="fas fa-sign-in-alt nav-bottom-ico"></i> <span class="nav-bottom-link">Entrar</span>
           <% end %>
         <% end %>

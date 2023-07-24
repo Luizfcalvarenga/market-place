@@ -32,7 +32,7 @@ class AdvertisementGenerator
     if @advertisement.should_generate_new_invoice?
       ::NovaIugu::InvoiceGenerator.new(@advertisement).call
     end
-    AdvertisementMailer.with(advertisement: @advertisement).advertisement_creation.deliver_now
+    AdvertisementMailer.with(advertisement: @advertisement).advertisement_creation.deliver_now unless @advertisement.is_free?
     AdvertisementMailer.with(advertisement: @advertisement).notify_admin_advertisement_creation.deliver_now
   end
 

@@ -12,6 +12,6 @@
     <%= f.input :valid_until, as: :date, html5: true, label: "Validade"%>
     <%= f.input :kind, :collection => %w[percentage fixed], label: "Tipo do desconto:" %>
     <%= f.input :discount, label: "Desconto" %>
-    <%= f.submit 'Salvar', class: 'btn btn-primary my-3' %>
+    <%= f.submit 'Salvar', class: 'btn btn-primary my-3 save-admin-coupon-btn' %>
   <% end %>
 </div>

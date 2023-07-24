@@ -1,6 +1,7 @@
 <div id="sign-in" class="<%= mobile_device? ? "w-90" : "w-40" %> m-auto">
   <div class="p-5 bg-dark br-8 <%= mobile_device? ? "p-3 my-3" : "my-5" %>">
     <h2 class="text-center text-success f-20">Fazer Login</h2>
+    <p class="mb-0 text-center  <%= mobile_device? ? " ": "d-none" %>">Não tem uma conta? <%= link_to "Crie a sua", new_user_registration_path, class: "nav-link fs-18 text-success user-registration", id: "mobile-user-registration" %></p>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
       <div class="h-100">
         <div class="h-80">
@@ -16,18 +17,18 @@
           <input type="checkbox" id="toggle-password-signin" />
         <div class="py-2">
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), class: "nav-link fs-20" %><br />
+            <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), class: "nav-link fs-20 forget-password-btn", id: "forget-password" %><br />
           <% end %>
         </div>
         </div>
-        <div class="text-center my-3 h-20">
-          <%= f.button :submit, "Fazer login", class: "btn btn-success" %>
+        <div class="text-center my-2 h-20">
+          <%= f.button :submit, "Fazer login", class: "btn btn-success", id:"login-btn" %>
         </div>
         <%# <%= link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, turbo: false %>
 
         <%# <%= link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, data: {turbo: "false"} %>
       </div>
     <% end %>
-    <p class="mt-5 mb-0 text-center">Não tem uma conta? <%= link_to "Crie a sua", new_user_registration_path, class: "nav-link fs-18" %></p>
+    <p class="mb-2 mb-0 text-center  <%= mobile_device? ? "d-none": " " %>">Não tem uma conta? <%= link_to "Crie a sua", new_user_registration_path, class: "nav-link fs-18 text-success user-registration", id: "user-registration" %></p>
   </div>
 </div>

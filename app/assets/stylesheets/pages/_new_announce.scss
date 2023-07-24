@@ -5,7 +5,7 @@
 
 .new_announce_banner {
   text-align: center;
-  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("new-announce-banner.jpg");
+  background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.4)), image-url("new-announce-banner-img.jpg");
   background-size: cover;
   height:80vh;
   margin-top: -150px;
@@ -136,9 +136,9 @@
   .new_announce_banner {
     height: 80vh;
     margin: auto;
-    background-position: center;
+        background-position: 30%;
     .announce-banner-title {
-      padding-top: 300px;
+      padding-top: 150px !important;
     }
 
     .card-banner {
@@ -155,4 +155,15 @@
 
     width: 100%;
   }
+}
+
+.accordion-subtitle{
+  color: #ffffff !important;
+  font-size: 1.5rem;
+  font-family: Bebas Neue", Helvetica, "sans-serif;
+  font-weight: 500;
+
+}
+.accordion-body{
+  font-size: 14px;
 }

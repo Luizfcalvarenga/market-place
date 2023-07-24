@@ -21,22 +21,12 @@
 }
 
 .slide-button {
-  width: 50%;
+  width: 100%;
   position: absolute;
   background: transparent;
   color: white;
   border: none;
   text-align: center;
-
-}
-
-.swiper-container {
-  position: absolute;
-  top: 119vh;
-  /* bottom: 0; */
-  left: 0;
-  right: 0;
-  z-index: 2;
 
 }
 
@@ -51,15 +41,30 @@
   z-index: 2;
 }
 
-.swiper-slide {
-  width: 180px;;
-}
-
 .swiper-button-prev,
 .swiper-button-next {
-  position: sticky;
   top: 50%;
-  transform: translateY(-50%);
   z-index: 10;
   transition: all 0.3s ease;
+}
+
+.swiper-container {
+  position:relative;
+  width: 100vw;
+  height: 300px;
+  overflow: hidden;
+  --swiper-navigation-color: gray;
+}
+
+.swiper-slide {
+  height: 300px;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+
+}
+
+.swiper-button-prev, .swiper-button-next{
+  position: absolute;
+  transform: translateY(0);
 }

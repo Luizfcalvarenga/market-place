@@ -10,7 +10,7 @@
   </p>
   <% if @order_items.empty? %>
     <h3 class="my-5">Seu carrinho está vazio!</h3>
-    <%= link_to "Adicionar item", products_path, class: "btn btn-primary"%>
+    <%= link_to "Adicionar item", products_path, class: "btn btn-primary", id: "add-item-btn"%>
   <% else %>
     <div class="row">
       <div class="col">
@@ -39,7 +39,7 @@
             </div>
             <div class="price-delete m-2 d-flex flex-column align-items-end">
               <div class="delete-item p-2">
-                <%= link_to destroy_path(order_item), method: :delete, data: { confirm: "Tem certeza que deseja remover #{order_item.product.product_type.name} do seu carrinho?"}  do %>
+                <%= link_to destroy_path(order_item), method: :delete, data: { confirm: "Tem certeza que deseja remover #{order_item.product.product_type.name} do seu carrinho?"}, id: "delete-order-item"  do %>
                   <i class="fas fa-trash-alt"> <span style="font-family: Montserrat, sans-serif; font-size: 15px;">Remover</span> </i>
                 <% end %>
               </div>
@@ -54,9 +54,9 @@
       </div>
       </div>
       <div>
-        <%= link_to "Adicionar mais itens", products_path, class: "btn btn-outline mt-3 w-100"%>
+        <%= link_to "Adicionar mais itens", products_path, class: "btn btn-outline mt-3 w-100 view-products", id: "add-more-items"%>
         <br>
-        <%= link_to "Finalizar compra", order_invoice_path, class: "btn-orders btn btn-primary mt-3 w-100" %>
+        <%= link_to "Finalizar compra", order_invoice_path, class: "btn-orders btn btn-primary mt-3 w-100 order-invoce-btn", id: "user-checkout-btn" %>
       </div>
     </div>
   <% end %>

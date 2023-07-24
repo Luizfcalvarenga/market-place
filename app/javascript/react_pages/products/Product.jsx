@@ -3,7 +3,7 @@ import AccessorieImage from "../../../assets/images/accessories.png";
 import ComponentImage from "../../../assets/images/frame.png";
 import ClotheImage from "../../../assets/images/tshirt.png";
 import VerifiedImage from "../../../assets/images/badge.png";
-
+import { Modal, Carousel } from "react-bootstrap";
 
 export function Product(props) {
   const [product, setProduct] = useState()
@@ -12,6 +12,17 @@ export function Product(props) {
   const [state, setState] = useState("")
   const [quantity, setQuantity] = useState()
   let productId = window.location.pathname.split("/").pop();
+  const [showModal, setShowModal] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const openModal = (index) => {
+    setActiveIndex(index);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(async () => {
     let url = `/api/v1/products/${productId}`;
@@ -133,43 +144,72 @@ export function Product(props) {
       {product && (<>
 
           <div className="other-infos d-flex justify-content-between gap-3 product-show-infos">
-            <div id="carouselExampleControls" className="carousel slide product-photos w-70" data-bs-ride="carousel">
-              <div className="carousel-inner">
-                {product.photos.map((photo, index) => {
-                  return (<>
-                    <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                      <button type="button" className="photo-btn" data-toggle="modal" data-target={`#exampleModal${index}`} >
-                        <img id={index} src={photo} className="d-block w-100 img-card-show" alt="" />
+            {product.photos.length > 1 ? (
+              <div id="carouselExampleControls" className="carousel slide product-photos w-70" data-bs-interval="false">
+                <div className="carousel-inner">
+                  {product.photos.map((photo, index) => (
+                    <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                      <button
+                        type="button"
+                        className="photo-btn"
+                        onClick={() => openModal(index)}
+                      >
+                        <img src={photo} className="d-block w-100 img-card-show" alt="" />
                       </button>
                     </div>
-                    <div className="modal fade modal-photo" id={`exampleModal${index}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div className="modal-dialog">
-                        <img id={index} src={photo} className="photo-modal" alt="" />
-                      </div>
-
-                    </div>
-                  </>)
-                })}
-              </div>
-              {product.photos.length === 0 && (
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
-                  </div>
+                  ))}
                 </div>
-              )}
-              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
+                <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Previous</span>
+                </a>
+                <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Next</span>
+                </a>
+              </div>
+              ) : (<>
+                {product.photos.length === 1 && (
+                  <div id="carouselExampleControls" className="carousel slide product-photos w-70" data-bs-interval="false">
+                    <div className="carousel-inner">
+                      <div key={0} className="carousel-item active">
+                        <button
+                          type="button"
+                          className="photo-btn"
+                          onClick={() => openModal(0)}
+                        >
+                        <img src={product.photos[0]} className="d-block w-100 img-card-show" alt="" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {product.photos.length === 0 && (
+                  <div id="carouselExampleControls" className="carousel slide product-photos w-70" data-bs-interval="false">
+                    <div className="carousel-inner">
+                      <div className="carousel-item active">
+                        <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
+                      </div>
+                      <div className="carousel-item">
+                        <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-show" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+            <Modal show={showModal} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered style={{ backgroundColor: "transparent" }}>
+              <Modal.Body>
+                <Carousel activeIndex={activeIndex} onSelect={(index) => setActiveIndex(index)} controls={ product.photos.length <=1 ? false : true} indicators={false} interval={null} >
+                  {product.photos.map((photo, index) => (
+                    <Carousel.Item key={index}>
+                      <img src={photo} className="d-block w-100 photo-modal" alt="" />
+                    </Carousel.Item>
+                  ))}
+                </Carousel>
+              </Modal.Body>
+            </Modal>
+            {showModal && (<div onClick={closeModal} className="closeModal"><i className="fa">&#xf00d;</i></div>)}
             <div className="card-product w-30 p-2">
               {product.verified && (
                 <div className="d-flex justify-content-between mt-3">
@@ -208,14 +248,14 @@ export function Product(props) {
 
               </div>
               {product.user.show_contact && (<>
-                <button className="btn-chat w-100 mt-3 mb-2" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
+                <button className="btn-chat w-100 mt-3 mb-2" id="show-seller-contact" onClick={() => showSellerContact()}>Mostrar contato do vendedor</button>
                 <div id="user-contact" className="d-none">
                   <p className=" text-center"><strong className="text-success mask-phone">Telefone:</strong>  {product.user.phone_number}</p>
                 </div>
               </>)}
 
               {Number(props.currentUser) !== product.user.id && (
-                <a href={"/user/" + product.user.id + "?product_id=" + product.id + "&photo=" + product.photos[0]}>
+                <a href={"/user/" + product.user.id + "?product_id=" + product.id + "&photo=" + product.photos[0]} id="chat-with-advertiser">
                   <button className="btn-chat w-100 mt-3 mb-2"><i className="fas fa-comments me-2"></i>Conversar com anunciante</button>
                 </a>
               )}

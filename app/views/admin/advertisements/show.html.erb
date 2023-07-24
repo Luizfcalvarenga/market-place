@@ -85,7 +85,7 @@
     </div>
 
     <% if @advertisement.invoice_url.present? %>
-      <%= link_to @advertisement.invoice_url, target: :_blank do %>
+      <%= link_to @advertisement.invoice_url, class: "admin-advertisement-invoice-btn", id: "admin-advertisement-invoice", target: :_blank do %>
         <p class="m-0 btn btn-primary w-100 text-white my-3">Ver fatura</p>
       <% end %>
     <% else %>
@@ -1456,13 +1456,13 @@
       <% if @advertisement.waiting_review? || @advertisement.paid? || (@advertisement.final_price_with_coupon_in_cents == 0) %>
         <div class="action-buttons flex center between mt-5">
           <div class="w-100">
-            <%= link_to admin_advertisement_approve_path(@advertisement.id), method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>
+            <%= link_to admin_advertisement_approve_path(@advertisement.id), class:"admin-advertisement-approve-btn", id: "admin-advertisement-approve", method: :patch, data: { confirm: "Tem certeza que quer aprovar o pedido?" } do %>
               <p class="m-0 btn btn-success w-100 text-white">Aprovar anúncio</p>
             <% end %>
           </div>
         </div>
       <% end %>
-      <button type="submit" value="Submit" class="btn btn-danger mt-3 w-100">Adicionar revisão</button>
+      <button type="submit" value="Submit" class="btn btn-danger mt-3 w-100 admin-ad-review-btn" id="admin-advertisement-review">Adicionar revisão</button>
     </div>
   </form>
 </div>

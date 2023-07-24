@@ -3,7 +3,7 @@
     <div class="p-5 flex center column">
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
       <h3>Seu produto foi criado e anuncio gerado, agora aguarde a aprovação do anúncio em até 3 dias úteis.</h3>
-      <%= link_to advertisements_path, class: "after-payment-button-link" do %>
+      <%= link_to advertisements_path, class: "after-payment-button-link user-advertisements-btn", id: "user-advertisements" do %>
         <p class="btn btn-dark w-100 p-2 px-5 br-8">Ver produtos anunciados</p>
       <% end %>
     </div>
@@ -14,7 +14,7 @@
       <i class="fas fa-thumbs-up fs-36 pr-4 mb-4"></i>
       <h3>Pagamento confirmado!</h3>
       <p>Seu anúncio foi criado e encaminhado para aprovação em até 1 dia útil. Você receberá a confirmação ou solicitação de revisão por e-mail. </p>
-      <%= link_to advertisements_path, class: "after-payment-button-link" do %>
+      <%= link_to advertisements_path, class: "after-payment-button-link user-advertisements-btn", id: "user-advertisements" do %>
         <p class="btn btn-dark w-100 p-2 px-5 br-8">Ver meu anúncio</p>
       <% end %>
     </div>

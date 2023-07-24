@@ -11,6 +11,8 @@ export function Bikes(props) {
   });
   // let buttonEvent = window.matchMedia("(hover: hover)").matches ? 'mousedown' : 'touchstart';
   const [bikes, setBikes] = useState([])
+  const [show, setShow] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [conditionFilter, setConditionFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
@@ -219,7 +221,11 @@ export function Bikes(props) {
     // if (certifiedFilter) url = url + `&certified=${certifiedFilter}`
 
     const response = await axios.get(url);
+    if (response.data.bikes.length === 0) {
+      setShow(true)
+    }
     setBikes(response.data.bikes);
+    setLoading(false)
 
   }, [modalityFilter, conditionFilter, minPriceFilter, maxPriceFilter, minYearFilter, maxYearFilter, bikeTypeFilter, batteryCyclesFilter, mileageFilter, cityFilter, stateFilter,
   filteredLinkCategory, filteredLinkBikeType, categoryOptionsToFilter, modalityOptionsToFilter, modelOptionsToFilter, frameSizeOptionsToFilter, frameMaterialOptionsToFilter, verifiedBikeFilter,
@@ -865,7 +871,7 @@ export function Bikes(props) {
 
   return (
     <div className="p-5 br-8 index-container">
-      <h2 className="text-center text-success">Bikes</h2>
+      <h2 className={`text-center text-success ${window.screen.width > 768 ? "" : "display-1"}`} style={{ marginLeft: window.screen.width > 768 ? "24vw" : "" }}>Bikes</h2>
       <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilterMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
       <div className={`mt-3 index-content ${ window.screen.width < 768 ? "d-block" : "d-flex"}`}>
         <div id="filters" className={`filters mt-1 mb-1 ${ window.screen.width < 768 ? "d-none w-100" : " w-25"}`}>
@@ -1669,15 +1675,17 @@ export function Bikes(props) {
           </div>
         </div>
 
-        <div className={`${window.screen.width < 768? 'w-100 gap-3' : 'w-75'} d-flex flex-wrap`}>
-          {bikes.length === 0 && (
-            <h3 className="mx-auto text-success">Ops! Não encontramos uma bike para sua busca. Tente com outras categorias e critérios</h3>
+        <div className={`${window.screen.width < 768? 'w-100 gap-3' : 'w-75'} d-flex flex-wrap nuflow-parent`}>
+          {
+            loading && <section className="nuflow-loader"  style={{ marginLeft: window.screen.width > 768 ? "12vw" : ""}}></section>
+          }
+          {(bikes.length === 0 && show) && (
+            <h3 className="mx-auto text-success no-item-text">Ops! Não encontramos uma bike para sua busca. Tente com outras categorias e critérios</h3>
           )}
           {bikes && bikes.map((bike, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'}`} bike={bike} key={bike.id} id="mobile">
-                <a href={"bikes/" + bike.id + "?bike=" + bike.frame_brand + bike.model} className="
-                " target="_blank">
+                <a href={`bikes/${bike.id}?bike=${bike.frame_brand.replace(/[-\s]+/g, "-").trim()}-${bike.model.replace(/[-\s]+/g, "-").trim()}`} className="view-bike" id={`view-bike-${bike.id.toString()}`} target="_blank">
                   <div className="cards-bikes">
                     {
                       bike.verified &&
@@ -1685,35 +1693,34 @@ export function Bikes(props) {
                         <div className="verified-icon"></div>
                       )
                     }
-                    <div id={"carouselExampleControls" + bike.id.toString()} className="carousel slide" data-bs-ride="carousel">
-                      <div className="carousel-inner">
-                        {bike.photos.map((photo, index) => {
-                          return (
-                            <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                    {bike.photos.length > 1 ? (
+                      <div id={"carouselExampleControls" + bike.id.toString()} className="carousel slide" data-bs-interval="false">
+                        <div className="carousel-inner">
+                          {bike.photos.map((photo, index) => (
+                            <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
                               <img src={photo} className="d-block w-100 img-card-index" alt="" />
                             </div>
-                          )
-                        })}
-                      </div>
-                      {bike.photos.length === 0 && (
-                        <div className="carousel-inner">
-                          <div className="carousel-item active">
-                            <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                          </div>
-                          <div className="carousel-item">
-                            <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                          </div>
+                          ))}
                         </div>
-                      )}
-                      <button className="carousel-control-prev" type="button" data-bs-target={"#carouselExampleControls" + bike.id.toString()} data-bs-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                      </button>
-                      <button className="carousel-control-next" type="button" data-bs-target={"#carouselExampleControls" + bike.id.toString()}  data-bs-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                      </button>
-                    </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target={"#carouselExampleControls" + bike.id.toString()} data-bs-slide="prev">
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target={"#carouselExampleControls" + bike.id.toString()}  data-bs-slide="next">
+                          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        {bike.photos.length === 1 && (
+                          <img src={bike.photos[0]} className="d-block w-100 img-card-index" alt="" />
+                        )}
+                        {bike.photos.length === 0 && (
+                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                        )}
+                      </div>
+                    )}
                     <h4 className="card-title text-center gap-2 mt-2">{bike.frame_brand}  {bike.model}</h4>
                     <h4 className="text-center mt-1">
                       {(bike.price_in_cents / 100).toLocaleString("pt-BR", {

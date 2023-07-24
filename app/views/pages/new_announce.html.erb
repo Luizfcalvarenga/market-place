@@ -27,7 +27,7 @@
 
       <div class="new-announce-btns">
         <%# <%= link_to "BIKE", new_bike_path, class: "btn btn-outline mt-3 px-4" %>
-        <%= link_to "ANUNCIAR", new_product_path, class: "btn-home-smooth" %>
+        <%= link_to "ANUNCIAR", new_product_path, class: "btn-home-smooth new-announce-btn", id: "new-announce" %>
       </div>
 
 
@@ -117,11 +117,11 @@
 
 
   <div id="frequent-questions" class="frequent-questions px-5 mt-2">
-    <h3 class="text-center text-success mb-4">Ainda com duvida</h3>
+    <h3 class="text-center text-success mb-4">Dúvidas frequentes</h3>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          <button class="accordion-button collapsed accordion-subtitle" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
             Como vender pela Nuflow?
           </button>
         </h2>
@@ -138,7 +138,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+          <button class="accordion-button collapsed accordion-subtitle" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
             Anunciei meu produto, e agora?
           </button>
         </h2>
@@ -153,7 +153,7 @@
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+          <button class="accordion-button collapsed accordion-subtitle" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
             Qual a diferença das bikes e produtos certificados?
           </button>
         </h2>
@@ -162,13 +162,13 @@
             As bikes e produtos certificados são anunciados por lojas e oficinas credenciadas pela Nuflow, que verificam o estado do produto e contam com recursos para garantir uma maior segurança para sua compra.<br>
             Em conjunto com a Nuflow é possível comprar sua bike ou equipamento de onde estiver, com pagamento parcelado e assegurado até o recebimento do produto.<br>
             Além disso, você é atendido por vendedores experientes para te ajudar a encontrar a bike ou equipamento ideal para você.<br>
-            Veja as <%= link_to "Bikes certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link fs-18" %> ou <%= link_to "Produtos certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link fs-18" %>
+            Veja as <%= link_to "Bikes certificadas",  {:controller => "bikes", :action => "index", :verified => true}, class: "nav-link fs-18", id: "certified-bikes" %> ou <%= link_to "Produtos certificados",  {:controller => "products", :action => "index", :verified => true}, class: "nav-link fs-18", id: "certified-products" %>
           </div>
         </div>
       </div>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+        <h2 class="accordion-header" id="flush-headingFour">
+          <button class="accordion-button collapsed accordion-subtitle" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
             Tenho interesse em um produto, o que fazer?
           </button>
         </h2>

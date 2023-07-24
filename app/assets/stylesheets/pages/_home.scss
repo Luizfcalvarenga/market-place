@@ -36,7 +36,9 @@
 //     font-size: 28px;
 //   }
 // }
-
+  .card-how-works-services{
+    width: 28vw;
+  }
 
 
 ///////////////////////////// 4ª SECTION
@@ -44,7 +46,7 @@
 .fourth-section-home {
   background-color:  #151515;
   .carousel-control-prev-icon, .carousel-control-next-icon {
-    filter: invert(1);
+    filter: invert(0);
   }
 }
 
@@ -106,8 +108,13 @@
     margin-top: 10px;
   }
   .cards-services, .links-service {
-    display: block!important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+  }
+  .card-how-works-services{
+    width: 76vw !important;
   }
 
   .fourth-section-home {
@@ -130,7 +137,7 @@
       box-shadow: none;
     }
     .carousel-control-prev-icon, .carousel-control-next-icon {
-      filter: invert(1);
+      filter: invert(0);
     }
   }
 
@@ -198,7 +205,7 @@
     height: 140vh;
     position: relative;
     z-index: 1;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 
 
     h1 {
@@ -249,7 +256,7 @@
       box-shadow: none;
     }
     .carousel-control-prev-icon, .carousel-control-next-icon {
-      filter: invert(1);
+      filter: invert(0);
     }
   }
 
@@ -304,7 +311,7 @@
     height: 140vh;
     position: relative;
     z-index: 1;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 
     h2 {
       margin-top: 50px;
@@ -352,7 +359,7 @@
       box-shadow: none;
     }
     .carousel-control-prev-icon, .carousel-control-next-icon {
-      filter: invert(1);
+      filter: invert(0);
     }
   }
 
@@ -406,7 +413,7 @@
     height: 140vh;
     position: relative;
     z-index: 1;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 
 
     h2 {
@@ -450,7 +457,7 @@
     }
 
     .carousel-control-prev-icon, .carousel-control-next-icon {
-      filter: invert(1);
+      filter: invert(0);
     }
   }
 
@@ -489,4 +496,25 @@
   .wpp-btn {
     display: none;
   }
+}
+
+.btn-home-blog, .btn-home-certified-bikes, .btn-home-certified-products {
+  background-color: transparent;
+  border-radius: 4px;
+  color: $color-primary;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 1px solid $color-primary;
+  font-size: 24px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-home-blog:hover, .btn-home-certified-bikes:hover, .btn-home-certified-products:hover {
+  box-shadow: 0px 0px 20px 0px #00c4545e;
 }

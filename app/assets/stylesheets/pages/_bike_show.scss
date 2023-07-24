@@ -141,3 +141,41 @@
   }
 
 }
+
+.modal-dialog-centered{
+  postion: relative;
+}
+
+.modal-content {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 4rem;
+}
+
+.modal-dialog {
+  border-radius: 8px;
+  max-width: 70vw;
+}
+
+@media (max-width: 768px) {
+.modal-dialog {
+  max-width: 100vw;
+
+  .modal-content{
+  top: 2rem
+  }
+}
+}
+
+.closeModal {
+  position: absolute;
+  right: 62px;
+  z-index: 1100;
+  font-size: 30px;
+  cursor: pointer;
+  @media (max-width: 768px) {
+  right: 20px;
+  top: 76px;
+  }
+}

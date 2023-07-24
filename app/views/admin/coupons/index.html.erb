@@ -1,7 +1,7 @@
 <div class="<%= mobile_device? ? "p-1" : "p-5" %>">
   <div class="flex center between">
     <h1 class="title">Cupons</h1>
-    <%= link_to new_admin_coupon_path do %>
+    <%= link_to new_admin_coupon_path, class: "new-admin-coupon-btn" do %>
       <i class="fa fa-plus mr-3"></i> Adicionar novo cupom
     <% end %>
   </div>
@@ -48,7 +48,7 @@
               <%= coupon.redemption_limit - coupon.advertisements.count %>
             </td>
             <td class="align-middle">
-              <%= link_to edit_admin_coupon_path(coupon) do %>
+              <%= link_to edit_admin_coupon_path(coupon), "edit-admin-coupon-btn" do %>
                 <i class="fas fa-edit"></i>Editar
               <% end %>
             </td>

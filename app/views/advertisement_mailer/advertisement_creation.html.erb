@@ -1,166 +1,33 @@
-<style>
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 90%;
-    /* margin: 0 auto; */
-    margin-top: 10px;
-    border: 1px solid #00c454;
-    border-radius: 50px;
-    box-shadow: 5px 8px 12px #e0e0e0;
-    align-items: center;
-    margin: 20px auto;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    padding-bottom: 20px;
-    background: #101010;
-  }
-
-  h6 {
-    font-size: 12;
-    font-weight: lighter;
-    color: white;
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 40px;
-  }
-
-  .orange {
-    background-color: #00c454;
-    color: white !important;
-    padding: 5px;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .mail-content {
-    padding: 0 20px;
-  }
-  p {
-    color: gray;
-  }
-
-  .item-name, h2 {
-    color: gray;
-  }
-
-  .detail-info {
-    color: gray;
-    font-size: 12px;
-  }
-
-  .btn-invoice {
-    background-color: transparent;
-    border-radius: 4px;
-    color: #00c454;
-    cursor: pointer;
-    display: inline-block;
-    padding: 7px 20px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 250ms;
-    border: 1px solid #00c454;
-    font-size: 16px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-
-  .social-icon {
-    width: 22px;
-    height: 22px;
-    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  }
-
-  .btn-invoice:hover {
-    box-shadow: 0px 0px 20px 0px #00c4545e;
-  }
-
-  .social-icon {
-    width: 25px;
-    height: 25px;
-    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  }
-
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .social-icon:hover {
-    filter: invert(46%) sepia(117%) saturate(1261%) hue-rotate(128deg) brightness(100%) contrast(102%);
-
-  }
-
- .social-icon-face {
-    width: 22px;
-    height: 22px;
-    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  }
-
-  .social-icon-face:hover {
-    filter: invert(46%) sepia(117%) saturate(1261%) hue-rotate(128deg) brightness(100%) contrast(102%);
-  }
-
-  .footer {
-    text-align: center;
-  }
-
-  .footer-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .footer-brand {
-    margin-top: 10px;
-  }
-
-  .footer-line {
-    border: 0.1px solid #00c454;
-    width: 30%;
-    height: 0.2px;
-  }
-
-  .invoice-link {
-    text-align: center;
-    margin: 0 !important;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-</style>
-
-<body>
-  <div class="orange">
-    <h3>FALTA POUCO PARA ANUNCIAR SEU PRODUTO!</h3>
+<body style="font-family: Arial, Helvetica, sans-serif; width: 90%; margin-top: 10px; border: 1px solid #00c454; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); align-items: center; margin: 20px auto; padding-bottom: 20px;">
+  <div class="orange" style="background-color: #00c454; padding: 5px; text-align: center; border-radius: 10px 10px 0 0; color: white !important;">
+    <h3>Falta pouco para anunciar seu produto!</h3>
   </div>
-  <div class="mail-content">
+  <div class="mail-content" style="padding: 0 20px;">
     <% if @advertisement.user.full_name %>
-    <h2 class="text-center">Olá <%= @advertisement.user.full_name %>,</h2>
+    <h2 class="text-center" style="color: gray; text-align: center;">Olá <%= @advertisement.user.full_name %>,</h2>
     <% else %>
-    <h2 class="text-center">Olá,</h2>
+    <h2 class="text-center" style="color: gray; text-align: center;">Olá,</h2>
     <% end %>
-    <p class="text-center">Você está muito próximo de anunciar seu produto para milhares de ciclistas</p>
-    <p class="text-center">Para publicar seu anúncio, basta efetuar o pagamento clicando no link abaixo.</p>
+    <p class="text-center" style="color: gray; text-align: center;">Você está muito próximo de anunciar seu produto para milhares de ciclistas</p>
+    <p class="text-center" style="color: gray; text-align: center;">Para publicar seu anúncio, basta efetuar o pagamento clicando no link abaixo.</p>
 
-    <div class="invoice-link">
-      <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice">Ver invoice</a>
-      <p class="detail-info">Se você já pagou pelo anúncio desconsidere o link acima.</p>
+    <div class="invoice-link" style="text-align: center; margin: 0 !important;">
+      <a href="<%= @advertisement.invoice_url %>" target="_blank" class="btn-invoice" style="background-color: transparent; border-radius: 4px; color: #00c454; cursor: pointer; display: inline-block; padding: 7px 20px; text-align: center; text-decoration: none; transition: all 250ms; border: 1px solid #00c454; font-size: 16px; user-select: none; -webkit-user-select: none; touch-action: manipulation;">Ver invoice</a>
+      <p class="detail-info" style="color: gray; font-size: 12px;">Se você já pagou pelo anúncio desconsidere o link acima.</p>
     </div>
-    <h2>Detalhes do seu anúncio:</h2>
-    <p><strong class="item-name">Anúncio:</strong> #<%= @advertisement.id %></p>
-    <p><strong class="item-name">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
-    <p><strong class="item-name">Anunciado:</strong> <%= @advertisement.advertisable_display %></p>
-    <p><strong class="item-name">Status:</strong> <%= @advertisement.status_display %></p>
-    <h6>Dúvidas? Entre em contato através do email <strong>atendimento@nuflow.com.br</strong></h6>
-    <hr class="footer-line">
-    <div class="footer">
+    <h2 style="color: gray;">Detalhes do seu anúncio:</h2>
+    <p style="color: gray;"><strong class="item-name" style="color: gray;">Anúncio:</strong> #<%= @advertisement.id %></p>
+    <p style="color: gray;"><strong class="item-name" style="color: gray;">Total:</strong> <%=number_to_currency(@advertisement.price_in_cents / 100, unit: "R$", separator: ",", delimiter: ".") %></p>
+    <p style="color: gray;"><strong class="item-name" style="color: gray;">Anunciado:</strong> <%= @advertisement.advertisable_display %></p>
+    <p style="color: gray;"><strong class="item-name" style="color: gray;">Status:</strong> <%= @advertisement.status_display %></p>
+    <h6 style="font-size: 12; font-weight: lighter; text-align: center; margin-bottom: 0; margin-top: 40px;">Dúvidas? Entre em contato através do email <strong>atendimento@nuflow.com.br</strong></h6>
+    <hr class="footer-line" style="border: 0.1px solid #00c454; width: 30%; height: 0.2px;">
+    <div class="footer" style="text-align: center;">
 
-      <%= image_tag attachments["white_logo.png"].url, class: "footer-brand"%>
-      <div class="social-icons">
-        <a href="https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw" class="footer-icon"><%= image_tag attachments['youtube.png'].url, class: "social-icon" %></a>
-        <a href="https://www.instagram.com/_nuflow_/"><%= image_tag attachments["instagram.png"].url, class: "social-icon" %></a>
+      <%= image_tag attachments["white_logo.png"].url, class: "footer-brand", style: "height: 6rem;"%>
+      <div class="social-icons" style="text-align: center;  gap: 10px;">
+        <a href="https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw" class="footer-icon" style="width: 22px; height: 22px;"><%= image_tag attachments['youtube.png'].url, class: "social-icon", style:"width: 22px; height: 22px;" %></a>
+        <a href="https://www.instagram.com/_nuflow_/"><%= image_tag attachments["instagram.png"].url, class: "social-icon", style:"width: 22px; height: 22px;" %></a>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@ class AdvertisementMailer < ApplicationMailer
     attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
     attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
     attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
-    mail(to: @client.email, subject: "FALTA POUCO PARA ANUNCIAR SEU PRODUTO!")
+    mail(to: @client.email, subject: "Falta pouco para anunciar seu produto!")
   end
 
   def notify_admin_advertisement_creation
@@ -28,7 +28,7 @@ class AdvertisementMailer < ApplicationMailer
     attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
     attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
     attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
-    mail(to: @client.email, subject: "PARABÉNS! SEU ANÚNCIO FOI PUBLICADO.")
+    mail(to: @client.email, subject: "Parabéns! seu anúncio foi publicado.")
   end
 
   def advertisement_rejecter
@@ -41,7 +41,7 @@ class AdvertisementMailer < ApplicationMailer
     attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
     attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
     attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
-    mail(to: @client.email, subject: "QUASE LÁ! REVISE SEU ANÚNCIO PARA PUBLICÁ-LO")
+    mail(to: @client.email, subject: "Quase lá! revise seu anúncio para publicá-lo")
   end
 
   def advertisement_updater
@@ -59,6 +59,6 @@ class AdvertisementMailer < ApplicationMailer
     attachments.inline['white_logo.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'white_logo.png'))
     attachments.inline['youtube.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'youtube.png'))
     attachments.inline['instagram.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'instagram.png'))
-    mail(to: @client.email, subject: "SEU ANÚNCIO FOI RECEBIDO E SERÁ PUBLICADO EM BREVE.")
+    mail(to: @client.email, subject: "Seu anúncio foi recebido e será publicado em breve.")
   end
 end

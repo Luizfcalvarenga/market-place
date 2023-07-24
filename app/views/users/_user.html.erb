@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-12 d-flex align-items-center justify-content-between">
         <div class="icon-container ms-3 mt-3">
-          <%= link_to user, class: 'd-flex align-items-center user-link-chat', data: {turbo: "false"} do %>
+          <%= link_to user, class: 'd-flex align-items-center user-link-chat', id: "user-chat-btn", data: {turbo: "false"} do %>
             <%= cl_image_tag user.photo.key, class: 'chat_pfp me-4' %>
             <% if user.full_name.present? %>
               <%= user.full_name %>

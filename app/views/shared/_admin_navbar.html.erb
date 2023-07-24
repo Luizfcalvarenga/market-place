@@ -1,21 +1,21 @@
 <div id="navbar" class="navbar navbar-expand-md navbar-light-lg">
   <div class="collapse navbar-collapse d-flex justify-content-center page-desktop">
     <div class="flex center around ms-3">
-      <%= link_to root_path, class: "nav-link-drop" do %>
-        <%= image_tag "white_logo.png", class: "navbar-brand" %>
+      <%= link_to root_path, class: "nav-link-drop home-btn", id: "admin-home-link" do %>
+        <%= image_tag "white_logo_1.png", class: "navbar-brand" %>
       <% end %>
     </div>
     <div class="f-40  w-100">
       <ul class="navbar-nav font-bebas-neue d-flex flex-row align-items-center justify-content-between gap-10">
         <div id="navbar-links" class="nav-links d-flex">
           <li class="nav-item active">
-            <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3" %>
+            <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3 admin-advertisements-btn", id: "admin-advertisements" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Cupons", admin_coupons_path, class: "nav-link mx-3" %>
+            <%= link_to "Cupons", admin_coupons_path, class: "nav-link mx-3 admin-coupons-btn", id: "admin-coupons" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
+            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3 admin-users-btn", id: "admin-users" %>
           </li>
         </div>
         <% if user_signed_in? %>
@@ -33,13 +33,13 @@
             </div>
           </li>
           <li class="my-auto">
-            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link-logout ms-3" do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link-logout ms-3 logout", id: "admin-logout-btn" do %>
               SAIR
             <% end %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link text-decoration-underline nav-login" %>
+            <%= link_to "Login/Criar conta", new_user_session_path, class: "text-success nav-link text-decoration-underline nav-login login", id: "admin-login-btn" %>
           </li>
         <% end %>
       </ul>
@@ -48,8 +48,8 @@
 
   <% if mobile_device? %>
     <div class="flex center between w-100 px-5">
-      <%= link_to root_path, class: "nav-link" do %>
-        <%= image_tag "white_logo.png", class: "navbar-brand" %>
+      <%= link_to root_path, class: "nav-link home-btn", id: "admin-home-btn" do %>
+        <%= image_tag "white_logo_1.png", class: "navbar-brand" %>
       <% end %>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,21 +61,21 @@
       <div class="flex center around mobile-menu">
         <ul class="navbar-nav font-bebas-neue text-center d-flex flex-column">
           <li class="nav-item active">
-            <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3" %>
+            <%= link_to "Anúncios", admin_advertisements_path, class: "nav-link  drop-btn mx-3 admin-advertisements-btn", id: "admin-advertisements-mobile-btn" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3" %>
+            <%= link_to "Usuários", admin_users_path, class: "nav-link mx-3 admin-users-btn", id: "admin-users-mobile-btn" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "CUPONS", admin_coupons_path, class: "nav-link" %>
+            <%= link_to "CUPONS", admin_coupons_path, class: "nav-link admin-coupons-btn", id: "admin-coupons-mobile-btn" %>
           </li>
           <% if user_signed_in? %>
             <li class="nav-item active">
-              <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline" %>
+              <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-success nav-link text-decoration-underline logout", id: "admin-logout-mobile-btn" %>
             </li>
           <% else %>
             <li class="nav-item">
-              <%= link_to "LOGIN", new_user_session_path, class: "text-success nav-link text-decoration-underline" %>
+              <%= link_to "LOGIN", new_user_session_path, class: "text-success nav-link text-decoration-underline login", id: "admin-login-mobile-btn" %>
             </li>
           <% end %>
         </ul>

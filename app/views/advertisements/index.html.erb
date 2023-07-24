@@ -14,7 +14,7 @@
 
             <% if advertisement.invoice_paid_at.blank?  && (advertisement.final_price_with_coupon_in_cents > 0)%>
               <div>
-                <%= link_to "Pagar", advertisement_invoice_path(advertisement), class: "btn-invoice"  %>
+                <%= link_to "Pagar", advertisement_invoice_path(advertisement), class: "btn-invoice advertisement-invoice-btn", id: "advertisement-pay-btn"  %>
               </div>
             <% end %>
           </div>
@@ -82,13 +82,13 @@
                   </div>
                   <div class="d-flex justify-content-between">
                     <% if policy(advertisement.advertisable).edit? %>
-                      <%= link_to edit_product_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
+                      <%= link_to edit_product_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray edit-product-btn", id: "edit-user-product-btn"  do %>
                         <i class="fas fa-pen"></i>  Editar <br>
                       <% end %>
                     <% end %>
 
                     <% if policy(advertisement.advertisable).destroy? %>
-                      <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.product_type.prompt}?"}, class: "remove-link fs-18 text-gray" do %>
+                      <%= link_to product_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.product_type.prompt}?"}, class: "remove-link fs-18 text-gray delete-product-btn", id: "delete-user-product-btn" do %>
                         <i class="fas fa-trash"></i> Remover
                       <% end %>
                     <% end %>
@@ -138,12 +138,12 @@
                   </div>
                   <div class="d-flex justify-content-between">
                     <% if policy(advertisement.advertisable).edit? %>
-                      <%= link_to edit_bike_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray"  do %>
+                      <%= link_to edit_bike_path(advertisement.advertisable), class: "nav-link fs-18 me-2 text-gray edit-bike-btn", id: "edit-user-bike-btn"  do %>
                         <i class="fas fa-pen"></i>  Editar <br>
                       <% end %>
                     <% end %>
                     <% if policy(advertisement.advertisable).destroy? %>
-                      <%= link_to bike_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.model}?"}, class: "remove-link fs-18 text-gray" do %>
+                      <%= link_to bike_path(advertisement.advertisable), method: :delete, data: { confirm: "Are you sure you want to remove #{advertisement.advertisable.model}?"}, class: "remove-link fs-18 text-gray delete-bike-btn", id: "edit-user-bike-btn" do %>
                         <i class="fas fa-trash"></i> Remover
                       <% end %>
                     <% end %>

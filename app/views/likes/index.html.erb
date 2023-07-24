@@ -7,7 +7,7 @@
     <div class="<%= mobile_device? ? "d-block" : "d-flex gap-1 flex-wrap justfy-content-between" %> ">
       <% @likes.each do | like| %>
         <% if like.likeble_type == "Bike" && like.likeble.present? %>
-          <%= link_to bike_path(like.likeble_id), class: "" do %>
+          <%= link_to bike_path(like.likeble_id), class: "favorite-bike", id: "favorite-bike-#{like.likeble_id}" do %>
             <div class="cards-bikes-likes mt-3">
               <div id="carouselExampleControls<%= like.likeble_id.to_s %>" class="carousel slide" data-bs-ride="carousel">
                 <% if like.likeble.photos.attached? %>
@@ -62,7 +62,7 @@
             </div>
           <% end %>
         <% elsif like.likeble_type ==  "Product" && like.likeble.present? %>
-          <%= link_to product_path(like.likeble_id), class: "" do %>
+          <%= link_to product_path(like.likeble_id), class: "favorite-product", id: "favorite-product-#{like.likeble_id}" do %>
             <div class="cards-products-likes mt-3">
               <div id="carouselExampleControls<%= like.likeble_id.to_s %>" class="carousel slide" data-bs-ride="carousel">
                 <% if like.likeble.photos.attached? %>
@@ -103,7 +103,7 @@
                     <p class="text-secondary"><%= like.likeble.product_type.prompt %></p>
                   </div>
                   <div class="infos">
-                    <%= link_to like_path(like), method: :delete, class: "dislike-btn", data: { confirm: "Tem certeza que deseja remover #{like.likeble.model} dos favoritos?"}  do %>
+                    <%= link_to like_path(like), method: :delete, class: "dislike-btn", id:"dislike", data: { confirm: "Tem certeza que deseja remover #{like.likeble.model} dos favoritos?"}  do %>
                       <i class="fas fa-heart"></i>
                     <% end %> <br>
                     <% if  ["air_bomb", "bottle_cage", "eletronics", "oil_lubricant", "stand", "tools", "car_protectors", "training_roller", "bike_rack", "water_bottle"].include?(like.likeble.product_type.name) %>

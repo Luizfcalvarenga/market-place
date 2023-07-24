@@ -29,6 +29,10 @@ $number-of-options: 4;
     color: gray !important;
   }
 
+  .couponInput{
+    width: 100% !important;
+  }
+
   .text-input:focus {
     outline:none !important;
     box-shadow: none !important;
@@ -313,7 +317,7 @@ option {
   text-decoration: none;
   transition: all 250ms;
   border: 1px solid $color-primary;
-  font-size: 16px;
+  font-size: 24px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;

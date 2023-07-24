@@ -1,159 +1,23 @@
-<style>
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 90%;
-    /* margin: 0 auto; */
-    margin-top: 10px;
-    border: 1px solid #00c454;
-    border-radius: 50px;
-    box-shadow: 5px 8px 12px #e0e0e0;
-    align-items: center;
-    margin: 20px auto;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    padding-bottom: 20px;
-    background: #101010;
-  }
-
-  h6 {
-    font-size: 12;
-    font-weight: lighter;
-    color: white;
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 40px;
-  }
-
-  .header {
-    background-color: #00c454;
-    color: white !important;
-    padding: 5px;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .mail-content {
-    padding: 10px 20px;
-  }
-  p {
-    color: gray;
-    text-align: center;
-  }
-
-  .item-name, h2 {
-    color: white;
-  }
-
-  .detail-info {
-    color: white;
-    font-size: 12px;
-  }
-
-  .btn-invoice {
-    background-color: transparent;
-    border-radius: 4px;
-    color: #00c454;
-    cursor: pointer;
-    display: inline-block;
-    padding: 7px 20px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 250ms;
-    border: 1px solid #00c454;
-    font-size: 16px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-
-  .btn-invoice:hover {
-    box-shadow: 0px 0px 20px 0px #00c4545e;
-  }
-
-  .social-icon {
-    width: 25px;
-    height: 25px;
-    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  }
-
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .social-icon:hover {
-    filter: invert(46%) sepia(117%) saturate(1261%) hue-rotate(128deg) brightness(100%) contrast(102%);
-
-  }
-
- .social-icon-face {
-    width: 22px;
-    height: 22px;
-    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  }
-
-  .social-icon-face:hover {
-    filter: invert(46%) sepia(117%) saturate(1261%) hue-rotate(128deg) brightness(100%) contrast(102%);
-  }
-
-  .footer {
-    text-align: center;
-    padding-top: 10px;
-  }
-
-  .footer-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .footer-brand {
-    margin-top: 10px;
-  }
-
-  .footer-line {
-    border: 0.1px solid #00c454;
-    width: 30%;
-    height: 0.2px;
-
-  }
-
-  .invoice-link {
-    text-align: center;
-    margin: 0 !important;
-  }
-
-  .text-center{
-    text-align: center;
-  }
-
-  .social-icon {
-    width: 22px;
-    height: 22px;
-    filter: invert(46%) sepia(99%) saturate(1234%) hue-rotate(110deg) brightness(97%) contrast(102%);
-  }
-</style>
-
-<body>
-  <div class="header">
+<body style="font-family: Arial, Helvetica, sans-serif; width: 90%; margin-top: 10px; border: 1px solid #00c454; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.3); align-items: center; margin: 20px auto; padding-bottom: 20px;">
+  <div class="header" style="background-color: #00c454; padding: 5px; text-align: center; border-radius: 10px 10px 0 0; color: white !important;">
     <h3>Yeah! Você tem uma nova mensagem no chat.</h3>
   </div>
-  <div class="mail-content">
-    <p>Olá,</p>
-    <p>Tem gente interessada em comprar o seu produto!</p>
-    <p>Você recebeu uma nova mensagem no chat. Não perca essa chance e corra para responder:</p>
-    <div class="text-center">
-      <a href="https://market.nuflow.com.br/user/<%= @client.id %>" target="_blank" class="btn-invoice">Responder chat</a>
+  <div class="mail-content" style="padding: 10px 20px;">
+    <h2 style="color: gray; text-align: center;">Olá,</h2>
+    <p style="color: gray; text-align: center;">Tem gente interessada em comprar o seu produto!</p>
+    <p style="color: gray; text-align: center;">Você recebeu uma nova mensagem no chat. Não perca essa chance e corra para responder:</p>
+    <div class="text-center" style="text-align: center;">
+      <a href="https://market.nuflow.com.br/user/<%= @client.id %>" target="_blank" class="btn-invoice" style="background-color: transparent;border-radius: 4px; color: #00c454; cursor: pointer; display: inline-block; padding: 7px 20px; text-align: center; text-decoration: none; transition: all 250ms; border: 1px solid #00c454; font-size: 16px; user-select: none; -webkit-user-select: none; touch-action: manipulation;">Responder chat</a>
     </div>
 
-    <p class="text-center">Dúvidas? Entre em contato com através do email atendimento@nuflow.com.br</p>
+    <p class="text-center" style="color: gray; text-align: center;">Dúvidas? Entre em contato com através do email atendimento@nuflow.com.br</p>
 
-    <hr class="footer-line">
-    <div class="footer">
-      <%= image_tag attachments["white_logo.png"].url, class: "footer-brand"%>
-      <div class="social-icons">
-        <a href="https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw" class="footer-icon"><%= image_tag attachments['youtube.png'].url, class: "social-icon" %></a>
-        <a href="https://www.instagram.com/_nuflow_/"><%= image_tag attachments["instagram.png"].url, class: "social-icon" %></a>
+    <hr class="footer-line" style="border: 0.1px solid #00c454; width: 30%; height: 0.2px;">
+    <div class="footer" style="text-align: center; padding-top: 10px;">
+      <%= image_tag attachments["white_logo.png"].url, class: "footer-brand", style: "height: 6rem;"%>
+      <div class="social-icons" style="align-items: center; gap: 10px;">
+        <a href="https://www.youtube.com/channel/UCMvz9XhN0wl39RK4y7Q7cEw" class="footer-icon" style="width: 22px;height: 22px;"><%= image_tag attachments['youtube.png'].url, class: "social-icon", style:"width: 22px; height: 22px;" %></a>
+        <a href="https://www.instagram.com/_nuflow_/"><%= image_tag attachments["instagram.png"].url, class: "social-icon", style:"width: 22px; height: 22px;" %></a>
       </div>
     </div>
   </div>

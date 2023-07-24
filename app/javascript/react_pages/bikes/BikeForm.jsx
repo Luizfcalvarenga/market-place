@@ -92,6 +92,9 @@ export function BikeForm(props) {
   const [cities, setCities] = useState([]);
   const [photos, setPhotos ] = useState(null);
   const [photosEdit, setPhotosEdit ] = useState([]);
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [discountedPrice, setDiscountedPrice] = useState("");
 
   const [photoFiles, setPhotoFiles] = useState({
     index: null,
@@ -128,26 +131,26 @@ export function BikeForm(props) {
   }
 
   //save reference for dragItem and dragOverItem
-	const dragItem = React.useRef(null)
-	const dragOverItem = React.useRef(null)
+  const dragItem = React.useRef(null)
+  const dragOverItem = React.useRef(null)
 
-	//const handle drag sorting
-	const handleSort = () => {
-		//duplicate items
-		let _photoFiles = [...photoFiles]
-		//remove and save the dragged item content
-		const draggedItemContent = _photoFiles.splice(dragItem.current, 1)[0]
-		//switch the position
-		_photoFiles.splice(dragOverItem.current, 0, draggedItemContent)
-		//reset the position ref
-		dragItem.current = null
-		dragOverItem.current = null
-		//update the actual array
-		setPhotoFiles(_photoFiles)
+  //const handle drag sorting
+  const handleSort = () => {
+    //duplicate items
+    let _photoFiles = [...photoFiles]
+    //remove and save the dragged item content
+    const draggedItemContent = _photoFiles.splice(dragItem.current, 1)[0]
+    //switch the position
+    _photoFiles.splice(dragOverItem.current, 0, draggedItemContent)
+    //reset the position ref
+    dragItem.current = null
+    dragOverItem.current = null
+    //update the actual array
+    setPhotoFiles(_photoFiles)
     // order photos to back from user order
     let order = _photoFiles.map((photo) => { return photo.name })
     mapOrder(photos, order, 'name');
-	}
+  }
 
 
   function mapOrder (array, order, key) {
@@ -816,8 +819,8 @@ export function BikeForm(props) {
     if (!category || !modality || !bikeType || !priceInCents || !model || !frameMaterial || !documentationType || !quantity || !frameBrand || !frameSize || !year || !city || !state) {
       return (<>
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-4" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step mt-4 pe-none" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-4" type="button" id="previous-btn" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-4 pe-none" type="button" id="second-section-btn" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
         <p className="text-center">Para avançar preencha todas as informações.</p>
       </>
@@ -825,8 +828,8 @@ export function BikeForm(props) {
     } else if (category && modality && bikeType && priceInCents && bikeCondition && model && frameMaterial && documentationType && quantity && frameBrand && frameSize && year && city && state) {
       return (
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-4" type="button" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step mt-4" type="button" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-4" type="button" id="previous-btn" onClick={(e) => handleBackToForm(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-4" type="button" id="second-section-btn" onClick={(e) => handleSecondStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       )
     }
@@ -1066,6 +1069,29 @@ export function BikeForm(props) {
     };
 
     return languageMap[word]
+  }
+
+  const handleApplyCoupon = async (value) =>{
+  console.log(value)
+    const url = "/api/v1/coupon_amount"
+    const method = "get"
+
+    const response = await axios[method](`${url}?discount_coupon=${discountCoupon}&price_in_cents=${value}`);
+
+    if (discountCoupon.length > 1){
+      if (response.data.success === false){
+        setErrors({...errors, coupon: response.data.errors});
+        setDiscountApplied(false)
+      }else{
+        setDiscountApplied(true)
+        setErrors({coupon: response.data.errors});
+        setOriginalPrice(value)
+        setDiscountedPrice(response.data.coupon)
+      }
+    }else{
+      setDiscountApplied(false)
+      setErrors({coupon: response.data.errors});
+    }
   }
 
   return (
@@ -1904,8 +1930,8 @@ export function BikeForm(props) {
             </div>
           </>)}
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-            <button className="btn-next-step" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            <button className="btn-back-step" type="button" id="back-to-second-section-btn" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-next-step" type="button" id="third-section-btn" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
 
@@ -2089,8 +2115,8 @@ export function BikeForm(props) {
               </>)}
             </div>
             <div className="d-flex justify-content-center">
-              <button className="btn-back-step" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-              <button className="btn-next-step" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+              <button className="btn-back-step" type="button" id="back-to-second-section-btn" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+              <button className="btn-next-step" type="button" id="third-section-btn" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
             </div>
         </div>
       </div>
@@ -2153,8 +2179,8 @@ export function BikeForm(props) {
           </>)}
         </div>
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" id="back-to-third-section-btn" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3" type="button" id="fourth-section-btn" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
 
@@ -2198,8 +2224,8 @@ export function BikeForm(props) {
 
 
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" id="back-to-fourth-section-btn" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3" type="button" id="fifth-section-btn" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       </div>
 
@@ -2429,9 +2455,9 @@ export function BikeForm(props) {
           {((priceInCents * 100) <= 100000) && (<>
             <div className="text-center mt-3 mb-3">
               <h5 className="announce-terms fs-22">Seu anúncio não será cobrado</h5>
-              <div className="d-flex justify-content-center gap-2">
+              <div className="my-2 d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+                <h5 className="announce-terms fs-16"><span  style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span  style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" className="nav-link fs-16 text-success" id="privacy-policy" target="_blank">Politica de pivacidade</a>.</h5>
               </div>
               {!props.bikeId && (<>
                 <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
@@ -2444,17 +2470,35 @@ export function BikeForm(props) {
           </>)}
 
           { ((priceInCents * 100) > 100000) && ((priceInCents * 100) <= 500000) && (<>
-            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 39,00</h5>
-            <div className="d-flex justify-content-center gap-2">
+            <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+              <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+              <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                  <>
+                    <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                    <s className="text-danger">R$ 39,00</s>
+                  </>
+                ) : (
+                  <>R$ 39,00</>
+                )}
+              </span>
+            </div>
+            <div className="my-2 d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+              <h5 className="announce-terms fs-16"><span  style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span  style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" className="nav-link fs-16 text-success" id="privacy-policy" target="_blank">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="w-50 mx-auto mt-3">
-              <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+            <div className="couponMainDiv mt-3 text-center">
+              <div className= "couponApplyDiv w-33">
+                <label htmlFor="discountCoupon" className="mt-1" style={{color: "#b6b6b6"}}>Cupom de desconto:</label>
+                <input type="text" className="text-input couponInput" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className= "couponApplyButton">
+                <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("3900")}> Aplicar </p>
+              </div>
+            </div>
+            <div className="my-1">
               { errors && errors.coupon && (
-                <p className="text-danger">{errors.coupon}</p>
+                <p className="text-danger text-center">{errors.coupon}</p>
               )}
             </div>
             <div className="text-center mt-3 mb-3">
@@ -2469,17 +2513,35 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 500000) && ((priceInCents * 100) <= 1000000) && (<>
-            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 59,00</h5>
-            <div className="d-flex justify-content-center gap-2">
+            <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+              <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+              <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                  <>
+                    <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                    <s className="text-danger">R$ 59,00</s>
+                  </>
+                ) : (
+                  <>R$ 59,00</>
+                )}
+              </span>
+            </div>
+            <div className="my-2 d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+              <h5 className="announce-terms fs-16"><span  style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span  style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" className="nav-link fs-16 text-success" id="privacy-policy" target="_blank">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="w-50 mx-auto mt-3">
-              <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+            <div className="couponMainDiv mt-3 text-center">
+              <div className= "couponApplyDiv w-33">
+                <label htmlFor="discountCoupon" className="mt-1" style={{color: "#b6b6b6"}}>Cupom de desconto:</label>
+                <input type="text" className="text-input couponInput" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className= "couponApplyButton">
+                <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("5900")}> Aplicar </p>
+              </div>
+            </div>
+            <div className="my-1">
               { errors && errors.coupon && (
-                <p className="text-danger">{errors.coupon}</p>
+                <p className="text-danger text-center">{errors.coupon}</p>
               )}
             </div>
             <div className="text-center mt-3 mb-3">
@@ -2494,17 +2556,35 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 1000000) && ((priceInCents * 100) <= 2000000) &&(<>
-            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 89,00</h5>
-            <div className="d-flex justify-content-center gap-2">
+            <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+              <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+              <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                  <>
+                    <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                    <s className="text-danger">R$ 89,00</s>
+                  </>
+                ) : (
+                  <>R$ 89,00</>
+                )}
+              </span>
+            </div>
+            <div className="my-2 d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+              <h5 className="announce-terms fs-16"><span  style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span  style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" className="nav-link fs-16 text-success" id="privacy-policy" target="_blank">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="w-50 mx-auto mt-3">
-              <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+            <div className="couponMainDiv mt-3 text-center">
+              <div className= "couponApplyDiv w-33">
+                <label htmlFor="discountCoupon" className="mt-1" style={{color: "#b6b6b6"}}>Cupom de desconto:</label>
+                <input type="text" className="text-input couponInput" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className= "couponApplyButton">
+                <p className="btn btn-underline text-underline f-10 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon('8900')}> Aplicar </p>
+              </div>
+            </div>
+            <div className="my-1">
               { errors && errors.coupon && (
-                <p className="text-danger">{errors.coupon}</p>
+                <p className="text-danger text-center">{errors.coupon}</p>
               )}
             </div>
             <div className="text-center mt-3 mb-3">
@@ -2519,17 +2599,35 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 2000000) && ((priceInCents * 100) <= 3000000) &&(<>
-            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 129,00</h5>
-            <div className="d-flex justify-content-center gap-2">
+            <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+              <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+              <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                  <>
+                    <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                    <s className="text-danger">R$ 129,00</s>
+                  </>
+                ) : (
+                  <>R$ 129,00</>
+                )}
+              </span>
+            </div>
+            <div className="my-2 d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+              <h5 className="announce-terms fs-16"><span  style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span  style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" className="nav-link fs-16 text-success" id="privacy-policy" target="_blank">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="w-50 mx-auto mt-3">
-              <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+            <div className="couponMainDiv mt-3 text-center">
+              <div className= "couponApplyDiv w-33">
+                <label htmlFor="discountCoupon" className="mt-1" style={{color: "#b6b6b6"}}>Cupom de desconto:</label>
+                <input type="text" className="text-input couponInput" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className= "couponApplyButton">
+                <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("12900")}> Aplicar </p>
+              </div>
+            </div>
+            <div className="my-1">
               { errors && errors.coupon && (
-                <p className="text-danger">{errors.coupon}</p>
+                <p className="text-danger text-center">{errors.coupon}</p>
               )}
             </div>
             <div className="text-center mt-3 mb-3">
@@ -2544,17 +2642,35 @@ export function BikeForm(props) {
           </>)}
 
           {((priceInCents * 100) > 3000000) && (<>
-            <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 159,00</h5>
-            <div className="d-flex justify-content-center gap-2">
+            <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+              <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+              <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                  <>
+                    <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                    <s className="text-danger">R$ 159,00</s>
+                  </>
+                ) : (
+                  <>R$ 159,00</>
+                )}
+              </span>
+            </div>
+            <div className="my-2 d-flex justify-content-center gap-2">
               <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-              <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+              <h5 className="announce-terms fs-16"><span  style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span  style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" className="nav-link fs-16 text-success" id="privacy-policy" target="_blank">Politica de pivacidade</a>.</h5>
             </div>
             <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-            <div className="w-50 mx-auto mt-3">
-              <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-              <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+            <div className="couponMainDiv mt-3 text-center">
+              <div className= "couponApplyDiv w-33">
+                <label htmlFor="discountCoupon" className="mt-1" style={{color: "#b6b6b6"}}>Cupom de desconto:</label>
+                <input type="text" className="text-input couponInput" onChange={(e) => setDiscountCoupon(e.target.value)}/>
+              </div>
+              <div className= "couponApplyButton">
+                <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("15900")}> Aplicar </p>
+              </div>
+            </div>
+            <div className="my-1">
               { errors && errors.coupon && (
-                <p className="text-danger">{errors.coupon}</p>
+                <p className="text-danger text-center">{errors.coupon}</p>
               )}
             </div>
             <div className="text-center mt-3 mb-3">
@@ -2580,7 +2696,7 @@ export function BikeForm(props) {
         </div>
 
         <div className="text-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-back-step me-3 mt-3" id="back-to-fifth-section-btn" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
         </div>
       </div>
     </div>

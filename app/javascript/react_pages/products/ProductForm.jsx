@@ -50,7 +50,9 @@ export function ProductForm(props) {
   const [cities, setCities] = useState([]);
   const [discountCoupon, setDiscountCoupon] = useState("");
   const [photosEdit, setPhotosEdit ] = useState([]);
-
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [discountedPrice, setDiscountedPrice] = useState("");
   const [photoFiles, setPhotoFiles] = useState({
     index: null,
   });
@@ -819,16 +821,16 @@ export function ProductForm(props) {
     if (!productCategory || !productModality || !productTypeId || !productName || !productBrand || !productModel ) {
       return (<>
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step me-3 mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" id="back-to-first-section-btn" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" id="second-section-btn" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
         <p className="text-center">Para avançar preencha todas as informações.</p>
       </>)
     } else if (productCategory && productModality && productTypeId && productName && productBrand && productModel) {
       return (
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" id="back-to-first-section-btn" onClick={(e) => handleBackToFirst(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step me-3 mt-3" type="button" id="second-section-btn" onClick={(e) => handleSecondStep(e)}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       )
     }
@@ -838,16 +840,16 @@ export function ProductForm(props) {
     if (!productState || !productCity || !productDocumentationType || !productCondition || !productYear || !productPrice || !productQuantity) {
       return (<>
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" id="back-to-third-section-btn" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-3 pe-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Preencha todos os campos antes de continuar" type="button" id="fourth-section-btn" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
         <p className="text-center">Para avançar preencha todas as informações.</p>
       </>)
     } else if (productState && productCity && productDocumentationType && productCondition && productYear && productPrice && productQuantity) {
       return (
         <div className="d-flex justify-content-center">
-          <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-          <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+          <button className="btn-back-step me-3 mt-3" type="button" id="back-to-third-section-btn" onClick={(e) => handleBackToThird(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+          <button className="btn-next-step mt-3" type="button" id="fourth-section-btn" onClick={(e) => handleFourthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
         </div>
       )
     }
@@ -1069,6 +1071,27 @@ export function ProductForm(props) {
   const dirtMtbFrontSuspensionModels = ["FOX 32", "FOX 34", "FOX 36", "FOX 38", "FOX 40", "FOX 30", "FOX 35", "ROCKSHOX BLUTO", "ROCKSHOX BOXXER", "ROCKSHOX DOMAIN", "ROCKSHOX JUDY", "ROCKSHOX LYRIK", "ROCKSHOX PARAGON", "ROCKSHOX PIKE", "ROCKSHOX REBA ", "ROCKSHOX RECON", "ROCKSHOX REVELATION", "ROCKSHOX RUDY", "ROCKSHOX SEKTOR", "ROCKSHOX SID", "ROCKSHOX YARI", "ROCKSHOX ZEB", "Outro"]
   const dirtMtbRearSuspensionModels = ["FOX DHX", "FOX DHX2 ", "FOX FLOAT DPS", "FOX FLOAT DPX2", "FOX FLOAT X", "FOX FLOAT X2", "ROCKSHOX DELUXE", "ROCKSHOX MONARCH", "ROCKSHOX SIDLUXE", "ROCKSHOX SUPER DELUXE", "ROCKSHOX VIVID", "Outro"]
 
+  const handleApplyCoupon = async (value) =>{
+    const url = "/api/v1/coupon_amount"
+    const method = "get"
+    const response = await axios[method](`${url}?discount_coupon=${discountCoupon}&price_in_cents=${value}`);
+
+    if (discountCoupon.length > 1){
+      if (response.data.success === false){
+        setErrors({...errors, coupon: response.data.errors});
+        setDiscountApplied(false)
+      }else{
+        setDiscountApplied(true)
+        setErrors({coupon: response.data.errors});
+        setOriginalPrice(value)
+        setDiscountedPrice(response.data.coupon)
+      }
+    }else{
+      setDiscountApplied(false)
+      setErrors({coupon: response.data.errors});
+    }
+  }
+
   return (
     <div className="w-60 new-product-react py-5">
       <h1 className="text-success  text-center">Vamos lá...</h1>
@@ -1092,10 +1115,10 @@ export function ProductForm(props) {
         <div id="first-section">
           <h4 className="text-gray  text-center mt-4">O que deseja anunciar?</h4>
           <div className="d-flex justify-content-between gap-3 btns-components mt-3">
-            <button id="acessories" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Acessório<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
-            <button id="bikes" className="btn-announce-type w-50" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="bikes" className="icon-card-form"/></button>
-            <button id="components" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
-            <button id="clothes" className="btn-announce-type w-50" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
+            <button id="acessories" className="btn-announce-type w-50 accessory-registration" onClick={(e) => handleProductType(e)}>Acessório<br/><img src={AccessorieImage} alt="acessories" className="icon-card-form mt-1"/></button>
+            <button id="bikes" className="btn-announce-type w-50 bike-registration" onClick={(e) => handleCreateBike(e)}>Bike<br/><img src={BikeImage} alt="bikes" className="icon-card-form"/></button>
+            <button id="components" className="btn-announce-type w-50 components-registration" onClick={(e) => handleProductType(e)}>Componente<br/><img src={ComponentImage} alt="components" className="icon-card-form"/></button>
+            <button id="clothes" className="btn-announce-type w-50 clothes-registration" onClick={(e) => handleProductType(e)}>Vestuário<br/><img src={ClotheImage} alt="clothes" className="icon-card-form"/></button>
           </div>
         </div>
 
@@ -1625,8 +1648,8 @@ export function ProductForm(props) {
                 return renderProductTypeAttributeSelect(attribute, index)
               })}
               <div className="d-flex justify-content-center">
-                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}><span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span></button>
+                <button className="btn-back-step me-3 mt-3" type="button" id="back-to-second-section-btn" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+                <button className="btn-next-step me-3 mt-3" type="button" id="third-section-btn" onClick={(e) => handleThirdStep()}><span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span></button>
               </div>
             </div>
           )}
@@ -1636,8 +1659,8 @@ export function ProductForm(props) {
               <h4 className="text-center text-success">Informações técnicas</h4>
               <p className="mt-5">não há nada para esse produto, vamos em frente!!!</p>
               <div className="d-flex justify-content-center">
-                <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-                <button className="btn-next-step me-3 mt-3" type="button" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+                <button className="btn-back-step me-3 mt-3" type="button" id="back-to-second-section-btn" onClick={(e) => handleBackToSecond(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+                <button className="btn-next-step me-3 mt-3" type="button" id="third-section-btn" onClick={(e) => handleThirdStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
               </div>
             </div>
           )}
@@ -1885,14 +1908,14 @@ export function ProductForm(props) {
             </div>
           </>)}
           <div className="d-flex justify-content-center">
-            <button className="btn-back-step me-3 mt-3" type="button" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
-            <button className="btn-next-step mt-3" type="button" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
+            <button className="btn-back-step me-3 mt-3" type="button" id="back-to-fourth-section-btn" onClick={(e) => handleBackToFourth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-next-step mt-3" type="button" id="fifth-section-btn" onClick={(e) => handleFifthStep()}> <span className="mb-1">próximo  <i className="fas fa-angle-double-right mt-1"></i></span> </button>
           </div>
         </div>
 
         <div id="sixth-section" className="card-questions mb-5 mt-3 d-none">
           <h4 className="text-center text-success">Revise as informações</h4>
-          <h4 className="text-success mt-3 text-center">Gerais</h4>
+          <h4 className="text-success mt-3 text-center" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }}>Gerais</h4>
           <div id="Gerais" className="">
             <div className="d-flex">
               <p><span className="text-success">Categoria:</span> {translateWord(productCategory)}</p>
@@ -2052,9 +2075,9 @@ export function ProductForm(props) {
             {((productPrice * 100) <= 100000) && (<>
               <div className="text-center mt-3 mb-3">
                 <h5 className="announce-terms fs-22">Seu anúncio não será cobrado</h5>
-                <div className="d-flex justify-content-center gap-2">
+                <div className="my-2 d-flex justify-content-center gap-2">
                   <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                  <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e <a href="/privacy_policy" className="nav-link fs-16">Politica de pivacidade</a>.</h5>
+                  <h5 className="announce-terms fs-16"><span   style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span   style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" id="privacy-policy" className="nav-link fs-16 text-success" target="_blank">Politica de pivacidade</a>.</h5>
                 </div>
                 {!props.productId && (<>
                   <button id="new-announce" onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3 disable-btn-form">Anunciar</button>
@@ -2067,17 +2090,35 @@ export function ProductForm(props) {
             </>)}
 
             { ((productPrice * 100) > 100000) && ((productPrice * 100) <= 500000) && (<>
-              <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 39,00</h5>
-              <div className="d-flex justify-content-center gap-2">
+              <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+                <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+                <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                    <>
+                      <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                      <s className="text-danger">R$ 39,00</s>
+                    </>
+                  ) : (
+                    <>R$ 39,00</>
+                  )}
+                </span>
+              </div>
+              <div className="my-2 d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link fs-16">termos e condições de uso</a> e a <a href="/privacy_policy" className="nav-link fs-16">politica de pivacidade</a>.</h5>
+                <h5 className="announce-terms fs-16"><span   style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span   style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" id="privacy-policy" className="nav-link fs-16 text-success" target="_blank">Politica de pivacidade</a>.</h5>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-              <div className="w-50 mx-auto mt-3">
-                <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+              <div className="couponMainDiv mt-3 text-center">
+                <div className= "couponApplyDiv w-33">
+                  <label htmlFor="discountCoupon" className="mt-1" style={{fontSize: "16px", color: "#b6b6b6"}}>Cupom de desconto:</label>
+                  <input type="text" className="text-input couponInput" style={{width: "100% !important"}} onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                </div>
+                <div className= "couponApplyButton">
+                  <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("3900")}> Aplicar </p>
+                </div>
+              </div>
+              <div className="my-1">
                 { errors && errors.coupon && (
-                  <p className="text-danger">{errors.coupon}</p>
+                  <p className="text-danger text-center">{errors.coupon}</p>
                 )}
               </div>
               <div className="text-center mt-3 mb-3">
@@ -2092,17 +2133,35 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 500000) && ((productPrice * 100) <= 1000000) && (<>
-              <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 59,00</h5>
-              <div className="d-flex justify-content-center gap-2">
+              <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+                <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+                  <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                    <>
+                      <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                      <s className="text-danger">R$ 59,00</s>
+                    </>
+                  ) : (
+                    <>R$ 59,00</>
+                  )}
+                </span>
+              </div>
+              <div className="my-2 d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link"fs-16 >termos e condições de uso</a> e a <a href="/privacy_policy" className="nav-link fs-16">politica de pivacidade</a>.</h5>
+                <h5 className="announce-terms fs-16"><span   style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span   style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" id="privacy-policy" className="nav-link fs-16 text-success" target="_blank">Politica de pivacidade</a>.</h5>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-              <div className="w-50 mx-auto mt-3">
-                <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+              <div className="couponMainDiv mt-3 text-center">
+                <div className= "couponApplyDiv w-33">
+                  <label htmlFor="discountCoupon" className="mt-1" style={{fontSize: "16px", color: "#b6b6b6"}}>Cupom de desconto:</label>
+                  <input type="text" className="text-input couponInput" style={{width: "100% !important"}} onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                </div>
+                <div className= "couponApplyButton">
+                  <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("5900")}> Aplicar </p>
+                </div>
+              </div>
+              <div className="my-1">
                 { errors && errors.coupon && (
-                  <p className="text-danger">{errors.coupon}</p>
+                  <p className="text-danger text-center">{errors.coupon}</p>
                 )}
               </div>
               <div className="text-center mt-3 mb-3">
@@ -2117,17 +2176,35 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 1000000) && ((productPrice * 100) <= 2000000) &&(<>
-              <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 89,00</h5>
-              <div className="d-flex justify-content-center gap-2">
+              <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+                <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+                <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                    <>
+                      <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                      <s className="text-danger">R$ 89,00</s>
+                    </>
+                  ) : (
+                    <>R$ 89,00</>
+                  )}
+                </span>
+              </div>
+              <div className="my-2 d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link"fs-16 >termos e condições de uso</a> e a <a href="/privacy_policy" className="nav-link fs-16">politica de pivacidade</a>.</h5>
+                <h5 className="announce-terms fs-16"><span   style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span   style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" id="privacy-policy" className="nav-link fs-16 text-success" target="_blank">Politica de pivacidade</a>.</h5>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-              <div className="w-50 mx-auto mt-3">
-                <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+              <div className="couponMainDiv mt-3 text-center">
+                <div className= "couponApplyDiv w-33">
+                  <label htmlFor="discountCoupon" className="mt-1" style={{fontSize: "16px", color: "#b6b6b6"}}>Cupom de desconto:</label>
+                  <input type="text" className="text-input couponInput" style={{width: "100% !important"}} onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                </div>
+                <div className= "couponApplyButton">
+                  <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("8900")}> Aplicar </p>
+                </div>
+              </div>
+              <div className="my-1">
                 { errors && errors.coupon && (
-                  <p className="text-danger">{errors.coupon}</p>
+                  <p className="text-danger text-center">{errors.coupon}</p>
                 )}
               </div>
               <div className="text-center mt-3 mb-3">
@@ -2142,16 +2219,34 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 2000000) && ((productPrice * 100) <= 3000000) &&(<>
-              <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 129,00</h5>
-              <div className="d-flex justify-content-center gap-2">
-                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link"fs-16 >termos e condições de uso</a> e a <a href="/privacy_policy" className="nav-link fs-16">politica de pivacidade</a>.</h5>
+              <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+                <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+                <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                    <>
+                      <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                      <s className="text-danger">R$ 129,00</s>
+                    </>
+                  ) : (
+                    <>R$ 129,00</>
+                  )}
+                </span>
               </div>
-              <div className="w-50 mx-auto mt-3">
-                <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+              <div className="my-2 d-flex justify-content-center gap-2">
+                <input type="checkbox" onChange={(e) => handleTerms(e)}/>
+                <h5 className="announce-terms fs-16"><span   style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span   style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" id="privacy-policy" className="nav-link fs-16 text-success" target="_blank">Politica de pivacidade</a>.</h5>
+              </div>
+              <div className="couponMainDiv mt-3 text-center">
+                <div className= "couponApplyDiv w-33">
+                  <label htmlFor="discountCoupon" className="mt-1" style={{fontSize: "16px", color: "#b6b6b6"}}>Cupom de desconto:</label>
+                  <input type="text" className="text-input couponInput" style={{width: "100% !important"}} onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                </div>
+                <div className= "couponApplyButton">
+                  <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("12900")}> Aplicar </p>
+                </div>
+              </div>
+              <div className="my-1">
                 { errors && errors.coupon && (
-                  <p className="text-danger">{errors.coupon}</p>
+                  <p className="text-danger text-center">{errors.coupon}</p>
                 )}
               </div>
               <div className="text-center mt-3 mb-3">
@@ -2166,17 +2261,35 @@ export function ProductForm(props) {
             </>)}
 
             {((productPrice * 100) > 3000000) && (<>
-              <h5 className="announce-terms text-center fs-22">Valor do anúncio: R$ 159,00</h5>
-              <div className="d-flex justify-content-center gap-2">
+              <div className="announce-terms text-center d-flex align-items-center m-auto flex-column">
+                <span style={{fontFamily: "Bebas Neue, Helvetica, sans-serif", fontSize: "24px"}}>Valor do anúncio:</span>
+                <span className="fs-18" style={{color: "#b6b6b6"}}>{discountApplied ? (
+                    <>
+                      <span className="mx-2">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(discountedPrice / 100)}</span>
+                      <s className="text-danger">R$ 159,00</s>
+                    </>
+                  ) : (
+                    <>R$ 159,00</>
+                  )}
+                </span>
+              </div>
+              <div className="my-2 d-flex justify-content-center gap-2">
                 <input type="checkbox" onChange={(e) => handleTerms(e)}/>
-                <h5 className="announce-terms fs-16">Aceito os <a href="/terms_and_conditions" className="nav-link"fs-16 >termos e condições de uso</a> e a <a href="/privacy_policy" className="nav-link fs-16">politica de pivacidade</a>.</h5>
+                <h5 className="announce-terms fs-16"><span   style={{color: "#b6b6b6"}}>Aceito os</span> <a href="/terms_and_conditions" className="nav-link fs-16 text-success" id="terms-and-condition" target="_blank">termos e condições de uso</a> <span   style={{color: "#b6b6b6"}}>e</span> <a href="/privacy_policy" id="privacy-policy" className="nav-link fs-16 text-success" target="_blank">Politica de pivacidade</a>.</h5>
               </div>
               <p className="text-center payment-methods">Pagamento no PIX, boleto ou cartão de crédito.</p>
-              <div className="w-50 mx-auto mt-3">
-                <label htmlFor="discountCoupon" className="mt-1">Cupom de desconto:</label>
-                <input type="text" className="text-input" onChange={(e) => setDiscountCoupon(e.target.value)}/> <br />
+              <div className="couponMainDiv mt-3 text-center">
+                <div className= "couponApplyDiv w-33">
+                  <label htmlFor="discountCoupon" className="mt-1" style={{fontSize: "16px", color: "#b6b6b6"}}>Cupom de desconto:</label>
+                  <input type="text" className="text-input couponInput" style={{width: "100% !important"}} onChange={(e) => setDiscountCoupon(e.target.value)}/>
+                </div>
+                <div className= "couponApplyButton">
+                  <p className="btn btn-underline text-underline fs-16 m-0" id="apply-coupon-btn" style={{ fontFamily: 'Poppins, Helvetica, sans-serif' }} onClick={() => handleApplyCoupon("15900")}> Aplicar </p>
+                </div>
+              </div>
+              <div className="my-1">
                 { errors && errors.coupon && (
-                  <p className="text-danger">{errors.coupon}</p>
+                  <p className="text-danger text-center">{errors.coupon}</p>
                 )}
               </div>
               <div className="text-center mt-3 mb-3">
@@ -2193,7 +2306,7 @@ export function ProductForm(props) {
 
           <div className="text-center">
             {props.productId && (<>
-              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3">Editar</button>
+              <button onClick={(e) => handleSubmit(e)} className="btn-new-announce mt-3" id="edit-announce">Editar</button>
               <div id="spinner" className="spinner-border text-success d-none" role="status">
                 <span className="sr-only">Loading...</span>
               </div>
@@ -2202,7 +2315,7 @@ export function ProductForm(props) {
           </div>
 
           <div className="text-center">
-            <button className="btn-back-step mt-3" type="button" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
+            <button className="btn-back-step mt-3" type="button" id="back-to-fifth-section-btn" onClick={(e) => handleBackToFifth(e)}> <span className="mb-1">  <i className="fas fa-angle-double-left mt-1"></i> anterior </span> </button>
           </div>
         </div>
       </form>

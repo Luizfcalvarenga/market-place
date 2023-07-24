@@ -244,10 +244,11 @@
 .announce-terms {
   color: $color-primary;
   margin-bottom: 0 !important;
+  font-family: Poppins, Helvetica, "sans-serif";
 }
 
 .payment-methods {
-  font-size: 0.675em
+  font-size: 14px;
 }
 
 @media screen and (max-width: 768px) {
@@ -256,5 +257,36 @@
   }
   .progress-bar {
     display: none;
+  }
+}
+
+.couponInput{
+  text-align: center;
+}
+
+.couponMainDiv{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-left: 12rem;
+  width: 50%;
+}
+
+.couponApplyDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .couponMainDiv{
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin:auto;
+  }
+
+  .couponInput{
+    width: 80% !important;
   }
 }

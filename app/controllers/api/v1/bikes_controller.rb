@@ -147,6 +147,25 @@ module Api
         end
       end
 
+      def coupon_amount
+        code = params[:discount_coupon]
+        price_in_cents = params[:price_in_cents]
+        coupon_response = CouponValidator.new(code).call() if code.present?
+        if coupon_response && coupon_response[:result] == false
+          errors = coupon_response[:error]
+          render json: {success: false, errors: errors}
+
+        elsif coupon_response && coupon_response[:result] == true
+          coupon = Coupon.find_by(code: code)
+          orignal_price = if coupon.kind_percentage?
+              (price_in_cents.to_i * (1 - coupon.discount.to_f/100)).to_i
+            else
+              price_in_cents >= coupon.discount ? price_in_cents - coupon.discount : 0
+            end
+          render json: {success: true, coupon: orignal_price}
+        end
+      end
+
       private
 
       def bike_params

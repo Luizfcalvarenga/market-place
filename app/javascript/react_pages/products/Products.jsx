@@ -12,6 +12,8 @@ export function Products(props) {
     get: (searchParams, prop) => searchParams.get(prop),
   });
   const [products, setProducts] = useState([])
+  const [show, setShow] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [productTypes, setProductTypes] = useState([])
   const [productTypeAttributes, setProductTypeAttributes] = useState([])
   const [attributesForProduct, setAttributesForProduct] = useState([]);
@@ -143,6 +145,9 @@ export function Products(props) {
     if (brandOptionsToFilter) url = url + `&brands=${brandOptionsToFilter}`
 
     const response = await axios.get(url);
+    if (response.data.products.length === 0) {
+      setShow(true)
+    }
     setProductTypes(response.data.product_types.sort(function (a, b) {
       if (a.prompt < b.prompt) {
         return -1;
@@ -154,6 +159,7 @@ export function Products(props) {
     }))
     setProductTypeAttributes(response.data.product_type_attributes)
     setProducts(response.data.products);
+    setLoading(false)
     if (onlyComponents) {
       document.getElementById("products-components").classList.remove("d-none")
     } else if (onlyAccessories && presentAccessories.lenght > 1) {
@@ -512,7 +518,7 @@ export function Products(props) {
 
   return (
     <div className="p-5 br-8 index-container">
-      <h2 className="text-center text-success">Produtos</h2>
+      <h2 className={`text-center text-success ${window.screen.width > 768 ? "" : "display-1"}`} style={{ marginLeft: window.screen.width > 768 ? "24vw" : "" }}>Produtos</h2>
       <button type="button" className={`filter-link ms-3 ${ window.screen.width > 768 ? "d-none" : ""}`} onClick={((e) => handleToggleFilerMobile(e))}><i className="fas fa-filter me-1"></i>Filtrar</button>
 
       <div className="d-flex mt-3 index-content">
@@ -800,14 +806,17 @@ export function Products(props) {
             </>)}
           </div>
         </div>
-        <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap`}>
-          {products.length === 0 && (
-            <h3 className="mx-auto text-success">Ops! Não encontramos um produto para sua busca. Tente com outras categorias e critérios</h3>
+        <div className={`${window.screen.width < 768? 'w-100' : 'w-75'} d-flex flex-wrap nuflow-parent`}>
+          {
+            loading && <section className="nuflow-loader" style={{marginLeft: window.screen.width > 768 ? "12vw" : ""}}></section>
+          }
+          {(products.length === 0 && show) && (
+            <h3 className="mx-auto text-gray no-item-text">Ops! Não encontramos um produto para sua busca. Tente com outras categorias e critérios</h3>
           )}
           {products.map((product, idx) => {
             return (
               <div className={`${window.screen.width < 768? 'w-100' : 'w-25'} mb-3`} product={product} key={product.id} id="mobile">
-                <a href={"products/" + product.id} className="" target="_blank">
+                <a href={`products/${product.id}?product=${product.brand? product.brand.replace(/[-\s]+/g, "-").trim()+"-": ""}${product.model.replace(/[-\s]+/g, "-").trim()}`} className="view-product" id={`view-product-${product.id.toString()}`} target="_blank">
                   <div className="cards-products">
                     {
                       product.verified &&
@@ -815,35 +824,34 @@ export function Products(props) {
                         <div className="verified-icon"></div>
                       )
                     }
-                    <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-ride="carousel">
-                      <div className="carousel-inner">
-                        {product.photos.map((photo, index) => {
-                          return (
-                            <div className={`carousel-item ${index === 0 ? "active" : ""}`}>
+                    {product.photos.length > 1 ? (
+                      <div id={"carouselExampleControls" + product.id.toString()} className="carousel slide" data-bs-interval="false">
+                        <div className="carousel-inner">
+                          {product.photos.map((photo, index) => (
+                            <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
                               <img src={photo} className="d-block w-100 img-card-index" alt="" />
                             </div>
-                          )
-                        })}
-                      </div>
-                      {product.photos.length === 0 && (
-                        <div className="carousel-inner">
-                          <div className="carousel-item active">
-                            <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                          </div>
-                          <div className="carousel-item">
-                            <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
-                          </div>
+                          ))}
                         </div>
-                      )}
-                      <button className="carousel-control-prev" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                      </button>
-                      <button className="carousel-control-next" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                      </button>
-                    </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="prev">
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target={"#carouselExampleControls" + product.id.toString()} data-bs-slide="next">
+                          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        {product.photos.length === 1 && (
+                          <img src={product.photos[0]} className="d-block w-100 img-card-index" alt="" />
+                        )}
+                        {product.photos.length === 0 && (
+                          <img src="https://www.bikemagazine.com.br/wp-content/uploads/2020/12/valeo-ebike.jpg" className="d-block w-100 img-card-index" alt="" />
+                        )}
+                      </div>
+                    )}
                     <h4 className="card-title text-center  gap-2 mt-1">{product.brand} {product.model}</h4>
                     <h4 className="text-center mt-1">
                       {(product.price_in_cents / 100).toLocaleString("pt-BR", {
