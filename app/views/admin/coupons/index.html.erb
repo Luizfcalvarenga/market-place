@@ -48,7 +48,7 @@
               <%= coupon.redemption_limit - coupon.advertisements.count %>
             </td>
             <td class="align-middle">
-              <%= link_to edit_admin_coupon_path(coupon), "edit-admin-coupon-btn" do %>
+              <%= link_to edit_admin_coupon_path(coupon), id: "edit-admin-coupon-btn" do %>
                 <i class="fas fa-edit"></i>Editar
               <% end %>
             </td>
