@@ -26,7 +26,7 @@
             </div>
           </div>
         </li>
-        <div id="navbar-links" class=" d-flex">
+        <div id="navbar-links" class="d-flex align-items-center">
           <li class="nav-item active nav-link-drop ">
             <div class="dropdown">
               <h3 class="drop-btn mx-3 my-auto">categorias</h3>
@@ -67,7 +67,7 @@
                     <%= link_to "Capacete", {:controller => "products", :action => "index", :product_types => "Capacete"}, class: "text-white products-clothes-btn", id: "Helmet" %>
                     <%= link_to "Sapatilha", {:controller => "products", :action => "index", :product_types => "Sapatilha"}, class: "text-white products-clothes-btn", id: "Sneaker" %>
                     <%= link_to "Bermuda", {:controller => "products", :action => "index", :product_types => "Bermuda"}, class: "text-white products-clothes-btn", id: "Shorts" %>
-                    <%= link_to "Camisa", {:controller => "products", :action => "index", :product_types => "Camisa"}, class: "text-white products-clothes-btn" %>
+                    <%= link_to "Camisa", {:controller => "products", :action => "index", :product_types => "Camisa"}, class: "text-white products-clothes-btn", id: "shirts" %>
                     <%= link_to "Ver mais", {:controller => "products", :action => "index", :products_clothes => "products_clothes"}, class: "text-white pb-3 view-products", id: "clothing-products" %>
                   <% end%>
                 </div>
