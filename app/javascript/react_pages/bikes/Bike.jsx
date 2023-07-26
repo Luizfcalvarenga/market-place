@@ -218,7 +218,7 @@ export function Bike(props) {
             </>
           )}
           {showModal && (<div onClick={closeModal} className="closeModal"><i className="fa">&#xf00d;</i></div>)}
-          <Modal show={showModal} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered style={{ backgroundColor: "transparent" }}>
+          <Modal show={showModal} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered style={{ backgroundColor: "transparent" }} restoreFocus={false}>
             <Modal.Body>
               <Carousel activeIndex={activeIndex} onSelect={(index) => setActiveIndex(index)} controls={ bike.photos.length <=1 ? false : true} indicators={false} interval={null}>
                 {bike.photos.map((photo, index) => (

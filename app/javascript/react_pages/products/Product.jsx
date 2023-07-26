@@ -198,7 +198,7 @@ export function Product(props) {
                 )}
               </>
             )}
-            <Modal show={showModal} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered style={{ backgroundColor: "transparent" }}>
+            <Modal show={showModal} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered style={{ backgroundColor: "transparent" }} restoreFocus={false}>
               <Modal.Body>
                 <Carousel activeIndex={activeIndex} onSelect={(index) => setActiveIndex(index)} controls={ product.photos.length <=1 ? false : true} indicators={false} interval={null} >
                   {product.photos.map((photo, index) => (

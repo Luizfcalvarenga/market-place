@@ -169,13 +169,14 @@
 }
 
 .closeModal {
-  position: absolute;
-  right: 62px;
+  position: fixed;
+  right: 80px;
+  top: 100px;
   z-index: 1100;
   font-size: 30px;
   cursor: pointer;
   @media (max-width: 768px) {
   right: 20px;
-  top: 76px;
+  top: 100px;
   }
 }
